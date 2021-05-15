@@ -25,3 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Installation guide
+npm install -g @angular/cli@11 [if you need to reset your angular version, please do]
+npm install --save @angular/material
+ng add @angular/material => choose theme, yes to both typography styles and animations
