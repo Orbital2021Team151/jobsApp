@@ -1,3 +1,10 @@
-<textarea rows = 6 [value]="newPost" #postInput></textarea>
-<hr>
-<button (click)="onAddPost(postInput)">Send Job Request</button>
+<mat-card>
+    <mat-form-field>
+      <textarea rows="1" [(ngModel)]="orgName">Name of Organization</textarea>
+
+      <button mat-raised-button
+      color="primary"
+      (click)="onAddPost($event)"> Save Job Listing</button>
+    </mat-form-field>
+
+</mat-card>

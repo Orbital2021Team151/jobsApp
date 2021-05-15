@@ -6,6 +6,8 @@ import {Component} from '@angular/core';
   styleUrls: ['./posts-create.component.css'],
 })
 export class PostCreateComponent {
+   orgName: String;
+
   onAddPost(postInput: HTMLTextAreaElement) {
     alert('Job post added!');
   }
