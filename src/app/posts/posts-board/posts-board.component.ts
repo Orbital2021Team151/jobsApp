@@ -16,7 +16,6 @@ export class PostBoardComponent implements OnInit, OnDestroy {
   private postSub: Subscription;
 
   constructor(public postsService: PostsService) {}
-
   ngOnInit() {
     this.postsService.getPosts();
     this.postSub = this.postsService.getPostsUpdatedListener()

@@ -1,23 +1,18 @@
 <mat-accordion multi="true" *ngIf="posts.length > 0">
-
   <mat-expansion-panel *ngFor="let post of posts">
-
     <mat-expansion-panel-header>
-      {{ post.title }}
+      Job Title: {{ post.title }}, start date: {{post.startDate}}, end date {{post.endDate}}
     </mat-expansion-panel-header>
-
-    <p>{{ post.orgName }}</p>
+    <p>Organization Name: {{ post.orgName }}</p>
     <p>{{ post.uen }}</p>
-    <p>{{ post.studentGroupName }}</p>
-    <p>{{ post.POC }}</p>
-    <p>{{ post.phoneNumber }}</p>
-    <p>{{ post.email }}</p>
-    <p>{{ post.content }}</p>
-    <p>{{ post.skills }}</p>
-    <p>{{ post.startDate }}</p>
-    <p>{{ post.endDate }}</p>
-    <p>{{ post.hoursRequired }}</p>
-    <p>{{ post.beneficiaryInfo }}</p>
+    <p>Student Group Name: {{ post.studentGroupName }}</p>
+    <p>Point of Contact: {{ post.POC }}</p>
+    <p>Contact Number: {{ post.phoneNumber }}</p>
+    <p>Contact Email: {{ post.email }}</p>
+    <p>Job description: {{ post.content }}</p>
+    <p>Preferred Skills: {{ post.skills }}</p>
+    <p>Commitment Hours Required: {{ post.hoursRequired }}</p>
+    <p>Beneficiaries: {{ post.beneficiaryInfo }}</p>
 
     <mat-action-row>
       <button mat-button color="primary">EDIT</button>
@@ -27,4 +22,18 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<p class="info-text mat-body-1" *ngIf="posts.length <= 0">No posts added yet!</p>
+
+<ul>
+  <p-card header= {{post.title}} subheader="{{post.startDate}} to {{post.endDate}}"
+[style]="{'width': '25rem', 'margin-bottom': '2em', 'text-align': 'center'}" styleClass="p-card-shadow"
+*ngFor="let post of posts"
+>
+  <p>{{post.content}}</p>
+  <ng-template pTemplate="footer" #footer>
+      <p-button label="Learn More"></p-button>
+      <p-button class="delete" label="Delete" icon="pi pi-times" styleClass="p-button-secondary" (click)="onDelete(post.id)"></p-button>
+  </ng-template>
+</p-card>
+</ul>
+
+<p class="info-text mat-body-1" *ngIf="posts.length <= 0"> No posts added yet! </p>

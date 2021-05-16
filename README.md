@@ -41,3 +41,5 @@ npm install -g @angular/cli@1.4.1
 * Install [MongoDB Shell](https://downloads.mongodb.org/windows/mongodb-shell-windows-x86_64-4.4.6.zip) (Optional, since this is just to check for requests if it does not show up on the webpage yet)
 
 * npm install --save mongoose
+
+* Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)

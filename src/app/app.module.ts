@@ -8,7 +8,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from "@angular/common";
 import { MatExpansionModule } from '@angular/material/expansion';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 //If these causes issue in the future, revert to angular material version "^8.0.0" in package-json
 //by doing npm install --save @angular/material@8 --save-exact
 
@@ -37,6 +43,11 @@ import { AppRoutingModule } from './app-routing.module';
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    CardModule,
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
