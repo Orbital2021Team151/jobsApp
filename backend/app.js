@@ -1,56 +1,64 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const Post = require('./models/post');
+
+const mongoose = require("mongoose");
 
 const app = express();
 
-app.use('/api/posts', (req, res, next) => {
-  const posts = [
-    {
-      id: '123',
-      orgName: 'ComCLAB',
-      uen: 'UEN007',
-      studentGroupName: 'Clab for komputing students',
-      contact: 'Mr Klaus',
-      phoneNumber: '911',
-      emailAddress: 'shoutingFireBuring@onTheDanceFloor.com',
-      title: 'firefighter required',
-      content: 'woaaaaaaahhhhh',
-      skills: 'tell me what you are thinking - paradise~~~, I can see right through ya',
-
-      startDate: '01/01/2001',
-      endDate: '01/03/2003',
-      hoursRequired: '27',
-
-      beneficiaryInfo: 'OBGYNs',
-      //imagePath: string;
-      //creator: string;
-    },
-
-    {
-      id: '321',
-      orgName: 'Goodfellas',
-      uen: 'GFL001',
-      studentGroupName: 'Mafia',
-      contact: 'Mr Mime',
-      phoneNumber: '555',
-      emailAddress: 'TonyCipriani@LibertyCity.com',
-      title: 'mafiosi required',
-      content: 'need fresh blood to join our cause',
-      skills: 'jew, italian, smoke cigar, RESPECT THE DON',
-
-      startDate: '01/01/1991',
-      endDate: '01/03/1998',
-      hoursRequired: '222',
-
-      beneficiaryInfo: 'NYPD',
-      //imagePath: string;
-      //creator: string;
-    },
-  ];
-  res.status(200).json({
-    message: "posts fetched successfully",
-    posts: posts
+//username: admin, password: bh447oHghiti5g2E
+mongoose.connect("mongodb+srv://admin:bh447oHghiti5g2E@eprepmeancoursecluster.qa0ny.mongodb.net/orbitalDatabase?retryWrites=true&w=majority")
+  .then(() => {
+    console.log("Successfully connected to MongoDB Atlas!");
+  })
+  .catch((e) => {
+    console.log("Error occurred!");
+    console.log(e);
   });
+
+app.use(bodyParser.json());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', "*");
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    "Origin, X-Requested-With, Content-Type, Accept",
+
+    );
+    res.setHeader('Access-Control-Allow-Methods', "GET, POST, PATCH, DELETE, OPTIONS");
   next();
+});
+
+app.post('/api/posts', (req, res, next) => {
+  const post = new Post({
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    studentGroupName: req.body.studentGroupName,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    skills: req.body.skills,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    hoursRequired: req.body.hoursRequired,
+    beneficiaryInfo: req.body.beneficiaryInfo,
+  });
+  post.save(); //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
+  res.status(201).json({message: "post added successfully!"});
+});
+
+app.get('/api/posts', (req, res, next) => {
+  Post.find()
+    .then(documents => {
+      res.status(200).json({
+        message: "posts fetched successfully",
+        posts: documents,
+      });
+    })
+    .catch(e => {
+      console.log("Error occured at backend/app app.get");
+    });
 });
 
 module.exports = app;

@@ -34,8 +34,8 @@ export class PostCreateComponent {
       hoursRequired: form.value.hoursRequired,
 
       beneficiaryInfo: form.value.beneficiaryInfo,
-      imagePath: null,
-      creator: null,
+      //imagePath: null,
+      //creator: null,
     };
 
     this.postsService.addPost(post);

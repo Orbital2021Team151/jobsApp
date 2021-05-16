@@ -1,5 +1,5 @@
 export interface Post {
-  id: string, //to link with mongoDB's unique ID
+  id: string, //to link with mongoDB's unique ID. automatically created by mongoose for us
   orgName: string, //organization/student group's name
   uen: string, //for non-nus charity registration number or society registration number
   studentGroupName: string, //for nus organization. should be from approved list (https://nus.edu.sg/osa/student-life/student-organisations-directory) so this is a dropdown list to select
@@ -16,6 +16,6 @@ export interface Post {
   hoursRequired: string, //number of hours that a student has to commit to minimally
 
   beneficiaryInfo: string, //paragraph on who are the beneficiaries to let the organization write down. or could be a dropdown list
-  imagePath: string; //store image? additional feature potentially
-  creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
+  //imagePath: string; //store image? additional feature potentially
+  //creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
 }

@@ -1,6 +1,9 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { map } from "rxjs/operators";
 import { Post } from "./post.model";
+
 
 
 @Injectable({providedIn: 'root'})
@@ -8,8 +11,34 @@ export class PostsService {
   private posts: Post[] = [];
   private postsUpdated = new Subject<Post[]>();
 
+  constructor(private http: HttpClient) {}
+
   getPosts() {
-    return [...this.posts];
+    this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts') //unsubscription handled by angular's http client
+      .pipe(map(postData => {
+        return postData.posts.map(post => {
+          return {
+            id: post._id,
+            orgName: post.orgName,
+            uen: post.uen,
+            studentGroupName: post.studentGroupName,
+            POC: post.POC,
+            phoneNumber: post.phoneNumber,
+            email: post.email,
+            title: post.title,
+            content: post.content,
+            skills: post.skills,
+            startDate: post.startDate,
+            endDate: post.endDate,
+            hoursRequired: post.hoursRequired,
+            beneficiaryInfo: post.beneficiaryInfo,
+          };
+        });
+      })) //to change from _id from database to id
+      .subscribe((mappedPosts) => {
+        this.posts = mappedPosts;
+        this.postsUpdated.next([...this.posts]);
+      });
   }
 
   getPostsUpdatedListener() {
@@ -17,7 +46,11 @@ export class PostsService {
   }
 
   addPost(post: Post) {
-    this.posts.push(post);
-    this.postsUpdated.next([...this.posts]);
+    this.http.post<{message: string}>('http://localhost:3000/api/posts', post)
+      .subscribe((responseData => {
+        console.log(responseData.message);
+        this.posts.push(post);
+        this.postsUpdated.next([...this.posts]);
+      }));
   }
 }

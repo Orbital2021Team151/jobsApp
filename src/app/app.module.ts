@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from "@angular/common";
 import { MatExpansionModule } from '@angular/material/expansion';
+import {HttpClientModule} from '@angular/common/http'
 //If these causes issue in the future, revert to angular material version "^8.0.0" in package-json
 //by doing npm install --save @angular/material@8 --save-exact
 
@@ -33,6 +34,7 @@ import { PostBoardComponent } from './posts/posts-board/posts-board.component';
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
