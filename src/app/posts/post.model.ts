@@ -3,9 +3,9 @@ export interface Post {
   orgName: string, //organization/student group's name
   uen: string, //for non-nus charity registration number or society registration number
   studentGroupName: string, //for nus organization. should be from approved list (https://nus.edu.sg/osa/student-life/student-organisations-directory) so this is a dropdown list to select
-  contact: string, //name of POC
+  POC: string, //name of POC
   phoneNumber: string, //POC's contact number. should change to number if it makes it easier
-  emailAddress: string, //POC's email address
+  email: string, //POC's email address
   title: string, //title of job
   content: string, //description of job
   skills: string, //skills required. should be a textbox for organization to just write down instead of limiting skills by making them choose from predefined list

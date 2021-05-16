@@ -1,10 +1,76 @@
 <mat-card>
-    <mat-form-field>
-      <textarea rows="1" [(ngModel)]="orgName">Name of Organization</textarea>
+    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="orgName" required #orgName="ngModel">
+        <mat-error *ngIf="orgName.invalid">Please enter your organization's name.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="uen" required #uen="ngModel">
+        <mat-error *ngIf="uen.invalid">Please enter your organization's UEN.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="studentGroupName" required #studentGroupName="ngModel">
+        <mat-error *ngIf="studentGroupName.invalid">Please enter the name of the Student Group.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="POC" required #POC="ngModel">
+        <mat-error *ngIf="POC.invalid">Please enter provide us the name of your Point-Of-Contact.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="phoneNumber" required #phoneNumber="ngModel">
+        <mat-error *ngIf="phoneNumber.invalid">Please provide us your Point-Of-Contact's phone number.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="email" required #email="ngModel">
+        <mat-error *ngIf="email.invalid">Please provide us your email.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="title" required #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please provide us the job's title.</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <textarea matInput name="content" ngModel rows="10" required #content="ngModel" minlength="100"></textarea>
+        <mat-error *ngIf="content.invalid">Please give us a description of the job (minimum 100 words).</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput name="skills" ngModel rows="10" required #skills="ngModel" minlength="10"></textarea>
+        <mat-error *ngIf="skills.invalid">Please give a brief description on the skills required for the job (minimum 10 words).</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="startDate" required #startDate="ngModel">
+        <mat-error *ngIf="startDate.invalid">Please provide the start date for the job.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="endDate" required #endDate="ngModel">
+        <mat-error *ngIf="endDate.invalid">Please provide the end date for the job.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="hoursRequired" required #hoursRequired="ngModel">
+        <mat-error *ngIf="hoursRequired.invalid">Please provide the minimum number of hours required to be committed for the job.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" ngModel name="beneficiaryInfo" required #beneficiaryInfo="ngModel">
+        <mat-error *ngIf="beneficiaryInfo.invalid">Please inform us of the main beneficiary of the job.</mat-error>
+      </mat-form-field>
+
 
       <button mat-raised-button
       color="primary"
-      (click)="onAddPost($event)"> Save Job Listing</button>
-    </mat-form-field>
+      type="submit"> Save Job Listing</button>
+    </form>
 
 </mat-card>

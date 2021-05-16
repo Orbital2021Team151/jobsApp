@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from "@angular/common";
+import {MatExpansionModule} from '@angular/material/expansion';
 //If these causes issue in the future, revert to angular material version "^8.0.0" in package-json
 //by doing npm install --save @angular/material@8 --save-exact
 
@@ -28,6 +29,7 @@ import { PostCreateComponent } from './posts/posts-create/posts-create.component
     MatCardModule,
     MatInputModule,
     MatButtonModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
