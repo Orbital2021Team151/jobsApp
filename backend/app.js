@@ -44,8 +44,10 @@ app.post('/api/posts', (req, res, next) => {
     hoursRequired: req.body.hoursRequired,
     beneficiaryInfo: req.body.beneficiaryInfo,
   });
-  post.save(); //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
-  res.status(201).json({message: "post added successfully!"});
+  post.save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
+    .then(createdPost => {
+      res.status(201).json({message: "post added successfully!", postId: createdPost._id});
+    });
 });
 
 app.get('/api/posts', (req, res, next) => {
@@ -58,6 +60,15 @@ app.get('/api/posts', (req, res, next) => {
     })
     .catch(e => {
       console.log("Error occured at backend/app app.get");
+    });
+});
+
+app.delete('/api/posts/:id', (req, res, next) => {
+  //console.log(req.params.id);
+  Post.deleteOne({_id: req.params.id})
+    .then((result) => {
+      console.log(result);
+      res.status(200).json({message: "Post delete request sent!"});
     });
 });
 
