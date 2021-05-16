@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
 import { PostBoardComponent } from './posts/posts-board/posts-board.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -29,12 +30,13 @@ import { PostBoardComponent } from './posts/posts-board/posts-board.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
     MatToolbarModule,
     MatCardModule,
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
-    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

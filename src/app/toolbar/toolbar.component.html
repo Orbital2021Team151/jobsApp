@@ -1,1 +1,10 @@
-<mat-toolbar color="accent"> Student Guild</mat-toolbar>
+<mat-toolbar color="accent">
+  <span>Student Guild</span>
+  <span class="space"></span>
+  <ul>
+    <li>
+      <a mat-button routerLink="/dashboard" routerLinkActive="mat-primary"> Dashboard</a>
+      <a mat-button routerLink="/create" routerLinkActive="mat-primary"> Create Job Posting</a>
+    </li>
+  </ul>
+</mat-toolbar>
