@@ -1,7 +1,7 @@
-import {Component, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import * as EventEmitter from 'events';
 import { Post } from '../post.model';
+import { PostsService } from '../post.service';
 
 @Component({
   selector: 'app-post-create',
@@ -10,9 +10,7 @@ import { Post } from '../post.model';
 })
 export class PostCreateComponent {
 
-  @Output() postCreated = new EventEmitter();
-
-
+  constructor(public postsService: PostsService) {}
 
   onAddPost(form: NgForm) {
     if (form.invalid) {
@@ -39,5 +37,7 @@ export class PostCreateComponent {
       imagePath: null,
       creator: null,
     };
+
+    this.postsService.addPost(post);
   }
 }

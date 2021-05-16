@@ -5,18 +5,19 @@ import { Post } from "./post.model";
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
-  private postsList: Post[] = [];
+  private posts: Post[] = [];
   private postsUpdated = new Subject<Post[]>();
 
   getPosts() {
-    return [...this.postsList];
+    return [...this.posts];
   }
 
   getPostsUpdatedListener() {
     return this.postsUpdated.asObservable();
   }
 
-  addPost(title: string, content: string) {
-
+  addPost(post: Post) {
+    this.posts.push(post);
+    this.postsUpdated.next([...this.posts]);
   }
 }
