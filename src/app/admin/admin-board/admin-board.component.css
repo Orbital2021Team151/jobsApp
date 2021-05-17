@@ -7,15 +7,32 @@
   text-align: center;
 }
 
-.delete {
+.deleteButton {
+
+  margin-left: 0.5rem;
+}
+
+.publishButton {
 
   margin-left: .5rem;
 }
+.moreInfoButton {
 
+  margin-left: .5rem;
+}
 .footer {
   width: auto;
+
 }
 
-ul {
-  align-items: center;
+@media screen and (min-width: 40em) {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .card {
+    flex: 0 1 24%;
+  }
 }

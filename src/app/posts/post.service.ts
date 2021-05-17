@@ -9,8 +9,11 @@ import { Post } from "./post.model";
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
-  private posts: Post[] = [];
-  private postsUpdated = new Subject<Post[]>();
+  private postsRequests: Post[] = [];
+  private postsRequestsUpdated = new Subject<Post[]>();
+
+  private postsPublished: Post[] = [];
+  private postsPublishedUpdated = new Subject<Post[]>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -37,40 +40,69 @@ export class PostsService {
         });
       })) //to change from _id from database to id
       .subscribe((mappedPosts) => {
-        this.posts = mappedPosts;
-        this.postsUpdated.next([...this.posts]);
+        this.postsRequests = mappedPosts;
+        this.postsRequestsUpdated.next([...this.postsRequests]);
       });
   }
 
-  getPostsUpdatedListener() {
-    return this.postsUpdated.asObservable();
+  getPostsPublishedUpdatedListener() {
+    return this.postsPublishedUpdated.asObservable();
   }
 
-  addPost(post: Post) {
+  getPostsRequestsUpdatedListener() {
+    return this.postsRequestsUpdated.asObservable();
+  }
+
+  requestPost(post: Post) {
     this.http.post<{message: string, postId: string}>('http://localhost:3000/api/posts', post)
       .subscribe((responseData => {
-        console.log(responseData.message);
         const postId = responseData.postId;
         post.id = postId;
-        this.posts.push(post);
-        this.postsUpdated.next([...this.posts]);
+        this.postsRequests.push(post);
+        this.postsRequestsUpdated.next([...this.postsRequests]);
+
         //TODO: should add some prompt here to tell user their post has successfully been sent,
         //pending confirmation from admin
+
         this.router.navigate(['/dashboard']);
       })
       );
   }
 
-  deletePost(postId: string) {
-    this.http.delete('http://localhost:3000/api/posts' + "/" + postId)
+  publishPost(postId: string) {
+    this.http.get('http://localhost:3000/api/posts' + "/" + postId)
       .subscribe(() => {
-        console.log("Post successfully deleted!");
-        this.posts = this.posts.filter(post => post.id !== postId);
-        this.postsUpdated.next([...this.posts]);
+        console.log("Post successfully published!");
+        let publishPost;
+        try {
+          publishPost = this.postsRequests.filter(post => post.id === postId)[0];
+          this.postsPublished.push(publishPost);
+          this.postsPublishedUpdated.next([...this.postsPublished]);
+        } catch (e) {
+          console.log("Try-Catch block at publishPost failed!");
+          console.log(e);
+          return;
+        }
+        //this.posts = this.posts.filter(post => post.id !== postId);
+        //this.postsUpdated.next([...this.posts]);
       });
   }
 
-  confirmPost(postId: string) {
+  deletePublishedPost(postId: string) {
+    this.http.delete('http://localhost:3000/api/posts' + "/" + postId)
+      .subscribe(() => {
+        console.log("Post successfully deleted!");
+        this.postsPublished = this.postsPublished.filter(post => post.id !== postId);
+        this.postsPublishedUpdated.next([...this.postsPublished]);
+      });
+  }
 
+  deleteRequestPost(postId: string) {
+    this.http.delete('http://localhost:3000/api/posts' + "/" + postId)
+      .subscribe(() => {
+        console.log("Post successfully deleted!");
+        this.postsRequests = this.postsRequests.filter(post => post.id !== postId);
+        this.postsRequestsUpdated.next([...this.postsRequests]);
+      });
   }
 }

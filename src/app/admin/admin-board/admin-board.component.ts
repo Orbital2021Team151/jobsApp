@@ -19,18 +19,14 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.postsService.getPosts();
-    this.postSub = this.postsService.getPostsUpdatedListener()
+    this.postSub = this.postsService.getPostsRequestsUpdatedListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
       });
   }
 
   onDelete(postId: string) {
-    this.postsService.deletePost(postId);
-  }
-
-  onAccept(postId: string) {
-    this.postsService.confirmPost(postId);
+    this.postsService.deleteRequestPost(postId);
   }
 
   ngOnDestroy() {
