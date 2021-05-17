@@ -20,10 +20,11 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## Installation guide / Dependencies
-
 * Install [NodeJS](https://nodejs.org/en/)
 
 * npm install -g @angular/cli@11 <br>
+
+* npm install --save-dev @angular-devkit/build-angular
 
 [if you need to reset your angular version, please do:
 npm uninstall -g @angular/cli
@@ -42,5 +43,9 @@ npm install -g @angular/cli@11
 * Install [MongoDB Shell](https://downloads.mongodb.org/windows/mongodb-shell-windows-x86_64-4.4.6.zip) (Optional, since this is just to check for requests if it does not show up on the webpage yet)
 
 * npm install --save mongoose
+
+* npm install --save mongoose-unique-validator
+
+* npm install --save bcrypt
 
 * Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)

@@ -24,6 +24,8 @@ import { PostCreateComponent } from './posts/posts-create/posts-create.component
 import { PostBoardComponent } from './posts/posts-board/posts-board.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { AppRoutingModule } from './app-routing.module';
     PostCreateComponent,
     PostBoardComponent,
     AdminBoardComponent,
+    LoginComponent,
+    SignupComponent
   ],
 
   imports: [
