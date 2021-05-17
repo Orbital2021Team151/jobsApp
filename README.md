@@ -25,7 +25,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 [if you need to reset your angular version, please do:
 npm uninstall -g @angular/cli
 npm cache clean --force
-npm install -g @angular/cli@1.4.1
+npm install -g @angular/cli@11
 ]
 
 * ng add @angular/material => choose theme, yes to both typography styles and animations <br>
