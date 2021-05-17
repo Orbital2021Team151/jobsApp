@@ -16,16 +16,18 @@ export class PostBoardComponent implements OnInit, OnDestroy {
   private postSub: Subscription;
 
   constructor(public postsService: PostsService) {}
+
   ngOnInit() {
-    this.postsService.getPosts();
-    this.postSub = this.postsService.getPostsUpdatedListener()
+    //this.postsService.getPosts();
+    //TODO:this part needs to be changed because getPosts is for admin
+    this.postSub = this.postsService.getPostsPublishedUpdatedListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
       });
   }
 
   onDelete(postId: string) {
-    this.postsService.deletePost(postId);
+    this.postsService.deletePublishedPost(postId);
   }
 
   ngOnDestroy() {

@@ -11,7 +11,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {HttpClientModule} from '@angular/common/http';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -22,6 +22,7 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
 import { PostBoardComponent } from './posts/posts-board/posts-board.component';
+import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -30,6 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
     ToolbarComponent,
     PostCreateComponent,
     PostBoardComponent,
+    AdminBoardComponent,
   ],
 
   imports: [

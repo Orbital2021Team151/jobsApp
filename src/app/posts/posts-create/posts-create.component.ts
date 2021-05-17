@@ -38,6 +38,6 @@ export class PostCreateComponent {
       //creator: null,
     };
 
-    this.postsService.addPost(post);
+    this.postsService.requestPost(post);
   }
 }

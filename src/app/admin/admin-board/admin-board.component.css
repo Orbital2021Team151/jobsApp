@@ -7,15 +7,28 @@
   text-align: center;
 }
 
-.delete {
+.deleteButton {
+
+  margin-left: 0.5rem;
+}
+
+.publishButton {
 
   margin-left: .5rem;
 }
+.moreInfoButton {
 
+  margin-left: .5rem;
+}
 .footer {
   width: auto;
+
 }
 
 ul {
   align-items: center;
+}
+
+p-card {
+  width: auto;
 }
