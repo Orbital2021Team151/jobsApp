@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+.info-text {
+  text-align: center;
+}
+
+.delete {
+
+  margin-left: .5rem;
+}
+
+.footer {
+  width: auto;
+}
+
+ul {
+  align-items: center;
+}
