@@ -20,6 +20,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## Installation guide / Dependencies
+
+* Install [NodeJS](https://nodejs.org/en/)
+
 * npm install -g @angular/cli@11 <br>
 
 [if you need to reset your angular version, please do:
@@ -29,8 +32,6 @@ npm install -g @angular/cli@11
 ]
 
 * ng add @angular/material => choose theme, yes to both typography styles and animations <br>
-
-* Install [NodeJS](https://nodejs.org/en/)
 
 * npm install --save express
 

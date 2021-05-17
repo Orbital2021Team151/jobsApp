@@ -54,6 +54,8 @@ export class PostsService {
         post.id = postId;
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
+        //TODO: should add some prompt here to tell user their post has successfully been sent,
+        //pending confirmation from admin
         this.router.navigate(['/dashboard']);
       })
       );
@@ -66,5 +68,9 @@ export class PostsService {
         this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
       });
+  }
+
+  confirmPost(postId: string) {
+
   }
 }
