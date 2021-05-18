@@ -49,3 +49,5 @@ npm install -g @angular/cli@11
 * npm install --save bcrypt
 
 * Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)
+
+* ng add @ng-bootstrap/ng-bootstrap

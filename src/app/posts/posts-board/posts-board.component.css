@@ -16,6 +16,14 @@
   width: auto;
 }
 
-ul {
-  align-items: center;
+@media screen and (min-width: 100em) {
+  .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+  }
+
+  .card {
+      flex: 0 1 calc(25% - 1em);
+  }
 }

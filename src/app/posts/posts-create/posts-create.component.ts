@@ -38,8 +38,8 @@ export class PostCreateComponent {
       //imagePath: null,
       //creator: null,
     };
-    console.log("Post creation fired! onAddPost. post is:");
-    console.log(post);
+//    console.log("Post creation fired! onAddPost. post is:");
+//    console.log(post);
     this.postsService.addPost(post);
   }
 }

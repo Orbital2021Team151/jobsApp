@@ -43,6 +43,10 @@ export class PostsService {
       });
   }
 
+  getPost(postId: string) {
+    return {...this.posts.find(post => post.id === postId)};
+  }
+
 
   getPostsUpdatedListener() {
     return this.postsUpdated.asObservable();
@@ -61,10 +65,6 @@ export class PostsService {
         this.router.navigate(['/dashboard']);
       })
       );
-  }
-
-  getPost(postId: string) {
-    return {...this.posts.find(post => post.id === postId)};
   }
 
   publishPost(postId: string) {
@@ -86,5 +86,10 @@ export class PostsService {
         this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
       });
+  }
+
+  expandPost(postId: string) {
+    const postToBeExpanded = this.getPost(postId);
+
   }
 }

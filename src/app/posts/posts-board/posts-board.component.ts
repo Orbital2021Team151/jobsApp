@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { Subscription } from "rxjs";
 import { Post } from "../post.model";
 import { PostsService } from "../post.service";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: "app-post-board",
@@ -16,7 +17,7 @@ export class PostBoardComponent implements OnInit, OnDestroy {
 
   private postSub: Subscription;
 
-  constructor(public postsService: PostsService) {}
+  constructor(public postsService: PostsService, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.hasApproved = false;
@@ -36,8 +37,73 @@ export class PostBoardComponent implements OnInit, OnDestroy {
     this.postsService.deletePost(postId);
   }
 
+  onMoreInfo(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
   ngOnDestroy() {
     this.postSub.unsubscribe();
   }
 
+}
+
+
+
+
+
+
+//for the popup window. should segment this data elsewhere so it can be reused and adhere to OOP principles
+@Component({
+  selector: 'ngbd-modal-options',
+  templateUrl: './posts-board.component.html',
+  encapsulation: ViewEncapsulation.None,
+  styles: [`
+    .dark-modal .modal-content {
+      background-color: #292b2c;
+      color: white;
+    }
+    .dark-modal .close {
+      color: white;
+    }
+    .light-blue-backdrop {
+      background-color: #5cb3fd;
+    }
+  `]
+})
+export class NgbdModalOptions {
+  closeResult: string;
+
+  constructor(private modalService: NgbModal) {}
+
+  openBackDropCustomClass(content) {
+    this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+  }
+
+  openWindowCustomClass(content) {
+    this.modalService.open(content, { windowClass: 'dark-modal' });
+  }
+
+  openSm(content) {
+    this.modalService.open(content, { size: 'sm' });
+  }
+
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  openXl(content) {
+    this.modalService.open(content, { size: 'xl' });
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
+  }
+
+  openScrollableContent(longContent) {
+    this.modalService.open(longContent, { scrollable: true });
+  }
+
+  openModalDialogCustomClass(content) {
+    this.modalService.open(content, { modalDialogClass: 'dark-modal' });
+  }
 }

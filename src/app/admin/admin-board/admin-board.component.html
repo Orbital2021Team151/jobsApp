@@ -1,23 +1,69 @@
-<ng-container *ngFor="let post of posts">
-
-  <div class="centered">
-    <section class="cards">
-
-      <p-card class="card" header= {{post.title}} subheader="{{post.startDate}} to {{post.endDate}}"
-    [style]="{'width': '25rem', 'margin-bottom': '2em', 'text-align': 'center'}" styleClass="p-card-shadow"
-    *ngIf="!post.approved"
+<div class="centered" *ngFor="let post of posts">
+  <section class="cards">
+    <p-card
+      class="card"
+      header="{{ post.title }}"
+      subheader="{{ post.startDate }} to {{ post.endDate }}"
+      [style]="{
+        width: '25rem',
+        'margin-bottom': '2em',
+        'text-align': 'center'
+      }"
+      styleClass="p-card-shadow"
+      *ngIf="!post.approved"
     >
-      <p>{{post.content}}</p>
+      <p>{{ post.content }}</p>
       <ng-template pTemplate="footer" #footer>
-          <p-button class="publishButton" label="Publish" (click)="onPublish(post.id)"></p-button>
-          <p-button class="moreInfoButton" label="More Information"></p-button>
-          <p-button class="deleteButton" label="Delete" icon="pi pi-times" styleClass="p-button-secondary" (click)="onDelete(post.id)"></p-button>
+        <p-button
+          class="publishButton"
+          label="Publish"
+          styleClass="p-button-success"
+          (click)="onPublish(post.id)"
+        ></p-button>
+
+        <button class="btn btn-outline-primary mb-2 mr-2" (click)="onMoreInfo(content)">Large modal</button>
+
+        <p-button
+          class="deleteButton"
+          label="Delete"
+          icon="pi pi-times"
+          styleClass="p-button-secondary"
+          (click)="onDelete(post.id)"
+        ></p-button>
       </ng-template>
     </p-card>
+  </section>
 
-    </section>
-  </div>
 
-</ng-container>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{post.title}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Organization Name: {{post.orgName}}&hellip;</p>
+      <p>UEN: {{post.uen}}&hellip;</p>
+      <p>Student Group Name: {{post.studentGroupName}}&hellip;</p>
+      <p>Point of Contact (POC): {{post.POC}}&hellip;</p>
+      <p>POC's phoneNumber: {{post.phoneNumber}}&hellip;</p>
+      <p>POC's email: {{post.email}}&hellip;</p>
+      <p>Brief Description for gig: {{post.content}}&hellip;</p>
+      <p>Preferred Skills: {{post.skills}}&hellip;</p>
+      <p>Start Date: {{post.startDate}}&hellip;</p>
+      <p>End Date: {{post.endDate}}&hellip;</p>
+      <p>Commitment Hours: {{post.hoursRequired}}&hellip;</p>
+      <p>Beneficiaries: {{post.beneficiaryInfo}}&hellip;</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
 
-<p class="info-text mat-body-1" *ngIf="!hasRequest"> No post request! </p>
+
+
+
+</div>
+
+<p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
