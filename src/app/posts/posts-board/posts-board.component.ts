@@ -3,6 +3,7 @@ import { Subscription } from "rxjs";
 import { Post } from "../post.model";
 import { PostsService } from "../post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from "src/app/auth/auth.service";
 
 @Component({
   selector: "app-post-board",
@@ -13,11 +14,17 @@ export class PostBoardComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
   hasApproved: boolean;
+  userIsAuthenticated = false;
   //need to remove subscription later to prevent memory leak
 
   private postSub: Subscription;
+  private authStatusSub: Subscription;
 
-  constructor(public postsService: PostsService, private modalService: NgbModal) {}
+  constructor(
+    public postsService: PostsService,
+    private modalService: NgbModal,
+    private authService: AuthService
+    ) {}
 
   ngOnInit() {
     this.hasApproved = false;
@@ -31,6 +38,12 @@ export class PostBoardComponent implements OnInit, OnDestroy {
           this.hasApproved = true;
         }
       });
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(isAutheticated => {
+      this.userIsAuthenticated = isAutheticated;
+    });
   }
 
   onDelete(postId: string) {
@@ -43,6 +56,7 @@ export class PostBoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.postSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
 
 }
