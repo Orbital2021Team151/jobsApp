@@ -18,4 +18,6 @@ export interface Post {
   beneficiaryInfo: string, //paragraph on who are the beneficiaries to let the organization write down. or could be a dropdown list
   //imagePath: string; //store image? additional feature potentially
   //creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
+
+  approved: boolean,
 }

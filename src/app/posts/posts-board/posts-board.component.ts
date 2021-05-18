@@ -11,6 +11,7 @@ import { PostsService } from "../post.service";
 export class PostBoardComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
+  hasApproved: boolean;
   //need to remove subscription later to prevent memory leak
 
   private postSub: Subscription;
@@ -18,16 +19,21 @@ export class PostBoardComponent implements OnInit, OnDestroy {
   constructor(public postsService: PostsService) {}
 
   ngOnInit() {
-    //this.postsService.getPosts();
-    //TODO:this part needs to be changed because getPosts is for admin
-    this.postSub = this.postsService.getPostsPublishedUpdatedListener()
+    this.hasApproved = false;
+//    console.log("AT BOARD PAGE NOW!");
+    this.postsService.getPosts();
+    this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
+//        console.log(this.posts);
+        if (posts.filter(post => post.approved).length > 0) {
+          this.hasApproved = true;
+        }
       });
   }
 
   onDelete(postId: string) {
-    this.postsService.deletePublishedPost(postId);
+    this.postsService.deletePost(postId);
   }
 
   ngOnDestroy() {

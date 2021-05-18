@@ -22,6 +22,7 @@ checkAuth,
     endDate: req.body.endDate,
     hoursRequired: req.body.hoursRequired,
     beneficiaryInfo: req.body.beneficiaryInfo,
+    appproved: false,
   });
   post.save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
     .then(createdPost => {
@@ -51,6 +52,31 @@ checkAuth,
       console.log(result);
       res.status(200).json({message: "Post delete request sent!"});
     });
+});
+
+router.put('/:id', (req, res, next) => { //publish function to change approved from false to true
+//  console.log("router.put request fired!");
+  const newPost = new Post({
+    _id: req.body.id,
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    studentGroupName: req.body.studentGroupName,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    skills: req.body.skills,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    hoursRequired: req.body.hoursRequired,
+    beneficiaryInfo: req.body.beneficiaryInfo,
+    approved: true,
+  });
+  Post.updateOne({_id: req.params.id}, newPost).then(result => {
+//    console.log(result);
+    res.status(200).json("Post published!");
+  });
 });
 
 module.exports = router;

@@ -34,10 +34,12 @@ export class PostCreateComponent {
       hoursRequired: form.value.hoursRequired,
 
       beneficiaryInfo: form.value.beneficiaryInfo,
+      approved: false,
       //imagePath: null,
       //creator: null,
     };
-
-    this.postsService.requestPost(post);
+    console.log("Post creation fired! onAddPost. post is:");
+    console.log(post);
+    this.postsService.addPost(post);
   }
 }
