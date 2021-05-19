@@ -17,7 +17,7 @@ const postSchema = mongoose.Schema({
   hoursRequired: {type: String, required: true},
   beneficiaryInfo: {type: String, required: true},
   approved: {type: Boolean, },
-  creator: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true}
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
   //imagePath:
   //creator:
 });

@@ -23,6 +23,7 @@ checkAuth,
     hoursRequired: req.body.hoursRequired,
     beneficiaryInfo: req.body.beneficiaryInfo,
     appproved: false,
+    creator: req.userData.userId
   });
   post.save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
     .then(createdPost => {
@@ -34,7 +35,7 @@ router.get('', (req, res, next) => {
   Post.find()
     .then(documents => {
       res.status(200).json({
-        message: "posts fetched successfully",
+        message: "Posts fetched successfully",
         posts: documents,
       });
     })
@@ -47,13 +48,18 @@ router.delete('/:id',
 checkAuth,
 (req, res, next) => {
   //console.log(req.params.id);
-  Post.deleteOne({_id: req.params.id})
+  Post.deleteOne({_id: req.params.id, creator: req.userData.userId})
     .then((result) => {
-      console.log(result);
-      res.status(200).json({message: "Post delete request sent!"});
+      if (result.n > 0) {
+        res.status(200).json({message: "Post delete request sent!"});
+      } else {
+        res.status(401).json({ message: "Not authorised to delete!"});
+      }
+
     });
 });
 
+//publish function, need to add some perms to make it so that only admins can do it..
 router.put('/:id', (req, res, next) => { //publish function to change approved from false to true
 //  console.log("router.put request fired!");
   const newPost = new Post({
@@ -72,6 +78,7 @@ router.put('/:id', (req, res, next) => { //publish function to change approved f
     hoursRequired: req.body.hoursRequired,
     beneficiaryInfo: req.body.beneficiaryInfo,
     approved: true,
+    //creator: req.userData.userId
   });
   Post.updateOne({_id: req.params.id}, newPost).then(result => {
 //    console.log(result);

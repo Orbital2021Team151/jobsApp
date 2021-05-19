@@ -34,10 +34,12 @@ export class PostsService {
             hoursRequired: post.hoursRequired,
             beneficiaryInfo: post.beneficiaryInfo,
             approved: post.approved,
+            creator: post.creator
           };
         });
       })) //to change from _id from database to id
       .subscribe((mappedPosts) => {
+        //console.log(mappedPosts);
         this.posts = mappedPosts;
         this.postsUpdated.next([...this.posts]);
       });
