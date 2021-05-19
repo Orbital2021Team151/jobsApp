@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from '../post.model';
 import { PostsService } from '../post.service';
 
@@ -7,10 +8,23 @@ import { PostsService } from '../post.service';
   selector: 'app-post-create',
   templateUrl: './posts-create.component.html',
   styleUrls: ['./posts-create.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  styles: [`
+    .dark-modal .modal-content {
+      background-color: #292b2c;
+      color: white;
+    }
+    .dark-modal .close {
+      color: white;
+    }
+    .light-blue-backdrop {
+      background-color: #5cb3fd;
+    }
+  `],
 })
 export class PostCreateComponent {
 
-  constructor(public postsService: PostsService) {}
+  constructor(public postsService: PostsService, private modalService: NgbModal) {} //public activeModal: NgbActiveModal
 
   onAddPost(form: NgForm) {
     if (form.invalid) {
@@ -41,5 +55,11 @@ export class PostCreateComponent {
 //    console.log("Post creation fired! onAddPost. post is:");
 //    console.log(post);
     this.postsService.addPost(post);
+    this.modalService.dismissAll();
   }
+
+  openTermsAndConditions(longContent) {
+    this.modalService.open(longContent, { scrollable: true });
+  }
+
 }

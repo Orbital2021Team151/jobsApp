@@ -8,6 +8,19 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: "app-admin-board",
   templateUrl: './admin-board.component.html',
   styleUrls: ['./admin-board.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  styles: [`
+    .dark-modal .modal-content {
+      background-color: #292b2c;
+      color: white;
+    }
+    .dark-modal .close {
+      color: white;
+    }
+    .light-blue-backdrop {
+      background-color: #5cb3fd;
+    }
+  `],
 })
 export class AdminBoardComponent implements OnInit, OnDestroy {
 
@@ -50,64 +63,4 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     this.postSub.unsubscribe();
   }
 
-}
-
-
-
-
-
-//for the popup window. should segment this data elsewhere so it can be reused and adhere to OOP principles
-@Component({
-  selector: 'ngbd-modal-options',
-  templateUrl: './admin-board.component.html',
-  encapsulation: ViewEncapsulation.None,
-  styles: [`
-    .dark-modal .modal-content {
-      background-color: #292b2c;
-      color: white;
-    }
-    .dark-modal .close {
-      color: white;
-    }
-    .light-blue-backdrop {
-      background-color: #5cb3fd;
-    }
-  `]
-})
-export class NgbdModalOptions {
-  closeResult: string;
-
-  constructor(private modalService: NgbModal) {}
-
-  openBackDropCustomClass(content) {
-    this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
-  }
-
-  openWindowCustomClass(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-  }
-
-  openSm(content) {
-    this.modalService.open(content, { size: 'sm' });
-  }
-
-  openLg(content) {
-    this.modalService.open(content, { size: 'lg' });
-  }
-
-  openXl(content) {
-    this.modalService.open(content, { size: 'xl' });
-  }
-
-  openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
-  }
-
-  openScrollableContent(longContent) {
-    this.modalService.open(longContent, { scrollable: true });
-  }
-
-  openModalDialogCustomClass(content) {
-    this.modalService.open(content, { modalDialogClass: 'dark-modal' });
-  }
 }
