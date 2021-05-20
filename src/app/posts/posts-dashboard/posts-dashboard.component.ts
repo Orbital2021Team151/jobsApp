@@ -7,9 +7,9 @@ import { AuthService } from "src/app/auth/auth.service";
 
 @Component({
   selector: "app-post-board",
-  templateUrl: './posts-board.component.html',
+  templateUrl: './posts-dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./posts-board.component.css'],
+  styleUrls: ['./posts-dashboard.component.css'],
   styles: [`
     .dark-modal .modal-content {
       background-color: #292b2c;
@@ -28,6 +28,7 @@ export class PostBoardComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   hasApproved: boolean;
   userIsAuthenticated = false;
+  private role: string = null;
   //need to remove subscription later to prevent memory leak
 
   private postSub: Subscription;
@@ -54,8 +55,9 @@ export class PostBoardComponent implements OnInit, OnDestroy {
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService
     .getAuthStatusListener()
-    .subscribe(isAutheticated => {
-      this.userIsAuthenticated = isAutheticated;
+    .subscribe(authObject => {
+      this.userIsAuthenticated = authObject.auth;
+      this.role = authObject.role;
     });
   }
 

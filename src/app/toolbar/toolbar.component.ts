@@ -10,6 +10,7 @@ import { AuthService } from "../auth/auth.service";
 export class ToolbarComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
   userIsAuthenticated = false;
+  role: string;
 
   constructor(private authService: AuthService) {};
 
@@ -21,8 +22,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authListenerSubs = this.authService
     .getAuthStatusListener()
-    .subscribe(isAuthenticated => {
-      this.userIsAuthenticated = isAuthenticated;
+    .subscribe(authAndRoleObject => {
+      this.userIsAuthenticated = authAndRoleObject.auth;
+      this.role = authAndRoleObject.role;
     })
   }
 

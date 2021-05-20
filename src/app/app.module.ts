@@ -13,6 +13,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatSelectModule} from '@angular/material/select';
 
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -22,13 +23,14 @@ import { ButtonModule } from 'primeng/button';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
-import { PostBoardComponent } from './posts/posts-board/posts-board.component';
+import { PostBoardComponent } from './posts/posts-feed/posts-feed.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
+import { SignupAdminComponent } from './auth/signup-admin/signup-admin.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SignupGeneralComponent } from './auth/signup-general/signup-general.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PostBoardComponent,
     AdminBoardComponent,
     LoginComponent,
-    SignupComponent
+    SignupAdminComponent,
+    SignupGeneralComponent,
   ],
 
   imports: [
@@ -56,6 +59,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSelectModule,
     CardModule,
     ButtonModule,
     NgbModule,

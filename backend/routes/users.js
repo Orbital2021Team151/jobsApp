@@ -8,11 +8,12 @@ const user = require('../models/user');
 const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
-  //console.log("hi");
-  bcrypt.hash(req.body.password, 10).then(hash => {
+
+  bcrypt.hash(req.body.password, 10).then(hash => { //TODO: might have to hash role here too.
     const user = new User({
       email: req.body.email,
-      password: hash
+      password: hash,
+      role: req.body.role,
     });
     user
       .save()
@@ -24,7 +25,7 @@ router.post("/signup", (req, res, next) => {
       })
       .catch(err => {
         res.status(500).json({
-          message: "your code doesnt work you idiot",
+          message: "You probably signed up before using this email...",
           error: err
         });
       });
@@ -33,8 +34,10 @@ router.post("/signup", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;
+
   User.findOne({
-    email: req.body.email
+    email: req.body.email,
+    role: req.body.role,
   })
   .then(user => {
     if (!user) {
@@ -43,7 +46,7 @@ router.post("/login", (req, res, next) => {
       })
     }
     fetchedUser = user;
-    return bcrypt.compare(req.body.password, user.password);
+    return bcrypt.compare(req.body.password, user.password); // , user.role);
   })
   .then(result => {
     if (!result) {
@@ -53,7 +56,8 @@ router.post("/login", (req, res, next) => {
     }
     const token = jwt.sign({
       email: fetchedUser.email,
-      userId: fetchedUser._id
+      userId: fetchedUser._id,
+      role: fetchedUser.role,
     },
     'secret_token_that_no_one_will_find_out_about',
     { expiresIn: "1h" }
@@ -61,7 +65,7 @@ router.post("/login", (req, res, next) => {
 
     res.status(200).json({
       token: token,
-      expiresIn: 3600
+      expiresIn: 3600,
     })
   })
   .catch(err => {

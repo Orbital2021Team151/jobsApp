@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 //username: admin, password: bh447oHghiti5g2E
+//cli command @mongdb's bin folder: mongo "mongodb+srv://eprepmeancoursecluster.qa0ny.mongodb.net/myFirstDatabase" --username <username>
 mongoose.connect("mongodb+srv://admin:bh447oHghiti5g2E@eprepmeancoursecluster.qa0ny.mongodb.net/orbitalDatabase?retryWrites=true&w=majority")
   .then(() => {
     console.log("Successfully connected to MongoDB Atlas!");

@@ -10,6 +10,13 @@
       <a mat-button routerLink="/login" routerLinkActive="mat-primary"> Login </a>
       <a mat-button routerLink="/signup" routerLinkActive="mat-primary"> Signup </a>
     </li>
+
+
+    <li *ngIf="userIsAuthenticated && (role === 'Admin')">
+      <a mat-button routerLink="/signupAdmin" routerLinkActive="mat-primary"> Signup for others </a>
+    </li>
+
+
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/create" routerLinkActive="mat-primary"> Create Job Posting</a>
     </li>

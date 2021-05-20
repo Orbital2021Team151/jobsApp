@@ -8,6 +8,7 @@ import { AuthService } from "../auth.service";
 })
 export class LoginComponent {
   isLoading = false;
+  roles: string[] = ["Admin", "External Organisation", "Internal Organisation", "Student"];
 
   constructor(public authService: AuthService) {}
 
@@ -15,6 +16,6 @@ export class LoginComponent {
     if (form.invalid) {
       return;
     }
-    this.authService.login(form.value.email, form.value.password);
+    this.authService.login(form.value.email, form.value.password, form.value.role);
   }
 }
