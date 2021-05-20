@@ -23,7 +23,7 @@ import { ButtonModule } from 'primeng/button';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
-import { PostBoardComponent } from './posts/posts-feed/posts-feed.component';
+import { PostFeedComponent } from './posts/posts-feed/posts-feed.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
@@ -37,7 +37,7 @@ import { SignupGeneralComponent } from './auth/signup-general/signup-general.com
     AppComponent,
     ToolbarComponent,
     PostCreateComponent,
-    PostBoardComponent,
+    PostFeedComponent,
     AdminBoardComponent,
     LoginComponent,
     SignupAdminComponent,

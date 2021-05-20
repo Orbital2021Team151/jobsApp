@@ -23,7 +23,7 @@ import { AuthService } from "src/app/auth/auth.service";
     }
   `],
 })
-export class PostBoardComponent implements OnInit, OnDestroy {
+export class PostFeedComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
   hasApproved: boolean;

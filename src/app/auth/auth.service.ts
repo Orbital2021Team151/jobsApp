@@ -65,7 +65,7 @@ export class AuthService {
         }, expiresInDuration * 1000);
         this.isAuthenticated = true;
         this.authStatusListener.next({auth: true, role: role});
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['']);
       }
     })
   }
