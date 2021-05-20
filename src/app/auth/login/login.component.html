@@ -1,7 +1,7 @@
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onLogin(loginForm)" *ngIf="!isLoading" #loginForm="ngForm">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <input
         matInput
         type="email"
@@ -17,22 +17,36 @@
       >
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
       <input
         matInput
-        type="password"
+        [type]="hidePassword ? 'password' : 'text'"
         name="password"
         ngModel
         required
         #passwordInput="ngModel"
-        placeholder="Password"
+        placeholder="Enter Password Here"
       />
+
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+
       <mat-error *ngIf="passwordInput.invalid"
         >Please enter a valid password.</mat-error
       >
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>User Role</mat-label>
       <mat-select ngModel required #roleInput="ngModel" name="role">
         <mat-option>--</mat-option>

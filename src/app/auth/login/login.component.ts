@@ -9,6 +9,7 @@ import { AuthService } from "../auth.service";
 export class LoginComponent {
   isLoading = false;
   roles: string[] = ["Admin", "External Organisation", "Student Organisation", "Student"];
+  hidePassword = true;
 
   constructor(public authService: AuthService) {}
 

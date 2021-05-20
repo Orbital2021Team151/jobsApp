@@ -9,7 +9,7 @@ import { AuthService } from "../auth.service";
 export class SignupAdminComponent {
   isLoading = false;
   roles: any = ["Admin", "External Organisation", "Internal Organisation", "Student"];
-  roleSelected: string;
+  hidePassword = true;
 
   constructor(public authService: AuthService) {}
 
