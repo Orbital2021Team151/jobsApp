@@ -23,6 +23,7 @@ import { PostsService } from '../post.service';
   `],
 })
 export class PostCreateComponent {
+  pendingApproval: boolean = false;
 
   constructor(public postsService: PostsService, private modalService: NgbModal) {} //public activeModal: NgbActiveModal
 
@@ -54,8 +55,13 @@ export class PostCreateComponent {
     };
 //    console.log("Post creation fired! onAddPost. post is:");
 //    console.log(post);
+    this.pendingApproval = true;
     this.postsService.addPost(post);
     this.modalService.dismissAll();
+  }
+
+  closeNotification() {
+    this.pendingApproval = false;
   }
 
   openTermsAndConditions(longContent) {

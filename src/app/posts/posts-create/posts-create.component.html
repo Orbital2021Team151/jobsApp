@@ -69,13 +69,14 @@
 
     </form>
 
+    <div *ngIf="pendingApproval" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Submitted for approval!</strong> Please wait while our administrators vet your post.
+      <button (click)="closeNotification()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <button class="btn btn-outline-primary mb-2 mr-2" (click)="openTermsAndConditions(TermsAndConditions)">Request</button>
-
-
-
-
-
-
 
 </mat-card>
 

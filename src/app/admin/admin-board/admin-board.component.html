@@ -1,5 +1,7 @@
+
 <div class="centered" *ngFor="let post of posts">
   <section class="cards">
+
     <p-card
       class="card"
       header="{{ post.title }}"
@@ -20,6 +22,7 @@
           styleClass="p-button-success"
           (click)="onPublish(post.id)"
         ></p-button>
+
 
         <button class="btn btn-outline-primary mb-2 mr-2" (click)="onMoreInfo(content)">Learn More</button>
 

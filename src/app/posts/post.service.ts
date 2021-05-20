@@ -64,7 +64,8 @@ export class PostsService {
 
         //TODO: should add some prompt here to tell user their post has successfully been sent,
         //pending confirmation from admin
-        this.router.navigate(['/dashboard']);
+
+        //this.router.navigate(['/feed']);
       })
       );
   }
@@ -77,7 +78,7 @@ export class PostsService {
     this.http.put('http://localhost:3000/api/posts' + "/" + postToBePublished.id, postToBePublished)
       .subscribe(() => {
         console.log("post successfully published!");
-        this.router.navigate(['/dashboard']);
+        //this.router.navigate(['/']);
       });
   }
 

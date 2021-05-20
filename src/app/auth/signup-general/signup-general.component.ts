@@ -10,6 +10,7 @@ export class SignupGeneralComponent {
   isLoading = false;
   roles: any = ["External Organisation", "Student Organisation", "Student"];
   hidePassword = true;
+  signedUp: boolean = false;
 
   constructor(public authService: AuthService) {}
 
@@ -17,6 +18,11 @@ export class SignupGeneralComponent {
     if (form.invalid) {
       return;
     }
+    this.signedUp = true;
     this.authService.createUser(form.value.email, form.value.password, form.value.role, form.value.orgName, form.value.uen);
+  }
+
+  closeNotification() {
+    this.signedUp = false;
   }
 }
