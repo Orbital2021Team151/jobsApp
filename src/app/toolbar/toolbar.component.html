@@ -4,7 +4,11 @@
   <ul>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/feed" routerLinkActive="mat-primary"> Feed</a>
-      <a mat-button routerLink="/admin" routerLinkActive="mat-primary"> Admin</a>
+
+
+      <a *ngIf="userIsAuthenticated && (role === 'Admin')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> Admin Dashboard</a>
+      <a *ngIf="userIsAuthenticated && (role !== 'Admin')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> {{orgName}} Dashboard</a>
+
     </li>
     <li *ngIf="!userIsAuthenticated">
       <a mat-button routerLink="/login" routerLinkActive="mat-primary"> Login </a>

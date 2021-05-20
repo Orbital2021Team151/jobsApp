@@ -1,7 +1,8 @@
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onSignup(signupForm)" *ngIf="!isLoading" #signupForm="ngForm">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email Address</mat-label>
       <input
         matInput
         type="email"
@@ -9,24 +10,37 @@
         ngModel
         required
         #emailInput="ngModel"
-        placeholder="Email Address"
-        email
+        placeholder="Enter Email Here"
       />
       <mat-error *ngIf="emailInput.invalid"
         >Please enter a valid email address.</mat-error
       >
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
       <input
         matInput
-        type="password"
+        [type]="hidePassword ? 'password' : 'text'"
         name="password"
         ngModel
         required
         #passwordInput="ngModel"
-        placeholder="Password"
+        placeholder="Enter Password Here"
       />
+
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+
       <mat-error *ngIf="passwordInput.invalid"
         >Please enter a valid password.</mat-error
       >
@@ -34,7 +48,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>User Role</mat-label>
-      <mat-select ngModel required #roleInput="ngModel" name="role">
+      <mat-select ngModel required #roleInput="ngModel" name="role" (click)="roleSelected = roll">
         <mat-option>--</mat-option>
         <mat-option *ngFor="let role of roles" [value]="role">
           {{ role }}
@@ -44,6 +58,46 @@
         >Please select the user's role.</mat-error
       >
     </mat-form-field>
+
+
+
+
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Organisation Name</mat-label>
+        <input
+          matInput
+          type="orgName"
+          name="orgName"
+          ngModel
+          required
+          #orgNameInput="ngModel"
+          placeholder="Enter Organisation Name Here"
+        />
+        <mat-error *ngIf="orgNameInput.invalid"
+          >Please enter an organisation name.</mat-error
+        >
+      </mat-form-field>
+
+
+      <mat-form-field matNativeControl appearance="outline" [disabled]="true">
+        <mat-label>Unique Entity Number (UEN)</mat-label>
+        <input
+          matInput
+          type="uen"
+          name="uen"
+          ngModel
+          required
+          #uenInput="ngModel"
+          placeholder="eg UEN1234567. If you are a Student Organisation, just put NA"
+        />
+        <mat-error *ngIf="uenInput.invalid"
+          >Please enter a valid Unique Entity Number (UEN).</mat-error
+        >
+      </mat-form-field>
+
+    </div>
 
     <button mat-raised-button color="accent" type="submit">Signup</button>
   </form>

@@ -14,6 +14,8 @@ router.post("/signup", (req, res, next) => {
       email: req.body.email,
       password: hash,
       role: req.body.role,
+      orgName: req.body.orgName,
+      uen: req.body.uen,
     });
     user
       .save()
@@ -25,7 +27,7 @@ router.post("/signup", (req, res, next) => {
       })
       .catch(err => {
         res.status(500).json({
-          message: "You probably signed up before using this email...",
+          message: "You probably signed up before using this email before...",
           error: err
         });
       });
@@ -33,6 +35,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
+
   let fetchedUser;
 
   User.findOne({
@@ -48,6 +51,7 @@ router.post("/login", (req, res, next) => {
     fetchedUser = user;
     return bcrypt.compare(req.body.password, user.password); // , user.role);
   })
+
   .then(result => {
     if (!result) {
       return res.status(401).json({
@@ -63,11 +67,23 @@ router.post("/login", (req, res, next) => {
     { expiresIn: "1h" }
     );
 
+    console.log("From Login, below data are retrieved");
+    console.log(fetchedUser);
+    console.log(fetchedUser.email);
+    console.log(fetchedUser.orgName);
+    console.log(fetchedUser.uen);
+    console.log(fetchedUser.password);
+
     res.status(200).json({
       token: token,
       expiresIn: 3600,
+      role: fetchedUser.role,
+      orgName: fetchedUser.orgName,
+      uen: fetchedUser.uen,
     })
   })
+
+
   .catch(err => {
     return res.status(401).json({
       message: "Authentication failed"

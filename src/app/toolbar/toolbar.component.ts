@@ -11,6 +11,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
   userIsAuthenticated = false;
   role: string;
+  orgName: string;
 
   constructor(private authService: AuthService) {};
 
@@ -25,6 +26,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     .subscribe(authAndRoleObject => {
       this.userIsAuthenticated = authAndRoleObject.auth;
       this.role = authAndRoleObject.role;
+      this.orgName = authAndRoleObject.orgName;
     })
   }
 

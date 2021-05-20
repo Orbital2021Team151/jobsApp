@@ -28,8 +28,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   hasApproved: boolean;
   userIsAuthenticated = false;
-  private role: string = null;
-  //need to remove subscription later to prevent memory leak
+  private role: string = null; //todo: could probably use this to give admin powers to delete all posts at feed page. same logic for admin page
 
   private postSub: Subscription;
   private authStatusSub: Subscription;
@@ -42,12 +41,10 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.hasApproved = false;
-//    console.log("AT BOARD PAGE NOW!");
     this.postsService.getPosts();
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
-//        console.log(this.posts);
         if (posts.filter(post => post.approved).length > 0) {
           this.hasApproved = true;
         }

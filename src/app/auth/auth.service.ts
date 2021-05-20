@@ -10,7 +10,7 @@ import { AuthData } from './auth-data.model';
 export class AuthService {
 
   private token: string;
-  private authStatusListener = new Subject<{auth: boolean, role: string}>();
+  private authStatusListener = new Subject<{auth: boolean, role: string, orgName: string, uen: string}>();
   private isAuthenticated = false;
   private tokenTimer: any;
 
@@ -28,13 +28,18 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(email: string, password: string, role: string) {
+  createUser(email: string, password: string, role: string, orgName: string, uen: string) {
+
+    /*
     const authData: AuthData = {
       email: email,
       password: password,
       role: role,
     }
-    this.http.post("http://localhost:3000/api/user/signup", authData)
+    */
+
+    let userObject = {email: email, password: password, role: role, orgName: orgName, uen: uen};
+    this.http.post("http://localhost:3000/api/user/signup", userObject)
       .subscribe(res => {
         console.log(res);
       });
@@ -48,23 +53,18 @@ export class AuthService {
     };
 
     this.http
-    .post<{token: string, expiresIn: number}>("http://localhost:3000/api/user/login", authData)
+    .post<{token: string, expiresIn: number, orgName: string, uen: string}>("http://localhost:3000/api/user/login", authData)
     .subscribe(response => {
       const token = response.token;
       this.token = token;
       if (token) {
-
-        console.log("Token retrieved from login is: ");
-        console.log(token);
-        console.log("Role for this person is: ");
-        console.log(role);
 
         const expiresInDuration = response.expiresIn;
         this.tokenTimer = setTimeout(() => {
           this.logout();
         }, expiresInDuration * 1000);
         this.isAuthenticated = true;
-        this.authStatusListener.next({auth: true, role: role});
+        this.authStatusListener.next({auth: true, role: role, orgName: response.orgName, uen: response.uen});
         this.router.navigate(['']);
       }
     })
@@ -73,7 +73,7 @@ export class AuthService {
   logout() {
     this.token = null;
     this.isAuthenticated = false;
-    this.authStatusListener.next({auth: true, role: null});
+    this.authStatusListener.next({auth: false, role: null, orgName: null, uen: null});
     this.router.navigate(['/']);
     clearTimeout(this.tokenTimer);
   }

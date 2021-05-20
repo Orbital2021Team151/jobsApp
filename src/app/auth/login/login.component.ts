@@ -8,7 +8,7 @@ import { AuthService } from "../auth.service";
 })
 export class LoginComponent {
   isLoading = false;
-  roles: string[] = ["Admin", "External Organisation", "Internal Organisation", "Student"];
+  roles: string[] = ["Admin", "External Organisation", "Student Organisation", "Student"];
 
   constructor(public authService: AuthService) {}
 
