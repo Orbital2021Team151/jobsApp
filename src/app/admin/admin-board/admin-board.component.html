@@ -15,8 +15,9 @@
       *ngIf="!post.approved"
     >
       <p>{{ post.content }}</p>
+
       <ng-template pTemplate="footer" #footer>
-        <p-button
+        <p-button *ngIf="(authStatusObject.role === 'Admin')"
           class="publishButton"
           label="Publish"
           styleClass="p-button-success"
@@ -70,16 +71,6 @@
 </div>
 
 <p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
-
-
-
-
-
-
-
-
-
-
 
 
 

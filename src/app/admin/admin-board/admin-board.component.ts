@@ -43,13 +43,17 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     this.postsService.getPosts();
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
+
+        console.log(posts);
+
         if (this.authStatusObject.role === "Admin") {
           this.posts = posts;
         } else {
           this.posts = posts
-            .filter(post => (post.orgName === this.authStatusObject.orgName) && (post.uen === this.authStatusObject.uen));
+            .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
         }
-
+        console.log(this.posts);
+        console.log(this.authStatusObject);
         //this.posts = posts;
 
 //        console.log("posts are: ");
