@@ -3,6 +3,7 @@ import { Subscription } from "rxjs";
 import { Post } from "../../posts/post.model";
 import { PostsService } from "../../posts/post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from "src/app/auth/auth.service";
 
 @Component({
   selector: "app-admin-board",
@@ -30,21 +31,37 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   private postSub: Subscription;
   hasRequest: Boolean;
   postToBeDeleted: string;
+  private authStatusObject;
 
-  constructor(public postsService: PostsService, private modalService: NgbModal) {}
+  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
   ngOnInit() {
+
+    this.authStatusObject = this.authService.getAuthStatusObject();
+
     this.hasRequest = false;
-//    console.log("at ADMIN page now!");
     this.postsService.getPosts();
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
-        this.posts = posts;
+
+        console.log(posts);
+
+        if (this.authStatusObject.role === "Admin") {
+          this.posts = posts;
+        } else {
+          this.posts = posts
+            .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
+        }
+        console.log(this.posts);
+        console.log(this.authStatusObject);
+        //this.posts = posts;
+
 //        console.log("posts are: ");
 //        console.log(this.posts);
-        if (posts.filter(post => !post.approved).length > 0 && posts.length !== 0) {
+        if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
         }
+
       });
   }
 
@@ -52,8 +69,9 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     this.postsService.deletePost(postId);
   }
 
-  onPublish(postId: string) {
+  onPublish(postId: string, publishContent) {
     this.postsService.publishPost(postId);
+    this.modalService.open(publishContent, { scrollable: true });
   }
 
   onMoreInfo(content) {

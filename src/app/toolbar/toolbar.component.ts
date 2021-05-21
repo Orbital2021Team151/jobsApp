@@ -12,6 +12,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   role: string;
   orgName: string;
+  private authStatusObject;
 
   constructor(private authService: AuthService) {};
 
@@ -21,13 +22,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    //this.userIsAuthenticated = this.authService.getIsAuth();
     this.authListenerSubs = this.authService
     .getAuthStatusListener()
     .subscribe(authObject => {
       this.userIsAuthenticated = authObject.auth;
-      this.role = authObject.role;
-      this.orgName = authObject.orgName;
+      this.authStatusObject = this.authService.getAuthStatusObject();
     })
   }
 
