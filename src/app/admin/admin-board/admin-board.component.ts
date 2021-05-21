@@ -3,7 +3,6 @@ import { Subscription } from "rxjs";
 import { Post } from "../../posts/post.model";
 import { PostsService } from "../../posts/post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "app-admin-board",
@@ -29,28 +28,23 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   //need to remove subscription later to prevent memory leak
 
   private postSub: Subscription;
-  private authStatusObject;
   hasRequest: Boolean;
+  postToBeDeleted: string;
 
-  role: string;
-  orgName: string;
-
-  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
+  constructor(public postsService: PostsService, private modalService: NgbModal) {}
 
   ngOnInit() {
-
-    this.authStatusObject = this.authService.getAuthStatusObject();
     this.hasRequest = false;
+//    console.log("at ADMIN page now!");
     this.postsService.getPosts();
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
 //        console.log("posts are: ");
 //        console.log(this.posts);
-        if (posts.filter(post => !post.approved).length > 0) {
+        if (posts.filter(post => !post.approved).length > 0 && posts.length !== 0) {
           this.hasRequest = true;
         }
-
       });
   }
 
@@ -58,14 +52,11 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     this.postsService.deletePost(postId);
   }
 
-  onPublish(postId: string, publishContent) {
+  onPublish(postId: string) {
     this.postsService.publishPost(postId);
-    this.modalService.open(publishContent, { scrollable: true });
   }
 
   onMoreInfo(content) {
-    console.log(this.authStatusObject);
-    console.log(this.authStatusObject.role);
     this.modalService.open(content, { size: 'lg' });
   }
 

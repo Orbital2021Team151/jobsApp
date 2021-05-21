@@ -1,7 +1,7 @@
 const express = require('express');
 const Post = require('../models/post');
 const checkAuth = require('../middleware/check-auth');
-
+const user = require('../models/user');
 
 const router = express();
 
@@ -47,17 +47,40 @@ router.get('', (req, res, next) => {
 router.delete('/:id',
 checkAuth,
 (req, res, next) => {
-  //console.log(req.params.id);
-  Post.deleteOne({_id: req.params.id, creator: req.userData.userId})
+  console.log(req.userData.role);
+  if (req.userData.role === 'Admin') {
+    Post.deleteOne({_id: req.params.id})
     .then((result) => {
       if (result.n > 0) {
         res.status(200).json({message: "Post delete request sent!"});
       } else {
         res.status(401).json({ message: "Not authorised to delete!"});
       }
-
     });
+    console.log("post deleted by administrator!")
+    // .then((result) => {
+    //   console.log(result);
+    // });
+  } else {
+    Post.deleteOne({ _id: req.params.id, creator: req.userData.userId, }) //change creator field to orgName?
+    .then((result) => {
+      if (result.n > 0) {
+        res.status(200).json({message: "Post delete request sent!"});
+      } else {
+        res.status(401).json({ message: "Not authorised to delete!"});
+      }
+    });
+  }
 });
+
+// Post.deleteOne({ _id: req.params.id, creator: req.userData.userId, }) //change creator field to orgName?
+//     .then((result) => {
+//       if (result.n > 0) {
+//         res.status(200).json({message: "Post delete request sent!"});
+//       } else {
+//         res.status(401).json({ message: "Not authorised to delete!"});
+//       }
+//     });
 
 //publish function, need to add some perms to make it so that only admins can do it..
 router.put('/:id', (req, res, next) => { //publish function to change approved from false to true

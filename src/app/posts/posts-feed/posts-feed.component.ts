@@ -34,7 +34,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     role: string;
     orgName: string;
     uen: string;
-};
+  };
 
   private postSub: Subscription;
 

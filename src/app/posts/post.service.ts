@@ -76,13 +76,11 @@ export class PostsService {
     const postToBePublished = this.getPost(postId);
 
     this.http.put('http://localhost:3000/api/posts' + "/" + postToBePublished.id, postToBePublished)
-      .subscribe(() => {
-        console.log("post successfully published!");
-        this.posts = this.posts.filter(post => post.id !== postId);
-        this.postsUpdated.next([...this.posts]);
+      .subscribe((response) => {
         //this.router.navigate(['/']);
+        console.log("post successfully published!");
       });
-  }
+    }
 
   deletePost(postId: string) {
     this.http.delete('http://localhost:3000/api/posts' + "/" + postId)
