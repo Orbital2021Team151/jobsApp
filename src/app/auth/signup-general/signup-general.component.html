@@ -99,7 +99,10 @@
 
     </div>
 
-    <div *ngIf="signedUp" class="alert alert-success alert-dismissible fade show" role="alert">
+    <div 
+    *ngIf="!emailInput.invalid && !passwordInput.invalid && !roleInput.invalid && !orgNameInput.invalid && !uenInput.invalid && signedUp" 
+    class="alert alert-success alert-dismissible fade show" 
+    role="alert">
       <strong>You have signed up!</strong> Try logging in.
       <button (click)="closeNotification()" type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>

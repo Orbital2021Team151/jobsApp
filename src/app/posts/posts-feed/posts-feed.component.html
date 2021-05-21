@@ -24,6 +24,7 @@
           ></p-button>
 
           <p-button
+            *ngIf="userIsAdmin || post.uen === authStatusObject.uen"
             class="delete"
             label="Delete"
             icon="pi pi-times"

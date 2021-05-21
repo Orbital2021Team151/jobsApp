@@ -29,6 +29,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   hasApproved: boolean;
   userIsAuthenticated = false;
+  userIsAdmin: boolean;
 
   private authStatusObject: {auth: boolean;
     role: string;
@@ -37,6 +38,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   };
 
   private postSub: Subscription;
+  private authStatusSub: Subscription;
 
   constructor(
     public postsService: PostsService,
@@ -58,9 +60,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
           this.hasApproved = true;
         }
       });
-
       this.userIsAuthenticated = this.authService.getIsAuth();
-
+      this.userIsAdmin = this.authStatusObject.role === 'Admin';
   }
 
   onDelete(postId: string) {
