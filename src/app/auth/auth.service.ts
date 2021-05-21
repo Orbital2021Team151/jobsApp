@@ -10,6 +10,7 @@ import { AuthData } from './auth-data.model';
 export class AuthService {
 
   private token: string;
+  private authStatus: {auth: boolean, role: string, orgName: string, uen: string};
   private authStatusListener = new Subject<{auth: boolean, role: string, orgName: string, uen: string}>();
   private isAuthenticated = false;
   private tokenTimer: any;
@@ -24,7 +25,12 @@ export class AuthService {
     return this.token;
   }
 
+  getAuthStatusObject() {
+    return this.authStatus;
+  }
+
   getAuthStatusListener() {
+    console.log(this.authStatusListener.asObservable());
     return this.authStatusListener.asObservable();
   }
 
@@ -60,14 +66,15 @@ export class AuthService {
       const token = response.token;
       this.token = token;
       if (token) {
-
         const expiresInDuration = response.expiresIn;
         this.tokenTimer = setTimeout(() => {
           this.logout();
         }, expiresInDuration * 1000);
         this.isAuthenticated = true;
+
+        this.authStatus = {auth: true, role: role, orgName: response.orgName, uen: response.uen};
         this.authStatusListener.next({auth: true, role: role, orgName: response.orgName, uen: response.uen});
-        this.router.navigate(['']);
+        this.router.navigate(['/feed']);
       }
     }, error => {
       this.authStatusListener.next({auth: false, role: null, orgName: null, uen: null});
@@ -77,6 +84,7 @@ export class AuthService {
   logout() {
     this.token = null;
     this.isAuthenticated = false;
+
     this.authStatusListener.next({auth: false, role: null, orgName: null, uen: null});
     this.router.navigate(['/']);
     clearTimeout(this.tokenTimer);
