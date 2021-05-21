@@ -32,18 +32,23 @@
         <mat-error *ngIf="skills.invalid">Please give a brief description on the preferred skills for the job (minimum 10 words).</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <input matInput type="text" ngModel name="startDate" required #startDate="ngModel" placeholder="Start Date">
-        <mat-error *ngIf="startDate.invalid">Please provide the start date for the job.</mat-error>
+      <mat-form-field appearance="outline" class="example-form-field">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="rangePicker">
+          <input matStartDate placeholder="Start date" ngModel #startDate="ngModel" name="startDate" required>
+          <input matEndDate placeholder="End date" ngModel #endDate="ngModel" name="endDate" required>
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #rangePicker touchUi>
+          <mat-date-range-picker-actions>
+            <button mat-button matDateRangePickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+          </mat-date-range-picker-actions>
+        </mat-date-range-picker>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" ngModel name="endDate" required #endDate="ngModel" placeholder="End Date">
-        <mat-error *ngIf="endDate.invalid">Please provide the end date for the job.</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <input matInput type="text" ngModel name="hoursRequired" required #hoursRequired="ngModel" placeholder="Commitment Hours Required">
+        <input matInput type="number" ngModel name="hoursRequired" required #hoursRequired="ngModel" placeholder="Commitment Hours Required">
         <mat-error *ngIf="hoursRequired.invalid">Please provide the minimum number of hours required to be committed for the job.</mat-error>
       </mat-form-field>
 

@@ -1,3 +1,5 @@
+import { MatNativeDateModule } from "@angular/material/core";
+
 export interface Post {
   id: string, //to link with mongoDB's unique ID. automatically created by mongoose for us
   orgName: string, //organization/student group's name
@@ -11,9 +13,9 @@ export interface Post {
   skills: string, //skills required. should be a textbox for organization to just write down instead of limiting skills by making them choose from predefined list
 
   //should implement calender feature if possible. Then string can be numbers instead or convert the numbers from calendar to string for storage
-  startDate: string, //Start date of volunteer
-  endDate: string, //End date of volunteer
-  hoursRequired: string, //number of hours that a student has to commit to minimally
+  startDate: Date, //Start date of volunteer
+  endDate: Date, //End date of volunteer
+  hoursRequired: number, //number of hours that a student has to commit to minimally
 
   beneficiaryInfo: string, //paragraph on who are the beneficiaries to let the organization write down. or could be a dropdown list
   //imagePath: string; //store image? additional feature potentially
