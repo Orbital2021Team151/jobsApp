@@ -1,28 +1,45 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Subscription } from "rxjs";
 import { AuthService } from "../auth.service";
 
 @Component({
   templateUrl: './signup-general.component.html',
   styleUrls: ['./signup-general.component.css']
 })
-export class SignupGeneralComponent {
+export class SignupGeneralComponent implements OnInit, OnDestroy {
   isLoading = false;
   roles: any = ["External Organisation", "Student Organisation", "Student"];
   hidePassword = true;
-  signedUp: boolean = false;
+  signedUp: boolean;
+  private authStatusSub: Subscription;
 
   constructor(public authService: AuthService) {}
+
+  ngOnInit() {
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
+      authStatusObject => {
+        if (!authStatusObject.auth) {
+          this.isLoading = false;
+          this.signedUp = false;
+        }
+      }
+    );
+  }
 
   onSignup(form: NgForm) {
     if (form.invalid) {
       return;
     }
-    this.signedUp = true;
     this.authService.createUser(form.value.email, form.value.password, form.value.role, form.value.orgName, form.value.uen);
+    this.signedUp = true;
   }
 
   closeNotification() {
     this.signedUp = false;
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 }

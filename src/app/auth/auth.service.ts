@@ -39,10 +39,12 @@ export class AuthService {
     */
 
     let userObject = {email: email, password: password, role: role, orgName: orgName, uen: uen};
-    this.http.post("http://localhost:3000/api/user/signup", userObject)
-      .subscribe(res => {
-        console.log(res);
-      });
+    return this.http.post("http://localhost:3000/api/user/signup", userObject)
+    .subscribe(() => {
+      //this.router.navigate['/signup'];
+    }, error => {
+      this.authStatusListener.next({auth: false, role: null, orgName: null, uen: null});
+    });
   }
 
   login(email: string, password: string, role: string) {
@@ -67,6 +69,8 @@ export class AuthService {
         this.authStatusListener.next({auth: true, role: role, orgName: response.orgName, uen: response.uen});
         this.router.navigate(['']);
       }
+    }, error => {
+      this.authStatusListener.next({auth: false, role: null, orgName: null, uen: null});
     })
   }
 
