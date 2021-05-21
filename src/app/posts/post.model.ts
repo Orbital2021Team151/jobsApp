@@ -2,7 +2,7 @@ export interface Post {
   id: string, //to link with mongoDB's unique ID. automatically created by mongoose for us
   orgName: string, //organization/student group's name
   uen: string, //for non-nus charity registration number or society registration number
-  studentGroupName: string, //for nus organization. should be from approved list (https://nus.edu.sg/osa/student-life/student-organisations-directory) so this is a dropdown list to select
+
   POC: string, //name of POC
   phoneNumber: string, //POC's contact number. should change to number if it makes it easier
   email: string, //POC's email address

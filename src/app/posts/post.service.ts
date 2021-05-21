@@ -79,6 +79,8 @@ export class PostsService {
       .subscribe((response) => {
         //this.router.navigate(['/']);
         console.log("post successfully published!");
+        this.posts = this.posts.filter(post => post.id !== postId);
+        this.postsUpdated.next([...this.posts]);
       });
     }
 

@@ -1,6 +1,7 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Post } from '../post.model';
 import { PostsService } from '../post.service';
 
@@ -22,10 +23,15 @@ import { PostsService } from '../post.service';
     }
   `],
 })
-export class PostCreateComponent {
+export class PostCreateComponent implements OnInit, OnDestroy {
   pendingApproval: boolean = false;
+  public authStatusObject;
 
-  constructor(public postsService: PostsService, private modalService: NgbModal) {} //public activeModal: NgbActiveModal
+  constructor(public postsService: PostsService, private modalService: NgbModal, private authService: AuthService) {} //public activeModal: NgbActiveModal
+
+  ngOnInit() {
+    this.authStatusObject = this.authService.getAuthStatusObject();
+  }
 
   onAddPost(form: NgForm) {
     if (form.invalid) {
@@ -34,9 +40,8 @@ export class PostCreateComponent {
 
     const post: Post = {
       id: null,
-      orgName: form.value.orgName,
-      uen: form.value.uen,
-      studentGroupName: form.value.studentGroupName,
+      orgName: this.authStatusObject.orgName,
+      uen: this.authStatusObject.uen,
       POC: form.value.POC,
       phoneNumber: form.value.phoneNumber,
       email: form.value.email,
@@ -67,5 +72,7 @@ export class PostCreateComponent {
   openTermsAndConditions(longContent) {
     this.modalService.open(longContent, { scrollable: true });
   }
+
+  ngOnDestroy() {}
 
 }

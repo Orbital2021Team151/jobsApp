@@ -5,7 +5,6 @@ const postSchema = mongoose.Schema({
   //id: String, Mongoose will auto generate a unique _id
   orgName: {type: String, required: true},
   uen: {type: String, required: true},
-  studentGroupName: {type: String, required: true},
   POC: {type: String, required: true},
   phoneNumber: {type: String, required: true},
   email: {type: String, required: true},
