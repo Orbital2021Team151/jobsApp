@@ -78,6 +78,8 @@ export class PostsService {
     this.http.put('http://localhost:3000/api/posts' + "/" + postToBePublished.id, postToBePublished)
       .subscribe(() => {
         console.log("post successfully published!");
+        this.posts = this.posts.filter(post => post.id !== postId);
+        this.postsUpdated.next([...this.posts]);
         //this.router.navigate(['/']);
       });
   }

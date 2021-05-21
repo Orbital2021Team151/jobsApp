@@ -1,6 +1,6 @@
 
 <div class="centered" *ngFor="let post of posts">
-  <section class="cards">
+  <section class="cards" *ngIf="!post.approved">
 
     <p-card
       class="card"
@@ -20,7 +20,7 @@
           class="publishButton"
           label="Publish"
           styleClass="p-button-success"
-          (click)="onPublish(post.id)"
+          (click)="onPublish(post.id, publishContent)"
         ></p-button>
 
 
@@ -70,3 +70,20 @@
 </div>
 
 <p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
+
+
+
+<ng-template #publishContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Publish Success</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Post Published Successfully!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Back</button>
+  </div>
+</ng-template>
