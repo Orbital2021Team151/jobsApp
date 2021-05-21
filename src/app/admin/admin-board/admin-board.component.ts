@@ -32,22 +32,29 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   private authStatusObject;
   hasRequest: Boolean;
 
-  role: string;
-  orgName: string;
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
   ngOnInit() {
 
     this.authStatusObject = this.authService.getAuthStatusObject();
+
     this.hasRequest = false;
     this.postsService.getPosts();
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
-        this.posts = posts;
+        if (this.authStatusObject.role === "Admin") {
+          this.posts = posts;
+        } else {
+          this.posts = posts
+            .filter(post => (post.orgName === this.authStatusObject.orgName) && (post.uen === this.authStatusObject.uen));
+        }
+
+        //this.posts = posts;
+
 //        console.log("posts are: ");
 //        console.log(this.posts);
-        if (posts.filter(post => !post.approved).length > 0) {
+        if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
         }
 
@@ -64,8 +71,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
-    console.log(this.authStatusObject);
-    console.log(this.authStatusObject.role);
     this.modalService.open(content, { size: 'lg' });
   }
 

@@ -30,7 +30,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   hasApproved: boolean;
   userIsAuthenticated = false;
 
-  private authObject: {auth: boolean;
+  private authStatusObject: {auth: boolean;
     role: string;
     orgName: string;
     uen: string;
@@ -47,6 +47,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.hasApproved = false;
     this.postsService.getPosts();
+
+    this.authStatusObject = this.authService.getAuthStatusObject();
 
     this.postSub = this.postsService
       .getPostsUpdatedListener()
@@ -66,6 +68,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
+//    console.log(this.authStatusObject);
     this.modalService.open(content, { size: 'lg' });
   }
 
