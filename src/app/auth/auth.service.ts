@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, timer } from 'rxjs';
 import { AuthData } from './auth-data.model';
 
 @Injectable({
