@@ -47,7 +47,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     "Sports",
     "Women & Girls",
   ];
-  beneficiariesSelected: string[];
+  beneficiariesSelected: string[] = [];
 
 
 
@@ -90,8 +90,8 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       //imagePath: null,
       //creator: null,
     };
-        console.log("Post creation fired! onAddPost. post is:");
-        console.log(post);
+    console.log("Post creation fired! onAddPost. post is:");
+    console.log(post);
     this.pendingApproval = true;
     this.postsService.addPost(post);
     this.modalService.dismissAll();

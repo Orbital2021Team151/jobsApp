@@ -71,6 +71,9 @@ router.post("/login", (req, res, next) => {
     res.status(200).json({
       token: token,
       expiresIn: 3600,
+      id: fetchedUser._id,
+      email: fetchedUser.email,
+      password: fetchedUser.password,
       role: fetchedUser.role,
       orgName: fetchedUser.orgName,
       uen: fetchedUser.uen,
@@ -83,6 +86,23 @@ router.post("/login", (req, res, next) => {
       message: "Authentication failed"
     })
   });
+});
+
+
+router.put("/update", (req, res , next) => {
+  const newUser = new User({
+    _id: req.body.id,
+    email: req.body.email,
+    password: req.body.password,
+    role: req.body.role,
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    beneficiaries: req.body.beneficiaries,
+  });
+  User.updateOne({_id: req.body.id}, newUser)
+    .then(result => {
+      res.status(200).json("User beneficiaries updated!");
+    });
 });
 
 module.exports = router;

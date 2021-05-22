@@ -142,7 +142,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Toppings</mat-label>
+      <mat-label>Beneficiaries</mat-label>
       <mat-select required multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
         <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{beneficiary}}</mat-option>
       </mat-select>

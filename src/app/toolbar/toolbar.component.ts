@@ -27,6 +27,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     .subscribe(authObject => {
       this.userIsAuthenticated = authObject.auth;
       this.authStatusObject = this.authService.getAuthStatusObject();
+      console.log(this.authStatusObject);
     })
   }
 

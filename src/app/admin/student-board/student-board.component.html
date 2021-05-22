@@ -1,1 +1,16 @@
 <p>STUDENT's board is supposed to be here!!!!!</p>
+
+<mat-form-field appearance="outline">
+  <mat-label>Beneficiaries</mat-label>
+  <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
+    <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{beneficiary}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<p-button
+            class="learnMore"
+            label="Update!"
+            icon="pi pi-search-plus"
+            styleClass="p-button-info"
+            (click)="updateUser()"
+          ></p-button>

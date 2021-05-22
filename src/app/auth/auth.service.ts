@@ -11,6 +11,9 @@ export class AuthService {
   private token: string;
   private authStatus: {
     auth: boolean;
+    id: string;
+    email: string;
+    password: string;
     role: string;
     orgName: string;
     uen: string;
@@ -18,6 +21,9 @@ export class AuthService {
   };
   private authStatusListener = new Subject<{
     auth: boolean;
+    id: string;
+    email: string;
+    password: string;
     role: string;
     orgName: string;
     uen: string;
@@ -50,7 +56,7 @@ export class AuthService {
     password: string,
     role: string,
     orgName: string,
-    uen: string,
+    uen: string
   ) {
     let userObject = {
       email: email,
@@ -58,7 +64,7 @@ export class AuthService {
       role: role,
       orgName: orgName,
       uen: uen,
-      beneficiaries: [""],
+      beneficiaries: [''],
     };
 
     return this.http
@@ -70,6 +76,9 @@ export class AuthService {
         (error) => {
           this.authStatusListener.next({
             auth: false,
+            id: null,
+            email: null,
+            password: null,
             role: null,
             orgName: null,
             uen: null,
@@ -77,6 +86,36 @@ export class AuthService {
           });
         }
       );
+  }
+
+  update(updatedBeneficiaries: string[]) {
+    let userObject = {
+      id: this.authStatus.id,
+      email: this.authStatus.email,
+      password: this.authStatus.password,
+      role: this.authStatus.role,
+      orgName: this.authStatus.orgName,
+      uen: this.authStatus.uen,
+      beneficiaries: updatedBeneficiaries,
+    };
+    this.http
+      .put('http://localhost:3000/api/user/update', userObject)
+      .subscribe((response) => {
+        console.log("User's beneficiaries updated! At authService.ts");
+        console.log(response);
+        let updatedObject = {
+          auth: true,
+          id: this.authStatus.id,
+          email: this.authStatus.email,
+          password: this.authStatus.password,
+          role: this.authStatus.role,
+          orgName: this.authStatus.orgName,
+          uen: this.authStatus.uen,
+          beneficiaries: updatedBeneficiaries,
+        };
+        this.authStatus = updatedObject;
+        //this.authStatusListener.next([...this.authStatus]);
+      });
   }
 
   login(email: string, password: string, role: string) {
@@ -87,10 +126,17 @@ export class AuthService {
     };
 
     this.http
-      .post<{ token: string; expiresIn: number; orgName: string; uen: string, beneficiaries: string[] }>(
-        'http://localhost:3000/api/user/login',
-        authData
-      )
+      .post<{
+        token: string;
+        expiresIn: number;
+        id: string;
+        email: string;
+        password: string;
+        orgName: string;
+        role: string;
+        uen: string;
+        beneficiaries: string[];
+      }>('http://localhost:3000/api/user/login', authData)
       .subscribe(
         (response) => {
           const token = response.token;
@@ -105,6 +151,9 @@ export class AuthService {
 
             this.authStatus = {
               auth: true,
+              id: response.id,
+              email: email,
+              password: password,
               role: role,
               orgName: response.orgName,
               uen: response.uen,
@@ -112,6 +161,9 @@ export class AuthService {
             };
             this.authStatusListener.next({
               auth: true,
+              id: response.id,
+              email: email,
+              password: password,
               role: role,
               orgName: response.orgName,
               uen: response.uen,
@@ -123,6 +175,9 @@ export class AuthService {
         (error) => {
           this.authStatusListener.next({
             auth: false,
+            id: null,
+            email: null,
+            password: null,
             role: null,
             orgName: null,
             uen: null,
@@ -138,6 +193,9 @@ export class AuthService {
 
     this.authStatusListener.next({
       auth: false,
+      id: null,
+      email: null,
+      password: null,
       role: null,
       orgName: null,
       uen: null,
