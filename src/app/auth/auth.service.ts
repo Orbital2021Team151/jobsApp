@@ -11,19 +11,16 @@ export class AuthService {
   private token: string;
   private authStatus: {
     auth: boolean;
-    id: string;
     email: string;
-    password: string;
     role: string;
     orgName: string;
     uen: string;
     beneficiaries: string[];
   };
+
   private authStatusListener = new Subject<{
     auth: boolean;
-    id: string;
     email: string;
-    password: string;
     role: string;
     orgName: string;
     uen: string;
@@ -64,7 +61,7 @@ export class AuthService {
       role: role,
       orgName: orgName,
       uen: uen,
-      beneficiaries: [''],
+      beneficiaries: [],
     };
 
     return this.http
@@ -76,9 +73,7 @@ export class AuthService {
         (error) => {
           this.authStatusListener.next({
             auth: false,
-            id: null,
             email: null,
-            password: null,
             role: null,
             orgName: null,
             uen: null,
@@ -90,9 +85,7 @@ export class AuthService {
 
   update(updatedBeneficiaries: string[]) {
     let userObject = {
-      id: this.authStatus.id,
       email: this.authStatus.email,
-      password: this.authStatus.password,
       role: this.authStatus.role,
       orgName: this.authStatus.orgName,
       uen: this.authStatus.uen,
@@ -105,9 +98,7 @@ export class AuthService {
         console.log(response);
         let updatedObject = {
           auth: true,
-          id: this.authStatus.id,
           email: this.authStatus.email,
-          password: this.authStatus.password,
           role: this.authStatus.role,
           orgName: this.authStatus.orgName,
           uen: this.authStatus.uen,
@@ -129,9 +120,7 @@ export class AuthService {
       .post<{
         token: string;
         expiresIn: number;
-        id: string;
         email: string;
-        password: string;
         orgName: string;
         role: string;
         uen: string;
@@ -151,9 +140,7 @@ export class AuthService {
 
             this.authStatus = {
               auth: true,
-              id: response.id,
               email: email,
-              password: password,
               role: role,
               orgName: response.orgName,
               uen: response.uen,
@@ -161,9 +148,7 @@ export class AuthService {
             };
             this.authStatusListener.next({
               auth: true,
-              id: response.id,
               email: email,
-              password: password,
               role: role,
               orgName: response.orgName,
               uen: response.uen,
@@ -175,9 +160,7 @@ export class AuthService {
         (error) => {
           this.authStatusListener.next({
             auth: false,
-            id: null,
             email: null,
-            password: null,
             role: null,
             orgName: null,
             uen: null,
@@ -193,9 +176,7 @@ export class AuthService {
 
     this.authStatusListener.next({
       auth: false,
-      id: null,
       email: null,
-      password: null,
       role: null,
       orgName: null,
       uen: null,
