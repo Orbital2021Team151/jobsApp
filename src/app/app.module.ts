@@ -34,6 +34,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupGeneralComponent } from './auth/signup-general/signup-general.component';
 import { StudentBoardComponent } from './admin/student-board/student-board.component';
+import { ErrorInterceptor } from './error-interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,7 @@ import { StudentBoardComponent } from './admin/student-board/student-board.compo
     SignupAdminComponent,
     SignupGeneralComponent,
     StudentBoardComponent,
+    ErrorComponent,
   ],
 
   imports: [
@@ -61,6 +65,7 @@ import { StudentBoardComponent } from './admin/student-board/student-board.compo
     MatFormFieldModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
@@ -70,7 +75,10 @@ import { StudentBoardComponent } from './admin/student-board/student-board.compo
     ButtonModule,
     NgbModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent],
 })
 export class AppModule { }

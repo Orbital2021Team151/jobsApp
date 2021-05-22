@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Subscription } from "rxjs";
@@ -14,7 +15,7 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
   signedUp: boolean;
   private authStatusSub: Subscription;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private http: HttpClient) {}
 
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
@@ -31,9 +32,16 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
-    this.authService.createUser(form.value.email, form.value.password, form.value.role, form.value.orgName, form.value.uen);
+    this.authService.createUser(
+      form.value.email,
+      form.value.password,
+      form.value.role,
+      form.value.orgName,
+      form.value.uen
+      );
     this.signedUp = true;
   }
+
 
   closeNotification() {
     this.signedUp = false;
