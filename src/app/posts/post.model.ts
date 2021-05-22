@@ -17,7 +17,7 @@ export interface Post {
   endDate: Date, //End date of volunteer
   hoursRequired: number, //number of hours that a student has to commit to minimally
 
-  beneficiaryInfo: string, //paragraph on who are the beneficiaries to let the organization write down. or could be a dropdown list
+  beneficiaries: string[], //paragraph on who are the beneficiaries to let the organization write down. or could be a dropdown list
   //imagePath: string; //store image? additional feature potentially
   //creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
 

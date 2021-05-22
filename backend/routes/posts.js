@@ -21,7 +21,7 @@ checkAuth,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
     hoursRequired: req.body.hoursRequired,
-    beneficiaryInfo: req.body.beneficiaryInfo,
+    beneficiaries: req.body.beneficiaries,
     appproved: false,
     creator: req.userData.userId
   });

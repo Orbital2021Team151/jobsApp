@@ -1,6 +1,8 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
 import { AuthService } from 'src/app/auth/auth.service';
 import { Post } from '../post.model';
 import { PostsService } from '../post.service';
@@ -10,30 +12,59 @@ import { PostsService } from '../post.service';
   templateUrl: './posts-create.component.html',
   styleUrls: ['./posts-create.component.css'],
   encapsulation: ViewEncapsulation.None,
-  styles: [`
-    .dark-modal .modal-content {
-      background-color: #292b2c;
-      color: white;
-    }
-    .dark-modal .close {
-      color: white;
-    }
-    .light-blue-backdrop {
-      background-color: #5cb3fd;
-    }
-  `],
+  styles: [
+    `
+      .dark-modal .modal-content {
+        background-color: #292b2c;
+        color: white;
+      }
+      .dark-modal .close {
+        color: white;
+      }
+      .light-blue-backdrop {
+        background-color: #5cb3fd;
+      }
+    `,
+  ],
 })
 export class PostCreateComponent implements OnInit, OnDestroy {
   pendingApproval: boolean = false;
   public authStatusObject;
+  isLoading = true;
+  beneficiaries: string[] = [
+    "Animal Welfare",
+    "Arts & Heritage",
+    "Children & Youth",
+    "Community",
+    "Disability",
+    "Education",
+    "Elderly",
+    "Environment",
+    "Families",
+    "Health",
+    "Humanitarian",
+    "Social Service",
+    "Sports",
+    "Women & Girls",
+  ];
+  beneficiariesSelected: string[];
 
-  constructor(public postsService: PostsService, private modalService: NgbModal, private authService: AuthService) {} //public activeModal: NgbActiveModal
+
+
+  constructor(
+    public postsService: PostsService,
+    private modalService: NgbModal,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.authStatusObject = this.authService.getAuthStatusObject();
   }
 
   onAddPost(form: NgForm) {
+    console.log("Beneficiaries Selected: ");
+    console.log(this.beneficiariesSelected);
+
     if (form.invalid) {
       return;
     }
@@ -53,13 +84,14 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       endDate: form.value.endDate,
       hoursRequired: form.value.hoursRequired,
 
-      beneficiaryInfo: form.value.beneficiaryInfo,
+      beneficiaries: this.beneficiariesSelected,
       approved: false,
+
       //imagePath: null,
       //creator: null,
     };
-//    console.log("Post creation fired! onAddPost. post is:");
-//    console.log(post);
+        console.log("Post creation fired! onAddPost. post is:");
+        console.log(post);
     this.pendingApproval = true;
     this.postsService.addPost(post);
     this.modalService.dismissAll();
@@ -74,5 +106,4 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {}
-
 }
