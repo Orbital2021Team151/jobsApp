@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
-const user = require('../models/user');
 
 const router = express.Router();
 
@@ -18,6 +17,7 @@ router.post("/signup", (req, res, next) => {
       role: req.body.role,
       orgName: req.body.orgName,
       uen: req.body.uen,
+      beneficiaries: ["", ],
     });
 
     user
@@ -34,8 +34,6 @@ router.post("/signup", (req, res, next) => {
           error: err
         });
       });
-
-
   });
 });
 
@@ -50,12 +48,6 @@ router.post("/login", (req, res, next) => {
 
   .then(user => {
     if (!user) {
-
-      /*
-      return res.status(401).json({
-        message: "Authentication failed"
-      });
-      */
       throw new Error("Authentication Failed 1");
     }
     fetchedUser = user;
@@ -64,11 +56,6 @@ router.post("/login", (req, res, next) => {
 
   .then(result => {
     if (!result) {
-      /*
-      return res.status(401).json({
-        message: "Authentication failed"
-      });
-      */
       throw new Error("Authentication Failed 1");
     }
 
@@ -87,7 +74,8 @@ router.post("/login", (req, res, next) => {
       role: fetchedUser.role,
       orgName: fetchedUser.orgName,
       uen: fetchedUser.uen,
-    })
+      beneficiaries: fetchedUser.beneficiaries,
+    });
   })
 
   .catch(err => {

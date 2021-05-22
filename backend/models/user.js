@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
 
   orgName: {type: String, required: true},
   uen: {type: String, required: true},
+  beneficiaries: {type: [String], required: true},
 });
 
 userSchema.plugin(uniqueValidator);

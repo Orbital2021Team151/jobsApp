@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, "secret_token_that_no_one_will_find_out_about");
-    req.userData = { email: decodedToken.email, userId: decodedToken.userId, role: decodedToken.role, };
+    req.userData = { email: decodedToken.email, userId: decodedToken.userId, role: decodedToken.role};
     next();
   } catch (error) {
     res.status(401).json({

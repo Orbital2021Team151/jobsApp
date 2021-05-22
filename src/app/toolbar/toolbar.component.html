@@ -7,7 +7,7 @@
 
       <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> Admin Dashboard</a>
       <a *ngIf="userIsAuthenticated && (authStatusObject.role !== 'Admin') && (authStatusObject.role !== 'Student')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> {{authStatusObject.orgName}} Dashboard</a>
-
+      <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Student')" mat-button routerLink="/student" routerLinkActive="mat-primary"> Student Dashboard</a>
     </li>
     <li *ngIf="!userIsAuthenticated">
       <a mat-button routerLink="/login" routerLinkActive="mat-primary"> Login </a>
@@ -15,10 +15,9 @@
     </li>
 
 
-    <li *ngIf="userIsAuthenticated && (role === 'Admin')">
+    <li *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')">
       <a mat-button routerLink="/signupAdmin" routerLinkActive="mat-primary"> Signup for others </a>
     </li>
-
 
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/create"

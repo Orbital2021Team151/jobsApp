@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+.info-text {
+  text-align: center;
+}
+
+.deleteButton {
+
+  margin-left: 0.5rem;
+}
+
+.publishButton {
+
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+.moreInfoButton {
+
+  margin-left: .5rem;
+}
+.footer {
+  width: auto;
+
+}
+
+.alert {
+  padding: 20px;
+  background-color: #20a033;
+  color: white;
+  margin-bottom: 15px;
+}
+
+
+
+
+
+
+@media screen and (min-width: 100em) {
+  .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+  }
+
+  .card {
+      flex: 0 1 calc(25% - 1em);
+  }
+}

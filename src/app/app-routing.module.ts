@@ -7,6 +7,7 @@ import { SignupAdminComponent } from './auth/signup-admin/signup-admin.component
 import { SignupGeneralComponent } from './auth/signup-general/signup-general.component';
 import { PostFeedComponent } from './posts/posts-feed/posts-feed.component';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
+import { StudentBoardComponent } from './admin/student-board/student-board.component';
 
 const routes: Routes = [
   { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard]},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupGeneralComponent },
   { path: 'signupAdmin', component: SignupAdminComponent },
+  { path: 'student', component: StudentBoardComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -5,13 +5,24 @@ import { Subject } from 'rxjs';
 import { AuthData } from './auth-data.model';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class AuthService {
-
   private token: string;
-  private authStatus: {auth: boolean, role: string, orgName: string, uen: string};
-  private authStatusListener = new Subject<{auth: boolean, role: string, orgName: string, uen: string}>();
+  private authStatus: {
+    auth: boolean;
+    role: string;
+    orgName: string;
+    uen: string;
+    beneficiaries: string[];
+  };
+  private authStatusListener = new Subject<{
+    auth: boolean;
+    role: string;
+    orgName: string;
+    uen: string;
+    beneficiaries: string[];
+  }>();
   private isAuthenticated = false;
   private tokenTimer: any;
 
@@ -34,23 +45,37 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(email: string, password: string, role: string, orgName: string, uen: string) {
-
-    /*
-    const authData: AuthData = {
+  createUser(
+    email: string,
+    password: string,
+    role: string,
+    orgName: string,
+    uen: string
+  ) {
+    let userObject = {
       email: email,
       password: password,
       role: role,
-    }
-    */
+      orgName: orgName,
+      uen: uen,
+    };
 
-    let userObject = {email: email, password: password, role: role, orgName: orgName, uen: uen};
-    return this.http.post("http://localhost:3000/api/user/signup", userObject)
-    .subscribe(() => {
-      //this.router.navigate['/signup'];
-    }, error => {
-      this.authStatusListener.next({auth: false, role: null, orgName: null, uen: null});
-    });
+    return this.http
+      .post('http://localhost:3000/api/user/signup', userObject)
+      .subscribe(
+        () => {
+          //this.router.navigate['/signup'];
+        },
+        (error) => {
+          this.authStatusListener.next({
+            auth: false,
+            role: null,
+            orgName: null,
+            uen: null,
+            beneficiaries: null,
+          });
+        }
+      );
   }
 
   login(email: string, password: string, role: string) {
@@ -61,33 +86,63 @@ export class AuthService {
     };
 
     this.http
-    .post<{token: string, expiresIn: number, orgName: string, uen: string}>("http://localhost:3000/api/user/login", authData)
-    .subscribe(response => {
-      const token = response.token;
-      this.token = token;
-      if (token) {
-        const expiresInDuration = response.expiresIn;
-        this.tokenTimer = setTimeout(() => {
-          this.logout();
-        }, expiresInDuration * 1000);
-        this.isAuthenticated = true;
+      .post<{ token: string; expiresIn: number; orgName: string; uen: string }>(
+        'http://localhost:3000/api/user/login',
+        authData
+      )
+      .subscribe(
+        (response) => {
+          const token = response.token;
+          this.token = token;
 
-        this.authStatus = {auth: true, role: role, orgName: response.orgName, uen: response.uen};
-        this.authStatusListener.next({auth: true, role: role, orgName: response.orgName, uen: response.uen});
-        this.router.navigate(['/feed']);
-      }
-    }, error => {
-      this.authStatusListener.next({auth: false, role: null, orgName: null, uen: null});
-    })
+          if (token) {
+            const expiresInDuration = response.expiresIn;
+            this.tokenTimer = setTimeout(() => {
+              this.logout();
+            }, expiresInDuration * 1000);
+            this.isAuthenticated = true;
+
+            this.authStatus = {
+              auth: true,
+              role: role,
+              orgName: response.orgName,
+              uen: response.uen,
+              beneficiaries: response.beneficiaries,
+            };
+            this.authStatusListener.next({
+              auth: true,
+              role: role,
+              orgName: response.orgName,
+              uen: response.uen,
+              beneficiaries: response.beneficiaries,
+            });
+            this.router.navigate(['/feed']);
+          }
+        },
+        (error) => {
+          this.authStatusListener.next({
+            auth: false,
+            role: null,
+            orgName: null,
+            uen: null,
+            beneficiaries: null,
+          });
+        }
+      );
   }
 
   logout() {
     this.token = null;
     this.isAuthenticated = false;
 
-    this.authStatusListener.next({auth: false, role: null, orgName: null, uen: null});
+    this.authStatusListener.next({
+      auth: false,
+      role: null,
+      orgName: null,
+      uen: null,
+      beneficiaries: null,
+    });
     this.router.navigate(['/']);
     clearTimeout(this.tokenTimer);
   }
-
 }

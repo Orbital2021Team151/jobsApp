@@ -12,7 +12,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   role: string;
   orgName: string;
-  private authStatusObject;
+  public authStatusObject;
 
   constructor(private authService: AuthService) {};
 

@@ -33,6 +33,7 @@ import { SignupAdminComponent } from './auth/signup-admin/signup-admin.component
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupGeneralComponent } from './auth/signup-general/signup-general.component';
+import { StudentBoardComponent } from './admin/student-board/student-board.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SignupGeneralComponent } from './auth/signup-general/signup-general.com
     LoginComponent,
     SignupAdminComponent,
     SignupGeneralComponent,
+    StudentBoardComponent,
   ],
 
   imports: [
