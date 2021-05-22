@@ -71,6 +71,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   onPublish(postId: string, publishContent) {
     this.postsService.publishPost(postId);
+    console.log(this.posts);
     this.modalService.open(publishContent, { scrollable: true });
   }
 

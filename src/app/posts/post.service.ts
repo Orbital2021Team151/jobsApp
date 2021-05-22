@@ -32,7 +32,7 @@ export class PostsService {
             startDate: post.startDate,
             endDate: post.endDate,
             hoursRequired: post.hoursRequired,
-            beneficiaryInfo: post.beneficiaryInfo,
+            beneficiaries: post.beneficiaries,
             approved: post.approved,
             creator: post.creator
           };

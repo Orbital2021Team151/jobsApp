@@ -99,7 +99,7 @@ router.put('/:id', (req, res, next) => { //publish function to change approved f
     startDate: req.body.startDate,
     endDate: req.body.endDate,
     hoursRequired: req.body.hoursRequired,
-    beneficiaryInfo: req.body.beneficiaryInfo,
+    beneficiaries: req.body.beneficiaries,
     approved: true,
     //creator: req.userData.userId
   });
