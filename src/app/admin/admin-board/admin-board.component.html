@@ -5,7 +5,7 @@
     <p-card
       class="card"
       header="{{ post.title }}"
-      subheader="{{ post.startDate }} to {{ post.endDate }}"
+      subheader="{{ post.startDate | date }} to {{ post.endDate | date }}"
       [style]="{
         width: '25rem',
         'margin-bottom': '2em',
@@ -55,12 +55,12 @@
       <p>POC's email: {{post.email}}&hellip;</p>
       <p>Brief Description for gig: {{post.content}}&hellip;</p>
       <p>Preferred Skills: {{post.skills}}&hellip;</p>
-      <p>Start Date: {{post.startDate}}&hellip;</p>
-      <p>End Date: {{post.endDate}}&hellip;</p>
+      <p>Start Date: {{post.startDate | date}}&hellip;</p>
+      <p>End Date: {{post.endDate | date}}&hellip;</p>
       <p>Commitment Hours: {{post.hoursRequired}}&hellip;</p>
       <p>Beneficiaries: &hellip;</p>
       <div *ngFor="let beneficiary of post.beneficiaries">
-        <p>{{beneficiary}}</p>
+        <p> => {{beneficiary}}</p>
       </div>
     </div>
     <div class="modal-footer">

@@ -4,6 +4,7 @@ import { Post } from "../../posts/post.model";
 import { PostsService } from "../../posts/post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
+import { formatDate } from "@angular/common";
 
 @Component({
   selector: "app-admin-board",
@@ -52,8 +53,8 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
           this.posts = posts
             .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
         }
-        console.log(this.posts);
-        console.log(this.authStatusObject);
+        //console.log(this.posts);
+        //console.log(this.authStatusObject);
         //this.posts = posts;
 
 //        console.log("posts are: ");
