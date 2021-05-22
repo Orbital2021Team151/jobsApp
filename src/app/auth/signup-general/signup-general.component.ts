@@ -1,4 +1,4 @@
-//import { HttpClient } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Subscription } from "rxjs";
@@ -15,8 +15,7 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
   signedUp: boolean;
   private authStatusSub: Subscription;
 
-  constructor(public authService: AuthService) {}
-  //constructor(public authService: AuthService, private http: HttpClient) {}
+  constructor(public authService: AuthService, private http: HttpClient) {}
 
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
