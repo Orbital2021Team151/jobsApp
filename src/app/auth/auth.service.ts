@@ -50,7 +50,7 @@ export class AuthService {
     password: string,
     role: string,
     orgName: string,
-    uen: string
+    uen: string,
   ) {
     let userObject = {
       email: email,
@@ -58,6 +58,7 @@ export class AuthService {
       role: role,
       orgName: orgName,
       uen: uen,
+      beneficiaries: [""],
     };
 
     return this.http
@@ -86,7 +87,7 @@ export class AuthService {
     };
 
     this.http
-      .post<{ token: string; expiresIn: number; orgName: string; uen: string }>(
+      .post<{ token: string; expiresIn: number; orgName: string; uen: string, beneficiaries: string[] }>(
         'http://localhost:3000/api/user/login',
         authData
       )

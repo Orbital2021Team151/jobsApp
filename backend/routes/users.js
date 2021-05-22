@@ -17,7 +17,7 @@ router.post("/signup", (req, res, next) => {
       role: req.body.role,
       orgName: req.body.orgName,
       uen: req.body.uen,
-      beneficiaries: ["", ],
+      beneficiaries: req.body.beneficiaries,
     });
 
     user

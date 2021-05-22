@@ -7,7 +7,9 @@ const userSchema = mongoose.Schema({
   role: {type: String, required: true},
 
   orgName: {type: String, required: true},
+
   uen: {type: String, required: true},
+
   beneficiaries: {type: [String], required: true},
 });
 
