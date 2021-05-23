@@ -11,6 +11,10 @@ const userSchema = mongoose.Schema({
   uen: {type: String, required: true},
 
   beneficiaries: {type: [String], required: true},
+
+  verified: {type: Boolean, required: true, default: false}, //should change to false later, but true for now to let me log in obviously
+
+  uniqueString: {type: String, required: false},
 });
 
 userSchema.plugin(uniqueValidator);

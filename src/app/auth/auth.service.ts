@@ -16,6 +16,7 @@ export class AuthService {
     orgName: string;
     uen: string;
     beneficiaries: string[];
+    verified: boolean;
   };
 
   private authStatusListener = new Subject<{
@@ -25,6 +26,7 @@ export class AuthService {
     orgName: string;
     uen: string;
     beneficiaries: string[];
+    verified: boolean;
   }>();
   private isAuthenticated = false;
   private tokenTimer: any;
@@ -62,6 +64,7 @@ export class AuthService {
       orgName: orgName,
       uen: uen,
       beneficiaries: [],
+      verified: false,
     };
 
     return this.http
@@ -71,6 +74,7 @@ export class AuthService {
           //this.router.navigate['/signup'];
         },
         (error) => {
+          console.log(error);
           this.authStatusListener.next({
             auth: false,
             email: null,
@@ -78,6 +82,7 @@ export class AuthService {
             orgName: null,
             uen: null,
             beneficiaries: null,
+            verified: null,
           });
         }
       );
@@ -90,6 +95,7 @@ export class AuthService {
       orgName: this.authStatus.orgName,
       uen: this.authStatus.uen,
       beneficiaries: updatedBeneficiaries,
+      verified: true,
     };
     this.http
       .put('http://localhost:3000/api/user/update', userObject)
@@ -103,6 +109,7 @@ export class AuthService {
           orgName: this.authStatus.orgName,
           uen: this.authStatus.uen,
           beneficiaries: updatedBeneficiaries,
+          verified: true,
         };
         this.authStatus = updatedObject;
         //this.authStatusListener.next([...this.authStatus]);
@@ -125,6 +132,7 @@ export class AuthService {
         role: string;
         uen: string;
         beneficiaries: string[];
+        verified: boolean;
       }>('http://localhost:3000/api/user/login', authData)
       .subscribe(
         (response) => {
@@ -145,6 +153,7 @@ export class AuthService {
               orgName: response.orgName,
               uen: response.uen,
               beneficiaries: response.beneficiaries,
+              verified: true,
             };
             this.authStatusListener.next({
               auth: true,
@@ -153,6 +162,7 @@ export class AuthService {
               orgName: response.orgName,
               uen: response.uen,
               beneficiaries: response.beneficiaries,
+              verified: true,
             });
             this.router.navigate(['/feed']);
           }
@@ -165,6 +175,7 @@ export class AuthService {
             orgName: null,
             uen: null,
             beneficiaries: null,
+            verified: null,
           });
         }
       );
@@ -181,6 +192,7 @@ export class AuthService {
       orgName: null,
       uen: null,
       beneficiaries: null,
+      verified: null,
     });
     this.router.navigate(['/']);
     clearTimeout(this.tokenTimer);

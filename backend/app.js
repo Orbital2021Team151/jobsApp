@@ -4,6 +4,7 @@ const postRoutes = require('./routes/posts');
 const userRoutes = require('./routes/users');
 
 const mongoose = require("mongoose");
+//const nev = require('email-verification')(mongoose);
 
 const app = express();
 

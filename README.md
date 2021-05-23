@@ -51,3 +51,9 @@ npm install -g @angular/cli@11
 * Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)
 
 * ng add @ng-bootstrap/ng-bootstrap
+
+* npm install nodemailer
+
+* npm install crypto --save
+
+* npm install email-verification --save
