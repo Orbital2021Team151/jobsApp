@@ -2,54 +2,32 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const mongoose = require("mongoose");
-const nev = require('email-verification')(mongoose);
 
 
 const User = require("../models/user");
 
 const router = express.Router();
 
-nev.configure({
-  //verificationURL: 'http://myawesomewebsite.com/email-verification/${URL}',
-  verificationURL: 'http://localhost:3000/api/user/verify/${uniqueString}',
-  persistentUserModel: User,
-  tempUserCollection: 'myawesomewebsite_tempusers',
-
-  transportOptions: {
-      service: 'Gmail',
-      auth: {
-          user: 'myawesomeemail@gmail.com',
-          pass: 'mysupersecretpassword'
-      }
-  },
-  verifyMailOptions: {
-      from: 'Do Not Reply <myawesomeemail_do_not_reply@gmail.com>',
-      subject: 'Please confirm account',
-      html: 'Click the following link to confirm your account:</p><p>${URL}</p>',
-      text: 'Please confirm your account by clicking the following link: ${URL}'
+const randomStringGenerator = () => {
+  const length = 32;
+  let randomString = "";
+  for (let i=0; i<length; i++) {
+    const char = Math.floor((Math.random() * 10) + 1);
+    randomString += char;
   }
-}, function(error, options){
-});
-
-
-/*
-const randString = () => {
-  const len = 32;
-  let randStr = '';
-  for (let i=0; i<len; i++) {
-    const char = Math.floor((Math.random()*10) +1);
-    randStr += char;
-  }
-  return randStr;
+  return randomString;
 }
+
 
 const sendEmail = (email, uniqueString) => {
   var Transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      passowrd: "ccsgp_confirmationEmailSender123",
+      pass: "ccsgp_confirmationEmailSender123",
     },
     tls: {
       rejectUnauthorized: false,
@@ -62,7 +40,7 @@ const sendEmail = (email, uniqueString) => {
   mailOptions = {
     from: sender,
     to: email,
-    subject: "Email Confirmation",
+    subject: "CCSGP Email Confirmation",
     html: `Press <a href=http://localhost:3000/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
   };
 
@@ -77,22 +55,44 @@ const sendEmail = (email, uniqueString) => {
 }
 
 
-router.get("/verify/:uniqueString", async (req, res) => {
-  const { uniqueString } = req.params;
-  const user = await User.findOne({uniqueString: uniqueString});
-  if (user) {
-    user.verified = true;
-    await user.save();
-    res.status(500).json({
-      message: "User is now verified!",
+router.get("/verify/:uniqueId", (req, res) => {
+
+  console.log("Request params are: ");
+  console.log(req.params);
+  console.log(req.params.uniqueId);
+
+
+
+  const uniqueId  = req.params.uniqueId;
+
+  User.findById(uniqueId)
+    .then(result => {
+
+      console.log("Found result: ");
+      console.log(result);
+      result.verified = true;
+      console.log(result);
+
+      if (result) {
+        result.verified = true;
+        User.updateOne({email: result.email, role: result.role}, result).then(result => {
+          res.status(500).json({
+            message: "User is now verified!",
+          });
+        });
+      } else {
+        throw new Error("User cannot be verified!?");
+      }
+    })
+    .catch(err => {
+      res.status(401).json({
+        message: "User not found",
+      });
     });
-  } else {
-    res.status(401).json({
-      message: "User not found",
-    });
-  }
-});
-*/
+}); //Need to return some HTML here to inform user their acc has been set up
+
+//TODO: BIG TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ISSUE NOW IS THAT email keeps changing to loo@gmail.com for some reason!? D=
+
 
 
 
@@ -100,6 +100,7 @@ router.post("/signup", (req, res, next) => {
 
 
   bcrypt.hash(req.body.password, 10).then((passwordHash) => {
+
     const user = new User({
       email: req.body.email,
       password: passwordHash,
@@ -107,16 +108,20 @@ router.post("/signup", (req, res, next) => {
       orgName: req.body.orgName,
       uen: req.body.uen,
       beneficiaries: req.body.beneficiaries,
+      verified: false,
     });
+
+    console.log("User details are: ");
+    console.log(user);
 
     user.save()
       .then((result) => {
+        console.log("Result is: ");
+        console.log(result);
 
-        //const uniqueString = randString();
-        //const {email} = req.body.email;
-        //sendEmail(email, uniqueString);
+        const email = user.email;
+        sendEmail(email, result._id);
 
-        //console.log("User has been created!");
         res.status(201).json({
           message: "Account Registered! Please check your email for activation link.",
           result: result,
@@ -129,7 +134,6 @@ router.post("/signup", (req, res, next) => {
           error: err,
         });
       });
-
   });
 });
 
@@ -142,20 +146,28 @@ router.post("/login", (req, res, next) => {
   })
 
     .then((user) => {
+
+//      console.log("At login, retrived user part now");
+//      console.log(user);
+
       if (!user) {
+        console.log("No user"); //TODO: WHICH IS CAUSING THIS BECAUSE THE ORIGINAL EMAIL IS GETTING REPLACED BY "loo@gmail.com" D=========
         throw new Error("Authentication Failed 1");
       }
+
       fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password) && !user.verified; //NEED TO MODIFY THIS LATER
+      return bcrypt.compare(req.body.password, user.password) && user.verified; //NEED TO MODIFY THIS LATER
     })
 
     .then((result) => {
-      if (!result) {
-        throw new Error("Authentication Failed 1");
-      }
 
-      if (!result.verified) {
-        throw new Error("Verify your account first!");
+      console.log("Fetched user is: ");
+      console.log(fetchedUser);
+
+
+      if (!result) {
+        console.log("GO AND ACTIVATE YOUR ACCOUNT!");
+        throw new Error("Authentication Failed! Go and activate your account first!");
       }
 
       const token = jwt.sign(
@@ -183,7 +195,7 @@ router.post("/login", (req, res, next) => {
 
     .catch((err) => {
       return res.status(401).json({
-        message: "Authentication failed",
+        message: err,
       });
     });
 });
