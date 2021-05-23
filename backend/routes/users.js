@@ -8,17 +8,6 @@ const User = require("../models/user");
 
 const router = express.Router();
 
-const randomStringGenerator = () => {
-  const length = 32;
-  let randomString = "";
-  for (let i=0; i<length; i++) {
-    const char = Math.floor((Math.random() * 10) + 1);
-    randomString += char;
-  }
-  return randomString;
-}
-
-
 const sendEmail = (email, uniqueString) => {
   var Transport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -91,8 +80,47 @@ router.get("/verify/:uniqueId", (req, res) => {
     });
 }); //Need to return some HTML here to inform user their acc has been set up
 
-//TODO: BIG TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ISSUE NOW IS THAT email keeps changing to loo@gmail.com for some reason!? D=
 
+router.post("/signupAdmin", (req, res, next) => {
+
+
+  bcrypt.hash(req.body.password, 10).then((passwordHash) => {
+
+    const user = new User({
+      email: req.body.email,
+      password: passwordHash,
+      role: req.body.role,
+      orgName: req.body.orgName,
+      uen: req.body.uen,
+      beneficiaries: req.body.beneficiaries,
+      verified: false,
+    });
+
+    console.log("User details are: ");
+    console.log(user);
+
+    user.save()
+      .then((result) => {
+        console.log("Result is: ");
+        console.log(result);
+
+        const email = user.email;
+        sendEmail(email, result._id);
+
+        res.status(201).json({
+          message: "Account Registered! Please check your email for activation link.",
+          result: result,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          message: "You probably signed up before using this email before...",
+          error: err,
+        });
+      });
+  });
+});
 
 
 
@@ -156,7 +184,7 @@ router.post("/login", (req, res, next) => {
       }
 
       fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password) && user.verified; //NEED TO MODIFY THIS LATER
+      return bcrypt.compare(req.body.password, user.password); // && user.verified; //NEED TO MODIFY THIS LATER
     })
 
     .then((result) => {

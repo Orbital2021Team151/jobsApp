@@ -88,6 +88,47 @@ export class AuthService {
       );
   }
 
+
+  createUserAdmin(
+    email: string,
+    password: string,
+    role: string,
+    orgName: string,
+    uen: string
+  ) {
+    let userObject = {
+      email: email,
+      password: password,
+      role: role,
+      orgName: orgName,
+      uen: uen,
+      beneficiaries: [],
+      verified: false,
+    };
+
+    return this.http
+      .post('http://localhost:3000/api/user/signupAdmin', userObject)
+      .subscribe(
+        () => {
+          //this.router.navigate['/signup'];
+        },
+        (error) => {
+          console.log(error);
+          this.authStatusListener.next({
+            auth: false,
+            email: null,
+            role: null,
+            orgName: null,
+            uen: null,
+            beneficiaries: null,
+            verified: null,
+          });
+        }
+      );
+  }
+
+
+
   update(updatedBeneficiaries: string[]) {
     let userObject = {
       email: this.authStatus.email,
