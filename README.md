@@ -53,7 +53,3 @@ npm install -g @angular/cli@11
 * ng add @ng-bootstrap/ng-bootstrap
 
 * npm install nodemailer
-
-* npm install crypto --save
-
-* npm install email-verification --save
