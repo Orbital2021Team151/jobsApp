@@ -40,6 +40,24 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   private postSub: Subscription;
   private authStatusSub: Subscription;
 
+  beneficiaries: string[] = [
+    "Animal Welfare",
+    "Arts & Heritage",
+    "Children & Youth",
+    "Community",
+    "Disability",
+    "Education",
+    "Elderly",
+    "Environment",
+    "Families",
+    "Health",
+    "Humanitarian",
+    "Social Service",
+    "Sports",
+    "Women & Girls",
+  ];
+  beneficiariesSelected: string[] = [];
+
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
@@ -71,6 +89,16 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   onMoreInfo(content) {
 //    console.log(this.authStatusObject);
     this.modalService.open(content, { size: 'lg' });
+  }
+
+  submitFilter() {
+    this.posts = this.posts.filter(post => {
+      for (var interestBeneficiary of post.beneficiaries) {
+        if (this.beneficiariesSelected.includes(interestBeneficiary)) {
+          return true;
+        }
+      }
+    });
   }
 
   ngOnDestroy() {
