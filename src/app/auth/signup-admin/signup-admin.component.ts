@@ -16,6 +16,9 @@ export class SignupAdminComponent implements OnInit, OnDestroy {
 
   constructor(public authService: AuthService) {}
 
+
+  //signup should be ok for async???????????????????????????
+  //TODO: Run some buggy cases eg go sign up a new admin and new non-admin accounts and see how it goes
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatusObject => {

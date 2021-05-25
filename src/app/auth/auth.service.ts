@@ -190,8 +190,9 @@ export class AuthService {
             this.isAuthenticated = true;
             const rightNow = new Date();
             const expirationDate = new Date(rightNow.getTime() + expiresInDuration * 1000);
-            console.log(response);
+            //console.log(response);
             this.saveAuthData(token, expirationDate, response);
+
             this.authStatus = {
               auth: true,
               email: email,
@@ -201,15 +202,8 @@ export class AuthService {
               beneficiaries: response.beneficiaries,
               verified: true,
             };
-            this.authStatusListener.next({
-              auth: true,
-              email: email,
-              role: role,
-              orgName: response.orgName,
-              uen: response.uen,
-              beneficiaries: response.beneficiaries,
-              verified: true,
-            });
+
+            this.authStatusListener.next(this.authStatus);
             this.router.navigate(['/feed']);
           }
         },
@@ -258,7 +252,7 @@ export class AuthService {
 
       //console.log(this.authStatus.role);
       this.authStatus = authInfo.authData;
-      this.authStatusListener.next(authInfo.authData);
+      this.authStatusListener.next(this.authStatus);
     }
   }
 
@@ -278,6 +272,8 @@ export class AuthService {
     this.router.navigate(['/']);
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
+    this.authStatusListener.next(null);
+    this.authStatus = null;
   }
 
   private setAuthTimer(duration: number) {

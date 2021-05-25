@@ -39,11 +39,13 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.postsService.getPosts();
+    this.authStatusObject = this.authService.getAuthStatusObject(); //another one that violates the async
+
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       this.authStatusObject = authObject;
 
       this.hasRequest = false;
-      this.postsService.getPosts();
 
     });
 

@@ -35,7 +35,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   startDate: Date;
   endDate: Date;
 
-  private authStatusObject: {auth: boolean;
+  private authStatusObject: {
+    auth: boolean;
     role: string;
     orgName: string;
     uen: string;
@@ -45,20 +46,20 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   private authStatusSub: Subscription;
 
   beneficiaries: string[] = [
-    "Animal Welfare",
-    "Arts & Heritage",
-    "Children & Youth",
-    "Community",
-    "Disability",
-    "Education",
-    "Elderly",
-    "Environment",
-    "Families",
-    "Health",
-    "Humanitarian",
-    "Social Service",
-    "Sports",
-    "Women & Girls",
+    'Animal Welfare',
+    'Arts & Heritage',
+    'Children & Youth',
+    'Community',
+    'Disability',
+    'Education',
+    'Elderly',
+    'Environment',
+    'Families',
+    'Health',
+    'Humanitarian',
+    'Social Service',
+    'Sports',
+    'Women & Girls',
   ];
   beneficiariesSelected: string[] = [];
 
@@ -72,9 +73,10 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.hasApproved = false;
     this.postsService.getPosts();
 
-    //this.authStatusObject = this.authService.getAuthStatusObject();
-    console.log("At feed now. the object retrieved is: ");
-    console.log(this.authStatusObject);
+    //TODO: these 3 lines also break async
+    this.authStatusObject = this.authService.getAuthStatusObject();
+    this.userIsAuthenticated = this.authStatusObject.auth;
+    this.userIsAdmin = this.authStatusObject.role === 'Admin';
 
     this.postSub = this.postsService
       .getPostsUpdatedListener()
@@ -85,16 +87,18 @@ export class PostFeedComponent implements OnInit, OnDestroy {
           this.hasApproved = true;
         }
       });
+    //this.userIsAuthenticated = this.authService.getIsAuth();
+    //this.userIsAdmin = this.authStatusObject.role === 'Admin';
 
-      this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
+
+    this.authStatusSub = this.authService
+      .getAuthStatusListener()
+      .subscribe((authObject) => {
         this.userIsAuthenticated = authObject.auth;
-        this.userIsAdmin = (authObject.role === "Admin");
+        this.userIsAdmin = authObject.role === 'Admin';
         this.authStatusObject = authObject;
       });
 
-
-      //this.userIsAuthenticated = this.authService.getIsAuth();
-      //this.userIsAdmin = this.authStatusObject.role === 'Admin';
   }
 
   onDelete(postId: string) {
@@ -102,7 +106,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
-//    console.log(this.authStatusObject);
+    //    console.log(this.authStatusObject);
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -111,7 +115,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     //console.log(this.endDate);
     //console.log(this.beneficiariesSelected);
     if (this.beneficiariesSelected.length !== 0) {
-      this.filteredPosts = this.posts.filter(post => {
+      this.filteredPosts = this.posts.filter((post) => {
         for (var interestBeneficiary of post.beneficiaries) {
           if (this.beneficiariesSelected.includes(interestBeneficiary)) {
             return true;
@@ -125,25 +129,34 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
     if (this.startDate) {
       //console.log("There is a startDate!");
-      this.filteredPosts = this.filteredPosts.filter(post => {
+      this.filteredPosts = this.filteredPosts.filter((post) => {
         console.log(post);
         console.log(post.startDate.valueOf());
         console.log(this.startDate.valueOf());
-        console.log(new Date(post.startDate).getTime() <= new Date(this.startDate).getTime());
-        return (new Date(post.startDate).getTime() <= new Date(this.startDate).getTime());
+        console.log(
+          new Date(post.startDate).getTime() <=
+            new Date(this.startDate).getTime()
+        );
+        return (
+          new Date(post.startDate).getTime() <=
+          new Date(this.startDate).getTime()
+        );
       });
     }
 
     if (this.endDate) {
       //console.log("There is an endDate!");
-      this.filteredPosts = this.filteredPosts.filter(post => new Date(post.endDate).getTime() <= new Date(this.endDate).getTime());
+      this.filteredPosts = this.filteredPosts.filter(
+        (post) =>
+          new Date(post.endDate).getTime() <= new Date(this.endDate).getTime()
+      );
     }
 
     //Need to cast new Date object over it again... KIV for future me. I have no idea why javascript does this (┛ಠ_ಠ)┛彡┻━┻
-
   }
 
   ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
     this.postSub.unsubscribe();
   }
 }

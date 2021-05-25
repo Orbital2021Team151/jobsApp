@@ -62,6 +62,10 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+
+    this.authStatusObject = this.authService.getAuthStatusObject(); //this is required to avoid the "Cannot read property 'orgName' of undefined" error. but it violates async
+
+
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       this.authStatusObject = authObject;
       console.log("At create page");
@@ -72,7 +76,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   onAddPost(form: NgForm) {
     console.log("Beneficiaries Selected: ");
     console.log(this.beneficiariesSelected);
-    console.log("THIS FIRED");
+    console.log("add post fired!");
 
     if (form.invalid) {
       return;
