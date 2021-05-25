@@ -184,11 +184,7 @@ router.post("/login", (req, res, next) => {
       }
 
       fetchedUser = user;
-<<<<<<< HEAD
       return bcrypt.compare(req.body.password, user.password) //&& user.verified; //NEED TO MODIFY THIS LATER
-=======
-      return bcrypt.compare(req.body.password, user.password) && user.verified; //NEED TO MODIFY THIS LATER
->>>>>>> 9972b01365cbffdd36afae2709155c2250af67a5
     })
 
     .then((result) => {

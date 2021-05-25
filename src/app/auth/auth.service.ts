@@ -236,20 +236,24 @@ export class AuthService {
     if (expiresIn > 0) {
       this.token = authInfo.token;
       this.isAuthenticated = true;
-      let authData = this.getAuthData();
-      const authObject = localStorage.getItem(authData.authObject);
-      // let updatedObject = {
-      //   auth: true,
-      //   email: this.authStatus.email,
-      //   role: this.authStatus.role,
-      //   orgName: this.authStatus.orgName,
-      //   uen: this.authStatus.uen,
-      //   beneficiaries: this.authStatus.beneficiaries,
-      //   verified: true,
-      // };
-      // this.authStatus = updatedObject;
+      let authDataObject = this.getAuthData();
+      //console.log(authDataObject.authData.role);
 
-      this.authStatusListener.next(this.authStatus);
+      let updatedObject = {
+        auth: true,
+        email: authDataObject.authData.email,
+        role: authDataObject.authData.role,
+        orgName: authDataObject.authData.orgName,
+        uen: authDataObject.authData.uen,
+        beneficiaries: authDataObject.authData.uen,
+        verified: authDataObject.authData.verified,
+      };
+      //this.authStatus = updatedObject;
+      // this.authStatus.role = authData.role;
+      // this.authStatus.uen = authData.uen;
+
+      console.log(this.authStatus.role);
+      this.authStatusListener.next(updatedObject);
     }
   }
 
@@ -294,20 +298,19 @@ export class AuthService {
   {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
-    //localStorage.setItem('authInfo', response);
+    localStorage.setItem('response', JSON.stringify(response));
   }
 
   private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
-    localStorage.removeItem("authInfo");
+    localStorage.removeItem("response");
   }
 
   private getAuthData() {
     const token = localStorage.getItem("token");
     const expirationDate = localStorage.getItem("expiration");
-    const userObject = localStorage.getItem('authInfo');
-
+    const retrievedDataObject = JSON.parse(localStorage.getItem("response"));
 
     if (!token || !expirationDate) {
       return;
@@ -316,7 +319,7 @@ export class AuthService {
     return {
       token: token,
       expirationDate: new Date(expirationDate),
-      authObject: userObject
+      authData: retrievedDataObject
     };
   }
 }
