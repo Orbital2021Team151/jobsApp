@@ -100,7 +100,7 @@
     </div>
 
     <div
-    *ngIf="!emailInput.invalid && !passwordInput.invalid && !roleInput.invalid && !orgNameInput.invalid && !uenInput.invalid && signedUp"
+    *ngIf="signedUp"
     class="alert alert-success alert-dismissible fade show"
     role="alert">
       <strong>You have signed up!</strong> Please check your email for the verification link.

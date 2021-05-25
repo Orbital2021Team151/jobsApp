@@ -32,6 +32,13 @@ export class SignupAdminComponent implements OnInit, OnDestroy {
       return;
     }
     this.authService.createUserAdmin(form.value.email, form.value.password, form.value.role, form.value.orgName, form.value.uen);
+
+    if (this.authService.signedUp) {
+      this.signedUp = true;
+    } else {
+      this.signedUp = false;
+    }
+
   }
 
   ngOnDestroy() {

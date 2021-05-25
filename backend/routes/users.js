@@ -184,7 +184,7 @@ router.post("/login", (req, res, next) => {
       }
 
       fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password); // && user.verified; //NEED TO MODIFY THIS LATER
+      return bcrypt.compare(req.body.password, user.password) //&& user.verified; //NEED TO MODIFY THIS LATER
     })
 
     .then((result) => {
@@ -205,7 +205,7 @@ router.post("/login", (req, res, next) => {
           role: fetchedUser.role,
         },
         "secret_token_that_no_one_will_find_out_about",
-        { expiresIn: "24h" }
+        { expiresIn: "1h" }
       );
 
       res.status(200).json({

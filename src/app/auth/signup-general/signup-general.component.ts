@@ -38,8 +38,13 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
       form.value.role,
       form.value.orgName,
       form.value.uen
-      );
-    this.signedUp = true;
+    );
+
+    if (this.authService.signedUp) {
+      this.signedUp = true;
+    } else {
+      this.signedUp = false;
+    }
   }
 
 

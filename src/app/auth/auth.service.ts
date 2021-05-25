@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { now } from 'mongoose';
 import { Subject, timer } from 'rxjs';
 import { AuthData } from './auth-data.model';
 
@@ -30,6 +31,7 @@ export class AuthService {
   }>();
   private isAuthenticated = false;
   private tokenTimer: any;
+  signedUp = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -71,6 +73,7 @@ export class AuthService {
       .post('http://localhost:3000/api/user/signup', userObject)
       .subscribe(
         () => {
+          this.signedUp = true;
           //this.router.navigate['/signup'];
         },
         (error) => {
@@ -110,7 +113,7 @@ export class AuthService {
       .post('http://localhost:3000/api/user/signupAdmin', userObject)
       .subscribe(
         () => {
-          //this.router.navigate['/signup'];
+          this.signedUp = true;
         },
         (error) => {
           console.log(error);
@@ -182,11 +185,12 @@ export class AuthService {
 
           if (token) {
             const expiresInDuration = response.expiresIn;
-            this.tokenTimer = setTimeout(() => {
-              this.logout();
-            }, expiresInDuration * 1000);
+            this.setAuthTimer(expiresInDuration);
             this.isAuthenticated = true;
-
+            const rightNow = new Date();
+            const expirationDate = new Date(rightNow.getTime() + expiresInDuration * 1000);
+            console.log(response);
+            this.saveAuthData(token, expirationDate, response);
             this.authStatus = {
               auth: true,
               email: email,
@@ -222,6 +226,33 @@ export class AuthService {
       );
   }
 
+  autoAuthUser() {
+    const authInfo =  this.getAuthData();
+    if (!authInfo) {
+      return;
+    }
+    const rightNow = new Date();
+    const expiresIn = authInfo.expirationDate.getTime() - rightNow.getTime();
+    if (expiresIn > 0) {
+      this.token = authInfo.token;
+      this.isAuthenticated = true;
+      let authData = this.getAuthData();
+      const authObject = localStorage.getItem(authData.authObject);
+      // let updatedObject = {
+      //   auth: true,
+      //   email: this.authStatus.email,
+      //   role: this.authStatus.role,
+      //   orgName: this.authStatus.orgName,
+      //   uen: this.authStatus.uen,
+      //   beneficiaries: this.authStatus.beneficiaries,
+      //   verified: true,
+      // };
+      // this.authStatus = updatedObject;
+
+      this.authStatusListener.next(this.authStatus);
+    }
+  }
+
   logout() {
     this.token = null;
     this.isAuthenticated = false;
@@ -237,5 +268,55 @@ export class AuthService {
     });
     this.router.navigate(['/']);
     clearTimeout(this.tokenTimer);
+    this.clearAuthData();
+  }
+
+  private setAuthTimer(duration: number) {
+    console.log("Setting timer" + duration);
+    this.tokenTimer = setTimeout(() => {
+      this.logout();
+    }, duration * 1000);
+  }
+
+  private saveAuthData(
+    token: string,
+    expirationDate: Date,
+    response: {
+      token: string;
+      expiresIn: number;
+      email: string;
+      orgName: string;
+      role: string;
+      uen: string;
+      beneficiaries: string[];
+      verified: boolean;
+    })
+  {
+    localStorage.setItem('token', token);
+    localStorage.setItem('expiration', expirationDate.toISOString());
+    //localStorage.setItem('authInfo', response);
+  }
+
+  private clearAuthData() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiration");
+    localStorage.removeItem("authInfo");
+  }
+
+  private getAuthData() {
+    const token = localStorage.getItem("token");
+    const expirationDate = localStorage.getItem("expiration");
+    const userObject = localStorage.getItem('authInfo');
+
+
+    if (!token || !expirationDate) {
+      return;
+    }
+
+    return {
+      token: token,
+      expirationDate: new Date(expirationDate),
+      authObject: userObject
+    };
   }
 }
