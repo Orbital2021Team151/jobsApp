@@ -32,6 +32,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   hasApproved: boolean;
   userIsAuthenticated = false;
   userIsAdmin: boolean;
+  startDate: Date;
+  endDate: Date;
 
   private authStatusObject: {auth: boolean;
     role: string;
@@ -95,13 +97,40 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   submitFilter() {
-    this.filteredPosts = this.posts.filter(post => {
-      for (var interestBeneficiary of post.beneficiaries) {
-        if (this.beneficiariesSelected.includes(interestBeneficiary)) {
-          return true;
+    //console.log(this.startDate);
+    //console.log(this.endDate);
+    //console.log(this.beneficiariesSelected);
+    if (this.beneficiariesSelected.length !== 0) {
+      this.filteredPosts = this.posts.filter(post => {
+        for (var interestBeneficiary of post.beneficiaries) {
+          if (this.beneficiariesSelected.includes(interestBeneficiary)) {
+            return true;
+          }
         }
-      }
-    });
+      });
+    } else {
+      this.filteredPosts = [...this.posts];
+      //console.log(this.filteredPosts);
+    }
+
+    if (this.startDate) {
+      //console.log("There is a startDate!");
+      this.filteredPosts = this.filteredPosts.filter(post => {
+        console.log(post);
+        console.log(post.startDate.valueOf());
+        console.log(this.startDate.valueOf());
+        console.log(new Date(post.startDate).getTime() <= new Date(this.startDate).getTime());
+        return (new Date(post.startDate).getTime() <= new Date(this.startDate).getTime());
+      });
+    }
+
+    if (this.endDate) {
+      //console.log("There is an endDate!");
+      this.filteredPosts = this.filteredPosts.filter(post => new Date(post.endDate).getTime() <= new Date(this.endDate).getTime());
+    }
+
+    //Need to cast new Date object over it again... KIV for future me. I have no idea why javascript does this (┛ಠ_ಠ)┛彡┻━┻
+
   }
 
   ngOnDestroy() {

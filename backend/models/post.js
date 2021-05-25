@@ -11,9 +11,11 @@ const postSchema = mongoose.Schema({
   title: {type: String, required: true},
   content: {type: String, required: true},
   skills: {type: String, required: true},
-  startDate: {type: String, required: true},
-  endDate: {type: String, required: true},
-  hoursRequired: {type: String, required: true},
+
+  startDate: {type: Date, required: true},
+  endDate: {type: Date, required: true},
+  hoursRequired: {type: Number, required: true},
+
   beneficiaries: {type: [String], required: true},
   approved: {type: Boolean, },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
