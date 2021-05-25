@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 
 import { AuthService } from 'src/app/auth/auth.service';
@@ -30,6 +31,8 @@ import { PostsService } from '../post.service';
 export class PostCreateComponent implements OnInit, OnDestroy {
   pendingApproval: boolean = false;
   public authStatusObject;
+  private authStatusSub: Subscription;
+  private postServiceSub: Subscription;
   isLoading = true;
   beneficiaries: string[] = [
     "Animal Welfare",
@@ -48,6 +51,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     "Women & Girls",
   ];
   beneficiariesSelected: string[] = [];
+  termsAndConditions = false;
 
 
 
@@ -58,12 +62,17 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.authStatusObject = this.authService.getAuthStatusObject();
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
+      this.authStatusObject = authObject;
+      console.log("At create page");
+      console.log(authObject);
+    });
   }
 
   onAddPost(form: NgForm) {
     console.log("Beneficiaries Selected: ");
     console.log(this.beneficiariesSelected);
+    console.log("THIS FIRED");
 
     if (form.invalid) {
       return;
@@ -105,5 +114,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     this.modalService.open(longContent, { scrollable: true });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
+  }
 }

@@ -88,7 +88,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
       this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
         this.userIsAuthenticated = authObject.auth;
-        this.userIsAdmin = authObject.role === "Admin";
+        this.userIsAdmin = (authObject.role === "Admin");
         this.authStatusObject = authObject;
       });
 

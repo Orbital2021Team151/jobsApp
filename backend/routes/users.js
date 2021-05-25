@@ -189,8 +189,8 @@ router.post("/login", (req, res, next) => {
 
     .then((result) => {
 
-      console.log("Fetched user is: ");
-      console.log(fetchedUser);
+      //console.log("Fetched user is: ");
+      //console.log(fetchedUser);
 
 
       if (!result) {
