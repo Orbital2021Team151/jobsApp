@@ -19,6 +19,7 @@ checkAuth,
     skills: req.body.skills,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
+
     hoursRequired: req.body.hoursRequired,
     beneficiaries: req.body.beneficiaries,
     appproved: false,

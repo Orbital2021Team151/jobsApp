@@ -179,12 +179,16 @@ router.post("/login", (req, res, next) => {
 //      console.log(user);
 
       if (!user) {
-        console.log("No user"); //TODO: WHICH IS CAUSING THIS BECAUSE THE ORIGINAL EMAIL IS GETTING REPLACED BY "loo@gmail.com" D=========
-        throw new Error("Authentication Failed 1");
+        console.log("No user");
+        throw new Error("Authentication Failed. User does not exist in database.");
       }
 
       fetchedUser = user;
+<<<<<<< HEAD
       return bcrypt.compare(req.body.password, user.password) //&& user.verified; //NEED TO MODIFY THIS LATER
+=======
+      return bcrypt.compare(req.body.password, user.password) && user.verified; //NEED TO MODIFY THIS LATER
+>>>>>>> 9972b01365cbffdd36afae2709155c2250af67a5
     })
 
     .then((result) => {
