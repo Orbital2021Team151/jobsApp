@@ -72,7 +72,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.hasApproved = false;
     this.postsService.getPosts();
 
-    this.authStatusObject = this.authService.getAuthStatusObject();
+    //this.authStatusObject = this.authService.getAuthStatusObject();
+    console.log("At feed now. the object retrieved is: ");
+    console.log(this.authStatusObject);
 
     this.postSub = this.postsService
       .getPostsUpdatedListener()
@@ -83,8 +85,16 @@ export class PostFeedComponent implements OnInit, OnDestroy {
           this.hasApproved = true;
         }
       });
-      this.userIsAuthenticated = this.authService.getIsAuth();
-      this.userIsAdmin = this.authStatusObject.role === 'Admin';
+
+      this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
+        this.userIsAuthenticated = authObject.auth;
+        this.userIsAdmin = authObject.role === "Admin";
+        this.authStatusObject = authObject;
+      });
+
+
+      //this.userIsAuthenticated = this.authService.getIsAuth();
+      //this.userIsAdmin = this.authStatusObject.role === 'Admin';
   }
 
   onDelete(postId: string) {

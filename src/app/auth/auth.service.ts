@@ -29,6 +29,7 @@ export class AuthService {
     beneficiaries: string[];
     verified: boolean;
   }>();
+
   private isAuthenticated = false;
   private tokenTimer: any;
   signedUp = false;
@@ -231,13 +232,16 @@ export class AuthService {
     if (!authInfo) {
       return;
     }
+
     const rightNow = new Date();
     const expiresIn = authInfo.expirationDate.getTime() - rightNow.getTime();
+
     if (expiresIn > 0) {
       this.token = authInfo.token;
       this.isAuthenticated = true;
       let authDataObject = this.getAuthData();
-      //console.log(authDataObject.authData.role);
+      console.log("Refreshed data is: ");
+      console.log(authInfo);
 
       let updatedObject = {
         auth: true,
@@ -252,8 +256,9 @@ export class AuthService {
       // this.authStatus.role = authData.role;
       // this.authStatus.uen = authData.uen;
 
-      console.log(this.authStatus.role);
-      this.authStatusListener.next(updatedObject);
+      //console.log(this.authStatus.role);
+      this.authStatus = authInfo.authData;
+      this.authStatusListener.next(authInfo.authData);
     }
   }
 

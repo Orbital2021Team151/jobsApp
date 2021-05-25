@@ -30,6 +30,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   //need to remove subscription later to prevent memory leak
 
   private postSub: Subscription;
+  private authStatusSub: Subscription;
   hasRequest: Boolean;
   postToBeDeleted: string;
   private authStatusObject;
@@ -38,10 +39,20 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.authStatusObject = this.authService.getAuthStatusObject();
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
+      this.authStatusObject = authObject;
 
-    this.hasRequest = false;
-    this.postsService.getPosts();
+      this.hasRequest = false;
+      this.postsService.getPosts();
+
+    });
+
+    //this.authStatusObject = this.authService.getAuthStatusObject();
+
+    //this.hasRequest = false;
+
+    //this.postsService.getPosts();
+
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
 
@@ -57,13 +68,13 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
         //console.log(this.authStatusObject);
         //this.posts = posts;
 
-//        console.log("posts are: ");
-//        console.log(this.posts);
+        //console.log("posts are: ");
+        //console.log(this.posts);
         if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
         }
-
       });
+
   }
 
   onDelete(postId: string) {
@@ -82,6 +93,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.postSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
 
 }

@@ -28,6 +28,7 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
 
   beneficiariesSelected: string[] = [];
   private postSub: Subscription;
+  private authStatusSub: Subscription;
   hasRequest: Boolean;
   postToBeDeleted: string;
   private authStatusObject;
@@ -51,12 +52,27 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
   ngOnInit() {
-    this.authStatusObject = this.authService.getAuthStatusObject();
-    for (var beneficiary of this.authStatusObject.beneficiaries) {
-      this.beneficiariesSelected.push(beneficiary);
-    }
-    console.log("At student dashboard! object retrieved is: ");
-    console.log(this.authStatusObject);
+
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
+      this.authStatusObject = authObject;
+
+      for (var beneficiary of this.authStatusObject.beneficiaries) {
+        this.beneficiariesSelected.push(beneficiary);
+      }
+
+      this.hasRequest = false;
+      this.postsService.getPosts();
+
+    });
+
+
+
+
+
+
+    //this.authStatusObject = this.authService.getAuthStatusObject();
+    //console.log("At student dashboard! object retrieved is: ");
+    //console.log(this.authStatusObject);
   }
 
   updateUser() {
