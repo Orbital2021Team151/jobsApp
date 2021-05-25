@@ -27,6 +27,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
+  filteredPosts: Post[] = [];
+
   hasApproved: boolean;
   userIsAuthenticated = false;
   userIsAdmin: boolean;
@@ -74,6 +76,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
+        this.filteredPosts = posts;
         if (posts.filter((post) => post.approved).length > 0) {
           this.hasApproved = true;
         }
@@ -92,7 +95,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   submitFilter() {
-    this.posts = this.posts.filter(post => {
+    this.filteredPosts = this.posts.filter(post => {
       for (var interestBeneficiary of post.beneficiaries) {
         if (this.beneficiariesSelected.includes(interestBeneficiary)) {
           return true;
