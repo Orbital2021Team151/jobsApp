@@ -107,7 +107,13 @@ export class PostsService {
 
 
 
-  applyPost(postId: string, student: {email: string, contact: number, content: string}) {
+  applyPost(postId: string, student: {
+    email: string,
+    contact: number,
+    content: string,
+  })
+
+    {
 
     console.log("apply Post request sent! postID is: ");
     console.log(postId);
@@ -117,17 +123,29 @@ export class PostsService {
     const postToBePublished = this.getPost(postId);
     console.log("Post to be published back is: ");
     console.log(postToBePublished);
+    let appliedBefore = false;
 
-    postToBePublished.students.push(student);
-
-    this.http.put('http://localhost:3000/api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
+    for (let i = 0; i < postToBePublished.students.length; i++) {
+      if (postToBePublished.students[i].email === student.email) {
+        //throw an error?
+        appliedBefore = true;
+        console.log("You applied to this post before!");
+      }
+    }
+    if (!appliedBefore) {
+      postToBePublished.students.push(student);
+      this.http.put('http://localhost:3000/api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
 
         console.log("apply post successful!");
         //this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
       });
+      return appliedBefore;
+    } else {
+      return appliedBefore;
     }
+  }
 
 
 

@@ -35,12 +35,16 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   user: string;
   startDate: Date;
   endDate: Date;
+  appliedBefore: boolean = false;
 
   private authStatusObject: {
     auth: boolean;
+    email: string;
     role: string;
     orgName: string;
     uen: string;
+    beneficiaries: string[];
+    verified: boolean;
   };
 
   private studentObject: {
@@ -119,15 +123,21 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  onApply(postId: string, email: string, contact: number, content: string) {
-
+  onApply(postId: string, contact: number, content: string) {
     this.studentObject = {
-      email: email,
+      email: this.authStatusObject.email,
       contact: contact,
       content: content,
     };
-
+    if (this.appliedBefore) {
+      this.modalService.open("You already applied to this post!", {centered: true});
+    }
     this.postsService.applyPost(postId, this.studentObject);
+    this.appliedBefore = true;
+  }
+
+  closeNotification() {
+    this.appliedBefore = false;
   }
 
   submitFilter() {
