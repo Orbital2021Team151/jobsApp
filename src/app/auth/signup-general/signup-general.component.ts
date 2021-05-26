@@ -44,6 +44,7 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
       this.signedUp = true;
     } else {
       this.signedUp = false;
+      //hello
     }
   }
 
