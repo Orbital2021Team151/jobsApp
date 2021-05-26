@@ -73,7 +73,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.hasApproved = false;
     this.postsService.getPosts();
 
-    //TODO: these 3 lines also break async
     this.authStatusObject = this.authService.getAuthStatusObject();
     this.userIsAuthenticated = this.authStatusObject.auth;
     this.userIsAdmin = this.authStatusObject.role === 'Admin';

@@ -10,11 +10,16 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'jobsApp';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    if (localStorage.getItem('token')) {
+      this.authService.autoAuthUser();
+    }
+  }
   private authStatusSub: Subscription;
   public authStatusObject: any;
 
   ngOnInit() {
+    //this.authService.autoAuthUser();
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       console.log("inside app-component's ngOnInit here!");

@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
     this.authService.login(form.value.email, form.value.password, form.value.role);
+    this.authService.autoAuthUser();
   }
 
   ngOnDestroy() {

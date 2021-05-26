@@ -222,6 +222,7 @@ export class AuthService {
   }
 
   autoAuthUser() {
+
     const authInfo =  this.getAuthData();
     if (!authInfo) {
       return;
@@ -233,24 +234,7 @@ export class AuthService {
     if (expiresIn > 0) {
       this.token = authInfo.token;
       this.isAuthenticated = true;
-      let authDataObject = this.getAuthData();
-      console.log("Refreshed data is: ");
-      console.log(authInfo);
 
-      let updatedObject = {
-        auth: true,
-        email: authDataObject.authData.email,
-        role: authDataObject.authData.role,
-        orgName: authDataObject.authData.orgName,
-        uen: authDataObject.authData.uen,
-        beneficiaries: authDataObject.authData.uen,
-        verified: authDataObject.authData.verified,
-      };
-      //this.authStatus = updatedObject;
-      // this.authStatus.role = authData.role;
-      // this.authStatus.uen = authData.uen;
-
-      //console.log(this.authStatus.role);
       this.authStatus = authInfo.authData;
       this.authStatusListener.next(this.authStatus);
     }
@@ -269,11 +253,14 @@ export class AuthService {
       beneficiaries: null,
       verified: null,
     });
-    this.router.navigate(['/']);
+
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.authStatusListener.next(null);
-    this.authStatus = null;
+    this.router.navigate(['/']);
+
+
+    //this.authStatus = null;
+
   }
 
   private setAuthTimer(duration: number) {
