@@ -10,17 +10,17 @@ checkAuth,
   const post = new Post({
     orgName: req.body.orgName,
     uen: req.body.uen,
-    studentGroupName: req.body.studentGroupName,
     POC: req.body.POC,
     phoneNumber: req.body.phoneNumber,
     email: req.body.email,
     title: req.body.title,
     content: req.body.content,
     skills: req.body.skills,
+
     startDate: req.body.startDate,
     endDate: req.body.endDate,
-
     hoursRequired: req.body.hoursRequired,
+
     beneficiaries: req.body.beneficiaries,
     appproved: false,
     creator: req.userData.userId,
@@ -84,19 +84,21 @@ router.put('/publish/:id', (req, res, next) => { //publish function to change ap
     _id: req.body.id,
     orgName: req.body.orgName,
     uen: req.body.uen,
-    studentGroupName: req.body.studentGroupName,
     POC: req.body.POC,
     phoneNumber: req.body.phoneNumber,
     email: req.body.email,
     title: req.body.title,
     content: req.body.content,
     skills: req.body.skills,
+
     startDate: req.body.startDate,
     endDate: req.body.endDate,
     hoursRequired: req.body.hoursRequired,
+
     beneficiaries: req.body.beneficiaries,
     approved: true,
     students: [],
+    creator: req.body.id,
     //creator: req.userData.userId
   });
   Post.updateOne({_id: req.params.id}, newPost).then(result => {
@@ -110,28 +112,33 @@ router.put('/publish/:id', (req, res, next) => { //publish function to change ap
 
 //student apply function
 router.put('/apply/:id', (req, res, next) => { //publish function to change approved from false to true
-  //  console.log("router.put request fired!");
+    console.log("apply Post's put posts route fired!");
     const newPost = new Post({
       _id: req.body.id,
       orgName: req.body.orgName,
       uen: req.body.uen,
-      studentGroupName: req.body.studentGroupName,
       POC: req.body.POC,
       phoneNumber: req.body.phoneNumber,
       email: req.body.email,
       title: req.body.title,
       content: req.body.content,
       skills: req.body.skills,
+
       startDate: req.body.startDate,
       endDate: req.body.endDate,
       hoursRequired: req.body.hoursRequired,
+
       beneficiaries: req.body.beneficiaries,
       approved: true,
-      students: [],
+      students: req.body.students,
+      creator: req.body.id,
       //creator: req.userData.userId
     });
-    Post.updateOne({_id: req.params.id}, newPost).then(result => {
-  //    console.log(result);
+    console.log("New post to be added into is: ");
+    console.log(newPost);
+
+    Post.findByIdAndUpdate(req.body.id, newPost).then(result => {
+      //console.log(result);
       res.status(200).json("Post published!");
     });
   });

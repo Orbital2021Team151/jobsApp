@@ -24,5 +24,6 @@ export interface Post {
 
   approved: boolean,
 
-  students: Student[],
+  //students: Student[],
+  students: {email: string, contact: number, content: string}[],
 }

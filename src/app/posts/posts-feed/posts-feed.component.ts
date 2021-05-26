@@ -4,7 +4,6 @@ import { Post } from '../post.model';
 import { PostsService } from '../post.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Student } from '../student.model';
 
 @Component({
   selector: 'app-post-feed',
@@ -43,6 +42,12 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     orgName: string;
     uen: string;
   };
+
+  private studentObject: {
+    email: string;
+    contact: number;
+    content: string;
+  }
 
   private postSub: Subscription;
   private authStatusSub: Subscription;
@@ -83,14 +88,16 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.postSub = this.postsService
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
+
+        console.log("Posts are: ");
+        console.log(this.posts);
+
         this.posts = posts;
         this.filteredPosts = posts;
         if (posts.filter((post) => post.approved).length > 0) {
           this.hasApproved = true;
         }
       });
-    //this.userIsAuthenticated = this.authService.getIsAuth();
-    //this.userIsAdmin = this.authStatusObject.role === 'Admin';
 
 
     this.authStatusSub = this.authService
@@ -114,13 +121,13 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   onApply(postId: string, email: string, contact: number, content: string) {
 
-    let student: Student = {
+    this.studentObject = {
       email: email,
       contact: contact,
       content: content,
     };
 
-    this.postsService.applyPost(postId, student);
+    this.postsService.applyPost(postId, this.studentObject);
   }
 
   submitFilter() {

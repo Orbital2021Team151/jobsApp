@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Post } from "./post.model";
-import { Student } from "./student.model";
 
 
 
@@ -23,19 +22,22 @@ export class PostsService {
             id: post._id,
             orgName: post.orgName,
             uen: post.uen,
-            studentGroupName: post.studentGroupName,
             POC: post.POC,
             phoneNumber: post.phoneNumber,
             email: post.email,
             title: post.title,
             content: post.content,
             skills: post.skills,
+
             startDate: post.startDate,
             endDate: post.endDate,
             hoursRequired: post.hoursRequired,
+
             beneficiaries: post.beneficiaries,
+            students: post.students,
+
             approved: post.approved,
-            creator: post.creator
+            creator: post.creator,
           };
         });
       })) //to change from _id from database to id
@@ -105,19 +107,24 @@ export class PostsService {
 
 
 
-  applyPost(postId: string, student: Student) {
+  applyPost(postId: string, student: {email: string, contact: number, content: string}) {
 
-    console.log("apply Post request sent!");
+    console.log("apply Post request sent! postID is: ");
+    console.log(postId);
+    console.log("student object is: ");
+    console.log(student);
 
-    let postToBePublished = this.getPost(postId);
+    const postToBePublished = this.getPost(postId);
+    console.log("Post to be published back is: ");
+    console.log(postToBePublished);
 
     postToBePublished.students.push(student);
 
     this.http.put('http://localhost:3000/api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
-        //this.router.navigate(['/']);
+
         console.log("apply post successful!");
-        this.posts = this.posts.filter(post => post.id !== postId);
+        //this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
       });
     }

@@ -19,7 +19,7 @@ const postSchema = mongoose.Schema({
   beneficiaries: {type: [String], required: true},
   approved: {type: Boolean, },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  students: {type: [mongoose.Schema.Types.ObjectId], ref: "User", required: false},
+  students: {type: {email: String, contact: Number, content: String}, required: true},
 
   //imagePath:
 });
