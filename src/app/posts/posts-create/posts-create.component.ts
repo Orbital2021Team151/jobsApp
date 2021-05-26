@@ -74,9 +74,9 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   }
 
   onAddPost(form: NgForm) {
-    console.log("Beneficiaries Selected: ");
-    console.log(this.beneficiariesSelected);
-    console.log("add post fired!");
+    //console.log("Beneficiaries Selected: ");
+    //console.log(this.beneficiariesSelected);
+    //console.log("add post fired!");
 
     if (form.invalid) {
       return;
@@ -99,12 +99,12 @@ export class PostCreateComponent implements OnInit, OnDestroy {
 
       beneficiaries: this.beneficiariesSelected,
       approved: false,
-
+      students: [],
       //imagePath: null,
       //creator: null,
     };
-    console.log("Post creation fired! onAddPost. post is:");
-    console.log(post);
+    //console.log("Post creation fired! onAddPost. post is:");
+    //console.log(post);
     this.pendingApproval = true;
     this.postsService.addPost(post);
     this.modalService.dismissAll();

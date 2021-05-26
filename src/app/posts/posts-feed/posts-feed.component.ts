@@ -4,6 +4,7 @@ import { Post } from '../post.model';
 import { PostsService } from '../post.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Student } from '../student.model';
 
 @Component({
   selector: 'app-post-feed',
@@ -32,6 +33,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   hasApproved: boolean;
   userIsAuthenticated = false;
   userIsAdmin: boolean;
+  user: string;
   startDate: Date;
   endDate: Date;
 
@@ -76,6 +78,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.authStatusObject = this.authService.getAuthStatusObject();
     this.userIsAuthenticated = this.authStatusObject.auth;
     this.userIsAdmin = this.authStatusObject.role === 'Admin';
+    this.user = this.authStatusObject.role;
 
     this.postSub = this.postsService
       .getPostsUpdatedListener()
@@ -107,6 +110,17 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   onMoreInfo(content) {
     //    console.log(this.authStatusObject);
     this.modalService.open(content, { size: 'lg' });
+  }
+
+  onApply(postId: string, email: string, contact: number, content: string) {
+
+    let student: Student = {
+      email: email,
+      contact: contact,
+      content: content,
+    };
+
+    this.postsService.applyPost(postId, student);
   }
 
   submitFilter() {

@@ -76,6 +76,19 @@
       >
         <p>{{ post.content }}</p>
         <ng-template pTemplate="footer" #footer>
+
+
+
+          <p-button
+            *ngIf="user === 'Student'"
+            class="apply"
+            label="Apply"
+            icon="pi pi-search-plus"
+            styleClass="p-button-info"
+            (click)="onApply(post.id, 'email', 123, 'content')"
+          ></p-button>
+
+
           <p-button
             class="learnMore"
             label="Learn More"
@@ -85,7 +98,7 @@
           ></p-button>
 
           <p-button
-            *ngIf="userIsAdmin || post.uen === authStatusObject.uen"
+            *ngIf="user === 'Admin' || post.uen === authStatusObject.uen"
             class="delete"
             label="Delete"
             icon="pi pi-times"

@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Post } from "./post.model";
+import { Student } from "./student.model";
 
 
 
@@ -75,7 +76,7 @@ export class PostsService {
 
     const postToBePublished = this.getPost(postId);
 
-    this.http.put('http://localhost:3000/api/posts' + "/" + postToBePublished.id, postToBePublished)
+    this.http.put('http://localhost:3000/api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
         //this.router.navigate(['/']);
         console.log("post successfully published!");
@@ -93,8 +94,35 @@ export class PostsService {
       });
   }
 
+
+  //what is this for?
   expandPost(postId: string) {
     const postToBeExpanded = this.getPost(postId);
 
   }
+
+
+
+
+
+  applyPost(postId: string, student: Student) {
+
+    console.log("apply Post request sent!");
+
+    let postToBePublished = this.getPost(postId);
+
+    postToBePublished.students.push(student);
+
+    this.http.put('http://localhost:3000/api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
+      .subscribe((response) => {
+        //this.router.navigate(['/']);
+        console.log("apply post successful!");
+        this.posts = this.posts.filter(post => post.id !== postId);
+        this.postsUpdated.next([...this.posts]);
+      });
+    }
+
+
+
+
 }
