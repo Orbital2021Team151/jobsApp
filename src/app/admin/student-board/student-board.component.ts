@@ -53,16 +53,17 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.authStatusObject = this.authService.getAuthStatusObject();
+
+    for (var beneficiary of this.authStatusObject.beneficiaries) {
+      this.beneficiariesSelected.push(beneficiary);
+    }
+
+    this.hasRequest = false;
+    this.postsService.getPosts();
+
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       this.authStatusObject = authObject;
-
-      for (var beneficiary of this.authStatusObject.beneficiaries) {
-        this.beneficiariesSelected.push(beneficiary);
-      }
-
-      this.hasRequest = false;
-      this.postsService.getPosts();
-
     });
 
 
