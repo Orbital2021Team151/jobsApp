@@ -2,15 +2,15 @@ const app = require("./backend/app");
 const debug = require("debug")("node-angular");
 const http = require("http");
 
-
-  //added condition for herokou?
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static("build"));
-    app.get("*", (req, res) => {
-      res.sendFile(path.resolve(__dirname,  "build", "index.html"));
-    });
-  }
-
+/*
+//added condition for herokou?
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+  });
+}
+*/
 
 const normalizePort = val => {
 
