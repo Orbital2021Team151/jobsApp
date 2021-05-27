@@ -33,6 +33,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   private authStatusSub: Subscription;
   hasRequest: Boolean;
   postToBeDeleted: string;
+  private postsNumber: number;
   private authStatusObject;
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
@@ -74,6 +75,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
         //console.log(this.posts);
         if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
+          this.postsNumber = this.posts.filter(post => !post.approved).length;
         }
       });
 
@@ -81,12 +83,20 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   onDelete(postId: string) {
     this.postsService.deletePost(postId);
+    this.postsNumber--;
+    if (this.postsNumber === 0) {
+      this.hasRequest = false;
+    }
   }
 
   onPublish(postId: string, publishContent) {
     this.postsService.publishPost(postId);
     //console.log(this.posts);
     this.modalService.open(publishContent, { scrollable: true });
+    this.postsNumber--;
+    if (this.postsNumber === 0) {
+      this.hasRequest = false;
+    }
   }
 
   onMoreInfo(content) {

@@ -102,14 +102,14 @@ deletePost(postId: string) {
   }
 
 
-  //what is this for?
+  //todo: what is this for?
   expandPost(postId: string) {
     const postToBeExpanded = this.getPost(postId);
 
   }
 
 
-  applyPost(postId: string, student: {email: string, contact: number, content: string,}) {
+  applyPost(postId: string, student: {email: string, contact: number, content: string}) {
 
     const postToBePublished = this.getPost(postId);
 
