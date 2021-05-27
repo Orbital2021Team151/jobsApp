@@ -5,7 +5,7 @@ import { Subject, timer } from 'rxjs';
 import { AuthData } from './auth-data.model';
 
 
-const localhost = "http://localhost:3000/";
+const url = "https://ccsgp-app.herokuapp.com/"; //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
 
 
 @Injectable({
@@ -74,8 +74,7 @@ export class AuthService {
     };
 
     return this.http
-      .post('api/user/signup', userObject) //heroku
-      //.post(localhost + 'api/user/signup', userObject)
+      .post(url + 'api/user/signup', userObject)
       .subscribe(
         () => {
           this.signedUp = true;
@@ -115,8 +114,7 @@ export class AuthService {
     };
 
     return this.http
-      .post('api/user/signupAdmin', userObject) //heroku
-      //.post(localhost + 'api/user/signupAdmin', userObject)
+      .post(url + 'api/user/signupAdmin', userObject)
       .subscribe(
         () => {
           this.signedUp = true;
@@ -148,8 +146,7 @@ export class AuthService {
       verified: true,
     };
     this.http
-      .put('api/user/update', userObject) //heroku
-      //.put(localhost + 'api/user/update', userObject)
+      .put(url + 'api/user/update', userObject)
       .subscribe((response) => {
         console.log("User's beneficiaries updated! At authService.ts");
         console.log(response);
@@ -185,8 +182,7 @@ export class AuthService {
         beneficiaries: string[];
         verified: boolean;
       }>
-      ('api/user/login', authData) //heroku
-      //(localhost + 'api/user/login', authData)
+      (url + 'api/user/login', authData)
       .subscribe(
         (response) => {
           const token = response.token;

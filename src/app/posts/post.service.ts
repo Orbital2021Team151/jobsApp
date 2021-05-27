@@ -6,7 +6,7 @@ import { map } from "rxjs/operators";
 import { Post } from "./post.model";
 
 
-const localhost = "http://localhost:3000/";
+const url = "https://ccsgp-app.herokuapp.com/"; //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
@@ -17,8 +17,7 @@ export class PostsService {
 
   getPosts() {
     this.http.get<{message: string, posts: any}>
-    ('api/posts') //heroku
-    //(localhost + 'api/posts')
+    (url + 'api/posts')
       .pipe(map(postData => {
         return postData.posts.map(post => {
           return {
@@ -61,7 +60,8 @@ export class PostsService {
   }
 
   addPost(post: Post) {
-    this.http.post<{message: string, postId: string}>('api/posts', post)
+    this.http.post<{message: string, postId: string}>
+      (url + 'api/posts', post)
       .subscribe((responseData => {
         const postId = responseData.postId;
         post.id = postId;
@@ -82,8 +82,7 @@ export class PostsService {
     const postToBePublished = this.getPost(postId);
 
     this.http
-      .put('api/posts/publish' + "/" + postToBePublished.id, postToBePublished) //heroku
-      //.put(localhost + 'api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
+      .put(url + 'api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
         //this.router.navigate(['/']);
         console.log("post successfully published!");
@@ -94,8 +93,7 @@ export class PostsService {
 
 deletePost(postId: string) {
     this.http
-    .delete('api/posts' + "/" + postId) //heroku
-    //.delete(localhost + 'api/posts' + "/" + postId)
+    .delete(url + 'api/posts' + "/" + postId)
       .subscribe(() => {
         console.log("Post successfully deleted!");
         this.posts = this.posts.filter(post => post.id !== postId);
@@ -139,8 +137,7 @@ deletePost(postId: string) {
     if (!appliedBefore) {
       postToBePublished.students.push(student);
       this.http
-      .put('api/posts/apply' + "/" + postToBePublished.id, postToBePublished) //heroku
-      //.put(localhost + 'api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
+      .put(url + 'api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
 
         console.log("apply post successful!");
