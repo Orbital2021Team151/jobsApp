@@ -30,13 +30,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(__dirname + '/dist'));
-
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
-});
-
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
+
+app.use("/", express.static(path.join(__dirname, "../dist/jobsApp")));
+
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "../dist/jobsApp/index.html"));
+});
 
 module.exports = app;
