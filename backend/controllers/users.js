@@ -167,9 +167,6 @@ exports.updateBeneficiaries = (req, res, next) => {
 
 
 
-const url = "https://ccsgp-app.herokuapp.com/"; //https://ccsgp-app.herokuapp.com/
-//TODO: Change this
-
 
 const sendEmail = (email, uniqueString) => {
   var Transport = nodemailer.createTransport({
@@ -194,6 +191,8 @@ const sendEmail = (email, uniqueString) => {
     to: email,
     subject: "CCSGP Email Confirmation",
     html: `Press <a href=http://localhost:3000/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
+    //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
+    //TODO: Change this when we can secure our verificaiton system
   };
 
   Transport.sendMail(mailOptions, (error, response) => {

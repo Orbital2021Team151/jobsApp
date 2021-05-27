@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'signupAdmin', component: SignupAdminComponent },
   { path: 'student', component: StudentBoardComponent },
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
