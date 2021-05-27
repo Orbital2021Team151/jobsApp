@@ -8,6 +8,12 @@ const User = require("../models/user");
 
 const router = express.Router();
 
+
+
+
+const localhost = "http://localhost:3000/";
+
+
 const sendEmail = (email, uniqueString) => {
   var Transport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -30,7 +36,7 @@ const sendEmail = (email, uniqueString) => {
     from: sender,
     to: email,
     subject: "CCSGP Email Confirmation",
-    html: `Press <a href=http://localhost:3000/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
+    html: `Press <a href=${localhost}api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
   };
 
   Transport.sendMail(mailOptions, (error, response) => {

@@ -16,7 +16,9 @@ export class PostsService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getPosts() {
-    this.http.get<{message: string, posts: any}>('api/posts') //unsubscription handled by angular's http client
+    this.http.get<{message: string, posts: any}>
+    ('api/posts') //heroku
+    //(localhost + 'api/posts')
       .pipe(map(postData => {
         return postData.posts.map(post => {
           return {
@@ -79,7 +81,9 @@ export class PostsService {
 
     const postToBePublished = this.getPost(postId);
 
-    this.http.put('api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
+    this.http
+      .put('api/posts/publish' + "/" + postToBePublished.id, postToBePublished) //heroku
+      //.put(localhost + 'api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
         //this.router.navigate(['/']);
         console.log("post successfully published!");
@@ -88,8 +92,10 @@ export class PostsService {
       });
     }
 
-  deletePost(postId: string) {
-    this.http.delete('api/posts' + "/" + postId)
+deletePost(postId: string) {
+    this.http
+    .delete('api/posts' + "/" + postId) //heroku
+    //.delete(localhost + 'api/posts' + "/" + postId)
       .subscribe(() => {
         console.log("Post successfully deleted!");
         this.posts = this.posts.filter(post => post.id !== postId);
@@ -103,9 +109,6 @@ export class PostsService {
     const postToBeExpanded = this.getPost(postId);
 
   }
-
-
-
 
 
   applyPost(postId: string, student: {
@@ -135,7 +138,9 @@ export class PostsService {
     }
     if (!appliedBefore) {
       postToBePublished.students.push(student);
-      this.http.put('api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
+      this.http
+      .put('api/posts/apply' + "/" + postToBePublished.id, postToBePublished) //heroku
+      //.put(localhost + 'api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
 
         console.log("apply post successful!");

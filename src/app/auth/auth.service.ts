@@ -74,7 +74,8 @@ export class AuthService {
     };
 
     return this.http
-      .post('api/user/signup', userObject)
+      .post('api/user/signup', userObject) //heroku
+      //.post(localhost + 'api/user/signup', userObject)
       .subscribe(
         () => {
           this.signedUp = true;
@@ -114,7 +115,8 @@ export class AuthService {
     };
 
     return this.http
-      .post('api/user/signupAdmin', userObject)
+      .post('api/user/signupAdmin', userObject) //heroku
+      //.post(localhost + 'api/user/signupAdmin', userObject)
       .subscribe(
         () => {
           this.signedUp = true;
@@ -146,7 +148,8 @@ export class AuthService {
       verified: true,
     };
     this.http
-      .put('api/user/update', userObject)
+      .put('api/user/update', userObject) //heroku
+      //.put(localhost + 'api/user/update', userObject)
       .subscribe((response) => {
         console.log("User's beneficiaries updated! At authService.ts");
         console.log(response);
@@ -181,7 +184,9 @@ export class AuthService {
         uen: string;
         beneficiaries: string[];
         verified: boolean;
-      }>('api/user/login', authData)
+      }>
+      ('api/user/login', authData) //heroku
+      //(localhost + 'api/user/login', authData)
       .subscribe(
         (response) => {
           const token = response.token;
