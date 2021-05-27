@@ -3,10 +3,12 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
+
+import { environment } from "../../environments/environment";
 import { Post } from "./post.model";
 
 
-const url = "http://localhost:3000/"; //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
+const BACKEND_URL = environment.apiUrl; //change this in the environment folder
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
@@ -17,7 +19,7 @@ export class PostsService {
 
   getPosts() {
     this.http.get<{message: string, posts: any}>
-    (url + 'api/posts')
+    (BACKEND_URL + 'api/posts')
       .pipe(map(postData => {
         return postData.posts.map(post => {
           return {
@@ -61,7 +63,7 @@ export class PostsService {
 
   addPost(post: Post) {
     this.http.post<{message: string, postId: string}>
-      (url + 'api/posts', post)
+      (BACKEND_URL + 'api/posts', post)
       .subscribe((responseData => {
         const postId = responseData.postId;
         post.id = postId;
@@ -82,7 +84,7 @@ export class PostsService {
     const postToBePublished = this.getPost(postId);
 
     this.http
-      .put(url + 'api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
+      .put(BACKEND_URL + 'api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
         //this.router.navigate(['/']);
         console.log("post successfully published!");
@@ -93,7 +95,7 @@ export class PostsService {
 
 deletePost(postId: string) {
     this.http
-    .delete(url + 'api/posts' + "/" + postId)
+    .delete(BACKEND_URL + 'api/posts' + "/" + postId)
       .subscribe(() => {
         console.log("Post successfully deleted!");
         this.posts = this.posts.filter(post => post.id !== postId);
@@ -137,7 +139,7 @@ deletePost(postId: string) {
     if (!appliedBefore) {
       postToBePublished.students.push(student);
       this.http
-      .put(url + 'api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
+      .put(BACKEND_URL + 'api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
 
         console.log("apply post successful!");

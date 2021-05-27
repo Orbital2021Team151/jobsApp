@@ -123,7 +123,7 @@ exports.login = (req, res, next) => {
           userId: fetchedUser._id,
           role: fetchedUser.role,
         },
-        "secret_token_that_no_one_will_find_out_about",
+        process.env.JWT_KEY,
         { expiresIn: "1h" }
       );
 

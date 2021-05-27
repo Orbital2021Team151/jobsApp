@@ -4,9 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { Subject, timer } from 'rxjs';
 import { AuthData } from './auth-data.model';
 
-
-const url = "http://localhost:3000/"; //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
-
+import { environment } from "../../environments/environment";
+const BACKEND_URL = environment.apiUrl; //change this in the environment folder
 
 @Injectable({
   providedIn: 'root',
@@ -74,7 +73,7 @@ export class AuthService {
     };
 
     return this.http
-      .post(url + 'api/user/signup', userObject)
+      .post(BACKEND_URL + 'api/user/signup', userObject)
       .subscribe(
         () => {
           this.signedUp = true;
@@ -114,7 +113,7 @@ export class AuthService {
     };
 
     return this.http
-      .post(url + 'api/user/signupAdmin', userObject)
+      .post(BACKEND_URL + 'api/user/signupAdmin', userObject)
       .subscribe(
         () => {
           this.signedUp = true;
@@ -146,7 +145,7 @@ export class AuthService {
       verified: true,
     };
     this.http
-      .put(url + 'api/user/update', userObject)
+      .put(BACKEND_URL + 'api/user/update', userObject)
       .subscribe((response) => {
         console.log("User's beneficiaries updated! At authService.ts");
         console.log(response);
@@ -182,7 +181,7 @@ export class AuthService {
         beneficiaries: string[];
         verified: boolean;
       }>
-      (url + 'api/user/login', authData)
+      (BACKEND_URL + 'api/user/login', authData)
       .subscribe(
         (response) => {
           const token = response.token;
