@@ -6,6 +6,7 @@ import { map } from "rxjs/operators";
 import { Post } from "./post.model";
 
 
+const localhost = "http://localhost:3000/";
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
@@ -15,7 +16,7 @@ export class PostsService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getPosts() {
-    this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts') //unsubscription handled by angular's http client
+    this.http.get<{message: string, posts: any}>('api/posts') //unsubscription handled by angular's http client
       .pipe(map(postData => {
         return postData.posts.map(post => {
           return {
@@ -58,7 +59,7 @@ export class PostsService {
   }
 
   addPost(post: Post) {
-    this.http.post<{message: string, postId: string}>('http://localhost:3000/api/posts', post)
+    this.http.post<{message: string, postId: string}>('api/posts', post)
       .subscribe((responseData => {
         const postId = responseData.postId;
         post.id = postId;
@@ -78,7 +79,7 @@ export class PostsService {
 
     const postToBePublished = this.getPost(postId);
 
-    this.http.put('http://localhost:3000/api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
+    this.http.put('api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
         //this.router.navigate(['/']);
         console.log("post successfully published!");
@@ -88,7 +89,7 @@ export class PostsService {
     }
 
   deletePost(postId: string) {
-    this.http.delete('http://localhost:3000/api/posts' + "/" + postId)
+    this.http.delete('api/posts' + "/" + postId)
       .subscribe(() => {
         console.log("Post successfully deleted!");
         this.posts = this.posts.filter(post => post.id !== postId);
@@ -134,7 +135,7 @@ export class PostsService {
     }
     if (!appliedBefore) {
       postToBePublished.students.push(student);
-      this.http.put('http://localhost:3000/api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
+      this.http.put('api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
 
         console.log("apply post successful!");

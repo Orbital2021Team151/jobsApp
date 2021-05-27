@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { now } from 'mongoose';
 import { Subject, timer } from 'rxjs';
 import { AuthData } from './auth-data.model';
+
+
+const localhost = "http://localhost:3000/";
+
 
 @Injectable({
   providedIn: 'root',
@@ -71,7 +74,7 @@ export class AuthService {
     };
 
     return this.http
-      .post('http://localhost:3000/api/user/signup', userObject)
+      .post('api/user/signup', userObject)
       .subscribe(
         () => {
           this.signedUp = true;
@@ -111,7 +114,7 @@ export class AuthService {
     };
 
     return this.http
-      .post('http://localhost:3000/api/user/signupAdmin', userObject)
+      .post('api/user/signupAdmin', userObject)
       .subscribe(
         () => {
           this.signedUp = true;
@@ -143,7 +146,7 @@ export class AuthService {
       verified: true,
     };
     this.http
-      .put('http://localhost:3000/api/user/update', userObject)
+      .put('api/user/update', userObject)
       .subscribe((response) => {
         console.log("User's beneficiaries updated! At authService.ts");
         console.log(response);
@@ -178,7 +181,7 @@ export class AuthService {
         uen: string;
         beneficiaries: string[];
         verified: boolean;
-      }>('http://localhost:3000/api/user/login', authData)
+      }>('api/user/login', authData)
       .subscribe(
         (response) => {
           const token = response.token;
