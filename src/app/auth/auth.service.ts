@@ -115,20 +115,11 @@ export class AuthService {
     return this.http
       .post(BACKEND_URL + 'api/user/signupAdmin', userObject)
       .subscribe(
-        () => {
+        (result) => {
           this.signedUp = true;
         },
         (error) => {
           console.log(error);
-          this.authStatusListener.next({
-            auth: false,
-            email: null,
-            role: null,
-            orgName: null,
-            uen: null,
-            beneficiaries: null,
-            verified: null,
-          });
         }
       );
   }

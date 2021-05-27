@@ -9,20 +9,20 @@ import { AuthService } from "../auth.service";
 })
 export class SignupAdminComponent implements OnInit, OnDestroy {
   isLoading = false;
-  roles: any = ["Admin", "External Organisation", "Internal Organisation", "Student"];
+  roles: any = ["Admin", "External Organisation", "Student Organisation", "Student"];
   hidePassword = true;
   signedUp: boolean;
+  //private authStatusObject;
   private authStatusSub: Subscription;
 
   constructor(public authService: AuthService) {}
 
-
-  //signup should be ok for async???????????????????????????
-  //TODO: Run some buggy cases eg go sign up a new admin and new non-admin accounts and see how it goes
   ngOnInit() {
+    //this.authStatusObject = this.authService.getAuthStatusObject();
+
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
-      authStatusObject => {
-        if (!authStatusObject.auth) {
+      authObject => {
+        if (!authObject.auth) {
           this.isLoading = false;
           this.signedUp = false;
         }
