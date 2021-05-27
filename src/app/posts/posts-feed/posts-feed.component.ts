@@ -35,7 +35,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   user: string;
   startDate: Date;
   endDate: Date;
-  appliedBefore: boolean = false;
 
   private authStatusObject: {
     auth: boolean;
@@ -119,7 +118,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
-    //    console.log(this.authStatusObject);
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -129,15 +127,15 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       contact: contact,
       content: content,
     };
-    if (this.appliedBefore) {
-      this.modalService.open("You already applied to this post!", {centered: true});
-    }
-    this.postsService.applyPost(postId, this.studentObject);
-    this.appliedBefore = true;
-  }
 
-  closeNotification() {
-    this.appliedBefore = false;
+    const currentPost = this.postsService.getPost(postId);
+    if (currentPost.students.filter(student => student.email === this.authStatusObject.email).length > 0) {
+      //TODO: insert some warning here.
+      console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
+      return;
+    } else {
+      this.postsService.applyPost(postId, this.studentObject);
+    }
   }
 
   submitFilter() {
@@ -159,18 +157,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
     if (this.startDate) {
       //console.log("There is a startDate!");
-      this.filteredPosts = this.filteredPosts.filter((post) => {
-        console.log(post);
-        console.log(post.startDate.valueOf());
-        console.log(this.startDate.valueOf());
-        console.log(
-          new Date(post.startDate).getTime() <=
-            new Date(this.startDate).getTime()
-        );
-        return (
-          new Date(post.startDate).getTime() <=
-          new Date(this.startDate).getTime()
-        );
+      this.filteredPosts = this.filteredPosts
+        .filter((post) => {
+          return ( new Date(post.startDate).getTime() <= new Date(this.startDate).getTime());
       });
     }
 

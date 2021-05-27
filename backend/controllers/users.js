@@ -17,13 +17,8 @@ exports.signupGeneral = (req, res, next) => {
       verified: false,
     });
 
-    console.log("User details are: ");
-    console.log(user);
-
     user.save()
       .then((result) => {
-        console.log("Result is: ");
-        console.log(result);
 
         const email = user.email;
         sendEmail(email, result._id);
@@ -34,7 +29,6 @@ exports.signupGeneral = (req, res, next) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         res.status(500).json({
           message: "You probably signed up before using this email before...",
           error: err,
@@ -58,13 +52,8 @@ exports.signupAdmin = (req, res, next) => {
       verified: false,
     });
 
-    console.log("User details are: ");
-    console.log(user);
-
     user.save()
       .then((result) => {
-        console.log("Result is: ");
-        console.log(result);
 
         const email = user.email;
         sendEmail(email, result._id);
@@ -75,7 +64,6 @@ exports.signupAdmin = (req, res, next) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         res.status(500).json({
           message: "You probably signed up before using this email before...",
           error: err,
@@ -94,9 +82,6 @@ exports.login = (req, res, next) => {
 
     .then((user) => {
 
-//      console.log("At login, retrived user part now");
-//      console.log(user);
-
       if (!user) {
         console.log("No user");
         throw new Error("Authentication Failed. User does not exist in database.");
@@ -107,10 +92,6 @@ exports.login = (req, res, next) => {
     })
 
     .then((result) => {
-
-      //console.log("Fetched user is: ");
-      //console.log(fetchedUser);
-
 
       if (!result) {
         console.log("GO AND ACTIVATE YOUR ACCOUNT!");
@@ -157,7 +138,6 @@ exports.updateBeneficiaries = (req, res, next) => {
     if (!user) {
       throw new Error("Update Failed. But this should not happen tbf");
     }
-    console.log("This fires");
     fetchedUser = user;
 
     const newUser = new User({
@@ -224,22 +204,11 @@ const sendEmail = (email, uniqueString) => {
 
 exports.sendVerificationMail = (req, res) => {
 
-  console.log("Request params are: ");
-  console.log(req.params);
-  console.log(req.params.uniqueId);
-
-
-
   const uniqueId  = req.params.uniqueId;
 
   User.findById(uniqueId)
     .then(result => {
-
-      console.log("Found result: ");
-      console.log(result);
       result.verified = true;
-      console.log(result);
-
       if (result) {
         result.verified = true;
         User.updateOne({email: result.email, role: result.role}, result).then(result => {

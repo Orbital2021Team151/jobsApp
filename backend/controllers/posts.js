@@ -1,6 +1,4 @@
-const express = require('express');
 const Post = require('../models/post');
-const checkAuth = require('../middleware/check-auth');
 
 exports.requestPost = (req, res, next) => {
   const post = new Post({
@@ -42,7 +40,6 @@ exports.getAllPosts = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  //console.log(req.userData.role);
 
   if (req.userData.role === 'Admin') {
     Post.deleteOne({_id: req.params.id})
@@ -71,7 +68,6 @@ exports.deletePost = (req, res, next) => {
 
 
 exports.publishPost = (req, res, next) => { //publish function to change approved from false to true
-  //  console.log("router.put request fired!");
     const newPost = new Post({
       _id: req.body.id,
       orgName: req.body.orgName,
@@ -94,14 +90,11 @@ exports.publishPost = (req, res, next) => { //publish function to change approve
       //creator: req.userData.userId
     });
     Post.updateOne({_id: req.params.id}, newPost).then(result => {
-      //console.log(result);
       res.status(200).json("Post published!");
     });
   };
 
  exports.applyPost = (req, res, next) => {
-  //publish function to change approved from false to true
-  console.log("apply Post's put posts route fired!");
   const newPost = new Post({
     _id: req.body.id,
     orgName: req.body.orgName,
@@ -123,11 +116,8 @@ exports.publishPost = (req, res, next) => { //publish function to change approve
     creator: req.body.id,
     //creator: req.userData.userId
   });
-  console.log("New post to be added into is: ");
-  console.log(newPost);
 
-  Post.findByIdAndUpdate(req.body.id, newPost).then((result) => {
-    //console.log(result);
+  Post.findByIdAndUpdate(req.body.id, newPost).then((result) => { //try updateOne instead as I think mongoose might deprecate findByIdAndUpdate
     res.status(200).json("Post published!");
   });
 };

@@ -79,8 +79,6 @@ export class PostsService {
   }
 
   publishPost(postId: string) {
-    console.log("publish Post request sent!");
-
     const postToBePublished = this.getPost(postId);
 
     this.http
@@ -111,33 +109,11 @@ deletePost(postId: string) {
   }
 
 
-  applyPost(postId: string, student: {
-    email: string,
-    contact: number,
-    content: string,
-  })
-
-    {
-
-    console.log("apply Post request sent! postID is: ");
-    console.log(postId);
-    console.log("student object is: ");
-    console.log(student);
+  applyPost(postId: string, student: {email: string, contact: number, content: string,}) {
 
     const postToBePublished = this.getPost(postId);
-    console.log("Post to be published back is: ");
-    console.log(postToBePublished);
-    let appliedBefore = false;
 
-    for (let i = 0; i < postToBePublished.students.length; i++) {
-      if (postToBePublished.students[i].email === student.email) {
-        //throw an error?
-        appliedBefore = true;
-        console.log("You applied to this post before!");
-      }
-    }
-    if (!appliedBefore) {
-      postToBePublished.students.push(student);
+    postToBePublished.students.push(student);
       this.http
       .put(BACKEND_URL + 'api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
@@ -146,13 +122,5 @@ deletePost(postId: string) {
         //this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
       });
-      return appliedBefore;
-    } else {
-      return appliedBefore;
     }
   }
-
-
-
-
-}
