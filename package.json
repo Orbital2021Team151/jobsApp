@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:server": "nodemon start server.js",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
+    //"heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "private": true,
   "dependencies": {
