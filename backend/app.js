@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
 
-
+//for deployment in heroku
 app.use("/", express.static(path.join(__dirname, "../dist/jobsApp")));
 
 app.use((req, res, next) => {

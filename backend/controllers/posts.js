@@ -52,11 +52,11 @@ exports.deletePost = (req, res, next) => {
       } else {
         res.status(401).json({ message: "Not authorised to delete!"});
       }
-    });
-    console.log("post deleted by administrator!")
-    // .then((result) => {
-    //   console.log(result);
-    // });
+    })
+     .then((result) => {
+       console.log(result);
+     });
+
   } else {
     Post.deleteOne({ _id: req.params.id, creator: req.userData.userId, }) //change creator field to orgName?
     .then((result) => {
