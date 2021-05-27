@@ -33,10 +33,12 @@ app.use((req, res, next) => {
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
 
+/*
 app.use("/", express.static(path.join(__dirname, "../dist/jobsApp")));
 
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "../dist/jobsApp/index.html"));
 });
+*/
 
 module.exports = app;

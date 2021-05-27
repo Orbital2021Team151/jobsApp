@@ -5,7 +5,7 @@ import { Subject, timer } from 'rxjs';
 import { AuthData } from './auth-data.model';
 
 
-const url = "https://ccsgp-app.herokuapp.com/"; //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
+const url = "http://localhost:3000/"; //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
 
 
 @Injectable({

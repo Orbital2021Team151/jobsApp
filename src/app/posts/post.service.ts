@@ -6,7 +6,7 @@ import { map } from "rxjs/operators";
 import { Post } from "./post.model";
 
 
-const url = "https://ccsgp-app.herokuapp.com/"; //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
+const url = "http://localhost:3000/"; //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
