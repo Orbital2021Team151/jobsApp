@@ -77,24 +77,13 @@
         <p>{{ post.content }}</p>
         <ng-template pTemplate="footer" #footer>
 
-
-          <!-- <div
-            *ngIf="appliedBefore"
-            class="alert alert-failure alert-dismissible fade show"
-            role="alert">
-            <strong>You already applied to this posting!</strong> Please await a response from the organisation. They will contact you directly.
-            <button (click)="closeNotification()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-          </div> -->
-
           <p-button
-            *ngIf="user === 'Student'"
+            *ngIf="(userRole === 'Student')"
             class="apply"
             label="Apply"
             icon="pi pi-search-plus"
             styleClass="p-button-info"
-            (click)="onApply(post.id, 'more stuff', 98751419, 'content')"
+            (click)="onApply(post.id, 'more stuff', 98751419, 'content', error)"
           ></p-button>
 
 
@@ -154,6 +143,21 @@
       <p>End Date: {{post.endDate | date}}&hellip;</p>
       <p>Commitment Hours: {{post.hoursRequired}}&hellip;</p>
       <p>Beneficiaries: {{post.beneficiaries}}&hellip;</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #error let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Applied Before</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>you applied for this before&hellip;</p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

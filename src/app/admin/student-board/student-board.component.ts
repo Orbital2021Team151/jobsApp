@@ -65,15 +65,6 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       this.authStatusObject = authObject;
     });
-
-
-
-
-
-
-    //this.authStatusObject = this.authService.getAuthStatusObject();
-    //console.log("At student dashboard! object retrieved is: ");
-    //console.log(this.authStatusObject);
   }
 
   updateUser() {

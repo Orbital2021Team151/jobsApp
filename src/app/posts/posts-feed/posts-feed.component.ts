@@ -31,8 +31,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   hasApproved: boolean;
   userIsAuthenticated = false;
-  userIsAdmin: boolean;
-  user: string;
+  userRole: string;
   startDate: Date;
   endDate: Date;
 
@@ -85,8 +84,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
     this.authStatusObject = this.authService.getAuthStatusObject();
     this.userIsAuthenticated = this.authStatusObject.auth;
-    this.userIsAdmin = this.authStatusObject.role === 'Admin';
-    this.user = this.authStatusObject.role;
+    this.userRole = this.authStatusObject.role;
 
     this.postSub = this.postsService
       .getPostsUpdatedListener()
@@ -107,7 +105,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       .getAuthStatusListener()
       .subscribe((authObject) => {
         this.userIsAuthenticated = authObject.auth;
-        this.userIsAdmin = authObject.role === 'Admin';
+        this.userRole = authObject.role;
         this.authStatusObject = authObject;
       });
 
@@ -121,7 +119,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  onApply(postId: string, contact: number, content: string) {
+  onApply(postId: string, contact: number, content: string, errorMessage) {
     this.studentObject = {
       email: this.authStatusObject.email,
       contact: contact,
@@ -131,6 +129,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     const currentPost = this.postsService.getPost(postId);
     if (currentPost.students.filter(student => student.email === this.authStatusObject.email).length > 0) {
       //TODO: insert some warning here.
+      this.modalService.open(errorMessage, { size: 'lg' });
       console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
       return;
     } else {
@@ -172,6 +171,14 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
 
     //Need to cast new Date object over it again... KIV for future me. I have no idea why javascript does this (┛ಠ_ಠ)┛彡┻━┻
+  }
+
+  applyBefore(currentPost: Post) {
+    console.log("Apply before line fires");
+    if (currentPost.students.filter(user => {user.email === this.authStatusObject.email}).length > 0) {
+      return true;
+    }
+    return false;
   }
 
   ngOnDestroy() {
