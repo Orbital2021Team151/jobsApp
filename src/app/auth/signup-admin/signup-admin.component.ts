@@ -36,11 +36,18 @@ export class SignupAdminComponent implements OnInit, OnDestroy {
     }
     this.authService.createUserAdmin(form.value.email, form.value.password, form.value.role, form.value.orgName, form.value.uen);
 
+    //IDK IF THIS FIXES IT BUT I THINK IT IS WORKING?
+    this.authService.getSignupListener().subscribe(result => {
+      this.signedUp = result;
+    });
+
+    /*
     if (this.authService.signedUp) {
       this.signedUp = true;
     } else {
       this.signedUp = false;
     }
+    */
 
   }
 

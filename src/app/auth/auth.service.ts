@@ -32,9 +32,10 @@ export class AuthService {
     verified: boolean;
   }>();
 
+  private signupListener = new Subject<boolean>();
+
   private isAuthenticated = false;
   private tokenTimer: any;
-  signedUp = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -53,6 +54,10 @@ export class AuthService {
   getAuthStatusListener() {
     console.log(this.authStatusListener.asObservable());
     return this.authStatusListener.asObservable();
+  }
+
+  getSignupListener() {
+    return this.signupListener.asObservable();
   }
 
   createUser(
@@ -75,21 +80,13 @@ export class AuthService {
     return this.http
       .post(BACKEND_URL + 'api/user/signup', userObject)
       .subscribe(
-        () => {
-          this.signedUp = true;
+        (result) => {
+          this.signupListener.next(true);
           //this.router.navigate['/signup'];
         },
         (error) => {
+          console.log("Failed to sign up user.");
           console.log(error);
-          this.authStatusListener.next({
-            auth: false,
-            email: null,
-            role: null,
-            orgName: null,
-            uen: null,
-            beneficiaries: null,
-            verified: null,
-          });
         }
       );
   }
@@ -116,7 +113,7 @@ export class AuthService {
       .post(BACKEND_URL + 'api/user/signupAdmin', userObject)
       .subscribe(
         (result) => {
-          this.signedUp = true;
+          this.signupListener.next(true);
         },
         (error) => {
           console.log(error);

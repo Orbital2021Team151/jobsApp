@@ -40,11 +40,18 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
       form.value.uen
     );
 
+    /*
     if (this.authService.signedUp) {
       this.signedUp = true;
     } else {
       this.signedUp = false;
     }
+    */
+
+    //IDK IF THIS FIXES IT BUT I THINK IT IS WORKING?
+    this.authService.getSignupListener().subscribe(result => {
+      this.signedUp = result;
+    });
   }
 
 

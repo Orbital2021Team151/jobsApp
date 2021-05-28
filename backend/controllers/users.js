@@ -167,7 +167,6 @@ exports.updateBeneficiaries = (req, res, next) => {
 
 
 
-
 const sendEmail = (email, uniqueString) => {
   var Transport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -198,7 +197,8 @@ const sendEmail = (email, uniqueString) => {
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
       console.log(error);
-      //throw new Error("Could not send confirmation email!");
+      console.log("Could not send confirmation email!");
+      throw new Error("Could not send confirmation email!");
     } else {
       console.log("Confirmation message sent!");
     }
