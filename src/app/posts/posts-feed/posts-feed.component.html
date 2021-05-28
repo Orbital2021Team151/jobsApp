@@ -1,4 +1,3 @@
-
 <ng-container>
 
   <mat-form-field appearance="outline">
@@ -50,12 +49,6 @@
             (click)="submitFilter()"
           ></p-button>
 
-
-
-
-
-
-
 </ng-container>
 
 
@@ -83,7 +76,7 @@
             label="Apply"
             icon="pi pi-search-plus"
             styleClass="p-button-info"
-            (click)="onApply(post.id, 'more stuff', 98751419, 'content', error)"
+            (click)="onApply(post.id, 'You have applied to this post before!', studentContent)"
           ></p-button>
 
 
@@ -161,6 +154,52 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+  <ng-template #studentContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{post.title}} Application </h4>
+      <button type="button" class="submit" aria-label="apply" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (submit)="submitApplication(post.id, appForm)" #appForm="ngForm">
+
+        <mat-form-field appearance="outline">
+          <input
+          matInput
+          type="text"
+          ngModel
+          name="contactNumber"
+          required
+          #contactNumber="ngModel"
+          placeholder="Contact number"
+          required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <input
+          matInput
+          type="text"
+          ngModel
+          name="message"
+          required
+          #message="ngModel"
+          placeholder="Message to organisation"
+          required>
+        </mat-form-field>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+      type="button"
+      class="btn btn-light"
+      (click)="submitApplication(post.id, appForm) && modal.dismiss('Cross click')"
+      >Submit Application
+      </button>
     </div>
   </ng-template>
 

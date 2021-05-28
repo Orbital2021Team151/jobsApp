@@ -4,6 +4,8 @@ import { Post } from '../post.model';
 import { PostsService } from '../post.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NgForm } from '@angular/forms';
+import { formatCurrency } from '@angular/common';
 
 @Component({
   selector: 'app-post-feed',
@@ -119,12 +121,27 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  onApply(postId: string, contact: number, content: string, errorMessage) {
-    this.studentObject = {
-      email: this.authStatusObject.email,
-      contact: contact,
-      content: content,
-    };
+  // onApply(studentContent) {
+  //   this.modalService.open(studentContent, {});
+  // }
+
+  // onApplication(appForm: NgForm, postId: string) {
+  //   if (appForm.invalid) {
+  //     console.log("onApplication not working")
+  //     return;
+  //   }
+
+  //   this.onSubmitApplication(
+  //     postId,
+  //     appForm.value.contactNumber,
+  //     appForm.value.message,
+  //     "You've applied before"
+  //     );
+  // }
+
+
+
+  onApply(postId: string, errorMessage: string, studentContent) {
 
     const currentPost = this.postsService.getPost(postId);
     if (currentPost.students.filter(student => student.email === this.authStatusObject.email).length > 0) {
@@ -133,9 +150,29 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
       return;
     } else {
-      this.postsService.applyPost(postId, this.studentObject);
+      //this.postsService.applyPost(postId, this.studentObject);
+      this.modalService.open(studentContent, {});
+      return;
     }
   }
+
+  submitApplication(postId: string, appForm: NgForm) {
+    if (appForm.invalid) {
+      return;
+    }
+
+    this.studentObject = {
+      email: this.authStatusObject.email,
+      contact: appForm.value.contactNumber,
+      content: appForm.value.message,
+    };
+
+    this.postsService.applyPost(postId, this.studentObject);
+    return true;
+
+  }
+
+
 
   submitFilter() {
     //console.log(this.startDate);
