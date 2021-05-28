@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -71,6 +72,7 @@ import { ErrorComponent } from './error/error.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    FlexLayoutModule,
     CardModule,
     ButtonModule,
     NgbModule,
