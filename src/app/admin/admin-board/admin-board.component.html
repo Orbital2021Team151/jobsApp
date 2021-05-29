@@ -1,7 +1,48 @@
 
+
+<form #changePasswordForm="ngForm">
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="password"
+      ngModel
+      name="currentPassword"
+      required
+      #currentPassword="ngModel"
+      placeholder="Current Password"
+    />
+    <mat-error *ngIf="currentPassword.invalid"
+      >Please enter your current password.</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="password"
+      ngModel
+      name="newPassword"
+      required
+      #newPassword="ngModel"
+      placeholder="New Password"
+    />
+    <mat-error *ngIf="newPassword.invalid"
+      >Please provide us with your new password.</mat-error
+    >
+  </mat-form-field>
+
+  <button
+    class="btn btn-outline-primary mb-2 mr-2"
+    (click)="onChangePassword(changePasswordForm)"
+  >
+    Request
+  </button>
+
+
+</form>
+
 <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5.0%" fxLayoutAlign="center">
-
-
   <div class="centered" *ngFor="let post of posts">
     <section class="cards" *ngIf="!post.approved">
       <p-card
@@ -25,7 +66,6 @@
             styleClass="p-button-success"
             (click)="onPublish(post.id, publishContent)"
           ></p-button>
-
 
           <button class="btn btn-outline-primary mb-2 mr-2" (click)="onMoreInfo(content)">Learn More</button>
 
@@ -69,17 +109,11 @@
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
       </div>
     </ng-template>
-
-
-
-
   </div>
-
-
-
-
-
 </div>
+
+
+
 <p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
 
 

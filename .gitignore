@@ -6,9 +6,10 @@
 # Only exists if Bazel was run
 /bazel-out
 
+/nodemon.json
+
 # dependencies
 /node_modules
-/nodemon.json
 
 # profiling files
 chrome-profiler-events*.json

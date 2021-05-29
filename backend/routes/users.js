@@ -14,6 +14,9 @@ router.post("/signup", UserController.signupGeneral);
 
 router.post("/login", UserController.login);
 
-router.put("/update", UserController.updateBeneficiaries);
+router.put("/updateBeneficiaries", UserController.updateBeneficiaries);
+
+
+router.put("/updatePassword", UserController.updatePassword);
 
 module.exports = router;

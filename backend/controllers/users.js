@@ -149,6 +149,7 @@ exports.updateBeneficiaries = (req, res, next) => {
       orgName: fetchedUser.orgName,
       uen: fetchedUser.uen,
       beneficiaries: req.body.beneficiaries, //only difference
+      verified: true,
     });
     User.updateOne(
       { email: req.body.email, role: req.body.role },
@@ -158,6 +159,82 @@ exports.updateBeneficiaries = (req, res, next) => {
     });
   });
 };
+
+
+
+
+exports.updatePassword = (req, res, next) => {
+  let fetchedUser;
+
+
+  User.findOne({
+    email: req.body.email,
+    role: req.body.role,
+  })
+
+    .then((user) => {
+
+      if (!user) {
+        console.log("No user");
+        throw new Error("Authentication Failed. User does not exist in database.");
+      }
+
+      fetchedUser = user;
+
+      return bcrypt.compare(req.body.currentPassword, user.password)
+    })
+
+    .then(result => {
+
+      if (!result) {
+        console.log("Wrong current password! Cannot change password until you give the correct password");
+        throw new Error("Wrong current password!");
+      }
+
+
+      bcrypt.hash(req.body.newPassword, 10).then(passwordHash => {
+
+        const newUser = new User({
+          _id: fetchedUser.id,
+          email: fetchedUser.email,
+          password: passwordHash,
+          role: fetchedUser.role,
+          orgName: fetchedUser.orgName,
+          uen: fetchedUser.uen,
+          beneficiaries: req.body.beneficiaries,
+          verified: true,
+        });
+
+        User.updateOne(
+          { email: req.body.email, role: req.body.role },
+          newUser
+        ).then((result) => {
+          res.status(200).json("User password updated!");
+        });
+      });
+    })
+
+    .catch(error => {
+      return res.status(412).json({
+        message: "Current password provided was wrong.",
+        error: error,
+      });
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
