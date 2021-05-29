@@ -5,6 +5,7 @@ import { PostsService } from "../../posts/post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "app-admin-board",
@@ -49,12 +50,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
       this.hasRequest = false;
 
     });
-
-    //this.authStatusObject = this.authService.getAuthStatusObject();
-
-    //this.hasRequest = false;
-
-    //this.postsService.getPosts();
 
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
@@ -101,6 +96,10 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   onMoreInfo(content) {
     this.modalService.open(content, { size: 'lg' });
+  }
+
+  onChangePassword(form: NgForm) {
+    this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
   }
 
   ngOnDestroy() {

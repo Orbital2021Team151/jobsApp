@@ -133,7 +133,7 @@ export class AuthService {
       verified: true,
     };
     this.http
-      .put(BACKEND_URL + 'api/user/update', userObject)
+      .put(BACKEND_URL + 'api/user/updateBeneficiaries', userObject)
       .subscribe((response) => {
         console.log("User's beneficiaries updated! At authService.ts");
         console.log(response);
@@ -147,7 +147,6 @@ export class AuthService {
           verified: true,
         };
         this.authStatus = updatedObject;
-        //this.authStatusListener.next([...this.authStatus]);
       });
   }
 
@@ -212,8 +211,10 @@ export class AuthService {
       );
   }
 
-  autoAuthUser() {
 
+
+
+  autoAuthUser() {
     const authInfo =  this.getAuthData();
     if (!authInfo) {
       return;
@@ -230,6 +231,9 @@ export class AuthService {
       this.authStatusListener.next(this.authStatus);
     }
   }
+
+
+
 
   logout() {
     this.token = null;
@@ -248,10 +252,6 @@ export class AuthService {
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
     this.router.navigate(['/']);
-
-
-    //this.authStatus = null;
-
   }
 
   private setAuthTimer(duration: number) {
@@ -301,4 +301,39 @@ export class AuthService {
       authData: retrievedDataObject
     };
   }
+
+
+  changePassword(currentPassword: string, newPassword: string) {
+    let userObject = {
+      email: this.authStatus.email,
+      role: this.authStatus.role,
+      orgName: this.authStatus.orgName,
+      uen: this.authStatus.uen,
+      beneficiaries: this.authStatus.beneficiaries,
+      verified: true,
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+    };
+    this.http
+      .put(BACKEND_URL + 'api/user/updatePassword', userObject)
+      .subscribe((response) => {
+        console.log("User's password updated! At authService.ts");
+        console.log(response);
+      });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

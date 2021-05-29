@@ -5,6 +5,7 @@ import { PostsService } from "../../posts/post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "app-admin-board",
@@ -71,6 +72,10 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     console.log("At student-board updateUser method now");
     console.log(this.beneficiariesSelected);
     this.authService.update(this.beneficiariesSelected);
+  }
+
+  onChangePassword(form: NgForm) {
+    this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
   }
 
   ngOnDestroy() {}

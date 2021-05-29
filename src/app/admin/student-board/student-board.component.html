@@ -1,5 +1,47 @@
 <p>STUDENT's board is supposed to be here!!!!!</p>
 
+<form #changePasswordForm="ngForm">
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="password"
+      ngModel
+      name="currentPassword"
+      required
+      #currentPassword="ngModel"
+      placeholder="Current Password"
+    />
+    <mat-error *ngIf="currentPassword.invalid"
+      >Please enter your current password.</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="password"
+      ngModel
+      name="newPassword"
+      required
+      #newPassword="ngModel"
+      placeholder="New Password"
+    />
+    <mat-error *ngIf="newPassword.invalid"
+      >Please provide us with your new password.</mat-error
+    >
+  </mat-form-field>
+
+  <button
+    class="btn btn-outline-primary mb-2 mr-2"
+    (click)="onChangePassword(changePasswordForm)"
+  >
+    Request
+  </button>
+
+
+</form>
+
 <mat-form-field appearance="outline">
   <mat-label>Beneficiaries</mat-label>
   <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
