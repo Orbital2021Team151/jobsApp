@@ -1,6 +1,5 @@
+<div class="filterBar">
 <ng-container>
-
-
   <mat-form-field appearance="outline">
     <mat-label>Beneficiaries</mat-label>
     <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
@@ -43,15 +42,15 @@
 
 
     <p-button
-            class="learnMore"
-            label="Filter Search Results"
-            icon="pi pi-search-plus"
-            styleClass="p-button-info"
-            (click)="submitFilter()"
-          ></p-button>
+      class="filterButton"
+      label="Filter Search Results"
+      icon="pi pi-filter"
+      styleClass="p-button-info"
+      (click)="submitFilter()"
+    ></p-button>
 
 </ng-container>
-
+</div>
 
 
 
@@ -80,7 +79,7 @@
               *ngIf="(userRole === 'Student')"
               class="apply"
               label="Apply"
-              icon="pi pi-search-plus"
+              icon="pi pi-heart"
               styleClass="p-button-info"
               (click)="onApply(post.id, 'You have applied to this post before!', studentContent)"
             ></p-button>

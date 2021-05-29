@@ -12,6 +12,19 @@
   margin-left: .5rem;
 }
 
+.filterBar {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.filterButton {
+  position: absolute;
+  right: 0px;
+  width: 250px;
+  padding: 10px;
+}
+
 .footer {
   width: auto;
 }
