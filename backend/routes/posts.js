@@ -17,4 +17,6 @@ router.put("/publish/:id", PostsController.publishPost);
 //student apply function
 router.put("/apply/:id", PostsController.applyPost);
 
+router.put("/report/:id", PostsController.reportPost);
+
 module.exports = router;

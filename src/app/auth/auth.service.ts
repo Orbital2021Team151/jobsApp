@@ -322,6 +322,17 @@ export class AuthService {
       });
   }
 
+  forgetPassword(email: string, role: string) {
+    let userObject = { email: email, role: role };
+
+    this.http
+      .put(BACKEND_URL + 'api/user/forgetPassword', userObject)
+      .subscribe((response) => {
+        console.log("User's password reset! At authService.ts");
+        console.log(response);
+      });
+
+  }
 
 
 

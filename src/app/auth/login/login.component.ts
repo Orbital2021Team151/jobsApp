@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth.service";
 
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loggedIn: boolean;
 
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
@@ -34,6 +35,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
     this.authService.login(form.value.email, form.value.password, form.value.role);
     this.authService.autoAuthUser();
+  }
+
+  onOpenForgetPassword(forgetPasswordContent) {
+    this.modalService.open(forgetPasswordContent, { size: 'lg' });
+
+  }
+  onForgetPassword(form: NgForm) {
+    if (form.invalid) {
+      return false;
+    }
+
+    //console.log("onForgetPassword Fired!");
+    //console.log(form.value.forgetPasswordEmail);
+    //console.log(form.value.forgetPasswordRole);
+
+    this.authService.forgetPassword(form.value.forgetPasswordEmail, form.value.forgetPasswordRole);
   }
 
   ngOnDestroy() {

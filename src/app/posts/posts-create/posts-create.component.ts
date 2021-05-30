@@ -100,6 +100,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       beneficiaries: this.beneficiariesSelected,
       approved: false,
       students: [],
+      reports: [],
       //imagePath: null,
       //creator: null,
     };

@@ -1,10 +1,11 @@
-<p>STUDENT's board is supposed to be here!!!!!</p>
+<!-- <p>STUDENT's board is supposed to be here!!!!!</p> -->
 
-<form #changePasswordForm="ngForm">
+<form #changePasswordForm="ngForm" class="changePasswordForm">
 
   <mat-form-field appearance="outline">
     <input
       matInput
+      class="currentPassword"
       type="password"
       ngModel
       name="currentPassword"
@@ -22,6 +23,7 @@
       matInput
       type="password"
       ngModel
+      class="newPassword"
       name="newPassword"
       required
       #newPassword="ngModel"
@@ -42,7 +44,7 @@
 
 </form>
 
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" class="beneficiaries" text-center>
   <mat-label>Beneficiaries</mat-label>
   <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
     <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{beneficiary}}</mat-option>
@@ -51,8 +53,8 @@
 
 <p-button
             class="learnMore"
-            label="Update!"
-            icon="pi pi-search-plus"
+            label="Update"
+            icon="pi pi-check"
             styleClass="p-button-info"
             (click)="updateUser()"
           ></p-button>

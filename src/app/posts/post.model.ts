@@ -26,4 +26,5 @@ export interface Post {
 
   //students: Student[],
   students: {email: string, contact: number, content: string}[],
+  reports: {email: string, contact: number, content: string}[],
 }

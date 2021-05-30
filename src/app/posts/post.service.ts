@@ -39,6 +39,7 @@ export class PostsService {
 
             beneficiaries: post.beneficiaries,
             students: post.students,
+            reports: post.reports,
 
             approved: post.approved,
             creator: post.creator,
@@ -64,18 +65,12 @@ export class PostsService {
   addPost(post: Post) {
     this.http.post<{message: string, postId: string}>
       (BACKEND_URL + 'api/posts', post)
-      .subscribe((responseData => {
+      .subscribe(responseData => {
         const postId = responseData.postId;
         post.id = postId;
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
-
-        //TODO: should add some prompt here to tell user their post has successfully been sent,
-        //pending confirmation from admin
-
-        //this.router.navigate(['/feed']);
-      })
-      );
+    });
   }
 
   publishPost(postId: string) {
@@ -89,38 +84,47 @@ export class PostsService {
         this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
       });
-    }
+  }
 
-deletePost(postId: string) {
+  deletePost(postId: string) {
     this.http
-    .delete(BACKEND_URL + 'api/posts' + "/" + postId)
+      .delete(BACKEND_URL + 'api/posts' + "/" + postId)
       .subscribe(() => {
         console.log("Post successfully deleted!");
         this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
-      });
+    });
   }
-
-
-  //todo: what is this for?
-  expandPost(postId: string) {
-    const postToBeExpanded = this.getPost(postId);
-
-  }
-
 
   applyPost(postId: string, student: {email: string, contact: number, content: string}) {
 
     const postToBePublished = this.getPost(postId);
 
     postToBePublished.students.push(student);
-      this.http
+
+    this.http
       .put(BACKEND_URL + 'api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
 
         console.log("apply post successful!");
         //this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
-      });
-    }
+    });
   }
+
+  reportPost(postId: string, student: {email: string, contact: number, content: string}) {
+
+    const postToBePublished = this.getPost(postId);
+
+    postToBePublished.reports.push(student);
+
+    this.http
+      .put(BACKEND_URL + 'api/posts/report' + "/" + postToBePublished.id, postToBePublished)
+      .subscribe((response) => {
+
+        console.log("post reported successfully!");
+        this.postsUpdated.next([...this.posts]);
+    });
+  }
+
+}

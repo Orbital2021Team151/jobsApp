@@ -42,6 +42,9 @@
 
 </form>
 
+
+<div>
+  <p class="info-text mat-body-1" *ngIf="hasRequest">Posts that needs to be approved!</p>
 <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5.0%" fxLayoutAlign="center">
   <div class="centered" *ngFor="let post of posts">
     <section class="cards" *ngIf="!post.approved">
@@ -112,9 +115,36 @@
   </div>
 </div>
 
-
-
 <p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
+</div>
+
+
+<div>
+  <p class="info-text mat-body-1">Posts with reports! :O</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

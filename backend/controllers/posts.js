@@ -18,7 +18,9 @@ exports.requestPost = (req, res, next) => {
     beneficiaries: req.body.beneficiaries,
     appproved: false,
     creator: req.userData.userId,
+
     students: [],
+    reports: [],
   });
   post.save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
     .then(createdPost => {
@@ -85,9 +87,13 @@ exports.publishPost = (req, res, next) => { //publish function to change approve
 
       beneficiaries: req.body.beneficiaries,
       approved: true,
-      students: [],
       creator: req.body.id,
       //creator: req.userData.userId
+
+      students: [],
+      reports: [],
+
+
     });
     Post.updateOne({_id: req.params.id}, newPost).then(result => {
       res.status(200).json("Post published!");
@@ -112,12 +118,42 @@ exports.publishPost = (req, res, next) => { //publish function to change approve
 
     beneficiaries: req.body.beneficiaries,
     approved: true,
-    students: req.body.students,
     creator: req.body.id,
-    //creator: req.userData.userId
+
+    students: req.body.students,
+    reports: req.body.reports,
   });
 
   Post.findByIdAndUpdate(req.body.id, newPost).then((result) => { //try updateOne instead as I think mongoose might deprecate findByIdAndUpdate
     res.status(200).json("Post published!");
+  });
+};
+
+exports.reportPost = (req, res, next) => {
+  const newPost = new Post({
+    _id: req.body.id,
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    skills: req.body.skills,
+
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    hoursRequired: req.body.hoursRequired,
+
+    beneficiaries: req.body.beneficiaries,
+    approved: true,
+    creator: req.body.id,
+
+    students: req.body.students,
+    reports: req.body.reports,
+  });
+
+  Post.findByIdAndUpdate(req.body.id, newPost).then((result) => { //try updateOne instead as I think mongoose might deprecate findByIdAndUpdate
+    res.status(200).json("Post reported!");
   });
 };

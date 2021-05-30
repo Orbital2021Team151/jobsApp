@@ -118,61 +118,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
+    console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
-
-  // onApply(studentContent) {
-  //   this.modalService.open(studentContent, {});
-  // }
-
-  // onApplication(appForm: NgForm, postId: string) {
-  //   if (appForm.invalid) {
-  //     console.log("onApplication not working")
-  //     return;
-  //   }
-
-  //   this.onSubmitApplication(
-  //     postId,
-  //     appForm.value.contactNumber,
-  //     appForm.value.message,
-  //     "You've applied before"
-  //     );
-  // }
-
-
-
-  onApply(postId: string, errorMessage: string, studentContent) {
-
-    const currentPost = this.postsService.getPost(postId);
-    if (currentPost.students.filter(student => student.email === this.authStatusObject.email).length > 0) {
-      //TODO: insert some warning here.
-      this.modalService.open(errorMessage, { size: 'lg' });
-      console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
-      return;
-    } else {
-      //this.postsService.applyPost(postId, this.studentObject);
-      this.modalService.open(studentContent, {});
-      return;
-    }
-  }
-
-  submitApplication(postId: string, appForm: NgForm) {
-    if (appForm.invalid) {
-      return;
-    }
-
-    this.studentObject = {
-      email: this.authStatusObject.email,
-      contact: appForm.value.contactNumber,
-      content: appForm.value.message,
-    };
-
-    this.postsService.applyPost(postId, this.studentObject);
-    return true;
-
-  }
-
-
 
   submitFilter() {
     //console.log(this.startDate);
@@ -206,13 +154,73 @@ export class PostFeedComponent implements OnInit, OnDestroy {
           new Date(post.endDate).getTime() <= new Date(this.endDate).getTime()
       );
     }
-
     //Need to cast new Date object over it again... KIV for future me. I have no idea why javascript does this (┛ಠ_ಠ)┛彡┻━┻
+  }
+
+  onApply(postId: string, errorMessage: string, studentContent) {
+
+    const currentPost = this.postsService.getPost(postId);
+    if (currentPost.students.filter(student => student.email === this.authStatusObject.email).length > 0) {
+      this.modalService.open(errorMessage, { size: 'lg' });
+      console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
+      return;
+    } else {
+      //this.postsService.applyPost(postId, this.studentObject);
+      this.modalService.open(studentContent, {});
+      return;
+    }
+  }
+
+  submitApplication(postId: string, appForm: NgForm) {
+    if (appForm.invalid) {
+      return;
+    }
+    this.studentObject = {
+      email: this.authStatusObject.email,
+      contact: appForm.value.contactNumber,
+      content: appForm.value.message,
+    };
+    this.postsService.applyPost(postId, this.studentObject);
+    return true;
   }
 
   applyBefore(currentPost: Post) {
     console.log("Apply before line fires");
     if (currentPost.students.filter(user => {user.email === this.authStatusObject.email}).length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+
+  onReport(postId: string, errorMessage: string, reportContent: any) {
+    const currentPost = this.postsService.getPost(postId);
+    if (currentPost.reports.filter(student => student.email === this.authStatusObject.email).length > 0) {
+      this.modalService.open(errorMessage, { size: 'lg' });
+      console.log("YOU REPORTED THIS POST BEFORE BEFORE.");
+      return;
+    } else {
+      this.modalService.open(reportContent, {});
+      return;
+    }
+  }
+
+  submitReport(postId: string, reportForm: NgForm) {
+    if (reportForm.invalid) {
+      return;
+    }
+    this.studentObject = {
+      email: this.authStatusObject.email,
+      contact: reportForm.value.contactNumber,
+      content: reportForm.value.message,
+    };
+    this.postsService.reportPost(postId, this.studentObject);
+    return true;
+  }
+
+  reportBefore(currentPost: Post) {
+    console.log("reportBefore's line fires");
+    if (currentPost.reports.filter(user => {user.email === this.authStatusObject.email}).length > 0) {
       return true;
     }
     return false;

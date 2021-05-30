@@ -78,6 +78,18 @@
             <p-button
               *ngIf="(userRole === 'Student')"
               class="apply"
+              label="Report"
+              icon="pi pi-heart"
+              styleClass="p-button-info"
+              (click)="onReport(post.id, 'You reported this post before!', reportContent)"
+            ></p-button>
+
+
+
+
+            <p-button
+              *ngIf="(userRole === 'Student')"
+              class="apply"
               label="Apply"
               icon="pi pi-heart"
               styleClass="p-button-info"
@@ -94,7 +106,7 @@
             ></p-button>
 
             <p-button
-              *ngIf="user === 'Admin' || post.uen === authStatusObject.uen"
+              *ngIf="(userRole === 'Admin') || (post.uen === authStatusObject.uen)"
               class="delete"
               label="Delete"
               icon="pi pi-times"
@@ -209,8 +221,79 @@
     </ng-template>
 
 
+
+
+
+
+
+
+
+
+    <ng-template #reportContent let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Report post: {{post.title}} </h4>
+        <button type="button" class="submit" aria-label="apply" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="submitReport(post.id, reportForm)" #reportForm="ngForm">
+
+          <mat-form-field appearance="outline">
+            <input
+            matInput
+            type="text"
+            ngModel
+            name="contactNumber"
+            required
+            #contactNumber="ngModel"
+            placeholder="Contact number"
+            required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <input
+            matInput
+            type="text"
+            ngModel
+            name="message"
+            required
+            #message="ngModel"
+            placeholder="Message to organisation"
+            required>
+          </mat-form-field>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+        type="button"
+        class="btn btn-light"
+        (click)="submitReport(post.id, reportForm) && modal.dismiss('Cross click')"
+        >Submit Report
+        </button>
+      </div>
+    </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </ng-container>
 
 
 </div>
-<p class="info-text mat-body-1" *ngIf="!hasApproved">No posts added yet!</p>
+<p class="info-text mat-body-1" *ngIf="!hasApproved">No jobs listing currently available!</p>
