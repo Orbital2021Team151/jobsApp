@@ -266,7 +266,7 @@ const sendEmail = (email, uniqueString) => {
     from: sender,
     to: email,
     subject: "CCSGP Email Confirmation",
-    html: `Press <a href=http://localhost:3000/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
+    html: `Press <a href=https://ccsgp-app.herokuapp.com/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
     //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
     //TODO: Change this when we can secure our verificaiton system
   };
