@@ -32,10 +32,14 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   private postSub: Subscription;
   private authStatusSub: Subscription;
-  hasRequest: Boolean;
-  postToBeDeleted: string;
-  private postsNumber: number;
   private authStatusObject;
+
+  private postsNumber: number;
+  private reportedPostsNumber: number;
+
+  public hasRequest: Boolean;
+  public hasReport: Boolean;
+  postToBeDeleted: string;
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
@@ -46,14 +50,12 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       this.authStatusObject = authObject;
-
       this.hasRequest = false;
 
     });
 
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
-
         console.log(posts);
 
         if (this.authStatusObject.role === "Admin") {
@@ -72,6 +74,11 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
           this.hasRequest = true;
           this.postsNumber = this.posts.filter(post => !post.approved).length;
         }
+
+        if (this.posts.filter(post => post.reports.length > 0).length > 0) {
+          this.hasReport = true;
+          this.reportedPostsNumber = this.posts.filter(post => post.reports.length > 0).length;
+        }
       });
 
   }
@@ -82,7 +89,21 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     if (this.postsNumber === 0) {
       this.hasRequest = false;
     }
+
+    if (this.reportedPostsNumber === 0) {
+      this.hasReport = false;
+    }
   }
+
+  onDeleteReportedPost(postId: string) {
+    this.postsService.deletePost(postId);
+    this.reportedPostsNumber--;
+
+    if (this.reportedPostsNumber === 0) {
+      this.hasReport = false;
+    }
+  }
+
 
   onPublish(postId: string, publishContent) {
     this.postsService.publishPost(postId);

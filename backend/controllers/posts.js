@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 
 exports.requestPost = (req, res, next) => {
   const post = new Post({
@@ -69,7 +70,9 @@ exports.deletePost = (req, res, next) => {
 };
 
 
-exports.publishPost = (req, res, next) => { //publish function to change approved from false to true
+//publish function to change approved from false to true
+//TODO: must also send out email to students with interested posts
+exports.publishPost = (req, res, next) => {
     const newPost = new Post({
       _id: req.body.id,
       orgName: req.body.orgName,
@@ -89,15 +92,29 @@ exports.publishPost = (req, res, next) => { //publish function to change approve
       approved: true,
       creator: req.body.id,
       //creator: req.userData.userId
-
       students: [],
       reports: [],
+    });
+    Post.updateOne({_id: req.params.id}, newPost)
+    .then(result => { //result is either true to false
+      if (!result) {
+        throw new Error("Unable to publish post!");
+      }
 
 
-    });
-    Post.updateOne({_id: req.params.id}, newPost).then(result => {
-      res.status(200).json("Post published!");
-    });
+      User.find()
+      .then(allUsersDocument => {
+        console.log(allUsersDocument);
+        res.status(200).json({
+          documents: allUsersDocument,
+          message: "All Users Found?",
+        });
+      });
+
+      //res.status(200).json("Post published!"); callback later because now we need to send notification email
+    })
+
+    .catch(error => {}); //in case anything goes wrong
   };
 
  exports.applyPost = (req, res, next) => {

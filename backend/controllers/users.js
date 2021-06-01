@@ -97,8 +97,8 @@ exports.login = (req, res, next) => {
     .then((result) => {
 
       if (!result) {
-        console.log("GO AND ACTIVATE YOUR ACCOUNT!");
-        throw new Error("Authentication Failed! Go and activate your account first!");
+        console.log("Either your account is not activated, or you typed in the wrong password.");
+        throw new Error("Authentication Failed!");
       }
 
       const token = jwt.sign(
@@ -353,50 +353,45 @@ const randomStringGenerator = () => {
 exports.forgetPassword = (req, res) => {
   let fetchedUser;
 
-    User.findOne({
-      email: req.body.email,
-      role: req.body.role,
-    })
-    .then((user) => {
+  User.findOne({
+    email: req.body.email,
+    role: req.body.role,
+  })
+  .then((user) => {
+    if (!user) {
+      console.log("No user");
+      throw new Error("Authentication Failed. User does not exist in database.");
+    }
 
-      if (!user) {
-        console.log("No user");
-        throw new Error("Authentication Failed. User does not exist in database.");
-      }
+    fetchedUser = user;
+    tempPassword = randomStringGenerator();
 
-      fetchedUser = user;
+    bcrypt.hash(tempPassword, 10).then(passwordHash => {
 
-      tempPassword = randomStringGenerator();
-
-      bcrypt.hash(tempPassword, 10).then(passwordHash => {
-
-        const newUser = new User({
-          _id: fetchedUser.id,
-          email: fetchedUser.email,
-          password: passwordHash,
-          role: fetchedUser.role,
-          orgName: fetchedUser.orgName,
-          uen: fetchedUser.uen,
-          beneficiaries: req.body.beneficiaries,
-          verified: true,
-        });
-
-        User.updateOne(
-          { email: req.body.email, role: req.body.role },
-          newUser
-        ).then((result) => {
-          sendForgetPasswordEmail(req.body.email, tempPassword);
-          res.status(200).json("User password reset!");
-        })
-      });
-    })
-
-    .catch(error => {
-      return res.status(412).json({
-        message: "Current email provided was wrong or user with that role does not exist in database.",
-        error: error,
+      const newUser = new User({
+        _id: fetchedUser.id,
+        email: fetchedUser.email,
+        password: passwordHash,
+        role: fetchedUser.role,
+        orgName: fetchedUser.orgName,
+        uen: fetchedUser.uen,
+        beneficiaries: req.body.beneficiaries,
+        verified: true,
       });
 
+      User.updateOne({ email: req.body.email, role: req.body.role }, newUser)
+      .then((result) => {
+        sendForgetPasswordEmail(req.body.email, tempPassword);
+        res.status(200).json("User password reset!");
+      })
     });
+  })
 
+  .catch(error => {
+    return res.status(412).json({
+      message: "Current email provided was wrong or user with that role does not exist in database.",
+      error: error,
+    });
+  });
 };
+

@@ -44,85 +44,148 @@
 
 
 <div>
-  <p class="info-text mat-body-1" *ngIf="hasRequest">Posts that needs to be approved!</p>
-<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5.0%" fxLayoutAlign="center">
-  <div class="centered" *ngFor="let post of posts">
-    <section class="cards" *ngIf="!post.approved">
-      <p-card
-        class="card"
-        header="{{ post.title }}"
-        subheader="{{ post.startDate | date }} to {{ post.endDate | date }}"
-        [style]="{
-          width: '25rem',
-          'margin-bottom': '2em',
-          'text-align': 'center'
-        }"
-        styleClass="p-card-shadow"
-        *ngIf="!post.approved"
-      >
-        <p>{{ post.content }}</p>
+  <p class="info-text mat-body-1" *ngIf="hasRequest"><b>Posts that needs to be approved!</b></p>
 
-        <ng-template pTemplate="footer" #footer>
-          <p-button *ngIf="(authStatusObject.role === 'Admin')"
-            class="publishButton"
-            label="Publish"
-            styleClass="p-button-success"
-            (click)="onPublish(post.id, publishContent)"
-          ></p-button>
+  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5.0%" fxLayoutAlign="center">
+    <div class="centered" *ngFor="let post of posts">
+      <section class="cards" *ngIf="!post.approved">
+        <p-card
+          class="card"
+          header="{{ post.title }}"
+          subheader="{{ post.startDate | date }} to {{ post.endDate | date }}"
+          [style]="{
+            width: '25rem',
+            'margin-bottom': '2em',
+            'text-align': 'center'
+          }"
+          styleClass="p-card-shadow"
+          *ngIf="!post.approved"
+        >
+          <p>{{ post.content }}</p>
 
-          <button class="btn btn-outline-primary mb-2 mr-2" (click)="onMoreInfo(content)">Learn More</button>
+          <ng-template pTemplate="footer" #footer>
+            <p-button *ngIf="(authStatusObject.role === 'Admin')"
+              class="publishButton"
+              label="Publish"
+              styleClass="p-button-success"
+              (click)="onPublish(post.id, publishContent)"
+            ></p-button>
 
-          <p-button
-            class="deleteButton"
-            label="Delete"
-            icon="pi pi-times"
-            styleClass="p-button-secondary"
-            (click)="onDelete(post.id)"
-          ></p-button>
-        </ng-template>
-      </p-card>
-    </section>
+            <button class="btn btn-outline-primary mb-2 mr-2" (click)="onMoreInfo(content)">Learn More</button>
+            <p-button
+              class="deleteButton"
+              label="Delete"
+              icon="pi pi-times"
+              styleClass="p-button-secondary"
+              (click)="onDelete(post.id)"
+            ></p-button>
+          </ng-template>
+        </p-card>
+      </section>
 
 
-    <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">{{post.title}}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Organization Name: {{post.orgName}}&hellip;</p>
-        <p>UEN: {{post.uen}}&hellip;</p>
-        <p>Student Group Name: {{post.studentGroupName}}&hellip;</p>
-        <p>Point of Contact (POC): {{post.POC}}&hellip;</p>
-        <p>POC's phoneNumber: {{post.phoneNumber}}&hellip;</p>
-        <p>POC's email: {{post.email}}&hellip;</p>
-        <p>Brief Description for gig: {{post.content}}&hellip;</p>
-        <p>Preferred Skills: {{post.skills}}&hellip;</p>
-        <p>Start Date: {{post.startDate | date}}&hellip;</p>
-        <p>End Date: {{post.endDate | date}}&hellip;</p>
-        <p>Commitment Hours: {{post.hoursRequired}}&hellip;</p>
-        <p>Beneficiaries: &hellip;</p>
-        <div *ngFor="let beneficiary of post.beneficiaries">
-          <p> => {{beneficiary}}</p>
+
+
+
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">{{post.title}}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-      </div>
-    </ng-template>
-  </div>
-</div>
+        <div class="modal-body">
+          <p>Organization Name: {{post.orgName}}&hellip;</p>
+          <p>UEN: {{post.uen}}&hellip;</p>
+          <p>Student Group Name: {{post.studentGroupName}}&hellip;</p>
+          <p>Point of Contact (POC): {{post.POC}}&hellip;</p>
+          <p>POC's phoneNumber: {{post.phoneNumber}}&hellip;</p>
+          <p>POC's email: {{post.email}}&hellip;</p>
+          <p>Brief Description for gig: {{post.content}}&hellip;</p>
+          <p>Preferred Skills: {{post.skills}}&hellip;</p>
+          <p>Start Date: {{post.startDate | date}}&hellip;</p>
+          <p>End Date: {{post.endDate | date}}&hellip;</p>
+          <p>Commitment Hours: {{post.hoursRequired}}&hellip;</p>
+          <p>Beneficiaries: &hellip;</p>
+          <div *ngFor="let beneficiary of post.beneficiaries">
+            <p> => {{beneficiary}}</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+      </ng-template>
 
-<p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
+
+
+    </div>
+  </div>
+
+  <p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
 </div>
 
 
 <div>
-  <p class="info-text mat-body-1">Posts with reports! :O</p>
-</div>
+  <p class="info-text mat-body-1"><b>Posts with reports! :O</b></p>
 
+  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5.0%" fxLayoutAlign="center">
+    <div class="centered" *ngFor="let post of posts">
+      <section class="cards" *ngIf="(post.reports.length > 0)">
+        <p-card
+          class="card"
+          header="{{ post.title }}"
+          subheader="{{ post.startDate | date }} to {{ post.endDate | date }}"
+          [style]="{
+            width: '25rem',
+            'margin-bottom': '2em',
+            'text-align': 'center'
+          }"
+          styleClass="p-card-shadow"
+        >
+          <p>{{ post.content }}</p>
+
+          <ng-template pTemplate="footer" #footer>
+
+            <button class="btn btn-outline-primary mb-2 mr-2" (click)="onMoreInfo(reportContent)">Read Report</button>
+
+            <button class="btn btn-outline-primary mb-2 mr-2" (click)="onMoreInfo(content)">Learn More</button>
+            <p-button
+              class="deleteButton"
+              label="Delete"
+              icon="pi pi-times"
+              styleClass="p-button-secondary"
+              (click)="onDeleteReportedPost(post.id)"
+            ></p-button>
+          </ng-template>
+        </p-card>
+      </section>
+
+      <ng-template #reportContent let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">{{post.title}}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let report of post.reports">
+            <div style="border: thin solid black">
+              <p style="text-align:center">Student's Email: {{report.email}}</p>
+              <p style="text-align:center">Student's Contact: {{report.contact}}</p>
+              <p style="text-align:center">Student's Report: {{report.content}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <p class="info-text mat-body-1" *ngIf="!hasReport">No post with reports! :D</p>
+
+</div>
 
 
 
@@ -162,5 +225,27 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Back</button>
+  </div>
+</ng-template>
+
+
+
+
+<ng-template #studentsReport let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{post.title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let report of post.reports">
+      <p>Email: {{report.email}}</p>
+      <p>Contact Number: {{report.contact}}</p>
+      <p>Reason for Reporting: {{report.content}}</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
   </div>
 </ng-template>
