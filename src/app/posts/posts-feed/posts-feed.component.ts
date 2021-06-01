@@ -123,9 +123,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   submitFilter() {
-    //console.log(this.startDate);
-    //console.log(this.endDate);
-    //console.log(this.beneficiariesSelected);
     if (this.beneficiariesSelected.length !== 0) {
       this.filteredPosts = this.posts.filter((post) => {
         for (var interestBeneficiary of post.beneficiaries) {
@@ -143,7 +140,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       //console.log("There is a startDate!");
       this.filteredPosts = this.filteredPosts
         .filter((post) => {
-          return ( new Date(post.startDate).getTime() <= new Date(this.startDate).getTime());
+          return ( new Date(post.startDate).getTime() >= new Date(this.startDate).getTime());
       });
     }
 
