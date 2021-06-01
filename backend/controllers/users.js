@@ -246,7 +246,7 @@ const sendVerificationEmail = (email, uniqueString) => {
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      pass: process.env.EMAIL_PASSWORD,
+      pass: process.env.EMAIL_PASSWORD
     },
     tls: {
       rejectUnauthorized: false,
@@ -256,13 +256,13 @@ const sendVerificationEmail = (email, uniqueString) => {
 
   var mailOptions;
   let sender = "CCSGP Email Verification";
+
   mailOptions = {
     from: sender,
     to: email,
     subject: "CCSGP Email Confirmation",
     html: `Press <a href=https://ccsgp-app.herokuapp.com/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
-    //https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
-    //TODO: Change this when we can secure our verificaiton system
+    // https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
@@ -310,7 +310,7 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      pass: process.env.EMAIL_PASSWORD,
+      pass: process.env.EMAIL_PASSWORD
     },
     tls: {
       rejectUnauthorized: false,
