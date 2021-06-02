@@ -72,7 +72,6 @@ exports.deletePost = (req, res, next) => {
 
 
 //publish function to change approved from false to true
-//TODO: must also send out email to students with interested posts
 exports.publishPost = (req, res, next) => {
     const newPost = new Post({
       _id: req.body.id,
@@ -164,39 +163,91 @@ exports.publishPost = (req, res, next) => {
     reports: req.body.reports,
   });
 
-  Post.findByIdAndUpdate(req.body.id, newPost).then((result) => { //try updateOne instead as I think mongoose might deprecate findByIdAndUpdate
-    res.status(200).json("Post published!");
+  Post.updateOne(req.body.id, newPost)
+  .then((result) => {
+    res.status(200).json("Applied for posting!");
   });
 };
 
+//report a post flagged out by a student
 exports.reportPost = (req, res, next) => {
   const newPost = new Post({
-    _id: req.body.id,
-    orgName: req.body.orgName,
-    uen: req.body.uen,
-    POC: req.body.POC,
-    phoneNumber: req.body.phoneNumber,
-    email: req.body.email,
-    title: req.body.title,
-    content: req.body.content,
-    skills: req.body.skills,
+    _id: req.body.post.id,
+    orgName: req.body.post.orgName,
+    uen: req.body.post.uen,
+    POC: req.body.post.POC,
+    phoneNumber: req.body.post.phoneNumber,
+    email: req.body.post.email,
+    title: req.body.post.title,
+    content: req.body.post.content,
+    skills: req.body.post.skills,
 
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
-    hoursRequired: req.body.hoursRequired,
+    startDate: req.body.post.startDate,
+    endDate: req.body.post.endDate,
+    hoursRequired: req.body.post.hoursRequired,
 
-    beneficiaries: req.body.beneficiaries,
+    beneficiaries: req.body.post.beneficiaries,
     approved: true,
-    creator: req.body.id,
+    creator: req.body.post.id,
 
-    students: req.body.students,
-    reports: req.body.reports,
+    students: req.body.post.students,
+    reports: req.body.post.reports,
   });
 
-  Post.findByIdAndUpdate(req.body.id, newPost).then((result) => { //try updateOne instead as I think mongoose might deprecate findByIdAndUpdate
-    res.status(200).json("Post reported!");
+  Post.findByIdAndUpdate(req.body.post.id, newPost)
+  .then((result) => {
+    if (!result) {
+      throw new Error("Post cannot be reported!");
+    }
+    console.log("This fires!");
+
+
+    User.find()
+      .then(allUsersDocument => {
+        console.log("Post has been reported! Now it should sent notification emails to all admins and the user who reported the post.");
+
+        let adminUsers = allUsersDocument.filter(user => user.role === "Admin");
+
+        for (var userI=0; userI< adminUsers.length; userI++) {
+          let currentAdmin = adminUsers[userI];
+          sendReportToAdminEmail(currentAdmin.email, req.body.post);
+          //console.log("Report email sent to admin: " + currentAdmin.email);
+        }
+
+        sendReportAcknowledgementEmail(req.body.student.email, req.body.post);
+        //console.log("Report acknowledgemtn sent to: " + req.body.student.email);
+
+        res.status(200).json({
+          documents: allUsersDocument,
+          message: "Notification for report against post?",
+        });
+      });
+  })
+
+  .catch(error => {
+    res.status(400).json({
+      message: "Something went wrong at reporting post. either reporting the post itself or failed to send notification to admins",
+    });
   });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -271,6 +322,117 @@ const sendNotificationEmail = (email, post) => {
       throw new Error("Could not send Posting Notification email!");
     } else {
       console.log("Posting Notification email sent!");
+    }
+  });
+};
+
+const sendReportToAdminEmail = (email, post) => {
+  var Transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+
+  });
+
+  var mailOptions;
+  let sender = "CCSGP Volunteer Posting Report";
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "Report made by student for a Volunteer job Posting",
+    html:
+    `We have received a report from a student regarding the following posting: <br>
+    Organisation: ${post.orgName}<br>
+    Point-Of-Contact: ${post.POC}<br>
+    Contact Number: ${post.phoneNumber}<br>
+    Email Address: ${post.email}<br>
+    Job Title: ${post.title}<br>
+    Job Description: ${post.content}<br>
+    Preferred Skills: ${post.skills}<br>
+    Start Date: ${new Date(post.startDate).toDateString()}<br>
+    End Date: ${new Date(post.endDate).toDateString()}<br>
+    Commitment Hours Required: ${post.hoursRequired}<br>
+    Beneficiaries involved: ${post.beneficiaries}<br>
+
+
+    Please review the post on the Admin Dashboard! The website can be accessed <a href=https://ccsgp-app.herokuapp.com/>here</a>.<br><br>
+
+    Yours sincerely,<br>
+    CCSGP Admin
+    `
+    // https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(error);
+      console.log("Could not send Report Notification to Admin email!");
+      throw new Error("Could not send Report Notification to Admin email!");
+    } else {
+      console.log("Report Notification to Admin email sent!");
+    }
+  });
+};
+
+const sendReportAcknowledgementEmail = (email, post) => {
+  var Transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+
+  });
+
+  var mailOptions;
+  let sender = "CCSGP Volunteer Post Report Acknowledgement";
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Volunteer Post Report Acknowledgement",
+    html:
+    `Thank you for your report. We have forwarded your concerns to the relevant stakeholders for actions to be taken. Below are the details of the post you have reported on:<br>
+    Organisation: ${post.orgName}<br>
+    Point-Of-Contact: ${post.POC}<br>
+    Contact Number: ${post.phoneNumber}<br>
+    Email Address: ${post.email}<br>
+    Job Title: ${post.title}<br>
+    Job Description: ${post.content}<br>
+    Preferred Skills: ${post.skills}<br>
+    Start Date: ${new Date(post.startDate).toDateString()}<br>
+    End Date: ${new Date(post.endDate).toDateString()}<br>
+    Commitment Hours Required: ${post.hoursRequired}<br>
+    Beneficiaries involved: ${post.beneficiaries}<br>
+
+
+    Rest assured that our Administrators have received your report and will investigate the post thoroughly. Once again, thank you for the feedback and apologies for any inconvenience caused.<br>
+
+    Yours sincerely,<br>
+    CCSGP Admin
+    `
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(error);
+      console.log("Could not send Post Report Acknowledgement email!");
+      throw new Error("Could not send Post Report Acknowledgement email!");
+    } else {
+      console.log("Post Report Acknowledgement email sent!");
     }
   });
 }

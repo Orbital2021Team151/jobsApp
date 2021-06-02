@@ -118,8 +118,10 @@ export class PostsService {
 
     postToBePublished.reports.push(student);
 
+    let post_student_pair = {post: postToBePublished, student: student};
+
     this.http
-      .put(BACKEND_URL + 'api/posts/report' + "/" + postToBePublished.id, postToBePublished)
+      .put(BACKEND_URL + 'api/posts/report' + "/" + postToBePublished.id, post_student_pair)
       .subscribe((response) => {
 
         console.log("post reported successfully!");

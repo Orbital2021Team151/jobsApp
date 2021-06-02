@@ -192,6 +192,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   onReport(postId: string, errorMessage: string, reportContent: any) {
     const currentPost = this.postsService.getPost(postId);
+
     if (currentPost.reports.filter(student => student.email === this.authStatusObject.email).length > 0) {
       this.modalService.open(errorMessage, { size: 'lg' });
       console.log("YOU REPORTED THIS POST BEFORE BEFORE.");
