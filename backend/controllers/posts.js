@@ -89,11 +89,12 @@ exports.publishPost = (req, res, next) => {
       hoursRequired: req.body.hoursRequired,
 
       beneficiaries: req.body.beneficiaries,
-      approved: true,
-      creator: req.body.id,
-      //creator: req.userData.userId
+
       students: [],
       reports: [],
+
+      approved: true,
+      creator: req.body.id,
     });
 
     Post.updateOne({_id: req.params.id}, newPost)
@@ -105,9 +106,7 @@ exports.publishPost = (req, res, next) => {
 
       User.find()
       .then(allUsersDocument => {
-        console.log("Post it published! It should retrieve all the users info so that it can fire to interested parties");
-        //console.log(allUsersDocument);
-        //console.log(req.body.beneficiaries);
+        console.log("Post it published! This message should only be seen from the mongoDB shell");
 
         for (var userI=0; userI< allUsersDocument.length; userI++) {
           var currentUser = allUsersDocument[userI];
@@ -123,6 +122,8 @@ exports.publishPost = (req, res, next) => {
             }
           }
         }
+
+        sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
 
         res.status(200).json({
           documents: allUsersDocument,
@@ -325,6 +326,74 @@ const sendNotificationEmail = (email, post) => {
     }
   });
 };
+
+
+
+
+
+const sendPostApprovedNotificationEmail = (email, post) => {
+  var Transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+
+  });
+
+  var mailOptions;
+  let sender = "CCSGP Volunteer Opportunity Post Appoved";
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Volunteer Opportunity Post Approved",
+    html:
+    `Thank you for your kind patience. Our administrators have approved your post and below are the details. <br><br>
+
+    Organisation: ${post.orgName}<br>
+    Point-Of-Contact: ${post.POC}<br>
+    Contact Number: ${post.phoneNumber}<br>
+    Email Address: ${post.email}<br>
+    Job Title: ${post.title}<br>
+    Job Description: ${post.content}<br>
+    Preferred Skills: ${post.skills}<br>
+    Start Date: ${new Date(post.startDate).toDateString()}<br>
+    End Date: ${new Date(post.endDate).toDateString()}<br>
+    Commitment Hours Required: ${post.hoursRequired}<br>
+    Beneficiaries involved: ${post.beneficiaries}<br><br>
+
+
+    Thank you for choosing SoC CCSGP as your partner! We have sent out email notifications to students who have indicated their interest in the benefeciaries you mentioned.<br><br>
+
+    The website can be accessed <a href=https://ccsgp-app.herokuapp.com/>here</a>. Please feel free to write in to us if you have any further queries.
+    Thank you and have a great day ahead!<br><br>
+
+    Yours sincerely,<br>
+    CCSGP Admin
+    `
+    // https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(error);
+      console.log("Could not send Posting Notification email!");
+      throw new Error("Could not send Posting Notification email!");
+    } else {
+      console.log("Posting Notification email sent!");
+    }
+  });
+};
+
+
+
+
 
 const sendReportToAdminEmail = (email, post) => {
   var Transport = nodemailer.createTransport({

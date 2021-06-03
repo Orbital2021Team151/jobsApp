@@ -22,9 +22,9 @@ export interface Post {
   //imagePath: string; //store image? additional feature potentially
   //creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
 
-  approved: boolean,
-
-  //students: Student[],
   students: {email: string, contact: number, content: string}[],
   reports: {email: string, contact: number, content: string}[],
+
+  approved: boolean,
+  creator: string,
 }

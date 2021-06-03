@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 
 import { environment } from "../../environments/environment";
+
 import { Post } from "./post.model";
 
 
@@ -83,6 +84,9 @@ export class PostsService {
         console.log("post successfully published!");
         this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
+
+
+
       });
   }
 

@@ -64,12 +64,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
           this.posts = posts
             .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
         }
-        //console.log(this.posts);
-        //console.log(this.authStatusObject);
-        //this.posts = posts;
 
-        //console.log("posts are: ");
-        //console.log(this.posts);
         if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
           this.postsNumber = this.posts.filter(post => !post.approved).length;
@@ -106,8 +101,9 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
 
   onPublish(postId: string, publishContent) {
+
     this.postsService.publishPost(postId);
-    //console.log(this.posts);
+
     this.modalService.open(publishContent, { scrollable: true });
     this.postsNumber--;
     if (this.postsNumber === 0) {

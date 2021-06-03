@@ -98,7 +98,10 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       hoursRequired: form.value.hoursRequired,
 
       beneficiaries: this.beneficiariesSelected,
+
       approved: false,
+      creator: null,
+
       students: [],
       reports: [],
       //imagePath: null,
