@@ -1,21 +1,30 @@
+
+
 .cdk-overlay-container {
   position: fixed;
   z-index: 1051;
 }
 
+
 ::ng-deep .cdk-overlay-container {
   z-index: 1050;
- }
+}
+
+mat-card {
+  background-color: #203647;
+}
 
 mat-form-field {
   width:100%;
+  background-color: #203647;
+  color: white;
 }
 
 mat-spinner {
   margin: auto;
 }
 
-.forgetPassword {
-  position: absolute;
-  right: 1150px;
+p-button {
+  margin-left: .5rem;
+  margin-right: .5rem;
 }

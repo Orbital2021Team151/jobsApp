@@ -1,32 +1,48 @@
-<mat-toolbar color="accent">
-  <span>Student Guild</span>
-  <span class="space"></span>
-  <ul>
-    <li *ngIf="userIsAuthenticated">
-      <a mat-button routerLink="/feed" routerLinkActive="mat-primary"> Feed</a>
+<mat-toolbar>
 
-      <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> Admin Dashboard</a>
-      <a *ngIf="userIsAuthenticated && (authStatusObject.role !== 'Admin') && (authStatusObject.role !== 'Student')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> {{authStatusObject.orgName}} Dashboard</a>
-      <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Student')" mat-button routerLink="/student" routerLinkActive="mat-primary"> Student Dashboard</a>
-    </li>
-    <li *ngIf="!userIsAuthenticated">
-      <a mat-button routerLink="/login" routerLinkActive="mat-primary"> Login </a>
-      <a mat-button routerLink="/signup" routerLinkActive="mat-primary"> Signup </a>
-    </li>
+  <mat-toolbar-row>
+    <span class="logo">
+      <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP">
+    </span>
+    <span class="spacer-row-1"></span>
+    <ul>
+      <li *ngIf="!userIsAuthenticated">
+        <a mat-stroked-button class="light-button" routerLink="/login" routerLinkActive="mat-primary"> Login </a>
+        <a mat-stroked-button class="light-button" routerLink="/signup" routerLinkActive="mat-primary"> Signup </a>
+      </li>
+
+      <li *ngIf="userIsAuthenticated">
+        <button mat-stroked-button class="light-button" (click)="onLogout()">Logout</button>
+      </li>
+
+    </ul>
+  </mat-toolbar-row>
 
 
-    <li *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')">
-      <a mat-button routerLink="/signupAdmin" routerLinkActive="mat-primary"> Signup for others </a>
-    </li>
 
-    <li *ngIf="userIsAuthenticated">
-      <a mat-button routerLink="/create"
-      routerLinkActive="mat-primary"
-      *ngIf="userIsAuthenticated && (authStatusObject.role !== 'Student')"
-      > Create Job Posting</a>
-    </li>
-    <li *ngIf="userIsAuthenticated">
-      <button mat-button (click)="onLogout()">Logout</button>
-    </li>
-  </ul>
+  <mat-toolbar-row>
+    <span class="spacer-row-2"></span>
+    <ul>
+      <li *ngIf="userIsAuthenticated">
+        <a mat-button routerLink="/feed" routerLinkActive="mat-primary"> Feed</a>
+
+        <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> Admin Dashboard</a>
+        <a *ngIf="userIsAuthenticated && (authStatusObject.role !== 'Admin') && (authStatusObject.role !== 'Student')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> {{authStatusObject.orgName}} Dashboard</a>
+        <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Student')" mat-button routerLink="/student" routerLinkActive="mat-primary"> Student Dashboard</a>
+      </li>
+
+
+      <li *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')">
+        <a mat-button routerLink="/signupAdmin" routerLinkActive="mat-primary"> Signup for others </a>
+      </li>
+
+      <li *ngIf="userIsAuthenticated">
+        <a mat-button routerLink="/create"
+        routerLinkActive="mat-primary"
+        *ngIf="userIsAuthenticated && (authStatusObject.role !== 'Student')"
+        > Create Job Posting</a>
+      </li>
+    </ul>
+    <span class="spacer-row-2"></span>
+  </mat-toolbar-row>
 </mat-toolbar>

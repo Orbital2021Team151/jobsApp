@@ -1,9 +1,21 @@
+mat-form-field, textarea {
+  width: 100%;
+}
+
 mat-card {
-  width: 80%;
+  width: 60%;
   margin: auto;
 }
 
-mat-form-field, textarea {
-  width: 100%;
-
+mat-label {
+  color: #EEFBFB;
 }
+
+.mat-input-element {
+  color: #EEFBFB;
+}
+
+.mat-input-element::placeholder {
+  color: #EEFBFB;
+}
+

@@ -5,3 +5,21 @@ mat-form-field {
 mat-spinner {
   margin: auto;
 }
+
+mat-card {
+  width: 60%;
+  margin: auto;
+  background-color: #203647;
+}
+
+mat-label {
+  color: #EEFBFB;
+}
+
+.mat-input-element {
+  color: #EEFBFB;
+}
+
+.mat-input-element::placeholder {
+  color: #EEFBFB;
+}

@@ -1,5 +1,8 @@
 <div class="filterBar">
-<ng-container>
+
+  <mat-card [style]="{'background-color': '#203647'}">
+
+    <ng-container>
   <mat-form-field appearance="outline">
     <mat-label>Beneficiaries</mat-label>
     <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
@@ -50,6 +53,8 @@
     ></p-button>
 
 </ng-container>
+
+  </mat-card>
 </div>
 
 
@@ -59,20 +64,24 @@
 
   <ng-container *ngFor="let post of filteredPosts">
     <div class="centered">
+
       <section class="cards">
         <p-card
           class="card"
           header="{{ post.title }}"
           subheader="{{ post.startDate | date }} to {{ post.endDate | date }}"
+
           [style]="{
             width: '25rem',
-            'margin-bottom': '2em',
             'text-align': 'center'
           }"
+
           styleClass="p-card-shadow"
           *ngIf="post.approved"
         >
-          <p>{{ post.content }}</p>
+
+          <p-card-content>{{ post.content }}</p-card-content>
+
           <ng-template pTemplate="footer" #footer>
 
             <p-button
@@ -219,11 +228,6 @@
         </button>
       </div>
     </ng-template>
-
-
-
-
-
 
 
 

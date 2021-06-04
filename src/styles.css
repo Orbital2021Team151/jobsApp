@@ -1,7 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+  background-color: #12232E;
+}
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #4DA8DA;
+}
+
+mat-card {
+  width: 60%;
+  margin: auto;
+  background-color: #203647;
+}
+
+mat-label {
+  color: #EEFBFB;
+}
+
+.mat-input-element {
+  color: #EEFBFB;
+}
+
+.mat-input-element::placeholder {
+  color: #EEFBFB;
+}

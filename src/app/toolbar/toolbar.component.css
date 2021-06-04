@@ -1,6 +1,35 @@
+mat-toolbar {
+  background-color: #12232E;
+}
+
+mat-stroked-button {
+  line-height: 0px !important;
+  padding: 12px 10px 10px 10px !important;
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+.light-button {
+  height: 50px;
+  width: 150px;
+  font-size: 110%;
+  border: 2px solid #4DA8DA !important;
+  color: white;
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+.light-button:hover {
+  background-color: #4DA8DA;
+
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
+}
+
 a {
   text-decoration: none;
   color: white;
+  font-size: 100%;
 }
 
 ul {
@@ -8,9 +37,23 @@ ul {
   padding: 0;
   margin: 0;
   display: flex;
+  background-color: #12232E;
 }
-.space {
+
+.spacer-row-1 {
   flex: 1 1 auto;
 }
 
+.spacer-row-2 {
+  flex: 1 1 auto;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  margin: auto;
+}
+
+.logo img {
+  width: 4%;
+  height: 4%;
+}
 
