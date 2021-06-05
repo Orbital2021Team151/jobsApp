@@ -24,3 +24,18 @@
 .footer {
   width: auto;
 }
+
+
+@media screen {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .card {
+    background-color: #4da8da;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

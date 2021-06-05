@@ -36,6 +36,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   userRole: string;
   startDate: Date;
   endDate: Date;
+  noFilteredPost: boolean;
 
   private authStatusObject: {
     auth: boolean;
@@ -82,6 +83,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.hasApproved = false;
+    this.noFilteredPost = false;
     this.postsService.getPosts();
 
     this.authStatusObject = this.authService.getAuthStatusObject();
@@ -152,6 +154,12 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       );
     }
     //Need to cast new Date object over it again... KIV for future me. I have no idea why javascript does this (┛ಠ_ಠ)┛彡┻━┻
+
+    if (this.filteredPosts.length === 0) {
+      this.noFilteredPost = true;
+    } else {
+      this.noFilteredPost = false;
+    }
   }
 
   onApply(postId: string, errorMessage: string, studentContent) {

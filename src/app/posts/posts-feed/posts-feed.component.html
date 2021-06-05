@@ -67,23 +67,69 @@
   fxLayoutGap="5.0%"
   fxLayoutAlign="center"
 >
+
+<p *ngIf="noFilteredPost" [style]="{'color':'white'}"><b>No posts match your filter criteria!</b></p>
+
   <ng-container *ngFor="let post of filteredPosts">
     <div class="centered">
       <section class="cards">
         <p-card
           class="card"
-          header="{{ post.title }}"
-          subheader="{{ post.startDate | date }} to {{ post.endDate | date }}"
           [style]="{
             width: '25rem',
+            'max-width': '25rem',
             height: '15rem',
             'text-align': 'center',
             'background-color': '#203647',
+            'display': 'block',
+            'overflow':'hidden',
+            'white-space':'nowrap',
             color: 'white'
           }"
           *ngIf="post.approved"
         >
-          <p-card-content>{{ post.content }}</p-card-content>
+
+        <p-card-header [style]="{
+          'text-overflow': 'ellipsis',
+          'width': '22rem',
+          'max-width': '22rem',
+          'height':'1.7rem',
+          'display': 'block',
+          'overflow':'hidden',
+          'white-space':'nowrap',
+          'color' : 'white',
+          'font-size' : '1.5rem'
+        }">
+
+        <b>{{ post.title }}</b>
+
+        </p-card-header>
+
+        <p-card-subheader [style]="{
+          'height': '3.5rem',
+          'display': 'block',
+          'overflow':'hidden',
+          'white-space':'nowrap',
+          'color': '#D9D9D9'
+        }">
+        {{ post.startDate | date }} to {{ post.endDate | date }}
+        </p-card-subheader>
+
+
+          <p-card-content [style]="{
+            'text-overflow': 'ellipsis',
+            'width': '22rem',
+            'max-width': '22rem',
+            'height' : '3rem',
+            'display': 'block',
+            'overflow':'hidden',
+            'white-space':'nowrap',
+            'color': '#D9D9D9'
+          }">
+
+          {{ post.content }}
+
+        </p-card-content>
 
           <ng-template pTemplate="footer" #footer>
             <p-button
