@@ -3,43 +3,14 @@
   margin-top: 1rem;
 }
 
-.info-text {
-  text-align: center;
+.updateUser {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.deleteButton {
-
-  margin-left: 0.5rem;
-}
-
-.publishButton {
-
-  margin-left: .5rem;
-  margin-right: .5rem;
-}
-.moreInfoButton {
-
-  margin-left: .5rem;
-}
-.footer {
-  width: auto;
-
-}
-.changePasswordForm {
-  margin-top: 0%;
-  margin-left:30%;
-  padding: 10px;
-}
-
-.beneficiaries {
-  margin-top: 0%;
-  margin-left:30%;
-  padding: 10px;
-}
-
-.learnMore {
-  position: absolute;
-  right: 650px;
+.changeInfoBar {
+  margin: auto;
+  width: 70%;
   padding: 10px;
 }
 
@@ -50,19 +21,16 @@
   margin-bottom: 15px;
 }
 
-
-
-
-
-
-@media screen and (min-width: 100em) {
+@media screen {
   .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .card {
-      flex: 0 1 calc(25% - 1em);
+    background-color: #4da8da;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 }

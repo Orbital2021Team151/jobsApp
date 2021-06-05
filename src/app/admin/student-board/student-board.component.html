@@ -1,60 +1,67 @@
 <!-- <p>STUDENT's board is supposed to be here!!!!!</p> -->
+<div class="changeInfoBar">
 
-<form #changePasswordForm="ngForm" class="changePasswordForm">
+  <mat-card [style]="{'background-color': '#203647'}">
 
-  <mat-form-field appearance="outline">
-    <input
-      matInput
-      class="currentPassword"
-      type="password"
-      ngModel
-      name="currentPassword"
-      required
-      #currentPassword="ngModel"
-      placeholder="Current Password"
-    />
-    <mat-error *ngIf="currentPassword.invalid"
-      >Please enter your current password.</mat-error
-    >
-  </mat-form-field>
+    <form #changePasswordForm="ngForm" class="changePasswordForm">
 
-  <mat-form-field appearance="outline">
-    <input
-      matInput
-      type="password"
-      ngModel
-      class="newPassword"
-      name="newPassword"
-      required
-      #newPassword="ngModel"
-      placeholder="New Password"
-    />
-    <mat-error *ngIf="newPassword.invalid"
-      >Please provide us with your new password.</mat-error
-    >
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          class="currentPassword"
+          type="password"
+          ngModel
+          name="currentPassword"
+          required
+          #currentPassword="ngModel"
+          placeholder="Current Password"
+        />
+        <mat-error *ngIf="currentPassword.invalid"
+          >Please enter your current password.</mat-error
+        >
+      </mat-form-field>
 
-  <button
-    class="btn btn-outline-primary mb-2 mr-2"
-    (click)="onChangePassword(changePasswordForm)"
-  >
-    Request
-  </button>
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          type="password"
+          ngModel
+          class="newPassword"
+          name="newPassword"
+          required
+          #newPassword="ngModel"
+          placeholder="New Password"
+        />
+        <mat-error *ngIf="newPassword.invalid"
+          >Please provide us with your new password.</mat-error
+        >
+      </mat-form-field>
+
+      <button
+        class="btn btn-outline-primary mb-2 mr-2"
+        (click)="onChangePassword(changePasswordForm)"
+      >
+        Request
+      </button>
 
 
-</form>
+    </form>
 
-<mat-form-field appearance="outline" class="beneficiaries" text-center>
-  <mat-label>Beneficiaries</mat-label>
-  <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
-    <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{beneficiary}}</mat-option>
-  </mat-select>
-</mat-form-field>
+    <mat-form-field appearance="outline" class="beneficiaries" text-center>
+      <mat-label>Beneficiaries</mat-label>
+      <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
+        <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{beneficiary}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-<p-button
-            class="learnMore"
-            label="Update"
-            icon="pi pi-check"
-            styleClass="p-button-info"
-            (click)="updateUser()"
-          ></p-button>
+    <p-button
+                class="updateUser"
+                label="Update"
+                icon="pi pi-check"
+                styleClass="p-button-info"
+                (click)="updateUser()"
+              ></p-button>
+
+  </mat-card>
+
+</div>
