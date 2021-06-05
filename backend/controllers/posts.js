@@ -205,14 +205,14 @@ exports.reportPost = (req, res, next) => {
 
     User.find()
       .then(allUsersDocument => {
-        console.log("Post has been reported! Now it should sent notification emails to all admins and the user who reported the post.");
+        console.log("Post has been reported! Now it should send notification emails to all admins and the user who reported the post.");
 
         let adminUsers = allUsersDocument.filter(user => user.role === "Admin");
 
         for (var userI=0; userI< adminUsers.length; userI++) {
           let currentAdmin = adminUsers[userI];
           sendReportToAdminEmail(currentAdmin.email, req.body.post);
-          //console.log("Report email sent to admin: " + currentAdmin.email);
+          console.log("Report email sent to admin: " + currentAdmin.email);
         }
 
         sendReportAcknowledgementEmail(req.body.student.email, req.body.post);
