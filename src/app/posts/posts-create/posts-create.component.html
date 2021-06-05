@@ -1,6 +1,7 @@
 <mat-card [style]="{'background-color': '#203647'}">
   <form (submit)="onAddPost(postForm)" #postForm="ngForm">
     <mat-form-field appearance="outline">
+      <mat-label>Point-Of-Contact (POC)</mat-label>
       <input
         matInput
         type="text"
@@ -8,7 +9,7 @@
         name="POC"
         required
         #POC="ngModel"
-        placeholder="Point-Of-Contact Name"
+        placeholder="eg Wilfred Gatsby"
       />
       <mat-error *ngIf="POC.invalid"
         >Please enter provide us the name of your Point-Of-Contact.</mat-error
@@ -16,6 +17,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>POC's Phone Number</mat-label>
       <input
         matInput
         type="text"
@@ -23,7 +25,7 @@
         name="phoneNumber"
         required
         #phoneNumber="ngModel"
-        placeholder="Point-Of-Contact Phone Number"
+        placeholder="eg +65 12345678"
       />
       <mat-error *ngIf="phoneNumber.invalid"
         >Please provide us your Point-Of-Contact's phone number.</mat-error
@@ -31,6 +33,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>POC's Email Address</mat-label>
       <input
         matInput
         type="text"
@@ -38,12 +41,13 @@
         name="email"
         required
         #email="ngModel"
-        placeholder="POC's Email Address"
+        placeholder="eg test@test.com"
       />
       <mat-error *ngIf="email.invalid">Please provide us your email.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Volunteer Opportunity Title</mat-label>
       <input
         matInput
         type="text"
@@ -51,7 +55,7 @@
         name="title"
         required
         #title="ngModel"
-        placeholder="Job Title"
+        placeholder="eg Weekend Underprivileged Teacher"
       />
       <mat-error *ngIf="title.invalid"
         >Please provide us the job's title.</mat-error
@@ -59,6 +63,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Volunteer Opportunity Description</mat-label>
       <textarea
         matInput
         name="content"
@@ -67,7 +72,7 @@
         required
         #content="ngModel"
         minlength="1"
-        placeholder="Job Description"
+        placeholder="Please give a short description of the volunteer opportunity"
       ></textarea>
       <mat-error *ngIf="content.invalid"
         >Please give us a description of the job (minimum 100 words).</mat-error
@@ -75,6 +80,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Volunteer Opportunity Preferred Skills</mat-label>
       <textarea
         matInput
         name="skills"
@@ -83,7 +89,7 @@
         required
         #skills="ngModel"
         minlength="1"
-        placeholder="Preferred Skills"
+        placeholder="eg Leadership, Open-mindedness, etc"
       ></textarea>
       <mat-error *ngIf="skills.invalid"
         >Please give a brief description on the preferred skills for the job
@@ -126,6 +132,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Total Commitment Hours</mat-label>
       <input
         matInput
         type="number"
@@ -133,7 +140,7 @@
         name="hoursRequired"
         required
         #hoursRequired="ngModel"
-        placeholder="Commitment Hours Required"
+        placeholder=""
       />
       <mat-error *ngIf="hoursRequired.invalid"
         >Please provide the minimum number of hours required to be committed for

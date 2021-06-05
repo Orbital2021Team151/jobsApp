@@ -1,66 +1,104 @@
 
+<div class="changePasswordBar">
+  <mat-card [style]="{'background-color': '#203647'}">
+    <form #changePasswordForm="ngForm">
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          type="password"
+          ngModel
+          name="currentPassword"
+          required
+          #currentPassword="ngModel"
+          placeholder="Current Password"
+        />
+        <mat-error *ngIf="currentPassword.invalid"
+          >Please enter your current password.</mat-error
+        >
+      </mat-form-field>
 
-<form #changePasswordForm="ngForm">
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          type="password"
+          ngModel
+          name="newPassword"
+          required
+          #newPassword="ngModel"
+          placeholder="New Password"
+        />
+        <mat-error *ngIf="newPassword.invalid"
+          >Please provide us with your new password.</mat-error
+        >
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <input
-      matInput
-      type="password"
-      ngModel
-      name="currentPassword"
-      required
-      #currentPassword="ngModel"
-      placeholder="Current Password"
-    />
-    <mat-error *ngIf="currentPassword.invalid"
-      >Please enter your current password.</mat-error
-    >
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <input
-      matInput
-      type="password"
-      ngModel
-      name="newPassword"
-      required
-      #newPassword="ngModel"
-      placeholder="New Password"
-    />
-    <mat-error *ngIf="newPassword.invalid"
-      >Please provide us with your new password.</mat-error
-    >
-  </mat-form-field>
-
-  <button
-    class="btn btn-outline-primary mb-2 mr-2"
-    (click)="onChangePassword(changePasswordForm)"
-  >
-    Request
-  </button>
+      <button
+        class="btn btn-outline-primary mb-2 mr-2"
+        (click)="onChangePassword(changePasswordForm)"
+      >
+        Request
+      </button>
+    </form>
+  </mat-card>
+</div>
 
 
-</form>
 
 
 <div>
-  <p class="info-text mat-body-1" *ngIf="hasRequest"><b>Posts that needs to be approved!</b></p>
+  <p class="info-text mat-body-1" *ngIf="hasRequest" [style]="{'color': 'white'}"><b>Posts that needs to be approved!</b></p>
 
   <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5.0%" fxLayoutAlign="center">
     <div class="centered" *ngFor="let post of posts">
+
       <section class="cards" *ngIf="!post.approved">
         <p-card
           class="card"
-          header="{{ post.title }}"
-          subheader="{{ post.startDate | date }} to {{ post.endDate | date }}"
           [style]="{
             width: '25rem',
-            'text-align': 'center'
+            height: '15rem',
+            'text-align': 'center',
+            'background-color': '#203647',
+            color: 'white'
           }"
           styleClass="p-card-shadow"
           *ngIf="!post.approved"
         >
-          <p>{{ post.content }}</p>
+
+        <p-card-header [style]="{
+          'text-overflow': 'ellipsis',
+          'width': '22rem',
+          'max-width': '22rem',
+          'display': 'block',
+          'overflow':'hidden',
+          'white-space':'nowrap',
+          'color' : 'white',
+          'font-size' : '1rem'
+        }">
+
+        <b>{{ post.title }}</b>
+
+        </p-card-header>
+
+        <p-card-subheader [style]="{
+          'color': '#D9D9D9',
+          'height': '2rem'
+        }">
+          {{ post.startDate | date }} to {{ post.endDate | date }}
+        </p-card-subheader>
+
+        <p-card-content
+          [style]="{
+            'text-overflow': 'ellipsis',
+            'width': '22rem',
+            'max-width': '22rem',
+            'height' : '3rem',
+            'display': 'block',
+            'overflow':'hidden',
+            'white-space':'nowrap',
+            'color': '#D9D9D9'
+          }">{{ post.content }}
+        </p-card-content>
 
           <ng-template pTemplate="footer" #footer>
             <p-button *ngIf="(authStatusObject.role === 'Admin')"

@@ -8,8 +8,7 @@
 }
 
 .delete {
-
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 .filterBar {
@@ -24,16 +23,4 @@
 
 .footer {
   width: auto;
-}
-
-@media screen and (min-width: 100em) {
-  .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-  }
-
-  .card {
-      flex: 0 1 calc(25% - 1em);
-  }
 }
