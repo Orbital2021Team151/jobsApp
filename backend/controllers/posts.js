@@ -417,7 +417,7 @@ const sendReportToAdminEmail = (email, post) => {
     to: email,
     subject: "Report made by student for a Volunteer job Posting",
     html:
-    `We have received a report from a student regarding the following posting: <br>
+    `We have received a report from a student regarding the following posting: <br><br>
     Organisation: ${post.orgName}<br>
     Point-Of-Contact: ${post.POC}<br>
     Contact Number: ${post.phoneNumber}<br>
@@ -431,7 +431,7 @@ const sendReportToAdminEmail = (email, post) => {
     Beneficiaries involved: ${post.beneficiaries}<br>
 
 
-    Please review the post on the Admin Dashboard! The website can be accessed <a href=https://ccsgp-app.herokuapp.com/>here</a>.<br><br>
+    Please review the post on the Admin Dashboard. The website can be accessed <a href=https://ccsgp-app.herokuapp.com/>here</a>.<br><br>
 
     Yours sincerely,<br>
     CCSGP Admin

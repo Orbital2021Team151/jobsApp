@@ -26,7 +26,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     //this.authService.autoAuthUser();
 
     if (localStorage.getItem('token')) {
-      console.log("This localStorage line is called!");
+      //console.log("This localStorage line is called!");
       this.userIsAuthenticated = true;
       this.authService.autoAuthUser();
       this.authStatusObject = this.authService.getAuthStatusObject();
@@ -38,8 +38,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     .subscribe(authObject => {
       this.userIsAuthenticated = authObject.auth;
       this.authStatusObject = authObject;
-      console.log("AT TOOLBAR NOW! ");
-      console.log(this.authStatusObject);
+      //console.log("AT TOOLBAR NOW! ");
+      //console.log(this.authStatusObject);
     });
 
   }

@@ -74,8 +74,8 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   }
 
   updateUser() {
-    console.log("At student-board updateUser method now");
-    console.log(this.beneficiariesSelected);
+    //console.log("At student-board updateUser method now");
+    //console.log(this.beneficiariesSelected);
     this.authService.update(this.beneficiariesSelected);
   }
 

@@ -94,8 +94,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
 
-        console.log("Posts are: ");
-        console.log(this.posts);
+        //console.log("Posts are: ");
+        //console.log(this.posts);
 
         this.posts = posts;
         this.filteredPosts = posts;
@@ -120,7 +120,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
-    console.log(this.posts);
+    //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -167,7 +167,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     const currentPost = this.postsService.getPost(postId);
     if (currentPost.students.filter(student => student.email === this.authStatusObject.email).length > 0) {
       this.modalService.open(errorMessage, { size: 'lg' });
-      console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
+      //console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
       return;
     } else {
       //this.postsService.applyPost(postId, this.studentObject);
@@ -190,7 +190,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   applyBefore(currentPost: Post) {
-    console.log("Apply before line fires");
+    //console.log("Apply before line fires");
     if (currentPost.students.filter(user => {user.email === this.authStatusObject.email}).length > 0) {
       return true;
     }
@@ -203,7 +203,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
     if (currentPost.reports.filter(student => student.email === this.authStatusObject.email).length > 0) {
       this.modalService.open(errorMessage, { size: 'lg' });
-      console.log("YOU REPORTED THIS POST BEFORE BEFORE.");
+      //console.log("YOU REPORTED THIS POST BEFORE BEFORE.");
       return;
     } else {
       this.modalService.open(reportContent, {});
@@ -213,6 +213,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   submitReport(postId: string, reportForm: NgForm) {
     if (reportForm.invalid) {
+      //console.log("Still need to fill in the form!");
       return;
     }
     this.studentObject = {
@@ -225,7 +226,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   reportBefore(currentPost: Post) {
-    console.log("reportBefore's line fires");
+    //console.log("reportBefore's line fires");
     if (currentPost.reports.filter(user => {user.email === this.authStatusObject.email}).length > 0) {
       return true;
     }

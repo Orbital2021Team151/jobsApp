@@ -91,7 +91,7 @@ exports.login = (req, res, next) => {
       }
 
       fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password) //&& user.verified; //NEED TO MODIFY THIS LATER
+      return bcrypt.compare(req.body.password, user.password) && user.verified;
     })
 
     .then((result) => {

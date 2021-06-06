@@ -68,8 +68,8 @@ export class PostCreateComponent implements OnInit, OnDestroy {
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       this.authStatusObject = authObject;
-      console.log("At create page");
-      console.log(authObject);
+      //console.log("At create page");
+      //console.log(authObject);
     });
   }
 
