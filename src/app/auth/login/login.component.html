@@ -48,11 +48,20 @@
       >
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }">
       <mat-label>User Role</mat-label>
       <mat-select ngModel required #roleInput="ngModel" name="role">
-        <mat-option>--</mat-option>
-        <mat-option *ngFor="let role of roles" [value]="role">
+        <mat-option [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }">--</mat-option>
+        <mat-option *ngFor="let role of roles" [value]="role" [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }">
           {{ role }}
         </mat-option>
       </mat-select>
@@ -99,7 +108,10 @@
         />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }">
         <mat-label>User Role</mat-label>
         <mat-select
           ngModel
@@ -107,8 +119,14 @@
           #forgetPasswordRole="ngModel"
           name="forgetPasswordRole"
         >
-          <mat-option>--</mat-option>
-          <mat-option *ngFor="let role of roles" [value]="role">
+          <mat-option [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }">--</mat-option>
+          <mat-option *ngFor="let role of roles" [value]="role" [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }">
             {{ role }}
           </mat-option>
         </mat-select>
@@ -186,11 +204,20 @@
           >
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" [style]="{
+          'color':'white',
+          'background-color': '#203647'
+      }">
           <mat-label>User Role</mat-label>
           <mat-select ngModel required #roleInput="ngModel" name="role">
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let role of roles" [value]="role">
+            <mat-option [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }">--</mat-option>
+            <mat-option *ngFor="let role of roles" [value]="role" [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }">
               {{ role }}
             </mat-option>
           </mat-select>
@@ -237,7 +264,10 @@
             />
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" [style]="{
+            'color':'white',
+            'background-color': '#203647'
+        }">
             <mat-label>User Role</mat-label>
             <mat-select
               ngModel
@@ -245,8 +275,14 @@
               #forgetPasswordRole="ngModel"
               name="forgetPasswordRole"
             >
-              <mat-option>--</mat-option>
-              <mat-option *ngFor="let role of roles" [value]="role">
+              <mat-option [style]="{
+                'color':'white',
+                'background-color': '#203647'
+            }">--</mat-option>
+              <mat-option *ngFor="let role of roles" [value]="role" [style]="{
+                'color':'white',
+                'background-color': '#203647'
+            }">
                 {{ role }}
               </mat-option>
             </mat-select>

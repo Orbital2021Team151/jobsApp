@@ -58,7 +58,7 @@
             width: '25rem',
             height: '15rem',
             'text-align': 'center',
-            'background-color': '#203647',
+            'background-color': '#2e2b12',
             color: 'white'
           }"
           styleClass="p-card-shadow"
@@ -162,27 +162,67 @@
     </div>
   </div>
 
-  <p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
+  <p class="info-text mat-body-1" *ngIf="!hasRequest" [style]="{'color': 'white'}">No post request!</p>
 </div>
 
 
 <div>
-  <p class="info-text mat-body-1"><b>Posts with reports! :O</b></p>
+  <p class="info-text mat-body-1" [style]="{'color': 'white'}"><b>Posts with reports! :O</b></p>
 
   <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5.0%" fxLayoutAlign="center">
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="(post.reports.length > 0)">
         <p-card
           class="card"
-          header="{{ post.title }}"
-          subheader="{{ post.startDate | date }} to {{ post.endDate | date }}"
           [style]="{
             width: '25rem',
-            'text-align': 'center'
+            height: '15rem',
+            'text-align': 'center',
+            'background-color': '#2e1215',
+            color: 'white'
           }"
           styleClass="p-card-shadow"
         >
-          <p>{{ post.content }}</p>
+
+        <p-card-header [style]="{
+          'text-overflow': 'ellipsis',
+          'width': '22rem',
+          'max-width': '22rem',
+          'height':'1.7rem',
+          'display': 'block',
+          'overflow':'hidden',
+          'white-space':'nowrap',
+          'color' : 'white',
+          'font-size' : '1.5rem'
+        }">
+
+        <b>{{ post.title }}</b>
+
+        </p-card-header>
+
+        <p-card-subheader [style]="{
+          'height': '3.5rem',
+          'display': 'block',
+          'overflow':'hidden',
+          'white-space':'nowrap',
+          'color': '#D9D9D9'
+        }">
+          {{ post.startDate | date }} to {{ post.endDate | date }}
+        </p-card-subheader>
+
+        <p-card-content
+        [style]="{
+          'text-overflow': 'ellipsis',
+          'width': '22rem',
+          'max-width': '22rem',
+          'height' : '3rem',
+          'display': 'block',
+          'overflow':'hidden',
+          'white-space':'nowrap',
+          'color': '#D9D9D9'
+        }">{{ post.content }}
+        </p-card-content>
+
 
           <ng-template pTemplate="footer" #footer>
 
@@ -223,7 +263,7 @@
     </div>
   </div>
 
-  <p class="info-text mat-body-1" *ngIf="!hasReport">No post with reports! :D</p>
+  <p class="info-text mat-body-1" *ngIf="!hasReport" [style]="{'color': 'white'}">No post with reports! :D</p>
 
 </div>
 

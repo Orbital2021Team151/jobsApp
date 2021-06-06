@@ -19,3 +19,25 @@ mat-label {
   color: #EEFBFB;
 }
 
+/*
+ * For Beneficiaries and DatePicker styling
+*/
+.mat-select-arrow {
+  color: #4da8da;
+}
+
+mat-datepicker-toggle {
+  color: #4da8da !important;
+}
+
+input {
+  color: #EEFBFB;
+}
+
+.mat-select-value {
+  color: #EEFBFB;
+}
+
+.mat-select-value::placeholder {
+  color: #EEFBFB;
+}

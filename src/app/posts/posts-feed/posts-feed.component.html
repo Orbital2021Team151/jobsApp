@@ -1,7 +1,10 @@
 <div class="filterBar">
-  <mat-card [style]="{ 'background-color': '#203647' }">
+  <mat-card [style]="{ 'background-color': '#203647', 'color' : 'white'}">
     <ng-container>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" [style]="{
+        'color':'white',
+        'background-color': '#203647'
+    }">
         <mat-label>Beneficiaries</mat-label>
         <mat-select
           multiple
@@ -13,6 +16,10 @@
           <mat-option
             *ngFor="let beneficiary of beneficiaries"
             [value]="beneficiary"
+            [style]="{
+              'color':'white',
+              'background-color': '#203647'
+          }"
             >{{ beneficiary }}</mat-option
           >
         </mat-select>

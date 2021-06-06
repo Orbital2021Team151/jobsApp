@@ -4,6 +4,38 @@ img {
   height: 100%;
 }
 
+
+/*
+ * For the role selection for user creation. Still need to combine w styling at html level
+*/
+.mat-input-element {
+  color: #EEFBFB;
+}
+
+.mat-input-element::placeholder {
+  color: #EEFBFB;
+}
+
+::ng-deep .mat-select-arrow {
+  color: #4da8da !important;
+}
+
+::ng-deep .mat-select-value {
+  color: #EEFBFB !important;
+}
+
+.mat-select-value::placeholder {
+  color: #EEFBFB !important;
+}
+
+mat-icon {
+  color: #4da8da;
+}
+
+
+
+
+
 html, body, .grid-container { height: 100%; margin: 0; }
 
 .grid-container {
