@@ -38,6 +38,7 @@ import { StudentBoardComponent } from './admin/student-board/student-board.compo
 import { ErrorInterceptor } from './error-interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './error/error.component';
+import { OrgBoardComponent } from './admin/org-board/org-board.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ErrorComponent } from './error/error.component';
     SignupAdminComponent,
     SignupGeneralComponent,
     StudentBoardComponent,
+    OrgBoardComponent,
     ErrorComponent,
   ],
 

@@ -239,7 +239,10 @@
     </mat-card>
 
     <ng-template #forgetPasswordContent let-modal>
-      <div class="modal-header">
+      <div class="modal-header" [style]="{
+        'color':'white',
+        'background-color': '#203647'
+    }">
         <h4 class="modal-title">Don't worry. Happens to the best of us ;)</h4>
         <button
           type="button"
@@ -250,7 +253,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" [style]="{
+        'color':'white',
+        'background-color': '#203647'
+    }">
         <form #forgetPasswordForm="ngForm">
           <mat-form-field appearance="outline">
             <input
@@ -293,7 +299,10 @@
         </form>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer" [style]="{
+        'color':'white',
+        'background-color': '#203647'
+    }">
         <button
           type="button"
           class="btn btn-light"

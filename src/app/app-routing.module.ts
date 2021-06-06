@@ -8,20 +8,23 @@ import { SignupGeneralComponent } from './auth/signup-general/signup-general.com
 import { PostFeedComponent } from './posts/posts-feed/posts-feed.component';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
 import { StudentBoardComponent } from './admin/student-board/student-board.component';
+import { OrgBoardComponent } from './admin/org-board/org-board.component';
 
 const routes: Routes = [
   { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminBoardComponent, canActivate: [AuthGuard], data: { roles: ["Admin"]}},
+  { path: 'student', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student"] }},
+  { path: 'organisation', component: OrgBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student Organisation", "External Organisation"] }},
   {
     path: 'create',
    component: PostCreateComponent,
    canActivate: [AuthGuard],
    data: { roles: ["Admin", "External Organisation", "Student Organisation", "Student"]}
   },
+
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupGeneralComponent },
   { path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
-  { path: 'student', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student"] }},
 ];
 
 @NgModule({

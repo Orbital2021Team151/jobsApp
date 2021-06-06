@@ -8,9 +8,9 @@ import { formatDate } from "@angular/common";
 import { NgForm } from "@angular/forms";
 
 @Component({
-  selector: "app-admin-board",
-  templateUrl: './admin-board.component.html',
-  styleUrls: ['./admin-board.component.css'],
+  selector: "app-org-board",
+  templateUrl: './org-board.component.html',
+  styleUrls: ['./org-board.component.css'],
   encapsulation: ViewEncapsulation.None,
   styles: [`
     .dark-modal .modal-content {
@@ -25,7 +25,7 @@ import { NgForm } from "@angular/forms";
     }
   `],
 })
-export class AdminBoardComponent implements OnInit, OnDestroy {
+export class OrgBoardComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
   //need to remove subscription later to prevent memory leak
@@ -38,7 +38,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   private reportedPostsNumber: number;
 
   public hasRequest: Boolean;
-  public hasReport: Boolean;
   postToBeDeleted: string;
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
@@ -57,16 +56,13 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         //console.log(posts);
-        this.posts = posts;
+
+        this.posts = posts
+            .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
 
         if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
           this.postsNumber = this.posts.filter(post => !post.approved).length;
-        }
-
-        if (this.posts.filter(post => post.reports.length > 0).length > 0) {
-          this.hasReport = true;
-          this.reportedPostsNumber = this.posts.filter(post => post.reports.length > 0).length;
         }
       });
 
@@ -74,31 +70,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   onDelete(postId: string) {
     this.postsService.deletePost(postId);
-    this.postsNumber--;
-    if (this.postsNumber === 0) {
-      this.hasRequest = false;
-    }
-
-    if (this.reportedPostsNumber === 0) {
-      this.hasReport = false;
-    }
-  }
-
-  onDeleteReportedPost(postId: string) {
-    this.postsService.deletePost(postId);
-    this.reportedPostsNumber--;
-
-    if (this.reportedPostsNumber === 0) {
-      this.hasReport = false;
-    }
-  }
-
-
-  onPublish(postId: string, publishContent) {
-
-    this.postsService.publishPost(postId);
-
-    this.modalService.open(publishContent, { scrollable: true });
     this.postsNumber--;
     if (this.postsNumber === 0) {
       this.hasRequest = false;

@@ -23,11 +23,15 @@ mat-label {
  * For Beneficiaries and DatePicker styling
 */
 .mat-select-arrow {
-  color: #4da8da;
+  color: #4da8da !important;
 }
 
 mat-datepicker-toggle {
   color: #4da8da !important;
+}
+
+mat-datepicker-value {
+  color: #EEFBFB !important;
 }
 
 input {
@@ -35,9 +39,9 @@ input {
 }
 
 .mat-select-value {
-  color: #EEFBFB;
+  color: #EEFBFB !important;
 }
 
 .mat-select-value::placeholder {
-  color: #EEFBFB;
+  color: #EEFBFB !important;
 }

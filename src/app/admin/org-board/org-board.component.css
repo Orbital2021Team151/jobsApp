@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+.changePasswordBar {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.info-text {
+  text-align: center;
+}
+
+.deleteButton {
+
+  margin-left: 0.5rem;
+}
+
+.publishButton {
+
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+.moreInfoButton {
+
+  margin-left: .5rem;
+}
+
+.footer {
+  width: auto;
+
+}
+
+.alert {
+  padding: 20px;
+  background-color: #20a033;
+  color: white;
+  margin-bottom: 15px;
+}
+
+@media screen {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .card {
+    background-color: #4da8da;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

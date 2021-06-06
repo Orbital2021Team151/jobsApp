@@ -1,4 +1,4 @@
-<mat-card [style]="{'background-color': '#203647'}">
+<mat-card [style]="{ 'background-color': '#203647', 'color' : 'white'}">
   <form (submit)="onAddPost(postForm)" #postForm="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Point-Of-Contact (POC)</mat-label>
@@ -150,8 +150,14 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Beneficiaries</mat-label>
-      <mat-select required multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
-        <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{beneficiary}}</mat-option>
+      <mat-select required multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected" [style]="{
+        'color':'white',
+        'background-color': '#203647'
+    }">
+        <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary" [style]="{
+          'color':'white',
+          'background-color': '#203647'
+      }">{{beneficiary}}</mat-option>
       </mat-select>
     </mat-form-field>
 
