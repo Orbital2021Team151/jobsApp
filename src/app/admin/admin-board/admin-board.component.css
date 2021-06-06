@@ -3,6 +3,11 @@
   margin-top: 1rem;
 }
 
+mat-icon {
+  color: #4da8da;
+}
+
+
 .changePasswordBar {
   margin: auto;
   width: 50%;
@@ -11,21 +16,6 @@
 
 .info-text {
   text-align: center;
-}
-
-.deleteButton {
-
-  margin-left: 0.5rem;
-}
-
-.publishButton {
-
-  margin-left: .5rem;
-  margin-right: .5rem;
-}
-.moreInfoButton {
-
-  margin-left: .5rem;
 }
 
 .footer {

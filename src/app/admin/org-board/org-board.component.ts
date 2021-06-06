@@ -33,6 +33,8 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   private postSub: Subscription;
   private authStatusSub: Subscription;
   private authStatusObject;
+  hideCurrentPassword = true;
+  hideNewPassword = true;
 
   private postsNumber: number;
   private reportedPostsNumber: number;

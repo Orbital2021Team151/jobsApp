@@ -86,7 +86,7 @@ exports.login = (req, res, next) => {
     .then((user) => {
 
       if (!user) {
-        console.log("No user");
+        //console.log("No user detected at login. at login controllers users.js line 89");
         throw new Error("Authentication Failed. User does not exist in database.");
       }
 
@@ -97,7 +97,7 @@ exports.login = (req, res, next) => {
     .then((result) => {
 
       if (!result) {
-        console.log("Either your account is not activated, or you typed in the wrong password.");
+        //console.log("Either your account is not activated, or you typed in the wrong password. at login controllers users.js line 100");
         throw new Error("Authentication Failed!");
       }
 
@@ -176,7 +176,7 @@ exports.updatePassword = (req, res, next) => {
     .then((user) => {
 
       if (!user) {
-        console.log("No user");
+        console.log("No user to update password. at controllers users.js line 179");
         throw new Error("Authentication Failed. User does not exist in database.");
       }
 
@@ -267,8 +267,8 @@ const sendVerificationEmail = (email, uniqueString) => {
 
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
+      console.log("Could not send confirmation email! (line 270, controllers users.js) Error log is as shown below: ");
       console.log(error);
-      console.log("Could not send confirmation email!");
       throw new Error("Could not send confirmation email!");
     } else {
       console.log("Confirmation message sent!");
@@ -329,8 +329,8 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
 
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
+      console.log("Could not send Reset Password email! (line 332, controllers users.js) Error is as shwon below: ");
       console.log(error);
-      console.log("Could not send Reset Password email!");
       throw new Error("Could not send Reset Password email!");
     } else {
       console.log("Reset Password email sent!");
@@ -359,7 +359,7 @@ exports.forgetPassword = (req, res) => {
   })
   .then((user) => {
     if (!user) {
-      console.log("No user");
+      console.log("No user found to send forget password email to (line 362, controllers users.js).");
       throw new Error("Authentication Failed. User does not exist in database.");
     }
 

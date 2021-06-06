@@ -3,6 +3,18 @@
   margin-top: 1rem;
 }
 
+mat-icon {
+  color: #4da8da;
+}
+
+.mat-select-value {
+  color: #EEFBFB !important;
+}
+
+.mat-select-value::placeholder {
+  color: #EEFBFB !important;
+}
+
 .updateUser {
   margin-left: auto;
   margin-right: auto;

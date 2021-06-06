@@ -40,6 +40,7 @@ exports.getAllPosts = (req, res, next) => {
     })
     .catch(e => {
       console.log("Error occured at backend/app app.get");
+      res.status(404).json({error: e, message: "Error at get all Posts in controllers posts.js"});
     });
 };
 
@@ -55,7 +56,7 @@ exports.deletePost = (req, res, next) => {
       }
     })
      .then((result) => {
-       console.log(result);
+       //console.log(result);
      });
 
   } else {
@@ -106,7 +107,7 @@ exports.publishPost = (req, res, next) => {
 
       User.find()
       .then(allUsersDocument => {
-        console.log("Post it published! This message should only be seen from the mongoDB shell");
+        //console.log("Post it published! This message should only be seen from the mongoDB shell");
 
         for (var userI=0; userI< allUsersDocument.length; userI++) {
           var currentUser = allUsersDocument[userI];
@@ -200,8 +201,6 @@ exports.reportPost = (req, res, next) => {
     if (!result) {
       throw new Error("Post cannot be reported!");
     }
-    console.log("This fires!");
-
 
     User.find()
       .then(allUsersDocument => {
@@ -212,7 +211,7 @@ exports.reportPost = (req, res, next) => {
         for (var userI=0; userI< adminUsers.length; userI++) {
           let currentAdmin = adminUsers[userI];
           sendReportToAdminEmail(currentAdmin.email, req.body.post);
-          console.log("Report email sent to admin: " + currentAdmin.email);
+          //console.log("Report email sent to admin: " + currentAdmin.email);
         }
 
         sendReportAcknowledgementEmail(req.body.student.email, req.body.post);

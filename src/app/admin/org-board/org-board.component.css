@@ -3,6 +3,10 @@
   margin-top: 1rem;
 }
 
+mat-icon {
+  color: #4da8da;
+}
+
 .changePasswordBar {
   margin: auto;
   width: 50%;

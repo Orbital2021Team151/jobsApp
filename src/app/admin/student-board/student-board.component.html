@@ -5,33 +5,57 @@
 
     <form #changePasswordForm="ngForm" class="changePasswordForm">
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" [style]="{'margin-left': '0.5rem', 'margin-right': '0.5rem', 'color' : 'white'}">
         <input
           matInput
-          class="currentPassword"
-          type="password"
+          [type]="hideCurrentPassword ? 'password' : 'text'"
           ngModel
           name="currentPassword"
           required
           #currentPassword="ngModel"
           placeholder="Current Password"
         />
+
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideCurrentPassword = !hideCurrentPassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideCurrentPassword"
+        >
+          <mat-icon>{{
+            hideCurrentPassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+
         <mat-error *ngIf="currentPassword.invalid"
           >Please enter your current password.</mat-error
         >
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" [style]="{'margin-left': '0.5rem', 'margin-right': '0.5rem', 'color' : 'white'}">
         <input
           matInput
-          type="password"
+          [type]="hideNewPassword ? 'password' : 'text'"
           ngModel
-          class="newPassword"
           name="newPassword"
           required
           #newPassword="ngModel"
           placeholder="New Password"
         />
+
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideNewPassword = !hideNewPassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideNewPassword"
+        >
+          <mat-icon>{{
+            hideNewPassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+
         <mat-error *ngIf="newPassword.invalid"
           >Please provide us with your new password.</mat-error
         >
@@ -49,8 +73,14 @@
 
     <mat-form-field appearance="outline" class="beneficiaries" text-center>
       <mat-label>Beneficiaries</mat-label>
-      <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected">
-        <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{beneficiary}}</mat-option>
+      <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected" [style]="{
+        'color':'white',
+        'background-color': '#203647'
+    }">
+        <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary" [style]="{
+          'color':'white',
+          'background-color': '#203647'
+      }">{{beneficiary}}</mat-option>
       </mat-select>
     </mat-form-field>
 

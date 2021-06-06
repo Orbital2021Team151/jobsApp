@@ -28,10 +28,15 @@ import { NgForm } from "@angular/forms";
 export class StudentBoardComponent implements OnInit, OnDestroy {
 
   beneficiariesSelected: string[] = [];
+
   private postSub: Subscription;
   private authStatusSub: Subscription;
+
   hasRequest: Boolean;
   postToBeDeleted: string;
+  hideCurrentPassword = true;
+  hideNewPassword = true;
+
   private authStatusObject;
   beneficiaries: string[] = [
     "Animal Welfare",
