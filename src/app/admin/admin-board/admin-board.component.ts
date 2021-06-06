@@ -109,6 +109,10 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
+  onMoreInfoReport(reportedContent) {
+    this.modalService.open(reportedContent, { size: 'lg' });
+  }
+
   onChangePassword(form: NgForm) {
     this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
   }
