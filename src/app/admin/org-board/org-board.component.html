@@ -72,7 +72,7 @@
 
 
 <div>
-  <p class="info-text mat-body-1" *ngIf="hasRequest" [style]="{'color': 'white'}"><b>Posts that has not been approved by CCSGP Admins yet</b></p>
+  <p class="info-text mat-body-1" *ngIf="hasRequest" [style]="{'color': 'white'}"><b>Posts that has not been approved by CCSGP Admins yet D:</b></p>
 
   <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5.0%" fxLayoutAlign="center">
     <div class="centered" *ngFor="let post of posts">
@@ -195,5 +195,186 @@
     </div>
   </div>
 
-  <p class="info-text mat-body-1" *ngIf="!hasRequest" [style]="{'color': 'white'}">No post request!</p>
+  <p class="info-text mat-body-1" *ngIf="!hasRequest" [style]="{'color': 'white'}">No post requests or all posts have already been approved! :D</p>
+</div>
+
+
+<div>
+  <p class="info-text mat-body-1" [style]="{ color: 'white' }">
+    <b>Posts with applications! :D</b>
+  </p>
+
+  <div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutWrap
+    fxLayoutGap="5.0%"
+    fxLayoutAlign="center"
+  >
+    <div class="centered" *ngFor="let post of posts">
+      <section class="cards" *ngIf="post.students.length > 0">
+        <p-card
+          class="card"
+          [style]="{
+            width: '25rem',
+            height: '15rem',
+            'text-align': 'center',
+            'background-color': '#122e2b',
+            color: 'white'
+          }"
+          styleClass="p-card-shadow"
+        >
+          <p-card-header
+            [style]="{
+              'text-overflow': 'ellipsis',
+              width: '22rem',
+              'max-width': '22rem',
+              height: '1.7rem',
+              display: 'block',
+              overflow: 'hidden',
+              'white-space': 'nowrap',
+              color: 'white',
+              'font-size': '1.5rem'
+            }"
+          >
+            <b>{{ post.title }}</b>
+          </p-card-header>
+
+          <p-card-subheader
+            [style]="{
+              height: '3.5rem',
+              display: 'block',
+              overflow: 'hidden',
+              'white-space': 'nowrap',
+              color: '#D9D9D9'
+            }"
+          >
+            {{ post.startDate | date }} to {{ post.endDate | date }}
+          </p-card-subheader>
+
+          <p-card-content
+            [style]="{
+              'text-overflow': 'ellipsis',
+              width: '22rem',
+              'max-width': '22rem',
+              height: '3rem',
+              display: 'block',
+              overflow: 'hidden',
+              'white-space': 'nowrap',
+              color: '#D9D9D9'
+            }"
+            >{{ post.content }}
+          </p-card-content>
+
+          <ng-template pTemplate="footer" #footer>
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onMoreInfo(applicantContent)"
+            >
+              View Applicants
+            </button>
+
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onMoreInfo(content)"
+            >
+              Learn More
+            </button>
+
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onDeleteAppliedPost(post.id)"
+            >
+              Delete
+            </button>
+
+          </ng-template>
+        </p-card>
+      </section>
+
+      <ng-template #applicantContent let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">{{ post.title }}</h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let student of post.students">
+            <div style="border: thin solid black">
+              <p style="text-align: center">
+                Student's Email: {{ student.email }}
+              </p>
+              <p style="text-align: center">
+                Student's Contact: {{ student.contact }}
+              </p>
+              <p style="text-align: center">
+                Student's Application: {{ student.content }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-light"
+            (click)="modal.close('Close click')"
+          >
+            Close
+          </button>
+        </div>
+      </ng-template>
+
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">{{ post.title }}</h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <p>Organization Name: {{ post.orgName }}</p>
+          <p>UEN: {{ post.uen }}</p>
+          <p>Point of Contact (POC): {{ post.POC }}</p>
+          <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
+          <p>POC's email: {{ post.email }}</p>
+          <p>Brief Description for gig: {{ post.content }}</p>
+          <p>Preferred Skills: {{ post.skills }}</p>
+          <p>Start Date: {{ post.startDate | date }}</p>
+          <p>End Date: {{ post.endDate | date }}</p>
+          <p>Commitment Hours: {{ post.hoursRequired }}</p>
+          <p>Beneficiaries: {{post.beneficiaries}} </p>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-light"
+            (click)="modal.close('Close click')"
+          >
+            Close
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <p
+    class="info-text mat-body-1"
+    *ngIf="!hasApplication"
+    [style]="{ color: 'white' }"
+  >
+    No applications or no post approved :/
+  </p>
 </div>

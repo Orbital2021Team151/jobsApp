@@ -165,7 +165,7 @@ exports.publishPost = (req, res, next) => {
     reports: req.body.reports,
   });
 
-  Post.updateOne(req.body.id, newPost)
+  Post.updateOne({_id: req.body.id}, newPost)
   .then((result) => {
     res.status(200).json("Applied for posting!");
   });

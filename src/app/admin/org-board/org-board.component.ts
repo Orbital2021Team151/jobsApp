@@ -37,9 +37,10 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   hideNewPassword = true;
 
   private postsNumber: number;
-  private reportedPostsNumber: number;
+  private appliedPostsNumber: number;
 
   public hasRequest: Boolean;
+  hasApplication: Boolean;
   postToBeDeleted: string;
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
@@ -66,6 +67,11 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
           this.hasRequest = true;
           this.postsNumber = this.posts.filter(post => !post.approved).length;
         }
+
+        if (this.posts.filter(post => post.students.length > 0).length > 0) {
+          this.hasApplication = true;
+          this.appliedPostsNumber = this.posts.filter(post => post.students.length > 0).length;
+        }
       });
 
   }
@@ -75,6 +81,19 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     this.postsNumber--;
     if (this.postsNumber === 0) {
       this.hasRequest = false;
+    }
+
+    if (this.appliedPostsNumber === 0) {
+      this.hasApplication = false;
+    }
+  }
+
+  onDeleteAppliedPost(postId: string) {
+    this.postsService.deletePost(postId);
+    this.appliedPostsNumber--;
+
+    if (this.appliedPostsNumber === 0) {
+      this.hasApplication = false;
     }
   }
 
