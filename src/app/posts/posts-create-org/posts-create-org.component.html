@@ -33,20 +33,6 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>POC's Email Address</mat-label>
-      <input
-        matInput
-        type="text"
-        ngModel
-        name="email"
-        required
-        #email="ngModel"
-        placeholder="eg test@test.com"
-      />
-      <mat-error *ngIf="email.invalid">Please provide us your email.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
       <mat-label>Volunteer Opportunity Title</mat-label>
       <input
         matInput
@@ -140,7 +126,7 @@
         name="hoursRequired"
         required
         #hoursRequired="ngModel"
-        placeholder=""
+        placeholder="eg 108"
       />
       <mat-error *ngIf="hoursRequired.invalid"
         >Please provide the minimum number of hours required to be committed for

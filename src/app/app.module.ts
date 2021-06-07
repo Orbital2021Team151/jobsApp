@@ -25,7 +25,7 @@ import { ButtonModule } from 'primeng/button';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { PostCreateComponent } from './posts/posts-create/posts-create.component';
+import { PostCreateAdminComponent } from './posts/posts-create-admin/posts-create-admin.component';
 import { PostFeedComponent } from './posts/posts-feed/posts-feed.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,12 +39,14 @@ import { ErrorInterceptor } from './error-interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './error/error.component';
 import { OrgBoardComponent } from './admin/org-board/org-board.component';
+import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-org.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    PostCreateComponent,
+    PostCreateAdminComponent,
+    PostCreateOrgComponent,
     PostFeedComponent,
     AdminBoardComponent,
     LoginComponent,

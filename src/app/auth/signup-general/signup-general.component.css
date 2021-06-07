@@ -18,7 +18,7 @@ mat-card {
 }
 
 .mat-input-element::placeholder {
-  color: #EEFBFB;
+  color: #7D7D7D;
 }
 
 ::ng-deep .mat-select-arrow {

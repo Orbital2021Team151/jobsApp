@@ -1,10 +1,13 @@
 <div class="filterBar">
-  <mat-card [style]="{ 'background-color': '#203647', 'color' : 'white'}">
+  <mat-card [style]="{ 'background-color': '#203647', color: 'white' }">
     <ng-container>
-      <mat-form-field appearance="outline" [style]="{
-        'color':'white',
-        'background-color': '#203647'
-    }">
+      <mat-form-field
+        appearance="outline"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
         <mat-label>Beneficiaries</mat-label>
         <mat-select
           multiple
@@ -17,9 +20,9 @@
             *ngFor="let beneficiary of beneficiaries"
             [value]="beneficiary"
             [style]="{
-              'color':'white',
+              color: 'white',
               'background-color': '#203647'
-          }"
+            }"
             >{{ beneficiary }}</mat-option
           >
         </mat-select>
@@ -49,7 +52,12 @@
         <mat-date-range-picker #rangePicker touchUi>
           <mat-date-range-picker-actions>
             <button mat-button matDateRangePickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDateRangePickerApply class="apply">
+            <button
+              mat-raised-button
+              color="primary"
+              matDateRangePickerApply
+              class="apply"
+            >
               Apply
             </button>
           </mat-date-range-picker-actions>
@@ -74,8 +82,9 @@
   fxLayoutGap="5.0%"
   fxLayoutAlign="center"
 >
-
-<p *ngIf="noFilteredPost" [style]="{'color':'white'}"><b>No posts match your filter criteria!</b></p>
+  <p *ngIf="noFilteredPost" [style]="{ color: 'white' }">
+    <b>No posts match your filter criteria!</b>
+  </p>
 
   <ng-container *ngFor="let post of filteredPosts">
     <div class="centered">
@@ -88,55 +97,55 @@
             height: '15rem',
             'text-align': 'center',
             'background-color': '#203647',
-            'display': 'block',
-            'overflow':'hidden',
-            'white-space':'nowrap',
+            display: 'block',
+            overflow: 'hidden',
+            'white-space': 'nowrap',
             color: 'white'
           }"
           *ngIf="post.approved"
         >
+          <p-card-header
+            [style]="{
+              'text-overflow': 'ellipsis',
+              width: '22rem',
+              'max-width': '22rem',
+              height: '1.7rem',
+              display: 'block',
+              overflow: 'hidden',
+              'white-space': 'nowrap',
+              color: 'white',
+              'font-size': '1.5rem'
+            }"
+          >
+            <b>{{ post.title }}</b>
+          </p-card-header>
 
-        <p-card-header [style]="{
-          'text-overflow': 'ellipsis',
-          'width': '22rem',
-          'max-width': '22rem',
-          'height':'1.7rem',
-          'display': 'block',
-          'overflow':'hidden',
-          'white-space':'nowrap',
-          'color' : 'white',
-          'font-size' : '1.5rem'
-        }">
+          <p-card-subheader
+            [style]="{
+              height: '3.5rem',
+              display: 'block',
+              overflow: 'hidden',
+              'white-space': 'nowrap',
+              color: '#D9D9D9'
+            }"
+          >
+            {{ post.startDate | date }} to {{ post.endDate | date }}
+          </p-card-subheader>
 
-        <b>{{ post.title }}</b>
-
-        </p-card-header>
-
-        <p-card-subheader [style]="{
-          'height': '3.5rem',
-          'display': 'block',
-          'overflow':'hidden',
-          'white-space':'nowrap',
-          'color': '#D9D9D9'
-        }">
-        {{ post.startDate | date }} to {{ post.endDate | date }}
-        </p-card-subheader>
-
-
-          <p-card-content [style]="{
-            'text-overflow': 'ellipsis',
-            'width': '22rem',
-            'max-width': '22rem',
-            'height' : '3rem',
-            'display': 'block',
-            'overflow':'hidden',
-            'white-space':'nowrap',
-            'color': '#D9D9D9'
-          }">
-
-          {{ post.content }}
-
-        </p-card-content>
+          <p-card-content
+            [style]="{
+              'text-overflow': 'ellipsis',
+              width: '22rem',
+              'max-width': '22rem',
+              height: '3rem',
+              display: 'block',
+              overflow: 'hidden',
+              'white-space': 'nowrap',
+              color: '#D9D9D9'
+            }"
+          >
+            {{ post.content }}
+          </p-card-content>
 
           <ng-template pTemplate="footer" #footer class="footer">
             <p-button
@@ -229,17 +238,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Organization Name: {{ post.orgName }}&hellip;</p>
-        <p>UEN: {{ post.uen }}&hellip;</p>
-        <p>Point of Contact (POC): {{ post.POC }}&hellip;</p>
-        <p>POC's phoneNumber: {{ post.phoneNumber }}&hellip;</p>
-        <p>POC's email: {{ post.email }}&hellip;</p>
-        <p>Brief Description for gig: {{ post.content }}&hellip;</p>
-        <p>Preferred Skills: {{ post.skills }}&hellip;</p>
-        <p>Start Date: {{ post.startDate | date }}&hellip;</p>
-        <p>End Date: {{ post.endDate | date }}&hellip;</p>
-        <p>Commitment Hours: {{ post.hoursRequired }}&hellip;</p>
-        <p>Beneficiaries: {{ post.beneficiaries }}&hellip;</p>
+        <p>
+          Organization Name: {{ post.orgName }}<br />
+          UEN: {{ post.uen }}<br />
+          Point of Contact (POC): {{ post.POC }}<br />
+          POC's phoneNumber: {{ post.phoneNumber }}<br />
+          POC's email: {{ post.email }}<br />
+          Brief Description for gig: {{ post.content }}<br />
+          Preferred Skills: {{ post.skills }}<br />
+          Start Date: {{ post.startDate | date }}<br />
+          End Date: {{ post.endDate | date }}<br />
+          Commitment Hours: {{ post.hoursRequired }}<br />
+          Beneficiaries: {{ post.beneficiaries }}
+        </p>
       </div>
       <div class="modal-footer">
         <button
@@ -263,7 +274,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p>you applied for this before&hellip;</p>
+        <p>you applied for this before</p>
       </div>
       <div class="modal-footer">
         <button
@@ -277,8 +288,14 @@
     </ng-template>
 
     <ng-template #studentContent let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">{{ post.title }} Application</h4>
+      <div
+        class="modal-header"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <h4 class="modal-title">Apply Post: {{ post.title }}</h4>
         <button
           type="button"
           class="submit"
@@ -288,9 +305,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+
+      <div
+        class="modal-body"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
         <form (submit)="submitApplication(post.id, appForm)" #appForm="ngForm">
           <mat-form-field appearance="outline">
+            <mat-label>Contact Number</mat-label>
             <input
               matInput
               type="text"
@@ -298,12 +323,13 @@
               name="contactNumber"
               required
               #contactNumber="ngModel"
-              placeholder="Contact number"
+              placeholder="Please provide the organisation your contact number for them to reach out to you."
               required
             />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
+            <mat-label>Reason for applying</mat-label>
             <input
               matInput
               type="text"
@@ -311,13 +337,21 @@
               name="message"
               required
               #message="ngModel"
-              placeholder="Message to organisation"
+              rows="10"
+              placeholder="Please elaborate on what you can contribute to the project."
               required
             />
           </mat-form-field>
         </form>
       </div>
-      <div class="modal-footer">
+
+      <div
+        class="modal-footer"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
         <button
           type="button"
           class="btn btn-light"
@@ -331,8 +365,14 @@
     </ng-template>
 
     <ng-template #reportContent let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Report post: {{ post.title }}</h4>
+      <div
+        class="modal-header"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <h4 class="modal-title">Report Post: {{ post.title }}</h4>
         <button
           type="button"
           class="submit"
@@ -342,9 +382,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+
+      <div
+        class="modal-body"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
         <form (submit)="submitReport(post.id, reportForm)" #reportForm="ngForm">
           <mat-form-field appearance="outline">
+            <mat-label>Contact Number</mat-label>
             <input
               matInput
               type="text"
@@ -352,12 +400,13 @@
               name="contactNumber"
               required
               #contactNumber="ngModel"
-              placeholder="Contact number"
+              placeholder="Please provide us with your contact number for administrators to get in touch with you."
               required
             />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
+            <mat-label>Reason for reporting</mat-label>
             <input
               matInput
               type="text"
@@ -365,13 +414,20 @@
               name="message"
               required
               #message="ngModel"
-              placeholder="Message to organisation"
+              placeholder="Please help us understand why are you making the report."
               required
             />
           </mat-form-field>
         </form>
       </div>
-      <div class="modal-footer">
+
+      <div
+        class="modal-footer"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
         <button
           type="button"
           class="btn btn-light"

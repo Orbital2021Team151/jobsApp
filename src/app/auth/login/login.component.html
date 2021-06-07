@@ -160,6 +160,7 @@
       <div class="form"></div>
       <form (submit)="onLogin(loginForm)" *ngIf="!isLoading" #loginForm="ngForm">
         <mat-form-field appearance="outline">
+          <mat-label>Email Address</mat-label>
           <input
             matInput
             type="email"
@@ -167,7 +168,7 @@
             ngModel
             required
             #emailInput="ngModel"
-            placeholder="Email Address"
+            placeholder="Enter Email Address Here"
             email
           />
           <mat-error *ngIf="emailInput.invalid"
@@ -259,6 +260,7 @@
     }">
         <form #forgetPasswordForm="ngForm">
           <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
             <input
               matInput
               type="text"
@@ -266,7 +268,7 @@
               name="forgetPasswordEmail"
               required
               #forgetPasswordEmail="ngModel"
-              placeholder="Email"
+              placeholder="Enter your Email Address here"
             />
           </mat-form-field>
 

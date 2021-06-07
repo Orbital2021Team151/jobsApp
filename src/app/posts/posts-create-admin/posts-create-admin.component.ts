@@ -10,8 +10,8 @@ import { PostsService } from '../post.service';
 
 @Component({
   selector: 'app-post-create',
-  templateUrl: './posts-create.component.html',
-  styleUrls: ['./posts-create.component.css'],
+  templateUrl: './posts-create-admin.component.html',
+  styleUrls: ['./posts-create-admin.component.css'],
   encapsulation: ViewEncapsulation.None,
   styles: [
     `
@@ -28,7 +28,7 @@ import { PostsService } from '../post.service';
     `,
   ],
 })
-export class PostCreateComponent implements OnInit, OnDestroy {
+export class PostCreateAdminComponent implements OnInit, OnDestroy {
   pendingApproval: boolean = false;
   public authStatusObject;
   private authStatusSub: Subscription;

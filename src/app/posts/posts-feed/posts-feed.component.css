@@ -18,6 +18,10 @@ input {
   color: #EEFBFB;
 }
 
+.mat-input-element::placeholder {
+  color: #7D7D7D;
+}
+
 .mat-select-value {
   color: #EEFBFB;
 }

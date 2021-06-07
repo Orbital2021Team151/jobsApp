@@ -132,6 +132,9 @@
 
           <ng-template pTemplate="footer" #footer>
 
+            <!--
+            <a mat-button [routerLink]="['/edit', post.id]">Edit</a>
+            -->
             <button class="btn btn-outline-primary mb-2 mr-2" (click)="onMoreInfo(content)">Learn More</button>
 
             <button
@@ -166,23 +169,22 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
-          <p>Organization Name: {{post.orgName}}&hellip;</p>
-          <p>UEN: {{post.uen}}&hellip;</p>
-          <p>Student Group Name: {{post.studentGroupName}}&hellip;</p>
-          <p>Point of Contact (POC): {{post.POC}}&hellip;</p>
-          <p>POC's phoneNumber: {{post.phoneNumber}}&hellip;</p>
-          <p>POC's email: {{post.email}}&hellip;</p>
-          <p>Brief Description for gig: {{post.content}}&hellip;</p>
-          <p>Preferred Skills: {{post.skills}}&hellip;</p>
-          <p>Start Date: {{post.startDate | date}}&hellip;</p>
-          <p>End Date: {{post.endDate | date}}&hellip;</p>
-          <p>Commitment Hours: {{post.hoursRequired}}&hellip;</p>
-          <p>Beneficiaries: &hellip;</p>
-          <div *ngFor="let beneficiary of post.beneficiaries">
-            <p> => {{beneficiary}}</p>
-          </div>
+          <p>Organization Name: {{post.orgName}}</p>
+          <p>UEN: {{post.uen}}</p>
+          <p>Student Group Name: {{post.studentGroupName}}</p>
+          <p>Point of Contact (POC): {{post.POC}}</p>
+          <p>POC's phoneNumber: {{post.phoneNumber}}</p>
+          <p>POC's email: {{post.email}}</p>
+          <p>Brief Description for gig: {{post.content}}</p>
+          <p>Preferred Skills: {{post.skills}}</p>
+          <p>Start Date: {{post.startDate | date}}</p>
+          <p>End Date: {{post.endDate | date}}</p>
+          <p>Commitment Hours: {{post.hoursRequired}}</p>
+          <p>Beneficiaries: {{post.beneficiaries}} </p>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
         </div>

@@ -36,12 +36,21 @@
         <a mat-button routerLink="/signupAdmin" routerLinkActive="mat-primary"> Signup for others </a>
       </li>
 
-      <li *ngIf="userIsAuthenticated">
-        <a mat-button routerLink="/create"
+      <li *ngIf="(userIsAuthenticated) && (authStatusObject.role === 'Admin')">
+        <a mat-button routerLink="/createAdmin"
         routerLinkActive="mat-primary"
-        *ngIf="userIsAuthenticated && (authStatusObject.role !== 'Student')"
         > Create Job Posting</a>
       </li>
+
+      <li *ngIf="(userIsAuthenticated) && ((authStatusObject.role === 'External Organisation') || (authStatusObject.role === 'Student Organisation'))">
+        <a mat-button routerLink="/create"
+        routerLinkActive="mat-primary"
+        > Create Job Posting</a>
+      </li>
+
+
+
+
     </ul>
     <span class="spacer-row-2"></span>
   </mat-toolbar-row>
