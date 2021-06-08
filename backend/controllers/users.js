@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const user = require("../models/user");
 const User = require("../models/user");
 
 
@@ -78,6 +79,66 @@ exports.signupAdmin = (req, res, next) => {
 exports.login = (req, res, next) => {
   let fetchedUser;
 
+  User.findOne({email: req.body.email, role: req.body.role}).then(userFound => {
+
+    if (userFound === null) {
+      throw new Error ("No such user");
+    }
+
+    //console.log("Users found are as follows: ");
+    //console.log(userFound);
+
+    fetchedUser = userFound;
+
+    return bcrypt.compare(req.body.password, userFound.password).then(result => {
+      //console.log("result of hashed password and password in database is: ");
+      //console.log(result);
+
+
+      if (!result) {
+        throw new Error("Wrong Password!");
+      } else {
+        const token = jwt.sign(
+          {
+            email: fetchedUser.email,
+            userId: fetchedUser._id,
+            role: fetchedUser.role,
+          },
+          process.env.JWT_KEY,
+          { expiresIn: "1h" }
+        );
+
+        res.status(200).json({
+          token: token,
+          expiresIn: 3600,
+          id: fetchedUser._id,
+          email: fetchedUser.email,
+          password: fetchedUser.password,
+          role: fetchedUser.role,
+          orgName: fetchedUser.orgName,
+          uen: fetchedUser.uen,
+          beneficiaries: fetchedUser.beneficiaries,
+        });
+
+        //console.log("is fetchedUser verified?");
+        //console.log(fetchedUser.verified);
+
+        return true && fetchedUser.verified;
+      }
+
+    })
+
+    .catch(err => {
+      res.status(401).json({message: "Wrong Password"});
+    })
+
+  })
+
+  .catch(err => {
+    res.status(404).json({message: "Unable to login", err: err})
+  });
+
+  /*
   User.findOne({
     email: req.body.email,
     role: req.body.role,
@@ -91,6 +152,11 @@ exports.login = (req, res, next) => {
       }
 
       fetchedUser = user;
+      console.log("At login step. the data field for password is: ");
+      console.log(req.body.password);
+      console.log("Meanwhile, the encrypted password is: ");
+      console.log(user.password);
+
       return bcrypt.compare(req.body.password, user.password) && user.verified;
     })
 
@@ -129,6 +195,8 @@ exports.login = (req, res, next) => {
         message: err,
       });
     });
+
+    */
 };
 
 exports.updateBeneficiaries = (req, res, next) => {
@@ -153,6 +221,7 @@ exports.updateBeneficiaries = (req, res, next) => {
       beneficiaries: req.body.beneficiaries, //only difference
       verified: true,
     });
+
     User.updateOne(
       { email: req.body.email, role: req.body.role },
       newUser
@@ -182,7 +251,7 @@ exports.updatePassword = (req, res, next) => {
 
       fetchedUser = user;
 
-      return bcrypt.compare(req.body.currentPassword, user.password)
+      return bcrypt.compare(req.body.currentPassword, user.password);
     })
 
     .then(result => {
@@ -206,10 +275,13 @@ exports.updatePassword = (req, res, next) => {
           verified: true,
         });
 
-        User.updateOne(
-          { email: req.body.email, role: req.body.role },
+        User.updateMany(
+          { _id: fetchedUser.id, email: req.body.email, role: req.body.role },
           newUser
         ).then((result) => {
+          if (!result) {
+            throw new Error("User password could not be updated!?");
+          }
           res.status(200).json("User password updated!");
         });
       });
@@ -217,7 +289,7 @@ exports.updatePassword = (req, res, next) => {
 
     .catch(error => {
       return res.status(412).json({
-        message: "Current password provided was wrong.",
+        message: "Current password provided was wrong or for some reason, could not update password :/",
         error: error,
       });
     });

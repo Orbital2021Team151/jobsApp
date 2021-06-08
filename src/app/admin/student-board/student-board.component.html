@@ -65,13 +65,13 @@
         class="btn btn-outline-primary mb-2 mr-2"
         (click)="onChangePassword(changePasswordForm)"
       >
-        Request
+        Change Password
       </button>
 
 
     </form>
 
-    <mat-form-field appearance="outline" class="beneficiaries" text-center>
+    <mat-form-field appearance="outline" class="beneficiaries" text-center [style]="{'margin-left': '0.5rem', 'margin-right': '0.5rem', 'color' : 'white'}">
       <mat-label>Beneficiaries</mat-label>
       <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected" [style]="{
         'color':'white',
@@ -84,13 +84,12 @@
       </mat-select>
     </mat-form-field>
 
-    <p-button
-                class="updateUser"
-                label="Update"
-                icon="pi pi-check"
-                styleClass="p-button-info"
-                (click)="updateUser()"
-              ></p-button>
+    <button
+        class="btn btn-outline-primary mb-2 mr-2"
+        (click)="updateUser()"
+      >
+        Update Interested Beneficiaries
+      </button>
 
   </mat-card>
 
