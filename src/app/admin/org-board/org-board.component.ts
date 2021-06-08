@@ -88,6 +88,10 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     }
   }
 
+  onDeletePrompt(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
   onDeleteAppliedPost(postId: string) {
     this.postsService.deletePost(postId);
     this.appliedPostsNumber--;

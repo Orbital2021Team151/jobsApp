@@ -84,17 +84,9 @@ exports.login = (req, res, next) => {
     if (userFound === null) {
       throw new Error ("No such user");
     }
-
-    //console.log("Users found are as follows: ");
-    //console.log(userFound);
-
     fetchedUser = userFound;
 
     return bcrypt.compare(req.body.password, userFound.password).then(result => {
-      //console.log("result of hashed password and password in database is: ");
-      //console.log(result);
-
-
       if (!result) {
         throw new Error("Wrong Password!");
       } else {
@@ -108,6 +100,7 @@ exports.login = (req, res, next) => {
           { expiresIn: "1h" }
         );
 
+        //TODO: This logic here is probably the cause behind the weird layout if our token expires etc. Need to redo this logic if it causes more issues.
         res.status(200).json({
           token: token,
           expiresIn: 3600,
@@ -119,19 +112,13 @@ exports.login = (req, res, next) => {
           uen: fetchedUser.uen,
           beneficiaries: fetchedUser.beneficiaries,
         });
-
-        //console.log("is fetchedUser verified?");
-        //console.log(fetchedUser.verified);
-
         return true && fetchedUser.verified;
       }
 
     })
-
     .catch(err => {
       res.status(401).json({message: "Wrong Password"});
     })
-
   })
 
   .catch(err => {

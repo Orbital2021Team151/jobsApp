@@ -115,8 +115,13 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   }
 
+  onDeletePrompt(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
   onDelete(postId: string) {
     this.postsService.deletePost(postId);
+    return true;
   }
 
   onMoreInfo(content) {
