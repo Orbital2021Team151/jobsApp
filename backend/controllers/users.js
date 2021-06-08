@@ -137,66 +137,6 @@ exports.login = (req, res, next) => {
   .catch(err => {
     res.status(404).json({message: "Unable to login", err: err})
   });
-
-  /*
-  User.findOne({
-    email: req.body.email,
-    role: req.body.role,
-  })
-
-    .then((user) => {
-
-      if (!user) {
-        //console.log("No user detected at login. at login controllers users.js line 89");
-        throw new Error("Authentication Failed. User does not exist in database.");
-      }
-
-      fetchedUser = user;
-      console.log("At login step. the data field for password is: ");
-      console.log(req.body.password);
-      console.log("Meanwhile, the encrypted password is: ");
-      console.log(user.password);
-
-      return bcrypt.compare(req.body.password, user.password) && user.verified;
-    })
-
-    .then((result) => {
-
-      if (!result) {
-        //console.log("Either your account is not activated, or you typed in the wrong password. at login controllers users.js line 100");
-        throw new Error("Authentication Failed!");
-      }
-
-      const token = jwt.sign(
-        {
-          email: fetchedUser.email,
-          userId: fetchedUser._id,
-          role: fetchedUser.role,
-        },
-        process.env.JWT_KEY,
-        { expiresIn: "1h" }
-      );
-
-      res.status(200).json({
-        token: token,
-        expiresIn: 3600,
-        id: fetchedUser._id,
-        email: fetchedUser.email,
-        password: fetchedUser.password,
-        role: fetchedUser.role,
-        orgName: fetchedUser.orgName,
-        uen: fetchedUser.uen,
-        beneficiaries: fetchedUser.beneficiaries,
-      });
-    })
-
-    .catch((err) => {
-      return res.status(401).json({
-        message: err,
-      });
-    });
-
-    */
 };
 
 exports.updateBeneficiaries = (req, res, next) => {
