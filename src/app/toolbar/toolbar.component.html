@@ -27,8 +27,8 @@
         <a mat-button routerLink="/feed" routerLinkActive="mat-primary"> Feed</a>
 
         <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> Admin Dashboard</a>
-        <a *ngIf="userIsAuthenticated && (authStatusObject.role !== 'Admin') && (authStatusObject.role !== 'Student')" mat-button routerLink="/organisation" routerLinkActive="mat-primary"> {{authStatusObject.orgName}} Dashboard</a>
-        <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Student')" mat-button routerLink="/student" routerLinkActive="mat-primary"> Student Dashboard</a>
+        <a *ngIf="userIsAuthenticated && ((authStatusObject.role === 'External Organisation') || (authStatusObject.role === 'Student Organisation'))" mat-button routerLink="/organisation" routerLinkActive="mat-primary"> {{authStatusObject.orgName}} Dashboard</a>
+        <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Student')" mat-button routerLink="/student-alumni" routerLinkActive="mat-primary"> Student / Alumni Dashboard</a>
       </li>
 
 

@@ -9,7 +9,7 @@ import { AuthService } from "../auth.service";
 })
 export class SignupAdminComponent implements OnInit, OnDestroy {
   isLoading = false;
-  roles: any = ["Admin", "External Organisation", "Student Organisation", "Student"];
+  roles: any = ["Admin", "External Organisation", "Student Organisation", "Student / NUS Alumni"];
   hidePassword = true;
   signedUp: boolean;
   //private authStatusObject;
@@ -34,20 +34,20 @@ export class SignupAdminComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
-    this.authService.createUserAdmin(form.value.email, form.value.password, form.value.role, form.value.orgName, form.value.uen);
+
+    var selectedRole = "";
+    if (form.value.role === "Student / NUS Alumni") {
+      selectedRole = "Student";
+    } else {
+      selectedRole = form.value.role;
+    }
+
+    this.authService.createUserAdmin(form.value.email, form.value.password, selectedRole, form.value.orgName, form.value.uen);
 
     //IDK IF THIS FIXES IT BUT I THINK IT IS WORKING?
     this.authService.getSignupListener().subscribe(result => {
       this.signedUp = result;
     });
-
-    /*
-    if (this.authService.signedUp) {
-      this.signedUp = true;
-    } else {
-      this.signedUp = false;
-    }
-    */
 
   }
 

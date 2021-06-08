@@ -14,7 +14,7 @@ import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-or
 const routes: Routes = [
   { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminBoardComponent, canActivate: [AuthGuard], data: { roles: ["Admin"]}},
-  { path: 'student', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student"] }},
+  { path: 'student-alumni', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student"] }},
   { path: 'organisation', component: OrgBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student Organisation", "External Organisation"] }},
 
   {

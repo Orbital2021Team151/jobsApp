@@ -10,7 +10,7 @@ import { AuthService } from "../auth.service";
 })
 export class SignupGeneralComponent implements OnInit, OnDestroy {
   isLoading = false;
-  roles: any = ["External Organisation", "Student Organisation", "Student"];
+  roles: any = ["External Organisation", "Student Organisation", "Student / NUS Alumni"];
   hidePassword = true;
   signedUp: boolean;
   private authStatusSub: Subscription;
@@ -32,10 +32,19 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
+
+    var selectedRole = "";
+    if (form.value.role === "Student / NUS Alumni") {
+      selectedRole = "Student";
+    } else {
+      selectedRole = form.value.role;
+    }
+
+
     this.authService.createUser(
       form.value.email,
       form.value.password,
-      form.value.role,
+      selectedRole,
       form.value.orgName,
       form.value.uen
     );
