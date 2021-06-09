@@ -3,6 +3,7 @@
   <div class="form"></div>
   <form *ngIf="!isLoading" #loginForm="ngForm">
     <mat-form-field appearance="outline">
+      <mat-label>Email Address</mat-label>
       <input
         matInput
         type="email"
@@ -10,7 +11,7 @@
         ngModel
         required
         #emailInput="ngModel"
-        placeholder="Email Address"
+        placeholder="Please enter your Email Address here"
         email
       />
       <mat-error *ngIf="emailInput.invalid"

@@ -74,6 +74,12 @@
   </mat-card>
 </div>
 
+
+
+
+
+
+<!--
 <div
   fxLayout="row wrap"
   fxLayout.xs="column"
@@ -504,6 +510,7 @@
 <p class="info-text mat-body-1" *ngIf="!hasApproved">
   No jobs listing currently available!
 </p>
+-->
 
 
 
@@ -530,14 +537,12 @@
 
 
 <div
-  fxLayout="col wrap"
-  fxLayout.xs="row"
-  fxLayoutWrap
-  fxLayoutGap="5.0%"
-  fxLayoutAlign="center"
+  fxLayout="column"
+  fxLayout.xs="col"
+  fxLayoutGap="1.0%"
+  fxLayoutAlign="space-around center"
 >
   <ng-container *ngFor="let post of filteredPosts">
-    <div class="centered">
       <section class="cards">
         <p-card
           class="card"
@@ -548,7 +553,6 @@
             'background-color': '#203647',
             display: 'block',
             overflow: 'hidden',
-            'white-space': 'nowrap',
             color: 'white'
           }"
           *ngIf="post.approved"
@@ -582,7 +586,7 @@
             {{ post.startDate | date }} to {{ post.endDate | date }}
           </p-card-subheader>
 
-          <p-card-content class="cardContent"
+          <p-card-content class="pCardContent"
           >
           <p>{{ post.content }}</p>
           </p-card-content>
@@ -637,7 +641,6 @@
           </ng-template>
         </p-card>
       </section>
-    </div>
 
     <ng-template #messageForStudent let-modal>
       <div class="modal-header">
