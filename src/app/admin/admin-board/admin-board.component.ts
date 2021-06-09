@@ -72,7 +72,10 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
           this.reportedPostsNumber = this.posts.filter(post => post.reports.length > 0).length;
         }
       });
+  }
 
+  onDeletePrompt(content) {
+    this.modalService.open(content, { size: 'lg' });
   }
 
   onDelete(postId: string) {
@@ -85,6 +88,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     if (this.reportedPostsNumber === 0) {
       this.hasReport = false;
     }
+    return true;
   }
 
   onDeleteReportedPost(postId: string) {
@@ -94,8 +98,8 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     if (this.reportedPostsNumber === 0) {
       this.hasReport = false;
     }
+    return true;
   }
-
 
   onPublish(postId: string, publishContent) {
 

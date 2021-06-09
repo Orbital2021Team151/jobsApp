@@ -183,7 +183,7 @@
 
             <button
               class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onDelete(post.id)"
+              (click)="onDeletePrompt(deleteUnapprovedContent)"
             >
               Delete
             </button>
@@ -239,6 +239,73 @@
           </button>
         </div>
       </ng-template>
+<<<<<<< HEAD
+=======
+
+
+
+      <ng-template #deleteUnapprovedContent let-modal>
+        <div
+          class="modal-header"
+          [style]="{
+            color: 'white',
+            'background-color': '#203647'
+          }"
+        >
+          <h4 class="modal-title">Delete Confirmation</h4>
+          <button
+            type="button"
+            class="submit"
+            aria-label="apply"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div
+          class="modal-body"
+          [style]="{
+            color: 'white',
+            'background-color': '#203647'
+          }"
+        >
+        <p>Are you sure you want to delete the post?</p>
+        </div>
+
+        <div
+          class="modal-footer"
+          [style]="{
+            color: 'white',
+            'background-color': '#203647'
+          }"
+        >
+
+        <button
+            type="button"
+            class="btn btn-light"
+            (click)="
+            onDelete(post.id) && modal.dismiss('Cross click')
+            "
+          >
+            Confirm Delete
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-light"
+            (click)="modal.dismiss('Cross click')"
+          >
+            Cancel
+          </button>
+        </div>
+      </ng-template>
+
+
+
+
+
+>>>>>>> 1a6899c5f604ec9b95bbf1b0e2de7881911a14d9
     </div>
   </div>
 
@@ -335,7 +402,7 @@
 
             <button
               class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onDeleteAppliedPost(post.id)"
+              (click)="onDeletePrompt(deleteAppliedContent)"
             >
               Delete
             </button>
@@ -418,6 +485,71 @@
           </button>
         </div>
       </ng-template>
+
+
+      <ng-template #deleteAppliedContent let-modal>
+        <div
+          class="modal-header"
+          [style]="{
+            color: 'white',
+            'background-color': '#203647'
+          }"
+        >
+          <h4 class="modal-title">Delete Confirmation</h4>
+          <button
+            type="button"
+            class="submit"
+            aria-label="apply"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div
+          class="modal-body"
+          [style]="{
+            color: 'white',
+            'background-color': '#203647'
+          }"
+        >
+        <p>Are you sure you want to delete the post?</p>
+        </div>
+
+        <div
+          class="modal-footer"
+          [style]="{
+            color: 'white',
+            'background-color': '#203647'
+          }"
+        >
+
+        <button
+            type="button"
+            class="btn btn-light"
+            (click)="
+            onDeleteAppliedPost(post.id) && modal.dismiss('Cross click')
+            "
+          >
+            Confirm Delete
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-light"
+            (click)="modal.dismiss('Cross click')"
+          >
+            Cancel
+          </button>
+        </div>
+      </ng-template>
+
+
+
+
+
+
+
     </div>
   </div>
 
