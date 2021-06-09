@@ -42,6 +42,7 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   public hasRequest: Boolean;
   hasApplication: Boolean;
   postToBeDeleted: string;
+  requestedNewPassword = false;
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
@@ -103,6 +104,11 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
 
   onChangePassword(form: NgForm) {
     this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
+    this.requestedNewPassword = true;
+  }
+
+  closeNotification() {
+    this.requestedNewPassword = false;
   }
 
   ngOnDestroy() {

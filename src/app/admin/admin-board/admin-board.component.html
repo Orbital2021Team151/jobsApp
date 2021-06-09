@@ -67,6 +67,23 @@
   </mat-card>
 </div>
 
+<div
+  *ngIf="requestedNewPassword"
+  class="alert alert-success alert-dismissible fade show"
+  role="alert"
+>
+  <strong>Password changed!</strong>
+  <button
+    (click)="closeNotification()"
+    type="button"
+    class="close"
+    data-dismiss="alert"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
 <div>
   <p
     class="info-text mat-body-1"

@@ -30,8 +30,8 @@ const routes: Routes = [
    data: { roles: ["Admin"]}
   },
 
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupGeneralComponent },
+  { path: 'login', component: LoginComponent, data: { animation: 'isRight' }},
+  { path: 'signup', component: SignupGeneralComponent, data: { animation: 'isLeft' }},
   { path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
 ];
 

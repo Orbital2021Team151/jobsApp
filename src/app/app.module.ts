@@ -80,6 +80,7 @@ import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-or
     CardModule,
     ButtonModule,
     NgbModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

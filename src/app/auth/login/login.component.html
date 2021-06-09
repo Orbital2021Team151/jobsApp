@@ -1,4 +1,4 @@
-<!-- <img src="./../../../assets/login-picture.png">
+
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <div class="form"></div>
@@ -138,19 +138,24 @@
   </div>
 
   <div class="modal-footer">
+    <script>
+      let notifier = new AWN({animationDuration: 300});
+    </script>
     <button
       type="button"
       class="btn btn-light"
       (click)="
-        onForgetPassword(forgetPasswordForm) && modal.dismiss('Cross click')
+        onForgetPassword(forgetPasswordForm) &&
+        modal.dismiss('Cross click') &&
+        notifier.success('Success', {animationDuration: 300})
       "
     >
-      Send forgetPassword
+      Send new password!
     </button>
   </div>
-</ng-template> -->
+</ng-template>
 
-<div class="grid-container">
+<!-- <div class="grid-container">
   <div class="picture">
     <img src="./../../../assets/login-picture.png">
   </div>
@@ -318,4 +323,4 @@
       </div>
     </ng-template>
   </div>
-</div>
+</div> -->

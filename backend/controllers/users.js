@@ -246,7 +246,7 @@ const sendVerificationEmail = (email, uniqueString) => {
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      pass: process.env.EMAIL_PASSWORD
+      pass: "newP@s5w0rd_123"
     },
     tls: {
       rejectUnauthorized: false,
@@ -310,7 +310,7 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      pass: process.env.EMAIL_PASSWORD
+      pass: "newP@s5w0rd_123"
     },
     tls: {
       rejectUnauthorized: false,

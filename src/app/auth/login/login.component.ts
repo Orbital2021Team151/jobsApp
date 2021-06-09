@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth.service";
+import { AWN } from "awesome-notifications";
 
 @Component({
   templateUrl: './login.component.html',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   hidePassword = true;
   authStatusSub: Subscription;
   loggedIn: boolean;
+  newPasswordSent = false;
 
 
   constructor(public authService: AuthService, private modalService: NgbModal) {}
@@ -39,7 +41,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onOpenForgetPassword(forgetPasswordContent) {
     this.modalService.open(forgetPasswordContent, { size: 'lg' });
-
   }
   onForgetPassword(form: NgForm) {
     if (form.invalid) {
@@ -51,6 +52,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     //console.log(form.value.forgetPasswordRole);
 
     this.authService.forgetPassword(form.value.forgetPasswordEmail, form.value.forgetPasswordRole);
+    this.newPasswordSent = true;
+    let globalOptions = {};
+    let notifier = new AWN(globalOptions);
+    let nextCallOptions = {};
+    notifier.success('Success', nextCallOptions);
+
+  }
+
+  closeNotification() {
+    this.newPasswordSent = false;
   }
 
   ngOnDestroy() {
