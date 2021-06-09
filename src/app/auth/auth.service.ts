@@ -33,6 +33,7 @@ export class AuthService {
   }>();
 
   private signupListener = new Subject<boolean>();
+  private loginListener = new Subject<boolean>();
 
   private isAuthenticated = false;
   private tokenTimer: any;
@@ -58,6 +59,10 @@ export class AuthService {
 
   getSignupListener() {
     return this.signupListener.asObservable();
+  }
+
+  getLoginListener() {
+    return this.loginListener.asObservable();
   }
 
   createUser(
@@ -330,8 +335,11 @@ export class AuthService {
       .subscribe((response) => {
         console.log("User's password reset! At authService.ts");
         console.log(response);
+        this.loginListener.next(true);
+      },
+      (error) => {
+        console.log(error);
       });
-
   }
 
 

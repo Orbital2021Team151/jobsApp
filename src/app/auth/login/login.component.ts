@@ -3,7 +3,6 @@ import { NgForm } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth.service";
-import { AWN } from "awesome-notifications";
 
 @Component({
   templateUrl: './login.component.html',
@@ -52,12 +51,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     //console.log(form.value.forgetPasswordRole);
 
     this.authService.forgetPassword(form.value.forgetPasswordEmail, form.value.forgetPasswordRole);
-    this.newPasswordSent = true;
-    let globalOptions = {};
-    let notifier = new AWN(globalOptions);
-    let nextCallOptions = {};
-    notifier.success('Success', nextCallOptions);
-
+    this.authService.getLoginListener().subscribe((res) => {
+      this.newPasswordSent = res;
+    });
   }
 
   closeNotification() {
