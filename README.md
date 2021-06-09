@@ -59,3 +59,5 @@ npm install -g @angular/cli@11<br>
 * npm install --save @fortawesome/fontawesome-free
 
 * npm i awesome-notifications
+
+//NEED TO FIND AN ALTERNATIVE TO SOCKET IO
