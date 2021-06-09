@@ -82,6 +82,14 @@ input {
   margin: 0 auto;
 }
 
+.cardContent p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media screen {
   .cards {
     display: flex;
@@ -94,4 +102,5 @@ input {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+
 }
