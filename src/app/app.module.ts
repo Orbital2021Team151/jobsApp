@@ -17,6 +17,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgChatModule } from 'ng-chat';
 
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -37,9 +38,13 @@ import { SignupGeneralComponent } from './auth/signup-general/signup-general.com
 import { StudentBoardComponent } from './admin/student-board/student-board.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ErrorComponent } from './error/error.component';
+import { ForgetPasswordErrorComponent } from './errors/forget-password-error/forget-password-error.component';
 import { OrgBoardComponent } from './admin/org-board/org-board.component';
 import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-org.component';
+import { LoginWrongPasswordErrorComponent } from './errors/login-wrong-password-error/login-wrong-password-error.component';
+import { UpdatePasswordErrorComponent } from './errors/update-password-error/update-password-error.component';
+import { LoginGeneralErrorComponent } from './errors/login-general-error/login-general-error.component';
+import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-before-error.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +59,11 @@ import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-or
     SignupGeneralComponent,
     StudentBoardComponent,
     OrgBoardComponent,
-    ErrorComponent,
+    ForgetPasswordErrorComponent,
+    LoginWrongPasswordErrorComponent,
+    UpdatePasswordErrorComponent,
+    LoginGeneralErrorComponent,
+    SignupBeforeErrorComponent
   ],
 
   imports: [
@@ -81,12 +90,19 @@ import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-or
     ButtonModule,
     NgbModule,
     BrowserAnimationsModule,
+    NgChatModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent],
+  entryComponents: [
+    ForgetPasswordErrorComponent,
+    LoginWrongPasswordErrorComponent,
+    UpdatePasswordErrorComponent,
+    LoginGeneralErrorComponent,
+    SignupBeforeErrorComponent,
+  ],
 })
 export class AppModule { }

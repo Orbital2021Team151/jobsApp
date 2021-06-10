@@ -56,6 +56,4 @@ npm install -g @angular/cli@11<br>
 
 * npm install jsonwebtoken
 
-* npm install --save @fortawesome/fontawesome-free
-
-* npm i awesome-notifications
+* npm install ng-chat

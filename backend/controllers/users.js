@@ -32,6 +32,7 @@ exports.signupGeneral = (req, res, next) => {
 
       .catch((err) => {
         res.status(500).json({
+          errorCode: 5, //same as below because it's the same error.
           message: "You probably signed up before using this email before...",
           error: err,
         });
@@ -68,6 +69,7 @@ exports.signupAdmin = (req, res, next) => {
       .catch((err) => {
 
         res.status(500).json({
+          errorCode: 5,
           message: "You probably signed up before using this email before...",
           result: err,
         });
@@ -117,12 +119,18 @@ exports.login = (req, res, next) => {
 
     })
     .catch(err => {
-      res.status(401).json({message: "Wrong Password"});
+      res.status(401).json({
+        errorCode: 2,
+        message: "Wrong Password"
+      });
     })
   })
 
   .catch(err => {
-    res.status(404).json({message: "Unable to login", err: err})
+    res.status(404).json({
+      errorCode: 3,
+      message: "Unable to login",
+      err: err})
   });
 };
 
@@ -216,6 +224,7 @@ exports.updatePassword = (req, res, next) => {
 
     .catch(error => {
       return res.status(412).json({
+        errorCode: 4,
         message: "Current password provided was wrong or for some reason, could not update password :/",
         error: error,
       });
@@ -294,6 +303,7 @@ exports.sendMail = (req, res) => {
     })
     .catch(err => {
       res.status(401).json({
+        errorCode: 6,
         message: "User not found",
       });
     });
@@ -388,6 +398,7 @@ exports.forgetPassword = (req, res) => {
 
   .catch(error => {
     return res.status(412).json({
+      errorCode: 1,
       message: "Current email provided was wrong or user with that role does not exist in database.",
       error: error,
     });

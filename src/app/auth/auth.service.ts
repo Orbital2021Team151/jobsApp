@@ -34,6 +34,7 @@ export class AuthService {
 
   private signupListener = new Subject<boolean>();
   private loginListener = new Subject<boolean>();
+  private changedPasswordListener = new Subject<boolean>();
 
   private isAuthenticated = false;
   private tokenTimer: any;
@@ -63,6 +64,10 @@ export class AuthService {
 
   getLoginListener() {
     return this.loginListener.asObservable();
+  }
+
+  getChangedPasswordListener() {
+    return this.changedPasswordListener.asObservable();
   }
 
   createUser(
@@ -323,6 +328,7 @@ export class AuthService {
       .put(BACKEND_URL + 'api/user/updatePassword', userObject)
       .subscribe((response) => {
         console.log("User's password updated! At authService.ts");
+        this.changedPasswordListener.next(true);
         console.log(response);
       });
   }

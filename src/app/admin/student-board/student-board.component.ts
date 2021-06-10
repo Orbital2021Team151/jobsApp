@@ -36,6 +36,7 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   postToBeDeleted: string;
   hideCurrentPassword = true;
   hideNewPassword = true;
+  requestedNewPassword = false;
 
   private authStatusObject;
   beneficiaries: string[] = [
@@ -81,6 +82,13 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
 
   onChangePassword(form: NgForm) {
     this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
+    this.authService.getChangedPasswordListener().subscribe(res => {
+      this.requestedNewPassword = res;
+    });
+  }
+
+  closeNotification() {
+    this.requestedNewPassword = false;
   }
 
   ngOnDestroy() {}

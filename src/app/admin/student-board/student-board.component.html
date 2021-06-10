@@ -1,11 +1,15 @@
 <!-- <p>STUDENT's board is supposed to be here!!!!!</p> -->
 <div class="changeInfoBar">
-
-  <mat-card [style]="{'background-color': '#203647'}">
-
+  <mat-card [style]="{ 'background-color': '#203647' }">
     <form #changePasswordForm="ngForm" class="changePasswordForm">
-
-      <mat-form-field appearance="outline" [style]="{'margin-left': '0.5rem', 'margin-right': '0.5rem', 'color' : 'white'}">
+      <mat-form-field
+        appearance="outline"
+        [style]="{
+          'margin-left': '0.5rem',
+          'margin-right': '0.5rem',
+          color: 'white'
+        }"
+      >
         <input
           matInput
           [type]="hideCurrentPassword ? 'password' : 'text'"
@@ -33,7 +37,14 @@
         >
       </mat-form-field>
 
-      <mat-form-field appearance="outline" [style]="{'margin-left': '0.5rem', 'margin-right': '0.5rem', 'color' : 'white'}">
+      <mat-form-field
+        appearance="outline"
+        [style]="{
+          'margin-left': '0.5rem',
+          'margin-right': '0.5rem',
+          color: 'white'
+        }"
+      >
         <input
           matInput
           [type]="hideNewPassword ? 'password' : 'text'"
@@ -67,30 +78,61 @@
       >
         Change Password
       </button>
-
-
     </form>
 
-    <mat-form-field appearance="outline" class="beneficiaries" text-center [style]="{'margin-left': '0.5rem', 'margin-right': '0.5rem', 'color' : 'white'}">
+    <div
+      *ngIf="requestedNewPassword"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>Password changed!</strong>
+      <button
+        (click)="closeNotification()"
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <mat-form-field
+      appearance="outline"
+      class="beneficiaries"
+      text-center
+      [style]="{
+        'margin-left': '0.5rem',
+        'margin-right': '0.5rem',
+        color: 'white'
+      }"
+    >
       <mat-label>Beneficiaries</mat-label>
-      <mat-select multiple ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected" [style]="{
-        'color':'white',
-        'background-color': '#203647'
-    }">
-        <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary" [style]="{
-          'color':'white',
+      <mat-select
+        multiple
+        ngModel
+        #beneficiariesInput="ngModel"
+        name="beneficiariesSelected"
+        [(ngModel)]="beneficiariesSelected"
+        [style]="{
+          color: 'white',
           'background-color': '#203647'
-      }">{{beneficiary}}</mat-option>
+        }"
+      >
+        <mat-option
+          *ngFor="let beneficiary of beneficiaries"
+          [value]="beneficiary"
+          [style]="{
+            color: 'white',
+            'background-color': '#203647'
+          }"
+          >{{ beneficiary }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
 
-    <button
-        class="btn btn-outline-primary mb-2 mr-2"
-        (click)="updateUser()"
-      >
-        Update Interested Beneficiaries
-      </button>
-
+    <button class="btn btn-outline-primary mb-2 mr-2" (click)="updateUser()">
+      Update Interested Beneficiaries
+    </button>
   </mat-card>
-
 </div>

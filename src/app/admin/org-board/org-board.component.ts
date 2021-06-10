@@ -108,7 +108,9 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
 
   onChangePassword(form: NgForm) {
     this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
-    this.requestedNewPassword = true;
+    this.authService.getChangedPasswordListener().subscribe(res => {
+      this.requestedNewPassword = res;
+    });
   }
 
   closeNotification() {
