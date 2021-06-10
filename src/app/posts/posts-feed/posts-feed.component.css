@@ -82,6 +82,16 @@ input {
   margin: 0 auto;
 }
 
+.pCardContent p {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 10rem;
+}
+
+
 @media screen {
   .cards {
     display: flex;
@@ -91,7 +101,8 @@ input {
 
   .card {
     background-color: #4da8da;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
   }
+
 }

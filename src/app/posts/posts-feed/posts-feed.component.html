@@ -74,6 +74,12 @@
   </mat-card>
 </div>
 
+
+
+
+
+
+<!--
 <div
   fxLayout="row wrap"
   fxLayout.xs="column"
@@ -504,3 +510,449 @@
 <p class="info-text mat-body-1" *ngIf="!hasApproved">
   No jobs listing currently available!
 </p>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+  fxLayout="column"
+  fxLayout.xs="col"
+  fxLayoutGap="1.0%"
+  fxLayoutAlign="space-around center"
+>
+  <ng-container *ngFor="let post of filteredPosts">
+      <section class="cards">
+        <p-card
+          class="card"
+          [style]="{
+            height: '25rem',
+            width: '50rem',
+            'text-align': 'center',
+            'background-color': '#203647',
+            display: 'block',
+            overflow: 'hidden',
+            color: 'white'
+          }"
+          *ngIf="post.approved"
+        >
+          <p-card-header
+            [style]="{
+              'text-overflow': 'ellipsis',
+              width: '45rem',
+              'max-width': '45rem',
+              'text-align': 'center',
+              height: '1.7rem',
+              display: 'block',
+              overflow: 'hidden',
+              'white-space': 'nowrap',
+              color: 'white',
+              'font-size': '1.5rem'
+            }"
+          >
+            <b>{{ post.title }}</b>
+          </p-card-header>
+
+          <p-card-subheader
+            [style]="{
+              height: '3.5rem',
+              display: 'block',
+              overflow: 'hidden',
+              'white-space': 'nowrap',
+              color: '#D9D9D9'
+            }"
+          >
+            {{ post.startDate | date }} to {{ post.endDate | date }}
+          </p-card-subheader>
+
+          <p-card-content class="pCardContent"
+          >
+          <p>{{ post.content }}</p>
+          </p-card-content>
+
+          <ng-template pTemplate="footer" #footer class="footer">
+            <p-button
+              *ngIf="userRole === 'Student'"
+              class="report"
+              label="Report"
+              icon="pi pi-exclamation-circle"
+              styleClass="p-button-info"
+              (click)="
+                onReport(
+                  post.id,
+                  'You reported this post before!',
+                  reportContent
+                )
+              "
+            ></p-button>
+
+            <p-button
+              class="learnMore"
+              label="Learn"
+              icon="pi pi-search-plus"
+              styleClass="p-button-info"
+              (click)="onMoreInfo(content)"
+            ></p-button>
+
+            <p-button
+              *ngIf="userRole === 'Student'"
+              class="apply"
+              label="Apply"
+              icon="pi pi-heart"
+              styleClass="p-button-info"
+              (click)="
+                onApply(
+                  post.id,
+                  'You have applied to this post before!',
+                  studentContent
+                )
+              "
+            ></p-button>
+
+            <p-button
+              *ngIf="userRole === 'Admin' || post.uen === authStatusObject.uen"
+              class="delete"
+              label="Delete"
+              icon="pi pi-times"
+              styleClass="p-button-secondary"
+              (click)="onDeletePrompt(deleteContent)"
+            ></p-button>
+          </ng-template>
+        </p-card>
+      </section>
+
+    <ng-template #messageForStudent let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Publish Success</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Post Published Successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="modal.close('Close click')"
+        >
+          Back
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">{{ post.title }}</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Organization Name: {{ post.orgName }}<br />
+          UEN: {{ post.uen }}<br />
+          Point of Contact (POC): {{ post.POC }}<br />
+          POC's phoneNumber: {{ post.phoneNumber }}<br />
+          POC's email: {{ post.email }}<br />
+          Brief Description for gig: {{ post.content }}<br />
+          Preferred Skills: {{ post.skills }}<br />
+          Start Date: {{ post.startDate | date }}<br />
+          End Date: {{ post.endDate | date }}<br />
+          Commitment Hours: {{ post.hoursRequired }}<br />
+          Beneficiaries: {{ post.beneficiaries }}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="modal.close('Close click')"
+        >
+          Close
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template #error let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Applied Before</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>you applied for this before</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="modal.close('Close click')"
+        >
+          Close
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template #studentContent let-modal>
+      <div
+        class="modal-header"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <h4 class="modal-title">Apply Post: {{ post.title }}</h4>
+        <button
+          type="button"
+          class="submit"
+          aria-label="apply"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div
+        class="modal-body"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <form (submit)="submitApplication(post.id, appForm)" #appForm="ngForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Contact Number</mat-label>
+            <input
+              matInput
+              type="text"
+              ngModel
+              name="contactNumber"
+              required
+              #contactNumber="ngModel"
+              placeholder="Please provide the organisation your contact number for them to reach out to you."
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Reason for applying</mat-label>
+            <input
+              matInput
+              type="text"
+              ngModel
+              name="message"
+              required
+              #message="ngModel"
+              rows="10"
+              placeholder="Please elaborate on what you can contribute to the project."
+              required
+            />
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div
+        class="modal-footer"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="
+            submitApplication(post.id, appForm) && modal.dismiss('Cross click')
+          "
+        >
+          Submit Application
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template #reportContent let-modal>
+      <div
+        class="modal-header"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <h4 class="modal-title">Report Post: {{ post.title }}</h4>
+        <button
+          type="button"
+          class="submit"
+          aria-label="apply"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div
+        class="modal-body"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <form (submit)="submitReport(post.id, reportForm)" #reportForm="ngForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Contact Number</mat-label>
+            <input
+              matInput
+              type="text"
+              ngModel
+              name="contactNumber"
+              required
+              #contactNumber="ngModel"
+              placeholder="Please provide us with your contact number for administrators to get in touch with you."
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Reason for reporting</mat-label>
+            <input
+              matInput
+              type="text"
+              ngModel
+              name="message"
+              required
+              #message="ngModel"
+              placeholder="Please help us understand why are you making the report."
+              required
+            />
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div
+        class="modal-footer"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="
+            submitReport(post.id, reportForm) && modal.dismiss('Cross click')
+          "
+        >
+          Submit Report
+        </button>
+      </div>
+    </ng-template>
+
+
+    <ng-template #deleteContent let-modal>
+      <div
+        class="modal-header"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+        <h4 class="modal-title">Delete Confirmation</h4>
+        <button
+          type="button"
+          class="submit"
+          aria-label="apply"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div
+        class="modal-body"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+      <p>Are you sure you want to delete the post?</p>
+      </div>
+
+      <div
+        class="modal-footer"
+        [style]="{
+          color: 'white',
+          'background-color': '#203647'
+        }"
+      >
+
+      <button
+          type="button"
+          class="btn btn-light"
+          (click)="
+          onDelete(post.id) && modal.dismiss('Cross click')
+          "
+        >
+          Confirm Delete
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="modal.dismiss('Cross click')"
+        >
+          Cancel
+        </button>
+      </div>
+    </ng-template>
+
+
+
+  </ng-container>
+</div>
+<p class="info-text mat-body-1" *ngIf="!hasApproved">
+  No jobs listing currently available!
+</p>
+
+
+
+
+
+
+
+

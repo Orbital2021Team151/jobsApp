@@ -5,7 +5,6 @@ import { PostsService } from '../post.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NgForm } from '@angular/forms';
-import { formatCurrency } from '@angular/common';
 
 @Component({
   selector: 'app-post-feed',

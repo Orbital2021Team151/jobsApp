@@ -56,4 +56,12 @@ npm install -g @angular/cli@11<br>
 
 * npm install jsonwebtoken
 
+<<<<<<< HEAD
 * npm install ng-chat
+=======
+* npm install --save @fortawesome/fontawesome-free
+
+* npm i awesome-notifications
+
+//NEED TO FIND AN ALTERNATIVE TO SOCKET IO
+>>>>>>> a22199ef606ec49b8783f98065f3d39b8878353a
