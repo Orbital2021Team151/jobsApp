@@ -65,3 +65,5 @@ npm install -g @angular/cli@11<br>
 * npm install --save socket.io
 
 * npm install --save socket.io-client
+
+* npm install ng-chat

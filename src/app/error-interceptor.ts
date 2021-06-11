@@ -6,6 +6,7 @@ import { catchError } from "rxjs/operators";
 import { ForgetPasswordErrorComponent } from "./errors/forget-password-error/forget-password-error.component";
 import { LoginGeneralErrorComponent } from "./errors/login-general-error/login-general-error.component";
 import { LoginWrongPasswordErrorComponent } from "./errors/login-wrong-password-error/login-wrong-password-error.component";
+import { SignupBeforeErrorComponent } from "./errors/signup-before-error/signup-before-error.component";
 import { UpdatePasswordErrorComponent } from "./errors/update-password-error/update-password-error.component";
 
 @Injectable({
@@ -23,10 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         let errorMessage = "Check your email to verify your account!";
         if (error.error.errorCode === 1) {
-          errorMessage = "Check whether you are entering the correct user role or correct email address.";
-          //this.errorListener.next(error.error.errorMessage);
-          this.dialog.open(ForgetPasswordErrorComponent, {data: {message: errorMessage}});
-          //new ErrorComponent(this);
+          this.dialog.open(ForgetPasswordErrorComponent);
         } else if (error.error.errorCode === 2) {
           this.dialog.open(LoginWrongPasswordErrorComponent);
         } else if (error.error.errorCode == 3) {
@@ -34,7 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         } else if (error.error.errorCode == 4) {
           this.dialog.open(UpdatePasswordErrorComponent);
         } else if (error.error.errorCode == 5) {
-
+          this.dialog.open(SignupBeforeErrorComponent);
         }
 
         return throwError(error);

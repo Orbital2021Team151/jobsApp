@@ -1,3 +1,4 @@
+import { animate, query, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -9,7 +10,46 @@ import { fader } from './route-animations';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
-    fader,
+    trigger('routeAnimations', [
+      transition('* => *', [
+        query(':enter, :leave', [
+          style({
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%'
+          })
+        ], { optional: true }),
+
+        query(':enter', [
+          style({
+            opacity: 0
+          })
+        ], { optional: true }),
+
+        query(':leave', [
+          style({
+            display: 'block'
+          }),
+
+          animate(500, style({
+            opacity: 0,
+          }))
+        ], { optional: true }),
+
+
+        query(':enter', [
+          style({
+            opacity: 0,
+            display: 'block',
+            height: '100%'
+          }),
+          animate(500, style({
+            opacity: 1,
+          }))
+        ], { optional: true })
+      ])
+    ])
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -43,7 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+    if (outlet.isActivated) return outlet.activatedRoute.snapshot.url;
   }
 
 
