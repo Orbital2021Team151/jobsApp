@@ -419,9 +419,10 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <div *ngFor="let student of post.students">
-            <div style="border: thin solid black">
+            <div style="border: thin solid black; margin-top: 0.5rem; margin-bottom: 0.5rem;">
               <p style="text-align: center">
                 Student's Email: {{ student.email }}
               </p>

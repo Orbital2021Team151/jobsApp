@@ -73,6 +73,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     'Women & Girls',
   ];
   beneficiariesSelected: string[] = [];
+  keywords: string = "";
 
   constructor(
     public postsService: PostsService,
@@ -150,11 +151,46 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
     //Need to cast new Date object over it again... KIV for future me. I have no idea why javascript does this (┛ಠ_ಠ)┛彡┻━┻
 
+    if (this.keywords !== "") {
+      this.filteredPosts = this.filteredPosts.filter(post => {
+        return (this.KnuthMorrisPrattSearch(this.keywords, post.content) != -1) || (this.KnuthMorrisPrattSearch(this.keywords, post.title) != -1);
+      });
+    }
+
     if (this.filteredPosts.length === 0) {
       this.noFilteredPost = true;
     } else {
       this.noFilteredPost = false;
     }
+  }
+
+  KnuthMorrisPrattSearch(pattern, text) {
+    if (pattern.length == 0)
+      return 0; // Immediate match
+
+    // Compute longest suffix-prefix table
+    var lsp = [0]; // Base case
+    for (var i = 1; i < pattern.length; i++) {
+      var j = lsp[i - 1]; // Start by assuming we're extending the previous LSP
+      while (j > 0 && pattern.charAt(i) != pattern.charAt(j))
+        j = lsp[j - 1];
+      if (pattern.charAt(i) == pattern.charAt(j))
+        j++;
+      lsp.push(j);
+    }
+
+    // Walk through text string
+    var j = 0; // Number of chars matched in pattern
+    for (var i = 0; i < text.length; i++) {
+      while (j > 0 && text.charAt(i) != pattern.charAt(j))
+        j = lsp[j - 1]; // Fall back in the pattern
+      if (text.charAt(i) == pattern.charAt(j)) {
+        j++; // Next char matched, increment position
+        if (j == pattern.length)
+          return i - (j - 1);
+      }
+    }
+    return -1; // Not found
   }
 
   onApply(postId: string, errorMessage: string, studentContent) {
