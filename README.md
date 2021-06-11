@@ -62,4 +62,8 @@ npm install -g @angular/cli@11<br>
 
 * npm i awesome-notifications
 
-//NEED TO FIND AN ALTERNATIVE TO SOCKET IO
+
+//MIGHT OR MIGHT NOT CRASH HEROKU IDK
+* npm install --save socket.io
+
+* npm install --save socket.io-client
