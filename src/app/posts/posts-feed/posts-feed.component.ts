@@ -95,6 +95,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
         //console.log("Posts are: ");
         //console.log(this.posts);
+        //console.log("The postsSub line fires!");
 
         this.posts = posts;
         this.filteredPosts = posts;
@@ -102,16 +103,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
           this.hasApproved = true;
         }
       });
-
-
-    this.authStatusSub = this.authService
-      .getAuthStatusListener()
-      .subscribe((authObject) => {
-        this.userIsAuthenticated = authObject.auth;
-        this.userRole = authObject.role;
-        this.authStatusObject = authObject;
-      });
-
   }
 
   onDeletePrompt(content) {
@@ -238,7 +229,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
     this.postSub.unsubscribe();
   }
 }

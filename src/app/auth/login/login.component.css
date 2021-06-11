@@ -32,6 +32,20 @@ mat-icon {
   color: #4da8da;
 }
 
+.logo img {
+  width: 50%;
+  height: 50%;
+}
+
+.logo {
+  background-position: center;
+  display:flex;
+	flex-wrap:wrap;
+	text-align:center;
+  justify-content: center;
+
+}
+
 
 
 

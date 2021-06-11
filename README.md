@@ -62,8 +62,6 @@ npm install -g @angular/cli@11<br>
 
 * npm i awesome-notifications
 
-
-//MIGHT OR MIGHT NOT CRASH HEROKU IDK
 * npm install --save socket.io
 
 * npm install --save socket.io-client
