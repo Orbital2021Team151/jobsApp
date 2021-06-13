@@ -347,6 +347,11 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     to: email,
     subject: "CCSGP Reset Password",
     html: htmlToSend,
+    attachments: [{
+      filename: 'forget-password.png',
+      path:  path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.png'),
+      cid: 'forgetPasswordLogo'
+    }],
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
