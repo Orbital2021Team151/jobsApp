@@ -3,7 +3,7 @@ const UserController = require("../controllers/users");
 
 const router = express.Router();
 
-router.get("/verify/:uniqueId", UserController.sendMail); //Need to return some HTML here to inform user their acc has been set up
+router.get("/verify/:uniqueId", UserController.verifyAccount); //Need to return some HTML here to inform user their acc has been set up
 
 router.post("/signupAdmin", UserController.signupAdmin);
 

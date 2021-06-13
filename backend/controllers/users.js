@@ -123,7 +123,7 @@ exports.login = (req, res, next) => {
           return fetchedUser.verified;
         })
 
-        .then(verified => {
+        .then((verified) => {
           if (!verified) {
             throw new Error("User not verified!");
           } else {
@@ -151,7 +151,6 @@ exports.login = (req, res, next) => {
           }
         })
         .catch((err) => {
-
           //console.log(err);
 
           if (err.message === "User not verified!") {
@@ -292,7 +291,7 @@ const sendVerificationEmail = (email, uniqueString) => {
     "verification",
     "verification.html"
   );
-  console.log(templatePath);
+  //console.log(templatePath);
   const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
   const template = handlebars.compile(templateSource);
   const replacements = {
@@ -308,7 +307,6 @@ const sendVerificationEmail = (email, uniqueString) => {
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
       pass: process.env.EMAIL_PASSWORD,
-
     },
     tls: {
       rejectUnauthorized: false,
@@ -320,8 +318,23 @@ const sendVerificationEmail = (email, uniqueString) => {
     to: email,
     subject: "CCSGP Email Confirmation",
     //html: `Press <a href=https://ccsgp-app.herokuapp.com/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
-    html: htmlToSend,
     // https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
+    html: htmlToSend,
+
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
@@ -337,7 +350,7 @@ const sendVerificationEmail = (email, uniqueString) => {
   });
 };
 
-exports.sendMail = (req, res) => {
+exports.verifyAccount = (req, res) => {
   const uniqueId = req.params.uniqueId;
 
   User.findById(uniqueId)
@@ -345,17 +358,24 @@ exports.sendMail = (req, res) => {
       if (result) {
         result.verified = true;
 
-        User.updateOne({ email: result.email, role: result.role }, result).then(
+        User
+        .updateOne({ email: result.email, role: result.role }, result)
+        .then(
           (result) => {
+
+            /*
             res.status(500).json({
               message: "User is now verified!",
             });
+            */
+            res.sendFile(path.join(__dirname, "..", "views", "verification-confirmation", "verification-confirmation.html"));
           }
         );
       } else {
         throw new Error("User cannot be verified!?");
       }
     })
+
     .catch((err) => {
       res.status(401).json({
         errorCode: 6,
