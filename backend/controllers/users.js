@@ -178,6 +178,8 @@ exports.updateBeneficiaries = (req, res, next) => {
 
 exports.updatePassword = (req, res, next) => {
   let fetchedUser;
+  //console.log("Update password's controller users.js part. The req body object is: ");
+  //console.log(req.body);
 
   User.findOne({
     email: req.body.email,
@@ -333,8 +335,6 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
   };
   const htmlToSend = template(replacements);
 
-  let imagePath = path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.png');
-
   var Transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -343,6 +343,7 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
       pass: process.env.EMAIL_PASSWORD,
+
     },
     tls: {
       rejectUnauthorized: false,
@@ -354,13 +355,18 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     to: email,
     subject: "CCSGP Reset Password",
     html: htmlToSend,
-    attachments: [{
+    attachments: [
+      {
       filename: 'forget-password.png',
-      path:  imagePath,
+      path:  path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.png'),
       cid: 'forgetPasswordLogo'
-    }],
-
-  };
+    }, {
+      filename: 'Orbital-Logo-Design.png',
+      path:  path.join(__dirname, '..', '..', 'src', 'assets', 'Orbital-Logo-Design.png'),
+      cid: 'orbitalLogo'
+    }
+  ],
+};
 
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
