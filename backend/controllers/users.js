@@ -238,7 +238,7 @@ const sendVerificationEmail = (email, uniqueString) => {
 
   var mailOptions;
   let sender = "CCSGP Email Verification";
-  let templatePath = path.join(__dirname, '..', 'views', 'verification.html');
+  let templatePath = path.join(__dirname, '..', 'views', 'verification', 'verification.html');
   console.log(templatePath);
   const templateSource = fs.readFileSync(templatePath, 'utf-8').toString();
   const template = handlebars.compile(templateSource);
@@ -281,45 +281,6 @@ const sendVerificationEmail = (email, uniqueString) => {
       console.log("Confirmation message sent!");
     }
   });
-
-
-
-  /*
-  let templatePath = path.join(__dirname, '..', 'views', 'verification.html');
-
-  readHTMLFile(
-    templatePath,
-
-    function (err, html) {
-      var template = handlebars.compile(html);
-
-      var replacements = {
-        uniqueString: uniqueString,
-      };
-
-      var htmlToSend = template(replacements);
-      var mailOptions = {
-        from: sender,
-        to: email,
-        subject: "CCSGP Email Confirmation",
-        html: htmlToSend,
-      };
-
-      Transport.sendMail(mailOptions, (error, response) => {
-        if (error) {
-          console.log(
-            "Could not send confirmation email! (line 270, controllers users.js) Error log is as shown below: "
-          );
-          console.log(error);
-          throw new Error("Could not send confirmation email!");
-        } else {
-          console.log("Confirmation message sent!");
-        }
-      });
-    }
-  );
-  */
-
 };
 
 exports.sendMail = (req, res) => {
@@ -350,6 +311,21 @@ exports.sendMail = (req, res) => {
 };
 
 const sendForgetPasswordEmail = (email, tempPassword) => {
+
+
+  var mailOptions;
+  let sender = "CCSGP Email Verification";
+  let templatePath = path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.html');
+  console.log(templatePath);
+  const templateSource = fs.readFileSync(templatePath, 'utf-8').toString();
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    tempPassword: tempPassword
+  };
+  const htmlToSend = template(replacements);
+
+
+
   var Transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -370,7 +346,7 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     from: sender,
     to: email,
     subject: "CCSGP Reset Password",
-    html: `We have reset your password to be your email. Your temporary password is: <b>${tempPassword}</b>. Please login and change it under your dashboard section. Thank you!`,
+    html: htmlToSend,
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
