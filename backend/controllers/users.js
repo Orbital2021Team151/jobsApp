@@ -1,10 +1,10 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const handlebars = require("handlebars");
-const fs = require("fs");
+const fs = require('fs');
+const path = require("path");
 
-const user = require("../models/user");
 const User = require("../models/user");
 
 exports.signupGeneral = (req, res, next) => {
@@ -22,6 +22,7 @@ exports.signupGeneral = (req, res, next) => {
     user
       .save()
       .then((result) => {
+
         const email = user.email;
         sendVerificationEmail(email, result._id);
 
@@ -233,19 +234,20 @@ exports.updatePassword = (req, res, next) => {
 };
 
 //For production, should use Sendgrid / MailGun [if we have the money]
-
-var readHTMLFile = function (path, callback) {
-  fs.readFile(path, { encoding: "utf-8" }, function (err, html) {
-    if (err) {
-      throw err;
-      callback(err);
-    } else {
-      callback(null, html);
-    }
-  });
-};
-
 const sendVerificationEmail = (email, uniqueString) => {
+
+  var mailOptions;
+  let sender = "CCSGP Email Verification";
+  let templatePath = path.join(__dirname, '..', 'views', 'verification.html');
+  console.log(templatePath);
+  const templateSource = fs.readFileSync(templatePath, 'utf-8').toString();
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    uniqueString: uniqueString
+  };
+  const htmlToSend = template(replacements);
+
+
   var Transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -253,30 +255,20 @@ const sendVerificationEmail = (email, uniqueString) => {
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      pass: process.env.EMAIL_PASSWORD
+      pass: process.env.EMAIL_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
 
-  readHTMLFile;
-
-  var mailOptions;
-  let sender = "CCSGP Email Verification";
-
-  /*
-  Transport.use('compile', handlebars({
-    viewEngine: 'express-handlebars',
-    viewPath: '../views/'
-  }));
-
 
   mailOptions = {
     from: sender,
     to: email,
     subject: "CCSGP Email Confirmation",
-    html: `Press <a href=https://ccsgp-app.herokuapp.com/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
+    //html: `Press <a href=https://ccsgp-app.herokuapp.com/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
+    html: htmlToSend
     // https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
   };
 
@@ -289,8 +281,10 @@ const sendVerificationEmail = (email, uniqueString) => {
       console.log("Confirmation message sent!");
     }
   });
-  */
 
+
+
+  /*
   let templatePath = path.join(__dirname, '..', 'views', 'verification.html');
 
   readHTMLFile(
@@ -324,6 +318,8 @@ const sendVerificationEmail = (email, uniqueString) => {
       });
     }
   );
+  */
+
 };
 
 exports.sendMail = (req, res) => {
@@ -333,6 +329,7 @@ exports.sendMail = (req, res) => {
     .then((result) => {
       if (result) {
         result.verified = true;
+
         User.updateOne({ email: result.email, role: result.role }, result).then(
           (result) => {
             res.status(500).json({
