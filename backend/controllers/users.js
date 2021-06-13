@@ -347,17 +347,20 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     to: email,
     subject: "CCSGP Reset Password",
     html: htmlToSend,
+
+    /*
     attachments: [{
       filename: 'forget-password.png',
       path:  path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.png'),
       cid: 'forgetPasswordLogo'
     }],
+    */
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
       console.log(
-        "Could not send Reset Password email! (line 332, controllers users.js) Error is as shwon below: "
+        "Could not send Reset Password email! (line 332, controllers users.js) Error is as shown below: "
       );
       console.log(error);
       throw new Error("Could not send Reset Password email!");
