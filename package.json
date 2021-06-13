@@ -44,6 +44,7 @@
     "ng-chat": "^3.0.3",
     "ng-multiselect-dropdown": "^0.3.4",
     "nodemailer": "^6.6.1",
+    "nodemailer-express-handlebars": "^4.0.0",
     "primeicons": "^4.1.0",
     "primeng": "^11.4.2",
     "rxjs": "~6.6.0",

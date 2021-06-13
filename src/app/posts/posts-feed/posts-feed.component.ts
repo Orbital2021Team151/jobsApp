@@ -93,13 +93,12 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.postSub = this.postsService
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
+        //console.log("Post Feed's observable!");
 
-        //console.log("Posts are: ");
-        //console.log(this.posts);
-        //console.log("The postsSub line fires!");
+        //show latest requested posts at the top of the timeline
+        this.posts = posts.reverse();
+        this.filteredPosts = posts.reverse();
 
-        this.posts = posts;
-        this.filteredPosts = posts;
         if (posts.filter((post) => post.approved).length > 0) {
           this.hasApproved = true;
         }
@@ -164,6 +163,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
   }
 
+  //credits to https://stackoverflow.com/questions/1789945/how-to-check-whether-a-string-contains-a-substring-in-javascript
   KnuthMorrisPrattSearch(pattern, text) {
     if (pattern.length == 0)
       return 0; // Immediate match

@@ -49,17 +49,23 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.postsService.getPosts();
-    this.authStatusObject = this.authService.getAuthStatusObject(); //another one that violates the async
+    this.authStatusObject = this.authService.getAuthStatusObject();
 
+    /*
+     * Probably do not need this because there are no changes to authStatusObject once user is logged in.
+     * Might have to be revised in the future for chat function.
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
+      console.log("Admin dashboard's authStatus observable!");
       this.authStatusObject = authObject;
       this.hasRequest = false;
 
     });
+    */
 
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         //console.log(posts);
+        console.log("Admin dashboard's postService observable!");
         this.posts = posts;
 
         if (this.posts.filter(post => !post.approved).length > 0) {
@@ -133,7 +139,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.postSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
+    //this.authStatusSub.unsubscribe();
   }
 
 }

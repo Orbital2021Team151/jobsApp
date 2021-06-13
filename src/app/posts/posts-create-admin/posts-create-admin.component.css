@@ -45,3 +45,7 @@ input {
 .mat-select-value::placeholder {
   color: #EEFBFB !important;
 }
+
+mat-form-field {
+  width: 100%;
+}

@@ -62,8 +62,10 @@ npm install -g @angular/cli@11<br>
 
 * npm i awesome-notifications
 
-* npm install --save socket.io
+* npm install --save socket.io //do we still need this?
 
-* npm install --save socket.io-client
+* npm install --save socket.io-client //do we still need this?
 
-* npm install ng-chat
+* npm install ng-chat //do we still need this?
+
+* npm install nodemailer-express-handlebars

@@ -51,15 +51,21 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     this.postsService.getPosts();
     this.authStatusObject = this.authService.getAuthStatusObject(); //another one that violates the async
 
+    /*
+     * Probably do not need this because there are no changes to authStatusObject once user is logged in.
+     * Might have to be revised in the future for chat function.
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
+      console.log("organisation dashboard's authStatus observable!");
       this.authStatusObject = authObject;
       this.hasRequest = false;
 
     });
+    */
 
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         //console.log(posts);
+        console.log("organisation dashboard's postService observable!");
 
         this.posts = posts
             .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
@@ -119,7 +125,7 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.postSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
+    //this.authStatusSub.unsubscribe();
   }
 
 }
