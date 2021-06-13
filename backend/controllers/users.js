@@ -81,7 +81,15 @@ exports.signupAdmin = (req, res, next) => {
 exports.login = (req, res, next) => {
   let fetchedUser;
 
-  User.findOne({ email: req.body.email, role: req.body.role })
+  //TODO: Need to fix this when ready for production
+  let backendRole = "";
+  if (req.body.role === "Student / NUS Alumni") {
+    backendRole = "Student";
+  } else {
+    backendRole = req.body.role;
+  }
+
+  User.findOne({ email: req.body.email, role: backendRole })
     .then((userFound) => {
       if (userFound === null) {
         throw new Error("No such user");
@@ -315,16 +323,17 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
 
   var mailOptions;
   let sender = "CCSGP Email Verification";
+
   let templatePath = path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.html');
-  console.log(templatePath);
   const templateSource = fs.readFileSync(templatePath, 'utf-8').toString();
+
   const template = handlebars.compile(templateSource);
   const replacements = {
     tempPassword: tempPassword
   };
   const htmlToSend = template(replacements);
 
-
+  let imagePath = path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.png');
 
   var Transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -340,21 +349,17 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     },
   });
 
-  var mailOptions;
-  let sender = "CCSGP Reset Password";
   mailOptions = {
     from: sender,
     to: email,
     subject: "CCSGP Reset Password",
     html: htmlToSend,
-
-    /*
     attachments: [{
       filename: 'forget-password.png',
-      path:  path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.png'),
+      path:  imagePath,
       cid: 'forgetPasswordLogo'
     }],
-    */
+
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
@@ -384,9 +389,18 @@ const randomStringGenerator = () => {
 exports.forgetPassword = (req, res) => {
   let fetchedUser;
 
+
+  //TODO: Need to change this wholesale when ready for production.
+  let backendRole = "";
+  if (req.body.role === "Student / NUS Alumni") {
+    backendRole = "Student";
+  } else {
+    backendRole = req.body.role;
+  }
+
   User.findOne({
     email: req.body.email,
-    role: req.body.role,
+    role: backendRole,
   })
     .then((user) => {
       if (!user) {
@@ -414,11 +428,21 @@ exports.forgetPassword = (req, res) => {
         });
 
         User.updateOne(
-          { email: req.body.email, role: req.body.role },
+          { email: req.body.email, role: backendRole },
           newUser
         ).then((result) => {
-          sendForgetPasswordEmail(req.body.email, tempPassword);
-          res.status(200).json("User password reset!");
+          if (result) {
+            sendForgetPasswordEmail(req.body.email, tempPassword);
+            res.status(200).json("User password reset!");
+          } else {
+            throw new Error("Unable to reset the person's password. Might it be due to the backendRole issue again?");
+          }
+        })
+        .catch(err => {
+          res.status(404).json({
+            errorCode: 10,
+            message: "Issue with resetting person's password.",
+          });
         });
       });
     })
