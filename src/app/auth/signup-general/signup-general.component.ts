@@ -33,18 +33,10 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
       return;
     }
 
-    var selectedRole = "";
-    if (form.value.role === "Student / NUS Alumni") {
-      selectedRole = "Student";
-    } else {
-      selectedRole = form.value.role;
-    }
-
-
     this.authService.createUser(
       form.value.email,
       form.value.password,
-      selectedRole,
+      form.value.role,
       form.value.orgName,
       form.value.uen
     );

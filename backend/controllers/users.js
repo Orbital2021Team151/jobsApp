@@ -2,17 +2,25 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const handlebars = require("handlebars");
-const fs = require('fs');
+const fs = require("fs");
 const path = require("path");
 
 const User = require("../models/user");
 
 exports.signupGeneral = (req, res, next) => {
+  //TODO: Need to change this wholesale when ready for production.
+  let backendRole = "";
+  if (req.body.role === "Student / NUS Alumni") {
+    backendRole = "Student";
+  } else {
+    backendRole = req.body.role;
+  }
+
   bcrypt.hash(req.body.password, 10).then((passwordHash) => {
     const user = new User({
       email: req.body.email,
       password: passwordHash,
-      role: req.body.role,
+      role: backendRole, //TODO: KIV to change
       orgName: req.body.orgName,
       uen: req.body.uen,
       beneficiaries: req.body.beneficiaries,
@@ -22,7 +30,6 @@ exports.signupGeneral = (req, res, next) => {
     user
       .save()
       .then((result) => {
-
         const email = user.email;
         sendVerificationEmail(email, result._id);
 
@@ -44,11 +51,19 @@ exports.signupGeneral = (req, res, next) => {
 };
 
 exports.signupAdmin = (req, res, next) => {
+  //TODO: Need to change this wholesale when ready for production.
+  let backendRole = "";
+  if (req.body.role === "Student / NUS Alumni") {
+    backendRole = "Student";
+  } else {
+    backendRole = req.body.role;
+  }
+
   bcrypt.hash(req.body.password, 10).then((passwordHash) => {
     const user = new User({
       email: req.body.email,
       password: passwordHash,
-      role: req.body.role,
+      role: backendRole, //todo: kiv to change
       orgName: req.body.orgName,
       uen: req.body.uen,
       beneficiaries: req.body.beneficiaries,
@@ -89,7 +104,10 @@ exports.login = (req, res, next) => {
     backendRole = req.body.role;
   }
 
-  User.findOne({ email: req.body.email, role: backendRole })
+  User.findOne({
+    email: req.body.email,
+    role: backendRole, //TODO: Kiv to change
+  })
     .then((userFound) => {
       if (userFound === null) {
         throw new Error("No such user");
@@ -101,6 +119,13 @@ exports.login = (req, res, next) => {
         .then((result) => {
           if (!result) {
             throw new Error("Wrong Password!");
+          }
+          return fetchedUser.verified;
+        })
+
+        .then(verified => {
+          if (!verified) {
+            throw new Error("User not verified!");
           } else {
             const token = jwt.sign(
               {
@@ -111,8 +136,6 @@ exports.login = (req, res, next) => {
               process.env.JWT_KEY,
               { expiresIn: "1h" }
             );
-
-            //TODO: This logic here is probably the cause behind the weird layout if our token expires etc. Need to redo this logic if it causes more issues.
             res.status(200).json({
               token: token,
               expiresIn: 3600,
@@ -124,14 +147,29 @@ exports.login = (req, res, next) => {
               uen: fetchedUser.uen,
               beneficiaries: fetchedUser.beneficiaries,
             });
-            return true && fetchedUser.verified;
+            return true;
           }
         })
         .catch((err) => {
-          res.status(401).json({
-            errorCode: 2,
-            message: "Wrong Password",
-          });
+
+          //console.log(err);
+
+          if (err.message === "User not verified!") {
+            //console.log("User not verified! err.message printed.");
+            sendVerificationEmail(fetchedUser.email, fetchedUser._id);
+            res.status(401).json({
+              errorCode: 11,
+              message: "User is not verified!",
+            });
+          }
+
+          if (err.message === "Wrong Password!") {
+            //console.log("Wrong Password! err.message printed.");
+            res.status(401).json({
+              errorCode: 2,
+              message: "Wrong Password",
+            });
+          }
         });
     })
 
@@ -245,18 +283,22 @@ exports.updatePassword = (req, res, next) => {
 
 //For production, should use Sendgrid / MailGun [if we have the money]
 const sendVerificationEmail = (email, uniqueString) => {
-
   var mailOptions;
   let sender = "CCSGP Email Verification";
-  let templatePath = path.join(__dirname, '..', 'views', 'verification', 'verification.html');
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "verification",
+    "verification.html"
+  );
   console.log(templatePath);
-  const templateSource = fs.readFileSync(templatePath, 'utf-8').toString();
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
   const template = handlebars.compile(templateSource);
   const replacements = {
-    uniqueString: uniqueString
+    uniqueString: uniqueString,
   };
   const htmlToSend = template(replacements);
-
 
   var Transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -266,25 +308,27 @@ const sendVerificationEmail = (email, uniqueString) => {
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
       pass: process.env.EMAIL_PASSWORD,
+
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
 
-
   mailOptions = {
     from: sender,
     to: email,
     subject: "CCSGP Email Confirmation",
     //html: `Press <a href=https://ccsgp-app.herokuapp.com/api/user/verify/${uniqueString}> here </a> to verify your email. Thank you!`
-    html: htmlToSend
+    html: htmlToSend,
     // https://ccsgp-app.herokuapp.com/ or http://localhost:3000/
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
-      console.log("Could not send confirmation email! (line 270, controllers users.js) Error log is as shown below: ");
+      console.log(
+        "Could not send confirmation email! (line 270, controllers users.js) Error log is as shown below: "
+      );
       console.log(error);
       throw new Error("Could not send confirmation email!");
     } else {
@@ -321,17 +365,21 @@ exports.sendMail = (req, res) => {
 };
 
 const sendForgetPasswordEmail = (email, tempPassword) => {
-
-
   var mailOptions;
   let sender = "CCSGP Email Verification";
 
-  let templatePath = path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.html');
-  const templateSource = fs.readFileSync(templatePath, 'utf-8').toString();
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "forget-password",
+    "forget-password.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
 
   const template = handlebars.compile(templateSource);
   const replacements = {
-    tempPassword: tempPassword
+    tempPassword: tempPassword,
   };
   const htmlToSend = template(replacements);
 
@@ -343,7 +391,6 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
       pass: process.env.EMAIL_PASSWORD,
-
     },
     tls: {
       rejectUnauthorized: false,
@@ -357,16 +404,19 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     html: htmlToSend,
     attachments: [
       {
-      filename: 'forget-password.png',
-      path:  path.join(__dirname, '..', 'views', 'forget-password', 'forget-password.png'),
-      cid: 'forgetPasswordLogo'
-    }, {
-      filename: 'Orbital-Logo-Design.png',
-      path:  path.join(__dirname, '..', '..', 'src', 'assets', 'Orbital-Logo-Design.png'),
-      cid: 'orbitalLogo'
-    }
-  ],
-};
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
 
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
@@ -394,7 +444,6 @@ const randomStringGenerator = () => {
 
 exports.forgetPassword = (req, res) => {
   let fetchedUser;
-
 
   //TODO: Need to change this wholesale when ready for production.
   let backendRole = "";
@@ -433,23 +482,23 @@ exports.forgetPassword = (req, res) => {
           verified: true,
         });
 
-        User.updateOne(
-          { email: req.body.email, role: backendRole },
-          newUser
-        ).then((result) => {
-          if (result) {
-            sendForgetPasswordEmail(req.body.email, tempPassword);
-            res.status(200).json("User password reset!");
-          } else {
-            throw new Error("Unable to reset the person's password. Might it be due to the backendRole issue again?");
-          }
-        })
-        .catch(err => {
-          res.status(404).json({
-            errorCode: 10,
-            message: "Issue with resetting person's password.",
+        User.updateOne({ email: req.body.email, role: backendRole }, newUser)
+          .then((result) => {
+            if (result) {
+              sendForgetPasswordEmail(req.body.email, tempPassword);
+              res.status(200).json("User password reset!");
+            } else {
+              throw new Error(
+                "Unable to reset the person's password. Might it be due to the backendRole issue again?"
+              );
+            }
+          })
+          .catch((err) => {
+            res.status(404).json({
+              errorCode: 10,
+              message: "Issue with resetting person's password.",
+            });
           });
-        });
       });
     })
 

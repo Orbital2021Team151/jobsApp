@@ -8,6 +8,7 @@ import { LoginGeneralErrorComponent } from "./errors/login-general-error/login-g
 import { LoginWrongPasswordErrorComponent } from "./errors/login-wrong-password-error/login-wrong-password-error.component";
 import { SignupBeforeErrorComponent } from "./errors/signup-before-error/signup-before-error.component";
 import { UpdatePasswordErrorComponent } from "./errors/update-password-error/update-password-error.component";
+import { NotVerifiedErrorComponent } from "./errors/user-not-verified-error/user-not-verified-error.component";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.dialog.open(UpdatePasswordErrorComponent);
         } else if (error.error.errorCode == 5) {
           this.dialog.open(SignupBeforeErrorComponent);
+        } else if (error.error.errorCode == 11) {
+          this.dialog.open(NotVerifiedErrorComponent);
         }
 
         return throwError(error);
