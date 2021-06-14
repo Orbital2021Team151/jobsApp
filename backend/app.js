@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoSanitize = require('express-mongo-sanitize');
+
 const postRoutes = require('./routes/posts');
 const userRoutes = require('./routes/users');
 const path = require("path");
@@ -21,6 +23,7 @@ mongoose.connect("mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepme
   });
 
 app.use(bodyParser.json());
+app.use(mongoSanitize());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', "*");
   res.setHeader(

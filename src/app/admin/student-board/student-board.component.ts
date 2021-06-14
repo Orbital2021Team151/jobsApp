@@ -88,6 +88,9 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   }
 
   onChangePassword(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
     this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
     this.authService.getChangedPasswordListener().subscribe(res => {
       this.requestedNewPassword = res;

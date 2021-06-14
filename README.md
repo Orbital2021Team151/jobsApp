@@ -67,3 +67,7 @@ npm install -g @angular/cli@11<br>
 * npm install --save socket.io-client //do we still need this?
 
 * npm install ng-chat //do we still need this?
+
+* npm install --save mongo-sanitize //might not need this at all
+
+* npm install --save express-mongo-sanitize

@@ -104,6 +104,7 @@ exports.login = (req, res, next) => {
     backendRole = req.body.role;
   }
 
+
   User.findOne({
     email: req.body.email,
     role: backendRole, //TODO: Kiv to change
@@ -179,6 +180,7 @@ exports.login = (req, res, next) => {
         err: err,
       });
     });
+
 };
 
 exports.updateBeneficiaries = (req, res, next) => {
