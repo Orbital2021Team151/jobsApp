@@ -75,13 +75,34 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   beneficiariesSelected: string[] = [];
   keywords: string = "";
 
+  public banner: any;
+
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
     private authService: AuthService
-  ) {}
+  ) {
+    this.banner = {
+      adClient: 'ca-pub-5762664625803860',
+      adSlot: 5806789784,
+      adFormat: "auto",
+      fullWidthResponsive: true,
+    };
+  }
 
   ngOnInit() {
+
+    setTimeout(() => {
+      try {
+          (window['adsbygoogle'] = window['adsbygoogle'] || []).push({
+              overlays: {bottom: true}
+          });
+      } catch (e) {
+          console.error(e);
+      }
+  }, 0);
+
+
     this.hasApproved = false;
     this.noFilteredPost = false;
     this.postsService.getPosts();

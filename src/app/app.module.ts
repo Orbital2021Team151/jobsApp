@@ -17,6 +17,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
+//import { AdsenseModule } from 'ng2-adsense';
 import { NgChatModule } from 'ng-chat';
 
 import { CardModule } from 'primeng/card';
