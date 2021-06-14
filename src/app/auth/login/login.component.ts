@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else {
       selectedRole = form.value.role;
     }
-    this.authService.login(form.value.email, form.value.password, selectedRole);
+    this.authService.login(form.value.email, form.value.password, form.value.role);
     this.authService.autoAuthUser();
   }
 

@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
 
   //seenPosts: {type: [String], required: false} //if we want to continue with notifications
 
-  about: {type: String, required: false},
+  //about: {type: String, required: false},
 
   // profilePic:
 

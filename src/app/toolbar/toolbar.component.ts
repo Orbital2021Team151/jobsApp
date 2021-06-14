@@ -55,5 +55,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
+    this.postSub.unsubscribe();
   }
 }

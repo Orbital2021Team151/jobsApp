@@ -61,6 +61,7 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.authStatusObject = this.authService.getAuthStatusObject();
+    console.log(this.authStatusObject);
 
     for (var beneficiary of this.authStatusObject.beneficiaries) {
       this.beneficiariesSelected.push(beneficiary);
@@ -72,6 +73,7 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     /*
      * Probably do not need this because there are no changes to authStatusObject once user is logged in.
      * Might have to be revised in the future for chat function.
+
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       console.log("student dashboard's authStatus observable!");
       this.authStatusObject = authObject;
@@ -96,6 +98,8 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     this.requestedNewPassword = false;
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    //this.authStatusSub.unsubscribe();
+  }
 
 }
