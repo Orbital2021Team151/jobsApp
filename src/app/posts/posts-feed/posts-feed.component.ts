@@ -119,6 +119,14 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
+  clearFilter() {
+    this.beneficiariesSelected = [];
+    this.keywords = "";
+    this.startDate = null;
+    this.endDate = null;
+    this.submitFilter();
+  }
+
   submitFilter() {
     if (this.beneficiariesSelected.length !== 0) {
       this.filteredPosts = this.posts.filter((post) => {

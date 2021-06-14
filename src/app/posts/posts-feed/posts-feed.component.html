@@ -24,6 +24,7 @@
         <mat-label>Beneficiaries</mat-label>
         <mat-select
           ngModel
+          multiple
           #beneficiariesInput="ngModel"
           name="beneficiariesSelected"
           [(ngModel)]="beneficiariesSelected"
@@ -76,13 +77,25 @@
         </mat-date-range-picker>
       </mat-form-field>
 
+
+      <div class="footerButtons" style="
+      text-align: center;
+      width: 100%;
+      flex: auto;">
+        <p-button
+        class="filterButton"
+        label="Clear filter criteria"
+        icon="pi pi-trash"
+        (click)="clearFilter()"
+      ></p-button>
+
       <p-button
         class="filterButton"
         label="Filter Search Results"
         icon="pi pi-filter"
-        styleClass="p-button-info"
         (click)="submitFilter()"
       ></p-button>
+      </div>
     </ng-container>
   </mat-card>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth/auth.service";
+import { Post } from "../posts/post.model";
+import { PostsService } from "../posts/post.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -9,12 +11,14 @@ import { AuthService } from "../auth/auth.service";
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
+  private postSub: Subscription;
+  public posts: Post[] = [];
   userIsAuthenticated = false;
   role: string;
   orgName: string;
   public authStatusObject;
 
-  constructor(private authService: AuthService) {};
+  constructor(private authService: AuthService, public postsService: PostsService) {};
 
   onLogout() {
     this.authService.logout();
@@ -36,11 +40,15 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.authListenerSubs = this.authService
     .getAuthStatusListener()
     .subscribe(authObject => {
-      //console.log("Toolbar's observable!");
+      //console.log("Toolbar's auth sub observable working!");
       this.userIsAuthenticated = authObject.auth;
       this.authStatusObject = authObject;
-      //console.log("AT TOOLBAR NOW! ");
-      //console.log(this.authStatusObject);
+    });
+
+
+    this.postSub = this.postsService.getPostsUpdatedListener().subscribe((posts: Post[]) => {
+      //console.log("Toolbar's post sub observable working!");    ok working
+      this.posts = posts;
     });
 
   }

@@ -32,12 +32,6 @@ input {
 
 
 
-
-
-
-
-
-
 .info-text {
   text-align: center;
 }
@@ -80,7 +74,10 @@ input {
 
 .filterButton {
   margin: 0 auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
+
 
 .pCardContent p {
   display: -webkit-box;

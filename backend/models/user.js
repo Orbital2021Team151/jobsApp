@@ -12,7 +12,13 @@ const userSchema = mongoose.Schema({
 
   beneficiaries: {type: [String], required: true},
 
-  verified: {type: Boolean, required: true, default: false}, //should change to false later, but true for now to let me log in obviously
+  verified: {type: Boolean, required: true, default: false},
+
+  //seenPosts: {type: [String], required: false} //if we want to continue with notifications
+
+  about: {type: String, required: false},
+
+  // profilePic:
 
 });
 
