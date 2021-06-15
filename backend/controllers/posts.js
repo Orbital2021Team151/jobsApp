@@ -26,7 +26,7 @@ exports.requestPost = (req, res, next) => {
   });
   post.save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
     .then(createdPost => {
-      res.status(201).json({message: "post requested successfully! Pending admin approval", postId: createdPost._id});
+      res.status(201).json({message: "post requested successfully! Pending admin approval"});
     });
 };
 

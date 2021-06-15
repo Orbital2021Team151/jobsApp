@@ -117,8 +117,10 @@ export class PostFeedComponent implements OnInit, OnDestroy {
         //console.log("Post Feed's observable!");
 
         //show latest requested posts at the top of the timeline
-        this.posts = posts.reverse();
-        this.filteredPosts = posts.reverse();
+        for (var i = posts.length - 1; i >= 0; i--) {
+          this.posts.push(posts[i]);
+          this.filteredPosts.push(posts[i]);
+        }
 
         if (posts.filter((post) => post.approved).length > 0) {
           this.hasApproved = true;
