@@ -18,7 +18,6 @@ import { MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 //import { AdsenseModule } from 'ng2-adsense';
-import { NgChatModule } from 'ng-chat';
 
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -91,7 +90,6 @@ import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-
     ButtonModule,
     NgbModule,
     BrowserAnimationsModule,
-    NgChatModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

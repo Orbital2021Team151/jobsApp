@@ -46,9 +46,7 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save mongoose-unique-validator
 
-* npm install --save bcrypt //<b>UNINSTALL THIS</b>
-
-* npm install --save bcryptjs
+* npm install --save bcrypt
 
 * Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)
 
@@ -68,8 +66,4 @@ npm install -g @angular/cli@11<br>
 
 * npm install ng-chat //do we still need this?
 
-* npm install --save mongo-sanitize //might not need this at all
-
 * npm install --save express-mongo-sanitize
-
-* npm install --save ng2-adsense@9.1.0
