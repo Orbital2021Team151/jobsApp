@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
 })
 
 export class LoginWrongPasswordErrorComponent {
-  message = "Wrong password!"
+  message = "Wrong password! Please check if there are spaces in your password."
 }
