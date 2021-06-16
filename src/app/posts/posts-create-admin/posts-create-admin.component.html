@@ -1,4 +1,4 @@
-<mat-card [style]="{ 'background-color': '#203647', 'color' : 'white'}">
+<mat-card [style]="{ 'background-color': '#203647', color: 'white' }">
   <form (submit)="onAddPost(postForm)" #postForm="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Point-Of-Contact (POC)</mat-label>
@@ -151,18 +151,28 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Beneficiaries</mat-label>
-      <mat-select required ngModel #beneficiariesInput="ngModel" name="beneficiariesSelected" [(ngModel)]="beneficiariesSelected" [style]="{
-        'color':'white',
-        'background-color': '#203647'
-    }">
-        <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary" [style]="{
-          'color':'white',
+      <mat-select
+        required
+        ngModel
+        #beneficiariesInput="ngModel"
+        name="beneficiariesSelected"
+        [(ngModel)]="beneficiariesSelected"
+        [style]="{
+          color: 'white',
           'background-color': '#203647'
-      }">{{beneficiary}}</mat-option>
+        }"
+      >
+        <mat-option
+          *ngFor="let beneficiary of beneficiaries"
+          [value]="beneficiary"
+          [style]="{
+            color: 'white',
+            'background-color': '#203647'
+          }"
+          >{{ beneficiary }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
-
-
   </form>
 
   <div
@@ -190,22 +200,6 @@
     Request
   </button>
 </mat-card>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <ng-template #TermsAndConditions let-modal>
   <div class="modal-header">
@@ -361,6 +355,9 @@
     >
       Submit
     </button>
+    <mat-error *ngIf="postForm.invalid"
+      >Please fill all required fields before submitting your request.</mat-error
+    >
     <mat-error *ngIf="checkbox.invalid"
       >Please click on the checkbox at the end of the page.</mat-error
     >

@@ -1,6 +1,6 @@
 <mat-card>
   <span class="logo">
-    <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP">
+    <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
   </span>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <div class="form"></div>
@@ -83,7 +83,9 @@
       >
     </mat-form-field>
 
-    <button mat-raised-button color="accent" (click)="onLogin(loginForm)">Login</button>
+    <button mat-raised-button color="accent" (click)="onLogin(loginForm)">
+      Login
+    </button>
 
     <p-button
       class="forgetPassword"
@@ -95,19 +97,28 @@
   </form>
 </mat-card>
 
-<ng-template #forgetPasswordContent let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Don't worry. Happens to the best of us ;)</h4>
+<ng-template #forgetPasswordContent let-modal class="forgetPasswordPopup">
+  <div
+    class="modal-header"
+    style="background-color: #203647; border: none;"
+  >
+    <h4 class="modal-title" style="background-color:#203647; color: white">
+      Don't worry. Happens to the best of us ;)
+    </h4>
     <button
       type="button"
-      class="submit"
-      aria-label="apply"
+      class="close"
+      aria-label="Close"
       (click)="modal.dismiss('Cross click')"
+      style="color: transparent"
     >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div
+    class="modal-body"
+    style="background-color: #203647; border: none"
+  >
     <form #forgetPasswordForm="ngForm">
       <mat-form-field appearance="outline">
         <input
@@ -160,14 +171,21 @@
     </form>
   </div>
 
-  <div class="modal-footer">
+  <div
+    class="modal-footer"
+    [style]="{
+      'background-color': '#203647',
+      'colour': 'white',
+      'border': 'none'
+    }"
+  >
     <div
       *ngIf="newPasswordSent"
       class="alert alert-success alert-dismissible fade show"
       role="alert"
     >
-      <strong>You have signed up!</strong> Please check your email for the
-      verification link.
+      <strong>Password changed!</strong> Please check your email for the new
+      password.
       <button
         (click)="closeNotification()"
         type="button"
@@ -181,6 +199,9 @@
     <button
       type="button"
       class="btn btn-light"
+      style="background-color: #203647;
+      border-color: #4da8da;
+      color: white;"
       (click)="
         onForgetPassword(forgetPasswordForm) && modal.dismiss('Cross click')
       "

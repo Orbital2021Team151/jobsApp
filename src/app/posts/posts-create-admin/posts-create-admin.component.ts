@@ -79,6 +79,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     //console.log("add post fired!");
 
     if (form.invalid) {
+      //this.modalService.open("bruh this shit ain't work");
       return;
     }
 
