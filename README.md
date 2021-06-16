@@ -52,6 +52,8 @@ npm install -g @angular/cli@11<br>
 
 * ng add @ng-bootstrap/ng-bootstrap
 
+* npm install --save bootstrap@5
+
 * npm install nodemailer
 
 * npm install jsonwebtoken

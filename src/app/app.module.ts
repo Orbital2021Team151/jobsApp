@@ -17,6 +17,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 //import { AdsenseModule } from 'ng2-adsense';
 
 import { CardModule } from 'primeng/card';
@@ -45,6 +46,7 @@ import { LoginWrongPasswordErrorComponent } from './errors/login-wrong-password-
 import { UpdatePasswordErrorComponent } from './errors/update-password-error/update-password-error.component';
 import { LoginGeneralErrorComponent } from './errors/login-general-error/login-general-error.component';
 import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-before-error.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-
     LoginWrongPasswordErrorComponent,
     UpdatePasswordErrorComponent,
     LoginGeneralErrorComponent,
-    SignupBeforeErrorComponent
+    SignupBeforeErrorComponent,
+    LandingPageComponent,
   ],
 
   imports: [
@@ -90,6 +93,8 @@ import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-
     ButtonModule,
     NgbModule,
     BrowserAnimationsModule,
+    NgbPaginationModule,
+    NgbAlertModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
