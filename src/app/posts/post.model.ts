@@ -16,7 +16,7 @@ export interface Post {
   //should implement calender feature if possible. Then string can be numbers instead or convert the numbers from calendar to string for storage
   startDate: Date, //Start date of volunteer
   endDate: Date, //End date of volunteer
-  hoursRequired: number, //number of hours that a student has to commit to minimally
+  hoursRequired: string, //number of hours that a student has to commit to minimally
 
   beneficiaries: string[], //paragraph on who are the beneficiaries to let the organization write down. or could be a dropdown list
   //imagePath: string; //store image? additional feature potentially

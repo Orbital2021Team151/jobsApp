@@ -52,6 +52,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   ];
   beneficiariesSelected: string[] = [];
   termsAndConditions = false;
+  pocEmail: string = "";
 
 
 
@@ -74,14 +75,17 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   }
 
   onAddPost(form: NgForm) {
+    //console.log(form.value);
     //console.log("Beneficiaries Selected: ");
     //console.log(this.beneficiariesSelected);
     //console.log("add post fired!");
 
     if (form.invalid) {
-      //this.modalService.open("bruh this shit ain't work");
+      console.log("Please fill up form first.");
       return;
     }
+
+
 
     const post: Post = {
       id: null,
@@ -89,7 +93,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       uen: this.authStatusObject.uen,
       POC: form.value.POC,
       phoneNumber: form.value.phoneNumber,
-      email: form.value.email,
+      email: this.pocEmail,
       title: form.value.title,
       content: form.value.content,
       skills: form.value.skills,
@@ -121,6 +125,16 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
   openTermsAndConditions(longContent) {
     this.modalService.open(longContent, { scrollable: true });
+  }
+
+  checkEmailExists(form: NgForm) {
+    if (this.pocEmail === "") {
+      console.log("Needs an email!");
+      return;
+    }
+
+    return this.postsService.checkEmailExists(form.value.email);
+
   }
 
   ngOnDestroy() {

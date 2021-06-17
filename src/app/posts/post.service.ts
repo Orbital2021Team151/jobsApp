@@ -133,4 +133,16 @@ export class PostsService {
     });
   }
 
+  checkEmailExists(email: string) {
+
+    const bodyObject = {email: email};
+
+    this.http
+    .post(BACKEND_URL + 'api/posts/check', bodyObject)
+    .subscribe((response) => {
+      console.log("Hi from postService check email exists");
+      console.log(response);
+    })
+  }
+
 }

@@ -19,4 +19,6 @@ router.put("/apply/:id", PostsController.applyPost);
 
 router.put("/report/:id", PostsController.reportPost);
 
+router.post("/check", PostsController.checkEmailExists);
+
 module.exports = router;

@@ -14,7 +14,7 @@ const postSchema = mongoose.Schema({
 
   startDate: {type: Date, required: true},
   endDate: {type: Date, required: true},
-  hoursRequired: {type: Number, required: true},
+  hoursRequired: {type: String, required: true},
 
   beneficiaries: {type: [String], required: true},
   approved: {type: Boolean, },

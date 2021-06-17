@@ -1,6 +1,7 @@
 const Post = require('../models/post');
 const nodemailer = require("nodemailer");
 const User = require('../models/user');
+const emailValidator = require('deep-email-validator');
 
 exports.requestPost = (req, res, next) => {
   const post = new Post({
@@ -232,8 +233,61 @@ exports.reportPost = (req, res, next) => {
 };
 
 
+exports.checkEmailExists = (req, res, next) => {
+
+  async function isEmailValid(email) {
+    return emailValidator.validate(email)
+   }
+
+   isEmailValid(req.body.email)
+   .then(dataObject => {
+
+    return res.status(200).json({
+      message: "retrieved information are as attached",
+      valid: dataObject.valid,
+      reason: dataObject.reason,
+      validators: dataObject.validators,
+      dataObject: dataObject,
+    });
+  })
+
+    .catch(err => {
+      console.log("Interesting to have it fail");
+      return res.status(400).send({
+        message: "check email exists function failed",
+        error: err,
+      });
+    });
 
 
+    /*
+     console.log(dataObject);
+     if (!dataObject.valid) {
+       throw new Error("Email is not valid")
+     }
+   })
+
+   .catch(err => {
+     console.log(err);
+   });
+   */
+
+
+  /*
+  const {valid, reason, validators} = isEmailValid(req.body.email);
+  if (valid) {
+    return res.status(200).json({
+      message: "Email is valid",
+    });
+  }
+  return res.status(400).send({
+    message: "Please provide a valid email address.",
+    reason: validators[reason].reason,
+    validators: validators,
+  });
+  */
+
+};
 
 
 
