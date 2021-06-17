@@ -10,10 +10,10 @@ import { PostCreateAdminComponent } from './posts/posts-create-admin/posts-creat
 import { StudentBoardComponent } from './admin/student-board/student-board.component';
 import { OrgBoardComponent } from './admin/org-board/org-board.component';
 import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-org.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { HomepageComponent } from './homepage/hompage.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent},
+  { path: '', component: HomepageComponent},
   { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminBoardComponent, canActivate: [AuthGuard], data: { roles: ["Admin"]}},
   { path: 'student-alumni', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student", "Student / NUS Alumni"] }},

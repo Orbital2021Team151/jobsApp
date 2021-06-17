@@ -46,7 +46,7 @@ import { LoginWrongPasswordErrorComponent } from './errors/login-wrong-password-
 import { UpdatePasswordErrorComponent } from './errors/update-password-error/update-password-error.component';
 import { LoginGeneralErrorComponent } from './errors/login-general-error/login-general-error.component';
 import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-before-error.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { HomepageComponent } from './homepage/hompage.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     UpdatePasswordErrorComponent,
     LoginGeneralErrorComponent,
     SignupBeforeErrorComponent,
-    LandingPageComponent,
+    HomepageComponent,
   ],
 
   imports: [

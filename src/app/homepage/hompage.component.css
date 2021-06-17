@@ -47,19 +47,38 @@ ngb-carousel {
 -------------------------------------------------- */
 
 /* Center align the text within the three columns below the carousel */
+.marketing-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
   text-align: center;
 }
 .marketing h2 {
-  font-weight: 400;
+  font-weight: 500;
+  margin-bottom: 0rem;
 }
+
+.marketing h3 {
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
 /* rtl:begin:ignore */
 .marketing .col-lg-4 p {
   margin-right: .75rem;
   margin-left: .75rem;
 }
 /* rtl:end:ignore */
+
+.profile-pic {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
 
 
 /* Featurettes
@@ -75,6 +94,21 @@ ngb-carousel {
   line-height: 1;
   /* rtl:remove */
   letter-spacing: -.05rem;
+}
+
+.text-muted {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.lead {
+  margin-top: 2rem;
+}
+
+.featurette-image {
+  object-fit: cover;
+  width: 500px;
+  height: 500px;
 }
 
 

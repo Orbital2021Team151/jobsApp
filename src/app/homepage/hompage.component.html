@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <!-- Use Angular's targetting in the .ts file instead.
+    <link href="./carousel.css" rel="stylesheet">
+    -->
+  </head>
+
+  <body>
+    <main>
+
+      <ngb-carousel *ngIf="images" class="carousel">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[0]" alt="Random first slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>First slide</h3>
+            <p>Should have some featured article here</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[1]" alt="Random second slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>Second slide</h3>
+            <p>Should have some featured article here</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[2]" alt="Random third slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>Third slide</h3>
+            <p>Should have some featured article here</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!--  Reviews Section  -->
+      <div class="container marketing">
+        <!-- Three columns of text below the carousel -->
+        <h1 class="marketing-header">Reviews from our users</h1>
+        <div class="row">
+
+          <div class="col-lg-4">
+
+            <!--
+            <svg
+            class="bd-placeholder-img rounded-circle"
+            width="140"
+            height="140"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: 140x140"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#777"/>
+            <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+          </svg>
+          -->
+
+
+          <img src="https://64.media.tumblr.com/3d0a3245d2c064aad34441ae061882a0/tumblr_pn6rqd03km1upe1ufo1_250.gifv"
+          alt="Picture of first reviewer"
+          class="profile-pic">
+            <h2>Quattro Bajeena</h2>
+            <h3>The Red Comet</h3>
+            <p>Great platform that allows my organisation, Neo Zeon, to seek for new volunteers for our organisation. Let's fight climate change together!</p>
+            <!--
+            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            -->
+          </div><!-- /.col-lg-4 -->
+
+
+
+          <div class="col-lg-4">
+
+            <!--
+            <svg
+            class="bd-placeholder-img rounded-circle"
+            width="140"
+            height="140"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: 140x140"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#777"/>
+            <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+          </svg>
+          -->
+
+
+          <img src="https://i2.wp.com/www.animemaru.com/wp-content/uploads/2018/05/violetevergarden.png?w=640&ssl=1"
+          alt="Picture of second reviewer"
+          class="profile-pic">
+            <h2>Violet Evergarden</h2>
+            <h3>Auto Memory Doll</h3>
+            <p>I'm glad that I can fulfill the requests of our clients as an Auto Memory Doll. The clients I have helped out not only
+              opened my eyes to a better, more beautiful world but it also helped me to overcome my own challenges.
+            </p>
+            <!--
+            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            -->
+          </div><!-- /.col-lg-4 -->
+
+
+          <div class="col-lg-4">
+
+            <!--
+            <svg
+            class="bd-placeholder-img rounded-circle"
+            width="140"
+            height="140"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: 140x140"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+            >
+
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#777"/>
+              <text x="50%" y="50%" fill="#777" dy=".3em">
+                140x140</text>
+              </svg>
+              -->
+
+              <img src="https://yaharibento.files.wordpress.com/2016/03/yahari-oregariu-zoku-anime-ep3-48-yukinoshita-haruno.gif?w=2000&h="
+              alt="Picture of third reviewer"
+              class="profile-pic">
+
+            <h2>Yukinoshita Haruno</h2>
+            <h3>NUS Alumni</h3>
+            <p>Love to use this website to find students wanting work that forms genuine bonds!</p>
+            <!--
+            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            -->
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- START THE FEATURETTES -->
+
+
+        <hr class="featurette-divider">
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Our Story<br></h2>
+            <span class="text-muted">Connecting Hearts with Minds</span>
+            <p class="lead">Inaugrated in June 2021, the Centre for Computing for Social Good and Philanthropy (CCSGP) aims to liberalise and unleash the power of
+              the National University of Singapore's (NUS) School of Computing (SOC) students to do good for society.</p>
+          </div>
+          <div class="col-md-5">
+            <!--
+            <svg
+            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+            width="500"
+            height="500"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: 500x500"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#eee"/>
+            <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+          </svg>
+          -->
+          <img src="../../assets/Orbital-Logo-Design.png" alt="CCSGP's logo" class="featurette-image">
+          </div>
+        </div>
+
+
+
+        <hr class="featurette-divider">
+
+
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Endless Possibilities</h2>
+            <span class="text-muted">Shoot for the moon and you will land upon the stars</span>
+            <p class="lead">Organisations have a plethora of students to choose from that best fits their project needs. Students have a myriad of choices of organisations to
+              volunteer for.<br>What's not to love?
+            </p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <!--
+            <svg
+            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+            width="500"
+            height="500"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: 500x500"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#eee"/>
+            <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+          </svg>
+          -->
+          <img src="https://www.pngkey.com/png/full/4-49790_galaxies-galaxy-png.png" alt="Photo of galaxies" class="featurette-image">
+          </div>
+        </div>
+
+
+
+        <hr class="featurette-divider">
+
+
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Global Network</h2>
+            <span class="text-muted">The world is your oyster</span>
+            <p class="lead">Tap into our network of professionals and their diverse skillsets.</p>
+          </div>
+          <div class="col-md-5">
+            <!--
+            <svg
+            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+            width="500"
+            height="500"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: 500x500"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#eee"/>
+            <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+          </svg>
+          -->
+          <img src="https://www.pngarts.com/files/1/Globe-Transparent-Images.png" alt="Photo of the galaxy" class="featurette-image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+      </div><!-- /.container -->
+
+      <div style="text-align: center;">
+        <p>
+          There is supposed to be an advertisement here.
+        </p>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
+
+        <ins
+          class="adsbygoogle"
+          style="display: inline-block; width: 120px; height: 500px"
+          data-ad-client="ca-pub-5762664625803860"
+          data-ad-slot="5806789784"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+
+
+      <!-- FOOTER -->
+      <footer class="container">
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <p>&copy; 2021 Centre for Computing for Social Good and Philanthropy, NUS. &middot;
+          <!--
+          <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+          -->
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
