@@ -1,8 +1,10 @@
 <div class="filterBar">
+
   <mat-card [style]="{ 'background-color': '#203647', color: 'white' }">
+
     <ng-container>
       <mat-form-field appearance="outline">
-        <mat-label>Keywords</mat-label>
+        <mat-label>Search for keywords</mat-label>
         <input
           matInput
           type="text"
@@ -586,7 +588,7 @@
 
         <ng-template pTemplate="footer" #footer class="footer">
           <p-button
-            *ngIf="userRole === 'Student'"
+            *ngIf="(userRole === 'Student') || (userRole === 'Student / NUS Alumni')"
             class="report"
             label="Report"
             icon="pi pi-exclamation-circle"
@@ -605,7 +607,7 @@
           ></p-button>
 
           <p-button
-            *ngIf="userRole === 'Student'"
+            *ngIf="(userRole === 'Student') || (userRole === 'Student / NUS Alumni')"
             class="apply"
             label="Apply"
             icon="pi pi-heart"
