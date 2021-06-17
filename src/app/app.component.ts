@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth/auth.service';
-import { fader } from './route-animations';
+
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,10 @@ import { fader } from './route-animations';
   animations: [
     trigger('routeAnimations', [
       transition('* => *', [
+        style({
+          position: 'relative'
+        }),
+
         query(':enter, :leave', [
           style({
             position: 'absolute',

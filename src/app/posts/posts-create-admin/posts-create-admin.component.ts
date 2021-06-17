@@ -117,6 +117,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     this.pendingApproval = true;
     this.postsService.addPost(post);
     this.modalService.dismissAll();
+    form.reset();
   }
 
   closeNotification() {
