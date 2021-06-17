@@ -240,18 +240,23 @@
 </mat-card>
 
 <ng-template #TermsAndConditions let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
+  <div
+  class="modal-header"
+  style="background-color: #203647; border: none;">
+    <h4 class="modal-title" style="background-color:#203647; color: white">Modal title</h4>
     <button
       type="button"
       class="close"
       aria-label="Close"
+      style="color: transparent"
       (click)="modal.dismiss('Cross click')"
     >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div
+  class="modal-body"
+  style="background-color: #203647; border: none; color: white">
     <p>Terms and Conditions of Use</p>
 
     <br />
@@ -378,10 +383,15 @@
       >I have read the above Terms and Conditions.</mat-checkbox
     >
   </div>
-  <div class="modal-footer">
+  <div
+  class="modal-footer"
+  style="background-color: #203647; border: none;">
     <button
       type="button"
       class="btn btn-light"
+      style="background-color: #203647;
+      border-color: #4da8da;
+      color: white;"
       (click)="modal.close('Close click')"
     >
       Back
@@ -389,6 +399,9 @@
     <button
       type="button"
       class="btn btn-light"
+      style="background-color: #203647;
+      border-color: #4da8da;
+      color: white;"
       (click)="checkbox.valid && onAddPost(postForm)"
     >
       Submit
