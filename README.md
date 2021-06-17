@@ -69,3 +69,5 @@ npm install -g @angular/cli@11<br>
 * npm install ng-chat //do we still need this?
 
 * npm install --save express-mongo-sanitize
+
+* npm install --save deep-email-validator
