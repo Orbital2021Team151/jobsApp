@@ -2,7 +2,6 @@
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
 
-
 body {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -47,9 +46,14 @@ ngb-carousel {
 -------------------------------------------------- */
 
 /* Center align the text within the three columns below the carousel */
-.marketing-header {
+.marketing-heading {
   text-align: center;
   margin-bottom: 2.5rem;
+  font-weight: 300;
+  line-height: 1;
+  /* rtl:remove */
+  letter-spacing: -.05rem;
+  font-family: 'Lato', sans-serif;
 }
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
@@ -58,18 +62,22 @@ ngb-carousel {
 .marketing h2 {
   font-weight: 500;
   margin-bottom: 0rem;
+  font-family: 'Lato', sans-serif;
 }
 
 .marketing h3 {
   font-weight: 400;
   margin-bottom: 1.5rem;
   font-style: italic;
+  font-family: 'Lato', sans-serif;
 }
 
 /* rtl:begin:ignore */
 .marketing .col-lg-4 p {
   margin-right: .75rem;
   margin-left: .75rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
 }
 /* rtl:end:ignore */
 
@@ -90,25 +98,37 @@ ngb-carousel {
 
 /* Thin out the marketing headings */
 .featurette-heading {
-  font-weight: 300;
   line-height: 1;
   /* rtl:remove */
   letter-spacing: -.05rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
 }
 
 .text-muted {
   font-size: 30px;
+  font-family: 'Lato', sans-serif;
   font-weight: 500;
 }
 
 .lead {
   margin-top: 2rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
 }
 
 .featurette-image {
   object-fit: cover;
   width: 500px;
   height: 500px;
+}
+
+
+
+/* Footer
+------------------------- */
+.copyright {
+  text-align: center;
 }
 
 
