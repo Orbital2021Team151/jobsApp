@@ -47,13 +47,7 @@
       <mat-error *ngIf="email.invalid">Please provide us your email.</mat-error>
     </mat-form-field>
 
-    <button
-      type="button"
-      class="btn btn-light"
-      (click)="checkEmailExists(postForm)"
-    >
-      Check if email exists
-    </button>
+    <a href="https://verify-email.org/" target="_blank" style="margin-top: 0rem;">Check if email exists (might not be accurate)</a>
 
     <mat-form-field appearance="outline">
       <mat-label>Volunteer Opportunity Title</mat-label>

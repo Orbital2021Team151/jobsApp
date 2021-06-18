@@ -1,7 +1,14 @@
-const Post = require('../models/post');
 const nodemailer = require("nodemailer");
+const handlebars = require("handlebars");
+const fs = require("fs");
+const path = require("path");
+//const emailValidator = require('deep-email-validator');
+//const emailExistence = require('email-existence');
+
+const Post = require('../models/post');
 const User = require('../models/user');
-const emailValidator = require('deep-email-validator');
+
+
 
 exports.requestPost = (req, res, next) => {
   const post = new Post({
@@ -27,6 +34,7 @@ exports.requestPost = (req, res, next) => {
   });
   post.save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
     .then(createdPost => {
+      sendPostRequestedNotificationEmail(req.body.email, post);
       res.status(201).json({message: "post requested successfully! Pending admin approval"});
     });
 };
@@ -233,8 +241,27 @@ exports.reportPost = (req, res, next) => {
 };
 
 
+//the only one that might work is the mailgun-js solution. but that feature is locked behind a subscription service
 exports.checkEmailExists = (req, res, next) => {
+  console.log("Inside MongoDB!");
 
+  /*
+   * yahoo addresses not working, @u.nus.edu addresses not working
+  emailExistence.check(req.body.email, (error, response) => {
+    console.log("Checking email's existence now!");
+    if (error) {
+      console.log("In error clause");
+      console.log(error);
+    } else {
+      console.log("Response works?");
+      console.log(response);
+    }
+    console.log("\n");
+  })
+  */
+
+  /*
+   * yahoo addresses not working, @u.nus.edu addresses not working
   async function isEmailValid(email) {
     return emailValidator.validate(email)
    }
@@ -259,34 +286,423 @@ exports.checkEmailExists = (req, res, next) => {
       });
     });
 
-
-    /*
-     console.log(dataObject);
-     if (!dataObject.valid) {
-       throw new Error("Email is not valid")
-     }
-   })
-
-   .catch(err => {
-     console.log(err);
-   });
-   */
+    */
+};
 
 
-  /*
-  const {valid, reason, validators} = isEmailValid(req.body.email);
-  if (valid) {
-    return res.status(200).json({
-      message: "Email is valid",
-    });
-  }
-  return res.status(400).send({
-    message: "Please provide a valid email address.",
-    reason: validators[reason].reason,
-    validators: validators,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Emails with HTML Templating.
+ * They use gmail's smtp service.
+ * Might need to move to sendgrid / mailgun in the future if volume is a lot larger
+*/
+const sendNotificationEmail = (email, post) => {
+  var mailOptions;
+  let sender = "CCSGP Email Notification";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "post-notification",
+    "post-notification.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    orgName: post.orgName,
+    POC: post.POC,
+    phoneNumber: post.phoneNumber,
+    email: post.email,
+    title: post.title,
+    content: post.content,
+    skills: post.skills,
+    startDate: new Date(post.startDate).toDateString(),
+    endDate: new Date(post.endDate).toDateString(),
+    hoursRequired: post.hoursRequired,
+    beneficiaries: post.beneficiaries,
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
   });
-  */
 
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Volunteer Opportunity Available",
+    html: htmlToSend,
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Notification email! (line 383, controllers posts.js) Error is as shown below: "
+      );
+      console.log(error);
+      throw new Error("Could not send Reset Password email!");
+    } else {
+      console.log("Notification email sent!");
+    }
+  });
+};
+
+
+const sendPostApprovedNotificationEmail = (email, post) => {
+  var mailOptions;
+  let sender = "CCSGP Post Approved";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "post-publish-confirmation",
+    "post-publish-confirmation.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    orgName: post.orgName,
+    POC: post.POC,
+    phoneNumber: post.phoneNumber,
+    email: post.email,
+    title: post.title,
+    content: post.content,
+    skills: post.skills,
+    startDate: new Date(post.startDate).toDateString(),
+    endDate: new Date(post.endDate).toDateString(),
+    hoursRequired: post.hoursRequired,
+    beneficiaries: post.beneficiaries,
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Requested Post Has Been Approved",
+    html: htmlToSend,
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Publish Notification email! (line 461, controllers posts.js) Error is as shown below: "
+      );
+      console.log(error);
+      throw new Error("Could not send Publish Notification email!");
+    } else {
+      console.log("Notification email sent!");
+    }
+  });
+};
+
+
+const sendPostRequestedNotificationEmail = (email, post) => {
+  var mailOptions;
+  let sender = "CCSGP Post Request Confirmation";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "post-request-confirmation",
+    "post-request-confirmation.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    orgName: post.orgName,
+    POC: post.POC,
+    phoneNumber: post.phoneNumber,
+    email: post.email,
+    title: post.title,
+    content: post.content,
+    skills: post.skills,
+    startDate: new Date(post.startDate).toDateString(),
+    endDate: new Date(post.endDate).toDateString(),
+    hoursRequired: post.hoursRequired,
+    beneficiaries: post.beneficiaries,
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Post Request Acknowledgement",
+    html: htmlToSend,
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Post Request Acknowledgement email! (line 539, controllers posts.js) Error is as shown below: "
+      );
+      console.log(error);
+      throw new Error("Could not send Post Request Acknowledgement email!");
+    } else {
+      console.log("Post Request Acknowledgement email sent!");
+    }
+  });
+};
+
+
+const sendReportToAdminEmail = (email, post) => {
+  var mailOptions;
+  let sender = "CCSGP Report Alert";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "report-admin",
+    "report-admin.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    orgName: post.orgName,
+    POC: post.POC,
+    phoneNumber: post.phoneNumber,
+    email: post.email,
+    title: post.title,
+    content: post.content,
+    skills: post.skills,
+    startDate: new Date(post.startDate).toDateString(),
+    endDate: new Date(post.endDate).toDateString(),
+    hoursRequired: post.hoursRequired,
+    beneficiaries: post.beneficiaries,
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Post Report Alert",
+    html: htmlToSend,
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Post Report Alert email! (line 539, controllers posts.js) Error is as shown below: "
+      );
+      console.log(error);
+      throw new Error("Could not send Post Report Alert email!");
+    } else {
+      console.log("Post Report Alert email sent!");
+    }
+  });
+};
+
+
+const sendReportAcknowledgementEmail = (email, post) => {
+  var mailOptions;
+  let sender = "CCSGP Report Acknowledgement";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "report-acknowledgement",
+    "report-acknowledgement.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    orgName: post.orgName,
+    POC: post.POC,
+    phoneNumber: post.phoneNumber,
+    email: post.email,
+    title: post.title,
+    content: post.content,
+    skills: post.skills,
+    startDate: new Date(post.startDate).toDateString(),
+    endDate: new Date(post.endDate).toDateString(),
+    hoursRequired: post.hoursRequired,
+    beneficiaries: post.beneficiaries,
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Post Report Acknowledgement",
+    html: htmlToSend,
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Post Report Acknowledgement email! (line 539, controllers posts.js) Error is as shown below: "
+      );
+      console.log(error);
+      throw new Error("Could not send Post Report Acknowledgement email!");
+    } else {
+      console.log("Post Report Acknowledgement email sent!");
+    }
+  });
 };
 
 
@@ -324,6 +740,8 @@ exports.checkEmailExists = (req, res, next) => {
 
 
 
+
+/*
 const sendNotificationEmail = (email, post) => {
   var Transport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -379,8 +797,6 @@ const sendNotificationEmail = (email, post) => {
     }
   });
 };
-
-
 
 
 
@@ -448,6 +864,8 @@ const sendPostApprovedNotificationEmail = (email, post) => {
 
 
 
+
+
 const sendReportToAdminEmail = (email, post) => {
   var Transport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -504,6 +922,8 @@ const sendReportToAdminEmail = (email, post) => {
   });
 };
 
+
+
 const sendReportAcknowledgementEmail = (email, post) => {
   var Transport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -558,3 +978,5 @@ const sendReportAcknowledgementEmail = (email, post) => {
     }
   });
 }
+
+*/

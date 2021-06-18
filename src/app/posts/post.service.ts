@@ -133,6 +133,8 @@ export class PostsService {
     });
   }
 
+
+  /*
   checkEmailExists(email: string) {
 
     const bodyObject = {email: email};
@@ -142,7 +144,16 @@ export class PostsService {
     .subscribe((response) => {
       console.log("Hi from postService check email exists");
       console.log(response);
+    });
+  }
+
+  checkVerifyEmailExistsCredits() {
+    this.http.get('https://app.verify-email.org/api/v1/Y9AYEP6RPc0C440d68rjzGIxisRa8Za2EHVdznQvqhOQlLqWRH/credits')
+    .subscribe(response => {
+      console.log("Checking verify-email.org amount of credits left");
+      console.log(response);
     })
   }
+  */
 
 }

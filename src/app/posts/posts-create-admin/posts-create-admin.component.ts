@@ -128,15 +128,18 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     this.modalService.open(longContent, { scrollable: true });
   }
 
+
+  /*
   checkEmailExists(form: NgForm) {
     if (this.pocEmail === "") {
       console.log("Needs an email!");
       return;
     }
-
-    return this.postsService.checkEmailExists(form.value.email);
-
+    //return this.postsService.checkEmailExists(form.value.email);
+    return this.postsService.checkVerifyEmailExistsCredits();
   }
+  */
+
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();

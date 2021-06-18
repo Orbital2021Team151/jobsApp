@@ -1,17 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
+const path = require("path");
+const mongoose = require("mongoose");
 
 const postRoutes = require('./routes/posts');
 const userRoutes = require('./routes/users');
-const path = require("path");
-
-const mongoose = require("mongoose");
-//const nev = require('email-verification')(mongoose);
 
 const app = express();
 
-//username: admin, password: bh447oHghiti5g2E
 //cli command @mongdb's bin folder: mongo "mongodb+srv://eprepmeancoursecluster.qa0ny.mongodb.net/myFirstDatabase" --username <username>
 mongoose.connect("mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepmeancoursecluster.qa0ny.mongodb.net/orbitalDatabase?retryWrites=true&w=majority")
   .then(() => {
@@ -36,6 +33,7 @@ app.use((req, res, next) => {
 
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
+
 
 //for deployment in heroku
 app.use("/", express.static(path.join(__dirname, "../dist/jobsApp")));

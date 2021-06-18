@@ -7,7 +7,7 @@ body {
   padding-bottom: 3rem;
   margin-top: 0rem;
   margin-bottom: 0rem;
-  color: #ffffff;
+  color: #ffffff !important;
   background-color: #12232E !important;
 }
 
@@ -48,8 +48,8 @@ ngb-carousel {
 /* Center align the text within the three columns below the carousel */
 .marketing-heading {
   text-align: center;
-  margin-bottom: 2.5rem;
-  font-weight: 300;
+  margin-bottom: 2.5rem !important;
+  font-weight: 300 !important;
   line-height: 1;
   /* rtl:remove */
   letter-spacing: -.05rem;
@@ -101,21 +101,22 @@ ngb-carousel {
 .featurette-heading {
   line-height: 1;
   /* rtl:remove */
-  letter-spacing: -.05rem;
+  /* letter-spacing: -.05rem; */
   font-family: 'Lato', sans-serif;
-  font-weight: 600;
+  font-weight: 600 !important;
+  font-size: 40px !important;
 }
 
 .text-muted {
-  font-size: 30px;
+  font-size: 30px !important;
   font-family: 'Lato', sans-serif;
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 .lead {
   margin-top: 2rem;
   font-family: 'Lato', sans-serif;
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .featurette-image {
