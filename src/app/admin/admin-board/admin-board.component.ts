@@ -138,7 +138,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   }
 
   onDownloadCSV() {
-
+    this.postsService.downloadCSV();
   }
 
   closeNotification() {

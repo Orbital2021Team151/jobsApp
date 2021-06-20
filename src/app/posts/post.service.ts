@@ -134,7 +134,7 @@ export class PostsService {
   }
 
   downloadCSV() {
-    this.http.get(BACKEND_URL + 'api/posts/downloadPosts')
+    this.http.get(BACKEND_URL + 'api/posts/download')
     .subscribe(response => {
       console.log("Post service's download CSV function called. The response is: ");
       console.log(response);
