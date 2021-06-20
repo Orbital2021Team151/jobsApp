@@ -46,7 +46,7 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save mongoose-unique-validator
 
-* npm install --save bcrypt
+* npm install --save bcryptjs
 
 * Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)
 
@@ -71,3 +71,9 @@ npm install -g @angular/cli@11<br>
 * npm install --save express-mongo-sanitize
 
 * npm install --save deep-email-validator
+
+* npm install --save fast-csv
+
+* npm install --save mongodb
+
+* npm install --save json2csv

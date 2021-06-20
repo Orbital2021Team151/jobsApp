@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const handlebars = require("handlebars");
@@ -20,7 +20,7 @@ exports.signupGeneral = (req, res, next) => {
     const user = new User({
       email: req.body.email,
       password: passwordHash,
-      role: backendRole, //TODO: KIV to change
+      role: backendRole, //TODO: KIV to change at production w/o all these confusing names
       orgName: req.body.orgName,
       uen: req.body.uen,
       beneficiaries: req.body.beneficiaries,

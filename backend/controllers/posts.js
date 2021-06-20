@@ -2,6 +2,10 @@ const nodemailer = require("nodemailer");
 const handlebars = require("handlebars");
 const fs = require("fs");
 const path = require("path");
+
+const mongodb = require("mongodb").MongoClient;
+const Json2csvParser = require("json2csv").Parser;
+
 //const emailValidator = require('deep-email-validator');
 //const emailExistence = require('email-existence');
 
@@ -238,6 +242,58 @@ exports.reportPost = (req, res, next) => {
       message: "Something went wrong at reporting post. either reporting the post itself or failed to send notification to admins",
     });
   });
+};
+
+exports.downloadPosts = (req, res, next) => {
+
+  //let url = "mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepmeancoursecluster.qa0ny.mongodb.net/orbitalDatabase?retryWrites=true&w=majority";
+  let url = "mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepmeancoursecluster.qa0ny.mongodb.net/";
+  mongodb.connect(
+    url,
+
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    },
+
+    (err, client) => {
+      if (err) {
+        console.log("Error at connecting to mongodb. line 261 controllers posts.js");
+        console.log(err);
+        res.stats(404).json({
+          message: "Error at download posts connecting to mongodb",
+          error: err
+        })
+      };
+
+      client
+        .db("orbitalDatabase")
+        .collection("posts")
+        .find({})
+        .toArray((err, data) => {
+          if (err) {
+            console.log("Error at toArray function of downloadPosts. line 274 controllers posts.js");
+            console.log(err);
+            res.stats(404).json({
+              message: "Error at download posts retrieving posts from mongodb",
+              error: err
+            })
+          };
+
+          console.log("Data retrieved is: ");
+          console.log(data);
+          const json2csvParser = new Json2csvParser({ header: true });
+          const csvData = json2csvParser.parse(data);
+
+          fs.writeFile("allPosts.csv", csvData, function(error) {
+            if (error) throw error;
+            console.log("Write to allPosts.csv successfully!");
+          });
+
+          client.close();
+        });
+    });
+
 };
 
 

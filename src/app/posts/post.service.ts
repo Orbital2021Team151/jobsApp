@@ -133,6 +133,14 @@ export class PostsService {
     });
   }
 
+  downloadCSV() {
+    this.http.get(BACKEND_URL + 'api/posts/downloadPosts')
+    .subscribe(response => {
+      console.log("Post service's download CSV function called. The response is: ");
+      console.log(response);
+    });
+  }
+
 
   /*
   checkEmailExists(email: string) {

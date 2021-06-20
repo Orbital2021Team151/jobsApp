@@ -21,4 +21,6 @@ router.put("/report/:id", PostsController.reportPost);
 
 router.post("/check", PostsController.checkEmailExists);
 
+router.get("/download", PostsController.downloadPosts);
+
 module.exports = router;

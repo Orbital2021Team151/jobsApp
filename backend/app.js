@@ -9,7 +9,7 @@ const userRoutes = require('./routes/users');
 
 const app = express();
 
-//cli command @mongdb's bin folder: mongo "mongodb+srv://eprepmeancoursecluster.qa0ny.mongodb.net/myFirstDatabase" --username <username>
+//cli command @mongdb's bin folder: mongo "mongodb+srv://eprepmeancoursecluster.qa0ny.mongodb.net/orbitalDatabase" --username <username>
 mongoose.connect("mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepmeancoursecluster.qa0ny.mongodb.net/orbitalDatabase?retryWrites=true&w=majority")
   .then(() => {
     console.log("Successfully connected to MongoDB Atlas!");

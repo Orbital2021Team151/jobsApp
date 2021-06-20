@@ -137,6 +137,10 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDownloadCSV() {
+
+  }
+
   closeNotification() {
     this.requestedNewPassword = false;
   }
