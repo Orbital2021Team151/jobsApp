@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const mongodb = require("mongodb").MongoClient;
-const Json2csvParser = require("json2csv").Parser;
+//const Json2csvParser = require("json2csv").Parser;
 
 //const emailValidator = require('deep-email-validator');
 //const emailExistence = require('email-existence');
@@ -260,7 +260,7 @@ exports.downloadPosts = (req, res, next) => {
       if (err) {
         console.log("Error at connecting to mongodb. line 261 controllers posts.js");
         console.log(err);
-        res.stats(404).json({
+        res.status(404).json({
           message: "Error at download posts connecting to mongodb",
           error: err
         })
@@ -280,14 +280,41 @@ exports.downloadPosts = (req, res, next) => {
             })
           };
 
-          console.log("Data retrieved is: ");
-          console.log(data);
-          const json2csvParser = new Json2csvParser({ header: true });
+          //console.log("Data retrieved is: ");
+          //console.log(data);
+
+          /*
+          const json2csvParser = new Json2csvParser({ header: true});
           const csvData = json2csvParser.parse(data);
 
-          fs.writeFile("allPosts.csv", csvData, function(error) {
-            if (error) throw error;
-            console.log("Write to allPosts.csv successfully!");
+          let filePath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "downloads",
+            "output.csv"
+          );
+
+          console.log("File path is: ");
+          console.log(filePath);
+
+          fs.promises.writeFile(filePath, csvData)
+          .then(() => {
+            console.log('wrote output.csv');
+
+            res.download(filePath, 'output.csv', err=> {
+              console.log(err);
+            });
+
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+          */
+
+          res.status(200).json({
+            message: "Downloaded csv file",
+            data: data,
           });
 
           client.close();

@@ -133,11 +133,32 @@ export class PostsService {
     });
   }
 
-  downloadCSV() {
-    this.http.get(BACKEND_URL + 'api/posts/download')
+  downloadPosts() {
+
+    this.http.get<{message: string, data: any}>(BACKEND_URL + 'api/posts/download')
     .subscribe(response => {
       console.log("Post service's download CSV function called. The response is: ");
       console.log(response);
+      //console.log(response.data);
+
+      const Json2csvParser = require("json2csv").Parser;
+      const json2csvParser = new Json2csvParser({ header: true});
+      const csvData = json2csvParser.parse(response.data);
+
+      let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
+        let dwldLink = document.createElement("a");
+        let url = URL.createObjectURL(blob);
+        let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+        if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
+            dwldLink.setAttribute("target", "_blank");
+        }
+        dwldLink.setAttribute("href", url);
+        dwldLink.setAttribute("download", "all posts" + ".csv");
+        dwldLink.style.visibility = "hidden";
+        document.body.appendChild(dwldLink);
+        dwldLink.click();
+        document.body.removeChild(dwldLink);
+
     });
   }
 
