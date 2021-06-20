@@ -280,41 +280,29 @@ exports.downloadPosts = (req, res, next) => {
             })
           };
 
-          //console.log("Data retrieved is: ");
-          //console.log(data);
-
-          /*
-          const json2csvParser = new Json2csvParser({ header: true});
-          const csvData = json2csvParser.parse(data);
-
-          let filePath = path.join(
-            __dirname,
-            "..",
-            "..",
-            "downloads",
-            "output.csv"
-          );
-
-          console.log("File path is: ");
-          console.log(filePath);
-
-          fs.promises.writeFile(filePath, csvData)
-          .then(() => {
-            console.log('wrote output.csv');
-
-            res.download(filePath, 'output.csv', err=> {
-              console.log(err);
-            });
-
-          })
-          .catch((err) => {
-            console.log(err);
+          mappedData = data.map(obj => {
+            return {
+              beneficiaries: obj.beneficiaries,
+              orgName: obj.orgName,
+              uen: obj.uen,
+              point_of_contact: obj.POC,
+              phoneNumber: obj.phoneNumber,
+              email: obj.email,
+              title: obj.title,
+              content: obj.content,
+              skills: obj.skills,
+              startDate: obj.startDate,
+              endDate: obj.endDate,
+              commitment: obj.hoursRequired,
+              studentsInterested: obj.students,
+              reports: obj.reports,
+              approved: obj.approved,
+            };
           });
-          */
 
           res.status(200).json({
             message: "Downloaded csv file",
-            data: data,
+            data: mappedData,
           });
 
           client.close();
