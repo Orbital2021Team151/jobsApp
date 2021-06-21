@@ -1,13 +1,31 @@
-
-img {
-  width:100%;
-  height: 100%;
+/* LOGIN PAGE GLOBAL
+-------------------------------------------------- */
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 99999;
 }
 
+::ng-deep .cdk-overlay-container {
+  z-index: 99999;
+}
 
-/*
- * For the role selection for user creation. Still need to combine w styling at html level
-*/
+.card {
+  grid-area: card;
+}
+
+/* LOGIN CARD
+-------------------------------------------------- */
+mat-card {
+  width: 20%;
+}
+
+.card {
+  grid-area: card;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
 .mat-input-element {
   color: #EEFBFB;
 }
@@ -24,14 +42,6 @@ img {
   color: #EEFBFB !important;
 }
 
-.mat-select-value::placeholder {
-  color: #EEFBFB !important;
-}
-
-mat-icon {
-  color: #4da8da;
-}
-
 .logo img {
   width: 50%;
   height: 50%;
@@ -43,9 +53,76 @@ mat-icon {
 	flex-wrap:wrap;
 	text-align:center;
   justify-content: center;
-
 }
 
+.mat-select-value::placeholder {
+  color: #EEFBFB !important;
+}
+
+mat-icon {
+  color: #4da8da;
+}
+
+mat-form-field {
+  width:100%;
+}
+
+p-button {
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+.form-footer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.forget-password-link {
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/* FORGET PASSWORD MODAL WINDOW
+-------------------------------------------------- */
+.modal-header {
+  /* background-color: #203647; */
+  border: none;
+}
+
+.modal-title {
+  /* background-color: #203647; */
+  border: none;
+}
+
+.modal-body {
+  /* background-color: #203647; */
+  border: none;
+}
+
+.modal-footer {
+  /* background-color: #203647; */
+  border: none;
+}
+
+/* MISCELLANEOUS
+-------------------------------------------------- */
+img {
+  width:100%;
+  height: 100%;
+}
+
+mat-spinner {
+  margin: auto;
+}
 
 
 
@@ -62,54 +139,3 @@ mat-icon {
 }
 
 .picture { grid-area: picture;} */
-
-.card { grid-area: card;
-  background-color: #12232E;
-}
-
-
-
-
-
-
-
-
-
-.cdk-overlay-container {
-  position: fixed;
-  z-index: 99999;
-}
-
-
-::ng-deep .cdk-overlay-container {
-  z-index: 99999;
-}
-
-mat-card {
-  background-color: #203647;
-}
-
-mat-form-field {
-  width:100%;
-  background-color: #203647;
-  color: white;
-}
-
-mat-spinner {
-  margin: auto;
-}
-
-p-button {
-  margin-left: .5rem;
-  margin-right: .5rem;
-}
-
-
-
-/* .modal-footer {
-  background-color: #203647;
-} */
-
-/* ::ng-deep div .modal-header {
-  background-color: #203647 !important;
-} */

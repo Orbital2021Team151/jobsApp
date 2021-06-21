@@ -1,14 +1,16 @@
 <mat-toolbar>
 
   <mat-toolbar-row>
-    <span class="logo" *ngIf="userIsAuthenticated">
-      <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP">
+    <span class="logo">
+      <a href="https://ccsgp-app.herokuapp.com/" title="logo" class="logo">
+        <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP">
+      </a>
     </span>
     <span class="spacer-row-1"></span>
     <ul>
       <li *ngIf="!userIsAuthenticated">
-        <a mat-stroked-button class="light-button" routerLink="/login" routerLinkActive="mat-primary"> Login </a>
-        <a mat-stroked-button class="light-button" routerLink="/signup" routerLinkActive="mat-primary"> Signup </a>
+        <button mat-stroked-button class="light-button" routerLink="/login" routerLinkActive="mat-primary">Login</button>
+        <button mat-stroked-button class="light-button" routerLink="/signup" routerLinkActive="mat-primary">Signup</button>
       </li>
 
       <li *ngIf="userIsAuthenticated">
@@ -18,9 +20,8 @@
     </ul>
   </mat-toolbar-row>
 
-
-
   <mat-toolbar-row>
+
     <span class="spacer-row-2"></span>
     <ul>
       <li *ngIf="userIsAuthenticated">

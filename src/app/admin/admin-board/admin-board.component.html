@@ -1,78 +1,79 @@
 <div class="changePasswordBar">
-  <mat-card [style]="{ 'background-color': '#203647' }">
-    <form #changePasswordForm="ngForm">
-      <mat-form-field appearance="outline" [style]="{'margin-left': '0.5rem', 'margin-right': '0.5rem', 'color' : 'white'}">
-        <input
-          matInput
-          [type]="hideCurrentPassword ? 'password' : 'text'"
-          ngModel
-          name="currentPassword"
-          required
-          #currentPassword="ngModel"
-          placeholder="Current Password"
-        />
+</div>
 
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hideCurrentPassword = !hideCurrentPassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hideCurrentPassword"
-        >
-          <mat-icon>{{
-            hideCurrentPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
-
-        <mat-error *ngIf="currentPassword.invalid"
-          >Please enter your current password.</mat-error
-        >
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" [style]="{'margin-left': '0.5rem', 'margin-right': '0.5rem', 'color' : 'white'}">
-        <input
-          matInput
-          [type]="hideNewPassword ? 'password' : 'text'"
-          ngModel
-          name="newPassword"
-          required
-          #newPassword="ngModel"
-          placeholder="New Password"
-        />
-
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hideNewPassword = !hideNewPassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hideNewPassword"
-        >
-          <mat-icon>{{
-            hideNewPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
-
-        <mat-error *ngIf="newPassword.invalid"
-          >Please provide us with your new password.</mat-error
-        >
-      </mat-form-field>
+<mat-card class="changePassword">
+  <form #changePasswordForm="ngForm">
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        [type]="hideCurrentPassword ? 'password' : 'text'"
+        ngModel
+        name="currentPassword"
+        required
+        #currentPassword="ngModel"
+        placeholder="Current Password"
+      />
 
       <button
-        class="btn btn-outline-primary mb-2 mr-2"
-        (click)="onChangePassword(changePasswordForm)"
+        mat-icon-button
+        matSuffix
+        (click)="hideCurrentPassword = !hideCurrentPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideCurrentPassword"
       >
-        Request
+        <mat-icon>{{
+          hideCurrentPassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
       </button>
-    </form>
+
+      <mat-error *ngIf="currentPassword.invalid"
+        >Please enter your current password.</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="changePassword-formField">
+      <input
+        matInput
+        [type]="hideNewPassword ? 'password' : 'text'"
+        ngModel
+        name="newPassword"
+        required
+        #newPassword="ngModel"
+        placeholder="New Password"
+      />
+
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hideNewPassword = !hideNewPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideNewPassword"
+      >
+        <mat-icon>{{
+          hideNewPassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+
+      <mat-error *ngIf="newPassword.invalid"
+        >Please provide us with your new password.</mat-error
+      >
+    </mat-form-field>
 
     <button
-        class="btn btn-outline-primary mb-2 mr-2"
-        (click)="onDownloadCSV()"
-      >
-        Download CSV
-      </button>
-  </mat-card>
-</div>
+      class="btn btn-outline-primary mb-2 mr-2"
+      (click)="onChangePassword(changePasswordForm)"
+    >
+      Request
+    </button>
+  </form>
+
+  <button
+      class="btn btn-outline-primary mb-2 mr-2"
+      (click)="onDownloadCSV()"
+    >
+      Download CSV
+    </button>
+</mat-card>
 
 <div
   *ngIf="requestedNewPassword"
@@ -95,17 +96,26 @@
   <p
     class="info-text mat-body-1"
     *ngIf="hasRequest"
-    [style]="{ color: 'white' }"
   >
     <b>Posts that needs to be approved!</b>
   </p>
 
+  <!--
+    <div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutWrap
+    fxLayoutGap="1.0%"
+    fxLayoutAlign="center"
+    fxFlexAlign="auto"
+  >
+  -->
   <div
     fxLayout="row wrap"
     fxLayout.xs="column"
     fxLayoutWrap
-    fxLayoutGap="5.0%"
     fxLayoutAlign="center"
+    fxFlexAlign="auto"
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="!post.approved">
@@ -230,10 +240,6 @@
       <ng-template #deleteUnapprovedContent let-modal>
         <div
           class="modal-header"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
           <h4 class="modal-title">Delete Confirmation</h4>
           <button
@@ -248,20 +254,12 @@
 
         <div
           class="modal-body"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
         <p>Are you sure you want to delete the post?</p>
         </div>
 
         <div
           class="modal-footer"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
 
         <button
@@ -293,23 +291,32 @@
   <p
     class="info-text mat-body-1"
     *ngIf="!hasRequest"
-    [style]="{ color: 'white' }"
   >
     No post request!
   </p>
 </div>
 
 <div>
-  <p class="info-text mat-body-1" [style]="{ color: 'white' }">
+  <p class="info-text mat-body-1">
     <b>Posts with reports! :O</b>
   </p>
 
+  <!--
+    <div
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutWrap
+  fxLayoutGap="1.0%"
+  fxLayoutAlign="center"
+  fxFlexAlign="auto"
+  >
+  -->
   <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutWrap
-    fxLayoutGap="5.0%"
-    fxLayoutAlign="center"
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutWrap
+  fxLayoutAlign="center"
+  fxFlexAlign="auto"
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="post.reports.length > 0">
@@ -413,16 +420,17 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
-          <div *ngFor="let report of post.reports">
-            <div style="border: thin solid black; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-              <p style="text-align: center">
+          <div *ngFor="let report of post.reports" class="modal-body-report">
+            <div>
+              <p>
                 Student's Email: {{ report.email }}
               </p>
-              <p style="text-align: center">
+              <p>
                 Student's Contact: {{ report.contact }}
               </p>
-              <p style="text-align: center">
+              <p>
                 Student's Report: {{ report.content }}
               </p>
             </div>
@@ -481,10 +489,6 @@
       <ng-template #deleteReportedContent let-modal>
         <div
           class="modal-header"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
           <h4 class="modal-title">Delete Confirmation</h4>
           <button
@@ -499,20 +503,12 @@
 
         <div
           class="modal-body"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
         <p>Are you sure you want to delete the post?</p>
         </div>
 
         <div
           class="modal-footer"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
 
         <button
@@ -543,7 +539,6 @@
   <p
     class="info-text mat-body-1"
     *ngIf="!hasReport"
-    [style]="{ color: 'white' }"
   >
     No post with reports! :D
   </p>

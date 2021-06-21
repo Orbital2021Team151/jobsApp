@@ -1,108 +1,106 @@
-<mat-card>
-  <span class="logo">
-    <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
-  </span>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <div class="form"></div>
-  <form *ngIf="!isLoading" #loginForm="ngForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Email Address</mat-label>
-      <input
-        matInput
-        type="email"
-        name="email"
-        ngModel
-        required
-        #emailInput="ngModel"
-        placeholder="Please enter your Email Address here"
-        email
-      />
-      <mat-error *ngIf="emailInput.invalid"
-        >Please enter a valid email address.</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        [type]="hidePassword ? 'password' : 'text'"
-        name="password"
-        ngModel
-        required
-        #passwordInput="ngModel"
-        placeholder="Enter Password Here"
-      />
-
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hidePassword = !hidePassword"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hidePassword"
-      >
-        <mat-icon>{{
-          hidePassword ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
-
-      <mat-error *ngIf="passwordInput.invalid"
-        >Please enter a valid password.</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field
-      appearance="outline"
-      [style]="{
-        color: 'white',
-        'background-color': '#203647'
-      }"
-    >
-      <mat-label>User Role</mat-label>
-      <mat-select ngModel required #roleInput="ngModel" name="role">
-        <mat-option
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
-          >--</mat-option
+<div class="card">
+  <mat-card>
+    <span class="logo">
+      <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
+    </span>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div class="form"></div>
+    <form *ngIf="!isLoading" #loginForm="ngForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input
+          matInput
+          type="email"
+          name="email"
+          ngModel
+          required
+          #emailInput="ngModel"
+          placeholder="Please enter your Email Address here"
+          email
+        />
+        <mat-error *ngIf="emailInput.invalid"
+          >Please enter a valid email address.</mat-error
         >
-        <mat-option
-          *ngFor="let role of roles"
-          [value]="role"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          name="password"
+          ngModel
+          required
+          #passwordInput="ngModel"
+          placeholder="Enter Password Here"
+        />
+
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
         >
-          {{ role }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="roleInput.invalid"
-        >Please select the user's role.</mat-error
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="passwordInput.invalid"
+          >Please enter a valid password.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="outline"
       >
-    </mat-form-field>
+        <mat-label>User Role</mat-label>
+        <mat-select ngModel required #roleInput="ngModel" name="role">
+          <mat-option
+            >--</mat-option
+          >
 
-    <button mat-raised-button color="accent" (click)="onLogin(loginForm)">
-      Login
-    </button>
+          <mat-option
+            *ngFor="let role of roles"
+            [value]="role"
+          >
+            {{ role }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="roleInput.invalid"
+          >Please select the user's role.</mat-error
+        >
+      </mat-form-field>
 
-    <p-button
-      class="forgetPassword"
-      label="Forget Password"
-      icon="pi pi-heart"
-      styleClass="p-button-info"
-      (click)="onOpenForgetPassword(forgetPasswordContent)"
-    ></p-button>
-  </form>
-</mat-card>
+      <div class="form-footer">
+        <button mat-raised-button color="accent" (click)="onLogin(loginForm)">
+          Login
+        </button>
+        <!--
+        <p-button
+          class="forgetPassword"
+          label="Forget Password"
+          icon="pi pi-heart"
+          styleClass="p-button-info"
+          (click)="onOpenForgetPassword(forgetPasswordContent)"
+        ></p-button>
+
+        <button mat-raised-button color="primary" (click)="onOpenForgetPassword(forgetPasswordContent)">
+          Forget Password
+        </button>
+        -->
+        <a href="javascript:;" (click)="onOpenForgetPassword(forgetPasswordContent)" class="forget-password-link">Forget Password</a>
+      </div>
+    </form>
+  </mat-card>
+</div>
 
 <ng-template #forgetPasswordContent let-modal class="forgetPasswordPopup">
   <div
     class="modal-header"
-    style="background-color: #203647; border: none;"
   >
-    <h4 class="modal-title" style="background-color:#203647; color: white">
+    <h4 class="modal-title">
       Don't worry. Happens to the best of us ;)
     </h4>
     <button
@@ -117,7 +115,6 @@
   </div>
   <div
     class="modal-body"
-    style="background-color: #203647; border: none"
   >
     <form #forgetPasswordForm="ngForm">
       <mat-form-field appearance="outline">
@@ -134,10 +131,6 @@
 
       <mat-form-field
         appearance="outline"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <mat-label>User Role</mat-label>
         <mat-select
@@ -147,19 +140,10 @@
           name="forgetPasswordRole"
         >
           <mat-option
-            [style]="{
-              color: 'white',
-              'background-color': '#203647'
-            }"
             >--</mat-option
           >
           <mat-option
             *ngFor="let role of roles"
-            [value]="role"
-            [style]="{
-              color: 'white',
-              'background-color': '#203647'
-            }"
           >
             {{ role }}
           </mat-option>
@@ -173,11 +157,6 @@
 
   <div
     class="modal-footer"
-    [style]="{
-      'background-color': '#203647',
-      'colour': 'white',
-      'border': 'none'
-    }"
   >
     <div
       *ngIf="newPasswordSent"
@@ -198,10 +177,7 @@
     </div>
     <button
       type="button"
-      class="btn btn-light"
-      style="background-color: #203647;
-      border-color: #4da8da;
-      color: white;"
+      class="btn btn-secondary"
       (click)="
         onForgetPassword(forgetPasswordForm) && modal.dismiss('Cross click')
       "

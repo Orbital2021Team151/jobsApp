@@ -1,11 +1,14 @@
 <div class="grid-container">
-  <div class="picture">
-    <!--
-      <img src="./../../../assets/signup-picture.jpg">
-    -->
-  </div>
+
   <div class="card">
     <mat-card>
+
+      <span class="logo">
+        <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
+      </span>
+
+
+
       <mat-spinner *ngIf="isLoading"></mat-spinner>
       <form *ngIf="!isLoading" #signupForm="ngForm">
 
@@ -71,20 +74,11 @@
           >
         </mat-form-field>
 
-        <mat-form-field appearance="outline" [style]="{
-          'color':'white',
-          'background-color': '#203647'
-      }">
+        <mat-form-field appearance="outline">
           <mat-label>User Role</mat-label>
           <mat-select ngModel required #roleInput="ngModel" name="role" (click)="roleSelected = role">
-            <mat-option [style]="{
-              'color':'white',
-              'background-color': '#203647'
-          }">--</mat-option>
-            <mat-option *ngFor="let role of roles" [value]="role" [style]="{
-              'color':'white',
-              'background-color': '#203647'
-          }">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let role of roles" [value]="role">
               {{ role }}
             </mat-option>
           </mat-select>

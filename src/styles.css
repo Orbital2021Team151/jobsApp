@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+mat-icon {
+  color: #4da8da;
+}
+
 html, body {
   height: 100%;
-  background-color: #12232E;
+  /* background-color: #dbe9f4; */
 }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -11,12 +15,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #4DA8DA;
 }
 
-mat-card {
-  width: 60%;
-  margin: auto;
-  background-color: #203647;
-}
-
+/*
 mat-label {
   color: #EEFBFB;
 }
@@ -29,11 +28,14 @@ mat-label {
   color: #EEFBFB;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*/

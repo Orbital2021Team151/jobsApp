@@ -1,5 +1,8 @@
+/* TOOLBAR GLOBAL
+-------------------------------------------------- */
 mat-toolbar {
-  background-color: #12232E;
+  background-color: white;
+  margin-top: 2rem;
 }
 
 mat-stroked-button {
@@ -9,26 +12,41 @@ mat-stroked-button {
   margin-right: .5rem;
 }
 
+.logo {
+  margin-left: 2rem;
+}
+
+.logo img {
+  width: 5%;
+  height: 8%;
+}
+
+
+/* TOOLBAR LOGIN / LOGOUT / SIGNUP
+-------------------------------------------------- */
 .light-button {
   height: 50px;
   width: 150px;
   font-size: 110%;
-  border: 2px solid #4DA8DA !important;
-  color: white;
+  border: 2px solid #da4d4d !important;
+  color: rgba(0, 0, 0, 0.726);
   margin-left: .5rem;
   margin-right: .5rem;
 }
 
 .light-button:hover {
-  background-color: #4DA8DA;
+  background-color: #da4d4d;
 
   transition: all .4s ease;
   -webkit-transition: all .4s ease;
 }
 
-a {
+
+/* TOOLBAR USER OPTIONS
+-------------------------------------------------- */
+button {
   text-decoration: none;
-  color: white;
+  color: rgba(0, 0, 0, 0.521);
   font-size: 100%;
 }
 
@@ -37,7 +55,7 @@ ul {
   padding: 0;
   margin: 0;
   display: flex;
-  background-color: #12232E;
+  /* background-color: #dbe9f4; */
 }
 
 .spacer-row-1 {
@@ -50,10 +68,5 @@ ul {
   display: inline-block;
   width: 100%;
   margin: auto;
-}
-
-.logo img {
-  width: 4%;
-  height: 4%;
 }
 

@@ -1,3 +1,5 @@
+/* SIGNUP GENERAL GLOBAL
+-------------------------------------------------- */
 mat-form-field {
   width:100%;
 }
@@ -6,8 +8,33 @@ mat-spinner {
   margin: auto;
 }
 
+/* SIGNUP GENERAL CARD
+-------------------------------------------------- */
+
 mat-card {
-  background-color: #203647;
+  width: 20%;
+}
+
+.card {
+  grid-area: card;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+
+.logo img {
+  width: 50%;
+  height: 50%;
+}
+
+.logo {
+  background-position: center;
+  display:flex;
+	flex-wrap:wrap;
+	text-align:center;
+  justify-content: center;
 }
 
 /*
@@ -61,8 +88,3 @@ html, body, .grid-container { height: 100%; margin: 0; }
 
 .picture { grid-area: picture;}
 */
-
-.card { grid-area: card;
-  background-color: #12232E;
-}
-
