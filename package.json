@@ -27,6 +27,7 @@
     "@angular/platform-browser": "~11.2.14",
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
+    "@material/card": "^11.0.0",
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
     "@syncfusion/ej2-angular-buttons": "^19.1.63",
     "@syncfusion/ej2-angular-dropdowns": "^19.1.64",

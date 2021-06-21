@@ -2,12 +2,15 @@
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
 
+html {
+  background-color: #f8f8ff !important;
+}
 body {
   padding-top: 3rem;
   padding-bottom: 3rem;
   margin-top: 0rem;
   margin-bottom: 0rem;
-  /* background-color: #dbe9f4; */
+  background-color: #f8f8ff !important;
 }
 
 

@@ -1,5 +1,9 @@
 /* LOGIN PAGE GLOBAL
 -------------------------------------------------- */
+div {
+  background-color: #f8f8ff !important;
+}
+
 .cdk-overlay-container {
   position: fixed;
   z-index: 99999;
@@ -17,6 +21,7 @@
 -------------------------------------------------- */
 mat-card {
   width: 20%;
+  margin-top: 5rem;
 }
 
 .card {
@@ -58,10 +63,11 @@ mat-card {
   justify-content: center;
 }
 
-
+/*
 .mat-select-value::placeholder {
   color: #EEFBFB !important;
 }
+*/
 
 
 mat-icon {

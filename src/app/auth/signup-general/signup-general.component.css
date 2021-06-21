@@ -1,5 +1,9 @@
 /* SIGNUP GENERAL GLOBAL
 -------------------------------------------------- */
+div {
+  background-color: #f8f8ff !important;
+}
+
 mat-form-field {
   width:100%;
 }
@@ -13,6 +17,7 @@ mat-spinner {
 
 mat-card {
   width: 20%;
+  margin-top: 5rem;
 }
 
 .card {

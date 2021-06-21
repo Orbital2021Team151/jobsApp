@@ -524,46 +524,20 @@
 -->
 
 <div class="posts-timeline">
+
   <ng-container *ngFor="let post of filteredPosts">
+
     <section class="cards">
       <p-card
         class="card"
-        [style]="{
-          height: '25rem',
-          width: '50rem',
-          'text-align': 'center',
-          'background-color': '#203647',
-          display: 'block',
-          overflow: 'hidden',
-          color: 'white'
-        }"
         *ngIf="post.approved"
       >
-        <p-card-header
-          [style]="{
-            'text-overflow': 'ellipsis',
-            width: '45rem',
-            'max-width': '45rem',
-            'text-align': 'center',
-            height: '1.7rem',
-            display: 'block',
-            overflow: 'hidden',
-            'white-space': 'nowrap',
-            color: 'white',
-            'font-size': '1.5rem'
-          }"
+        <p-card-header class="pCardHeader"
         >
           <b>{{ post.title }}</b>
         </p-card-header>
 
-        <p-card-subheader
-          [style]="{
-            height: '3.5rem',
-            display: 'block',
-            overflow: 'hidden',
-            'white-space': 'nowrap',
-            color: '#D9D9D9'
-          }"
+        <p-card-subheader class="pCardSubheader"
         >
           {{ post.startDate | date }} to {{ post.endDate | date }}
         </p-card-subheader>
@@ -572,10 +546,10 @@
           <p>{{ post.content }}</p>
         </p-card-content>
 
-        <ng-template pTemplate="footer" #footer class="footer">
+        <ng-template pTemplate="footer" #footer class="post-footer">
           <p-button
             *ngIf="(userRole === 'Student') || (userRole === 'Student / NUS Alumni')"
-            class="report"
+            class="post-button"
             label="Report"
             icon="pi pi-exclamation-circle"
             styleClass="p-button-info"
@@ -585,7 +559,7 @@
           ></p-button>
 
           <p-button
-            class="learnMore"
+            class="post-button"
             label="Learn"
             icon="pi pi-search-plus"
             styleClass="p-button-info"
@@ -594,7 +568,7 @@
 
           <p-button
             *ngIf="(userRole === 'Student') || (userRole === 'Student / NUS Alumni')"
-            class="apply"
+            class="post-button"
             label="Apply"
             icon="pi pi-heart"
             styleClass="p-button-info"
@@ -609,7 +583,7 @@
 
           <p-button
             *ngIf="userRole === 'Admin' || post.uen === authStatusObject.uen"
-            class="delete"
+            class="post-button"
             label="Delete"
             icon="pi pi-times"
             styleClass="p-button-secondary"
@@ -710,10 +684,6 @@
     <ng-template #studentContent let-modal>
       <div
         class="modal-header"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <h4 class="modal-title">Apply Post: {{ post.title }}</h4>
         <button
@@ -728,10 +698,6 @@
 
       <div
         class="modal-body"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <form (submit)="submitApplication(post.id, appForm)" #appForm="ngForm">
           <mat-form-field appearance="outline">
@@ -767,10 +733,6 @@
 
       <div
         class="modal-footer"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <button
           type="button"
@@ -787,10 +749,6 @@
     <ng-template #reportContent let-modal>
       <div
         class="modal-header"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <h4 class="modal-title">Report Post: {{ post.title }}</h4>
         <button
@@ -805,10 +763,6 @@
 
       <div
         class="modal-body"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <form (submit)="submitReport(post.id, reportForm)" #reportForm="ngForm">
           <mat-form-field appearance="outline">
@@ -843,10 +797,6 @@
 
       <div
         class="modal-footer"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <button
           type="button"
@@ -863,10 +813,6 @@
     <ng-template #deleteContent let-modal>
       <div
         class="modal-header"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <h4 class="modal-title">Delete Confirmation</h4>
         <button
@@ -881,20 +827,12 @@
 
       <div
         class="modal-body"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <p>Are you sure you want to delete the post?</p>
       </div>
 
       <div
         class="modal-footer"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <button
           type="button"

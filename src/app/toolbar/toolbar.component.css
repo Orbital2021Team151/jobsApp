@@ -2,7 +2,8 @@
 -------------------------------------------------- */
 mat-toolbar {
   background-color: white;
-  margin-top: 2rem;
+  margin-top: 0rem;
+  border: none;
 }
 
 mat-stroked-button {
@@ -17,8 +18,8 @@ mat-stroked-button {
 }
 
 .logo img {
-  width: 5%;
-  height: 8%;
+  width: 4%;
+  height: 4%;
 }
 
 

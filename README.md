@@ -77,3 +77,5 @@ npm install -g @angular/cli@11<br>
 * npm install --save mongodb
 
 * npm install --save json2csv
+
+* npm install --save @material/card  //might not need
