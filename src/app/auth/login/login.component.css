@@ -26,6 +26,8 @@ mat-card {
   align-items: center;
   border: none;
 }
+
+/*
 .mat-input-element {
   color: #EEFBFB;
 }
@@ -41,6 +43,7 @@ mat-card {
 ::ng-deep .mat-select-value {
   color: #EEFBFB !important;
 }
+*/
 
 .logo img {
   width: 50%;
@@ -55,9 +58,11 @@ mat-card {
   justify-content: center;
 }
 
+
 .mat-select-value::placeholder {
   color: #EEFBFB !important;
 }
+
 
 mat-icon {
   color: #4da8da;

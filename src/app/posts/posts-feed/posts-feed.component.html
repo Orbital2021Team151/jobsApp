@@ -1,6 +1,6 @@
-<div class="filterBar">
+<div class="filter-card">
 
-  <mat-card [style]="{ 'background-color': '#203647', color: 'white' }">
+  <mat-card class="filter-body">
 
     <ng-container>
       <mat-form-field appearance="outline">
@@ -16,10 +16,6 @@
 
       <mat-form-field
         appearance="outline"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <mat-label>Beneficiaries</mat-label>
         <mat-select
@@ -32,10 +28,6 @@
           <mat-option
             *ngFor="let beneficiary of beneficiaries"
             [value]="beneficiary"
-            [style]="{
-              color: 'white',
-              'background-color': '#203647'
-            }"
             >{{ beneficiary }}</mat-option
           >
         </mat-select>
@@ -78,18 +70,17 @@
       </mat-form-field>
 
       <div
-        class="footerButtons"
-        style="text-align: center; width: 100%; flex: auto"
+        class="filter-footer"
       >
         <p-button
-          class="filterButton"
+          class="filter-button"
           label="Clear filter criteria"
           icon="pi pi-trash"
           (click)="clearFilter()"
         ></p-button>
 
         <p-button
-          class="filterButton"
+          class="filter-button"
           label="Filter Search Results"
           icon="pi pi-filter"
           (click)="submitFilter()"
@@ -532,12 +523,7 @@
 </p>
 -->
 
-<div
-  fxLayout="column"
-  fxLayout.xs="col"
-  fxLayoutGap="1.0%"
-  fxLayoutAlign="space-around center"
->
+<div class="posts-timeline">
   <ng-container *ngFor="let post of filteredPosts">
     <section class="cards">
       <p-card

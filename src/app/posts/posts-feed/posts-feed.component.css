@@ -1,11 +1,17 @@
+/* FEED GLOBAL
+-------------------------------------------------- */
 :host {
   display: block;
   margin-top: 1rem;
 }
 
+/* FILTER CARD
+-------------------------------------------------- */
+
 /*
  * For Beneficiaries and DatePicker styling
 */
+/*
 .mat-select-arrow {
   color: #4da8da;
 }
@@ -29,9 +35,37 @@ input {
 .mat-select-value::placeholder {
   color: #EEFBFB;
 }
+*/
+
+.filter-card {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.filter-button {
+  margin: 0 auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.filter-footer {
+  text-align: center;
+  width: 100%;
+  flex: auto
+}
 
 
+/* POSTS TIMELINE
+-------------------------------------------------- */
+.posts-timeline {
+  align-items: center;
+  justify-content: center;
+  display: grid;
+}
 
+/* MISCELLANEOUS
+-------------------------------------------------- */
 .info-text {
   text-align: center;
 }
@@ -65,19 +99,6 @@ input {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
-
-.filterBar {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}
-
-.filterButton {
-  margin: 0 auto;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
 
 .pCardContent p {
   display: -webkit-box;

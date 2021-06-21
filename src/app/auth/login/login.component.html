@@ -96,6 +96,14 @@
   </mat-card>
 </div>
 
+
+
+
+
+
+
+
+
 <ng-template #forgetPasswordContent let-modal class="forgetPasswordPopup">
   <div
     class="modal-header"
@@ -129,9 +137,7 @@
         />
       </mat-form-field>
 
-      <mat-form-field
-        appearance="outline"
-      >
+      <mat-form-field appearance="outline">
         <mat-label>User Role</mat-label>
         <mat-select
           ngModel
@@ -139,14 +145,9 @@
           #forgetPasswordRole="ngModel"
           name="forgetPasswordRole"
         >
-          <mat-option
-            >--</mat-option
+          <mat-option>--</mat-option
           >
-          <mat-option
-            *ngFor="let role of roles"
-          >
-            {{ role }}
-          </mat-option>
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
         </mat-select>
         <mat-error *ngIf="forgetPasswordRole.invalid"
           >Please select the user's role.</mat-error
