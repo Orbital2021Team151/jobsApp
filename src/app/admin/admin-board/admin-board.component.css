@@ -1,12 +1,19 @@
 /* CHANGE PASSWORD
 -------------------------------------------------- */
 .changePassword {
+
   width: 50% !important;
   margin: auto !important;
   padding: 10px !important;
-  background-color: #ff57576b !important;
+
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+
+  border-style: solid;
+  border-width: thin;
+  border-color: #ffacac;
+  box-shadow: none;
+
 }
 
 .changePassword-formField {
@@ -24,25 +31,67 @@
 
 /* JOBS PENDING APPROVAL CARDS
 -------------------------------------------------- */
-.card {
+.request-post-card {
   width: 25rem;
   height: 15rem;
   text-align: center;
-  background-color: #FF5757;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  color: black !important;
+
+  border-style: solid;
+  border-width: thin;
+  border-color: #57ff57;
+  box-shadow: none;
 }
 
-/* affects report cards too */
-.footer {
+mat-card-title {
+  text-overflow: ellipsis;
+  width: 22rem;
+  max-width: 22rem;
+  height: 1.7rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.5rem;
+}
+
+mat-card-subtitle {
+  height: 3.5rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: rgb(88, 88, 88);
+}
+
+mat-card-content {
+  text-overflow: ellipsis;
+  width: 22rem;
+  max-width: 22rem;
+  height: 3rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #777777;
+}
+
+mat-card-footer {
   width: auto;
 }
 
-
-
 /* JOBS WITH REPORTS CARDS
 -------------------------------------------------- */
+.report-post-card {
+  width: 25rem;
+  height: 15rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  border-style: solid;
+  border-width: thin;
+  border-color: #ff0000;
+  box-shadow: none;
+}
 
 /* MODAL WINDOW
 -------------------------------------------------- */

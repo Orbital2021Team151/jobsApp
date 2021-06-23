@@ -3,6 +3,43 @@
   margin-top: 1rem;
 }
 
+
+
+
+
+mat-card-title {
+  text-overflow: ellipsis;
+  width: 22rem;
+  max-width: 22rem;
+  height: 1.7rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.5rem;
+}
+
+mat-card-subtitle {
+  height: 3.5rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: rgb(88, 88, 88);
+}
+
+mat-card-content {
+  text-overflow: ellipsis;
+  width: 22rem;
+  max-width: 22rem;
+  height: 3rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #777777;
+}
+
+
+
+
 mat-icon {
   color: #4da8da;
 }

@@ -1,7 +1,8 @@
 <div class="changePasswordBar">
 </div>
 
-<mat-card class="changePassword">
+<mat-card class="mat-elevation-z0 changePassword"
+>
   <form #changePasswordForm="ngForm">
     <mat-form-field appearance="outline">
       <input
@@ -120,61 +121,13 @@
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="!post.approved">
-        <p-card
-          class="card"
-          [style]="{
-            width: '25rem',
-            height: '15rem',
-            'text-align': 'center',
-            'background-color': '#2e2b12',
-            color: 'white'
-          }"
-          styleClass="p-card-shadow"
-          *ngIf="!post.approved"
-        >
-          <p-card-header
-            [style]="{
-              'text-overflow': 'ellipsis',
-              width: '22rem',
-              'max-width': '22rem',
-              height: '1.7rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: 'white',
-              'font-size': '1.5rem'
-            }"
-          >
-            <b>{{ post.title }}</b>
-          </p-card-header>
 
-          <p-card-subheader
-            [style]="{
-              height: '3.5rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: '#D9D9D9'
-            }"
-          >
-            {{ post.startDate | date }} to {{ post.endDate | date }}
-          </p-card-subheader>
+        <mat-card class="request-post-card">
+          <mat-card-title>{{ post.title }}</mat-card-title>
+          <mat-card-subtitle>{{ post.startDate | date }} to {{ post.endDate | date }}</mat-card-subtitle>
+          <mat-card-content>{{ post.content }}</mat-card-content>
+          <mat-card-footer>
 
-          <p-card-content
-            [style]="{
-              'text-overflow': 'ellipsis',
-              width: '22rem',
-              'max-width': '22rem',
-              height: '3rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: '#D9D9D9'
-            }"
-            >{{ post.content }}
-          </p-card-content>
-
-          <ng-template pTemplate="footer" #footer>
             <button
               class="btn btn-outline-primary mb-2 mr-2"
               (click)="onPublish(post.id, publishContent)"
@@ -195,8 +148,10 @@
             >
               Delete
             </button>
-          </ng-template>
-        </p-card>
+
+          </mat-card-footer>
+        </mat-card>
+
       </section>
 
       <ng-template #content let-modal>
@@ -321,6 +276,34 @@
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="post.reports.length > 0">
+        <mat-card class="report-post-card">
+          <mat-card-title>{{ post.title }}</mat-card-title>
+          <mat-card-subtitle>{{ post.startDate | date }} to {{ post.endDate | date }}</mat-card-subtitle>
+          <mat-card-content>{{ post.content }}</mat-card-content>
+          <mat-footer>
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onMoreInfo(reportContent)"
+            >
+              Read Report
+            </button>
+
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onMoreInfo(content)"
+            >
+              Learn More
+            </button>
+
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onDeletePrompt(deleteReportedContent)"
+            >
+              Delete
+            </button>
+          </mat-footer>
+        </mat-card>
+        <!--
         <p-card
           class="card"
           [style]="{
@@ -395,18 +378,9 @@
             >
               Delete
             </button>
-
-            <!--
-            <p-button
-              class="deleteButton"
-              label="Delete"
-              icon="pi pi-times"
-              styleClass="p-button-secondary"
-              (click)="onDeleteReportedPost(post.id)"
-            ></p-button>
-            -->
           </ng-template>
         </p-card>
+      -->
       </section>
 
       <ng-template #reportContent let-modal>
