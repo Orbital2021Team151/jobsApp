@@ -1,5 +1,7 @@
-mat-form-field, textarea {
-  width: 100%;
+/* GLOBAL
+-------------------------------------------------- */
+div {
+  margin-top: 2rem;
 }
 
 mat-card {
@@ -7,21 +9,9 @@ mat-card {
   margin: auto;
 }
 
-mat-label {
-  color: #EEFBFB;
-}
-
-.mat-input-element {
-  color: #EEFBFB;
-}
-
-.mat-input-element::placeholder {
-  color: #7D7D7D;
-}
-
 /*
  * For Beneficiaries and DatePicker styling
-*/
+
 .mat-select-arrow {
   color: #4da8da !important;
 }
@@ -45,6 +35,7 @@ input {
 .mat-select-value::placeholder {
   color: #EEFBFB !important;
 }
+*/
 
 mat-form-field {
   width: 100%;

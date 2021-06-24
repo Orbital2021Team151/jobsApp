@@ -1,117 +1,110 @@
-<mat-card>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form *ngIf="!isLoading" #signupForm="ngForm">
+<div>
+  <mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form *ngIf="!isLoading" #signupForm="ngForm">
 
-    <mat-form-field appearance="outline">
-      <mat-label>Student / Organisation Name</mat-label>
-      <input
-        matInput
-        type="orgName"
-        name="orgName"
-        ngModel
-        required
-        #orgNameInput="ngModel"
-        placeholder="Enter Student / Organisation's name Here"
-      />
-      <mat-error *ngIf="orgNameInput.invalid"
-        >Please enter your name / your organisation's name.</mat-error
-      >
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Student / Organisation Name</mat-label>
+        <input
+          matInput
+          type="orgName"
+          name="orgName"
+          ngModel
+          required
+          #orgNameInput="ngModel"
+          placeholder="Enter Student / Organisation's name Here"
+        />
+        <mat-error *ngIf="orgNameInput.invalid"
+          >Please enter your name / your organisation's name.</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Email Address</mat-label>
-      <input
-        matInput
-        type="email"
-        name="email"
-        ngModel
-        required
-        #emailInput="ngModel"
-        placeholder="Enter your Email Address"
-        email
-      />
-      <mat-error *ngIf="emailInput.invalid"
-        >Please enter a valid email address.</mat-error
-      >
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input
+          matInput
+          type="email"
+          name="email"
+          ngModel
+          required
+          #emailInput="ngModel"
+          placeholder="Enter your Email Address"
+          email
+        />
+        <mat-error *ngIf="emailInput.invalid"
+          >Please enter a valid email address.</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        [type]="hidePassword ? 'password' : 'text'"
-        name="password"
-        ngModel
-        required
-        #passwordInput="ngModel"
-        placeholder="Enter Password Here"
-      />
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          name="password"
+          ngModel
+          required
+          #passwordInput="ngModel"
+          placeholder="Enter Password Here"
+        />
 
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hidePassword = !hidePassword"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hidePassword"
-      >
-        <mat-icon>{{
-          hidePassword ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
 
-      <mat-error *ngIf="passwordInput.invalid"
-        >Please enter a valid password.</mat-error
-      >
-    </mat-form-field>
+        <mat-error *ngIf="passwordInput.invalid"
+          >Please enter a valid password.</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" [style]="{
-      'color':'white',
-      'background-color': '#203647'
-  }">
-      <mat-label>User Role</mat-label>
-      <mat-select ngModel required #roleInput="ngModel" name="role">
-        <mat-option [style]="{
-          'color':'white',
-          'background-color': '#203647'
-      }">--</mat-option>
-        <mat-option *ngFor="let role of roles" [value]="role" [style]="{
-          'color':'white',
-          'background-color': '#203647'
-      }">
-          {{ role }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="roleInput.invalid"
-        >Please select the user's role.</mat-error
-      >
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>User Role</mat-label>
+        <mat-select ngModel required #roleInput="ngModel" name="role">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="roleInput.invalid"
+          >Please select the user's role.</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Unique Entity Number (UEN)</mat-label>
-      <input
-        matInput
-        type="uen"
-        name="uen"
-        ngModel
-        required
-        #uenInput="ngModel"
-        placeholder="eg UEN1234567. If you are a Student Organisation, just put NA"
-      />
-      <mat-error *ngIf="uenInput.invalid"
-        >Please enter a valid Unique Entity Number (UEN).</mat-error
-      >
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Unique Entity Number (UEN)</mat-label>
+        <input
+          matInput
+          type="uen"
+          name="uen"
+          ngModel
+          required
+          #uenInput="ngModel"
+          placeholder="eg UEN1234567. If you are a Student Organisation, just put NA"
+        />
+        <mat-error *ngIf="uenInput.invalid"
+          >Please enter a valid Unique Entity Number (UEN).</mat-error
+        >
+      </mat-form-field>
 
-    <div
-    *ngIf="signedUp"
-    class="alert alert-success alert-dismissible fade show"
-    role="alert">
-      <strong>You have signed up!</strong> Please check your email for the verification link.
-      <button (click)="closeNotification()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+      <div
+      *ngIf="signedUp"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert">
+        <strong>You have signed up!</strong> Please check your email for the verification link.
+        <button (click)="closeNotification()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-    <button mat-raised-button color="accent" (click)="onSignup(signupForm)">Signup</button>
-  </form>
-</mat-card>
+      <button mat-raised-button color="accent" (click)="onSignup(signupForm)">Signup</button>
+    </form>
+  </mat-card>
+</div>

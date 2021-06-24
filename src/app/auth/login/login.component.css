@@ -1,8 +1,5 @@
 /* LOGIN PAGE GLOBAL
 -------------------------------------------------- */
-div {
-  background-color: #f8f8ff !important;
-}
 
 .cdk-overlay-container {
   position: fixed;
@@ -13,9 +10,6 @@ div {
   z-index: 99999;
 }
 
-.card {
-  grid-area: card;
-}
 
 /* LOGIN CARD
 -------------------------------------------------- */
@@ -25,11 +19,11 @@ mat-card {
 }
 
 .card {
-  grid-area: card;
-  display: flex;
   justify-content: center;
+  display: flex;
   align-items: center;
   border: none;
+  background-color: #f8f8ff;
 }
 
 /*
@@ -78,16 +72,13 @@ mat-form-field {
   width:100%;
 }
 
-p-button {
-  margin-left: .5rem;
-  margin-right: .5rem;
-}
 
 .form-footer {
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  background-color: white !important;
 }
 
 .forget-password-link {

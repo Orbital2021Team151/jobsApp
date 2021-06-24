@@ -1,12 +1,13 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth.service";
 
 @Component({
   templateUrl: './signup-general.component.html',
-  styleUrls: ['./signup-general.component.css']
+  styleUrls: ['./signup-general.component.css'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SignupGeneralComponent implements OnInit, OnDestroy {
   isLoading = false;

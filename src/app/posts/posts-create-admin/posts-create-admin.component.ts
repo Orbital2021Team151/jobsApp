@@ -12,7 +12,7 @@ import { PostsService } from '../post.service';
   selector: 'app-post-create',
   templateUrl: './posts-create-admin.component.html',
   styleUrls: ['./posts-create-admin.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
   styles: [
     `
       .dark-modal .modal-content {

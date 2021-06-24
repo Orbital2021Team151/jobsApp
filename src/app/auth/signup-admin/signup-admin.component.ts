@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth.service";
 
 @Component({
   templateUrl: './signup-admin.component.html',
-  styleUrls: ['./signup-admin.component.css']
+  styleUrls: ['./signup-admin.component.css'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SignupAdminComponent implements OnInit, OnDestroy {
   isLoading = false;

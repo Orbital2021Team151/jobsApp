@@ -1,80 +1,103 @@
-<div class="changePasswordBar">
+<div class="change-password-card">
+  <mat-card class="mat-elevation-z0 change-password-body">
+
+    <mat-card-title class="change-password-title">Change Password</mat-card-title>
+
+    <ng-container>
+      <form #changePasswordForm="ngForm">
+        <mat-form-field appearance="outline" class="change-password-form-field">
+          <input
+            matInput
+            class="change-password-form-input"
+            [type]="hideCurrentPassword ? 'password' : 'text'"
+            ngModel
+            name="currentPassword"
+            required
+            #currentPassword="ngModel"
+            placeholder="Current Password"
+          />
+
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hideCurrentPassword = !hideCurrentPassword"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hideCurrentPassword"
+          >
+            <mat-icon>{{
+              hideCurrentPassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+
+          <mat-error *ngIf="currentPassword.invalid"
+            >Please enter your current password.</mat-error
+          >
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field appearance="outline" class="change-password-form-field">
+          <input
+            matInput
+            class="change-password-form-input"
+            [type]="hideNewPassword ? 'password' : 'text'"
+            ngModel
+            name="newPassword"
+            required
+            #newPassword="ngModel"
+            placeholder="New Password"
+          />
+
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hideNewPassword = !hideNewPassword"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hideNewPassword"
+          >
+            <mat-icon>{{
+              hideNewPassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+
+          <mat-error *ngIf="newPassword.invalid"
+            >Please provide us with your new password.</mat-error
+          >
+        </mat-form-field>
+
+        <mat-card-footer class="change-password-footer">
+          <button
+            class="btn btn-outline-primary mb-2 mr-2 change-password-button"
+            (click)="onChangePassword(changePasswordForm)"
+          >
+            Request password change
+          </button>
+        </mat-card-footer>
+      </form>
+    </ng-container>
+  </mat-card>
 </div>
 
-<mat-card class="mat-elevation-z0 changePassword"
->
-  <form #changePasswordForm="ngForm">
-    <mat-form-field appearance="outline">
-      <input
-        matInput
-        [type]="hideCurrentPassword ? 'password' : 'text'"
-        ngModel
-        name="currentPassword"
-        required
-        #currentPassword="ngModel"
-        placeholder="Current Password"
-      />
+<div class="change-password-card">
+  <mat-card class="mat-elevation-z0 change-password-body">
+    <mat-card-title class="download-csv-title">
+      CSV File download
+    </mat-card-title>
 
+    <mat-card-subtitle>
+      click on the button below
+    </mat-card-subtitle>
+
+    <mat-card-footer>
       <button
-        mat-icon-button
-        matSuffix
-        (click)="hideCurrentPassword = !hideCurrentPassword"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hideCurrentPassword"
-      >
-        <mat-icon>{{
-          hideCurrentPassword ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
-
-      <mat-error *ngIf="currentPassword.invalid"
-        >Please enter your current password.</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="changePassword-formField">
-      <input
-        matInput
-        [type]="hideNewPassword ? 'password' : 'text'"
-        ngModel
-        name="newPassword"
-        required
-        #newPassword="ngModel"
-        placeholder="New Password"
-      />
-
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hideNewPassword = !hideNewPassword"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hideNewPassword"
-      >
-        <mat-icon>{{
-          hideNewPassword ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
-
-      <mat-error *ngIf="newPassword.invalid"
-        >Please provide us with your new password.</mat-error
-      >
-    </mat-form-field>
-
-    <button
-      class="btn btn-outline-primary mb-2 mr-2"
-      (click)="onChangePassword(changePasswordForm)"
-    >
-      Request
-    </button>
-  </form>
-
-  <button
-      class="btn btn-outline-primary mb-2 mr-2"
+      class="btn btn-outline-primary mb-2 mr-2 change-password-button"
       (click)="onDownloadCSV()"
     >
       Download CSV
     </button>
-</mat-card>
+    </mat-card-footer>
+  </mat-card>
+</div>
 
 <div
   *ngIf="requestedNewPassword"
@@ -93,11 +116,8 @@
   </button>
 </div>
 
-<div>
-  <p
-    class="info-text mat-body-1"
-    *ngIf="hasRequest"
-  >
+<div class="info-text">
+  <p *ngIf="hasRequest">
     <b>Posts that needs to be approved!</b>
   </p>
 
@@ -121,13 +141,14 @@
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="!post.approved">
-
         <mat-card class="request-post-card">
-          <mat-card-title>{{ post.title }}</mat-card-title>
-          <mat-card-subtitle>{{ post.startDate | date }} to {{ post.endDate | date }}</mat-card-subtitle>
-          <mat-card-content>{{ post.content }}</mat-card-content>
-          <mat-card-footer>
-
+          <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
+          <mat-card-subtitle class="post-card-subtitle"
+            >{{ post.startDate | date }} to
+            {{ post.endDate | date }}</mat-card-subtitle
+          >
+          <mat-card-content class="post-card-content">{{ post.content }}</mat-card-content>
+          <mat-card-footer class="post-card-footer">
             <button
               class="btn btn-outline-primary mb-2 mr-2"
               (click)="onPublish(post.id, publishContent)"
@@ -148,10 +169,8 @@
             >
               Delete
             </button>
-
           </mat-card-footer>
         </mat-card>
-
       </section>
 
       <ng-template #content let-modal>
@@ -178,7 +197,7 @@
           <p>Start Date: {{ post.startDate | date }}</p>
           <p>End Date: {{ post.endDate | date }}</p>
           <p>Commitment Hours: {{ post.hoursRequired }}</p>
-          <p>Beneficiaries: {{post.beneficiaries}} </p>
+          <p>Beneficiaries: {{ post.beneficiaries }}</p>
         </div>
 
         <div class="modal-footer">
@@ -192,11 +211,8 @@
         </div>
       </ng-template>
 
-
       <ng-template #deleteUnapprovedContent let-modal>
-        <div
-          class="modal-header"
-        >
+        <div class="modal-header">
           <h4 class="modal-title">Delete Confirmation</h4>
           <button
             type="button"
@@ -208,22 +224,15 @@
           </button>
         </div>
 
-        <div
-          class="modal-body"
-        >
-        <p>Are you sure you want to delete the post?</p>
+        <div class="modal-body">
+          <p>Are you sure you want to delete the post?</p>
         </div>
 
-        <div
-          class="modal-footer"
-        >
-
-        <button
+        <div class="modal-footer">
+          <button
             type="button"
             class="btn btn-light"
-            (click)="
-            onDelete(post.id) && modal.dismiss('Cross click')
-            "
+            (click)="onDelete(post.id) && modal.dismiss('Cross click')"
           >
             Confirm Delete
           </button>
@@ -237,23 +246,14 @@
           </button>
         </div>
       </ng-template>
-
-
-
-
     </div>
   </div>
 
-  <p
-    class="info-text mat-body-1"
-    *ngIf="!hasRequest"
-  >
-    No post request!
-  </p>
+  <p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
 </div>
 
-<div>
-  <p class="info-text mat-body-1">
+<div class="info-text">
+  <p>
     <b>Posts with reports! :O</b>
   </p>
 
@@ -267,20 +267,23 @@
   >
   -->
   <div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutWrap
-  fxLayoutGap="1.0%"
-  fxLayoutAlign="center"
-  fxFlexAlign="auto"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutWrap
+    fxLayoutGap="1.0%"
+    fxLayoutAlign="center"
+    fxFlexAlign="auto"
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="post.reports.length > 0">
         <mat-card class="report-post-card">
-          <mat-card-title>{{ post.title }}</mat-card-title>
-          <mat-card-subtitle>{{ post.startDate | date }} to {{ post.endDate | date }}</mat-card-subtitle>
-          <mat-card-content>{{ post.content }}</mat-card-content>
-          <mat-footer>
+          <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
+          <mat-card-subtitle class="post-card-subtitle"
+            >{{ post.startDate | date }} to
+            {{ post.endDate | date }}</mat-card-subtitle
+          >
+          <mat-card-content class="post-card-content">{{ post.content }}</mat-card-content>
+          <mat-footer class="post-card-footer">
             <button
               class="btn btn-outline-primary mb-2 mr-2"
               (click)="onMoreInfo(reportContent)"
@@ -381,7 +384,7 @@
           </ng-template>
         </p-card>
       -->
-      </section>
+    </section>
 
       <ng-template #reportContent let-modal>
         <div class="modal-header">
@@ -399,15 +402,9 @@
         <div class="modal-body">
           <div *ngFor="let report of post.reports" class="modal-body-report">
             <div>
-              <p>
-                Student's Email: {{ report.email }}
-              </p>
-              <p>
-                Student's Contact: {{ report.contact }}
-              </p>
-              <p>
-                Student's Report: {{ report.content }}
-              </p>
+              <p>Student's Email: {{ report.email }}</p>
+              <p>Student's Contact: {{ report.contact }}</p>
+              <p>Student's Report: {{ report.content }}</p>
             </div>
           </div>
         </div>
@@ -446,7 +443,7 @@
           <p>Start Date: {{ post.startDate | date }}</p>
           <p>End Date: {{ post.endDate | date }}</p>
           <p>Commitment Hours: {{ post.hoursRequired }}</p>
-          <p>Beneficiaries: {{post.beneficiaries}} </p>
+          <p>Beneficiaries: {{ post.beneficiaries }}</p>
         </div>
 
         <div class="modal-footer">
@@ -460,11 +457,8 @@
         </div>
       </ng-template>
 
-
       <ng-template #deleteReportedContent let-modal>
-        <div
-          class="modal-header"
-        >
+        <div class="modal-header">
           <h4 class="modal-title">Delete Confirmation</h4>
           <button
             type="button"
@@ -476,21 +470,16 @@
           </button>
         </div>
 
-        <div
-          class="modal-body"
-        >
-        <p>Are you sure you want to delete the post?</p>
+        <div class="modal-body">
+          <p>Are you sure you want to delete the post?</p>
         </div>
 
-        <div
-          class="modal-footer"
-        >
-
-        <button
+        <div class="modal-footer">
+          <button
             type="button"
             class="btn btn-light"
             (click)="
-            onDeleteReportedPost(post.id) && modal.dismiss('Cross click')
+              onDeleteReportedPost(post.id) && modal.dismiss('Cross click')
             "
           >
             Confirm Delete
@@ -505,16 +494,10 @@
           </button>
         </div>
       </ng-template>
-
-
-
     </div>
   </div>
 
-  <p
-    class="info-text mat-body-1"
-    *ngIf="!hasReport"
-  >
+  <p class="info-text mat-body-1" *ngIf="!hasReport">
     No post with reports! :D
   </p>
 </div>

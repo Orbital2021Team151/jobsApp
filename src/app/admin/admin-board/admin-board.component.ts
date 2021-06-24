@@ -11,7 +11,7 @@ import { NgForm } from "@angular/forms";
   selector: "app-admin-board",
   templateUrl: './admin-board.component.html',
   styleUrls: ['./admin-board.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
   styles: [`
     .dark-modal .modal-content {
       background-color: #292b2c;

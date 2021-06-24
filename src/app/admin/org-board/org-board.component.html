@@ -1,16 +1,16 @@
-<div class="changePasswordBar">
-  <mat-card [style]="{ 'background-color': '#203647' }">
+<div class="change-password-card">
+  <mat-card class="mat-elevation-z0 change-password-body">
+
+    <mat-card-title class="change-password-title">Change Password</mat-card-title>
+
     <form #changePasswordForm="ngForm">
       <mat-form-field
         appearance="outline"
-        [style]="{
-          'margin-left': '0.5rem',
-          'margin-right': '0.5rem',
-          color: 'white'
-        }"
+        class="change-password-form-field"
       >
         <input
           matInput
+          class="change-password-form-input"
           [type]="hideCurrentPassword ? 'password' : 'text'"
           ngModel
           name="currentPassword"
@@ -38,14 +38,11 @@
 
       <mat-form-field
         appearance="outline"
-        [style]="{
-          'margin-left': '0.5rem',
-          'margin-right': '0.5rem',
-          color: 'white'
-        }"
+        class="change-password-form-field"
       >
         <input
           matInput
+          class="change-password-form-input"
           [type]="hideNewPassword ? 'password' : 'text'"
           ngModel
           name="newPassword"
@@ -71,12 +68,14 @@
         >
       </mat-form-field>
 
-      <button
-        class="btn btn-outline-primary mb-2 mr-2"
-        (click)="onChangePassword(changePasswordForm)"
-      >
-        Request
-      </button>
+      <mat-card-footer class="change-password-footer">
+        <button
+          class="btn btn-outline-primary mb-2 mr-2 change-password-button"
+          (click)="onChangePassword(changePasswordForm)"
+        >
+          Request password change
+        </button>
+      </mat-card-footer>
     </form>
   </mat-card>
 </div>
@@ -102,29 +101,49 @@
   <p
     class="info-text mat-body-1"
     *ngIf="hasRequest"
-    [style]="{ color: 'white' }"
   >
     <b>Posts that has not been approved by CCSGP Admins yet D:</b>
   </p>
 
   <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutWrap
-    fxLayoutGap="5.0%"
-    fxLayoutAlign="center"
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutWrap
+  fxLayoutGap="1.0%"
+  fxLayoutAlign="center"
+  fxFlexAlign="auto"
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="!post.approved">
+        <mat-card
+        class="request-post-card"
+        *ngIf="!post.approved">
+          <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
+          <mat-card-subtitle class="post-card-subtitle"
+            >{{ post.startDate | date }} to
+            {{ post.endDate | date }}</mat-card-subtitle
+          >
+          <mat-card-content class="post-card-content">{{ post.content }}</mat-card-content>
+          <mat-footer class="post-card-footer">
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onMoreInfo(content)"
+            >
+              Learn More
+            </button>
+
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onDeletePrompt(deleteReportedContent)"
+            >
+              Delete
+            </button>
+          </mat-footer>
+        </mat-card>
+
+        <!--
         <p-card
           class="card"
-          [style]="{
-            width: '25rem',
-            height: '15rem',
-            'text-align': 'center',
-            'background-color': '#2e2b12',
-            color: 'white'
-          }"
           styleClass="p-card-shadow"
           *ngIf="!post.approved"
         >
@@ -170,10 +189,8 @@
             >{{ post.content }}
           </p-card-content>
 
+
           <ng-template pTemplate="footer" #footer>
-            <!--
-            <a mat-button [routerLink]="['/edit', post.id]">Edit</a>
-            -->
             <button
               class="btn btn-outline-primary mb-2 mr-2"
               (click)="onMoreInfo(content)"
@@ -187,18 +204,10 @@
             >
               Delete
             </button>
-
-            <!--
-            <p-button
-              class="deleteButton"
-              label="Delete"
-              icon="pi pi-times"
-              styleClass="p-button-secondary"
-              (click)="onDelete(post.id)"
-            ></p-button>
-            -->
           </ng-template>
         </p-card>
+        -->
+
       </section>
 
       <ng-template #content let-modal>
@@ -245,10 +254,6 @@
       <ng-template #deleteUnapprovedContent let-modal>
         <div
           class="modal-header"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
           <h4 class="modal-title">Delete Confirmation</h4>
           <button
@@ -263,20 +268,12 @@
 
         <div
           class="modal-body"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
         <p>Are you sure you want to delete the post?</p>
         </div>
 
         <div
           class="modal-footer"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
 
         <button
@@ -308,15 +305,13 @@
 
   <p
     class="info-text mat-body-1"
-    *ngIf="!hasRequest"
-    [style]="{ color: 'white' }"
-  >
+    *ngIf="!hasRequest">
     No post requests or all posts have already been approved! :D
   </p>
 </div>
 
 <div>
-  <p class="info-text mat-body-1" [style]="{ color: 'white' }">
+  <p class="info-text mat-body-1">
     <b>Posts with applications! :D</b>
   </p>
 
@@ -329,6 +324,39 @@
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="post.students.length > 0">
+
+        <mat-card
+        class="application-post-card">
+          <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
+          <mat-card-subtitle class="post-card-subtitle"
+            >{{ post.startDate | date }} to
+            {{ post.endDate | date }}</mat-card-subtitle
+          >
+          <mat-card-content class="post-card-content">{{ post.content }}</mat-card-content>
+          <mat-footer class="post-card-footer">
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onMoreInfo(applicantContent)"
+            >
+              View Applicants
+            </button>
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onMoreInfo(content)"
+            >
+              Learn More
+            </button>
+
+            <button
+              class="btn btn-outline-primary mb-2 mr-2"
+              (click)="onDeletePrompt(deleteReportedContent)"
+            >
+              Delete
+            </button>
+          </mat-footer>
+        </mat-card>
+
+        <!--
         <p-card
           class="card"
           [style]="{
@@ -405,6 +433,10 @@
             </button>
           </ng-template>
         </p-card>
+      -->
+
+
+
       </section>
 
       <ng-template #applicantContent let-modal>
@@ -488,10 +520,6 @@
       <ng-template #deleteAppliedContent let-modal>
         <div
           class="modal-header"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
           <h4 class="modal-title">Delete Confirmation</h4>
           <button
@@ -506,20 +534,12 @@
 
         <div
           class="modal-body"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
         <p>Are you sure you want to delete the post?</p>
         </div>
 
         <div
           class="modal-footer"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
         >
 
         <button
@@ -554,7 +574,6 @@
   <p
     class="info-text mat-body-1"
     *ngIf="!hasApplication"
-    [style]="{ color: 'white' }"
   >
     No applications or no post approved :/
   </p>

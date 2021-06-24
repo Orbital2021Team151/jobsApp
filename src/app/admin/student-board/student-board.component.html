@@ -1,17 +1,17 @@
 <!-- <p>STUDENT's board is supposed to be here!!!!!</p> -->
-<div class="changeInfoBar">
-  <mat-card [style]="{ 'background-color': '#203647' }">
+<div class="change-password-card">
+  <mat-card class="mat-elevation-z0 change-password-body">
+
+    <mat-card-title class="change-password-title">Change Password</mat-card-title>
+
     <form #changePasswordForm="ngForm" class="changePasswordForm">
       <mat-form-field
         appearance="outline"
-        [style]="{
-          'margin-left': '0.5rem',
-          'margin-right': '0.5rem',
-          color: 'white'
-        }"
+        class="change-password-form-field"
       >
         <input
           matInput
+          class="change-password-form-input"
           [type]="hideCurrentPassword ? 'password' : 'text'"
           ngModel
           name="currentPassword"
@@ -39,14 +39,11 @@
 
       <mat-form-field
         appearance="outline"
-        [style]="{
-          'margin-left': '0.5rem',
-          'margin-right': '0.5rem',
-          color: 'white'
-        }"
+        class="change-password-form-field"
       >
         <input
           matInput
+          class="change-password-form-input"
           [type]="hideNewPassword ? 'password' : 'text'"
           ngModel
           name="newPassword"
@@ -96,16 +93,22 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+  </mat-card>
+</div>
 
+
+
+
+<div class="change-password-card">
+  <mat-card class="mat-elevation-z0 change-password-body">
+
+    <mat-card-title class="change-password-title">
+      Update interested beneficiaries
+    </mat-card-title>
     <mat-form-field
       appearance="outline"
-      class="beneficiaries"
+      class="change-password-form-field"
       text-center
-      [style]="{
-        'margin-left': '0.5rem',
-        'margin-right': '0.5rem',
-        color: 'white'
-      }"
     >
       <mat-label>Beneficiaries</mat-label>
       <mat-select
@@ -114,18 +117,10 @@
         #beneficiariesInput="ngModel"
         name="beneficiariesSelected"
         [(ngModel)]="beneficiariesSelected"
-        [style]="{
-          color: 'white',
-          'background-color': '#203647'
-        }"
       >
         <mat-option
           *ngFor="let beneficiary of beneficiaries"
           [value]="beneficiary"
-          [style]="{
-            color: 'white',
-            'background-color': '#203647'
-          }"
           >{{ beneficiary }}</mat-option
         >
       </mat-select>
