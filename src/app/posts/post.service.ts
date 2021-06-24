@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
@@ -133,17 +134,59 @@ export class PostsService {
     });
   }
 
-  downloadPosts() {
+  downloadPosts(startDate: Date, endDate: Date) {
 
-    this.http.get<{message: string, data: any}>(BACKEND_URL + 'api/posts/download')
+    this.http.get<{message: string, data: any[]}>(BACKEND_URL + 'api/posts/download')
     .subscribe(response => {
+      /*
       console.log("Post service's download CSV function called. The response is: ");
       console.log(response);
-      //console.log(response.data);
+      console.log(response.data);
+      console.log("The start date is: ");
+      console.log(startDate);
+      console.log("The end date is: ");
+      console.log(endDate);
+      */
+
+      let pipe = new DatePipe('en-US'); // Use your own locale
+      let dataArray = response.data;
+      if (startDate) {
+        console.log("Start Date's clause activated!");
+        dataArray = dataArray.filter(obj => {
+          return (new Date(obj.startDate).getTime() >= new Date(startDate).getTime()) || (new Date(obj.endDate).getTime() >= new Date(startDate).getTime());
+        });
+      }
+
+      if (endDate) {
+        console.log("end Date's clause activated!");
+        dataArray = dataArray.filter(obj => {
+          return (new Date(obj.endDate).getTime() <= new Date(endDate).getTime()) || (new Date(obj.startDate).getTime() <= new Date(endDate).getTime());
+        });
+      }
+
+      dataArray = dataArray.map(obj => {
+        return {
+          beneficiaries: obj.beneficiaries,
+          orgName: obj.orgName,
+          uen: obj.uen,
+          point_of_contact: obj.POC,
+          phoneNumber: obj.phoneNumber,
+          email: obj.email,
+          title: obj.title,
+          content: obj.content,
+          skills: obj.skills,
+          startDate: pipe.transform(obj.startDate, 'longDate'),
+          endDate: pipe.transform(obj.endDate, 'longDate'),
+          commitment: obj.hoursRequired,
+          studentsInterested: obj.students,
+          reports: obj.reports,
+          approved: obj.approved,
+        };
+      });
 
       const Json2csvParser = require("json2csv").Parser;
       const json2csvParser = new Json2csvParser({ header: true});
-      const csvData = json2csvParser.parse(response.data);
+      const csvData = json2csvParser.parse(dataArray);
 
       let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
         let dwldLink = document.createElement("a");

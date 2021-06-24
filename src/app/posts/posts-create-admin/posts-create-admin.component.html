@@ -1,6 +1,10 @@
 <div>
   <mat-card>
-    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+
+    <!--
+      <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    -->
+    <form #postForm="ngForm">
       <mat-form-field appearance="outline">
         <mat-label>Point-Of-Contact (POC)</mat-label>
         <input

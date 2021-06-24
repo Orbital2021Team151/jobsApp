@@ -137,8 +137,11 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDownloadCSV() {
-    this.postsService.downloadPosts();
+  onDownloadCSV(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    this.postsService.downloadPosts(form.value.startDate, form.value.endDate);
   }
 
   closeNotification() {
