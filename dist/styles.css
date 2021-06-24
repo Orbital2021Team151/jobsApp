@@ -2227,23 +2227,24 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 }
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
-  height: 100%;
-  background-color: #12232E;
+mat-icon {
+  color: #4da8da;
 }
 
+html, body {
+  height: 100%;
+  background-color: #f8f8ff;
+}
+
+/*
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*/
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: #4DA8DA;
 }
 
-mat-card {
-  width: 60%;
-  margin: auto;
-  background-color: #203647;
-}
-
+/*
 mat-label {
   color: #EEFBFB;
 }
@@ -2256,13 +2257,17 @@ mat-label {
   color: #EEFBFB;
 }
 
-html, body { height: 100%; }
 
+
+html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
-
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*/
 
 @font-face {
     font-family: 'primeicons';

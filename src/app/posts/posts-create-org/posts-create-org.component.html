@@ -66,6 +66,23 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Type of volunteer opportunity</mat-label>
+      <textarea
+        matInput
+        name="opportunity"
+        ngModel
+        rows="10"
+        required
+        #opportunity="ngModel"
+        minlength="1"
+        placeholder="Please indicate the frequency of this job."
+      ></textarea>
+      <mat-error *ngIf="content.invalid"
+        >Please indicate the frequency of this job.</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Volunteer Opportunity Preferred Skills</mat-label>
       <textarea
         matInput

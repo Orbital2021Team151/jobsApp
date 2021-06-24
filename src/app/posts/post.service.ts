@@ -33,6 +33,7 @@ export class PostsService {
             email: post.email,
             title: post.title,
             content: post.content,
+            opportunity: post.opportunity,
             skills: post.skills,
 
             startDate: post.startDate,
@@ -72,6 +73,7 @@ export class PostsService {
         post.id = postId;
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
+        console.log(post.opportunity);
     });
   }
 
@@ -174,6 +176,7 @@ export class PostsService {
           email: obj.email,
           title: obj.title,
           content: obj.content,
+          opportunity: obj.opportunity,
           skills: obj.skills,
           startDate: pipe.transform(obj.startDate, 'longDate'),
           endDate: pipe.transform(obj.endDate, 'longDate'),

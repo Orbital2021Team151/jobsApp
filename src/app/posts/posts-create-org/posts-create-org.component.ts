@@ -114,6 +114,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       email: this.authStatusObject.email,
       title: form.value.title,
       content: form.value.content,
+      opportunity: form.value.opportunity,
       skills: form.value.skills,
 
       startDate: form.value.startDate,
@@ -127,6 +128,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
       students: [],
       reports: [],
+      timeOfPost: Date.now(),
       //imagePath: null,
       //creator: null,
     };

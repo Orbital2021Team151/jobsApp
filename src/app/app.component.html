@@ -1,5 +1,8 @@
 <app-toolbar></app-toolbar>
 <main [@routeAnimations]="prepareRoute(outlet)" class="content">
+  <div class="loading-icon" *ngIf="showOverlay">
+    <mat-spinner></mat-spinner>
+  </div>
   <router-outlet #outlet="outlet"></router-outlet>
 </main>
 

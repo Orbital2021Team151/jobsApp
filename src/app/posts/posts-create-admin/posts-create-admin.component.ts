@@ -89,12 +89,14 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
     const post: Post = {
       id: null,
-      orgName: this.authStatusObject.orgName,
-      uen: this.authStatusObject.uen,
+      orgName: form.value.orgName,
+      uen: form.value.uen,
       POC: form.value.POC,
       phoneNumber: form.value.phoneNumber,
       email: this.pocEmail,
       title: form.value.title,
+      opportunity: form.value.opportunity,
+
       content: form.value.content,
       skills: form.value.skills,
 
@@ -109,9 +111,11 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
       students: [],
       reports: [],
+      timeOfPost: Date.now(),
       //imagePath: null,
       //creator: null,
     };
+    console.log(post.opportunity);
     //console.log("Post creation fired! onAddPost. post is:");
     //console.log(post);
     this.pendingApproval = true;

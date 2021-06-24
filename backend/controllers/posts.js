@@ -15,6 +15,7 @@ const User = require('../models/user');
 
 
 exports.requestPost = (req, res, next) => {
+  console.log(req.body.opportunity);
   const post = new Post({
     orgName: req.body.orgName,
     uen: req.body.uen,
@@ -23,6 +24,7 @@ exports.requestPost = (req, res, next) => {
     email: req.body.email,
     title: req.body.title,
     content: req.body.content,
+    opportunity: req.body.opportunity,
     skills: req.body.skills,
 
     startDate: req.body.startDate,
@@ -96,6 +98,7 @@ exports.publishPost = (req, res, next) => {
       email: req.body.email,
       title: req.body.title,
       content: req.body.content,
+      opportunity: req.body.opportunity,
       skills: req.body.skills,
 
       startDate: req.body.startDate,
@@ -164,6 +167,7 @@ exports.publishPost = (req, res, next) => {
     email: req.body.email,
     title: req.body.title,
     content: req.body.content,
+    opportunity: req.body.opportunity,
     skills: req.body.skills,
 
     startDate: req.body.startDate,
@@ -195,6 +199,7 @@ exports.reportPost = (req, res, next) => {
     email: req.body.post.email,
     title: req.body.post.title,
     content: req.body.post.content,
+    opportunity: req.body.opportunity,
     skills: req.body.post.skills,
 
     startDate: req.body.post.startDate,
@@ -290,6 +295,7 @@ exports.downloadPosts = (req, res, next) => {
               email: obj.email,
               title: obj.title,
               content: obj.content,
+              opportunity: obj.opportunity,
               skills: obj.skills,
               startDate: obj.startDate,
               endDate: obj.endDate,
@@ -408,6 +414,7 @@ const sendNotificationEmail = (email, post) => {
     email: post.email,
     title: post.title,
     content: post.content,
+    opportunity: post.opportunity,
     skills: post.skills,
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
@@ -486,6 +493,7 @@ const sendPostApprovedNotificationEmail = (email, post) => {
     email: post.email,
     title: post.title,
     content: post.content,
+    opportunity: post.opportunity,
     skills: post.skills,
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
@@ -564,6 +572,7 @@ const sendPostRequestedNotificationEmail = (email, post) => {
     email: post.email,
     title: post.title,
     content: post.content,
+    opportunity: post.opportunity,
     skills: post.skills,
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
@@ -642,6 +651,7 @@ const sendReportToAdminEmail = (email, post) => {
     email: post.email,
     title: post.title,
     content: post.content,
+    opportunity: post.opportunity,
     skills: post.skills,
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
@@ -720,6 +730,7 @@ const sendReportAcknowledgementEmail = (email, post) => {
     email: post.email,
     title: post.title,
     content: post.content,
+    opportunity: post.opportunity,
     skills: post.skills,
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),

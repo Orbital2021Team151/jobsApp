@@ -4,7 +4,41 @@
     <!--
       <form (submit)="onAddPost(postForm)" #postForm="ngForm">
     -->
+
     <form #postForm="ngForm">
+
+      <mat-form-field appearance="outline">
+        <mat-label>POC's Organization Name</mat-label>
+        <input
+          matInput
+          type="text"
+          ngModel
+          name="orgName"
+          required
+          #orgName="ngModel"
+          placeholder="eg SPCA"
+        />
+        <mat-error *ngIf="orgName.invalid"
+          >Please enter provide us the name of your Point-Of-Contact.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>POC's UEN</mat-label>
+        <input
+          matInput
+          type="text"
+          ngModel
+          name="uen"
+          required
+          #uen="ngModel"
+          placeholder="eg UEN7654321"
+        />
+        <mat-error *ngIf="uen.invalid"
+          >Please enter provide us the name of your Point-Of-Contact.</mat-error
+        >
+      </mat-form-field>
+
       <mat-form-field appearance="outline">
         <mat-label>Point-Of-Contact (POC)</mat-label>
         <input
@@ -84,6 +118,23 @@
         ></textarea>
         <mat-error *ngIf="content.invalid"
           >Please give us a description of the job (minimum 100 words).</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Type of volunteer opportunity</mat-label>
+        <textarea
+          matInput
+          name="opportunity"
+          ngModel
+          rows="10"
+          required
+          #opportunity="ngModel"
+          minlength="1"
+          placeholder="Please indicate the frequency of this job."
+        ></textarea>
+        <mat-error *ngIf="content.invalid"
+          >Please indicate the frequency of this job.</mat-error
         >
       </mat-form-field>
 

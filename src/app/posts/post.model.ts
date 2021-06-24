@@ -10,6 +10,7 @@ export interface Post {
   phoneNumber: string, //POC's contact number. should change to number if it makes it easier
   email: string, //POC's email address
   title: string, //title of job
+  opportunity: string, //type of opportunity (one-time job/recurring)
   content: string, //description of job
   skills: string, //skills required. should be a textbox for organization to just write down instead of limiting skills by making them choose from predefined list
 
@@ -27,4 +28,6 @@ export interface Post {
 
   approved: boolean,
   creator: string,
+  timeOfPost: number, //a post timestamp.
+
 }

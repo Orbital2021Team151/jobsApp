@@ -1,6 +1,6 @@
 import { animate, query, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 
@@ -59,10 +59,16 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'jobsApp';
 
-  constructor(private authService: AuthService) {
+  public showOverlay: boolean = true;
+
+  constructor(private authService: AuthService, private router: Router) {
     if (localStorage.getItem('token')) {
       this.authService.autoAuthUser();
     }
+
+    this.router.events.subscribe((event: RouterEvent) => {
+      this.navigationInterceptor(event)
+    })
   }
   private authStatusSub: Subscription;
   public authStatusObject: any;
@@ -88,6 +94,24 @@ export class AppComponent implements OnInit, OnDestroy {
 
   prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated) return outlet.activatedRoute.snapshot.url;
+  }
+
+  // Shows and hides the loading spinner during RouterEvent changes
+  navigationInterceptor(event: RouterEvent): void {
+    if (event instanceof NavigationStart) {
+      this.showOverlay = true;
+    }
+    if (event instanceof NavigationEnd) {
+      this.showOverlay = false;
+    }
+
+    // Set loading state to false in both of the below events to hide the spinner in case a request fails
+    if (event instanceof NavigationCancel) {
+      this.showOverlay = false;
+    }
+    if (event instanceof NavigationError) {
+      this.showOverlay = false;
+    }
   }
 
 
