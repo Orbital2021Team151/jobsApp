@@ -65,7 +65,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         //console.log(posts);
-        console.log("Admin dashboard's postService observable!");
+        //console.log("Admin dashboard's postService observable!");
         this.posts = posts;
 
         if (this.posts.filter(post => !post.approved).length > 0) {
@@ -119,6 +119,8 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
+    //console.log("Checking this page's posts! ");
+    //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 

@@ -18,7 +18,10 @@ const postSchema = mongoose.Schema({
   hoursRequired: {type: String, required: true},
 
   beneficiaries: {type: [String], required: true},
+
   approved: {type: Boolean, },
+  creationDate: {type: Date, /* required: true */},
+  publishDate: {type: Date, /* required: true */},
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 
   students: {type: {email: String, contact: Number, content: String, applicationUser: String}, required: true},

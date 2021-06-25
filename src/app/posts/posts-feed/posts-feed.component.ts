@@ -107,18 +107,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-    setTimeout(() => {
-      try {
-          (window['adsbygoogle'] = window['adsbygoogle'] || []).push({
-              overlays: {bottom: true}
-          });
-      } catch (e) {
-          console.error(e);
-      }
-  }, 0);
-
-
     this.hasApproved = false;
     this.noFilteredPost = false;
     this.postsService.getPosts();
@@ -130,6 +118,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.postSub = this.postsService
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
+        this.posts = [];
+        this.filteredPosts = [];
         //console.log("Post Feed's observable!");
 
         //show latest requested posts at the top of the timeline
@@ -141,6 +131,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
         if (posts.filter((post) => post.approved).length > 0) {
           this.hasApproved = true;
         }
+
+        //console.log("Posts are: ");
+        //console.log(this.posts);
       });
   }
 

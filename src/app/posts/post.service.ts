@@ -41,11 +41,14 @@ export class PostsService {
             hoursRequired: post.hoursRequired,
 
             beneficiaries: post.beneficiaries,
-            students: post.students,
-            reports: post.reports,
 
             approved: post.approved,
             creator: post.creator,
+            creationDate: post.creationDate,
+            publishDate: post.publishDate,
+
+            students: post.students,
+            reports: post.reports,
           };
         });
       })) //to change from _id from database to id
@@ -79,6 +82,7 @@ export class PostsService {
 
   publishPost(postId: string) {
     const postToBePublished = this.getPost(postId);
+    postToBePublished.publishDate = new Date(Date.now());
 
     this.http
       .put(BACKEND_URL + 'api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
@@ -96,8 +100,8 @@ export class PostsService {
   deletePost(postId: string) {
     this.http
       .delete(BACKEND_URL + 'api/posts' + "/" + postId)
-      .subscribe(() => {
-        console.log("Post successfully deleted!");
+      .subscribe((response) => {
+
         this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
     });

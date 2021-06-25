@@ -128,7 +128,9 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
       students: [],
       reports: [],
-      timeOfPost: Date.now(),
+      creationDate: new Date(Date.now()),
+      publishDate: null,
+
       //imagePath: null,
       //creator: null,
     };

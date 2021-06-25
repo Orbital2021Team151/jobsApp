@@ -13,7 +13,6 @@ export interface Post {
   content: string, //description of job
   skills: string, //skills required. should be a textbox for organization to just write down instead of limiting skills by making them choose from predefined list
 
-  //should implement calender feature if possible. Then string can be numbers instead or convert the numbers from calendar to string for storage
   startDate: Date, //Start date of volunteer
   endDate: Date, //End date of volunteer
   hoursRequired: string, //number of hours that a student has to commit to minimally
@@ -26,7 +25,8 @@ export interface Post {
   reports: {email: string, contact: number, content: string}[],
 
   approved: boolean,
+  creationDate: Date, //Date post was published
+  publishDate: Date, //Date post was published
   creator: string,
-  timeOfPost: number, //a post timestamp.
 
 }

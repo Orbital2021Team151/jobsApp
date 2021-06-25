@@ -107,19 +107,24 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       beneficiaries: this.beneficiariesSelected,
 
       approved: false,
-      creator: null,
+      creationDate: new Date(),
+      publishDate: null,
+      creator: null,        //is this supposed to be null?
 
       students: [],
       reports: [],
-      timeOfPost: Date.now(),
+
       //imagePath: null,
       //creator: null,
     };
-    console.log(post.opportunity);
-    //console.log("Post creation fired! onAddPost. post is:");
-    //console.log(post);
+
+    console.log("Post creation fired! onAddPost. post is:");
+    console.log(post);
+
     this.pendingApproval = true;
+
     this.postsService.addPost(post);
+
     this.modalService.dismissAll();
     form.reset();
   }

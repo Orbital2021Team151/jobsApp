@@ -526,7 +526,11 @@
         </p-card-header>
 
         <p-card-subheader class="pCardSubheader">
-          {{ post.startDate | date }} to {{ post.endDate | date }}
+          {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+          <!--
+            Post Creation Date: {{ post.creationDate | date }} <br>
+          Post Publish Date: {{ post.publishDate | date }}
+          -->
         </p-card-subheader>
 
         <p-card-content class="pCardContent">

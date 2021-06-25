@@ -65,7 +65,7 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         //console.log(posts);
-        console.log("organisation dashboard's postService observable!");
+        //console.log("organisation dashboard's postService observable!");
 
         this.posts = posts
             .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
