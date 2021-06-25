@@ -184,6 +184,10 @@ exports.publishPost = (req, res, next) => {
 
   Post.updateOne({_id: req.body.id}, newPost)
   .then((result) => {
+
+    //TODO: Build this
+    //sendPostApplyNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
+
     res.status(200).json("Applied for posting!");
   });
 };

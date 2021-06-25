@@ -21,7 +21,7 @@ const postSchema = mongoose.Schema({
   approved: {type: Boolean, },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 
-  students: {type: {email: String, contact: Number, content: String}, required: true},
+  students: {type: {email: String, contact: Number, content: String, applicationUser: String}, required: true},
   reports: {type: {email: String, contact: Number, content: String}, required: true},
 
   //imagePath:

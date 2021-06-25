@@ -1,5 +1,4 @@
 import { MatNativeDateModule } from "@angular/material/core";
-import { Student } from "./student.model";
 
 export interface Post {
   id: string, //to link with mongoDB's unique ID. automatically created by mongoose for us
@@ -23,7 +22,7 @@ export interface Post {
   //imagePath: string; //store image? additional feature potentially
   //creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
 
-  students: {email: string, contact: number, content: string}[],
+  students: {email: string, contact: number, content: string, applicationUser: string}[],
   reports: {email: string, contact: number, content: string}[],
 
   approved: boolean,

@@ -47,11 +47,19 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     verified: boolean;
   };
 
-  private studentObject: {
+  private studentApplyObject: {
+    email: string;
+    contact: number;
+    content: string;
+    applicationUser: string;
+  }
+
+  private studentReportObject: {
     email: string;
     contact: number;
     content: string;
   }
+
 
   private postSub: Subscription;
   private authStatusSub: Subscription;
@@ -76,6 +84,14 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   keywords: string = "";
 
   public banner: any;
+
+  public applicationUsers: string[] = [
+    "Student",
+    "NUS Alumni"
+  ];
+  public applictionUser: string = "Student";
+  favoriteSeason: string;
+  seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
   constructor(
     public postsService: PostsService,
@@ -239,15 +255,21 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   submitApplication(postId: string, appForm: NgForm) {
+
+    //console.log(appForm.value);
+
     if (appForm.invalid) {
       return;
     }
-    this.studentObject = {
+
+    this.studentApplyObject = {
       email: this.authStatusObject.email,
       contact: appForm.value.contactNumber,
       content: appForm.value.message,
+      applicationUser: appForm.value.user,
     };
-    this.postsService.applyPost(postId, this.studentObject);
+
+    this.postsService.applyPost(postId, this.studentApplyObject);
     return true;
   }
 
@@ -278,12 +300,12 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       //console.log("Still need to fill in the form!");
       return;
     }
-    this.studentObject = {
+    this.studentReportObject = {
       email: this.authStatusObject.email,
       contact: reportForm.value.contactNumber,
       content: reportForm.value.message,
     };
-    this.postsService.reportPost(postId, this.studentObject);
+    this.postsService.reportPost(postId, this.studentReportObject);
     return true;
   }
 

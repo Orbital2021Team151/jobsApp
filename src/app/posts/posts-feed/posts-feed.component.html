@@ -1,7 +1,5 @@
 <div class="filter-card">
-
   <mat-card class="filter-body">
-
     <ng-container>
       <mat-form-field appearance="outline">
         <mat-label>Search for keywords</mat-label>
@@ -14,9 +12,7 @@
         />
       </mat-form-field>
 
-      <mat-form-field
-        appearance="outline"
-      >
+      <mat-form-field appearance="outline">
         <mat-label>Beneficiaries</mat-label>
         <mat-select
           ngModel
@@ -69,9 +65,7 @@
         </mat-date-range-picker>
       </mat-form-field>
 
-      <div
-        class="filter-footer"
-      >
+      <div class="filter-footer">
         <p-button
           class="filter-button"
           label="Clear filter criteria"
@@ -524,21 +518,14 @@
 -->
 
 <div class="posts-timeline">
-
   <ng-container *ngFor="let post of filteredPosts">
-
     <section class="cards">
-      <p-card
-        class="card"
-        *ngIf="post.approved"
-      >
-        <p-card-header class="pCardHeader"
-        >
+      <p-card class="card" *ngIf="post.approved">
+        <p-card-header class="pCardHeader">
           <b>{{ post.title }}</b>
         </p-card-header>
 
-        <p-card-subheader class="pCardSubheader"
-        >
+        <p-card-subheader class="pCardSubheader">
           {{ post.startDate | date }} to {{ post.endDate | date }}
         </p-card-subheader>
 
@@ -548,7 +535,9 @@
 
         <ng-template pTemplate="footer" #footer class="post-footer">
           <p-button
-            *ngIf="(userRole === 'Student') || (userRole === 'Student / NUS Alumni')"
+            *ngIf="
+              userRole === 'Student' || userRole === 'Student / NUS Alumni'
+            "
             class="post-button"
             label="Report"
             icon="pi pi-exclamation-circle"
@@ -567,7 +556,9 @@
           ></p-button>
 
           <p-button
-            *ngIf="(userRole === 'Student') || (userRole === 'Student / NUS Alumni')"
+            *ngIf="
+              userRole === 'Student' || userRole === 'Student / NUS Alumni'
+            "
             class="post-button"
             label="Apply"
             icon="pi pi-heart"
@@ -683,9 +674,7 @@
     </ng-template>
 
     <ng-template #studentContent let-modal>
-      <div
-        class="modal-header"
-      >
+      <div class="modal-header">
         <h4 class="modal-title">Apply Post: {{ post.title }}</h4>
         <button
           type="button"
@@ -697,10 +686,11 @@
         </button>
       </div>
 
-      <div
-        class="modal-body"
-      >
+      <div class="modal-body">
+        <!--
         <form (submit)="submitApplication(post.id, appForm)" #appForm="ngForm">
+      -->
+        <form #appForm="ngForm">
           <mat-form-field appearance="outline">
             <mat-label>Contact Number</mat-label>
             <input
@@ -717,7 +707,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Reason for applying</mat-label>
-            <input
+            <textarea
               matInput
               type="text"
               ngModel
@@ -725,15 +715,34 @@
               required
               #message="ngModel"
               rows="10"
+              minlength="5"
               placeholder="Please elaborate on what you can contribute to the project."
-              required
-            />
+            ></textarea>
           </mat-form-field>
+
+          <div class="role-radio-group">
+            <mat-label>
+              Applicant Type
+            </mat-label>
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="Student" type="radio" class="custom-control-input" value="Student" name="role" ngModel required>
+                <label class="custom-control-label" for="Student">Student</label>
+              </div>
+
+              <div class="custom-control custom-radio">
+                <input id="NUS Alumni" type="radio" class="custom-control-input" value="NUS Alumni" name="role" ngModel required>
+                <label class="custom-control-label" for="NUS Alumni">NUS Alumni</label>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
 
-      <div
-        class="modal-footer"
+      <div class="modal-footer">
+
+        <mat-error *ngIf="appForm.invalid"
+        >Please fill all required fields before submitting your request.</mat-error
       >
         <button
           type="button"
@@ -748,9 +757,7 @@
     </ng-template>
 
     <ng-template #reportContent let-modal>
-      <div
-        class="modal-header"
-      >
+      <div class="modal-header">
         <h4 class="modal-title">Report Post: {{ post.title }}</h4>
         <button
           type="button"
@@ -762,9 +769,7 @@
         </button>
       </div>
 
-      <div
-        class="modal-body"
-      >
+      <div class="modal-body">
         <form (submit)="submitReport(post.id, reportForm)" #reportForm="ngForm">
           <mat-form-field appearance="outline">
             <mat-label>Contact Number</mat-label>
@@ -782,7 +787,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Reason for reporting</mat-label>
-            <input
+            <textarea
               matInput
               type="text"
               ngModel
@@ -791,14 +796,14 @@
               #message="ngModel"
               placeholder="Please help us understand why are you making the report."
               required
-            />
+              rows="10"
+              minlength="5"
+            ></textarea>
           </mat-form-field>
         </form>
       </div>
 
-      <div
-        class="modal-footer"
-      >
+      <div class="modal-footer">
         <button
           type="button"
           class="btn btn-light"
@@ -812,9 +817,7 @@
     </ng-template>
 
     <ng-template #deleteContent let-modal>
-      <div
-        class="modal-header"
-      >
+      <div class="modal-header">
         <h4 class="modal-title">Delete Confirmation</h4>
         <button
           type="button"
@@ -826,15 +829,11 @@
         </button>
       </div>
 
-      <div
-        class="modal-body"
-      >
+      <div class="modal-body">
         <p>Are you sure you want to delete the post?</p>
       </div>
 
-      <div
-        class="modal-footer"
-      >
+      <div class="modal-footer">
         <button
           type="button"
           class="btn btn-light"

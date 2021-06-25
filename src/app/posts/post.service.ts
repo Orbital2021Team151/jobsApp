@@ -103,7 +103,7 @@ export class PostsService {
     });
   }
 
-  applyPost(postId: string, student: {email: string, contact: number, content: string}) {
+  applyPost(postId: string, student: {email: string, contact: number, content: string, applicationUser: string}) {
 
     const postToBePublished = this.getPost(postId);
 
