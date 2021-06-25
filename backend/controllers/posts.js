@@ -185,8 +185,10 @@ exports.publishPost = (req, res, next) => {
   Post.updateOne({_id: req.body.id}, newPost)
   .then((result) => {
 
-    //TODO: Build this
-    //sendPostApplyNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
+     //sends email to organisation to inform that that someone applied for their post?
+
+     //to just to inform the person who applied for the post that their application got through.
+    sendApplyAcknowledgementEmail(req.body.email, req.body);
 
     res.status(200).json("Applied for posting!");
   });
@@ -325,7 +327,6 @@ exports.downloadPosts = (req, res, next) => {
 //the only one that might work is the mailgun-js solution. but that feature is locked behind a subscription service
 exports.checkEmailExists = (req, res, next) => {
   console.log("Inside MongoDB!");
-
   /*
    * yahoo addresses not working, @u.nus.edu addresses not working
   emailExistence.check(req.body.email, (error, response) => {
@@ -790,6 +791,100 @@ const sendReportAcknowledgementEmail = (email, post) => {
     }
   });
 };
+
+
+const sendApplyAcknowledgementEmail = (email, post) => {
+  var mailOptions;
+  let sender = "CCSGP Report Acknowledgement";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "apply-acknowledgement",
+    "apply-acknowledgement.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    orgName: post.orgName,
+    POC: post.POC,
+    phoneNumber: post.phoneNumber,
+    email: post.email,
+    title: post.title,
+    content: post.content,
+    opportunity: post.opportunity,
+    skills: post.skills,
+    startDate: new Date(post.startDate).toDateString(),
+    endDate: new Date(post.endDate).toDateString(),
+    hoursRequired: post.hoursRequired,
+    beneficiaries: post.beneficiaries,
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Post Application Acknowledgement",
+    html: htmlToSend,
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Post Application Acknowledgement email! (line 539, controllers posts.js) Error is as shown below: "
+      );
+      console.log(error);
+      throw new Error("Could not send Post Application Acknowledgement email!");
+    } else {
+      console.log("Post Application Acknowledgement email sent!");
+    }
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
