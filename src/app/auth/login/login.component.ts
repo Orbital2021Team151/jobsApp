@@ -36,21 +36,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    //TODO: Need to change this method to be backend taking in the" student / nus alumni" role if our project gets selected.
-    // this is currently just a temp fix to conform to backend's role since a lot of the accounts have been set up as "Student" strictly already
-    var selectedRole = "";
-    if (form.value.role === "Student / NUS Alumni") {
-      selectedRole = "Student";
-    } else {
-      selectedRole = form.value.role;
-    }
-    this.authService.login(form.value.email, form.value.password, form.value.role);
+    this.authService.login(form.value.email, form.value.password);
     this.authService.autoAuthUser();
   }
 
   onOpenForgetPassword(forgetPasswordContent) {
     this.modalService.open(forgetPasswordContent, { size: 'lg' });
   }
+
   onForgetPassword(form: NgForm) {
     if (form.invalid) {
       return false;
@@ -60,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     //console.log(form.value.forgetPasswordEmail);
     //console.log(form.value.forgetPasswordRole);
 
-    this.authService.forgetPassword(form.value.forgetPasswordEmail, form.value.forgetPasswordRole);
+    this.authService.forgetPassword(form.value.forgetPasswordEmail);
     this.authService.getLoginListener().subscribe((res) => {
       this.newPasswordSent = res;
     });

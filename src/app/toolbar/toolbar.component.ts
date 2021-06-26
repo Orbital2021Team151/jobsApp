@@ -43,6 +43,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     .getAuthStatusListener()
     .subscribe(authObject => {
       //console.log("Toolbar's auth sub observable working!");
+      console.log("Retrieved user in toolbar is: ");
+      console.log(authObject);
       this.userIsAuthenticated = authObject.auth;
       this.authStatusObject = authObject;
     });

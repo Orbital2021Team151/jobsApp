@@ -160,11 +160,10 @@ export class AuthService {
       });
   }
 
-  login(email: string, password: string, role: string) {
+  login(email: string, password: string) {
     const authData: AuthData = {
       email: email,
       password: password,
-      role: role,
     };
 
     this.http
@@ -196,7 +195,7 @@ export class AuthService {
             this.authStatus = {
               auth: true,
               email: email,
-              role: role,
+              role: response.role,
               orgName: response.orgName,
               uen: response.uen,
               beneficiaries: response.beneficiaries,
@@ -207,6 +206,7 @@ export class AuthService {
             this.router.navigate(['/feed']);
           }
         },
+
         (error) => {
           this.authStatusListener.next({
             auth: false,
@@ -333,8 +333,8 @@ export class AuthService {
       });
   }
 
-  forgetPassword(email: string, role: string) {
-    let userObject = { email: email, role: role };
+  forgetPassword(email: string) {
+    let userObject = { email: email};
 
     this.http
       .put(BACKEND_URL + 'api/user/forgetPassword', userObject)

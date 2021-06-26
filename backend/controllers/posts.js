@@ -51,7 +51,7 @@ exports.requestPost = (req, res, next) => {
       //console.log(createdPost);
 
       //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-      //sendPostRequestedNotificationEmail(req.body.email, post);
+      sendPostRequestedNotificationEmail(req.body.email, post);
       res.status(201).json({message: "post requested successfully! Pending admin approval"});
     });
 };
@@ -162,14 +162,14 @@ exports.publishPost = (req, res, next) => {
             //console.log(postBeneficiary);
             if (interestedBeneficiaries.includes(postBeneficiary)) {
               //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-              //sendNotificationEmail(currentUser.email, req.body);
+              sendNotificationEmail(currentUser.email, req.body);
               break;
             }
           }
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-        //sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
+        sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
 
         res.status(200).json({
           documents: allUsersDocument, //probably do not need this
@@ -221,7 +221,7 @@ exports.publishPost = (req, res, next) => {
 
      //to just to inform the person who applied for the post that their application got through.
      //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-     //sendApplyAcknowledgementEmail(req.body.email, req.body);
+     sendApplyAcknowledgementEmail(req.body.email, req.body);
 
     res.status(200).json("Applied for posting!");
   });
@@ -271,12 +271,12 @@ exports.reportPost = (req, res, next) => {
         for (var userI=0; userI< adminUsers.length; userI++) {
           let currentAdmin = adminUsers[userI];
           //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-          //sendReportToAdminEmail(currentAdmin.email, req.body.post);
+          sendReportToAdminEmail(currentAdmin.email, req.body.post);
           //console.log("Report email sent to admin: " + currentAdmin.email);
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-        //sendReportAcknowledgementEmail(req.body.student.email, req.body.post);
+        sendReportAcknowledgementEmail(req.body.student.email, req.body.post);
         //console.log("Report acknowledgement sent to: " + req.body.student.email);
 
         res.status(200).json({

@@ -31,6 +31,8 @@ exports.signupGeneral = (req, res, next) => {
       .save()
       .then((result) => {
         const email = user.email;
+
+        //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
         sendVerificationEmail(email, result._id);
 
         res.status(201).json({
@@ -74,6 +76,8 @@ exports.signupAdmin = (req, res, next) => {
       .save()
       .then((result) => {
         const email = user.email;
+
+        //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
         sendVerificationEmail(email, result._id);
 
         res.status(201).json({
@@ -96,24 +100,17 @@ exports.signupAdmin = (req, res, next) => {
 exports.login = (req, res, next) => {
   let fetchedUser;
 
-  //TODO: Need to fix this when ready for production
-  let backendRole = "";
-  if (req.body.role === "Student / NUS Alumni") {
-    backendRole = "Student";
-  } else {
-    backendRole = req.body.role;
-  }
-
-
   User.findOne({
-    email: req.body.email,
-    role: backendRole, //TODO: Kiv to change
+    email: req.body.email
   })
     .then((userFound) => {
       if (userFound === null) {
         throw new Error("No such user");
       }
+
       fetchedUser = userFound;
+      //console.log("Inside MongoDB now. Fetched user is: ");
+      //console.log(userFound);
 
       return bcrypt
         .compare(req.body.password, userFound.password)
@@ -128,15 +125,18 @@ exports.login = (req, res, next) => {
           if (!verified) {
             throw new Error("User not verified!");
           } else {
+
             const token = jwt.sign(
               {
                 email: fetchedUser.email,
                 userId: fetchedUser._id,
                 role: fetchedUser.role,
               },
+
               process.env.JWT_KEY,
               { expiresIn: "1h" }
             );
+
             res.status(200).json({
               token: token,
               expiresIn: 3600,
@@ -278,6 +278,102 @@ exports.updatePassword = (req, res, next) => {
     });
 };
 
+
+exports.forgetPassword = (req, res) => {
+  let fetchedUser;
+
+  User.findOne({
+    email: req.body.email
+  })
+    .then((user) => {
+      if (!user) {
+        console.log("No user found to send forget password email to (line 362, controllers users.js).");
+        throw new Error(
+          "Authentication Failed. User does not exist in database."
+        );
+      }
+
+      fetchedUser = user;
+      tempPassword = randomStringGenerator();
+
+      bcrypt.hash(tempPassword, 10).then((passwordHash) => {
+        const newUser = new User({
+          _id: fetchedUser.id,
+          email: fetchedUser.email,
+          password: passwordHash,
+          role: fetchedUser.role,
+          orgName: fetchedUser.orgName,
+          uen: fetchedUser.uen,
+          beneficiaries: req.body.beneficiaries,
+          verified: true,
+        });
+
+        User.updateOne({ email: req.body.email, role: fetchedUser.role}, newUser)
+          .then((result) => {
+            if (result) {
+
+              //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
+              sendForgetPasswordEmail(req.body.email, tempPassword);
+              res.status(200).json("User password reset!");
+            } else {
+              throw new Error(
+                "Unable to reset the person's password. Might it be due to the backendRole issue again?"
+              );
+            }
+          })
+          .catch((err) => {
+            res.status(404).json({
+              errorCode: 10,
+              message: "Issue with resetting person's password.",
+            });
+          });
+      });
+    })
+
+    .catch((error) => {
+      return res.status(412).json({
+        errorCode: 1,
+        message:
+          "Current email provided was wrong or user with that role does not exist in database.",
+        error: error,
+      });
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Emails with html templating
+*/
 //For production, should use Sendgrid / MailGun [if we have the money]
 const sendVerificationEmail = (email, uniqueString) => {
   var mailOptions;
@@ -406,7 +502,7 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      pass: process.env.EMAIL_PASSWORD,
+      pass: process.env.EMAIL_PASSWORD
     },
     tls: {
       rejectUnauthorized: false,
@@ -454,72 +550,4 @@ const randomStringGenerator = () => {
     result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
-};
-
-exports.forgetPassword = (req, res) => {
-  let fetchedUser;
-
-  //TODO: Need to change this wholesale when ready for production.
-  let backendRole = "";
-  if (req.body.role === "Student / NUS Alumni") {
-    backendRole = "Student";
-  } else {
-    backendRole = req.body.role;
-  }
-
-  User.findOne({
-    email: req.body.email,
-    role: backendRole,
-  })
-    .then((user) => {
-      if (!user) {
-        console.log("No user found to send forget password email to (line 362, controllers users.js).");
-        throw new Error(
-          "Authentication Failed. User does not exist in database."
-        );
-      }
-
-      fetchedUser = user;
-      tempPassword = randomStringGenerator();
-
-      bcrypt.hash(tempPassword, 10).then((passwordHash) => {
-        const newUser = new User({
-          _id: fetchedUser.id,
-          email: fetchedUser.email,
-          password: passwordHash,
-          role: fetchedUser.role,
-          orgName: fetchedUser.orgName,
-          uen: fetchedUser.uen,
-          beneficiaries: req.body.beneficiaries,
-          verified: true,
-        });
-
-        User.updateOne({ email: req.body.email, role: backendRole }, newUser)
-          .then((result) => {
-            if (result) {
-              sendForgetPasswordEmail(req.body.email, tempPassword);
-              res.status(200).json("User password reset!");
-            } else {
-              throw new Error(
-                "Unable to reset the person's password. Might it be due to the backendRole issue again?"
-              );
-            }
-          })
-          .catch((err) => {
-            res.status(404).json({
-              errorCode: 10,
-              message: "Issue with resetting person's password.",
-            });
-          });
-      });
-    })
-
-    .catch((error) => {
-      return res.status(412).json({
-        errorCode: 1,
-        message:
-          "Current email provided was wrong or user with that role does not exist in database.",
-        error: error,
-      });
-    });
 };
