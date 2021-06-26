@@ -238,7 +238,7 @@ exports.reportPost = (req, res, next) => {
     email: req.body.post.email,
     title: req.body.post.title,
     content: req.body.post.content,
-    opportunity: req.body.opportunity,
+    opportunity: req.body.post.opportunity,
     skills: req.body.post.skills,
 
     startDate: req.body.post.startDate,

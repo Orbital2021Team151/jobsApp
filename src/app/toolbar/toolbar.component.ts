@@ -36,6 +36,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       this.authStatusObject = this.authService.getAuthStatusObject();
     } else {
       localStorage.clear();
+      this.userIsAuthenticated = false;
     }
 
 

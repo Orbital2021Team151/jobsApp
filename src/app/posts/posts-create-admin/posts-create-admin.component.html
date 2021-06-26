@@ -59,12 +59,14 @@
         <mat-label>POC's Phone Number</mat-label>
         <input
           matInput
-          type="text"
+          type="number"
           ngModel
           name="phoneNumber"
           required
           #phoneNumber="ngModel"
-          placeholder="eg +65 12345678"
+          placeholder="eg 12345678"
+          maxlength="8"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         />
         <mat-error *ngIf="phoneNumber.invalid"
           >Please provide us your Point-Of-Contact's phone number.</mat-error
@@ -121,7 +123,7 @@
         >
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <!-- <mat-form-field appearance="outline">
         <mat-label>Type of volunteer opportunity</mat-label>
         <textarea
           matInput
@@ -136,6 +138,23 @@
         <mat-error *ngIf="content.invalid"
           >Please indicate the frequency of this job.</mat-error
         >
+      </mat-form-field> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Type of opportunity</mat-label>
+        <mat-select
+          required
+          ngModel
+          #opportunityInput="ngModel"
+          name="opportunitySelected"
+          [(ngModel)]="opportunitySelected"
+        >
+          <mat-option
+            *ngFor="let opportunity of opportunities"
+            [value]="opportunity"
+            >{{ opportunity }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">

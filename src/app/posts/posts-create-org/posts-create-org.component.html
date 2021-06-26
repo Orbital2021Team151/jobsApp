@@ -65,7 +65,7 @@
       >
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <!-- <mat-form-field appearance="outline">
       <mat-label>Type of volunteer opportunity</mat-label>
       <textarea
         matInput
@@ -80,6 +80,23 @@
       <mat-error *ngIf="content.invalid"
         >Please indicate the frequency of this job.</mat-error
       >
+    </mat-form-field> -->
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type of opportunity</mat-label>
+      <mat-select
+        required
+        ngModel
+        #opportunityInput="ngModel"
+        name="opportunitySelected"
+        [(ngModel)]="opportunitySelected"
+      >
+        <mat-option
+          *ngFor="let opp of opportunity"
+          [value]="opp"
+          >{{ opp }}</mat-option
+        >
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

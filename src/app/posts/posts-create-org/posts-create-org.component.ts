@@ -58,6 +58,11 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     "Women & Girls",
   ];
   beneficiariesSelected: string[] = [];
+  opportunity: string[] = [
+    "One-off",
+    "Recurring",
+  ]
+  opportunitySelected: string[] = [];
   termsAndConditions = false;
 
 
@@ -114,7 +119,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       email: this.authStatusObject.email,
       title: form.value.title,
       content: form.value.content,
-      opportunity: form.value.opportunity,
+      opportunity: this.opportunitySelected,
       skills: form.value.skills,
 
       startDate: form.value.startDate,

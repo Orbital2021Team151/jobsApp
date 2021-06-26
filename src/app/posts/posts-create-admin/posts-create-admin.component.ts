@@ -51,6 +51,11 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     "Women & Girls",
   ];
   beneficiariesSelected: string[] = [];
+  opportunities: string[] = [
+    "One-off",
+    "Recurring",
+  ]
+  opportunitySelected: string[] = [];
   termsAndConditions = false;
   pocEmail: string = "";
 
@@ -95,7 +100,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       phoneNumber: form.value.phoneNumber,
       email: this.pocEmail,
       title: form.value.title,
-      opportunity: form.value.opportunity,
+      opportunity: this.opportunitySelected,
 
       content: form.value.content,
       skills: form.value.skills,
