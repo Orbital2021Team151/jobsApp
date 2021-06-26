@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth/auth.service";
 import { Post } from "../posts/post.model";
@@ -8,6 +8,7 @@ import { PostsService } from "../posts/post.service";
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css'],
+  //encapsulation: ViewEncapsulation.Emulated
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
