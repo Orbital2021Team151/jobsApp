@@ -1,3 +1,13 @@
+/* GLOBAL
+-------------------------------------------------- */
+.create-post-card {
+  margin-top: 2rem;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
 mat-form-field, textarea {
   width: 100%;
 }
@@ -5,47 +15,25 @@ mat-form-field, textarea {
 mat-card {
   width: 60%;
   margin: auto;
-}
 
-mat-label {
-  color: #EEFBFB;
-}
-
-.mat-input-element {
-  color: #EEFBFB;
-}
-
-.mat-input-element::placeholder {
-  color: #7D7D7D;
-}
-
-/*
- * For Beneficiaries and DatePicker styling
-*/
-.mat-select-arrow {
-  color: #4da8da !important;
-}
-
-mat-datepicker-toggle {
-  color: #4da8da !important;
-}
-
-mat-datepicker-value {
-  color: #EEFBFB !important;
-}
-
-input {
-  color: #EEFBFB;
-}
-
-.mat-select-value {
-  color: #EEFBFB !important;
-}
-
-.mat-select-value::placeholder {
-  color: #EEFBFB !important;
+  padding: 10px;
+  border-style: solid;
+  border-width: thick;
+  border-color: #9b9b9b;
+  box-shadow: none;
 }
 
 mat-form-field {
   width: 100%;
+}
+
+
+/* FOOTER
+-------------------------------------------------- */
+.container-footer {
+  margin-top: 2rem;
+}
+
+.copyright {
+  text-align: center;
 }

@@ -1,5 +1,10 @@
 div {
   margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+mat-card-title {
+  text-align: center;
 }
 
 mat-form-field {
@@ -13,6 +18,16 @@ mat-spinner {
 mat-card {
   width: 60%;
   margin: auto;
+
+  padding: 10px;
+  border-style: solid;
+  border-width: thick;
+  border-color: #f75c97;
+  box-shadow: none;
+}
+
+.copyright {
+  text-align: center;
 }
 
 

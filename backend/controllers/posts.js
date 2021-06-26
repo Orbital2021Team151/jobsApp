@@ -9,13 +9,10 @@ const mongodb = require("mongodb").MongoClient;
 //const emailValidator = require('deep-email-validator');
 //const emailExistence = require('email-existence');
 
-const Post = require('../models/post');
-const User = require('../models/user');
-
-
+const Post = require("../models/post");
+const User = require("../models/user");
 
 exports.requestPost = (req, res, next) => {
-
   const post = new Post({
     orgName: req.body.orgName,
     uen: req.body.uen,
@@ -45,38 +42,70 @@ exports.requestPost = (req, res, next) => {
   //console.log("At backend, requested post is: ");
   //console.log(post);
 
-  post.save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
-    .then(createdPost => {
+  post
+    .save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
+    .then((createdPost) => {
       //console.log("created post, stored in database is: ");
       //console.log(createdPost);
 
       //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
       sendPostRequestedNotificationEmail(req.body.email, post);
-      res.status(201).json({message: "post requested successfully! Pending admin approval"});
+      res
+        .status(201)
+        .json({
+          message: "post requested successfully! Pending admin approval",
+        });
     });
 };
 
 exports.getAllPosts = (req, res, next) => {
-
   Post.find()
-    .then(documents => {
+    .then((documents) => {
       res.status(200).json({
         message: "Posts fetched successfully",
         posts: documents,
       });
     })
-    .catch(e => {
+    .catch((e) => {
       console.log("Error occured at backend/app app.get");
-      res.status(404).json({error: e, message: "Error at get all Posts in controllers posts.js"});
+      res
+        .status(404)
+        .json({
+          error: e,
+          message: "Error at get all Posts in controllers posts.js",
+        });
     });
 };
 
 exports.deletePost = (req, res, next) => {
+  //console.log("At backend delete PoST! Data are as follows: ");
+  //console.log(req.userData);
+  //console.log(req.params);
 
-  console.log("At backend delete PoST! Data are as follows: ");
-  console.log(req.userData);
-  console.log(req.params);
+  Post.deleteOne({ _id: req.params.id })
+    .then((result) => {
+      if (result.n > 0) {
+        //console.log("Deletion by admin successful");
+        res
+          .status(200)
+          .json({ message: "Post delete request sent and completed!" });
+      } else {
+        //console.log("Deletion by admin unsuccessful");
+        res
+          .status(401)
+          .json({
+            message: "Not authorised to delete? Even tho I am an admin!?",
+          });
+      }
+    })
+    .catch((err) => {
+      //console.log(err);
+      res
+        .status(401)
+        .json({ message: "Error at deleting. it does not exist?", error: err });
+    });
 
+  /*
   if (req.userData.role === 'Admin') {
     Post.deleteOne({_id: req.params.id})
     .then((result) => {
@@ -94,8 +123,7 @@ exports.deletePost = (req, res, next) => {
      });
 
   } else {
-
-    Post.deleteOne({ _id: req.params.id, creator: req.userData.userId, }) //change creator field to orgName?
+    Post.deleteOne({ _id: req.params.id, }) //  creator: req.userData.userId,  }) //can't tag creator too apparently
     .then((result) => {
       if (result.n > 0) {
         res.status(200).json({message: "Post delete request sent!"});
@@ -109,55 +137,58 @@ exports.deletePost = (req, res, next) => {
       res.status(401).json({ message: "Error at deleting. it does not exist?", error: err});
     });
   }
+  */
 };
-
 
 //publish function to change approved from false to true
 exports.publishPost = (req, res, next) => {
-    const newPost = new Post({
-      _id: req.body.id,
-      orgName: req.body.orgName,
-      uen: req.body.uen,
-      POC: req.body.POC,
-      phoneNumber: req.body.phoneNumber,
-      email: req.body.email,
-      title: req.body.title,
-      content: req.body.content,
-      opportunity: req.body.opportunity,
-      skills: req.body.skills,
+  const newPost = new Post({
+    _id: req.body.id,
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    opportunity: req.body.opportunity,
+    skills: req.body.skills,
 
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      hoursRequired: req.body.hoursRequired,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    hoursRequired: req.body.hoursRequired,
 
-      beneficiaries: req.body.beneficiaries,
+    beneficiaries: req.body.beneficiaries,
 
-      approved: true,
-      creator: req.body.id,
-      creationDate: req.body.creationDate,
-      publishDate: req.body.publishDate,
+    approved: true,
+    creator: req.body.id,
+    creationDate: req.body.creationDate,
+    publishDate: req.body.publishDate,
 
-      students: [],
-      reports: [],
-    });
+    students: [],
+    reports: [],
+  });
 
-    Post.updateOne({_id: req.params.id}, newPost)
-    .then(result => { //result is either true to false
+  Post.updateOne({ _id: req.params.id }, newPost)
+    .then((result) => {
+      //result is either true to false
       if (!result) {
         throw new Error("Unable to publish post!");
       }
 
-
-      User.find()
-      .then(allUsersDocument => {
+      User.find().then((allUsersDocument) => {
         //console.log("Post it published! This message should only be seen from the mongoDB shell");
 
-        for (var userI=0; userI< allUsersDocument.length; userI++) {
+        for (var userI = 0; userI < allUsersDocument.length; userI++) {
           var currentUser = allUsersDocument[userI];
           var interestedBeneficiaries = currentUser.beneficiaries;
           //console.log(currentUser);
 
-          for(var postBeneficiaryI=0; postBeneficiaryI < req.body.beneficiaries.length; postBeneficiaryI++) {
+          for (
+            var postBeneficiaryI = 0;
+            postBeneficiaryI < req.body.beneficiaries.length;
+            postBeneficiaryI++
+          ) {
             let postBeneficiary = req.body.beneficiaries[postBeneficiaryI];
             //console.log(postBeneficiary);
             if (interestedBeneficiaries.includes(postBeneficiary)) {
@@ -180,13 +211,15 @@ exports.publishPost = (req, res, next) => {
       //res.status(200).json("Post published!"); callback later because now we need to send notification email
     })
 
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
-      console.log("Error occured at posts line 136. Could be either issue with publishing the post or sending notificaitno emails to users");
+      console.log(
+        "Error occured at posts line 136. Could be either issue with publishing the post or sending notificaitno emails to users"
+      );
     }); //in case anything goes wrong
-  };
+};
 
- exports.applyPost = (req, res, next) => {
+exports.applyPost = (req, res, next) => {
   const newPost = new Post({
     _id: req.body.id,
     orgName: req.body.orgName,
@@ -214,14 +247,12 @@ exports.publishPost = (req, res, next) => {
     reports: req.body.reports,
   });
 
-  Post.updateOne({_id: req.body.id}, newPost)
-  .then((result) => {
+  Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
+    //sends email to organisation to inform that that someone applied for their post?
 
-     //sends email to organisation to inform that that someone applied for their post?
-
-     //to just to inform the person who applied for the post that their application got through.
-     //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-     sendApplyAcknowledgementEmail(req.body.email, req.body);
+    //to just to inform the person who applied for the post that their application got through.
+    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
+    sendApplyAcknowledgementEmail(req.body.email, req.body);
 
     res.status(200).json("Applied for posting!");
   });
@@ -257,18 +288,21 @@ exports.reportPost = (req, res, next) => {
   });
 
   Post.findByIdAndUpdate(req.body.post.id, newPost)
-  .then((result) => {
-    if (!result) {
-      throw new Error("Post cannot be reported!");
-    }
+    .then((result) => {
+      if (!result) {
+        throw new Error("Post cannot be reported!");
+      }
 
-    User.find()
-      .then(allUsersDocument => {
-        console.log("Post has been reported! Now it should send notification emails to all admins and the user who reported the post.");
+      User.find().then((allUsersDocument) => {
+        console.log(
+          "Post has been reported! Now it should send notification emails to all admins and the user who reported the post."
+        );
 
-        let adminUsers = allUsersDocument.filter(user => user.role === "Admin");
+        let adminUsers = allUsersDocument.filter(
+          (user) => user.role === "Admin"
+        );
 
-        for (var userI=0; userI< adminUsers.length; userI++) {
+        for (var userI = 0; userI < adminUsers.length; userI++) {
           let currentAdmin = adminUsers[userI];
           //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
           sendReportToAdminEmail(currentAdmin.email, req.body.post);
@@ -284,36 +318,41 @@ exports.reportPost = (req, res, next) => {
           message: "Notification for report against post?",
         });
       });
-  })
+    })
 
-  .catch(error => {
-    res.status(400).json({
-      message: "Something went wrong at reporting post. either reporting the post itself or failed to send notification to admins",
+    .catch((error) => {
+      res.status(400).json({
+        message:
+          "Something went wrong at reporting post. either reporting the post itself or failed to send notification to admins",
+      });
     });
-  });
 };
 
 exports.downloadPosts = (req, res, next) => {
-
   //let url = "mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepmeancoursecluster.qa0ny.mongodb.net/orbitalDatabase?retryWrites=true&w=majority";
-  let url = "mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepmeancoursecluster.qa0ny.mongodb.net/";
+  let url =
+    "mongodb+srv://admin:" +
+    process.env.MONGO_ATLAS_PW +
+    "@eprepmeancoursecluster.qa0ny.mongodb.net/";
   mongodb.connect(
     url,
 
     {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     },
 
     (err, client) => {
       if (err) {
-        console.log("Error at connecting to mongodb. line 261 controllers posts.js");
+        console.log(
+          "Error at connecting to mongodb. line 261 controllers posts.js"
+        );
         console.log(err);
         res.status(404).json({
           message: "Error at download posts connecting to mongodb",
-          error: err
-        })
-      };
+          error: err,
+        });
+      }
 
       client
         .db("orbitalDatabase")
@@ -321,15 +360,17 @@ exports.downloadPosts = (req, res, next) => {
         .find({})
         .toArray((err, data) => {
           if (err) {
-            console.log("Error at toArray function of downloadPosts. line 274 controllers posts.js");
+            console.log(
+              "Error at toArray function of downloadPosts. line 274 controllers posts.js"
+            );
             console.log(err);
             res.stats(404).json({
               message: "Error at download posts retrieving posts from mongodb",
-              error: err
-            })
-          };
+              error: err,
+            });
+          }
 
-          mappedData = data.map(obj => {
+          mappedData = data.map((obj) => {
             return {
               beneficiaries: obj.beneficiaries,
               orgName: obj.orgName,
@@ -359,10 +400,9 @@ exports.downloadPosts = (req, res, next) => {
 
           client.close();
         });
-    });
-
+    }
+  );
 };
-
 
 //the only one that might work is the mailgun-js solution. but that feature is locked behind a subscription service
 exports.checkEmailExists = (req, res, next) => {
@@ -411,33 +451,11 @@ exports.checkEmailExists = (req, res, next) => {
     */
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
  * Emails with HTML Templating.
  * They use gmail's smtp service.
  * Might need to move to sendgrid / mailgun in the future if volume is a lot larger
-*/
+ */
 const sendNotificationEmail = (email, post) => {
   var mailOptions;
   let sender = "CCSGP Email Notification";
@@ -515,7 +533,6 @@ const sendNotificationEmail = (email, post) => {
     }
   });
 };
-
 
 const sendPostApprovedNotificationEmail = (email, post) => {
   var mailOptions;
@@ -595,7 +612,6 @@ const sendPostApprovedNotificationEmail = (email, post) => {
   });
 };
 
-
 const sendPostRequestedNotificationEmail = (email, post) => {
   var mailOptions;
   let sender = "CCSGP Post Request Confirmation";
@@ -673,7 +689,6 @@ const sendPostRequestedNotificationEmail = (email, post) => {
     }
   });
 };
-
 
 const sendReportToAdminEmail = (email, post) => {
   var mailOptions;
@@ -753,7 +768,6 @@ const sendReportToAdminEmail = (email, post) => {
   });
 };
 
-
 const sendReportAcknowledgementEmail = (email, post) => {
   var mailOptions;
   let sender = "CCSGP Report Acknowledgement";
@@ -832,7 +846,6 @@ const sendReportAcknowledgementEmail = (email, post) => {
   });
 };
 
-
 const sendApplyAcknowledgementEmail = (email, post) => {
   var mailOptions;
   let sender = "CCSGP Report Acknowledgement";
@@ -910,57 +923,6 @@ const sendApplyAcknowledgementEmail = (email, post) => {
     }
   });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 const sendNotificationEmail = (email, post) => {

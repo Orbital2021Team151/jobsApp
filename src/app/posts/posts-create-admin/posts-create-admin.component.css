@@ -2,12 +2,32 @@
 -------------------------------------------------- */
 div {
   margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.create-post-card {
+  margin-top: 2rem;
+}
+
+mat-card-title {
+  text-align: center;
 }
 
 mat-card {
   width: 60%;
   margin: auto;
+
+  padding: 10px;
+  border-style: solid;
+  border-width: thick;
+  border-color: #9b9b9b;
+  box-shadow: none;
 }
+
+.copyright {
+  text-align: center;
+}
+
 
 /*
  * For Beneficiaries and DatePicker styling

@@ -123,6 +123,18 @@
   box-shadow: none;
 }
 
+
+/* FOOTER
+-------------------------------------------------- */
+.container-footer {
+  margin-top: 2rem;
+}
+
+.copyright {
+  text-align: center;
+}
+
+
 /* MODAL WINDOW
 -------------------------------------------------- */
 .modal-header {

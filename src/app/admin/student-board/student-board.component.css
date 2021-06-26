@@ -55,6 +55,15 @@
 }
 
 
+/* CHANGE PASSWORD
+-------------------------------------------------- */
+.update-beneficiaries-card {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+
 /* JOBS PENDING APPROVAL CARDS
 -------------------------------------------------- */
 .request-post-card {
@@ -85,6 +94,14 @@
   border-color: #57ff57;
   box-shadow: none;
 }
+
+
+/* FOOTER
+-------------------------------------------------- */
+.copyright {
+  text-align: center;
+}
+
 
 /* MODAL WINDOW
 -------------------------------------------------- */

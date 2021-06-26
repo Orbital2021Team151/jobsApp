@@ -88,6 +88,7 @@ input {
   align-items: center;
   justify-content: center;
   display: grid;
+  margin-bottom: 2rem;
 }
 
 .pCardHeader {
@@ -129,6 +130,13 @@ input {
 .post-button {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+
+/* FOOTER
+-------------------------------------------------- */
+.copyright {
+  text-align: center;
 }
 
 

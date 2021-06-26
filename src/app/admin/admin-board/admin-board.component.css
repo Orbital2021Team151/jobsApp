@@ -114,13 +114,19 @@
   width: 25rem;
   height: 15rem;
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 
   border-style: solid;
   border-width: thin;
   border-color: #ff0000;
   box-shadow: none;
+}
+
+/* FOOTER
+-------------------------------------------------- */
+.copyright {
+  text-align: center;
 }
 
 /* MODAL WINDOW
