@@ -3,7 +3,7 @@
 /* Padding below the footer and lighter body text */
 
 html {
-  background-color: #f8f8ff !important;
+  background-color: inherit;
 }
 
 
@@ -11,7 +11,8 @@ body {
   padding-bottom: 1rem;
   margin-top: 0rem;
   margin-bottom: 0rem;
-  background-color: #f8f8ff !important;
+  background-color: inherit;
+  color: inherit;
 }
 
 

@@ -28,35 +28,6 @@ mat-card {
   text-align: center;
 }
 
-
-/*
- * For Beneficiaries and DatePicker styling
-
-.mat-select-arrow {
-  color: #4da8da !important;
-}
-
-mat-datepicker-toggle {
-  color: #4da8da !important;
-}
-
-mat-datepicker-value {
-  color: #EEFBFB !important;
-}
-
-input {
-  color: #EEFBFB;
-}
-
-.mat-select-value {
-  color: #EEFBFB !important;
-}
-
-.mat-select-value::placeholder {
-  color: #EEFBFB !important;
-}
-*/
-
 mat-form-field {
   width: 100%;
 }
@@ -65,9 +36,17 @@ mat-error {
   float: left;
 }
 
-/*
-mat-checkbox {
-  color: white !important;
-}
-*/
 
+/* MODAL WINDOW
+-------------------------------------------------- */
+.modal-header {
+  color: black;
+}
+
+.modal-body {
+  color: black;
+}
+
+.modal-footer {
+  color: black;
+}

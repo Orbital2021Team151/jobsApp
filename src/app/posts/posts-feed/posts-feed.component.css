@@ -143,14 +143,17 @@ input {
 /* MODAL WINDOW
 -------------------------------------------------- */
 .modal-header {
+  color: black;
   border: none;
 }
 
 .modal-body {
+  color: black;
   border: none;
 }
 
 .modal-footer {
+  color: black;
   border: none;
 }
 

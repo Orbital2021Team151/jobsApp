@@ -47,6 +47,7 @@ import { UpdatePasswordErrorComponent } from './errors/update-password-error/upd
 import { LoginGeneralErrorComponent } from './errors/login-general-error/login-general-error.component';
 import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-before-error.component';
 import { HomepageComponent } from './homepage/hompage.component';
+import { DarkModeToggleComponent } from './dark-mode-toggle/dark-mode-toggle.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { HomepageComponent } from './homepage/hompage.component';
     LoginGeneralErrorComponent,
     SignupBeforeErrorComponent,
     HomepageComponent,
+    DarkModeToggleComponent,
   ],
 
   imports: [

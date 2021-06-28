@@ -23,7 +23,7 @@ mat-card {
   display: flex;
   align-items: center;
   border: none;
-  background-color: #f8f8ff;
+  background-color: inherit;
 }
 
 /*

@@ -1,7 +1,9 @@
 /* TOOLBAR GLOBAL
 -------------------------------------------------- */
 mat-toolbar {
-  background-color: white;
+  background-color: #ff5338cb;
+  color: white;
+  padding-top: 2rem;
   margin-top: 0rem;
   border: none;
 }
@@ -30,7 +32,11 @@ mat-stroked-button {
   width: 150px;
   font-size: 110%;
   border: 2px solid #da4d4d !important;
+
+  /*
   color: rgba(0, 0, 0, 0.726);
+  */
+
   margin-left: .5rem;
   margin-right: .5rem;
 }
@@ -47,7 +53,11 @@ mat-stroked-button {
 -------------------------------------------------- */
 button {
   text-decoration: none;
+
+  /*
   color: rgba(0, 0, 0, 0.521);
+  */
+  color: inherit;
   font-size: 100%;
 }
 

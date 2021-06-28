@@ -7,7 +7,7 @@ import { HomepageService } from "./homepage.service";
   selector: 'app-hompage',
   templateUrl: './hompage.component.html',
   styleUrls: ['./hompage.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class HomepageComponent implements OnInit, OnDestroy {
   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);

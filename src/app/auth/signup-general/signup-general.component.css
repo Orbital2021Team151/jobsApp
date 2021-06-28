@@ -1,7 +1,7 @@
 /* SIGNUP GENERAL GLOBAL
 -------------------------------------------------- */
 div {
-  background-color: #f8f8ff !important;
+  background-color: inherit;
 }
 
 mat-form-field {

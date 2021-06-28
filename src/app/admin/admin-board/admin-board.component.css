@@ -132,15 +132,15 @@
 /* MODAL WINDOW
 -------------------------------------------------- */
 .modal-header {
-  color: black !important;
+  color: black;
 }
 
 .modal-body {
-  color: black !important;
+  color: black;
 }
 
 .modal-footer {
-  color: black !important;
+  color: black;
 }
 
 .modal-body-report {
@@ -155,7 +155,7 @@
 -------------------------------------------------- */
 .info-text {
   text-align: center;
-  color: black !important;
+  color: inherit;
   margin-top: 5rem;
 }
 
