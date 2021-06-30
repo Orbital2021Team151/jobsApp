@@ -1,5 +1,189 @@
 <div class="grid-container">
+  <div class="card">
+    <mat-card>
+      <span class="logo">
+        <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
+      </span>
 
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+      <form [formGroup]="options" #signupForm="ngForm">
+
+        <div>
+          <label>User Type: </label>
+          <mat-radio-group [formControl]="userTypeControl">
+            <mat-radio-button value="Student / NUS Alumni"
+              >Student / NUS Alumni</mat-radio-button
+            >
+            <mat-radio-button value="Student / External Organisation">
+              Student / External Organisation
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
+
+        <div *ngIf="userTypeControl.value === 'Student / NUS Alumni'">
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          >
+            <mat-label>Student Name</mat-label>
+            <input
+              matInput
+              name="orgName"
+              required
+              [formControl]="orgNameControl"
+              placeholder="Mary Antoinette"
+            />
+            <mat-error *ngIf="orgNameControl.errors?.required"
+              >Please enter your name.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          >
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              type="email"
+              name="email"
+              required
+              [formControl]="emailControl"
+              placeholder="e1234567@u.nus.edu"
+            />
+            <mat-error *ngIf="emailControl.errors?.required"
+              >Please enter your NUS student / Alumni email address.</mat-error
+            >
+          </mat-form-field>
+
+
+        </div>
+
+        <div
+          *ngIf="userTypeControl.value === 'Student / External Organisation'"
+        >
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          >
+            <mat-label>Organisation Name</mat-label>
+            <input
+              matInput
+              name="orgName"
+              required
+              [formControl]="orgNameControl"
+              placeholder="Standard Oil Co."
+            />
+            <mat-error *ngIf="orgNameControl.errors?.required"
+              >Please enter your organisation's name.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          >
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              type="email"
+              name="email"
+              required
+              [formControl]="emailControl"
+              placeholder="jeff@amazon.com"
+            />
+            <mat-error *ngIf="emailControl.errors?.required"
+              >Please enter your work email address.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-checkbox
+          formControlName="hideUen"
+          >We are a Student Organisation</mat-checkbox>
+
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          *ngIf="!hideUenControl.value"
+          >
+            <mat-label>Organisation UEN</mat-label>
+            <input
+              matInput
+              name="uen"
+              required
+              [formControl]="uenControl"
+              placeholder="UEN1234567"
+            />
+            <mat-error *ngIf="uenControl.errors?.required"
+              >Please enter your organisation's UEN Number.</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              name="password"
+              [formControl]="passwordControl"
+              required
+              placeholder="Enter Password Here"
+            />
+
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword"
+            >
+              <mat-icon>{{
+                hidePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+
+            <mat-error *ngIf="passwordControl.errors?.required"
+              >Please enter a valid password.</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+
+        <!--
+        <mat-checkbox [formControl]="hideRequiredControl">Hide required marker</mat-checkbox>
+        <p *ngIf="hideRequiredControl.value">This para appears when hideRequiredControl is ticked</p>
+
+        <mat-form-field appearance="fill"
+            [hideRequiredMarker]="hideRequiredControl.value"
+            [floatLabel]="floatLabelControl.value">
+          <input matInput placeholder="Simple placeholder" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
+          <mat-label>Both a label and a placeholder</mat-label>
+          <input matInput placeholder="Simple placeholder">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill"
+            [hideRequiredMarker]="hideRequiredControl.value"
+            [floatLabel]="floatLabelControl.value">
+          <mat-select required>
+            <mat-option>-- None --</mat-option>
+            <mat-option value="option">Option</mat-option>
+          </mat-select>
+          <mat-label><mat-icon>favorite</mat-icon> <b> Fancy</b> <i> label</i></mat-label>
+        </mat-form-field>
+        -->
+      </form>
+    </mat-card>
+  </div>
+
+  <!--
   <div class="card">
     <mat-card>
 
@@ -7,13 +191,25 @@
         <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
       </span>
 
-
-
       <mat-spinner *ngIf="isLoading"></mat-spinner>
+
       <form *ngIf="!isLoading" #signupForm="ngForm">
 
         <mat-form-field appearance="outline">
-          <mat-label>Student / Organisation Name</mat-label>
+          <mat-label>User Role</mat-label>
+          <mat-select ngModel required #roleInput="ngModel" name="role" (click)="roleSelected = role">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{ role }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="roleInput.invalid">
+            Please select the user's role.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Student Name</mat-label>
           <input
             matInput
             type="orgName"
@@ -21,10 +217,10 @@
             ngModel
             required
             #orgNameInput="ngModel"
-            placeholder="Enter Student / Organisation Name Here"
+            placeholder="eg Alexandra Martinez Delaso"
           />
           <mat-error *ngIf="orgNameInput.invalid"
-            >Please enter your name / your organisation's name.</mat-error
+            >Please enter your name.</mat-error
           >
         </mat-form-field>
 
@@ -74,19 +270,6 @@
           >
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>User Role</mat-label>
-          <mat-select ngModel required #roleInput="ngModel" name="role" (click)="roleSelected = role">
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let role of roles" [value]="role">
-              {{ role }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="roleInput.invalid"
-            >Please select the user's role.</mat-error
-          >
-        </mat-form-field>
-
         <mat-form-field matNativeControl appearance="outline" [disabled]="true">
           <mat-label>Unique Entity Number (UEN)</mat-label>
           <input
@@ -117,7 +300,6 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
   </div>
+  -->
 </div>
-

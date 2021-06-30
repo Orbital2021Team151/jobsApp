@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth.service";
 
@@ -16,7 +16,29 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
   signedUp: boolean;
   private authStatusSub: Subscription;
 
-  constructor(public authService: AuthService, private http: HttpClient) {}
+  /* FormGroup version */
+  public options: FormGroup;
+  public hideRequiredControl = new FormControl(false);
+  public floatLabelControl = new FormControl('auto');
+  public userTypeControl = new FormControl('Student / NUS Alumni');
+  public orgNameControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public emailControl = new FormControl(null, [Validators.required, Validators.minLength(10)]);
+  public uenControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public hideUenControl = new FormControl(false);
+  public passwordControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+
+  constructor(public authService: AuthService, private http: HttpClient, fb: FormBuilder) {
+    this.options = fb.group({
+      hideRequired: this.hideRequiredControl,
+      floatLabel: this.floatLabelControl,
+      userType: this.userTypeControl,
+      orgName: this.orgNameControl,
+      email: this.emailControl,
+      uen: this.uenControl,
+      hideUen: this.hideUenControl,
+      password: this.passwordControl,
+    });
+  }
 
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
