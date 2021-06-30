@@ -15,20 +15,6 @@ import { ReportedPostNotificationDialog } from 'src/app/dialogs/reported-post-no
   templateUrl: './posts-feed.component.html',
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./posts-feed.component.css'],
-  styles: [
-    `
-      .dark-modal .modal-content {
-        background-color: #292b2c;
-        color: white;
-      }
-      .dark-modal .close {
-        color: white;
-      }
-      .light-blue-backdrop {
-        background-color: #5cb3fd;
-      }
-    `,
-  ],
 })
 export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];

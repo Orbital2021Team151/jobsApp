@@ -11,19 +11,7 @@ import { NgForm } from "@angular/forms";
   selector: "app-admin-board",
   templateUrl: './student-board.component.html',
   styleUrls: ['./student-board.component.css'],
-  encapsulation: ViewEncapsulation.None,
-  styles: [`
-    .dark-modal .modal-content {
-      background-color: #292b2c;
-      color: white;
-    }
-    .dark-modal .close {
-      color: white;
-    }
-    .light-blue-backdrop {
-      background-color: #5cb3fd;
-    }
-  `],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class StudentBoardComponent implements OnInit, OnDestroy {
 

@@ -1,165 +1,7 @@
+
+
+<!--
 <div class="grid-container">
-
-  <!--
-  <div class="card">
-    <mat-card>
-      <span class="logo">
-        <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
-      </span>
-
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
-
-      <form [formGroup]="options" #signupForm="ngForm">
-
-        <div>
-          <label>User Type: </label>
-          <mat-radio-group [formControl]="userTypeControl">
-            <mat-radio-button value="Student / NUS Alumni"
-              >Student / NUS Alumni</mat-radio-button
-            >
-            <mat-radio-button value="Student / External Organisation">
-              Student / External Organisation
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-
-
-        <div *ngIf="userTypeControl.value === 'Student / NUS Alumni'">
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          >
-            <mat-label>Student Name</mat-label>
-            <input
-              matInput
-              name="orgName"
-              required
-              [formControl]="orgNameControl"
-              placeholder="Mary Antoinette"
-            />
-            <mat-error *ngIf="orgNameControl.errors?.required"
-              >Please enter your name.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          >
-            <mat-label>Email Address</mat-label>
-            <input
-              matInput
-              type="email"
-              name="email"
-              required
-              [formControl]="emailControl"
-              placeholder="e1234567@u.nus.edu"
-            />
-            <mat-error *ngIf="emailControl.errors?.required"
-              >Please enter your NUS student / Alumni email address.</mat-error
-            >
-          </mat-form-field>
-
-
-        </div>
-
-        <div
-          *ngIf="userTypeControl.value === 'Student / External Organisation'"
-        >
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          >
-            <mat-label>Organisation Name</mat-label>
-            <input
-              matInput
-              name="orgName"
-              required
-              [formControl]="orgNameControl"
-              placeholder="Standard Oil Co."
-            />
-            <mat-error *ngIf="orgNameControl.errors?.required"
-              >Please enter your organisation's name.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          >
-            <mat-label>Email Address</mat-label>
-            <input
-              matInput
-              type="email"
-              name="email"
-              required
-              [formControl]="emailControl"
-              placeholder="jeff@amazon.com"
-            />
-            <mat-error *ngIf="emailControl.errors?.required"
-              >Please enter your work email address.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-checkbox
-          formControlName="hideUen"
-          >We are a Student Organisation</mat-checkbox>
-
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          *ngIf="!hideUenControl.value"
-          >
-            <mat-label>Organisation UEN</mat-label>
-            <input
-              matInput
-              name="uen"
-              required
-              [formControl]="uenControl"
-              placeholder="UEN1234567"
-            />
-            <mat-error *ngIf="uenControl.errors?.required"
-              >Please enter your organisation's UEN Number.</mat-error
-            >
-          </mat-form-field>
-        </div>
-
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
-            <input
-              matInput
-              [type]="hidePassword ? 'password' : 'text'"
-              name="password"
-              [formControl]="passwordControl"
-              required
-              placeholder="Enter Password Here"
-            />
-
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="hidePassword = !hidePassword"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hidePassword"
-            >
-              <mat-icon>{{
-                hidePassword ? "visibility_off" : "visibility"
-              }}</mat-icon>
-            </button>
-
-            <mat-error *ngIf="passwordControl.errors?.required"
-              >Please enter a valid password.</mat-error
-            >
-          </mat-form-field>
-        </div>
-      </form>
-    </mat-card>
-  </div>
--->
-
-
   <div class="card">
     <mat-card>
 
@@ -262,7 +104,7 @@
           >
         </mat-form-field>
 
-        <button mat-raised-button color="accent" (click)="onSignup(signupForm)">Signup</button>
+        <button mat-raised-button color="accent" (click)="onSignupTemplate(signupForm)">Signup</button>
 
       </form>
     </mat-card>
@@ -277,5 +119,176 @@
           </button>
         </div>
   </div>
+</div>
+-->
 
+
+<div class="grid-container">
+  <div class="card">
+    <mat-card>
+      <span class="logo">
+        <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
+      </span>
+
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+      <form [formGroup]="form" #signupForm="ngForm">
+
+        <div>
+          <mat-radio-group [formControl]="roleControl">
+            <mat-radio-button value="External / Student Organisation">
+              External / Student Organisation
+            </mat-radio-button>
+            <br>
+            <mat-radio-button value="Student / NUS Alumni"
+              >Student / NUS Alumni</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+
+
+
+        <div *ngIf="roleControl.value === 'Student / NUS Alumni'">
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          >
+            <mat-label>Student Name</mat-label>
+            <input
+              matInput
+              name="orgName"
+              required
+              [formControl]="orgNameControl"
+              placeholder="Mary Antoinette"
+            />
+            <mat-error *ngIf="orgNameControl.errors?.required"
+              >Please enter your name.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          >
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              type="email"
+              name="email"
+              required
+              [formControl]="emailControl"
+              placeholder="e1234567@u.nus.edu"
+            />
+            <mat-error *ngIf="emailControl.errors?.required"
+              >Please enter your NUS student / Alumni email address.</mat-error
+            >
+          </mat-form-field>
+
+
+        </div>
+
+        <div
+          *ngIf="roleControl.value === 'External / Student Organisation'"
+        >
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          >
+            <mat-label>Organisation Name</mat-label>
+            <input
+              matInput
+              name="orgName"
+              required
+              [formControl]="orgNameControl"
+              placeholder="Standard Oil Co."
+            />
+            <mat-error *ngIf="orgNameControl.errors?.required"
+              >Please enter your organisation's name.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          >
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              type="email"
+              name="email"
+              required
+              [formControl]="emailControl"
+              placeholder="jeff@amazon.com"
+            />
+            <mat-error *ngIf="emailControl.errors?.required"
+              >Please enter your work email address.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-checkbox
+          formControlName="hideUen"
+          >We are a Student Organisation</mat-checkbox>
+
+          <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          *ngIf="!hideUenControl.value"
+          >
+            <mat-label>Organisation UEN</mat-label>
+            <input
+              matInput
+              name="uen"
+              required
+              [formControl]="uenControl"
+              placeholder="UEN1234567"
+            />
+            <mat-error *ngIf="uenControl.errors?.required"
+              >Please enter your organisation's UEN Number.</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              name="password"
+              [formControl]="passwordControl"
+              required
+              placeholder="Enter Password Here"
+            />
+
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword"
+            >
+              <mat-icon>{{
+                hidePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+
+            <mat-error *ngIf="passwordControl.errors?.required"
+              >Please enter a valid password.</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </form>
+      <button mat-raised-button color="accent" (click)="onSignupReactive()">Signup</button>
+    </mat-card>
+
+    <div
+        *ngIf="signedUp"
+        class="alert alert-success alert-dismissible fade show"
+        role="alert">
+          <strong>You have signed up!</strong> Please check your email for the verification link.
+          <button (click)="closeNotification()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  </div>
 </div>

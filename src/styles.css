@@ -27,6 +27,10 @@ body.light-mode {
   color: #2d3436;
 }
 
+body:not(.dark-mode-preloading) {
+  transition: all 0.3s linear;
+}
+
 /*
 mat-label {
   color: #EEFBFB;

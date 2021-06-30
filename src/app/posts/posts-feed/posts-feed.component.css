@@ -57,15 +57,17 @@ input {
   padding: 10px;
 }
 
+
 .filter-card-body {
   width: 100%;
   margin: auto;
   padding: 10px;
   text-align: center;
 
+
   border-style: solid;
-  border-width: thick;
-  border-color: #5464f5;
+  border-width: thin;
+  border-color: #4da8da;
   box-shadow: none;
 }
 
@@ -172,6 +174,7 @@ mat-form-field {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 
 .card {
   background-color: #9da5f0;
