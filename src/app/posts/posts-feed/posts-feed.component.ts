@@ -5,6 +5,10 @@ import { PostsService } from '../post.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AppliedBeforeDialog } from 'src/app/dialogs/applied-before-dialog/applied-before-dialog.component';
+import { ReportedBeforeDialog } from 'src/app/dialogs/reported-before-dialog/reported-before-dialog.component';
+import { ReportedPostNotificationDialog } from 'src/app/dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
 
 @Component({
   selector: 'app-post-feed',
@@ -96,7 +100,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog,
   ) {
     this.banner = {
       adClient: 'ca-pub-5762664625803860',
@@ -237,7 +242,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
     const currentPost = this.postsService.getPost(postId);
     if (currentPost.students.filter(student => student.email === this.authStatusObject.email).length > 0) {
-      this.modalService.open(errorMessage, { size: 'lg' });
+      //this.modalService.open(errorMessage, { size: 'lg' });
+      this.dialog.open(AppliedBeforeDialog);
       //console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
       return;
     } else {
@@ -279,7 +285,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     const currentPost = this.postsService.getPost(postId);
 
     if (currentPost.reports.filter(student => student.email === this.authStatusObject.email).length > 0) {
-      this.modalService.open(errorMessage, { size: 'lg' });
+      //this.modalService.open(errorMessage, { size: 'lg' });
+      this.dialog.open(ReportedBeforeDialog);
       //console.log("YOU REPORTED THIS POST BEFORE BEFORE.");
       return;
     } else {
@@ -299,8 +306,11 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       content: reportForm.value.message,
     };
     this.postsService.reportPost(postId, this.studentReportObject);
+    this.dialog.open(ReportedPostNotificationDialog);
     return true;
   }
+
+
 
   reportBefore(currentPost: Post) {
     //console.log("reportBefore's line fires");

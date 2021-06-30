@@ -1,8 +1,6 @@
 <div class="filter-card">
   <mat-card class="filter-card-body">
-    <mat-card-title class="filter-card-title">
-      Filter Search
-    </mat-card-title>
+    <mat-card-title class="filter-card-title"> Filter Search </mat-card-title>
     <ng-container>
       <mat-form-field appearance="outline">
         <mat-label>Search for keywords</mat-label>
@@ -529,7 +527,7 @@
         </p-card-header>
 
         <p-card-subheader class="pCardSubheader">
-          {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+          {{ post.startDate | date }} to {{ post.endDate | date }} <br />
           <!--
             Post Creation Date: {{ post.creationDate | date }} <br>
           Post Publish Date: {{ post.publishDate | date }}
@@ -549,9 +547,7 @@
             label="Report"
             icon="pi pi-exclamation-circle"
             styleClass="p-button-info"
-            (click)="
-              onReport(post.id, 'You reported this post before!', reportContent)
-            "
+            (click)="onReport(post.id, errorMessage, reportContent)"
           ></p-button>
 
           <p-button
@@ -728,18 +724,36 @@
           </mat-form-field>
 
           <div class="role-radio-group">
-            <mat-label>
-              Applicant Type
-            </mat-label>
+            <mat-label> Applicant Type </mat-label>
             <div class="d-block my-3">
               <div class="custom-control custom-radio">
-                <input id="Student" type="radio" class="custom-control-input" value="Student" name="role" ngModel required>
-                <label class="custom-control-label" for="Student">Student</label>
+                <input
+                  id="Student"
+                  type="radio"
+                  class="custom-control-input"
+                  value="Student"
+                  name="role"
+                  ngModel
+                  required
+                />
+                <label class="custom-control-label" for="Student"
+                  >Student</label
+                >
               </div>
 
               <div class="custom-control custom-radio">
-                <input id="NUS Alumni" type="radio" class="custom-control-input" value="NUS Alumni" name="role" ngModel required>
-                <label class="custom-control-label" for="NUS Alumni">NUS Alumni</label>
+                <input
+                  id="NUS Alumni"
+                  type="radio"
+                  class="custom-control-input"
+                  value="NUS Alumni"
+                  name="role"
+                  ngModel
+                  required
+                />
+                <label class="custom-control-label" for="NUS Alumni"
+                  >NUS Alumni</label
+                >
               </div>
             </div>
           </div>
@@ -747,10 +761,10 @@
       </div>
 
       <div class="modal-footer">
-
         <mat-error *ngIf="appForm.invalid"
-        >Please fill all required fields before submitting your request.</mat-error
-      >
+          >Please fill all required fields before submitting your
+          request.</mat-error
+        >
         <button
           type="button"
           class="btn btn-light"
@@ -811,6 +825,23 @@
       </div>
 
       <div class="modal-footer">
+        <!-- <div
+          *ngIf="reported"
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Post reported!</strong> Please wait while our
+          administrators have a look at your report. You may now close this window by clicking the cross button at the top right-hand corner.
+          <button
+            (click)="closeNotification() && modal.dismiss('Cross click')"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
         <button
           type="button"
           class="btn btn-light"
@@ -819,6 +850,20 @@
           "
         >
           Submit Report
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template #errorMessage let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">You reported this post before!</h4>
+        <button
+          type="button"
+          class="submit"
+          aria-label="apply"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
     </ng-template>
@@ -869,8 +914,11 @@
   <!--
   <p class="float-end"><a href="#">Back to top</a></p>
   -->
-  <p class="copyright">&copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong. <br>
-    In conjuction with the Centre for Computing for Social Good and Philanthropy (CCSGP), NUS.
+  <p class="copyright">
+    &copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong.
+    <br />
+    In conjuction with the Centre for Computing for Social Good and Philanthropy
+    (CCSGP), NUS.
     <!--
     <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
     -->

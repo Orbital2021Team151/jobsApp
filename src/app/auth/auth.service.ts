@@ -296,7 +296,7 @@ export class AuthService {
     localStorage.removeItem("response");
   }
 
-  private getAuthData() {
+  public getAuthData() {
     const token = localStorage.getItem("token");
     const expirationDate = localStorage.getItem("expiration");
     const retrievedDataObject = JSON.parse(localStorage.getItem("response"));

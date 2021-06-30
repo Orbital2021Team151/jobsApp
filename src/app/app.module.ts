@@ -48,6 +48,9 @@ import { LoginGeneralErrorComponent } from './errors/login-general-error/login-g
 import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-before-error.component';
 import { HomepageComponent } from './homepage/hompage.component';
 import { DarkModeToggleComponent } from './dark-mode-toggle/dark-mode-toggle.component';
+import { AppliedBeforeDialog } from './dialogs/applied-before-dialog/applied-before-dialog.component';
+import { ReportedBeforeDialog } from './dialogs/reported-before-dialog/reported-before-dialog.component';
+import { ReportedPostNotificationDialog } from './dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import { DarkModeToggleComponent } from './dark-mode-toggle/dark-mode-toggle.com
     SignupBeforeErrorComponent,
     HomepageComponent,
     DarkModeToggleComponent,
+    AppliedBeforeDialog,
+    ReportedBeforeDialog,
+    ReportedPostNotificationDialog
   ],
 
   imports: [

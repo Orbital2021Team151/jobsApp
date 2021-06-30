@@ -62,10 +62,20 @@ export class AppComponent implements OnInit, OnDestroy {
   public showOverlay: boolean = true;
 
   constructor(private authService: AuthService, private router: Router) {
+
+    if (localStorage.getItem('expiration')) {
+
+    const expiryDate: Date = new Date(localStorage.getItem('expiration'));
+    const rightNow = new Date();
+    const diff = expiryDate.getTime() - rightNow.getTime();
+
+      if (diff <= 0) {
+      localStorage.clear();
+      }
+    }
     if (localStorage.getItem('token')) {
       this.authService.autoAuthUser();
     }
-
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     })

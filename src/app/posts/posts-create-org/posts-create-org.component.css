@@ -37,3 +37,17 @@ mat-form-field {
 .copyright {
   text-align: center;
 }
+
+/* MODAL WINDOW
+-------------------------------------------------- */
+.modal-header {
+  color: black;
+}
+
+.modal-body {
+  color: black;
+}
+
+.modal-footer {
+  color: black;
+}
