@@ -10,14 +10,14 @@ const postSchema = mongoose.Schema({
   email: {type: String, required: true},
   title: {type: String, required: true},
   content: {type: String, required: true},
-  opportunity: { type: [String], required: true },
+  opportunity: { type: String, required: true },
   skills: {type: String, required: true},
 
   startDate: {type: Date, required: true},
   endDate: {type: Date, required: true},
   hoursRequired: {type: String, required: true},
 
-  beneficiaries: {type: [String], required: true},
+  beneficiaries: {type: String, required: true},
 
   approved: {type: Boolean, },
   creationDate: {type: Date, /* required: true */},

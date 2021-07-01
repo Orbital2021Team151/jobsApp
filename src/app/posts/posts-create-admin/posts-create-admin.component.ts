@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 
@@ -13,20 +13,6 @@ import { PostsService } from '../post.service';
   templateUrl: './posts-create-admin.component.html',
   styleUrls: ['./posts-create-admin.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
-  styles: [
-    `
-      .dark-modal .modal-content {
-        background-color: #292b2c;
-        color: white;
-      }
-      .dark-modal .close {
-        color: white;
-      }
-      .light-blue-backdrop {
-        background-color: #5cb3fd;
-      }
-    `,
-  ],
 })
 export class PostCreateAdminComponent implements OnInit, OnDestroy {
   pendingApproval: boolean = false;
@@ -60,12 +46,50 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   pocEmail: string = "";
 
 
+  /* FormGroup version */
+  public form: FormGroup;
+  public orgNameControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public uenControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public pocControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public phoneNumberControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public emailControl = new FormControl(null, [Validators.required, Validators.minLength(10)]);
+  public titleControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public contentControl = new FormControl(null, [Validators.required, Validators.minLength(100)]);
+  public opportunitySelectedControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public skillsControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public startDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public endDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public hoursRequiredControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public beneficiariesControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+
 
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
     private authService: AuthService
-  ) {}
+  ) {
+
+    this.form = new FormGroup({
+      orgName: this.orgNameControl,
+      uen: this.uenControl,
+      POC: this.pocControl,
+      phoneNumber: this.phoneNumberControl,
+      email: this.emailControl,
+      title: this.titleControl,
+      opportunity: this.opportunitySelectedControl,
+
+      content: this.contentControl,
+      skills: this.skillsControl,
+
+      startDate: this.startDateControl,
+      endDate: this.endDateControl,
+      hoursRequired: this.hoursRequiredControl,
+
+      beneficiaries: this.beneficiariesControl,
+
+    });
+
+  }
 
   ngOnInit() {
 
@@ -79,7 +103,8 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  onAddPost(form: NgForm) {
+  /*
+  onAddPostTemplate(form: NgForm) {
     //console.log(form.value);
     //console.log("Beneficiaries Selected: ");
     //console.log(this.beneficiariesSelected);
@@ -98,7 +123,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       uen: form.value.uen,
       POC: form.value.POC,
       phoneNumber: form.value.phoneNumber,
-      email: this.pocEmail,
+      email: form.value.email,
       title: form.value.title,
       opportunity: this.opportunitySelected,
 
@@ -123,8 +148,8 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       //creator: null,
     };
 
-    console.log("Post creation fired! onAddPost. post is:");
-    console.log(post);
+    //console.log("Post creation fired! onAddPost. post is:");
+    //console.log(post);
 
     this.pendingApproval = true;
 
@@ -133,27 +158,65 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     this.modalService.dismissAll();
     form.reset();
   }
+  */
+
+  onAddPostReactive() {
+
+    if (this.form.invalid) {
+      console.log("Please fill up form first.");
+      return;
+    }
+
+    const post: Post = {
+      id: null,
+      orgName: this.form.value.orgName,
+      uen: this.form.value.uen,
+      POC: this.form.value.POC,
+      phoneNumber: this.form.value.phoneNumber,
+      email: this.form.value.email,
+      title: this.form.value.title,
+      opportunity: this.form.value.opportunity,
+
+      content: this.form.value.content,
+      skills: this.form.value.skills,
+
+      startDate: this.form.value.startDate,
+      endDate: this.form.value.endDate,
+      hoursRequired: this.form.value.hoursRequired,
+
+      beneficiaries: this.form.value.beneficiaries,
+
+      approved: false,
+      creationDate: new Date(),
+      publishDate: null,
+      creator: null,
+
+      students: [],
+      reports: [],
+
+      //imagePath: null,
+      //creator: null,
+    };
+
+    //console.log("Post creation fired! onAddPost. post is:");
+    //console.log(post);
+
+    this.pendingApproval = true;
+
+    this.postsService.addPost(post);
+
+    this.modalService.dismissAll();
+    this.form.reset();
+  }
 
   closeNotification() {
     this.pendingApproval = false;
   }
 
   openTermsAndConditions(longContent) {
+    //console.log(this.form);
     this.modalService.open(longContent, { scrollable: true });
   }
-
-
-  /*
-  checkEmailExists(form: NgForm) {
-    if (this.pocEmail === "") {
-      console.log("Needs an email!");
-      return;
-    }
-    //return this.postsService.checkEmailExists(form.value.email);
-    return this.postsService.checkVerifyEmailExistsCredits();
-  }
-  */
-
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -58,12 +58,25 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     "Women & Girls",
   ];
   beneficiariesSelected: string[] = [];
-  opportunity: string[] = [
+  opportunities: string[] = [
     "One-off",
     "Recurring",
   ]
   opportunitySelected: string[] = [];
   termsAndConditions = false;
+
+  /* FormGroup version */
+  public form: FormGroup;
+  public pocControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public phoneNumberControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public titleControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public contentControl = new FormControl(null, [Validators.required, Validators.minLength(100)]);
+  public opportunitySelectedControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public skillsControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public startDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public endDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public hoursRequiredControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public beneficiariesControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
 
 
 
@@ -72,7 +85,26 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private authService: AuthService,
     public route: ActivatedRoute
-  ) {}
+  ) {
+
+    this.form = new FormGroup({
+      POC: this.pocControl,
+      phoneNumber: this.phoneNumberControl,
+      title: this.titleControl,
+      opportunity: this.opportunitySelectedControl,
+
+      content: this.contentControl,
+      skills: this.skillsControl,
+
+      startDate: this.startDateControl,
+      endDate: this.endDateControl,
+      hoursRequired: this.hoursRequiredControl,
+
+      beneficiaries: this.beneficiariesControl,
+
+    });
+
+  }
 
   ngOnInit() {
 
@@ -101,7 +133,8 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     });
   }
 
-  onAddPost(form: NgForm) {
+  /*
+  onAddPostTemplate(form: NgForm) {
     //console.log("Beneficiaries Selected: ");
     //console.log(this.beneficiariesSelected);
     //console.log("add post fired!");
@@ -146,13 +179,64 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     this.modalService.dismissAll();
     form.reset();
   }
+  */
+
+  onAddPostReactive() {
+    //console.log("Beneficiaries Selected: ");
+    //console.log(this.beneficiariesSelected);
+    //console.log("add post fired!");
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    const post: Post = {
+      id: null,
+      orgName: this.authStatusObject.orgName,
+      uen: this.authStatusObject.uen,
+      POC: this.form.value.POC,
+      phoneNumber: this.form.value.phoneNumber,
+      email: this.authStatusObject.email,
+      title: this.form.value.title,
+      opportunity: this.form.value.opportunity,
+
+      content: this.form.value.content,
+      skills: this.form.value.skills,
+
+      startDate: this.form.value.startDate,
+      endDate: this.form.value.endDate,
+      hoursRequired: this.form.value.hoursRequired,
+
+      beneficiaries: this.form.value.beneficiaries,
+
+      approved: false,
+      creationDate: new Date(),
+      publishDate: null,
+      creator: null,
+
+      students: [],
+      reports: [],
+
+      //imagePath: null,
+      //creator: null,
+    };
+
+
+    //console.log("Post creation fired! onAddPost. post is:");
+    //console.log(post);
+    this.pendingApproval = true;
+    this.postsService.addPost(post);
+    this.modalService.dismissAll();
+    this.form.reset();
+  }
 
   closeNotification() {
     this.pendingApproval = false;
   }
 
   openTermsAndConditions(longContent) {
-    this.modalService.open(longContent, { scrollable: true });
+    console.log(this.form)
+    //this.modalService.open(longContent, { scrollable: true });
   }
 
   ngOnDestroy() {
