@@ -30,7 +30,7 @@ mat-stroked-button {
   height: 50px;
   width: 150px;
   font-size: 110%;
-  border: 2px solid #da4d4d !important;
+  border: 2px solid #f8f8ff6e;
 
   /*
   color: rgba(0, 0, 0, 0.726);
@@ -41,7 +41,7 @@ mat-stroked-button {
 }
 
 .light-button:hover {
-  background-color: #da4d4d;
+  background-color: #F2545B;
 
   transition: all .4s ease;
   -webkit-transition: all .4s ease;
@@ -66,6 +66,13 @@ ul {
   margin: 0;
   display: flex;
   /* background-color: #dbe9f4; */
+}
+
+a {
+
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: large;
 }
 
 .spacer-row-1 {

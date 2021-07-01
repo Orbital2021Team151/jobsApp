@@ -17,6 +17,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #4DA8DA;
 }
 
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #F2545B;
+  }
+
 body.dark-mode {
   background-color: #2d3436;
   color: #f8f8ff;

@@ -108,6 +108,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Shows and hides the loading spinner during RouterEvent changes
   navigationInterceptor(event: RouterEvent): void {
+
     if (event instanceof NavigationStart) {
       this.showOverlay = true;
     }
