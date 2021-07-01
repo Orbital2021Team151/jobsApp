@@ -20,12 +20,12 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   filteredPosts: Post[] = [];
 
-  hasApproved: boolean;
+  hasApproved: boolean = null;
   userIsAuthenticated = false;
   userRole: string;
   startDate: Date;
   endDate: Date;
-  noFilteredPost: boolean;
+  noFilteredPost: boolean = null;
 
   private authStatusObject: {
     auth: boolean;
@@ -73,33 +73,14 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   beneficiariesSelected: string[] = [];
   keywords: string = "";
 
-  public banner: any;
-
-  public applicationUsers: string[] = [
-    "Student",
-    "NUS Alumni"
-  ];
-  public applictionUser: string = "Student";
-  favoriteSeason: string;
-  seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
-
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
     private authService: AuthService,
     public dialog: MatDialog,
-  ) {
-    this.banner = {
-      adClient: 'ca-pub-5762664625803860',
-      adSlot: 5806789784,
-      adFormat: "auto",
-      fullWidthResponsive: true,
-    };
-  }
+  ) {}
 
   ngOnInit() {
-    this.hasApproved = false;
-    this.noFilteredPost = false;
     this.postsService.getPosts();
 
     this.authStatusObject = this.authService.getAuthStatusObject();
@@ -121,6 +102,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
         if (posts.filter((post) => post.approved).length > 0) {
           this.hasApproved = true;
+        } else {
+          this.hasApproved = false;
         }
 
         //console.log("Posts are: ");
@@ -151,6 +134,14 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   submitFilter() {
+
+    /*
+    let weirdText: string = "Ss!@#$%^&*(){}:\"<>~`"
+    let lowerWeirdText = weirdText.toLowerCase();
+    console.log(weirdText);
+    console.log(lowerWeirdText);
+    */
+
     if (this.beneficiariesSelected.length !== 0) {
       this.filteredPosts = this.posts.filter((post) => {
         for (var interestBeneficiary of post.beneficiaries) {
@@ -195,17 +186,24 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   //credits to https://stackoverflow.com/questions/1789945/how-to-check-whether-a-string-contains-a-substring-in-javascript
-  KnuthMorrisPrattSearch(pattern, text) {
-    if (pattern.length == 0)
-      return 0; // Immediate match
+  KnuthMorrisPrattSearch(pattern: string, text: string) {
+
+    // Immediate match
+    if (pattern.length == 0) {
+      return 0;
+    }
+
+    //convert them all to lowercase first.
+    let lowerPattern: string = pattern.toLowerCase();
+    let lowerText: string = text.toLowerCase();
 
     // Compute longest suffix-prefix table
     var lsp = [0]; // Base case
     for (var i = 1; i < pattern.length; i++) {
       var j = lsp[i - 1]; // Start by assuming we're extending the previous LSP
-      while (j > 0 && pattern.charAt(i) != pattern.charAt(j))
+      while (j > 0 && lowerPattern.charAt(i) != lowerPattern.charAt(j))
         j = lsp[j - 1];
-      if (pattern.charAt(i) == pattern.charAt(j))
+      if (lowerPattern.charAt(i) == lowerPattern.charAt(j))
         j++;
       lsp.push(j);
     }
@@ -213,11 +211,11 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     // Walk through text string
     var j = 0; // Number of chars matched in pattern
     for (var i = 0; i < text.length; i++) {
-      while (j > 0 && text.charAt(i) != pattern.charAt(j))
+      while (j > 0 && lowerText.charAt(i) != lowerPattern.charAt(j))
         j = lsp[j - 1]; // Fall back in the pattern
-      if (text.charAt(i) == pattern.charAt(j)) {
+      if (lowerText.charAt(i) == lowerPattern.charAt(j)) {
         j++; // Next char matched, increment position
-        if (j == pattern.length)
+        if (j == lowerPattern.length)
           return i - (j - 1);
       }
     }

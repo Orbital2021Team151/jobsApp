@@ -27,8 +27,8 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   private postsNumber: number;
   private appliedPostsNumber: number;
 
-  public hasRequest: Boolean;
-  hasApplication: Boolean;
+  public hasRequest: Boolean = null;
+  public hasApplication: Boolean = null;
   postToBeDeleted: string;
   requestedNewPassword = false;
 
@@ -61,11 +61,15 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
         if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
           this.postsNumber = this.posts.filter(post => !post.approved).length;
+        } else {
+          this.hasRequest = false;
         }
 
         if (this.posts.filter(post => post.students.length > 0).length > 0) {
           this.hasApplication = true;
           this.appliedPostsNumber = this.posts.filter(post => post.students.length > 0).length;
+        } else {
+          this.hasApplication = false;
         }
       });
 

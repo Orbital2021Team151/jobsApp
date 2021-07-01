@@ -145,7 +145,7 @@
 </div>
 
 <div class="info-text">
-  <p *ngIf="hasRequest">
+  <p>
     <b>Posts that needs to be approved!</b>
   </p>
 
@@ -278,7 +278,9 @@
     </div>
   </div>
 
-  <p class="info-text mat-body-1" *ngIf="!hasRequest">No post request!</p>
+  <p class="info-text mat-body-1" *ngIf="hasRequest === false">No post request!</p>
+  <mat-spinner *ngIf="hasRequest === null" class="spinner"></mat-spinner>
+
 </div>
 
 <div class="info-text">
@@ -526,9 +528,10 @@
     </div>
   </div>
 
-  <p class="info-text mat-body-1" *ngIf="!hasReport">
+  <p class="info-text mat-body-1" *ngIf="hasReport === false">
     No post with reports! :D
   </p>
+  <mat-spinner *ngIf="hasReport === null"></mat-spinner>
 </div>
 
 <footer class="container">

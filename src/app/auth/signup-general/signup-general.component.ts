@@ -10,7 +10,6 @@ import { AuthService } from "../auth.service";
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class SignupGeneralComponent implements OnInit, OnDestroy {
-  isLoading = false;
   roles: any = ["External Organisation", "Student Organisation", "Student / NUS Alumni"];
   hidePassword = true;
   signedUp: boolean;
@@ -58,7 +57,6 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatusObject => {
         if (!authStatusObject.auth) {
-          this.isLoading = false;
           this.signedUp = false;
         }
       }

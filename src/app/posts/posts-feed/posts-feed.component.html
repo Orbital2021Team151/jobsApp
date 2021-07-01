@@ -519,6 +519,11 @@
 -->
 
 <div class="posts-timeline">
+
+  <p *ngIf="noFilteredPost">
+    <i>No posts match your filter criteria</i>
+  </p>
+
   <ng-container *ngFor="let post of filteredPosts">
     <section class="cards">
       <p-card class="card" *ngIf="post.approved">
@@ -905,9 +910,10 @@
     </ng-template>
   </ng-container>
 
-  <p class="info-text" *ngIf="!hasApproved">
+  <p class="info-text" *ngIf="hasApproved === false">
     No jobs listing currently available!
   </p>
+  <mat-spinner *ngIf="hasApproved === null"></mat-spinner>
 </div>
 
 <footer class="container">

@@ -27,14 +27,20 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   private postsNumber: number;
   private reportedPostsNumber: number;
 
-  public hasRequest: Boolean;
-  public hasReport: Boolean;
+  public hasRequest: Boolean = null;
+  public hasReport: Boolean = null;
   postToBeDeleted: string;
   requestedNewPassword = false;
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
   ngOnInit() {
+    /*
+    if (!null) {
+      console.log("This prints for some reason...");
+      //so !null is treated as true in typescript. cool.
+    }
+    */
 
     this.postsService.getPosts();
     this.authStatusObject = this.authService.getAuthStatusObject();
@@ -59,12 +65,17 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
         if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
           this.postsNumber = this.posts.filter(post => !post.approved).length;
+        } else {
+          this.hasRequest = false;
         }
 
         if (this.posts.filter(post => post.reports.length > 0).length > 0) {
           this.hasReport = true;
           this.reportedPostsNumber = this.posts.filter(post => post.reports.length > 0).length;
+        } else {
+          this.hasReport = false;
         }
+
       });
   }
 

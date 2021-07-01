@@ -1,4 +1,4 @@
-/* FEED GLOBAL
+/* GLOBAL
 -------------------------------------------------- */
 /*
 :host {
@@ -13,6 +13,11 @@
 
 ::ng-deep .cdk-overlay-container {
   z-index: 99999;
+}
+
+mat-spinner {
+  margin: auto;
+  display: flex;
 }
 
 /* FILTER CARD

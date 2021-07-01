@@ -98,9 +98,7 @@
 </div>
 
 <div class="info-text">
-  <p
-    *ngIf="hasRequest"
-  >
+  <p>
     <b>Posts that has not been approved by CCSGP Admins yet D:</b>
   </p>
 
@@ -304,10 +302,12 @@
   </div>
 
   <p
-    class="info-text mat-body-1"
-    *ngIf="!hasRequest">
-    No post requests or all posts have already been approved! :D
+    class="info-text-2"
+    *ngIf="hasRequest === false">
+    <i>No post requests or all posts have already been approved.</i>
   </p>
+  <mat-spinner *ngIf="hasRequest === null"></mat-spinner>
+
 </div>
 
 <div class="info-text">
@@ -572,11 +572,12 @@
   </div>
 
   <p
-    class="info-text mat-body-1"
-    *ngIf="!hasApplication"
+    class="info-text-2"
+    *ngIf="hasApplication === false"
   >
-    No applications or no post approved :/
+    <i>No applications yet</i>
   </p>
+  <mat-spinner *ngIf="hasApplication === null"></mat-spinner>
 </div>
 
 <footer class="container-footer">
