@@ -156,17 +156,28 @@ export class PostsService {
 
       let pipe = new DatePipe('en-US'); // Use your own locale
       let dataArray = response.data;
-      if (startDate) {
+
+
+      if (startDate && endDate) {
+        console.log("Both Start and End dates are present!");
+
+        dataArray = dataArray.filter(obj => {
+          return (new Date(obj.startDate).getTime() >= new Date(startDate).getTime() && new Date(obj.endDate).getTime() <= new Date(endDate).getTime()) //within search range
+          || (new Date(obj.endDate).getTime() > new Date(startDate).getTime()) //endDate of job is after start date of search range
+          || (new Date(obj.startDate).getTime() < new Date(endDate).getTime()); //startDate of job is before end date of search range
+        });
+
+      } else if (startDate) {
         console.log("Start Date's clause activated!");
         dataArray = dataArray.filter(obj => {
-          return (new Date(obj.startDate).getTime() >= new Date(startDate).getTime()) || (new Date(obj.endDate).getTime() >= new Date(startDate).getTime());
+          return (new Date(obj.startDate).getTime() >= new Date(startDate).getTime()) //start date of job is after start date of range
+          || (new Date(obj.endDate).getTime() > new Date(startDate).getTime()); //end date of job is after start date of range
         });
-      }
-
-      if (endDate) {
+      } else if (endDate) {
         console.log("end Date's clause activated!");
         dataArray = dataArray.filter(obj => {
-          return (new Date(obj.endDate).getTime() <= new Date(endDate).getTime()) || (new Date(obj.startDate).getTime() <= new Date(endDate).getTime());
+          return (new Date(obj.endDate).getTime() <= new Date(endDate).getTime()) //end date of job is before end date of range
+          || (new Date(obj.startDate).getTime() < new Date(endDate).getTime()); //start date of job is before end date of range
         });
       }
 

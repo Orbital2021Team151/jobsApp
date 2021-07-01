@@ -1,5 +1,5 @@
 <div class="change-password-card">
-  <mat-card class="mat-elevation-z0 change-password-body">
+  <mat-card class="change-password-body">
 
     <mat-card-title class="change-password-title">Change Password</mat-card-title>
 
@@ -149,27 +149,15 @@
     <b>Posts that needs to be approved!</b>
   </p>
 
-  <!--
 
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutWrap
-  fxLayoutGap="1.0%"
-  fxLayoutAlign="center"
-  fxFlexAlign="auto"
-
-  -->
-  <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutWrap
-    fxLayoutGap="1.0%"
-    fxLayoutAlign="center"
-    fxFlexAlign="auto"
+  <div class="request-posts-div"
   >
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="!post.approved">
-        <mat-card class="request-post-card">
+
+
+        <!--
+        <mat-card class="request-post-card hoverable">
           <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
           <mat-card-subtitle class="post-card-subtitle"
             >{{ post.startDate | date }} to
@@ -199,6 +187,55 @@
             </button>
           </mat-card-footer>
         </mat-card>
+        -->
+
+        <mat-card class="request-post-card">
+
+          <img
+          mat-card-image
+          class="card-image"
+          src="../../../assets/light-background-placeholder.png"
+          alt="Placeholder image">
+
+          <mat-card-title class="post-card-title"><b>{{ post.title }}</b></mat-card-title>
+          <mat-card-subtitle class="post-card-subtitle">
+            by <b>{{ post.orgName }}</b>
+            </mat-card-subtitle
+          >
+          <mat-card-content class="post-card-content">
+            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
+
+          </mat-card-content>
+          <mat-card-footer class="post-card-footer">
+            <button
+            mat-raised-button
+            class="publish-button"
+              (click)="onPublish(post.id, publishContent)"
+            >
+              Publish
+            </button>
+
+            <button
+            mat-raised-button
+            color="warn"
+              (click)="onDeletePrompt(deleteUnapprovedContent)"
+            >
+              Delete
+            </button>
+
+            <button
+            mat-button
+            color="primary"
+              (click)="onMoreInfo(content)"
+            >
+              Learn More
+            </button>
+          </mat-card-footer>
+        </mat-card>
+
+
+
       </section>
 
       <ng-template #content let-modal>
@@ -288,26 +325,17 @@
     <b>Posts with reports! :O</b>
   </p>
 
-  <!--
-    <div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutWrap
-  fxLayoutAlign="center"
-  fxFlexAlign="auto"
-  >
-  -->
-  <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutWrap
-    fxLayoutGap="1.0%"
-    fxLayoutAlign="center"
-    fxFlexAlign="auto"
-  >
+  <div class="report-posts-div">
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="post.reports.length > 0">
         <mat-card class="report-post-card">
+
+          <img
+          mat-card-image
+          class="card-image"
+          src="../../../assets/dark-background-placeholder.png"
+          alt="Placeholder image">
+
           <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
           <mat-card-subtitle class="post-card-subtitle"
             >{{ post.startDate | date }} to
@@ -316,25 +344,29 @@
           <mat-card-content class="post-card-content">{{ post.content }}</mat-card-content>
           <mat-footer class="post-card-footer">
             <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onMoreInfo(reportContent)"
+            mat-raised-button
+            color="accent"
+            (click)="onMoreInfo(reportContent)"
             >
               Read Report
             </button>
 
             <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onMoreInfo(content)"
-            >
-              Learn More
-            </button>
-
-            <button
-              class="btn btn-outline-primary mb-2 mr-2"
+            mat-raised-button
+            color="warn"
               (click)="onDeletePrompt(deleteReportedContent)"
             >
               Delete
             </button>
+
+            <button
+            mat-button
+            color="primary"
+            (click)="onMoreInfo(content)"
+            >
+              Learn More
+            </button>
+
           </mat-footer>
         </mat-card>
         <!--
