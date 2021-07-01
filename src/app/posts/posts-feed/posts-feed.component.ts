@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AppliedBeforeDialog } from 'src/app/dialogs/applied-before-dialog/applied-before-dialog.component';
 import { ReportedBeforeDialog } from 'src/app/dialogs/reported-before-dialog/reported-before-dialog.component';
 import { ReportedPostNotificationDialog } from 'src/app/dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
+import { AppliedPostNotificationDialog } from 'src/app/dialogs/applied-post-notification-dialog/applied-post-notification-dialog.component';
 
 @Component({
   selector: 'app-post-feed',
@@ -253,6 +254,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     };
 
     this.postsService.applyPost(postId, this.studentApplyObject);
+    this.dialog.open(AppliedPostNotificationDialog);
     return true;
   }
 

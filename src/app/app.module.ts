@@ -56,6 +56,7 @@ import { AppliedBeforeDialog } from './dialogs/applied-before-dialog/applied-bef
 import { ReportedBeforeDialog } from './dialogs/reported-before-dialog/reported-before-dialog.component';
 import { ReportedPostNotificationDialog } from './dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
 import { DARK_MODE_OPTIONS } from 'angular-dark-mode';
+import { AppliedPostNotificationDialog } from './dialogs/applied-post-notification-dialog/applied-post-notification-dialog.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { DARK_MODE_OPTIONS } from 'angular-dark-mode';
     AppliedBeforeDialog,
     ReportedBeforeDialog,
     ReportedPostNotificationDialog,
+    AppliedPostNotificationDialog
   ],
 
   imports: [
