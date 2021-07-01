@@ -235,8 +235,8 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   }
 
   openTermsAndConditions(longContent) {
-    console.log(this.form)
-    //this.modalService.open(longContent, { scrollable: true });
+    //console.log(this.form)
+    this.modalService.open(longContent, { scrollable: true });
   }
 
   ngOnDestroy() {
