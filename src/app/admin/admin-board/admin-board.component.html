@@ -205,6 +205,8 @@
           <mat-card-content class="post-card-content">
             <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
             <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
+            <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
+            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
 
           </mat-card-content>
           <mat-card-footer class="post-card-footer">
@@ -336,12 +338,17 @@
           src="../../../assets/dark-background-placeholder.png"
           alt="Placeholder image">
 
-          <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
-          <mat-card-subtitle class="post-card-subtitle"
-            >{{ post.startDate | date }} to
-            {{ post.endDate | date }}</mat-card-subtitle
-          >
-          <mat-card-content class="post-card-content">{{ post.content }}</mat-card-content>
+          <mat-card-title class="post-card-title"><b>{{ post.title }}</b></mat-card-title>
+          <mat-card-subtitle class="post-card-subtitle">
+            by <b>{{ post.orgName }}</b>
+            </mat-card-subtitle>
+          <mat-card-content class="post-card-content">
+            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
+            <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
+            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+
+          </mat-card-content>
           <mat-footer class="post-card-footer">
             <button
             mat-raised-button
