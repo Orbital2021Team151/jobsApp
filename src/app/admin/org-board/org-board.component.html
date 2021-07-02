@@ -102,109 +102,55 @@
     <b>Posts that has not been approved by CCSGP Admins yet D:</b>
   </p>
 
-  <div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutWrap
-  fxLayoutGap="1.0%"
-  fxLayoutAlign="center"
-  fxFlexAlign="auto"
-  >
+  <div class="request-posts-div">
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="!post.approved">
         <mat-card
         class="request-post-card"
         *ngIf="!post.approved">
-          <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
-          <mat-card-subtitle class="post-card-subtitle"
-            >{{ post.startDate | date }} to
-            {{ post.endDate | date }}</mat-card-subtitle
-          >
-          <mat-card-content class="post-card-content">{{ post.content }}</mat-card-content>
+
+        <img
+          mat-card-image
+          class="card-image"
+          src="../../../assets/dark-background-placeholder.png"
+          alt="Placeholder image">
+
+          <mat-card-title class="post-card-title"
+          ><b>{{ post.title }}</b>
+          </mat-card-title>
+
+          <mat-card-subtitle class="post-card-subtitle">
+            by <b>{{ post.orgName }}</b>
+            </mat-card-subtitle>
+
+          <mat-card-content class="post-card-content">
+            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
+            <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
+            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+
+          </mat-card-content>
+
           <mat-footer class="post-card-footer">
-            <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onMoreInfo(content)"
-            >
-              Learn More
-            </button>
 
             <button
-              class="btn btn-outline-primary mb-2 mr-2"
+            mat-raised-button
+              color="warn"
               (click)="onDeletePrompt(deleteReportedContent)"
             >
-              Delete
+              Remove Request
             </button>
-          </mat-footer>
-        </mat-card>
 
-        <!--
-        <p-card
-          class="card"
-          styleClass="p-card-shadow"
-          *ngIf="!post.approved"
-        >
-          <p-card-header
-            [style]="{
-              'text-overflow': 'ellipsis',
-              width: '22rem',
-              'max-width': '22rem',
-              height: '1.7rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: 'white',
-              'font-size': '1.5rem'
-            }"
-          >
-            <b>{{ post.title }}</b>
-          </p-card-header>
-
-          <p-card-subheader
-            [style]="{
-              height: '3.5rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: '#D9D9D9'
-            }"
-          >
-            {{ post.startDate | date }} to {{ post.endDate | date }}
-          </p-card-subheader>
-
-          <p-card-content
-            [style]="{
-              'text-overflow': 'ellipsis',
-              width: '22rem',
-              'max-width': '22rem',
-              height: '3rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: '#D9D9D9'
-            }"
-            >{{ post.content }}
-          </p-card-content>
-
-
-          <ng-template pTemplate="footer" #footer>
             <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onMoreInfo(content)"
+            mat-button
+            color="primary"
+            (click)="onMoreInfo(content)"
             >
               Learn More
             </button>
 
-            <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onDeletePrompt(deleteUnapprovedContent)"
-            >
-              Delete
-            </button>
-          </ng-template>
-        </p-card>
-        -->
-
+          </mat-footer>
+        </mat-card>
       </section>
 
       <ng-template #content let-modal>
@@ -315,43 +261,55 @@
     <b>Posts with applications! :D</b>
   </p>
 
-  <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutWrap
-    fxLayoutGap="5.0%"
-    fxLayoutAlign="center"
-  >
+  <div class="application-posts-div">
     <div class="centered" *ngFor="let post of posts">
       <section class="cards" *ngIf="post.students.length > 0">
 
-        <mat-card
-        class="application-post-card">
-          <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
-          <mat-card-subtitle class="post-card-subtitle"
-            >{{ post.startDate | date }} to
-            {{ post.endDate | date }}</mat-card-subtitle
-          >
-          <mat-card-content class="post-card-content">{{ post.content }}</mat-card-content>
+        <mat-card class="application-post-card">
+
+          <img
+          mat-card-image
+          class="card-image"
+          src="../../../assets/light-background-placeholder.png"
+          alt="Placeholder image">
+
+          <mat-card-title class="post-card-title">
+            <b>{{ post.title }}</b>
+          </mat-card-title>
+
+          <mat-card-subtitle class="post-card-subtitle">
+            by <b>{{ post.orgName }}</b>
+          </mat-card-subtitle>
+
+          <mat-card-content class="post-card-content">
+            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
+            <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
+            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+          </mat-card-content>
+
           <mat-footer class="post-card-footer">
             <button
-              class="btn btn-outline-primary mb-2 mr-2"
+            mat-raised-button
+            class="application-post-card-button-view-applicants"
               (click)="onMoreInfo(applicantContent)"
             >
               View Applicants
             </button>
-            <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onMoreInfo(content)"
-            >
-              Learn More
-            </button>
 
             <button
-              class="btn btn-outline-primary mb-2 mr-2"
+            mat-raised-button
+            class="application-post-card-button-complete"
               (click)="onDeletePrompt(deleteReportedContent)"
             >
               Delete
+            </button>
+
+            <button
+            mat-button
+              (click)="onMoreInfo(content)"
+            >
+              Learn More
             </button>
           </mat-footer>
         </mat-card>

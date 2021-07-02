@@ -81,6 +81,10 @@ mat-spinner {
   margin-right: 1rem;
 }
 
+.published-post-card:hover {
+  box-shadow: 0 0 11px #394dffda;
+}
+
 .card-image {
   height: 50%;
   overflow: hidden;
@@ -228,17 +232,4 @@ mat-form-field {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-
-.card {
-  background-color: #9da5f0;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-
-  height: 25rem;
-  width: 50rem;
-  text-align: center;
-  display: block;
-  overflow: hidden;
 }
