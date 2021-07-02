@@ -27,8 +27,8 @@ const postSchema = mongoose.Schema({
   students: {type: {email: String, contact: Number, content: String, applicationUser: String}, required: true},
   reports: {type: {email: String, contact: Number, content: String}, required: true},
 
-
-  //imagePath:
+  //image:
+  imagePath:{type: String, required: true},
 });
 
 module.exports = mongoose.model('Post', postSchema);

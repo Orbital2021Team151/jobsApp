@@ -13,21 +13,7 @@ import { PostsService } from '../post.service';
   selector: 'app-post-create',
   templateUrl: './posts-create-org.component.html',
   styleUrls: ['./posts-create-org.component.css'],
-  encapsulation: ViewEncapsulation.None,
-  styles: [
-    `
-      .dark-modal .modal-content {
-        background-color: #292b2c;
-        color: white;
-      }
-      .dark-modal .close {
-        color: white;
-      }
-      .light-blue-backdrop {
-        background-color: #5cb3fd;
-      }
-    `,
-  ],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class PostCreateOrgComponent implements OnInit, OnDestroy {
   pendingApproval: boolean = false;
@@ -78,9 +64,10 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   public endDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public hoursRequiredControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public beneficiariesControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
-  public imageControl = new FormControl(null, {});
-
-
+  public imageControl = new FormControl(null, {
+    validators: [Validators.required],
+    asyncValidators: [mimeType]
+  });
 
   constructor(
     public postsService: PostsService,
@@ -104,9 +91,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
       beneficiaries: this.beneficiariesControl,
       image: this.imageControl,
-
     });
-
   }
 
   ngOnInit() {
@@ -220,21 +205,21 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       students: [],
       reports: [],
       image: this.form.value.image,
+      imagePath: null,
 
       //imagePath: null,
       //creator: null,
     };
 
+    this.pendingApproval = true;
     // console.log("printing image directly from the form");
     // console.log(this.form.value.imageControl);
     // console.log(this.form.value.image);
-
-
     //console.log("Post creation fired! onAddPost. post is:");
     //console.log(post);
-    this.pendingApproval = true;
     // console.log("this is postcreateorg");
     // console.log(post.image);
+
     this.postsService.addPost(post);
     this.modalService.dismissAll();
     this.form.reset();

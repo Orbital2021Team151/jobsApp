@@ -13,7 +13,44 @@ const Post = require("../models/post");
 const User = require("../models/user");
 
 exports.requestPost = (req, res, next) => {
-  console.log(req.body.image);
+  const url = req.protocol + "://" + req.get("host"); //url to our server
+
+  console.log("\nAt backend now. data received is as follows:");
+  console.log("Testing out JSON.Stringified req");
+  console.log(req.body);
+
+  const post = new Post({
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    opportunity: req.body.opportunity,
+    skills: req.body.skills,
+
+    startDate: JSON.parse(req.body.startDate),
+    endDate: JSON.parse(req.body.endDate),
+    hoursRequired: req.body.hoursRequired,
+
+    beneficiaries: req.body.beneficiaries,
+
+    appproved: JSON.parse(req.body.approved),
+    creationDate: JSON.parse(req.body.creationDate),
+    publishDate: JSON.parse(req.body.publishDate),
+    creator: req.userData.userId,
+
+    students: JSON.parse(req.body.students),
+    reports: JSON.parse(req.body.reports),
+    image: req.body.image,
+    imagePath: "/images/" + req.file.filename,
+  });
+
+  console.log("\nTrying out JSON.parse now. hope it works.");
+  console.log(post);
+
+  /*
   const post = new Post({
     orgName: req.body.orgName,
     uen: req.body.uen,
@@ -40,6 +77,7 @@ exports.requestPost = (req, res, next) => {
     reports: [],
     image: req.body.image,
   });
+  */
 
   //console.log("At backend, requested post is: ");
   //console.log(post);
@@ -51,12 +89,50 @@ exports.requestPost = (req, res, next) => {
       //console.log(createdPost);
 
       //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-      sendPostRequestedNotificationEmail(req.body.email, post);
-      res
-        .status(201)
-        .json({
-          message: "post requested successfully! Pending admin approval",
-        });
+      //sendPostRequestedNotificationEmail(req.body.email, post);
+      res.status(201).json({
+        message: "post requested successfully! Pending admin approval",
+        postId: createdPost._id,
+        /*
+        post: {
+          //might not work tho because of the JSON crap again.
+          id: createdPost._id,
+          orgName: createdPost.orgName,
+          uen: createdPost.uen,
+          POC: createdPost.POC,
+          phoneNumber: createdPost.phoneNumber,
+          email: createdPost.email,
+          title: createdPost.title,
+          content: createdPost.content,
+          opportunity: createdPost.opportunity,
+          skills: createdPost.skills,
+
+          startDate: createdPost.startDate,
+          endDate: createdPost.endDate,
+          hoursRequired: createdPost.hoursRequired,
+
+          beneficiaries: createdPost.beneficiaries,
+
+          appproved: createdPost.approved,
+          creationDate: createdPost.creationDate,
+          publishDate: createdPost.publishDate,
+          creator: createdPost.userId,
+
+          students: createdPost.students,
+          reports: createdPost.reports,
+          image: req.body.image,
+          imagePath: createdPost.imagePath,
+        },
+        */
+
+        /*
+         * Spread operator has some gotcha thing in Mongoose
+        post: {
+          ...createdPost,
+          id: createdPost._id
+        }
+        */
+      });
     });
 };
 
@@ -70,12 +146,10 @@ exports.getAllPosts = (req, res, next) => {
     })
     .catch((e) => {
       console.log("Error occured at backend/app app.get");
-      res
-        .status(404)
-        .json({
-          error: e,
-          message: "Error at get all Posts in controllers posts.js",
-        });
+      res.status(404).json({
+        error: e,
+        message: "Error at get all Posts in controllers posts.js",
+      });
     });
 };
 
@@ -93,11 +167,9 @@ exports.deletePost = (req, res, next) => {
           .json({ message: "Post delete request sent and completed!" });
       } else {
         //console.log("Deletion by admin unsuccessful");
-        res
-          .status(401)
-          .json({
-            message: "Not authorised to delete? Even tho I am an admin!?",
-          });
+        res.status(401).json({
+          message: "Not authorised to delete? Even tho I am an admin!?",
+        });
       }
     })
     .catch((err) => {
@@ -195,14 +267,14 @@ exports.publishPost = (req, res, next) => {
             //console.log(postBeneficiary);
             if (interestedBeneficiaries.includes(postBeneficiary)) {
               //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-              sendNotificationEmail(currentUser.email, req.body);
+              //sendNotificationEmail(currentUser.email, req.body);
               break;
             }
           }
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-        sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
+        //sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
 
         res.status(200).json({
           documents: allUsersDocument, //probably do not need this
@@ -254,7 +326,7 @@ exports.applyPost = (req, res, next) => {
 
     //to just to inform the person who applied for the post that their application got through.
     //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-    sendApplyAcknowledgementEmail(req.body.email, req.body);
+    //sendApplyAcknowledgementEmail(req.body.email, req.body);
 
     res.status(200).json("Applied for posting!");
   });
@@ -307,12 +379,12 @@ exports.reportPost = (req, res, next) => {
         for (var userI = 0; userI < adminUsers.length; userI++) {
           let currentAdmin = adminUsers[userI];
           //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-          sendReportToAdminEmail(currentAdmin.email, req.body.post);
+          //sendReportToAdminEmail(currentAdmin.email, req.body.post);
           //console.log("Report email sent to admin: " + currentAdmin.email);
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-        sendReportAcknowledgementEmail(req.body.student.email, req.body.post);
+        //sendReportAcknowledgementEmail(req.body.student.email, req.body.post);
         //console.log("Report acknowledgement sent to: " + req.body.student.email);
 
         res.status(200).json({

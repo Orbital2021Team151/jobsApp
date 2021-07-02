@@ -49,6 +49,8 @@ export class PostsService {
 
             students: post.students,
             reports: post.reports,
+
+            imagePath: post.imagePath,
           };
         });
       })) //to change from _id from database to id
@@ -69,18 +71,43 @@ export class PostsService {
   }
 
   addPost(post: Post) {
-    /*
+
+    //Because JSON cannot pass files.
     const postData = new FormData();
     postData.append("id", post.id),
     postData.append("orgName", post.orgName);
     postData.append("uen", post.uen);
-    postData.append()
-    */
-   console.log("postservice here");
-   console.log(post);
+    postData.append("POC", post.POC);
+    postData.append("phoneNumber", post.phoneNumber);
+    postData.append("email", post.email);
+    postData.append("title", post.title);
+    postData.append("opportunity", post.opportunity);
+
+    postData.append("content", post.content);
+    postData.append("skills", post.skills);
+
+    postData.append("startDate", JSON.stringify(post.startDate));
+    postData.append("endDate", JSON.stringify(post.endDate));
+    postData.append("hoursRequired", post.hoursRequired);
+
+    postData.append("beneficiaries", post.beneficiaries);
+
+    postData.append("approved", JSON.stringify(post.approved));
+    postData.append("creationDate", JSON.stringify(post.creationDate));
+    postData.append("publishDate", JSON.stringify(post.publishDate));
+    postData.append("creator", post.creator);
+
+    postData.append("students", JSON.stringify(post.students));
+    postData.append("reports", JSON.stringify(post.reports));
+    postData.append("image", post.image, post.title);
+
+    console.log("At front end, post service is tring to send this over: ");
+    console.log(postData);
+
     this.http.post<{message: string, postId: string}>
-      (BACKEND_URL + 'api/posts', post)
+      (BACKEND_URL + 'api/posts', postData)
       .subscribe(responseData => {
+
         const postId = responseData.postId;
         post.id = postId;
         this.posts.push(post);

@@ -110,9 +110,17 @@
         *ngIf="!post.approved">
 
         <img
+          *ngIf="!post.imagePath"
           mat-card-image
           class="card-image"
           src="../../../assets/dark-background-placeholder.png"
+          alt="Placeholder image">
+
+          <img
+          *ngIf="post.imagePath"
+          mat-card-image
+          class="card-image"
+          [src]="post.imagePath"
           alt="Placeholder image">
 
           <mat-card-title class="post-card-title"
@@ -136,7 +144,7 @@
             <button
             mat-raised-button
               color="warn"
-              (click)="onDeletePrompt(deleteReportedContent)"
+              (click)="onDeletePrompt(deleteUnapprovedContent)"
             >
               Remove Request
             </button>
@@ -268,10 +276,19 @@
         <mat-card class="application-post-card">
 
           <img
+          *ngIf="!post.imagePath"
           mat-card-image
           class="card-image"
           src="../../../assets/light-background-placeholder.png"
           alt="Placeholder image">
+
+          <img
+          *ngIf="post.imagePath"
+          mat-card-image
+          class="card-image"
+          [src]="post.imagePath"
+          alt="Placeholder image">
+
 
           <mat-card-title class="post-card-title">
             <b>{{ post.title }}</b>
@@ -307,7 +324,7 @@
 
             <button
             mat-button
-              (click)="onMoreInfo(content)"
+            (click)="onMoreInfo(content)"
             >
               Learn More
             </button>

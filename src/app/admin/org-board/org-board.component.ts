@@ -85,6 +85,8 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     if (this.appliedPostsNumber === 0) {
       this.hasApplication = false;
     }
+
+    return true;
   }
 
   onDeletePrompt(content) {

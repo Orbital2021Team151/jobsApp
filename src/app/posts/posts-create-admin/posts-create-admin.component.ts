@@ -196,6 +196,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       students: [],
       reports: [],
       image: this.form.value.image,
+      imagePath: null,
 
       //imagePath: null,
       //creator: null,

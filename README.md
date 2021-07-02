@@ -81,9 +81,3 @@ npm install -g @angular/cli@11<br>
 * npm install --save angular-dark-mode
 
 * npm install --save multer
-
-* npm install --save multer-gridfs-storage
-
-* npm install --save gridfs-stream
-
-* npm install --save method-override

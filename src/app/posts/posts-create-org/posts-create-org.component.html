@@ -379,7 +379,7 @@
   <mat-card>
     <mat-card-title> Create Post Form </mat-card-title>
 
-    <form [formGroup]="form" #postForm="ngForm">
+    <form [formGroup]="form" #postForm="ngForm" enctype="multipart/form-data">
 
       <mat-form-field appearance="outline">
         <mat-label>Point-Of-Contact (POC)</mat-label>
@@ -553,7 +553,6 @@
       <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
         <img [src]="imagePreview" [alt]="form.value.titleControl">
       </div>
-
     </form>
 
     <div

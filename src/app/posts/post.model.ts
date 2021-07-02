@@ -18,8 +18,6 @@ export interface Post {
   hoursRequired: string, //number of hours that a student has to commit to minimally
 
   beneficiaries: string, //paragraph on who are the beneficiaries to let the organization write down. or could be a dropdown list
-  //imagePath: string; //store image? additional feature potentially
-  //creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
 
   students: {email: string, contact: number, content: string, applicationUser: string}[],
   reports: {email: string, contact: number, content: string}[],
@@ -27,7 +25,9 @@ export interface Post {
   approved: boolean,
   creationDate: Date, //Date post was published
   publishDate: Date, //Date post was published
+
   creator: string,
   image: File,
+  imagePath: string,
 
 }
