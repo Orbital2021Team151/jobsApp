@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { mimeType } from '../mime-type.validator';
 
 
 import { AuthService } from 'src/app/auth/auth.service';
@@ -61,7 +62,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   public endDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public hoursRequiredControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public beneficiariesControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
-
+  public imageControl = new FormControl(null, {});
 
   constructor(
     public postsService: PostsService,
@@ -86,6 +87,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       hoursRequired: this.hoursRequiredControl,
 
       beneficiaries: this.beneficiariesControl,
+      image: this.imageControl,
 
     });
 
@@ -193,6 +195,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
       students: [],
       reports: [],
+      image: this.form.value.image,
 
       //imagePath: null,
       //creator: null,

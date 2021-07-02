@@ -28,5 +28,6 @@ export interface Post {
   creationDate: Date, //Date post was published
   publishDate: Date, //Date post was published
   creator: string,
+  image: File,
 
 }

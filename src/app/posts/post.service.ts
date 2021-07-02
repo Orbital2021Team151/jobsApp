@@ -69,6 +69,15 @@ export class PostsService {
   }
 
   addPost(post: Post) {
+    /*
+    const postData = new FormData();
+    postData.append("id", post.id),
+    postData.append("orgName", post.orgName);
+    postData.append("uen", post.uen);
+    postData.append()
+    */
+   console.log("postservice here");
+   console.log(post);
     this.http.post<{message: string, postId: string}>
       (BACKEND_URL + 'api/posts', post)
       .subscribe(responseData => {
@@ -245,5 +254,7 @@ export class PostsService {
     })
   }
   */
+
+
 
 }

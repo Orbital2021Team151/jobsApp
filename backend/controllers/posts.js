@@ -13,6 +13,7 @@ const Post = require("../models/post");
 const User = require("../models/user");
 
 exports.requestPost = (req, res, next) => {
+  console.log(req.body.image);
   const post = new Post({
     orgName: req.body.orgName,
     uen: req.body.uen,
@@ -37,6 +38,7 @@ exports.requestPost = (req, res, next) => {
 
     students: [],
     reports: [],
+    image: req.body.image,
   });
 
   //console.log("At backend, requested post is: ");

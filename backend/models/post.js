@@ -27,6 +27,7 @@ const postSchema = mongoose.Schema({
   students: {type: {email: String, contact: Number, content: String, applicationUser: String}, required: true},
   reports: {type: {email: String, contact: Number, content: String}, required: true},
 
+
   //imagePath:
 });
 

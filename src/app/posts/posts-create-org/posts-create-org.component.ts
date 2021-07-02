@@ -3,7 +3,7 @@ import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angula
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-
+import { mimeType } from '../mime-type.validator';
 
 import { AuthService } from 'src/app/auth/auth.service';
 import { Post } from '../post.model';
@@ -40,6 +40,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   private mode = "create";
   private postId: string;
   post: Post;
+  imagePreview: string;
 
   beneficiaries: string[] = [
     "Animal Welfare",
@@ -77,6 +78,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   public endDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public hoursRequiredControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public beneficiariesControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public imageControl = new FormControl(null, {});
 
 
 
@@ -101,6 +103,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       hoursRequired: this.hoursRequiredControl,
 
       beneficiaries: this.beneficiariesControl,
+      image: this.imageControl,
 
     });
 
@@ -216,18 +219,26 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
       students: [],
       reports: [],
+      image: this.form.value.image,
 
       //imagePath: null,
       //creator: null,
     };
 
+    // console.log("printing image directly from the form");
+    // console.log(this.form.value.imageControl);
+    // console.log(this.form.value.image);
+
 
     //console.log("Post creation fired! onAddPost. post is:");
     //console.log(post);
     this.pendingApproval = true;
+    // console.log("this is postcreateorg");
+    // console.log(post.image);
     this.postsService.addPost(post);
     this.modalService.dismissAll();
     this.form.reset();
+    this.imagePreview = '';
   }
 
   closeNotification() {
@@ -241,5 +252,18 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
+  }
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({image: file});
+    this.form.get('image').updateValueAndValidity();
+    // console.log(file);
+    // console.log(this.form);
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 }
