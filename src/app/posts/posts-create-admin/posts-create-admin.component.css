@@ -1,12 +1,8 @@
 /* GLOBAL
 -------------------------------------------------- */
-div {
+.post-create-card {
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
-
-.create-post-card {
-  margin-top: 2rem;
 }
 
 mat-card-title {
@@ -45,6 +41,7 @@ mat-error {
 
 .modal-body {
   color: black;
+  margin: none;
 }
 
 .modal-footer {

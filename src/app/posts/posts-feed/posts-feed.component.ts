@@ -94,6 +94,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
         this.posts = [];
         this.filteredPosts = [];
         //console.log("Post Feed's observable!");
+        //console.log("Posts are: ");
+        //console.log(this.posts);
 
         //show latest requested posts at the top of the timeline
         for (var i = posts.length - 1; i >= 0; i--) {
@@ -106,9 +108,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
         } else {
           this.hasApproved = false;
         }
-
-        //console.log("Posts are: ");
-        //console.log(this.posts);
       });
   }
 
@@ -260,7 +259,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   applyBefore(currentPost: Post) {
     //console.log("Apply before line fires");
-    if (currentPost.students.filter(user => {user.email === this.authStatusObject.email}).length > 0) {
+    if (currentPost.students.filter(user => user.email === this.authStatusObject.email).length > 0) {
       return true;
     }
     return false;
@@ -296,11 +295,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     return true;
   }
 
-
-
   reportBefore(currentPost: Post) {
     //console.log("reportBefore's line fires");
-    if (currentPost.reports.filter(user => {user.email === this.authStatusObject.email}).length > 0) {
+    if (currentPost.reports.filter(user => user.email === this.authStatusObject.email).length > 0) {
       return true;
     }
     return false;
