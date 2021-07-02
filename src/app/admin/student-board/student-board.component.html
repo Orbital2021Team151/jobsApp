@@ -1,14 +1,27 @@
+<!-- navbar -->
+<!-- <h1>Dashboard navbar</h1> -->
+<div class="sidenavbar">
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened>
+      <mat-action-list>
+        <mat-list-item [routerLink]="['changepassword']"
+          >Change Password</mat-list-item
+        >
+      </mat-action-list>
+    </mat-sidenav>
+    <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
 <!-- <p>STUDENT's board is supposed to be here!!!!!</p> -->
 <div class="change-password-card">
   <mat-card class="mat-elevation-z0 change-password-body">
-
-    <mat-card-title class="change-password-title">Change Password</mat-card-title>
+    <mat-card-title class="change-password-title"
+      >Change Password</mat-card-title
+    >
 
     <form #changePasswordForm="ngForm" class="changePasswordForm">
-      <mat-form-field
-        appearance="outline"
-        class="change-password-form-field"
-      >
+      <mat-form-field appearance="outline" class="change-password-form-field">
         <input
           matInput
           class="change-password-form-input"
@@ -37,10 +50,7 @@
         >
       </mat-form-field>
 
-      <mat-form-field
-        appearance="outline"
-        class="change-password-form-field"
-      >
+      <mat-form-field appearance="outline" class="change-password-form-field">
         <input
           matInput
           class="change-password-form-input"
@@ -98,7 +108,6 @@
 
 <div class="update-beneficiaries-card">
   <mat-card class="mat-elevation-z0 change-password-body">
-
     <mat-card-title class="change-password-title">
       Update interested beneficiaries
     </mat-card-title>
@@ -133,10 +142,168 @@
   <!--
   <p class="float-end"><a href="#">Back to top</a></p>
   -->
-  <p class="copyright">&copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong. <br>
-    In conjuction with the Centre for Computing for Social Good and Philanthropy (CCSGP), NUS.
+  <p class="copyright">
+    &copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong.
+    <br />
+    In conjuction with the Centre for Computing for Social Good and Philanthropy
+    (CCSGP), NUS.
     <!--
     <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
     -->
   </p>
 </footer>
+
+<div class="info-text">
+  <p>
+    <b>Posts that you applied to!</b>
+  </p>
+
+  <div class="application-posts-div">
+    <div class="centered" *ngFor="let post of appliedPosts">
+      <section class="cards" *ngIf="post.students.length > 0">
+        <mat-card class="application-post-card">
+          <img
+            *ngIf="!post.imagePath"
+            mat-card-image
+            class="card-image"
+            src="../../../assets/light-background-placeholder.png"
+            alt="Placeholder image"
+          />
+
+          <img
+            *ngIf="post.imagePath"
+            mat-card-image
+            class="card-image"
+            [src]="post.imagePath"
+            alt="Placeholder image"
+          />
+
+          <mat-card-title class="post-card-title">
+            <b>{{ post.title }}</b>
+          </mat-card-title>
+
+          <mat-card-subtitle class="post-card-subtitle">
+            by <b>{{ post.orgName }}</b>
+          </mat-card-subtitle>
+
+          <mat-card-content class="post-card-content">
+            <mat-icon>event</mat-icon> {{ post.startDate | date }} to
+            {{ post.endDate | date }} <br />
+            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
+            <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
+            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
+            <br />
+          </mat-card-content>
+
+          <mat-footer class="post-card-footer">
+            <!-- <button
+            mat-raised-button
+            class="application-post-card-button-view-applicants"
+              (click)="onMoreInfo(applicantContent)"
+            >
+              View Applicants
+            </button> -->
+
+            <!-- <button
+            mat-raised-button
+            class="application-post-card-button-complete"
+              (click)="onDeletePrompt(deleteReportedContent)"
+            >
+              Delete
+            </button> -->
+
+            <button mat-button (click)="onMoreInfo(content)">Learn More</button>
+          </mat-footer>
+        </mat-card>
+      </section>
+    </div>
+
+    <div class="info-text">
+      <p>
+        <b>Posts that you reported.</b>
+      </p>
+
+      <div class="report-posts-div">
+        <div class="centered" *ngFor="let post of reportedPosts">
+          <section class="cards" *ngIf="post.reports.length > 0">
+            <mat-card class="report-post-card">
+              <img
+                mat-card-image
+                class="card-image"
+                src="../../../assets/dark-background-placeholder.png"
+                alt="Placeholder image"
+              />
+
+              <mat-card-title class="post-card-title"
+                ><b>{{ post.title }}</b></mat-card-title
+              >
+              <mat-card-subtitle class="post-card-subtitle">
+                by <b>{{ post.orgName }}</b>
+              </mat-card-subtitle>
+              <mat-card-content class="post-card-content">
+                <mat-icon>event</mat-icon> {{ post.startDate | date }} to
+                {{ post.endDate | date }} <br />
+                <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
+                <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
+                <mat-icon>people_outline</mat-icon> Skillsets:
+                {{ post.skills }} <br />
+              </mat-card-content>
+              <mat-footer class="post-card-footer">
+                <button
+                  mat-button
+                  color="primary"
+                  (click)="onMoreInfo(content)"
+                >
+                  Learn More
+                </button>
+              </mat-footer>
+            </mat-card>
+          </section>
+
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">{{ post.title }}</h4>
+              <button
+                type="button"
+                class="close"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <p>Organization Name: {{ post.orgName }}</p>
+              <p>UEN: {{ post.uen }}</p>
+              <p>Point of Contact (POC): {{ post.POC }}</p>
+              <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
+              <p>POC's email: {{ post.email }}</p>
+              <p>Brief Description for gig: {{ post.content }}</p>
+              <p>Preferred Skills: {{ post.skills }}</p>
+              <p>Start Date: {{ post.startDate | date }}</p>
+              <p>End Date: {{ post.endDate | date }}</p>
+              <p>Commitment Hours: {{ post.hoursRequired }}</p>
+              <p>Beneficiaries: {{ post.beneficiaries }}</p>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-light"
+                (click)="modal.close('Close click')"
+              >
+                Close
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <p class="info-text mat-body-1" *ngIf="hasReport === false">
+      No post with reports! :D
+    </p>
+    <mat-spinner *ngIf="hasReport === null"></mat-spinner>
+  </div>
+</div>

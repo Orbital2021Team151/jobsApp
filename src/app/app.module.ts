@@ -17,7 +17,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import {  MatSidenavModule } from  '@angular/material/sidenav';
+import { MatList, MatListModule } from '@angular/material/list';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   NgbPaginationModule,
@@ -57,6 +58,9 @@ import { ReportedBeforeDialog } from './dialogs/reported-before-dialog/reported-
 import { ReportedPostNotificationDialog } from './dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
 import { DARK_MODE_OPTIONS } from 'angular-dark-mode';
 import { AppliedPostNotificationDialog } from './dialogs/applied-post-notification-dialog/applied-post-notification-dialog.component';
+import { DashBoardLandingComponent } from './admin/dashboard-landing/dashboard-landing.component';
+import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';
+
 
 @NgModule({
   declarations: [
@@ -81,7 +85,9 @@ import { AppliedPostNotificationDialog } from './dialogs/applied-post-notificati
     AppliedBeforeDialog,
     ReportedBeforeDialog,
     ReportedPostNotificationDialog,
-    AppliedPostNotificationDialog
+    AppliedPostNotificationDialog,
+    DashBoardLandingComponent,
+    StudentBoardChangePasswordComponent,
   ],
 
   imports: [
@@ -112,6 +118,8 @@ import { AppliedPostNotificationDialog } from './dialogs/applied-post-notificati
     NgbAlertModule,
     MatRadioModule,
     ReactiveFormsModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

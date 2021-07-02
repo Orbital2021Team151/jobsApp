@@ -44,6 +44,11 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     "Women & Girls",
   ];
 
+  posts: Post[] = [];
+  appliedPosts: Post[] = [];
+  reportedPosts: Post[] = [];
+  hasReport: boolean = false;
+
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
   ngOnInit() {
@@ -57,6 +62,41 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
 
     this.hasRequest = false;
     this.postsService.getPosts();
+
+    this.postSub = this.postsService.getPostsUpdatedListener()
+      .subscribe((posts: Post[]) => {
+        //console.log(posts);
+        this.posts = posts
+        .filter(post => post.students.length > 0 || post.reports.length > 0);
+        // console.log("this.posts");
+        // console.log(this.posts);
+
+        this.appliedPosts = this.posts.filter(posts => {
+          for (let i = 0; i < posts.students.length; i++) {
+            if (posts.students[i].email === this.authStatusObject.email) {
+              return true;
+            }
+          }
+        });
+        // console.log("this.appliedPosts");
+        // console.log(this.appliedPosts);
+
+        this.reportedPosts = this.posts.filter(posts => {
+          for (let i = 0; i < posts.reports.length; i++) {
+            if (posts.reports[i].email === this.authStatusObject.email) {
+              this.hasReport = true;
+              return true;
+            }
+          }
+        });
+        console.log("this.reportedPosts");
+        console.log(this.reportedPosts);
+
+      });
+
+    // console.log("this.appliedPosts");
+    // console.log(this.appliedPosts);
+    // console.log(this.posts);
 
     /*
      * Probably do not need this because there are no changes to authStatusObject once user is logged in.

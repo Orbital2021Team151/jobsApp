@@ -11,12 +11,19 @@ import { StudentBoardComponent } from './admin/student-board/student-board.compo
 import { OrgBoardComponent } from './admin/org-board/org-board.component';
 import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-org.component';
 import { HomepageComponent } from './homepage/hompage.component';
+import { DashBoardLandingComponent } from './admin/dashboard-landing/dashboard-landing.component';
+import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminBoardComponent, canActivate: [AuthGuard], data: { roles: ["Admin"]}},
-  { path: 'student-alumni', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student", "Student / NUS Alumni"] }},
+  { path: 'student-alumni', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student", "Student / NUS Alumni"] },
+    children: [
+      //{ path: '', component: DashBoardLandingComponent, canActivate: [AuthGuard] },
+      { path: 'changepassword', component: StudentBoardChangePasswordComponent, canActivate: [AuthGuard]}
+    ]
+  },
   { path: 'organisation', component: OrgBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student Organisation", "External Organisation"] }},
 
   {
