@@ -2226,24 +2226,37 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   color: #ff4081;
 }
 /* You can add global styles to this file, and also import other style files */
-
+/*
 mat-icon {
   color: #4da8da;
 }
-
+*/
+mat-icon {
+  color: #00000094;
+}
 html, body {
   height: 100%;
-  background-color: #f8f8ff;
 }
-
 /*
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 */
-
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: #4DA8DA;
 }
-
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #F2545B;
+  }
+body.dark-mode {
+  background-color: #2d3436;
+  color: #f8f8ff;
+}
+body.light-mode {
+  background-color: #f8f8ff;
+  color: #2d3436;
+}
+body:not(.dark-mode-preloading) {
+  transition: all 0.3s linear;
+}
 /*
 mat-label {
   color: #EEFBFB;

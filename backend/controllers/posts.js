@@ -15,9 +15,11 @@ const User = require("../models/user");
 exports.requestPost = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host"); //url to our server
 
+  /*
   console.log("\nAt backend now. data received is as follows:");
   console.log("Testing out JSON.Stringified req");
   console.log(req.body);
+  */
 
   const post = new Post({
     orgName: req.body.orgName,
@@ -44,43 +46,13 @@ exports.requestPost = (req, res, next) => {
     students: JSON.parse(req.body.students),
     reports: JSON.parse(req.body.reports),
     image: req.body.image,
-    imagePath: "/images/" + req.file.filename,
+    imagePath: url + "/images/" + req.file.filename,
   });
-
-  console.log("\nTrying out JSON.parse now. hope it works.");
-  console.log(post);
 
   /*
-  const post = new Post({
-    orgName: req.body.orgName,
-    uen: req.body.uen,
-    POC: req.body.POC,
-    phoneNumber: req.body.phoneNumber,
-    email: req.body.email,
-    title: req.body.title,
-    content: req.body.content,
-    opportunity: req.body.opportunity,
-    skills: req.body.skills,
-
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
-    hoursRequired: req.body.hoursRequired,
-
-    beneficiaries: req.body.beneficiaries,
-    creationDate: req.body.creationDate,
-    publishDate: null,
-
-    appproved: false,
-    creator: req.userData.userId,
-
-    students: [],
-    reports: [],
-    image: req.body.image,
-  });
+  console.log("\nTrying out JSON.parse now. hope it works.");
+  console.log(post);
   */
-
-  //console.log("At backend, requested post is: ");
-  //console.log(post);
 
   post
     .save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)

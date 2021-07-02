@@ -22,7 +22,7 @@ mongoose.connect("mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepme
 
 app.use(bodyParser.json());
 app.use(urlencoded({extended: false}));
-app.use("/images", express.static(path.join("backend/images")));
+app.use("/images", express.static("backend/images"));
 
 app.use(mongoSanitize());
 app.use((req, res, next) => {
@@ -38,13 +38,12 @@ app.use((req, res, next) => {
 
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
-/*
+
 //for deployment in heroku
 app.use("/", express.static(path.join(__dirname, "../dist/jobsApp")));
 
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "../dist/jobsApp/index.html"));
 });
-*/
 
 module.exports = app;
