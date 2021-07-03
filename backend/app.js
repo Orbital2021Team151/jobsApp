@@ -22,7 +22,10 @@ mongoose.connect("mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepme
 
 app.use(bodyParser.json());
 app.use(urlencoded({extended: false}));
+
+
 app.use("/images", express.static("images"));
+app.use("/highlightsImages", express.static("highlightsImages"));
 
 app.use(mongoSanitize());
 app.use((req, res, next) => {
@@ -36,12 +39,14 @@ app.use((req, res, next) => {
   next();
 });
 
+/*
 //for deployment in heroku. might have to comment out for AWS though. see how.
 app.use("/", express.static(path.join(__dirname, "../dist/jobsApp")));
 
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "../dist/jobsApp/index.html"));
 });
+*/
 
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);

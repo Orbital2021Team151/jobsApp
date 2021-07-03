@@ -10,7 +10,9 @@ import { HomepageService } from "./homepage.service";
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class HomepageComponent implements OnInit, OnDestroy {
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  //images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  images = [1, 2, 3].map((n) => `../../assets/sample-carousel-image-${n}.jpg`);
+
 
   constructor(public homepageService: HomepageService) {}
   ngOnInit() {}

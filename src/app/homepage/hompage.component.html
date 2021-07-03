@@ -35,6 +35,84 @@
     <main>
 
       <ngb-carousel *ngIf="images" class="carousel">
+
+        <ng-template ngbSlide>
+          <div class="row carousel-card">
+            <div class="col-md-7 order-md-2">
+              <h2 class="carousel-heading"><u>Women in Tech</u></h2>
+              <p class="lead">
+                SOC has been increasing our drive to attract women into the tech workforce. We're glad to announce our success in increasing the participation rate of
+                ladies as exemplified by our increase in female students enrolled year on year.
+              </p>
+
+              <button
+              mat-raised-button
+              class="carousel-read-more-button"
+              >
+              Read More
+              </button>
+            </div>
+
+            <div class="col-md-5 order-md-1">
+              <!--
+                <img src="https://www.pngkey.com/png/full/4-49790_galaxies-galaxy-png.png" alt="Photo of galaxies" class="carousel-image">
+              -->
+              <img [src]="images[0]" alt="Random first slide" class="carousel-image">
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template ngbSlide>
+          <div class="row carousel-card">
+            <div class="col-md-7">
+              <h2 class="carousel-heading"><u>Care for Students</u><br></h2>
+              <p class="lead">
+                The organisations are carefully selected by Computing veterans such as the renown <i>Professor Ben Leong</i> and <i>Professor Leong Wing Lup</i>.
+              </p>
+              <button
+              mat-raised-button
+              class="carousel-read-more-button"
+              >
+              Read More
+              </button>
+            </div>
+            <div class="col-md-5">
+            <img [src]="images[1]" alt="Random second slide" class="carousel-image">
+            </div>
+          </div>
+        </ng-template>
+
+
+        <ng-template ngbSlide>
+          <div class="row carousel-card">
+            <div class="col-md-7 order-md-2">
+              <h2 class="carousel-heading"><u>Expert Novices</u></h2>
+              <p class="lead">
+                SOC students are highly sought-after in Singapore. Our platform enables organisations to employ their services for free. <br>
+                Students have the opportunity to gain exposure and experience while organisations get the chance bring onboard motivated volunteers. <br>
+                It's a win-win situation.
+              </p>
+
+              <button
+              mat-raised-button
+              class="carousel-read-more-button"
+              >
+              Read More
+              </button>
+            </div>
+
+            <div class="col-md-5 order-md-1">
+              <!--
+                <img src="https://www.pngkey.com/png/full/4-49790_galaxies-galaxy-png.png" alt="Photo of galaxies" class="carousel-image">
+              -->
+              <img [src]="images[2]" alt="Random third slide" class="carousel-image">
+            </div>
+          </div>
+        </ng-template>
+
+
+
+        <!--
         <ng-template ngbSlide>
           <div class="picsum-img-wrapper">
             <img [src]="images[0]" alt="Random first slide">
@@ -44,6 +122,7 @@
             <p>Should have some featured article here</p>
           </div>
         </ng-template>
+
         <ng-template ngbSlide>
           <div class="picsum-img-wrapper">
             <img [src]="images[1]" alt="Random second slide">
@@ -53,6 +132,7 @@
             <p>Should have some featured article here</p>
           </div>
         </ng-template>
+
         <ng-template ngbSlide>
           <div class="picsum-img-wrapper">
             <img [src]="images[2]" alt="Random third slide">
@@ -62,6 +142,8 @@
             <p>Should have some featured article here</p>
           </div>
         </ng-template>
+        -->
+
       </ngb-carousel>
 
 
@@ -75,6 +157,8 @@
 
 
 
+
+      <hr class="featurette-divider">
 
 
       <!--  Reviews Section  -->
@@ -102,12 +186,18 @@
           -->
 
 
-          <img src="https://64.media.tumblr.com/3d0a3245d2c064aad34441ae061882a0/tumblr_pn6rqd03km1upe1ufo1_250.gifv"
+          <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHG9S8-sc4Eq27YCO-5oWujccTSgNRuTEXEQ&usqp=CAU"
+          onmouseover="this.src='https\://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/8b/8b1ca18fe3a0fed1a551dd9c73c93a7bb407a147_full.jpg';"
+          onmouseout="this.src='https\://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHG9S8-sc4Eq27YCO-5oWujccTSgNRuTEXEQ&usqp=CAU';"
+
           alt="Picture of first reviewer"
           class="profile-pic">
-            <h2>Quattro Bajeena</h2>
-            <h3>The Red Comet</h3>
-            <p class="marketing-content">Great platform that allows my organisation, Neo Zeon, to seek for new volunteers for our organisation. Let's fight climate change together!</p>
+            <h2>Elmo</h2>
+            <h3>Sesame Street Mascot</h3>
+            <p class="marketing-content">
+              Elmo thinks it’s important to be kind because if you’re kind to somebody, then they’ll be kind to somebody, and it goes on and on and on.
+            </p>
             <!--
             <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
             -->
@@ -134,13 +224,13 @@
           -->
 
 
-          <img src="https://i2.wp.com/www.animemaru.com/wp-content/uploads/2018/05/violetevergarden.png?w=640&ssl=1"
+          <img src="https://i2.wp.com/www.animemaru.com/wp-content/uploads/2018/05/violetevergarden.png?fit=640%2C360&ssl=1"
           alt="Picture of second reviewer"
           class="profile-pic">
             <h2>Violet Evergarden</h2>
-            <h3>Auto Memory Doll</h3>
-            <p class="marketing-content">I'm glad that I can fulfill the requests of our clients as an Auto Memory Doll. The clients I have helped out not only
-              opened my eyes to a better, more beautiful world but it also helped me to overcome my own challenges.
+            <h3>CH Postal Company</h3>
+            <p class="marketing-content">
+              No letter that could be sent deserves to go undelivered.
             </p>
             <!--
             <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
@@ -169,13 +259,14 @@
               </svg>
               -->
 
-              <img src="https://yaharibento.files.wordpress.com/2016/03/yahari-oregariu-zoku-anime-ep3-48-yukinoshita-haruno.gif?w=2000&h="
+              <img src="https://media.giphy.com/media/133cAiXr4T1te/giphy.gif"
               alt="Picture of third reviewer"
               class="profile-pic">
 
-            <h2>Yukinoshita Haruno</h2>
+            <h2>Eevee</h2>
             <h3>NUS Alumni</h3>
-            <p class="marketing-content">Love to use this website to find students wanting work that forms genuine bonds!</p>
+            <p class="marketing-content">I'm May's Eevee! Bet you didn't know I studied in NUS eh? Sorry for breaking the 4th wall! 🤭 <br>
+            Oh and this website is cool!</p>
             <!--
             <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
             -->
@@ -198,6 +289,7 @@
 
 
         <hr class="featurette-divider">
+
         <div class="row featurette">
           <div class="col-md-7">
             <h2 class="featurette-heading">Our Story<br></h2>
@@ -228,9 +320,6 @@
 
 
         <hr class="featurette-divider">
-
-
-
         <div class="row featurette">
           <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">Endless Possibilities</h2>
