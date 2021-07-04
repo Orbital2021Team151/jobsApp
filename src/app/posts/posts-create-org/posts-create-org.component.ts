@@ -44,12 +44,70 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     "Sports",
     "Women & Girls",
   ];
-  beneficiariesSelected: string[] = [];
+  locations: string[] = [
+    "Ang Mo Kio",
+    "Bedok",
+    "Bishan",
+    "Boon Lay",
+    "Bukit Batok",
+    "Bukit Merah",
+    "Bukit Panjang",
+    "Bukit Timah",
+    "Central Water Catchment",
+    "Changi",
+    "Changi Bay",
+    "Choa Chu Kang",
+    "Clementi",
+    "Downtown Core",
+    "Geylang",
+    "Hougang",
+    "Islandwide",
+    "Jurong East",
+    "Jurong West",
+    "Kallang",
+    "Lim Chu Kang",
+    "Mandai",
+    "Marina East",
+    "Marina South",
+    "Marine Parade",
+    "Museum",
+    "Newton",
+    "North-Eastern Islands",
+    "Novena",
+    "Orchard",
+    "Outram",
+    "Overseas",
+    "Pasir Ris",
+    "Paya Lebar",
+    "Pioneer",
+    "Punggol",
+    "Queenstown",
+    "River Valley",
+    "Rochor",
+    "Seletar",
+    "Sembawang",
+    "Sengkang",
+    "Serangoon",
+    "Simpang",
+    "Singapore River",
+    "Southern Islands",
+    "Straits View",
+    "Sungei Kadut",
+    "Tampines",
+    "Tanglin",
+    "Tengah",
+    "Toa Payoh",
+    "Tuas",
+    "Virtual",
+    "Western Islands",
+    "Western Water Catchment",
+    "Woodlands",
+    "Yishun",
+  ];
   opportunities: string[] = [
     "One-off",
     "Recurring",
   ]
-  opportunitySelected: string[] = [];
   termsAndConditions = false;
 
   /* FormGroup version */
@@ -63,6 +121,8 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   public startDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public endDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public hoursRequiredControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+
+  public locationControl = new FormControl(null);
   public beneficiariesControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public imageControl = new FormControl(null, {
     validators: [Validators.required],
@@ -89,7 +149,9 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       endDate: this.endDateControl,
       hoursRequired: this.hoursRequiredControl,
 
+      location: this.locationControl,
       beneficiaries: this.beneficiariesControl,
+
       image: this.imageControl,
     });
   }
@@ -121,53 +183,6 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     });
   }
 
-  /*
-  onAddPostTemplate(form: NgForm) {
-    //console.log("Beneficiaries Selected: ");
-    //console.log(this.beneficiariesSelected);
-    //console.log("add post fired!");
-
-    if (form.invalid) {
-      return;
-    }
-
-    const post: Post = {
-      id: null,
-      orgName: this.authStatusObject.orgName,
-      uen: this.authStatusObject.uen,
-      POC: form.value.POC,
-      phoneNumber: form.value.phoneNumber,
-      email: this.authStatusObject.email,
-      title: form.value.title,
-      content: form.value.content,
-      opportunity: this.opportunitySelected,
-      skills: form.value.skills,
-
-      startDate: form.value.startDate,
-      endDate: form.value.endDate,
-      hoursRequired: form.value.hoursRequired,
-
-      beneficiaries: this.beneficiariesSelected,
-
-      approved: false,
-      creator: null,
-
-      students: [],
-      reports: [],
-      creationDate: new Date(Date.now()),
-      publishDate: null,
-
-      //imagePath: null,
-      //creator: null,
-    };
-    //console.log("Post creation fired! onAddPost. post is:");
-    //console.log(post);
-    this.pendingApproval = true;
-    this.postsService.addPost(post);
-    this.modalService.dismissAll();
-    form.reset();
-  }
-  */
 
   onAddPostReactive() {
     //console.log("Beneficiaries Selected: ");
@@ -195,6 +210,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       endDate: this.form.value.endDate,
       hoursRequired: this.form.value.hoursRequired,
 
+      location: this.form.value.location,
       beneficiaries: this.form.value.beneficiaries,
 
       approved: false,
@@ -202,8 +218,13 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       publishDate: null,
       creator: null,
 
+      rejected: false,
+      reason: null,
+      completed: false,
+
       students: [],
       reports: [],
+
       image: this.form.value.image,
       imagePath: null,
 

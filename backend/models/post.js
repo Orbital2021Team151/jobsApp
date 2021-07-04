@@ -17,12 +17,17 @@ const postSchema = mongoose.Schema({
   endDate: {type: Date, required: true},
   hoursRequired: {type: String, required: true},
 
+  location: {type: String, },
   beneficiaries: {type: String, required: true},
 
   approved: {type: Boolean, },
   creationDate: {type: Date, /* required: true */},
   publishDate: {type: Date, /* required: true */},
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+
+  rejected: {type: Boolean, },
+  reason: {type: String, },
+  completed: {type: Boolean, },
 
   students: {type: {email: String, contact: Number, content: String, applicationUser: String}, required: true},
   reports: {type: {email: String, contact: Number, content: String}, required: true},
