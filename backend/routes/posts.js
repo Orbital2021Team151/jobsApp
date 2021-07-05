@@ -3,6 +3,7 @@ const Post = require("../models/post");
 const checkAuth = require("../middleware/check-auth");
 const PostsController = require("../controllers/posts");
 const multer = require('multer');
+const path = require("path");
 
 const router = express();
 
@@ -19,7 +20,8 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    callback(error, "images"); //path relative to server.js
+    //callback(error, "images"); //path relative to server.js
+    callback(null, path.join(__dirname, "..", "images")); //path relative to server.js for localhost:3000
   },
 
   filename: (req, file, callback) => {
@@ -29,7 +31,10 @@ const storage = multer.diskStorage({
   }
 });
 
+
 router.post("", multer({storage: storage}).single("image"), checkAuth, PostsController.requestPost);
+
+router.post("/requestPostNoImage", checkAuth, PostsController.requestPostNoImage);
 
 router.get("", PostsController.getAllPosts);
 
@@ -42,8 +47,6 @@ router.put("/publish/:id", PostsController.publishPost);
 router.put("/apply/:id", PostsController.applyPost);
 
 router.put("/report/:id", PostsController.reportPost);
-
-router.post("/check", PostsController.checkEmailExists);
 
 router.get("/download", PostsController.downloadPosts);
 

@@ -33,7 +33,7 @@ const postSchema = mongoose.Schema({
   reports: {type: {email: String, contact: Number, content: String}, required: true},
 
   //image:
-  imagePath:{type: String, required: true},
+  imagePath:{type: String, },
 });
 
 module.exports = mongoose.model('Post', postSchema);

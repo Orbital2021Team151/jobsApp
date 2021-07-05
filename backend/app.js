@@ -21,11 +21,15 @@ mongoose.connect("mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepme
   });
 
 app.use(bodyParser.json());
+
+//can i comment out this and nothing breaks?
 app.use(urlencoded({extended: false}));
 
 
-app.use("/images", express.static("images"));
-app.use("/highlightsImages", express.static("highlightsImages"));
+//app.use("/images", express.static("images")); //for aws
+//app.use("/highlightsImages", express.static("highlightsImages")); //for aws
+app.use("/images", express.static(path.join(__dirname, "images"))); //for localhost:3000? or do it on aws for safety
+app.use("/highlightsImages", express.static(path.join(__dirname, "highlightsImages"))); //for localhost:3000 only? or do it on aws for safety
 
 app.use(mongoSanitize());
 app.use((req, res, next) => {

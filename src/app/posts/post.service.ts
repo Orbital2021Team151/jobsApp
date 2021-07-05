@@ -101,11 +101,28 @@ export class PostsService {
     postData.append("reports", JSON.stringify(post.reports));
     postData.append("image", post.image, post.title);
 
-    console.log("At front end, post service is tring to send this over: ");
+    console.log("At front end, postService is tring to send this over via addPost: ");
     console.log(postData);
 
     this.http.post<{message: string, postId: string}>
       (BACKEND_URL + 'api/posts', postData)
+      .subscribe(responseData => {
+
+        const postId = responseData.postId;
+        post.id = postId;
+        this.posts.push(post);
+        this.postsUpdated.next([...this.posts]);
+        console.log(post.opportunity);
+    });
+  }
+
+  addPostNoImage(post: Post) {
+
+    console.log("At front end, postService is tring to send this over via addPostNoImage: ");
+    console.log(post);
+
+    this.http.post<{message: string, postId: string}>
+      (BACKEND_URL + 'api/posts/requestPostNoImage', post)
       .subscribe(responseData => {
 
         const postId = responseData.postId;

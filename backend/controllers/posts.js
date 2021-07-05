@@ -14,6 +14,8 @@ const User = require("../models/user");
 
 exports.requestPost = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host"); //url to our server
+  //console.log("In Node's requestPost now. the URL for our local is: ");
+  //console.log(url);
 
   /*
   console.log("\nAt backend now. data received is as follows:");
@@ -104,6 +106,57 @@ exports.requestPost = (req, res, next) => {
           id: createdPost._id
         }
         */
+      });
+    });
+};
+
+exports.requestPostNoImage = (req, res, next) => {
+
+  const post = new Post({
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    opportunity: req.body.opportunity,
+    skills: req.body.skills,
+
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    hoursRequired: req.body.hoursRequired,
+
+    beneficiaries: req.body.beneficiaries,
+
+    creationDate: req.body.creationDate,
+    publishDate: null,
+    appproved: false,
+    creator: req.userData.userId,
+
+    students: [],
+    reports: [],
+
+    //image: null,
+    imagePath: null,
+  });
+
+  /*
+  console.log("\nTrying out JSON.parse now. hope it works.");
+  console.log(post);
+  */
+
+  post
+    .save() //creates a new post document stored in collections. Name will be plural from of models name. so schema was Post, stored is posts (lowercase)
+    .then((createdPost) => {
+      //console.log("created post, stored in database is: ");
+      //console.log(createdPost);
+
+      //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
+      //sendPostRequestedNotificationEmail(req.body.email, post);
+      res.status(201).json({
+        message: "post requested successfully! Pending admin approval",
+        postId: createdPost._id,
       });
     });
 };

@@ -125,8 +125,10 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   public locationControl = new FormControl(null);
   public beneficiariesControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public imageControl = new FormControl(null, {
+    /*
     validators: [Validators.required],
     asyncValidators: [mimeType]
+    */
   });
 
   constructor(
@@ -193,6 +195,11 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       return;
     }
 
+    let imageAdd = null;
+    if (this.form.value.image) {
+      imageAdd = this.form.value.image;
+    }
+
     const post: Post = {
       id: null,
       orgName: this.authStatusObject.orgName,
@@ -227,9 +234,6 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
       image: this.form.value.image,
       imagePath: null,
-
-      //imagePath: null,
-      //creator: null,
     };
 
     this.pendingApproval = true;
@@ -241,7 +245,12 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     // console.log("this is postcreateorg");
     // console.log(post.image);
 
-    this.postsService.addPost(post);
+    if (this.form.value.image) {
+      this.postsService.addPost(post);
+    } else {
+      this.postsService.addPostNoImage(post);
+    }
+
     this.modalService.dismissAll();
     this.form.reset();
     this.imagePreview = '';
