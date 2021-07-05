@@ -40,12 +40,17 @@ export class PostsService {
             endDate: post.endDate,
             hoursRequired: post.hoursRequired,
 
+            location: post.location,
             beneficiaries: post.beneficiaries,
 
             approved: post.approved,
             creator: post.creator,
             creationDate: post.creationDate,
             publishDate: post.publishDate,
+
+            rejected: post.rejected,
+            reason: post.reason,
+            completed: post.completed,
 
             students: post.students,
             reports: post.reports,
@@ -74,6 +79,7 @@ export class PostsService {
 
     //Because JSON cannot pass files.
     const postData = new FormData();
+
     postData.append("id", post.id),
     postData.append("orgName", post.orgName);
     postData.append("uen", post.uen);
@@ -90,6 +96,7 @@ export class PostsService {
     postData.append("endDate", JSON.stringify(post.endDate));
     postData.append("hoursRequired", post.hoursRequired);
 
+    postData.append("location", JSON.stringify(post.location));
     postData.append("beneficiaries", post.beneficiaries);
 
     postData.append("approved", JSON.stringify(post.approved));
@@ -97,12 +104,17 @@ export class PostsService {
     postData.append("publishDate", JSON.stringify(post.publishDate));
     postData.append("creator", post.creator);
 
+    postData.append("rejected", JSON.stringify(post.rejected));
+    postData.append("reason", JSON.stringify(post.reason));
+    postData.append("completed", JSON.stringify(post.completed));
+
+
     postData.append("students", JSON.stringify(post.students));
     postData.append("reports", JSON.stringify(post.reports));
     postData.append("image", post.image, post.title);
 
-    console.log("At front end, postService is tring to send this over via addPost: ");
-    console.log(postData);
+    //console.log("At front end, postService is tring to send this over via addPost: ");
+    //console.log(postData);
 
     this.http.post<{message: string, postId: string}>
       (BACKEND_URL + 'api/posts', postData)
@@ -118,8 +130,8 @@ export class PostsService {
 
   addPostNoImage(post: Post) {
 
-    console.log("At front end, postService is tring to send this over via addPostNoImage: ");
-    console.log(post);
+    //console.log("At front end, postService is tring to send this over via addPostNoImage: ");
+    //console.log(post);
 
     this.http.post<{message: string, postId: string}>
       (BACKEND_URL + 'api/posts/requestPostNoImage', post)
@@ -137,6 +149,9 @@ export class PostsService {
     const postToBePublished = this.getPost(postId);
     postToBePublished.publishDate = new Date(Date.now());
 
+    console.log("At postsService now. Post to be published is: ");
+    console.log(postToBePublished);
+
     this.http
       .put(BACKEND_URL + 'api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
       .subscribe((response) => {
@@ -144,9 +159,6 @@ export class PostsService {
         console.log("post successfully published!");
         this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
-
-
-
       });
   }
 

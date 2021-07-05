@@ -38,12 +38,17 @@ exports.requestPost = (req, res, next) => {
     endDate: JSON.parse(req.body.endDate),
     hoursRequired: req.body.hoursRequired,
 
+    location: JSON.parse(req.body.location),
     beneficiaries: req.body.beneficiaries,
 
-    appproved: JSON.parse(req.body.approved),
+    approved: false,
     creationDate: JSON.parse(req.body.creationDate),
     publishDate: JSON.parse(req.body.publishDate),
     creator: req.userData.userId,
+
+    rejected: false,
+    reason: null,
+    completed: false,
 
     students: JSON.parse(req.body.students),
     reports: JSON.parse(req.body.reports),
@@ -127,12 +132,17 @@ exports.requestPostNoImage = (req, res, next) => {
     endDate: req.body.endDate,
     hoursRequired: req.body.hoursRequired,
 
+    location: req.body.location,
     beneficiaries: req.body.beneficiaries,
 
+    approved: false,
     creationDate: req.body.creationDate,
     publishDate: null,
-    appproved: false,
     creator: req.userData.userId,
+
+    rejected: false,
+    reason: null,
+    completed: false,
 
     students: [],
     reports: [],
@@ -241,6 +251,7 @@ exports.deletePost = (req, res, next) => {
 
 //publish function to change approved from false to true
 exports.publishPost = (req, res, next) => {
+
   const newPost = new Post({
     _id: req.body.id,
     orgName: req.body.orgName,
@@ -256,6 +267,7 @@ exports.publishPost = (req, res, next) => {
     startDate: req.body.startDate,
     endDate: req.body.endDate,
     hoursRequired: req.body.hoursRequired,
+
 
     beneficiaries: req.body.beneficiaries,
 
@@ -503,52 +515,16 @@ exports.downloadPosts = (req, res, next) => {
   );
 };
 
-//the only one that might work is the mailgun-js solution. but that feature is locked behind a subscription service
-exports.checkEmailExists = (req, res, next) => {
-  console.log("Inside MongoDB!");
-  /*
-   * yahoo addresses not working, @u.nus.edu addresses not working
-  emailExistence.check(req.body.email, (error, response) => {
-    console.log("Checking email's existence now!");
-    if (error) {
-      console.log("In error clause");
-      console.log(error);
-    } else {
-      console.log("Response works?");
-      console.log(response);
-    }
-    console.log("\n");
-  })
-  */
 
-  /*
-   * yahoo addresses not working, @u.nus.edu addresses not working
-  async function isEmailValid(email) {
-    return emailValidator.validate(email)
-   }
 
-   isEmailValid(req.body.email)
-   .then(dataObject => {
 
-    return res.status(200).json({
-      message: "retrieved information are as attached",
-      valid: dataObject.valid,
-      reason: dataObject.reason,
-      validators: dataObject.validators,
-      dataObject: dataObject,
-    });
-  })
 
-    .catch(err => {
-      console.log("Interesting to have it fail");
-      return res.status(400).send({
-        message: "check email exists function failed",
-        error: err,
-      });
-    });
 
-    */
-};
+
+
+
+
+
 
 /*
  * Emails with HTML Templating.

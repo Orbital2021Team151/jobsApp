@@ -192,11 +192,19 @@
               <section class="cards" *ngIf="!post.approved">
                 <mat-card class="request-post-card">
                   <img
+                    *ngIf="!post.imagePath"
                     mat-card-image
                     class="card-image"
                     src="../../../assets/light-background-placeholder.png"
-                    alt="Placeholder image"
+                    alt="Placeholder image for post"
                   />
+
+                  <img
+                  *ngIf="post.imagePath"
+                  mat-card-image
+                  class="card-image"
+                  [src]="post.imagePath"
+                  alt="Post's image">
 
                   <mat-card-title class="post-card-title"
                     ><b>{{ post.title }}</b></mat-card-title
@@ -208,7 +216,7 @@
                     <mat-icon>event</mat-icon> {{ post.startDate | date }} to
                     {{ post.endDate | date }} <br />
                     <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                    <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
+                    <mat-icon> location_on</mat-icon> {{ post.location }} <br />
                     <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
                     <br />
                   </mat-card-content>
@@ -335,11 +343,19 @@
               <section class="cards" *ngIf="post.reports.length > 0">
                 <mat-card class="report-post-card">
                   <img
+                   *ngIf="!post.imagePath"
                     mat-card-image
                     class="card-image"
                     src="../../../assets/dark-background-placeholder.png"
-                    alt="Placeholder image"
+                    alt="Placeholder image for post"
                   />
+
+                  <img
+                  *ngIf="post.imagePath"
+                  mat-card-image
+                  class="card-image"
+                  [src]="post.imagePath"
+                  alt="Post's Image">
 
                   <mat-card-title class="post-card-title"
                     ><b>{{ post.title }}</b></mat-card-title
@@ -351,7 +367,7 @@
                     <mat-icon>event</mat-icon> {{ post.startDate | date }} to
                     {{ post.endDate | date }} <br />
                     <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                    <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
+                    <mat-icon> location_on</mat-icon> {{ post.location }} <br />
                     <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
                     <br />
                   </mat-card-content>

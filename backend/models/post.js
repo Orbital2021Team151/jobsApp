@@ -20,14 +20,14 @@ const postSchema = mongoose.Schema({
   location: {type: String, },
   beneficiaries: {type: String, required: true},
 
-  approved: {type: Boolean, },
+  approved: {type: Boolean, required: true},
   creationDate: {type: Date, /* required: true */},
   publishDate: {type: Date, /* required: true */},
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 
-  rejected: {type: Boolean, },
+  rejected: {type: Boolean, required: true},
   reason: {type: String, },
-  completed: {type: Boolean, },
+  completed: {type: Boolean, required: true},
 
   students: {type: {email: String, contact: Number, content: String, applicationUser: String}, required: true},
   reports: {type: {email: String, contact: Number, content: String}, required: true},

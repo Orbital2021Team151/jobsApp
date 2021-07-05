@@ -121,7 +121,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
-    //console.log(this.posts);
+    console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 

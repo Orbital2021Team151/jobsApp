@@ -245,6 +245,9 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     // console.log("this is postcreateorg");
     // console.log(post.image);
 
+    //console.log("Form to be submitted is: ");
+    //console.log(this.form.value);
+
     if (this.form.value.image) {
       this.postsService.addPost(post);
     } else {

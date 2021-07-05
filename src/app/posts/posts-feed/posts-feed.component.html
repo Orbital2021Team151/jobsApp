@@ -85,98 +85,115 @@
   </mat-card>
 </div>
 
-
 <div class="published-posts">
-
   <p *ngIf="noFilteredPost">
     <i>No posts match your filter criteria</i>
   </p>
 
   <ng-container *ngFor="let post of filteredPosts">
-
     <section class="cards">
       <mat-card class="published-post-card">
         <img
-        mat-card-image
-        class="card-image"
-        src="../../../assets/dark-background-placeholder.png"
-        alt="Placeholder image">
+          *ngIf="!post.imagePath"
+          mat-card-image
+          class="card-image"
+          src="../../../assets/dark-background-placeholder.png"
+          alt="Placeholder image for post"
+        />
 
-        <mat-card-title class="post-card-title"><b>{{ post.title }}</b></mat-card-title>
+        <img
+          *ngIf="post.imagePath"
+          mat-card-image
+          class="card-image"
+          [src]="post.imagePath"
+          alt="Post's image"
+        />
+
+        <mat-card-title class="post-card-title"
+          ><b>{{ post.title }}</b></mat-card-title
+        >
         <mat-card-subtitle class="post-card-subtitle">
           by <b>{{ post.orgName }}</b>
-          </mat-card-subtitle
-        >
+        </mat-card-subtitle>
         <mat-card-content class="post-card-content">
-          <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
-          <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
-          <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
-          <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
-
+          <mat-icon>event</mat-icon> {{ post.startDate | date }} to
+          {{ post.endDate | date }} <br />
+          <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
+          <mat-icon> location_on</mat-icon> {{ post.location }} <br />
+          <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
+          <br />
         </mat-card-content>
         <mat-card-footer class="post-card-footer">
-
           <button
-          mat-raised-button
-          *ngIf="(userRole === 'Student' || userRole === 'Student / NUS Alumni') && !applyBefore(post)"
-          class="post-card-footer-button"
-          color="accent"
-          (click)=" onApply(post.id, 'You have applied to this post before!', studentContent)"
+            mat-raised-button
+            *ngIf="
+              (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
+              !applyBefore(post)
+            "
+            class="post-card-footer-button"
+            color="accent"
+            (click)="
+              onApply(
+                post.id,
+                'You have applied to this post before!',
+                studentContent
+              )
+            "
           >
             Apply
           </button>
 
           <button
-          mat-raised-button
-          disabled
-          class="post-card-footer-button"
-          *ngIf="applyBefore(post)"
+            mat-raised-button
+            disabled
+            class="post-card-footer-button"
+            *ngIf="applyBefore(post)"
           >
             Apply
           </button>
 
           <button
-          mat-raised-button
-          class="post-card-footer-button"
-          color="warn"
-          *ngIf=" (userRole === 'Student' || userRole === 'Student / NUS Alumni') && !reportBefore(post)"
-          (click)="onReport(post.id, errorMessage, reportContent)"
+            mat-raised-button
+            class="post-card-footer-button"
+            color="warn"
+            *ngIf="
+              (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
+              !reportBefore(post)
+            "
+            (click)="onReport(post.id, errorMessage, reportContent)"
           >
             Report
           </button>
 
           <button
-          mat-raised-button
-          disabled
-          *ngIf="reportBefore(post)"
-          class="post-card-footer-button"
+            mat-raised-button
+            disabled
+            *ngIf="reportBefore(post)"
+            class="post-card-footer-button"
           >
             Report
           </button>
 
           <button
-          mat-raised-button
-          class="post-card-footer-button"
-          color="warn"
-          *ngIf="userRole === 'Admin' || post.uen === authStatusObject.uen"
-          (click)="onDeletePrompt(deleteContent)"
+            mat-raised-button
+            class="post-card-footer-button"
+            color="warn"
+            *ngIf="userRole === 'Admin' || post.uen === authStatusObject.uen"
+            (click)="onDeletePrompt(deleteContent)"
           >
             Delete
           </button>
 
           <button
-          mat-button
-          color="primary"
-          class="post-card-footer-button"
-          (click)="onMoreInfo(content)"
+            mat-button
+            color="primary"
+            class="post-card-footer-button"
+            (click)="onMoreInfo(content)"
           >
             Learn More
           </button>
         </mat-card-footer>
       </mat-card>
-
-
-
     </section>
 
     <ng-template #messageForStudent let-modal>
