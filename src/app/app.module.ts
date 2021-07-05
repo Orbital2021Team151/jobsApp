@@ -60,6 +60,8 @@ import { DARK_MODE_OPTIONS } from 'angular-dark-mode';
 import { AppliedPostNotificationDialog } from './dialogs/applied-post-notification-dialog/applied-post-notification-dialog.component';
 import { DashBoardLandingComponent } from './admin/dashboard-landing/dashboard-landing.component';
 import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';
+import { StartDateErrorDialog } from './dialogs/start-date-error-dialog/start-date-error-dialog.component';
+import { WrongStudentEmailDialog } from './dialogs/wrong-student-email-dialog/wrong-student-email-dialog.component';
 
 
 @NgModule({
@@ -88,6 +90,8 @@ import { StudentBoardChangePasswordComponent } from './admin/student-board-chang
     AppliedPostNotificationDialog,
     DashBoardLandingComponent,
     StudentBoardChangePasswordComponent,
+    StartDateErrorDialog,
+    WrongStudentEmailDialog,
   ],
 
   imports: [

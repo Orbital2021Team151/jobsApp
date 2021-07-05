@@ -8,6 +8,9 @@ import { mimeType } from '../mime-type.validator';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Post } from '../post.model';
 import { PostsService } from '../post.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AppliedBeforeDialog } from 'src/app/dialogs/applied-before-dialog/applied-before-dialog.component';
+import { StartDateErrorDialog } from 'src/app/dialogs/start-date-error-dialog/start-date-error-dialog.component';
 
 @Component({
   selector: 'app-post-create',
@@ -103,6 +106,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   ]
   termsAndConditions = false;
   pocEmail: string = "";
+  imagePreview: string;
 
 
   /* FormGroup version */
@@ -122,12 +126,18 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
   public locationControl = new FormControl(null);
   public beneficiariesControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
-  public imageControl = new FormControl(null, {});
+  public imageControl = new FormControl(null, {
+    /*
+    validators: [Validators.required],
+    asyncValidators: [mimeType]
+    */
+  });
 
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog,
   ) {
 
     this.form = new FormGroup({
@@ -174,6 +184,12 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (this.form.value.startDate > this.form.value.endDate) {
+      this.modalService.dismissAll();
+      this.dialog.open(StartDateErrorDialog);
+      return;
+    }
+
     const post: Post = {
       id: null,
       orgName: this.form.value.orgName,
@@ -217,7 +233,13 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
     this.pendingApproval = true;
 
-    this.postsService.addPost(post);
+    if (this.form.value.image) {
+      this.postsService.addPost(post);
+    } else {
+      this.postsService.addPostNoImage(post);
+    }
+
+    //this.postsService.addPost(post);
 
     this.modalService.dismissAll();
     this.form.reset();
@@ -234,5 +256,18 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
+  }
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({image: file});
+    this.form.get('image').updateValueAndValidity();
+    // console.log(file);
+    // console.log(this.form);
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 }

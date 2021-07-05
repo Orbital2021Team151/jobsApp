@@ -1,7 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
 import { Subscription } from "rxjs";
+import { AppliedBeforeDialog } from "src/app/dialogs/applied-before-dialog/applied-before-dialog.component";
+import { WrongStudentEmailDialog } from "src/app/dialogs/wrong-student-email-dialog/wrong-student-email-dialog.component";
 import { AuthService } from "../auth.service";
 
 @Component({
@@ -26,7 +29,11 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
   public hideUenControl = new FormControl(false);
   public passwordControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
 
-  constructor(public authService: AuthService, private http: HttpClient, fb: FormBuilder) {
+  constructor(
+    public authService: AuthService,
+    private http: HttpClient,
+    fb: FormBuilder,
+    public dialog: MatDialog) {
 
     /*
     this.form = fb.group({
@@ -87,6 +94,10 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
     console.log(this.form);
 
     if (this.form.value.role === "Student / NUS Alumni") {
+      if (this.form.value.email.indexOf("@u.nus.edu") == -1) {
+        this.dialog.open(WrongStudentEmailDialog);
+        return;
+      }
       this.form.setValue({
         role: this.form.value.role,
         orgName: this.form.value.orgName,

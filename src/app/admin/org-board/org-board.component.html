@@ -1,559 +1,876 @@
-<div class="change-password-card">
-  <mat-card class="mat-elevation-z0 change-password-body">
+<!-- <p>navbar stuff</p> -->
+<p>
+  You should use <code>class="nav-pills"</code> if you need pills and the <code>[orientation]</code> input
+  to change nav orientation
+</p>
 
-    <mat-card-title class="change-password-title">Change Password</mat-card-title>
+<div class="d-flex">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
 
-    <form #changePasswordForm="ngForm">
-      <mat-form-field
-        appearance="outline"
-        class="change-password-form-field"
-      >
-        <input
-          matInput
-          class="change-password-form-input"
-          [type]="hideCurrentPassword ? 'password' : 'text'"
-          ngModel
-          name="currentPassword"
-          required
-          #currentPassword="ngModel"
-          placeholder="Current Password"
-        />
-
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hideCurrentPassword = !hideCurrentPassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hideCurrentPassword"
-        >
-          <mat-icon>{{
-            hideCurrentPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
-
-        <mat-error *ngIf="currentPassword.invalid"
-          >Please enter your current password.</mat-error
-        >
-      </mat-form-field>
-
-      <mat-form-field
-        appearance="outline"
-        class="change-password-form-field"
-      >
-        <input
-          matInput
-          class="change-password-form-input"
-          [type]="hideNewPassword ? 'password' : 'text'"
-          ngModel
-          name="newPassword"
-          required
-          #newPassword="ngModel"
-          placeholder="New Password"
-        />
-
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hideNewPassword = !hideNewPassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hideNewPassword"
-        >
-          <mat-icon>{{
-            hideNewPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
-
-        <mat-error *ngIf="newPassword.invalid"
-          >Please provide us with your new password.</mat-error
-        >
-      </mat-form-field>
-
-      <mat-card-footer class="change-password-footer">
-        <button
-          class="btn btn-outline-primary mb-2 mr-2 change-password-button"
-          (click)="onChangePassword(changePasswordForm)"
-        >
-          Request password change
-        </button>
-      </mat-card-footer>
-    </form>
-  </mat-card>
-</div>
-
-<div
-  *ngIf="requestedNewPassword"
-  class="alert alert-success alert-dismissible fade show"
-  role="alert"
->
-  <strong>Password changed!</strong>
-  <button
-    (click)="closeNotification()"
-    type="button"
-    class="close"
-    data-dismiss="alert"
-    aria-label="Close"
-  >
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-<div class="info-text">
-  <p>
-    <b>Posts that has not been approved by CCSGP Admins yet D:</b>
-  </p>
-
-  <div class="request-posts-div">
-    <div class="centered" *ngFor="let post of posts">
-      <section class="cards" *ngIf="!post.approved">
-        <mat-card
-        class="request-post-card"
-        *ngIf="!post.approved">
-
-        <img
-          *ngIf="!post.imagePath"
-          mat-card-image
-          class="card-image"
-          src="../../../assets/dark-background-placeholder.png"
-          alt="Placeholder image">
-
-          <img
-          *ngIf="post.imagePath"
-          mat-card-image
-          class="card-image"
-          [src]="post.imagePath"
-          alt="Placeholder image">
-
-          <mat-card-title class="post-card-title"
-          ><b>{{ post.title }}</b>
-          </mat-card-title>
-
-          <mat-card-subtitle class="post-card-subtitle">
-            by <b>{{ post.orgName }}</b>
-            </mat-card-subtitle>
-
-          <mat-card-content class="post-card-content">
-            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
-            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
-            <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
-            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
-
-          </mat-card-content>
-
-          <mat-footer class="post-card-footer">
-
-            <button
-            mat-raised-button
-              color="warn"
-              (click)="onDeletePrompt(deleteUnapprovedContent)"
+    <li ngbNavItem="changePassword" class="nav-item">
+      <a ngbNavLink>Change Password</a>
+      <ng-template ngbNavContent>
+        <div class="change-password-card">
+          <mat-card class="mat-elevation-z0 change-password-body">
+            <mat-card-title class="change-password-title"
+              >Change Password</mat-card-title
             >
-              Remove Request
-            </button>
 
-            <button
-            mat-button
-            color="primary"
-            (click)="onMoreInfo(content)"
+            <form #changePasswordForm="ngForm" class="changePasswordForm">
+              <mat-form-field
+                appearance="outline"
+                class="change-password-form-field"
+              >
+                <input
+                  matInput
+                  class="change-password-form-input"
+                  [type]="hideCurrentPassword ? 'password' : 'text'"
+                  ngModel
+                  name="currentPassword"
+                  required
+                  #currentPassword="ngModel"
+                  placeholder="Current Password"
+                />
+
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hideCurrentPassword = !hideCurrentPassword"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hideCurrentPassword"
+                >
+                  <mat-icon>{{
+                    hideCurrentPassword ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+
+                <mat-error *ngIf="currentPassword.invalid"
+                  >Please enter your current password.</mat-error
+                >
+              </mat-form-field>
+
+              <mat-form-field
+                appearance="outline"
+                class="change-password-form-field"
+              >
+                <input
+                  matInput
+                  class="change-password-form-input"
+                  [type]="hideNewPassword ? 'password' : 'text'"
+                  ngModel
+                  name="newPassword"
+                  required
+                  #newPassword="ngModel"
+                  placeholder="New Password"
+                />
+
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hideNewPassword = !hideNewPassword"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hideNewPassword"
+                >
+                  <mat-icon>{{
+                    hideNewPassword ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+
+                <mat-error *ngIf="newPassword.invalid"
+                  >Please provide us with your new password.</mat-error
+                >
+              </mat-form-field>
+
+              <button
+                class="btn btn-outline-primary mb-2 mr-2"
+                (click)="onChangePassword(changePasswordForm)"
+              >
+                Change Password
+              </button>
+            </form>
+
+            <div
+              *ngIf="requestedNewPassword"
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
             >
-              Learn More
-            </button>
-
-          </mat-footer>
-        </mat-card>
-      </section>
-
-      <ng-template #content let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">{{ post.title }}</h4>
-          <button
-            type="button"
-            class="close"
-            aria-label="Close"
-            (click)="modal.dismiss('Cross click')"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <p>Organization Name: {{ post.orgName }}</p>
-          <p>UEN: {{ post.uen }}</p>
-          <p>Student Group Name: {{ post.studentGroupName }}</p>
-          <p>Point of Contact (POC): {{ post.POC }}</p>
-          <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
-          <p>POC's email: {{ post.email }}</p>
-          <p>Brief Description for gig: {{ post.content }}</p>
-          <p>Frequency/Type of volunteer opportunity: {{ post.opportunityType }}</p>
-          <p>Preferred Skills: {{ post.skills }}</p>
-          <p>Start Date: {{ post.startDate | date }}</p>
-          <p>End Date: {{ post.endDate | date }}</p>
-          <p>Commitment Hours: {{ post.hoursRequired }}</p>
-          <p>Beneficiaries: {{ post.beneficiaries }}</p>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-light"
-            (click)="modal.close('Close click')"
-          >
-            Close
-          </button>
+              <strong>Password changed!</strong>
+              <button
+                (click)="closeNotification()"
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </mat-card>
         </div>
       </ng-template>
+    </li>
+
+    <li ngbNavItem="pendingPosts">
+      <a ngbNavLink>Posts pending approval from admins</a>
+      <ng-template ngbNavContent>
+        <div class="info-text">
+          <p>
+            <b>Posts that has not been approved by CCSGP Admins yet D:</b>
+          </p>
+
+          <div class="request-posts-div">
+            <div class="centered" *ngFor="let post of posts">
+              <section class="cards" *ngIf="!post.approved">
+                <mat-card
+                class="request-post-card"
+                *ngIf="!post.approved">
+
+                <img
+                  *ngIf="!post.imagePath"
+                  mat-card-image
+                  class="card-image"
+                  src="../../../assets/dark-background-placeholder.png"
+                  alt="Placeholder image">
+
+                  <img
+                  *ngIf="post.imagePath"
+                  mat-card-image
+                  class="card-image"
+                  [src]="post.imagePath"
+                  alt="Placeholder image">
+
+                  <mat-card-title class="post-card-title"
+                  ><b>{{ post.title }}</b>
+                  </mat-card-title>
+
+                  <mat-card-subtitle class="post-card-subtitle">
+                    by <b>{{ post.orgName }}</b>
+                    </mat-card-subtitle>
+
+                  <mat-card-content class="post-card-content">
+                    <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+                    <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
+                    <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
+                    <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+
+                  </mat-card-content>
+
+                  <mat-footer class="post-card-footer">
+
+                    <button
+                    mat-raised-button
+                      color="warn"
+                      (click)="onDeletePrompt(deleteUnapprovedContent)"
+                    >
+                      Remove Request
+                    </button>
+
+                    <button
+                    mat-button
+                    color="primary"
+                    (click)="onMoreInfo(content)"
+                    >
+                      Learn More
+                    </button>
+
+                  </mat-footer>
+                </mat-card>
+              </section>
+
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">{{ post.title }}</h4>
+                  <button
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <p>Organization Name: {{ post.orgName }}</p>
+                  <p>UEN: {{ post.uen }}</p>
+                  <p>Student Group Name: {{ post.studentGroupName }}</p>
+                  <p>Point of Contact (POC): {{ post.POC }}</p>
+                  <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
+                  <p>POC's email: {{ post.email }}</p>
+                  <p>Brief Description for gig: {{ post.content }}</p>
+                  <p>Frequency/Type of volunteer opportunity: {{ post.opportunityType }}</p>
+                  <p>Preferred Skills: {{ post.skills }}</p>
+                  <p>Start Date: {{ post.startDate | date }}</p>
+                  <p>End Date: {{ post.endDate | date }}</p>
+                  <p>Commitment Hours: {{ post.hoursRequired }}</p>
+                  <p>Beneficiaries: {{ post.beneficiaries }}</p>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.close('Close click')"
+                  >
+                    Close
+                  </button>
+                </div>
+              </ng-template>
 
 
 
-      <ng-template #deleteUnapprovedContent let-modal>
-        <div
-          class="modal-header"
-        >
-          <h4 class="modal-title">Delete Confirmation</h4>
-          <button
-            type="button"
-            class="submit"
-            aria-label="apply"
-            (click)="modal.dismiss('Cross click')"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+              <ng-template #deleteUnapprovedContent let-modal>
+                <div
+                  class="modal-header"
+                >
+                  <h4 class="modal-title">Delete Confirmation</h4>
+                  <button
+                    type="button"
+                    class="submit"
+                    aria-label="apply"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
 
-        <div
-          class="modal-body"
-        >
-        <p>Are you sure you want to delete the post?</p>
-        </div>
+                <div
+                  class="modal-body"
+                >
+                <p>Are you sure you want to delete the post?</p>
+                </div>
 
-        <div
-          class="modal-footer"
-        >
+                <div
+                  class="modal-footer"
+                >
 
-        <button
-            type="button"
-            class="btn btn-light"
-            (click)="
-            onDelete(post.id) && modal.dismiss('Cross click')
-            "
-          >
-            Confirm Delete
-          </button>
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="
+                    onDelete(post.id) && modal.dismiss('Cross click')
+                    "
+                  >
+                    Confirm Delete
+                  </button>
 
-          <button
-            type="button"
-            class="btn btn-light"
-            (click)="modal.dismiss('Cross click')"
-          >
-            Cancel
-          </button>
-        </div>
-      </ng-template>
-
-
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </ng-template>
 
 
 
-    </div>
-  </div>
-
-  <p
-    class="info-text-2"
-    *ngIf="hasRequest === false">
-    <i>No post requests or all posts have already been approved.</i>
-  </p>
-  <mat-spinner *ngIf="hasRequest === null"></mat-spinner>
-
-</div>
-
-<div class="info-text">
-  <p>
-    <b>Posts with applications! :D</b>
-  </p>
-
-  <div class="application-posts-div">
-    <div class="centered" *ngFor="let post of posts">
-      <section class="cards" *ngIf="post.students.length > 0">
-
-        <mat-card class="application-post-card">
-
-          <img
-          *ngIf="!post.imagePath"
-          mat-card-image
-          class="card-image"
-          src="../../../assets/light-background-placeholder.png"
-          alt="Placeholder image">
-
-          <img
-          *ngIf="post.imagePath"
-          mat-card-image
-          class="card-image"
-          [src]="post.imagePath"
-          alt="Placeholder image">
 
 
-          <mat-card-title class="post-card-title">
-            <b>{{ post.title }}</b>
-          </mat-card-title>
-
-          <mat-card-subtitle class="post-card-subtitle">
-            by <b>{{ post.orgName }}</b>
-          </mat-card-subtitle>
-
-          <mat-card-content class="post-card-content">
-            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
-            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
-            <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
-            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
-          </mat-card-content>
-
-          <mat-footer class="post-card-footer">
-            <button
-            mat-raised-button
-            class="application-post-card-button-view-applicants"
-              (click)="onMoreInfo(applicantContent)"
-            >
-              View Applicants
-            </button>
-
-            <button
-            mat-raised-button
-            class="application-post-card-button-complete"
-              (click)="onDeletePrompt(deleteReportedContent)"
-            >
-              Delete
-            </button>
-
-            <button
-            mat-button
-            (click)="onMoreInfo(content)"
-            >
-              Learn More
-            </button>
-          </mat-footer>
-        </mat-card>
-
-        <!--
-        <p-card
-          class="card"
-          [style]="{
-            width: '25rem',
-            height: '15rem',
-            'text-align': 'center',
-            'background-color': '#122e2b',
-            color: 'white'
-          }"
-          styleClass="p-card-shadow"
-        >
-          <p-card-header
-            [style]="{
-              'text-overflow': 'ellipsis',
-              width: '22rem',
-              'max-width': '22rem',
-              height: '1.7rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: 'white',
-              'font-size': '1.5rem'
-            }"
-          >
-            <b>{{ post.title }}</b>
-          </p-card-header>
-
-          <p-card-subheader
-            [style]="{
-              height: '3.5rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: '#D9D9D9'
-            }"
-          >
-            {{ post.startDate | date }} to {{ post.endDate | date }}
-          </p-card-subheader>
-
-          <p-card-content
-            [style]="{
-              'text-overflow': 'ellipsis',
-              width: '22rem',
-              'max-width': '22rem',
-              height: '3rem',
-              display: 'block',
-              overflow: 'hidden',
-              'white-space': 'nowrap',
-              color: '#D9D9D9'
-            }"
-            >{{ post.content }}
-          </p-card-content>
-
-          <ng-template pTemplate="footer" #footer>
-            <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onMoreInfo(applicantContent)"
-            >
-              View Applicants
-            </button>
-
-            <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onMoreInfo(content)"
-            >
-              Learn More
-            </button>
-
-            <button
-              class="btn btn-outline-primary mb-2 mr-2"
-              (click)="onDeletePrompt(deleteAppliedContent)"
-            >
-              Delete
-            </button>
-          </ng-template>
-        </p-card>
-      -->
-
-
-
-      </section>
-
-      <ng-template #applicantContent let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">{{ post.title }}</h4>
-          <button
-            type="button"
-            class="close"
-            aria-label="Close"
-            (click)="modal.dismiss('Cross click')"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <div *ngFor="let student of post.students">
-            <div style="border: thin solid black; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-              <p style="text-align: center">
-                Student's Email: {{ student.email }}
-              </p>
-              <p style="text-align: center">
-                Student's Contact: {{ student.contact }}
-              </p>
-              <p style="text-align: center">
-                Student's Application: {{ student.content }}
-              </p>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-light"
-            (click)="modal.close('Close click')"
-          >
-            Close
-          </button>
-        </div>
-      </ng-template>
 
-      <ng-template #content let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">{{ post.title }}</h4>
-          <button
-            type="button"
-            class="close"
-            aria-label="Close"
-            (click)="modal.dismiss('Cross click')"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+          <p
+            class="info-text-2"
+            *ngIf="hasRequest === false">
+            <i>No post requests or all posts have already been approved.</i>
+          </p>
+          <mat-spinner *ngIf="hasRequest === null"></mat-spinner>
 
-        <div class="modal-body">
-          <p>Organization Name: {{ post.orgName }}</p>
-          <p>UEN: {{ post.uen }}</p>
-          <p>Point of Contact (POC): {{ post.POC }}</p>
-          <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
-          <p>POC's email: {{ post.email }}</p>
-          <p>Brief Description for gig: {{ post.content }}</p>
-          <p>Preferred Skills: {{ post.skills }}</p>
-          <p>Start Date: {{ post.startDate | date }}</p>
-          <p>End Date: {{ post.endDate | date }}</p>
-          <p>Commitment Hours: {{ post.hoursRequired }}</p>
-          <p>Beneficiaries: {{ post.beneficiaries }}</p>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-light"
-            (click)="modal.close('Close click')"
-          >
-            Close
-          </button>
         </div>
       </ng-template>
+    </li>
+    <li ngbNavItem="postsWithApplications">
+      <a ngbNavLink>Posts with applications</a>
+      <ng-template ngbNavContent>
+        <div class="info-text">
+          <p>
+            <b>Posts with applications! :D</b>
+          </p>
+
+          <div class="application-posts-div">
+            <div class="centered" *ngFor="let post of posts">
+              <section class="cards" *ngIf="post.students.length > 0">
+
+                <mat-card class="application-post-card">
+
+                  <img
+                  *ngIf="!post.imagePath"
+                  mat-card-image
+                  class="card-image"
+                  src="../../../assets/light-background-placeholder.png"
+                  alt="Placeholder image">
+
+                  <img
+                  *ngIf="post.imagePath"
+                  mat-card-image
+                  class="card-image"
+                  [src]="post.imagePath"
+                  alt="Placeholder image">
 
 
-      <ng-template #deleteAppliedContent let-modal>
-        <div
-          class="modal-header"
-        >
-          <h4 class="modal-title">Delete Confirmation</h4>
-          <button
-            type="button"
-            class="submit"
-            aria-label="apply"
-            (click)="modal.dismiss('Cross click')"
+                  <mat-card-title class="post-card-title">
+                    <b>{{ post.title }}</b>
+                  </mat-card-title>
+
+                  <mat-card-subtitle class="post-card-subtitle">
+                    by <b>{{ post.orgName }}</b>
+                  </mat-card-subtitle>
+
+                  <mat-card-content class="post-card-content">
+                    <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+                    <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
+                    <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
+                    <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+                  </mat-card-content>
+
+                  <mat-footer class="post-card-footer">
+                    <button
+                    mat-raised-button
+                    class="application-post-card-button-view-applicants"
+                      (click)="onMoreInfo(applicantContent)"
+                    >
+                      View Applicants
+                    </button>
+
+                    <button
+                    mat-raised-button
+                    class="application-post-card-button-complete"
+                      (click)="onDeletePrompt(deleteReportedContent)"
+                    >
+                      Delete
+                    </button>
+
+                    <button
+                    mat-button
+                    (click)="onMoreInfo(content)"
+                    >
+                      Learn More
+                    </button>
+                  </mat-footer>
+                </mat-card>
+
+                <!--
+                <p-card
+                  class="card"
+                  [style]="{
+                    width: '25rem',
+                    height: '15rem',
+                    'text-align': 'center',
+                    'background-color': '#122e2b',
+                    color: 'white'
+                  }"
+                  styleClass="p-card-shadow"
+                >
+                  <p-card-header
+                    [style]="{
+                      'text-overflow': 'ellipsis',
+                      width: '22rem',
+                      'max-width': '22rem',
+                      height: '1.7rem',
+                      display: 'block',
+                      overflow: 'hidden',
+                      'white-space': 'nowrap',
+                      color: 'white',
+                      'font-size': '1.5rem'
+                    }"
+                  >
+                    <b>{{ post.title }}</b>
+                  </p-card-header>
+
+                  <p-card-subheader
+                    [style]="{
+                      height: '3.5rem',
+                      display: 'block',
+                      overflow: 'hidden',
+                      'white-space': 'nowrap',
+                      color: '#D9D9D9'
+                    }"
+                  >
+                    {{ post.startDate | date }} to {{ post.endDate | date }}
+                  </p-card-subheader>
+
+                  <p-card-content
+                    [style]="{
+                      'text-overflow': 'ellipsis',
+                      width: '22rem',
+                      'max-width': '22rem',
+                      height: '3rem',
+                      display: 'block',
+                      overflow: 'hidden',
+                      'white-space': 'nowrap',
+                      color: '#D9D9D9'
+                    }"
+                    >{{ post.content }}
+                  </p-card-content>
+
+                  <ng-template pTemplate="footer" #footer>
+                    <button
+                      class="btn btn-outline-primary mb-2 mr-2"
+                      (click)="onMoreInfo(applicantContent)"
+                    >
+                      View Applicants
+                    </button>
+
+                    <button
+                      class="btn btn-outline-primary mb-2 mr-2"
+                      (click)="onMoreInfo(content)"
+                    >
+                      Learn More
+                    </button>
+
+                    <button
+                      class="btn btn-outline-primary mb-2 mr-2"
+                      (click)="onDeletePrompt(deleteAppliedContent)"
+                    >
+                      Delete
+                    </button>
+                  </ng-template>
+                </p-card>
+              -->
+
+
+
+              </section>
+
+              <ng-template #applicantContent let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">{{ post.title }}</h4>
+                  <button
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <div *ngFor="let student of post.students">
+                    <div style="border: thin solid black; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                      <p style="text-align: center">
+                        Student's Email: {{ student.email }}
+                      </p>
+                      <p style="text-align: center">
+                        Student's Contact: {{ student.contact }}
+                      </p>
+                      <p style="text-align: center">
+                        Student's Application: {{ student.content }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.close('Close click')"
+                  >
+                    Close
+                  </button>
+                </div>
+              </ng-template>
+
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">{{ post.title }}</h4>
+                  <button
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <p>Organization Name: {{ post.orgName }}</p>
+                  <p>UEN: {{ post.uen }}</p>
+                  <p>Point of Contact (POC): {{ post.POC }}</p>
+                  <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
+                  <p>POC's email: {{ post.email }}</p>
+                  <p>Brief Description for gig: {{ post.content }}</p>
+                  <p>Preferred Skills: {{ post.skills }}</p>
+                  <p>Start Date: {{ post.startDate | date }}</p>
+                  <p>End Date: {{ post.endDate | date }}</p>
+                  <p>Commitment Hours: {{ post.hoursRequired }}</p>
+                  <p>Beneficiaries: {{ post.beneficiaries }}</p>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.close('Close click')"
+                  >
+                    Close
+                  </button>
+                </div>
+              </ng-template>
+
+
+              <ng-template #deleteAppliedContent let-modal>
+                <div
+                  class="modal-header"
+                >
+                  <h4 class="modal-title">Delete Confirmation</h4>
+                  <button
+                    type="button"
+                    class="submit"
+                    aria-label="apply"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div
+                  class="modal-body"
+                >
+                <p>Are you sure you want to delete the post?</p>
+                </div>
+
+                <div
+                  class="modal-footer"
+                >
+
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="
+                    onDeleteAppliedPost(post.id) && modal.dismiss('Cross click')
+                    "
+                  >
+                    Confirm Delete
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </ng-template>
+
+
+
+
+
+
+
+            </div>
+          </div>
+
+          <p
+            class="info-text-2"
+            *ngIf="hasApplication === false"
           >
-            <span aria-hidden="true">&times;</span>
-          </button>
+            <i>No applications yet</i>
+          </p>
+          <mat-spinner *ngIf="hasApplication === null"></mat-spinner>
         </div>
 
-        <div
-          class="modal-body"
-        >
-        <p>Are you sure you want to delete the post?</p>
-        </div>
-
-        <div
-          class="modal-footer"
-        >
-
-        <button
-            type="button"
-            class="btn btn-light"
-            (click)="
-            onDeleteAppliedPost(post.id) && modal.dismiss('Cross click')
-            "
-          >
-            Confirm Delete
-          </button>
-
-          <button
-            type="button"
-            class="btn btn-light"
-            (click)="modal.dismiss('Cross click')"
-          >
-            Cancel
-          </button>
-        </div>
       </ng-template>
+    </li>
+    <li ngbNavItem="Approved posts">
+      <a ngbNavLink>Approved posts</a>
+      <ng-template ngbNavContent>
+        <div class="info-text">
+          <p>
+            <b>Posts with applications! :D</b>
+          </p>
+
+          <div class="application-posts-div">
+            <div class="centered" *ngFor="let post of approvedPosts">
+              <section class="cards">
+                <mat-card class="application-post-card">
+                  <img
+                  *ngIf="!post.imagePath"
+                  mat-card-image
+                  class="card-image"
+                  src="../../../assets/light-background-placeholder.png"
+                  alt="Placeholder image">
+
+                  <img
+                  *ngIf="post.imagePath"
+                  mat-card-image
+                  class="card-image"
+                  [src]="post.imagePath"
+                  alt="Placeholder image">
+
+
+                  <mat-card-title class="post-card-title">
+                    <b>{{ post.title }}</b>
+                  </mat-card-title>
+
+                  <mat-card-subtitle class="post-card-subtitle">
+                    by <b>{{ post.orgName }}</b>
+                  </mat-card-subtitle>
+
+                  <mat-card-content class="post-card-content">
+                    <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
+                    <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
+                    <mat-icon> location_on</mat-icon> Kent Ridge Drive <br>
+                    <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+                  </mat-card-content>
+
+                  <mat-footer class="post-card-footer">
+                    <button
+                    mat-raised-button
+                    class="application-post-card-button-view-applicants"
+                      (click)="onMoreInfo(applicantContent)"
+                    >
+                      View Applicants
+                    </button>
+
+                    <button
+                    mat-raised-button
+                    class="application-post-card-button-complete"
+                      (click)="onDeletePrompt(deleteReportedContent)"
+                    >
+                      Delete
+                    </button>
+
+                    <button
+                    mat-button
+                    (click)="onMoreInfo(content)"
+                    >
+                      Learn More
+                    </button>
+                  </mat-footer>
+                </mat-card>
+
+                <!--
+                <p-card
+                  class="card"
+                  [style]="{
+                    width: '25rem',
+                    height: '15rem',
+                    'text-align': 'center',
+                    'background-color': '#122e2b',
+                    color: 'white'
+                  }"
+                  styleClass="p-card-shadow"
+                >
+                  <p-card-header
+                    [style]="{
+                      'text-overflow': 'ellipsis',
+                      width: '22rem',
+                      'max-width': '22rem',
+                      height: '1.7rem',
+                      display: 'block',
+                      overflow: 'hidden',
+                      'white-space': 'nowrap',
+                      color: 'white',
+                      'font-size': '1.5rem'
+                    }"
+                  >
+                    <b>{{ post.title }}</b>
+                  </p-card-header>
+
+                  <p-card-subheader
+                    [style]="{
+                      height: '3.5rem',
+                      display: 'block',
+                      overflow: 'hidden',
+                      'white-space': 'nowrap',
+                      color: '#D9D9D9'
+                    }"
+                  >
+                    {{ post.startDate | date }} to {{ post.endDate | date }}
+                  </p-card-subheader>
+
+                  <p-card-content
+                    [style]="{
+                      'text-overflow': 'ellipsis',
+                      width: '22rem',
+                      'max-width': '22rem',
+                      height: '3rem',
+                      display: 'block',
+                      overflow: 'hidden',
+                      'white-space': 'nowrap',
+                      color: '#D9D9D9'
+                    }"
+                    >{{ post.content }}
+                  </p-card-content>
+
+                  <ng-template pTemplate="footer" #footer>
+                    <button
+                      class="btn btn-outline-primary mb-2 mr-2"
+                      (click)="onMoreInfo(applicantContent)"
+                    >
+                      View Applicants
+                    </button>
+
+                    <button
+                      class="btn btn-outline-primary mb-2 mr-2"
+                      (click)="onMoreInfo(content)"
+                    >
+                      Learn More
+                    </button>
+
+                    <button
+                      class="btn btn-outline-primary mb-2 mr-2"
+                      (click)="onDeletePrompt(deleteAppliedContent)"
+                    >
+                      Delete
+                    </button>
+                  </ng-template>
+                </p-card>
+              -->
 
 
 
+              </section>
+
+              <ng-template #applicantContent let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">{{ post.title }}</h4>
+                  <button
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <div *ngFor="let student of post.students">
+                    <div style="border: thin solid black; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                      <p style="text-align: center">
+                        Student's Email: {{ student.email }}
+                      </p>
+                      <p style="text-align: center">
+                        Student's Contact: {{ student.contact }}
+                      </p>
+                      <p style="text-align: center">
+                        Student's Application: {{ student.content }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.close('Close click')"
+                  >
+                    Close
+                  </button>
+                </div>
+              </ng-template>
+
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">{{ post.title }}</h4>
+                  <button
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <p>Organization Name: {{ post.orgName }}</p>
+                  <p>UEN: {{ post.uen }}</p>
+                  <p>Point of Contact (POC): {{ post.POC }}</p>
+                  <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
+                  <p>POC's email: {{ post.email }}</p>
+                  <p>Brief Description for gig: {{ post.content }}</p>
+                  <p>Preferred Skills: {{ post.skills }}</p>
+                  <p>Start Date: {{ post.startDate | date }}</p>
+                  <p>End Date: {{ post.endDate | date }}</p>
+                  <p>Commitment Hours: {{ post.hoursRequired }}</p>
+                  <p>Beneficiaries: {{ post.beneficiaries }}</p>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.close('Close click')"
+                  >
+                    Close
+                  </button>
+                </div>
+              </ng-template>
 
 
+              <ng-template #deleteAppliedContent let-modal>
+                <div
+                  class="modal-header"
+                >
+                  <h4 class="modal-title">Delete Confirmation</h4>
+                  <button
+                    type="button"
+                    class="submit"
+                    aria-label="apply"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
 
+                <div
+                  class="modal-body"
+                >
+                <p>Are you sure you want to delete the post?</p>
+                </div>
 
-    </div>
-  </div>
+                <div
+                  class="modal-footer"
+                >
 
-  <p
-    class="info-text-2"
-    *ngIf="hasApplication === false"
-  >
-    <i>No applications yet</i>
-  </p>
-  <mat-spinner *ngIf="hasApplication === null"></mat-spinner>
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="
+                    onDeleteAppliedPost(post.id) && modal.dismiss('Cross click')
+                    "
+                  >
+                    Confirm Delete
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+
+          <p
+            class="info-text-2"
+            *ngIf="hasNoApprovedPosts"
+          >
+            <i>No approved posts yet</i>
+          </p>
+          <mat-spinner *ngIf="hasNoApprovedPosts === null"></mat-spinner>
+        </div>
+
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ml-4"></div>
 </div>
+
+<pre>Active: {{ active }}</pre>
+
 
 <footer class="container-footer">
   <!--

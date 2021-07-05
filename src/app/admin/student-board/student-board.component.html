@@ -1,143 +1,290 @@
-<!-- navbar -->
-<!-- <h1>Dashboard navbar</h1> -->
-<div class="sidenavbar">
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened>
-      <mat-action-list>
-        <mat-list-item [routerLink]="['changepassword']"
-          >Change Password</mat-list-item
-        >
-      </mat-action-list>
-    </mat-sidenav>
-    <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
-
 <!-- <p>STUDENT's board is supposed to be here!!!!!</p> -->
-<div class="change-password-card">
-  <mat-card class="mat-elevation-z0 change-password-body">
-    <mat-card-title class="change-password-title"
-      >Change Password</mat-card-title
-    >
+<div class="d-flex">
+  <ul
+    ngbNav
+    #nav="ngbNav"
+    [(activeId)]="active"
+    class="nav-pills"
+    orientation="vertical"
+  >
+    <li ngbNavItem="changePassword" class="nav-item">
+      <a ngbNavLink>Change Password</a>
+      <ng-template ngbNavContent>
+        <div class="change-password-card">
+          <mat-card class="mat-elevation-z0 change-password-body">
+            <mat-card-title class="change-password-title"
+              >Change Password</mat-card-title
+            >
 
-    <form #changePasswordForm="ngForm" class="changePasswordForm">
-      <mat-form-field appearance="outline" class="change-password-form-field">
-        <input
-          matInput
-          class="change-password-form-input"
-          [type]="hideCurrentPassword ? 'password' : 'text'"
-          ngModel
-          name="currentPassword"
-          required
-          #currentPassword="ngModel"
-          placeholder="Current Password"
-        />
+            <form #changePasswordForm="ngForm" class="changePasswordForm">
+              <mat-form-field
+                appearance="outline"
+                class="change-password-form-field"
+              >
+                <input
+                  matInput
+                  class="change-password-form-input"
+                  [type]="hideCurrentPassword ? 'password' : 'text'"
+                  ngModel
+                  name="currentPassword"
+                  required
+                  #currentPassword="ngModel"
+                  placeholder="Current Password"
+                />
 
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hideCurrentPassword = !hideCurrentPassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hideCurrentPassword"
-        >
-          <mat-icon>{{
-            hideCurrentPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hideCurrentPassword = !hideCurrentPassword"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hideCurrentPassword"
+                >
+                  <mat-icon>{{
+                    hideCurrentPassword ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
 
-        <mat-error *ngIf="currentPassword.invalid"
-          >Please enter your current password.</mat-error
-        >
-      </mat-form-field>
+                <mat-error *ngIf="currentPassword.invalid"
+                  >Please enter your current password.</mat-error
+                >
+              </mat-form-field>
 
-      <mat-form-field appearance="outline" class="change-password-form-field">
-        <input
-          matInput
-          class="change-password-form-input"
-          [type]="hideNewPassword ? 'password' : 'text'"
-          ngModel
-          name="newPassword"
-          required
-          #newPassword="ngModel"
-          placeholder="New Password"
-        />
+              <mat-form-field
+                appearance="outline"
+                class="change-password-form-field"
+              >
+                <input
+                  matInput
+                  class="change-password-form-input"
+                  [type]="hideNewPassword ? 'password' : 'text'"
+                  ngModel
+                  name="newPassword"
+                  required
+                  #newPassword="ngModel"
+                  placeholder="New Password"
+                />
 
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hideNewPassword = !hideNewPassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hideNewPassword"
-        >
-          <mat-icon>{{
-            hideNewPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hideNewPassword = !hideNewPassword"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hideNewPassword"
+                >
+                  <mat-icon>{{
+                    hideNewPassword ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
 
-        <mat-error *ngIf="newPassword.invalid"
-          >Please provide us with your new password.</mat-error
-        >
-      </mat-form-field>
+                <mat-error *ngIf="newPassword.invalid"
+                  >Please provide us with your new password.</mat-error
+                >
+              </mat-form-field>
 
-      <button
-        class="btn btn-outline-primary mb-2 mr-2"
-        (click)="onChangePassword(changePasswordForm)"
-      >
-        Change Password
-      </button>
-    </form>
+              <button
+                class="btn btn-outline-primary mb-2 mr-2"
+                (click)="onChangePassword(changePasswordForm)"
+              >
+                Change Password
+              </button>
+            </form>
 
-    <div
-      *ngIf="requestedNewPassword"
-      class="alert alert-success alert-dismissible fade show"
-      role="alert"
-    >
-      <strong>Password changed!</strong>
-      <button
-        (click)="closeNotification()"
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  </mat-card>
+            <div
+              *ngIf="requestedNewPassword"
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <strong>Password changed!</strong>
+              <button
+                (click)="closeNotification()"
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </mat-card>
+        </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem="appliedPosts" class="nav-item">
+      <a ngbNavLink>Posts that you have applied to</a>
+      <ng-template ngbNavContent>
+        <div class="centered" *ngFor="let post of appliedPosts">
+          <section class="cards" *ngIf="post.students.length > 0">
+            <mat-card class="application-post-card">
+              <img
+                *ngIf="!post.imagePath"
+                mat-card-image
+                class="card-image"
+                src="../../../assets/light-background-placeholder.png"
+                alt="Placeholder image"
+              />
+
+              <img
+                *ngIf="post.imagePath"
+                mat-card-image
+                class="card-image"
+                [src]="post.imagePath"
+                alt="Placeholder image"
+              />
+
+              <mat-card-title class="post-card-title">
+                <b>{{ post.title }}</b>
+              </mat-card-title>
+
+              <mat-card-subtitle class="post-card-subtitle">
+                by <b>{{ post.orgName }}</b>
+              </mat-card-subtitle>
+
+              <mat-card-content class="post-card-content">
+                <mat-icon>event</mat-icon> {{ post.startDate | date }} to
+                {{ post.endDate | date }} <br />
+                <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
+                <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
+                <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
+                <br />
+              </mat-card-content>
+
+              <mat-footer class="post-card-footer">
+                <button mat-button (click)="onMoreInfo(content)">
+                  Learn More
+                </button>
+              </mat-footer>
+            </mat-card>
+          </section>
+        </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem="reportedPosts" class="nav-item">
+      <a ngbNavLink>Posts that you have reported</a>
+      <ng-template ngbNavContent>
+        <div class="report-posts-div">
+          <div class="centered" *ngFor="let post of reportedPosts">
+            <section class="cards" *ngIf="post.reports.length > 0">
+              <mat-card class="report-post-card">
+                <img
+                  mat-card-image
+                  class="card-image"
+                  src="../../../assets/dark-background-placeholder.png"
+                  alt="Placeholder image"
+                />
+
+                <mat-card-title class="post-card-title"
+                  ><b>{{ post.title }}</b></mat-card-title
+                >
+                <mat-card-subtitle class="post-card-subtitle">
+                  by <b>{{ post.orgName }}</b>
+                </mat-card-subtitle>
+                <mat-card-content class="post-card-content">
+                  <mat-icon>event</mat-icon> {{ post.startDate | date }} to
+                  {{ post.endDate | date }} <br />
+                  <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
+                  <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
+                  <mat-icon>people_outline</mat-icon> Skillsets:
+                  {{ post.skills }} <br />
+                </mat-card-content>
+                <mat-footer class="post-card-footer">
+                  <button
+                    mat-button
+                    color="primary"
+                    (click)="onMoreInfo(content)"
+                  >
+                    Learn More
+                  </button>
+                </mat-footer>
+              </mat-card>
+            </section>
+
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title">{{ post.title }}</h4>
+                <button
+                  type="button"
+                  class="close"
+                  aria-label="Close"
+                  (click)="modal.dismiss('Cross click')"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <p>Organization Name: {{ post.orgName }}</p>
+                <p>UEN: {{ post.uen }}</p>
+                <p>Point of Contact (POC): {{ post.POC }}</p>
+                <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
+                <p>POC's email: {{ post.email }}</p>
+                <p>Brief Description for gig: {{ post.content }}</p>
+                <p>Preferred Skills: {{ post.skills }}</p>
+                <p>Start Date: {{ post.startDate | date }}</p>
+                <p>End Date: {{ post.endDate | date }}</p>
+                <p>Commitment Hours: {{ post.hoursRequired }}</p>
+                <p>Beneficiaries: {{ post.beneficiaries }}</p>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  (click)="modal.close('Close click')"
+                >
+                  Close
+                </button>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <p class="info-text mat-body-1" *ngIf="hasReport === false">
+          No post with reports! :D
+        </p>
+      </ng-template>
+    </li>
+    <li ngbNavItem="updateBeneficiaries" class="nav-item">
+      <a ngbNavLink>Update Beneficiaries</a>
+      <ng-template ngbNavContent>
+        <div class="update-beneficiaries-card">
+          <mat-card class="mat-elevation-z0 change-password-body">
+            <mat-card-title class="change-password-title">
+              Update interested beneficiaries
+            </mat-card-title>
+            <mat-form-field
+              appearance="outline"
+              class="change-password-form-field"
+              text-center
+            >
+              <mat-label>Beneficiaries</mat-label>
+              <mat-select
+                multiple
+                ngModel
+                #beneficiariesInput="ngModel"
+                name="beneficiariesSelected"
+                [(ngModel)]="beneficiariesSelected"
+              >
+                <mat-option
+                  *ngFor="let beneficiary of beneficiaries"
+                  [value]="beneficiary"
+                  >{{ beneficiary }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <button class="btn btn-outline-primary mb-2 mr-2" (click)="updateUser()">
+              Update Interested Beneficiaries
+            </button>
+          </mat-card>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ml-4"></div>
 </div>
 
-<div class="update-beneficiaries-card">
-  <mat-card class="mat-elevation-z0 change-password-body">
-    <mat-card-title class="change-password-title">
-      Update interested beneficiaries
-    </mat-card-title>
-    <mat-form-field
-      appearance="outline"
-      class="change-password-form-field"
-      text-center
-    >
-      <mat-label>Beneficiaries</mat-label>
-      <mat-select
-        multiple
-        ngModel
-        #beneficiariesInput="ngModel"
-        name="beneficiariesSelected"
-        [(ngModel)]="beneficiariesSelected"
-      >
-        <mat-option
-          *ngFor="let beneficiary of beneficiaries"
-          [value]="beneficiary"
-          >{{ beneficiary }}</mat-option
-        >
-      </mat-select>
-    </mat-form-field>
-
-    <button class="btn btn-outline-primary mb-2 mr-2" (click)="updateUser()">
-      Update Interested Beneficiaries
-    </button>
-  </mat-card>
-</div>
-
+<!-- <pre>Tab opened: {{ active }}</pre> -->
 <footer class="container">
   <!--
   <p class="float-end"><a href="#">Back to top</a></p>
@@ -153,157 +300,18 @@
   </p>
 </footer>
 
-<div class="info-text">
-  <p>
-    <b>Posts that you applied to!</b>
-  </p>
-
+<!-- <div class="info-text">
   <div class="application-posts-div">
-    <div class="centered" *ngFor="let post of appliedPosts">
-      <section class="cards" *ngIf="post.students.length > 0">
-        <mat-card class="application-post-card">
-          <img
-            *ngIf="!post.imagePath"
-            mat-card-image
-            class="card-image"
-            src="../../../assets/light-background-placeholder.png"
-            alt="Placeholder image"
-          />
-
-          <img
-            *ngIf="post.imagePath"
-            mat-card-image
-            class="card-image"
-            [src]="post.imagePath"
-            alt="Placeholder image"
-          />
-
-          <mat-card-title class="post-card-title">
-            <b>{{ post.title }}</b>
-          </mat-card-title>
-
-          <mat-card-subtitle class="post-card-subtitle">
-            by <b>{{ post.orgName }}</b>
-          </mat-card-subtitle>
-
-          <mat-card-content class="post-card-content">
-            <mat-icon>event</mat-icon> {{ post.startDate | date }} to
-            {{ post.endDate | date }} <br />
-            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-            <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
-            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
-            <br />
-          </mat-card-content>
-
-          <mat-footer class="post-card-footer">
-            <!-- <button
-            mat-raised-button
-            class="application-post-card-button-view-applicants"
-              (click)="onMoreInfo(applicantContent)"
-            >
-              View Applicants
-            </button> -->
-
-            <!-- <button
-            mat-raised-button
-            class="application-post-card-button-complete"
-              (click)="onDeletePrompt(deleteReportedContent)"
-            >
-              Delete
-            </button> -->
-
-            <button mat-button (click)="onMoreInfo(content)">Learn More</button>
-          </mat-footer>
-        </mat-card>
-      </section>
-    </div>
-
     <div class="info-text">
       <p>
         <b>Posts that you reported.</b>
       </p>
 
-      <div class="report-posts-div">
-        <div class="centered" *ngFor="let post of reportedPosts">
-          <section class="cards" *ngIf="post.reports.length > 0">
-            <mat-card class="report-post-card">
-              <img
-                mat-card-image
-                class="card-image"
-                src="../../../assets/dark-background-placeholder.png"
-                alt="Placeholder image"
-              />
 
-              <mat-card-title class="post-card-title"
-                ><b>{{ post.title }}</b></mat-card-title
-              >
-              <mat-card-subtitle class="post-card-subtitle">
-                by <b>{{ post.orgName }}</b>
-              </mat-card-subtitle>
-              <mat-card-content class="post-card-content">
-                <mat-icon>event</mat-icon> {{ post.startDate | date }} to
-                {{ post.endDate | date }} <br />
-                <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
-                <mat-icon>people_outline</mat-icon> Skillsets:
-                {{ post.skills }} <br />
-              </mat-card-content>
-              <mat-footer class="post-card-footer">
-                <button
-                  mat-button
-                  color="primary"
-                  (click)="onMoreInfo(content)"
-                >
-                  Learn More
-                </button>
-              </mat-footer>
-            </mat-card>
-          </section>
-
-          <ng-template #content let-modal>
-            <div class="modal-header">
-              <h4 class="modal-title">{{ post.title }}</h4>
-              <button
-                type="button"
-                class="close"
-                aria-label="Close"
-                (click)="modal.dismiss('Cross click')"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <div class="modal-body">
-              <p>Organization Name: {{ post.orgName }}</p>
-              <p>UEN: {{ post.uen }}</p>
-              <p>Point of Contact (POC): {{ post.POC }}</p>
-              <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
-              <p>POC's email: {{ post.email }}</p>
-              <p>Brief Description for gig: {{ post.content }}</p>
-              <p>Preferred Skills: {{ post.skills }}</p>
-              <p>Start Date: {{ post.startDate | date }}</p>
-              <p>End Date: {{ post.endDate | date }}</p>
-              <p>Commitment Hours: {{ post.hoursRequired }}</p>
-              <p>Beneficiaries: {{ post.beneficiaries }}</p>
-            </div>
-
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-light"
-                (click)="modal.close('Close click')"
-              >
-                Close
-              </button>
-            </div>
-          </ng-template>
-        </div>
-      </div>
-    </div>
 
     <p class="info-text mat-body-1" *ngIf="hasReport === false">
       No post with reports! :D
     </p>
     <mat-spinner *ngIf="hasReport === null"></mat-spinner>
   </div>
-</div>
+</div> -->

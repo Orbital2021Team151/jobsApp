@@ -25,6 +25,7 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   hideCurrentPassword = true;
   hideNewPassword = true;
   requestedNewPassword = false;
+  active: string = "changePassword";
 
   private authStatusObject;
   beneficiaries: string[] = [

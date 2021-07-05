@@ -1,3 +1,24 @@
+/* For the navbar */
+
+.d-flex {
+  margin: auto;
+  /* padding-left: 14rem; */
+}
+
+a {
+  margin: auto;
+}
+
+.nav-pills {
+  padding-left: 14rem;
+  padding-top: 10px;
+}
+
+ng-template {
+  height: 100%;
+  width: 100%;
+}
+
 /* GLOBAL
 -------------------------------------------------- */
 .card-image {
@@ -76,7 +97,7 @@ button {
 -------------------------------------------------- */
 .change-password-card {
   margin: auto;
-  width: 50%;
+  width: 100%;
   padding: 10px;
 }
 
@@ -133,7 +154,7 @@ button {
 -------------------------------------------------- */
 .update-beneficiaries-card {
   margin: auto;
-  width: 50%;
+  width: 100%;
   padding: 10px;
   margin-bottom: 2rem;
 }

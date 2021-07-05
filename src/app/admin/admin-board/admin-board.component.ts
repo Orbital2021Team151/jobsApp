@@ -32,6 +32,9 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   postToBeDeleted: string;
   requestedNewPassword = false;
 
+  //navbar stuff
+  active: string = "changePassword";
+
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
   ngOnInit() {

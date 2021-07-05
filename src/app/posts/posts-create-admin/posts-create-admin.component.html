@@ -178,8 +178,12 @@
         <mat-datepicker #endDatePicker></mat-datepicker>
         <mat-error *ngIf="endDateControl.errors?.invalid">
           Please pick an end date.
-          </mat-error>
+        </mat-error>
       </mat-form-field>
+
+      <mat-error *ngIf="(startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value)">
+        Your start date cannot be later than the end date! If so, your post will be rejected!
+      </mat-error>
 
       <mat-form-field appearance="outline">
         <mat-label>Commitment Information</mat-label>
@@ -227,6 +231,15 @@
           >
         </mat-select>
       </mat-form-field>
+
+      <div>
+        <button mat-stroked-button type="button" (click)="filePicker.click()">Upload an image</button>
+        <input type="file" #filePicker (change)="onImagePicked($event)">
+      </div>
+
+      <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+        <img [src]="imagePreview" [alt]="form.value.titleControl">
+      </div>
 
     </form>
 

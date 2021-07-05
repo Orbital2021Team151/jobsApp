@@ -16,6 +16,7 @@ import { NgForm } from "@angular/forms";
 export class OrgBoardComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
+  approvedPosts: Post[] = [];
   //need to remove subscription later to prevent memory leak
 
   private postSub: Subscription;
@@ -27,10 +28,14 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   private postsNumber: number;
   private appliedPostsNumber: number;
 
+  public hasNoApprovedPosts: boolean = null;
   public hasRequest: Boolean = null;
   public hasApplication: Boolean = null;
   postToBeDeleted: string;
   requestedNewPassword = false;
+
+  //for the navbar
+  active: string = "changePassword";
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
@@ -57,6 +62,14 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
 
         this.posts = posts
             .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
+        this.approvedPosts = posts
+            .filter(post => {
+              return post.email === this.authStatusObject.email;
+            })
+
+        if (this.approvedPosts.length === 0) {
+          this.hasNoApprovedPosts = true;
+        }
 
         if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
