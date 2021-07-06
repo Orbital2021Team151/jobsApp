@@ -103,7 +103,25 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   opportunities: string[] = [
     "One-off",
     "Recurring",
-  ]
+  ];
+  skills: string[] = [
+    " Accounting & Finance",
+    " Arts & Music",
+    " Business Development",
+    " Coaching & Training",
+    " Counselling & Mentoring",
+    " Fundraising",
+    " Human Resource",
+    " Information Technology",
+    " Leadership Development",
+    " Legal",
+    " Marketing & Communications",
+    " Medical & Health",
+    " Volunteer Management",
+    " Other Skills (elaborate in description)",
+    " No Specific Skills Required",
+
+  ];
   termsAndConditions = false;
   pocEmail: string = "";
   imagePreview: string;
@@ -221,15 +239,14 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
       students: [],
       reports: [],
+
       image: this.form.value.image,
       imagePath: null,
-
-      //imagePath: null,
-      //creator: null,
     };
 
-    //console.log("Post creation fired! onAddPost. post is:");
-    //console.log(post);
+    console.log("Form to be submitted is: ");
+    console.log(this.form.value);
+
 
     this.pendingApproval = true;
 
@@ -243,6 +260,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
     this.modalService.dismissAll();
     this.form.reset();
+    this.imagePreview = '';
   }
 
   closeNotification() {

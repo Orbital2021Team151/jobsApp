@@ -32,7 +32,7 @@ exports.requestPost = (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
     opportunity: req.body.opportunity,
-    skills: req.body.skills,
+    skills: JSON.parse(req.body.skills),
 
     startDate: JSON.parse(req.body.startDate),
     endDate: JSON.parse(req.body.endDate),
@@ -371,6 +371,7 @@ exports.applyPost = (req, res, next) => {
 
 //report a post flagged out by a student
 exports.reportPost = (req, res, next) => {
+
   const newPost = new Post({
     _id: req.body.post.id,
     orgName: req.body.post.orgName,
@@ -398,6 +399,12 @@ exports.reportPost = (req, res, next) => {
     reports: req.body.post.reports,
   });
 
+  let reportInfo = {
+    email: req.body.student.email,
+    contact: req.body.student.contact,
+    content: req.body.student.content,
+  }
+
   Post.findByIdAndUpdate(req.body.post.id, newPost)
     .then((result) => {
       if (!result) {
@@ -416,12 +423,12 @@ exports.reportPost = (req, res, next) => {
         for (var userI = 0; userI < adminUsers.length; userI++) {
           let currentAdmin = adminUsers[userI];
           //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-          //sendReportToAdminEmail(currentAdmin.email, req.body.post);
+          //sendReportToAdminEmail(currentAdmin.email, req.body.student, req.body.post);
           //console.log("Report email sent to admin: " + currentAdmin.email);
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-        //sendReportAcknowledgementEmail(req.body.student.email, req.body.post);
+        //sendReportAcknowledgementEmail(req.body.student, req.body.post);
         //console.log("Report acknowledgement sent to: " + req.body.student.email);
 
         res.status(200).json({
@@ -483,6 +490,7 @@ exports.downloadPosts = (req, res, next) => {
 
           mappedData = data.map((obj) => {
             return {
+              location: obj.location,
               beneficiaries: obj.beneficiaries,
               orgName: obj.orgName,
               uen: obj.uen,
@@ -557,7 +565,11 @@ const sendNotificationEmail = (email, post) => {
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
     hoursRequired: post.hoursRequired,
+
+    location: post.location,
     beneficiaries: post.beneficiaries,
+
+    //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
   };
   const htmlToSend = template(replacements);
 
@@ -635,7 +647,11 @@ const sendPostApprovedNotificationEmail = (email, post) => {
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
     hoursRequired: post.hoursRequired,
+
+    location: post.locaiton,
     beneficiaries: post.beneficiaries,
+
+    //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
   };
   const htmlToSend = template(replacements);
 
@@ -713,7 +729,11 @@ const sendPostRequestedNotificationEmail = (email, post) => {
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
     hoursRequired: post.hoursRequired,
+
+    location: post.location,
     beneficiaries: post.beneficiaries,
+
+    //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
   };
   const htmlToSend = template(replacements);
 
@@ -765,7 +785,7 @@ const sendPostRequestedNotificationEmail = (email, post) => {
   });
 };
 
-const sendReportToAdminEmail = (email, post) => {
+const sendReportToAdminEmail = (adminEmail, student, post) => {
   var mailOptions;
   let sender = "CCSGP Report Alert";
 
@@ -779,6 +799,7 @@ const sendReportToAdminEmail = (email, post) => {
   const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
 
   const template = handlebars.compile(templateSource);
+
   const replacements = {
     orgName: post.orgName,
     POC: post.POC,
@@ -791,7 +812,15 @@ const sendReportToAdminEmail = (email, post) => {
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
     hoursRequired: post.hoursRequired,
+
+    location: post.location,
     beneficiaries: post.beneficiaries,
+
+    //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
+
+    studentEmail: student.email,
+    studentContact: student.contact,
+    studentContent: student.content,
   };
   const htmlToSend = template(replacements);
 
@@ -811,7 +840,7 @@ const sendReportToAdminEmail = (email, post) => {
 
   mailOptions = {
     from: sender,
-    to: email,
+    to: adminEmail,
     subject: "CCSGP Post Report Alert",
     html: htmlToSend,
     attachments: [
@@ -843,7 +872,7 @@ const sendReportToAdminEmail = (email, post) => {
   });
 };
 
-const sendReportAcknowledgementEmail = (email, post) => {
+const sendReportAcknowledgementEmail = (student, post) => {
   var mailOptions;
   let sender = "CCSGP Report Acknowledgement";
 
@@ -869,7 +898,15 @@ const sendReportAcknowledgementEmail = (email, post) => {
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
     hoursRequired: post.hoursRequired,
+
+    location: post.location,
     beneficiaries: post.beneficiaries,
+
+    //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
+
+    studentEmail: student.email,
+    studentContact: student.contact,
+    studentContent: student.content,
   };
   const htmlToSend = template(replacements);
 
@@ -947,7 +984,11 @@ const sendApplyAcknowledgementEmail = (email, post) => {
     startDate: new Date(post.startDate).toDateString(),
     endDate: new Date(post.endDate).toDateString(),
     hoursRequired: post.hoursRequired,
+
+    location: post.location,
     beneficiaries: post.beneficiaries,
+
+    //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
   };
   const htmlToSend = template(replacements);
 
@@ -999,6 +1040,26 @@ const sendApplyAcknowledgementEmail = (email, post) => {
   });
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Email without templating
+ */
 /*
 const sendNotificationEmail = (email, post) => {
   var Transport = nodemailer.createTransport({

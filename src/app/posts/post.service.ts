@@ -90,7 +90,7 @@ export class PostsService {
     postData.append("opportunity", post.opportunity);
 
     postData.append("content", post.content);
-    postData.append("skills", post.skills);
+    postData.append("skills", JSON.stringify(post.skills));
 
     postData.append("startDate", JSON.stringify(post.startDate));
     postData.append("endDate", JSON.stringify(post.endDate));

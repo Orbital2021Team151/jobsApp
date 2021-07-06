@@ -9,7 +9,7 @@ export interface Post {
   title: string, //title of job
   opportunity: string, //type of opportunity (one-time job/recurring)
   content: string, //description of job
-  skills: string, //skills required. should be a textbox for organization to just write down instead of limiting skills by making them choose from predefined list
+  skills: string[], //skills required. should be a textbox for organization to just write down instead of limiting skills by making them choose from predefined list
 
   startDate: Date, //Start date of volunteer
   endDate: Date, //End date of volunteer

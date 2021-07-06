@@ -61,7 +61,7 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
         //console.log("organisation dashboard's postService observable!");
 
         this.posts = posts
-            .filter(post => (post.orgName === this.authStatusObject.orgName && (post.uen === this.authStatusObject.uen)));
+            .filter(post => post.email === this.authStatusObject.email);
         this.approvedPosts = posts
             .filter(post => {
               return post.email === this.authStatusObject.email;

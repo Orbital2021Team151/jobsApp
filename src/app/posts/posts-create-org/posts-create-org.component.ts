@@ -107,7 +107,25 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   opportunities: string[] = [
     "One-off",
     "Recurring",
-  ]
+  ];
+  skills: string[] = [
+    " Accounting & Finance",
+    " Arts & Music",
+    " Business Development",
+    " Coaching & Training",
+    " Counselling & Mentoring",
+    " Fundraising",
+    " Human Resource",
+    " Information Technology",
+    " Leadership Development",
+    " Legal",
+    " Marketing & Communications",
+    " Medical & Health",
+    " Volunteer Management",
+    " Other Skills (elaborate in description)",
+    " No Specific Skills Required",
+
+  ];
   termsAndConditions = false;
 
   /* FormGroup version */
@@ -117,7 +135,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   public titleControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public contentControl = new FormControl(null, [Validators.required, Validators.minLength(100)]);
   public opportunitySelectedControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
-  public skillsControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public skillsControl = new FormControl(null, [Validators.required]);
   public startDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public endDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public hoursRequiredControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
@@ -237,16 +255,10 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     };
 
     this.pendingApproval = true;
-    // console.log("printing image directly from the form");
-    // console.log(this.form.value.imageControl);
-    // console.log(this.form.value.image);
-    //console.log("Post creation fired! onAddPost. post is:");
-    //console.log(post);
-    // console.log("this is postcreateorg");
-    // console.log(post.image);
 
     //console.log("Form to be submitted is: ");
     //console.log(this.form.value);
+
 
     if (this.form.value.image) {
       this.postsService.addPost(post);
@@ -257,6 +269,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     this.modalService.dismissAll();
     this.form.reset();
     this.imagePreview = '';
+
   }
 
   closeNotification() {
