@@ -299,22 +299,25 @@
       </div>
 
       <div class="modal-body">
+
+        <!-- TEMPLATE-DRIVEN FORM -->
         <!--
-        <form (submit)="submitApplication(post.id, appForm)" #appForm="ngForm">
-      -->
         <form #appForm="ngForm">
           <mat-form-field appearance="outline">
             <mat-label>Contact Number</mat-label>
             <input
               matInput
-              type="text"
+              type="number"
               ngModel
               name="contactNumber"
               required
               #contactNumber="ngModel"
-              placeholder="Please provide the organisation your contact number for them to reach out to you."
-              required
+              placeholder="81234567"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              minlength="8"
+              maxLength="8"
             />
+            <mat-error *ngIf="contactNumber.invalid">Please ensure your contact number is correct.</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -341,7 +344,7 @@
                   type="radio"
                   class="custom-control-input"
                   value="Student"
-                  name="role"
+                  name="applicationUser"
                   ngModel
                   required
                 />
@@ -356,7 +359,7 @@
                   type="radio"
                   class="custom-control-input"
                   value="NUS Alumni"
-                  name="role"
+                  name="applicationUser"
                   ngModel
                   required
                 />
@@ -367,9 +370,80 @@
             </div>
           </div>
         </form>
+        -->
+
+
+        <!-- REACTIVE FORM -->
+        <form [formGroup]="applicationForm">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Contact Number</mat-label>
+            <input
+              matInput
+              type="number"
+              required
+              [formControl]="applicationContactControl"
+              placeholder="eg 81234567"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              maxlength="8"
+            />
+            <mat-error *ngIf="!applicationForm.get('contact').valid">Please ensure your contact number is correct.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Reason for applying</mat-label>
+            <textarea
+              matInput
+              type="text"
+              required
+              [formControl]="applicationContentControl"
+              rows="10"
+              placeholder="Please elaborate on how you can contribute to the project."
+            ></textarea>
+            <mat-error *ngIf="applicationContentControl.errors?.required">Please ensure your contact number is correct.</mat-error>
+          </mat-form-field>
+
+          <div class="role-radio-group">
+            <mat-label> Applicant Type </mat-label>
+            <div class="d-block my-3">
+              <div
+              class="custom-control custom-radio"
+              >
+                <input
+                  id="Student"
+                  type="radio"
+                  class="custom-control-input"
+                  value="Student"
+                  [formControl]="applicationUserTypeControl"
+                />
+                <label class="custom-control-label" for="Student"
+                  >Student</label
+                >
+              </div>
+
+              <div class="custom-control custom-radio">
+                <input
+                  id="NUS Alumni"
+                  type="radio"
+                  class="custom-control-input"
+                  value="NUS Alumni"
+                  [formControl]="applicationUserTypeControl"
+                />
+                <label class="custom-control-label" for="NUS Alumni"
+                  >NUS Alumni</label
+                >
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+
       </div>
 
       <div class="modal-footer">
+        <!-- TEMPLATE DRIVEN FORM -->
+        <!--
         <mat-error *ngIf="appForm.invalid"
           >Please fill all required fields before submitting your
           request.</mat-error
@@ -383,6 +457,23 @@
         >
           Submit Application
         </button>
+        -->
+
+        <!-- REACTIVE FORM -->
+        <mat-error *ngIf="applicationForm.invalid"
+          >Please fill all required fields before submitting your
+          application.</mat-error
+        >
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="
+            submitApplicationReactive(post.id) && modal.dismiss('Cross click')
+          "
+        >
+          Submit Application
+        </button>
+
       </div>
     </ng-template>
 
@@ -400,6 +491,9 @@
       </div>
 
       <div class="modal-body">
+
+        <!-- TEMPLATE DRIVEN FORM -->
+        <!--
         <form (submit)="submitReport(post.id, reportForm)" #reportForm="ngForm">
           <mat-form-field appearance="outline">
             <mat-label>Contact Number</mat-label>
@@ -431,6 +525,38 @@
             ></textarea>
           </mat-form-field>
         </form>
+        -->
+
+        <!-- REACTIVE FORM -->
+        <form [formGroup]="reportForm">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Contact Number</mat-label>
+            <input
+              matInput
+              type="number"
+              required
+              [formControl]="reportContactControl"
+              placeholder="eg 81234567"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              maxlength="8"
+            />
+            <mat-error *ngIf="!reportForm.get('contact').valid">Please ensure your contact number is correct.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Reason for reporting</mat-label>
+            <textarea
+              matInput
+              type="text"
+              required
+              [formControl]="reportContentControl"
+              rows="10"
+              placeholder="Please elaborate provide us with the reason for reporting the post."
+            ></textarea>
+            <mat-error *ngIf="reportContentControl.errors?.required">Please ensure your contact number is correct.</mat-error>
+          </mat-form-field>
+        </form>
       </div>
 
       <div class="modal-footer">
@@ -451,11 +577,31 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div> -->
+
+        <mat-error *ngIf="reportForm.invalid"
+          >Please fill all required fields before submitting your
+          report.</mat-error
+        >
+
+        <!-- TEMPLATE DRIVEN FORM -->
+        <!--
         <button
           type="button"
           class="btn btn-light"
           (click)="
             submitReport(post.id, reportForm) && modal.dismiss('Cross click')
+          "
+        >
+          Submit Report
+        </button>
+        -->
+
+        <!-- REACTIVE FORM -->
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="
+            submitReportReactive(post.id) && modal.dismiss('Cross click')
           "
         >
           Submit Report

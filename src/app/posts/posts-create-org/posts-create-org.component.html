@@ -29,7 +29,6 @@
           required
           [formControl]="phoneNumberControl"
           placeholder="eg 12345678"
-          maxlength="8"
           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         />
         <mat-error *ngIf="phoneNumberControl.errors?.invalid"

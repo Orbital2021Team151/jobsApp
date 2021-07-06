@@ -118,6 +118,7 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
+    console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 

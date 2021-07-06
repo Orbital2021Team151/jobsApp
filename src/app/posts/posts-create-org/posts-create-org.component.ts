@@ -131,7 +131,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   /* FormGroup version */
   public form: FormGroup;
   public pocControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
-  public phoneNumberControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public phoneNumberControl = new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999)]);
   public titleControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public contentControl = new FormControl(null, [Validators.required, Validators.minLength(100)]);
   public opportunitySelectedControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);

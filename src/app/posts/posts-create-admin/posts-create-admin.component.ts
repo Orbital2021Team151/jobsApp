@@ -132,7 +132,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   public orgNameControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
   public uenControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public pocControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
-  public phoneNumberControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public phoneNumberControl = new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999)]);
   public emailControl = new FormControl(null, [Validators.required, Validators.minLength(10)]);
   public titleControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public contentControl = new FormControl(null, [Validators.required, Validators.minLength(100)]);
