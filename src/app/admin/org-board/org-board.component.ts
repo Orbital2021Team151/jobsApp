@@ -69,6 +69,8 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
 
         if (this.approvedPosts.length === 0) {
           this.hasNoApprovedPosts = true;
+        } else {
+          this.hasNoApprovedPosts = false;
         }
 
         if (this.posts.filter(post => !post.approved).length > 0) {

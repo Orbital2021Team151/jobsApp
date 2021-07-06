@@ -116,25 +116,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Type of opportunity</mat-label>
-        <mat-select
-          required
-          [formControl]="opportunitySelectedControl"
-          name="opportunitySelected"
-        >
-          <mat-option
-            *ngFor="let opportunity of opportunities"
-            [value]="opportunity"
-            >{{ opportunity }}</mat-option
-          >
-        </mat-select>
-        <mat-error *ngIf="opportunitySelectedControl.errors?.invalid"
-          >Please indicate the frequency of this job.</mat-error
-        >
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Type of opportunity</mat-label>
+        <mat-label>Preferred Skills</mat-label>
         <mat-select
           required
           multiple
@@ -151,25 +133,6 @@
           >Please select the skill(s) an applicant require for the job.</mat-error
         >
       </mat-form-field>
-
-      <!--
-      <mat-form-field appearance="outline">
-        <mat-label>Volunteer Opportunity Preferred Skills</mat-label>
-        <textarea
-          matInput
-          name="skills"
-          rows="10"
-          required
-          [formControl]="skillsControl"
-          minlength="1"
-          placeholder="eg Leadership, Open-mindedness, etc"
-        ></textarea>
-        <mat-error *ngIf="skillsControl.errors?.invalid"
-          >Please give a brief description on the preferred skills for the job
-          (minimum 10 words).</mat-error
-        >
-      </mat-form-field>
-      -->
 
       <mat-form-field appearance="outline">
         <mat-label>Choose a start date</mat-label>
@@ -207,6 +170,38 @@
       </mat-error>
 
       <mat-form-field appearance="outline">
+        <mat-label>Volunteer Type</mat-label>
+        <mat-select
+          required
+          [formControl]="opportunitySelectedControl"
+          name="opportunitySelected"
+        >
+          <mat-option
+            *ngFor="let opportunity of opportunities"
+            [value]="opportunity"
+            >{{ opportunity }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="opportunitySelectedControl.errors?.invalid"
+          >Please indicate the frequency of this job.</mat-error
+        >
+      </mat-form-field>
+
+      <!--
+      <div class="post-create-opportunity">
+        <mat-radio-group required [formControl]="opportunitySelectedControl">
+          <mat-radio-button value="Ad-hoc / One-off">
+            Ad-hoc / One-off
+          </mat-radio-button>
+
+          <mat-radio-button value="Regular / Recurring"
+            >Regular / Recurring</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+      -->
+
+      <mat-form-field appearance="outline">
         <mat-label>Commitment Information</mat-label>
         <input
           matInput
@@ -214,7 +209,7 @@
           name="hoursRequired"
           required
           [formControl]="hoursRequiredControl"
-          placeholder="eg 1hr per week"
+          placeholder="eg 1hr per week, Monday to Friday, anytime between 8am - 3pm"
         />
         <mat-error *ngIf="hoursRequiredControl.errors?.invalid"
           >Please provide the details on the commitment required of the student.</mat-error

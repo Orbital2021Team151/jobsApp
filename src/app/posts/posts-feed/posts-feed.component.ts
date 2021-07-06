@@ -15,7 +15,7 @@ import { AppliedPostNotificationDialog } from 'src/app/dialogs/applied-post-noti
   selector: 'app-post-feed',
   templateUrl: './posts-feed.component.html',
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./posts-feed.component.css'],
+  styleUrls: ['./posts-feed.component.scss'],
 })
 export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
@@ -93,9 +93,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       .subscribe((posts: Post[]) => {
         this.posts = [];
         this.filteredPosts = [];
-        //console.log("Post Feed's observable!");
-        //console.log("Posts are: ");
-        //console.log(this.posts);
 
         //show latest requested posts at the top of the timeline
         for (var i = posts.length - 1; i >= 0; i--) {
@@ -108,6 +105,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
         } else {
           this.hasApproved = false;
         }
+
+        //to only show posts that have been approved
+        this.filteredPosts = this.filteredPosts.filter(post => post.approved);
       });
   }
 

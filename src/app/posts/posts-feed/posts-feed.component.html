@@ -517,8 +517,26 @@
   <p class="info-text" *ngIf="hasApproved === false">
     No jobs listing currently available!
   </p>
+
+  <!--
   <mat-spinner *ngIf="hasApproved === null"></mat-spinner>
+  -->
+
+  <!-------------------------------------------
+    Loader 12. Nicer spinner
+  --------------------------------------------->
+  <div *ngIf="hasApproved === null" class="loader-wrapper loader-wrapper--12">
+    <div class="loader loader--12">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    </div>
+  </div>
 </div>
+
 
 <footer class="container">
   <!--
