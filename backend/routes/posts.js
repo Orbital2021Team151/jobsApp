@@ -40,6 +40,13 @@ router.get("", PostsController.getAllPosts);
 
 router.delete("/:id", checkAuth, PostsController.deletePost);
 
+
+//reject Post function
+router.put("/reject/:id", checkAuth, PostsController.rejectPost);
+
+//completed Post function
+router.put("/complete/:id", checkAuth, PostsController.completePost);
+
 //publish function
 router.put("/publish/:id", PostsController.publishPost);
 

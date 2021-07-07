@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
 import { NgForm } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-admin-board",
@@ -32,10 +33,19 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   postToBeDeleted: string;
   requestedNewPassword = false;
 
+
+  /* Reject FormGroup */
+  public rejectForm: FormGroup;
+  public rejectReasonControl = new FormControl(null);
+
   //navbar stuff
   active: string = "changePassword";
 
-  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
+  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {
+    this.rejectForm = new FormGroup({
+      reason: this.rejectReasonControl,
+    });
+  }
 
   ngOnInit() {
     /*
@@ -101,6 +111,36 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   onDeleteReportedPost(postId: string) {
     this.postsService.deletePost(postId);
+    this.reportedPostsNumber--;
+
+    if (this.reportedPostsNumber === 0) {
+      this.hasReport = false;
+    }
+    return true;
+  }
+
+  //need to test
+  onRejectPrompt(reportPrompt) {
+    this.modalService.open(reportPrompt, { size: 'lg' });
+  }
+
+  //need to test
+  onReject(postId: string) {
+    this.postsService.rejectPost(postId);
+    this.postsNumber--;
+    if (this.postsNumber === 0) {
+      this.hasRequest = false;
+    }
+
+    if (this.reportedPostsNumber === 0) {
+      this.hasReport = false;
+    }
+    return true;
+  }
+
+  //need to test
+  onRejectReportedPost(postId: string) {
+    this.postsService.rejectPost(postId);
     this.reportedPostsNumber--;
 
     if (this.reportedPostsNumber === 0) {

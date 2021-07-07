@@ -46,6 +46,7 @@ exports.requestPost = (req, res, next) => {
     publishDate: JSON.parse(req.body.publishDate),
     creator: req.userData.userId,
 
+    removed: null,
     rejected: false,
     reason: null,
     completed: false,
@@ -140,6 +141,7 @@ exports.requestPostNoImage = (req, res, next) => {
     publishDate: null,
     creator: req.userData.userId,
 
+    removed: null,
     rejected: false,
     reason: null,
     completed: false,
@@ -268,13 +270,18 @@ exports.publishPost = (req, res, next) => {
     endDate: req.body.endDate,
     hoursRequired: req.body.hoursRequired,
 
-
+    location: req.body.location,
     beneficiaries: req.body.beneficiaries,
 
     approved: true,
     creator: req.body.id,
     creationDate: req.body.creationDate,
     publishDate: req.body.publishDate,
+
+    removed: null,
+    rejected: false,
+    reason: null,
+    completed: false,
 
     students: [],
     reports: [],
@@ -330,6 +337,7 @@ exports.publishPost = (req, res, next) => {
     }); //in case anything goes wrong
 };
 
+//adds the student / NUS alumni applicant to the post
 exports.applyPost = (req, res, next) => {
   const newPost = new Post({
     _id: req.body.id,
@@ -347,12 +355,18 @@ exports.applyPost = (req, res, next) => {
     endDate: req.body.endDate,
     hoursRequired: req.body.hoursRequired,
 
+    location: req.body.location,
     beneficiaries: req.body.beneficiaries,
 
     approved: true,
     creator: req.body.id,
     creationDate: req.body.creationDate,
     publishDate: req.body.publishDate,
+
+    removed: null,
+    rejected: false,
+    reason: null,
+    completed: false,
 
     students: req.body.students,
     reports: req.body.reports,
@@ -388,7 +402,13 @@ exports.reportPost = (req, res, next) => {
     endDate: req.body.post.endDate,
     hoursRequired: req.body.post.hoursRequired,
 
+    location: req.body.location,
     beneficiaries: req.body.post.beneficiaries,
+
+    removed: null,
+    rejected: false,
+    reason: null,
+    completed: false,
 
     approved: true,
     creator: req.body.post.id,
@@ -444,6 +464,100 @@ exports.reportPost = (req, res, next) => {
           "Something went wrong at reporting post. either reporting the post itself or failed to send notification to admins",
       });
     });
+};
+
+//Rejects the post. Either can be done by admin or done by organisation
+//TODO: Need to change clauses
+exports.rejectPost = (req, res, next) => {
+  const newPost = new Post({
+    _id: req.body.id,
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    opportunity: req.body.opportunity,
+    skills: req.body.skills,
+
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    hoursRequired: req.body.hoursRequired,
+
+    location: req.body.location,
+    beneficiaries: req.body.beneficiaries,
+
+    removed: "REJECTED",
+    rejected: false,
+    reason: "Post has been rejected",
+    completed: false,
+
+    approved: true,
+    creator: req.body.id,
+    creationDate: req.body.creationDate,
+    publishDate: req.body.publishDate,
+
+    students: req.body.students,
+    reports: req.body.reports,
+  });
+
+  Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
+    //sends email to organisation to inform that that someone applied for their post?
+
+    //to just to inform the person who applied for the post that their application got through.
+    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
+    //sendApplyAcknowledgementEmail(req.body.email, req.body);
+
+    res.status(200).json("Applied for posting!");
+  });
+};
+
+//Post is marked as completed. Either can be done by admin or done by organisation
+//TODO: Need to change clauses
+exports.completePost = (req, res, next) => {
+  const newPost = new Post({
+    _id: req.body.id,
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    opportunity: req.body.opportunity,
+    skills: req.body.skills,
+
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    hoursRequired: req.body.hoursRequired,
+
+    location: req.body.location,
+    beneficiaries: req.body.beneficiaries,
+
+    removed: "COMPLETED",
+    rejected: false,
+    reason: "Post request was completed",
+    completed: false,
+
+    approved: true,
+    creator: req.body.id,
+    creationDate: req.body.creationDate,
+    publishDate: req.body.publishDate,
+
+    students: req.body.students,
+    reports: req.body.reports,
+  });
+
+  Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
+    //sends email to organisation to inform that that someone applied for their post?
+
+    //to just to inform the person who applied for the post that their application got through.
+    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
+    //sendApplyAcknowledgementEmail(req.body.email, req.body);
+
+    res.status(200).json("Applied for posting!");
+  });
 };
 
 exports.downloadPosts = (req, res, next) => {

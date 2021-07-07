@@ -162,6 +162,38 @@ export class PostsService {
       });
   }
 
+  rejectPost(postId: string) {
+    const postToBeRejected = this.getPost(postId);
+
+    //console.log("At postsService now. Post to be rejected is: ");
+    //console.log(postToBeRejected);
+
+    this.http
+      .put(BACKEND_URL + 'api/posts/reject' + "/" + postToBeRejected.id, postToBeRejected)
+      .subscribe((response) => {
+        //this.router.navigate(['/']);
+        console.log("post successfully rejected!");
+        this.posts = this.posts.filter(post => post.id !== postId);
+        this.postsUpdated.next([...this.posts]);
+      });
+  }
+
+  completePost(postId: string) {
+    const postToBeCompleted = this.getPost(postId);
+
+    //console.log("At postsService now. Post to be rejected is: ");
+    //console.log(postToBeRejected);
+
+    this.http
+      .put(BACKEND_URL + 'api/posts/complete' + "/" + postToBeCompleted.id, postToBeCompleted)
+      .subscribe((response) => {
+        //this.router.navigate(['/']);
+        console.log("post successfully completed! (As in the request has been fulfilled)");
+        this.posts = this.posts.filter(post => post.id !== postId);
+        this.postsUpdated.next([...this.posts]);
+      });
+  }
+
   deletePost(postId: string) {
     this.http
       .delete(BACKEND_URL + 'api/posts' + "/" + postId)
@@ -287,30 +319,5 @@ export class PostsService {
 
     });
   }
-
-
-  /*
-  checkEmailExists(email: string) {
-
-    const bodyObject = {email: email};
-
-    this.http
-    .post(BACKEND_URL + 'api/posts/check', bodyObject)
-    .subscribe((response) => {
-      console.log("Hi from postService check email exists");
-      console.log(response);
-    });
-  }
-
-  checkVerifyEmailExistsCredits() {
-    this.http.get('https://app.verify-email.org/api/v1/Y9AYEP6RPc0C440d68rjzGIxisRa8Za2EHVdznQvqhOQlLqWRH/credits')
-    .subscribe(response => {
-      console.log("Checking verify-email.org amount of credits left");
-      console.log(response);
-    })
-  }
-  */
-
-
 
 }

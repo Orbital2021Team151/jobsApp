@@ -63,6 +63,10 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   public reportContactControl = new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999)]);
   public reportContentControl = new FormControl(null, [Validators.required, ]);
 
+  /* Reject FormGroup */
+  public rejectForm: FormGroup;
+  public rejectReasonControl = new FormControl(null);
+
   private postSub: Subscription;
   private authStatusSub: Subscription;
 
@@ -103,7 +107,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       content: this.reportContentControl,
     });
 
-
+    this.rejectForm = new FormGroup({
+      reason: this.rejectReasonControl,
+    });
   }
 
   ngOnInit() {
@@ -141,6 +147,28 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   onDelete(postId: string) {
     this.postsService.deletePost(postId);
+    return true;
+  }
+
+  //need to test
+  onCompletePrompt(completePrompt) {
+    this.modalService.open(completePrompt, { size: 'lg' });
+  }
+
+  //need to test
+  onComplete(postId: string) {
+    this.postsService.completePost(postId);
+    return true;
+  }
+
+  //need to test
+  onRejectPrompt(rejectPrompt) {
+    this.modalService.open(rejectPrompt, { size: 'lg' });
+  }
+
+  //need to test
+  onReject(postId: string) {
+    this.postsService.rejectPost(postId);
     return true;
   }
 

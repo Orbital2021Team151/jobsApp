@@ -25,9 +25,10 @@ const postSchema = mongoose.Schema({
   publishDate: {type: Date, /* required: true */},
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 
-  rejected: {type: Boolean, required: true},
+  removed: {type: String, required: true},
+  rejected: {type: Boolean, required: true}, //remove in future
   reason: {type: String, },
-  completed: {type: Boolean, required: true},
+  completed: {type: Boolean, required: true}, //remove in future
 
   students: {type: {email: String, contact: Number, content: String, applicationUser: String}, required: true},
   reports: {type: {email: String, contact: Number, content: String}, required: true},

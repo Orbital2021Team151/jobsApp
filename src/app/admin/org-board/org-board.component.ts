@@ -108,6 +108,8 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
+  //function should not be available since after a post is approved, it can either only be
+  //rejected by admin or mark as complete
   onDeleteAppliedPost(postId: string) {
     this.postsService.deletePost(postId);
     this.appliedPostsNumber--;
