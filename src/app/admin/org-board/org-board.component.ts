@@ -119,9 +119,44 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     }
   }
 
+  //testing needed
+  onComplete(postId: string) {
+    this.postsService.completePost(postId);
+    this.postsNumber--;
+    if (this.postsNumber === 0) {
+      this.hasRequest = false;
+    }
+
+    if (this.appliedPostsNumber === 0) {
+      this.hasApplication = false;
+    }
+
+    return true;
+  }
+
+  //testing needed
+  onCompletePrompt(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  //testing needed
+  onCompleteAppliedPost(postId: string) {
+    this.postsService.completePost(postId);
+    this.appliedPostsNumber--;
+
+    if (this.appliedPostsNumber === 0) {
+      this.hasApplication = false;
+    }
+  }
+
   onMoreInfo(content) {
     console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
+  }
+
+  //need to build up along with button. RxJS changes and email accompanying
+  acceptApplicant(userEmail: string) {
+
   }
 
   onChangePassword(form: NgForm) {

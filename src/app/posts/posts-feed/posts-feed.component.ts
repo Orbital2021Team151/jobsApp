@@ -305,8 +305,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   submitApplication(postId: string, appForm: NgForm) {
-
-
     if (appForm.invalid) {
       return;
     }

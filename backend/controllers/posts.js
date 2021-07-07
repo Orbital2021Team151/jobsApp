@@ -503,13 +503,7 @@ exports.rejectPost = (req, res, next) => {
   });
 
   Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
-    //sends email to organisation to inform that that someone applied for their post?
-
-    //to just to inform the person who applied for the post that their application got through.
-    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-    //sendApplyAcknowledgementEmail(req.body.email, req.body);
-
-    res.status(200).json("Applied for posting!");
+    res.status(200).json("Post has been rejected!");
   });
 };
 
@@ -550,13 +544,10 @@ exports.completePost = (req, res, next) => {
   });
 
   Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
-    //sends email to organisation to inform that that someone applied for their post?
-
-    //to just to inform the person who applied for the post that their application got through.
+    //to inform the organisation that their job has been completed and thank them for using our service
     //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-    //sendApplyAcknowledgementEmail(req.body.email, req.body);
-
-    res.status(200).json("Applied for posting!");
+    //sendCompleteAcknowledgementEmail(req.body.email, req.body);
+    res.status(200).json("Post has been completed!");
   });
 };
 
@@ -1150,6 +1141,172 @@ const sendApplyAcknowledgementEmail = (email, post) => {
       throw new Error("Could not send Post Application Acknowledgement email!");
     } else {
       console.log("Post Application Acknowledgement email sent!");
+    }
+  });
+};
+
+//need to do up
+const sendCompleteAcknowledgementEmail = (email, post) => {
+  var mailOptions;
+  let sender = "CCSGP Post Completion Acknowledgement";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "complete-acknowledgement",
+    "complete-acknowledgement.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    orgName: post.orgName,
+    POC: post.POC,
+    phoneNumber: post.phoneNumber,
+    email: post.email,
+    title: post.title,
+    content: post.content,
+    opportunity: post.opportunity,
+    skills: post.skills,
+    startDate: new Date(post.startDate).toDateString(),
+    endDate: new Date(post.endDate).toDateString(),
+    hoursRequired: post.hoursRequired,
+
+    location: post.location,
+    beneficiaries: post.beneficiaries,
+
+    //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Post Completion Acknowledgement",
+    html: htmlToSend,
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Post Completion Acknowledgement email! (line 539, controllers posts.js) Error is as shown below: "
+      );
+      console.log(error);
+      throw new Error("Could not send Post Completion Acknowledgement email!");
+    } else {
+      console.log("Post Completion Acknowledgement email sent!");
+    }
+  });
+};
+
+//need to do up
+const sendApplyAcceptanceEmail = (email, post) => {
+  var mailOptions;
+  let sender = "CCSGP Post Completion Acknowledgement";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "apply-accceptance",
+    "apply-accceptance.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    orgName: post.orgName,
+    POC: post.POC,
+    phoneNumber: post.phoneNumber,
+    email: post.email,
+    title: post.title,
+    content: post.content,
+    opportunity: post.opportunity,
+    skills: post.skills,
+    startDate: new Date(post.startDate).toDateString(),
+    endDate: new Date(post.endDate).toDateString(),
+    hoursRequired: post.hoursRequired,
+
+    location: post.location,
+    beneficiaries: post.beneficiaries,
+
+    //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "CCSGP.NUS.CONFIRMATION@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  mailOptions = {
+    from: sender,
+    to: email,
+    subject: "CCSGP Post Completion Acknowledgement",
+    html: htmlToSend,
+    attachments: [
+      {
+        filename: "Orbital-Logo-Design.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Orbital-Logo-Design.png"
+        ),
+        cid: "orbitalLogo",
+      },
+    ],
+  };
+
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Post Completion Acknowledgement email! (line 539, controllers posts.js) Error is as shown below: "
+      );
+      console.log(error);
+      throw new Error("Could not send Post Completion Acknowledgement email!");
+    } else {
+      console.log("Post Completion Acknowledgement email sent!");
     }
   });
 };
