@@ -233,9 +233,8 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       publishDate: null,
       creator: null,
 
-      rejected: false,
+      removed: null,
       reason: null,
-      completed: false,
 
       students: [],
       reports: [],

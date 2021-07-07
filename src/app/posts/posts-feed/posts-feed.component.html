@@ -103,8 +103,8 @@
 </div>
 
 <div class="published-posts">
-  <p *ngIf="noFilteredPost">
-    <i>No posts match your filter criteria</i>
+  <p class="info-text" *ngIf="noFilteredPost && hasApproved">
+    <i>No posts match your filter criteria or there are no job listings currently available</i>
   </p>
 
   <ng-container *ngFor="let post of filteredPosts">
@@ -196,7 +196,7 @@
             mat-raised-button
             class="post-card-footer-button"
             color="warn"
-            *ngIf="userRole === 'Admin' || post.uen === authStatusObject.uen"
+            *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
             (click)="onDeletePrompt(deleteContent)"
           >
             Delete
@@ -205,19 +205,18 @@
 
           <button
             mat-raised-button
-            class="post-card-footer-button"
-            color="warn"
-            *ngIf="userRole === 'Admin' || post.uen === authStatusObject.uen"
+            class="post-card-footer-button-complete"
+            *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
             (click)="onCompletePrompt(completeContent)"
           >
-            Complete
+            Complete / Remove
           </button>
 
           <button
             mat-raised-button
             class="post-card-footer-button"
             color="warn"
-            *ngIf=" userRole === 'Admin' "
+            *ngIf=" userRole === 'Admin'"
             (click)="onRejectPrompt(rejectContent)"
           >
             Reject
@@ -481,22 +480,6 @@
       </div>
 
       <div class="modal-footer">
-        <!-- TEMPLATE DRIVEN FORM -->
-        <!--
-        <mat-error *ngIf="appForm.invalid"
-          >Please fill all required fields before submitting your
-          request.</mat-error
-        >
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="
-            submitApplication(post.id, appForm) && modal.dismiss('Cross click')
-          "
-        >
-          Submit Application
-        </button>
-        -->
 
         <!-- REACTIVE FORM -->
         <mat-error *ngIf="applicationForm.invalid"
@@ -530,41 +513,6 @@
       </div>
 
       <div class="modal-body">
-
-        <!-- TEMPLATE DRIVEN FORM -->
-        <!--
-        <form (submit)="submitReport(post.id, reportForm)" #reportForm="ngForm">
-          <mat-form-field appearance="outline">
-            <mat-label>Contact Number</mat-label>
-            <input
-              matInput
-              type="text"
-              ngModel
-              name="contactNumber"
-              required
-              #contactNumber="ngModel"
-              placeholder="Please provide us with your contact number for administrators to get in touch with you."
-              required
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Reason for reporting</mat-label>
-            <textarea
-              matInput
-              type="text"
-              ngModel
-              name="message"
-              required
-              #message="ngModel"
-              placeholder="Please help us understand why are you making the report."
-              required
-              rows="10"
-              minlength="5"
-            ></textarea>
-          </mat-form-field>
-        </form>
-        -->
 
         <!-- REACTIVE FORM -->
         <form [formGroup]="reportForm">
@@ -621,19 +569,6 @@
           >Please fill all required fields before submitting your
           report.</mat-error
         >
-
-        <!-- TEMPLATE DRIVEN FORM -->
-        <!--
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="
-            submitReport(post.id, reportForm) && modal.dismiss('Cross click')
-          "
-        >
-          Submit Report
-        </button>
-        -->
 
         <!-- REACTIVE FORM -->
         <button
@@ -713,6 +648,20 @@
 
       <div class="modal-body">
         <p>Confirm that the post request has been completed?</p>
+
+        <form [formGroup]="removeForm">
+
+          <mat-form-field appearance="outline">
+            <mat-label>If you are removing the post not because it is completed, please fill in the reason here.</mat-label>
+            <textarea
+              matInput
+              type="text"
+              [formControl]="removeReasonControl"
+              rows="10"
+              placeholder="Please tell us why you are removing the post. (eg lack of interest in job, job expired, etc)"
+            ></textarea>
+          </mat-form-field>
+        </form>
       </div>
 
       <div class="modal-footer">
@@ -786,7 +735,7 @@
   </ng-container>
 
   <p class="info-text" *ngIf="hasApproved === false">
-    No jobs listing currently available!
+    <i>No jobs listing currently available!</i>
   </p>
 
   <!--

@@ -216,7 +216,7 @@
                     <mat-icon>event</mat-icon> {{ post.startDate | date }} to
                     {{ post.endDate | date }} <br />
                     <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                    <mat-icon> location_on</mat-icon> {{ post.location }} <br />
+                    <mat-icon> location_on</mat-icon> {{ post.location || "No Specific Location" }} <br />
                     <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
                     <br />
                   </mat-card-content>
@@ -398,7 +398,7 @@
 
           <div class="report-posts-div">
             <div class="centered" *ngFor="let post of posts">
-              <section class="cards" *ngIf="post.reports.length > 0">
+              <section class="cards" *ngIf="(post.reports.length > 0)">
                 <mat-card class="report-post-card">
                   <img
                    *ngIf="!post.imagePath"
@@ -425,7 +425,7 @@
                     <mat-icon>event</mat-icon> {{ post.startDate | date }} to
                     {{ post.endDate | date }} <br />
                     <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                    <mat-icon> location_on</mat-icon> {{ post.location }} <br />
+                    <mat-icon> location_on</mat-icon> {{ post.location || "No Specific Location" }} <br/>
                     <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
                     <br />
                   </mat-card-content>

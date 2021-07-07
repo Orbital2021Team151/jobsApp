@@ -48,9 +48,8 @@ export class PostsService {
             creationDate: post.creationDate,
             publishDate: post.publishDate,
 
-            rejected: post.rejected,
+            removed: post.removed,
             reason: post.reason,
-            completed: post.completed,
 
             students: post.students,
             reports: post.reports,
@@ -104,10 +103,10 @@ export class PostsService {
     postData.append("publishDate", JSON.stringify(post.publishDate));
     postData.append("creator", post.creator);
 
-    postData.append("rejected", JSON.stringify(post.rejected));
+    /*
+    postData.append("removed", JSON.stringify(post.removed));
     postData.append("reason", JSON.stringify(post.reason));
-    postData.append("completed", JSON.stringify(post.completed));
-
+    */
 
     postData.append("students", JSON.stringify(post.students));
     postData.append("reports", JSON.stringify(post.reports));
@@ -162,8 +161,12 @@ export class PostsService {
       });
   }
 
-  rejectPost(postId: string) {
+  rejectPost(postId: string, reason: string) {
     const postToBeRejected = this.getPost(postId);
+
+    if (reason) {
+      postToBeRejected.reason = reason;
+    }
 
     //console.log("At postsService now. Post to be rejected is: ");
     //console.log(postToBeRejected);
@@ -178,9 +181,12 @@ export class PostsService {
       });
   }
 
-  completePost(postId: string) {
+  completePost(postId: string, reason: string) {
     const postToBeCompleted = this.getPost(postId);
 
+    if (reason) {
+      postToBeCompleted.reason = reason;
+    }
     //console.log("At postsService now. Post to be rejected is: ");
     //console.log(postToBeRejected);
 
@@ -280,6 +286,7 @@ export class PostsService {
 
       dataArray = dataArray.map(obj => {
         return {
+          location: obj.location,
           beneficiaries: obj.beneficiaries,
           orgName: obj.orgName,
           uen: obj.uen,
@@ -296,6 +303,8 @@ export class PostsService {
           studentsInterested: obj.students,
           reports: obj.reports,
           approved: obj.approved,
+          removed: obj.removed,
+          reason: obj.reason,
         };
       });
 

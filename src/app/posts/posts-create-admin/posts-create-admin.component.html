@@ -61,6 +61,7 @@
           [formControl]="phoneNumberControl"
           placeholder="eg 12345678"
           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          maxlength="8"
         />
         <mat-error *ngIf="phoneNumberControl.errors?.invalid"
           >Please provide us your Point-Of-Contact's phone number.</mat-error

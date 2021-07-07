@@ -47,9 +47,7 @@ exports.requestPost = (req, res, next) => {
     creator: req.userData.userId,
 
     removed: null,
-    rejected: false,
     reason: null,
-    completed: false,
 
     students: JSON.parse(req.body.students),
     reports: JSON.parse(req.body.reports),
@@ -142,9 +140,7 @@ exports.requestPostNoImage = (req, res, next) => {
     creator: req.userData.userId,
 
     removed: null,
-    rejected: false,
     reason: null,
-    completed: false,
 
     students: [],
     reports: [],
@@ -279,9 +275,7 @@ exports.publishPost = (req, res, next) => {
     publishDate: req.body.publishDate,
 
     removed: null,
-    rejected: false,
     reason: null,
-    completed: false,
 
     students: [],
     reports: [],
@@ -364,9 +358,7 @@ exports.applyPost = (req, res, next) => {
     publishDate: req.body.publishDate,
 
     removed: null,
-    rejected: false,
     reason: null,
-    completed: false,
 
     students: req.body.students,
     reports: req.body.reports,
@@ -406,9 +398,7 @@ exports.reportPost = (req, res, next) => {
     beneficiaries: req.body.post.beneficiaries,
 
     removed: null,
-    rejected: false,
     reason: null,
-    completed: false,
 
     approved: true,
     creator: req.body.post.id,
@@ -467,7 +457,6 @@ exports.reportPost = (req, res, next) => {
 };
 
 //Rejects the post. Either can be done by admin or done by organisation
-//TODO: Need to change clauses
 exports.rejectPost = (req, res, next) => {
   const newPost = new Post({
     _id: req.body.id,
@@ -489,9 +478,7 @@ exports.rejectPost = (req, res, next) => {
     beneficiaries: req.body.beneficiaries,
 
     removed: "REJECTED",
-    rejected: false,
-    reason: "Post has been rejected",
-    completed: false,
+    reason: req.body.reason || "Post has been rejected. No reason was provided.",
 
     approved: true,
     creator: req.body.id,
@@ -508,8 +495,13 @@ exports.rejectPost = (req, res, next) => {
 };
 
 //Post is marked as completed. Either can be done by admin or done by organisation
-//TODO: Need to change clauses
 exports.completePost = (req, res, next) => {
+
+  let removedStatus = "COMPLETED"
+  if (req.body.reason) {
+    removedStatus = "REMOVED / COMPLETED"
+  }
+
   const newPost = new Post({
     _id: req.body.id,
     orgName: req.body.orgName,
@@ -529,10 +521,8 @@ exports.completePost = (req, res, next) => {
     location: req.body.location,
     beneficiaries: req.body.beneficiaries,
 
-    removed: "COMPLETED",
-    rejected: false,
-    reason: "Post request was completed",
-    completed: false,
+    removed: removedStatus,
+    reason: req.body.reason || "This post was marked as completed.",
 
     approved: true,
     creator: req.body.id,
@@ -614,6 +604,8 @@ exports.downloadPosts = (req, res, next) => {
               approved: obj.approved,
               creationDate: obj.creationDate,
               publishDate: obj.publishDate,
+              removed: obj.removed,
+              reason: obj.reason,
             };
           });
 

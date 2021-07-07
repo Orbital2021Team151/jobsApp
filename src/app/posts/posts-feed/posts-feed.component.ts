@@ -22,7 +22,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   filteredPosts: Post[] = [];
 
-  hasApproved: boolean = null;
+  hasApproved: boolean = false;
   userIsAuthenticated = false;
   userRole: string;
   startDate: Date;
@@ -66,6 +66,10 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   /* Reject FormGroup */
   public rejectForm: FormGroup;
   public rejectReasonControl = new FormControl(null);
+
+  /* Remove / Complete FormGroup */
+  public removeForm: FormGroup;
+  public removeReasonControl = new FormControl(null);
 
   private postSub: Subscription;
   private authStatusSub: Subscription;
@@ -114,6 +118,10 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.rejectForm = new FormGroup({
       reason: this.rejectReasonControl,
     });
+
+    this.removeForm = new FormGroup({
+      reason: this.removeReasonControl,
+    });
   }
 
   ngOnInit() {
@@ -131,13 +139,13 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
         //show latest requested posts at the top of the timeline
         for (var i = posts.length - 1; i >= 0; i--) {
-          if (posts[i].approved) {
+          if (posts[i].approved && !posts[i].removed) {
             this.posts.push(posts[i]);
             this.filteredPosts.push(posts[i]);
           }
         }
 
-        if (posts.filter((post) => post.approved).length > 0) {
+        if (this.posts.filter((post) => post.approved).length > 0) {
           this.hasApproved = true;
         } else {
           this.hasApproved = false;
@@ -157,25 +165,22 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  //need to test
   onCompletePrompt(completePrompt) {
     this.modalService.open(completePrompt, { size: 'lg' });
   }
 
-  //need to test
   onComplete(postId: string) {
-    this.postsService.completePost(postId);
+    this.postsService.completePost(postId, this.removeForm.value.reason);
+    this.removeForm.reset();
     return true;
   }
 
-  //need to test
   onRejectPrompt(rejectPrompt) {
     this.modalService.open(rejectPrompt, { size: 'lg' });
   }
 
-  //need to test
   onReject(postId: string) {
-    this.postsService.rejectPost(postId);
+    this.postsService.rejectPost(postId, this.rejectForm.value.reason);
     return true;
   }
 

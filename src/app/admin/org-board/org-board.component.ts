@@ -5,7 +5,7 @@ import { PostsService } from "../../posts/post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-org-board",
@@ -34,14 +34,20 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   postToBeDeleted: string;
   requestedNewPassword = false;
 
+  /* Remove / Complete FormGroup */
+  public removeForm: FormGroup;
+  public removeReasonControl = new FormControl(null);
+
   //for the navbar
   active: string = "changePassword";
 
-  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
+  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {
+    this.removeForm = new FormGroup({
+      reason: this.removeReasonControl,
+    });
+  }
 
   ngOnInit() {
-
-    this.postsService.getPosts();
     this.authStatusObject = this.authService.getAuthStatusObject(); //another one that violates the async
 
     /*
@@ -55,17 +61,26 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     });
     */
 
+    this.postsService.getPosts(); //NEED THIS. To push the posts to the subscription for the getPostsUpdatedListener to work
+
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
-        //console.log(posts);
-        //console.log("organisation dashboard's postService observable!");
 
-        this.posts = posts
+        console.log("organisation dashboard's postService observable!");
+        console.log(posts);
+
+        this.posts = [];
+        this.approvedPosts = [];
+
+        this.posts = posts.filter(post => !post.removed);
+
+        this.posts = this.posts
             .filter(post => post.email === this.authStatusObject.email);
-        this.approvedPosts = posts
+
+        this.approvedPosts = this.posts
             .filter(post => {
-              return post.email === this.authStatusObject.email;
-            })
+              return (post.approved === true);
+            });
 
         if (this.approvedPosts.length === 0) {
           this.hasNoApprovedPosts = true;
@@ -121,7 +136,7 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
 
   //testing needed
   onComplete(postId: string) {
-    this.postsService.completePost(postId);
+    this.postsService.completePost(postId, this.removeForm.value.reason);
     this.postsNumber--;
     if (this.postsNumber === 0) {
       this.hasRequest = false;
@@ -131,22 +146,24 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
       this.hasApplication = false;
     }
 
+    this.removeForm.reset();
     return true;
   }
 
-  //testing needed
   onCompletePrompt(content) {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  //testing needed
   onCompleteAppliedPost(postId: string) {
-    this.postsService.completePost(postId);
+    this.postsService.completePost(postId, this.removeForm.value.reason);
     this.appliedPostsNumber--;
 
     if (this.appliedPostsNumber === 0) {
       this.hasApplication = false;
     }
+
+    this.removeForm.reset();
+    return true;
   }
 
   onMoreInfo(content) {

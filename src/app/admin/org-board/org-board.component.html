@@ -162,7 +162,7 @@
                       color="warn"
                       (click)="onDeletePrompt(deleteUnapprovedContent)"
                     >
-                      Remove Request
+                      Delete Request
                     </button>
 
                     <button
@@ -290,8 +290,8 @@
           </p>
 
           <div class="application-posts-div">
-            <div class="centered" *ngFor="let post of posts">
-              <section class="cards" *ngIf="post.students.length > 0">
+            <div class="centered" *ngFor="let approvedPost of approvedPosts">
+              <section class="cards" *ngIf="approvedPost.students.length > 0">
                 <mat-card class="application-post-card">
                   <img
                   *ngIf="!post.imagePath"
@@ -319,11 +319,12 @@
                   <mat-card-content class="post-card-content">
                     <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
                     <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
-                    <mat-icon> location_on</mat-icon> {{ post.location }} <br>
+                    <mat-icon> location_on</mat-icon> {{ post.location || "Not Specified" }} <br>
                     <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
                   </mat-card-content>
 
                   <mat-footer class="post-card-footer">
+
                     <button
                     mat-raised-button
                     class="application-post-card-button-view-applicants"
@@ -332,12 +333,22 @@
                       View Applicants
                     </button>
 
+                    <!--
                     <button
                     mat-raised-button
                     class="application-post-card-button-complete"
                       (click)="onDeletePrompt(deleteReportedContent)"
                     >
                       Delete
+                    </button>
+                    -->
+
+                    <button
+                    mat-raised-button
+                    class="application-post-card-button-complete"
+                      (click)="onCompletePrompt(completeContentWithApplicants)"
+                    >
+                      Complete
                     </button>
 
                     <button
@@ -473,10 +484,50 @@
                 </div>
               </ng-template>
 
+              <ng-template #completeContentWithApplicants let-modal>
+                <div
+                  class="modal-header"
+                >
+                  <h4 class="modal-title">Completion Confirmation</h4>
+                  <button
+                    type="button"
+                    class="submit"
+                    aria-label="apply"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
 
+                <div
+                  class="modal-body"
+                >
+                <p>Are you sure you want to mark the Post as completed?</p>
+                </div>
 
+                <div
+                  class="modal-footer"
+                >
 
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="
+                    onCompleteAppliedPost(post.id) && modal.dismiss('Cross click')
+                    "
+                  >
+                    Confirm Completion
+                  </button>
 
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </ng-template>
 
 
             </div>
@@ -498,7 +549,7 @@
       <ng-template ngbNavContent>
         <div class="info-text">
           <p>
-            <b>Posts with applications! :D</b>
+            <b>Posts that have received approval from CCSGP</b>
           </p>
 
           <div class="application-posts-div">
@@ -531,25 +582,18 @@
                   <mat-card-content class="post-card-content">
                     <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
                     <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
-                    <mat-icon> location_on</mat-icon> {{ post.location }} <br>
+                    <mat-icon> location_on</mat-icon> {{ post.location || "Not Specified" }} <br>
                     <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
                   </mat-card-content>
 
                   <mat-footer class="post-card-footer">
-                    <button
-                    mat-raised-button
-                    class="application-post-card-button-view-applicants"
-                      (click)="onMoreInfo(applicantContent)"
-                    >
-                      View Applicants
-                    </button>
 
                     <button
                     mat-raised-button
                     class="application-post-card-button-complete"
-                      (click)="onDeletePrompt(deleteReportedContent)"
+                      (click)="onCompletePrompt(completeContent)"
                     >
-                      Delete
+                      Complete / Remove
                     </button>
 
                     <button
@@ -560,88 +604,6 @@
                     </button>
                   </mat-footer>
                 </mat-card>
-
-                <!--
-                <p-card
-                  class="card"
-                  [style]="{
-                    width: '25rem',
-                    height: '15rem',
-                    'text-align': 'center',
-                    'background-color': '#122e2b',
-                    color: 'white'
-                  }"
-                  styleClass="p-card-shadow"
-                >
-                  <p-card-header
-                    [style]="{
-                      'text-overflow': 'ellipsis',
-                      width: '22rem',
-                      'max-width': '22rem',
-                      height: '1.7rem',
-                      display: 'block',
-                      overflow: 'hidden',
-                      'white-space': 'nowrap',
-                      color: 'white',
-                      'font-size': '1.5rem'
-                    }"
-                  >
-                    <b>{{ post.title }}</b>
-                  </p-card-header>
-
-                  <p-card-subheader
-                    [style]="{
-                      height: '3.5rem',
-                      display: 'block',
-                      overflow: 'hidden',
-                      'white-space': 'nowrap',
-                      color: '#D9D9D9'
-                    }"
-                  >
-                    {{ post.startDate | date }} to {{ post.endDate | date }}
-                  </p-card-subheader>
-
-                  <p-card-content
-                    [style]="{
-                      'text-overflow': 'ellipsis',
-                      width: '22rem',
-                      'max-width': '22rem',
-                      height: '3rem',
-                      display: 'block',
-                      overflow: 'hidden',
-                      'white-space': 'nowrap',
-                      color: '#D9D9D9'
-                    }"
-                    >{{ post.content }}
-                  </p-card-content>
-
-                  <ng-template pTemplate="footer" #footer>
-                    <button
-                      class="btn btn-outline-primary mb-2 mr-2"
-                      (click)="onMoreInfo(applicantContent)"
-                    >
-                      View Applicants
-                    </button>
-
-                    <button
-                      class="btn btn-outline-primary mb-2 mr-2"
-                      (click)="onMoreInfo(content)"
-                    >
-                      Learn More
-                    </button>
-
-                    <button
-                      class="btn btn-outline-primary mb-2 mr-2"
-                      (click)="onDeletePrompt(deleteAppliedContent)"
-                    >
-                      Delete
-                    </button>
-                  </ng-template>
-                </p-card>
-              -->
-
-
-
               </section>
 
               <ng-template #applicantContent let-modal>
@@ -721,7 +683,6 @@
                 </div>
               </ng-template>
 
-
               <ng-template #deleteAppliedContent let-modal>
                 <div
                   class="modal-header"
@@ -766,6 +727,67 @@
                   </button>
                 </div>
               </ng-template>
+
+              <ng-template #completeContent let-modal>
+                <div
+                  class="modal-header"
+                >
+                  <h4 class="modal-title">Completion Confirmation</h4>
+                  <button
+                    type="button"
+                    class="submit"
+                    aria-label="apply"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div
+                  class="modal-body"
+                >
+                <p>Are you sure you want to mark the Post as completed?</p>
+
+                <form [formGroup]="removeForm">
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>If you are removing the post not because it is completed, please fill in the reason here.</mat-label>
+                    <textarea
+                      matInput
+                      type="text"
+                      [formControl]="removeReasonControl"
+                      rows="10"
+                      placeholder="Please tell us why you are removing the post. (eg lack of interest in job, job expired, etc)"
+                    ></textarea>
+                  </mat-form-field>
+                </form>
+                </div>
+
+                <div
+                  class="modal-footer"
+                >
+
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="
+                    onComplete(post.id) && modal.dismiss('Cross click')
+                    "
+                  >
+                    Confirm Completion
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </ng-template>
+
+
             </div>
           </div>
 
@@ -773,7 +795,7 @@
             class="info-text-2"
             *ngIf="hasNoApprovedPosts"
           >
-            <i>No approved posts yet</i>
+            <i>No approved posts yet.</i>
           </p>
           <mat-spinner *ngIf="hasNoApprovedPosts === null"></mat-spinner>
         </div>

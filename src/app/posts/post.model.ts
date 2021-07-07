@@ -28,9 +28,8 @@ export interface Post {
   publishDate: Date, //Date post was published
   creator: string,
 
-  rejected: boolean,
+  removed: string,
   reason: string,
-  completed: boolean,
 
 
   image: File,

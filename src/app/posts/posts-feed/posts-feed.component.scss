@@ -222,6 +222,8 @@ mat-icon {
 -------------------------------------------------- */
 .info-text {
   text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 mat-form-field {
@@ -232,6 +234,11 @@ mat-form-field {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.post-card-footer-button-complete {
+  background-color: #00b167;
+  color: rgb(255, 255, 255);
 }
 
 

@@ -5,8 +5,7 @@ import { PostsService } from "../../posts/post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
-import { NgForm } from "@angular/forms";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-admin-board",
@@ -73,7 +72,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
       .subscribe((posts: Post[]) => {
         //console.log(posts);
         //console.log("Admin dashboard's postService observable!");
-        this.posts = posts;
+        this.posts = posts.filter(post => !post.removed);
 
         if (this.posts.filter(post => !post.approved).length > 0) {
           this.hasRequest = true;
@@ -119,14 +118,12 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  //need to test
   onRejectPrompt(reportPrompt) {
     this.modalService.open(reportPrompt, { size: 'lg' });
   }
 
-  //need to test
   onReject(postId: string) {
-    this.postsService.rejectPost(postId);
+    this.postsService.rejectPost(postId, this.rejectForm.value.reason);
     this.postsNumber--;
     if (this.postsNumber === 0) {
       this.hasRequest = false;
@@ -135,17 +132,20 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     if (this.reportedPostsNumber === 0) {
       this.hasReport = false;
     }
+
+    this.rejectForm.reset();
     return true;
   }
 
-  //need to test
   onRejectReportedPost(postId: string) {
-    this.postsService.rejectPost(postId);
+    this.postsService.rejectPost(postId, this.rejectForm.value.reason);
     this.reportedPostsNumber--;
 
     if (this.reportedPostsNumber === 0) {
       this.hasReport = false;
     }
+
+    this.rejectForm.reset();
     return true;
   }
 
@@ -162,7 +162,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   onMoreInfo(content) {
     //console.log("Checking this page's posts! ");
-    //console.log(this.posts);
+    console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 
