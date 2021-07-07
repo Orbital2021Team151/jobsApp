@@ -13,6 +13,7 @@ import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-or
 import { HomepageComponent } from './homepage/hompage.component';
 import { DashBoardLandingComponent } from './admin/dashboard-landing/dashboard-landing.component';
 import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';
+import { HighlightCreateComponent } from './admin/highlight-create/highlight-create.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { animation: 'isRight' }},
   { path: 'signup', component: SignupGeneralComponent, data: { animation: 'isLeft' }},
   { path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
+  { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], data: { roles: ["Admin"] }},
 ];
 
 @NgModule({

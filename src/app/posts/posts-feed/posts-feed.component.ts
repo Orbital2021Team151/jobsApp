@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+
 import { Post } from '../post.model';
 import { PostsService } from '../post.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth/auth.service';
-import { NgForm } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { AppliedBeforeDialog } from 'src/app/dialogs/applied-before-dialog/applied-before-dialog.component';
 import { ReportedBeforeDialog } from 'src/app/dialogs/reported-before-dialog/reported-before-dialog.component';
 import { ReportedPostNotificationDialog } from 'src/app/dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
@@ -15,7 +16,7 @@ import { AppliedPostNotificationDialog } from 'src/app/dialogs/applied-post-noti
   selector: 'app-post-feed',
   templateUrl: './posts-feed.component.html',
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./posts-feed.component.css'],
+  styleUrls: ['./posts-feed.component.scss'],
 })
 export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
@@ -51,6 +52,16 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     content: string;
   }
 
+  /* Application FormGroup */
+  public applicationForm: FormGroup;
+  public applicationContactControl = new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999)]);
+  public applicationContentControl = new FormControl(null, [Validators.required, ]);
+  public applicationUserTypeControl = new FormControl(null, [Validators.required]);
+
+  /* Report FormGroup */
+  public reportForm: FormGroup;
+  public reportContactControl = new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999)]);
+  public reportContentControl = new FormControl(null, [Validators.required, ]);
 
   private postSub: Subscription;
   private authStatusSub: Subscription;
@@ -83,7 +94,21 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private authService: AuthService,
     public dialog: MatDialog,
-  ) {}
+  ) {
+
+    this.applicationForm = new FormGroup({
+      contact: this.applicationContactControl,
+      content: this.applicationContentControl,
+      applicationUser: this.applicationUserTypeControl,
+    });
+
+    this.reportForm = new FormGroup({
+      contact: this.reportContactControl,
+      content: this.reportContentControl,
+    });
+
+
+  }
 
   ngOnInit() {
     this.postsService.getPosts();
@@ -97,14 +122,13 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       .subscribe((posts: Post[]) => {
         this.posts = [];
         this.filteredPosts = [];
-        //console.log("Post Feed's observable!");
-        //console.log("Posts are: ");
-        //console.log(this.posts);
 
         //show latest requested posts at the top of the timeline
         for (var i = posts.length - 1; i >= 0; i--) {
-          this.posts.push(posts[i]);
-          this.filteredPosts.push(posts[i]);
+          if (posts[i].approved) {
+            this.posts.push(posts[i]);
+            this.filteredPosts.push(posts[i]);
+          }
         }
 
         if (posts.filter((post) => post.approved).length > 0) {
@@ -128,7 +152,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
-    console.log(this.posts);
+    //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -153,11 +177,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
     if (this.beneficiariesSelected.length !== 0) {
       this.filteredPosts = this.posts.filter((post) => {
-        for (var interestBeneficiary of post.beneficiaries) {
-          if (this.beneficiariesSelected.includes(interestBeneficiary)) {
-            return true;
-          }
-        }
+        return this.beneficiariesSelected.includes(post.beneficiaries);
       });
     } else {
       this.filteredPosts = [...this.posts];
@@ -258,7 +278,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   submitApplication(postId: string, appForm: NgForm) {
 
-    //console.log(appForm.value);
 
     if (appForm.invalid) {
       return;
@@ -268,12 +287,35 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       email: this.authStatusObject.email,
       contact: appForm.value.contactNumber,
       content: appForm.value.message,
-      applicationUser: appForm.value.user,
+      applicationUser: appForm.value.applicationUser,
     };
 
     this.postsService.applyPost(postId, this.studentApplyObject);
     this.dialog.open(AppliedPostNotificationDialog);
     return true;
+  }
+
+  submitApplicationReactive(postId: string) {
+
+    console.log(this.applicationForm);
+
+    if (this.applicationForm.invalid) {
+      console.log("Application Form is not filled up yet or has invalid parts!");
+      return;
+    }
+
+    this.studentApplyObject = {
+      email: this.authStatusObject.email,
+      contact: this.applicationForm.value.contact,
+      content: this.applicationForm.value.content,
+      applicationUser: this.applicationForm.value.applicationUser,
+    };
+
+    this.postsService.applyPost(postId, this.studentApplyObject);
+    this.dialog.open(AppliedPostNotificationDialog);
+    this.applicationForm.reset();
+    return true;
+
   }
 
   applyBefore(currentPost: Post) {
@@ -309,6 +351,26 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       contact: reportForm.value.contactNumber,
       content: reportForm.value.message,
     };
+    this.postsService.reportPost(postId, this.studentReportObject);
+    this.dialog.open(ReportedPostNotificationDialog);
+    return true;
+  }
+
+  submitReportReactive(postId: string) {
+
+    console.log(this.reportForm);
+
+    if (this.reportForm.invalid) {
+      console.log("Report Form is not filled up yet or has invalid parts!");
+      return;
+    }
+
+    this.studentReportObject = {
+      email: this.authStatusObject.email,
+      contact: this.reportForm.value.contact,
+      content: this.reportForm.value.content,
+    };
+
     this.postsService.reportPost(postId, this.studentReportObject);
     this.dialog.open(ReportedPostNotificationDialog);
     return true;

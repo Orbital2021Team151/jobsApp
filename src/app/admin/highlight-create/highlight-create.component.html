@@ -1,0 +1,74 @@
+<div class="create-highlight-card">
+  <mat-card class="card-body">
+    <mat-card-title> Create Highlight </mat-card-title>
+
+    <form [formGroup]="form" #highlightForm="ngForm">
+      <mat-form-field appearance="outline">
+        <mat-label> Highlight's Title </mat-label>
+        <input
+          matInput
+          type="text"
+          name="title"
+          required
+          [formControl]="titleControl"
+          placeholder="Title"
+        />
+        <mat-error *ngIf="titleControl.errors?.required">
+          Please enter a title for the highlight.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Highlight's Summary </mat-label>
+        <input
+          matInput
+          type="text"
+          name="summary"
+          required
+          [formControl]="summaryControl"
+          placeholder="A quick summary of the highlight"
+        />
+        <mat-error *ngIf="summaryControl.errors?.required">
+          Please enter a summary for the highlight.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Content </mat-label>
+        <input
+          matInput
+          type="text"
+          name="content"
+          required
+          [formControl]="contentControl"
+          placeholder="Content"
+        />
+        <mat-error *ngIf="contentControl.errors?.required">
+          Please enter some content for the highlight.
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-stroked-button type="button" (click)="filePicker.click()">
+          Upload an image
+        </button>
+        <input type="file" #filePicker (change)="onImagePicked($event)" />
+      </div>
+
+      <div
+        class="image-preview"
+        *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
+      >
+        <img [src]="imagePreview" [alt]="form.value.titleControl" />
+      </div>
+    </form>
+
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="publishHighlight()"
+    >
+      Submit
+    </button>
+  </mat-card>
+</div>

@@ -2,8 +2,14 @@
 
 /*for the whole navbar*/
 .container1 {
-  border: 3px solid #fff;
+  /* border: 3px solid #fff; */
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .container1-child {
@@ -271,7 +277,6 @@ button {
 /* MISCELLANEOUS
 -------------------------------------------------- */
 .container {
-  position: fixed;
   bottom: 0;
   text-align: center;
 }

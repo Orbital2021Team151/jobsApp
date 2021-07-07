@@ -62,6 +62,7 @@ import { DashBoardLandingComponent } from './admin/dashboard-landing/dashboard-l
 import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';
 import { StartDateErrorDialog } from './dialogs/start-date-error-dialog/start-date-error-dialog.component';
 import { WrongStudentEmailDialog } from './dialogs/wrong-student-email-dialog/wrong-student-email-dialog.component';
+import { HighlightCreateComponent } from './admin/highlight-create/highlight-create.component';
 
 
 @NgModule({
@@ -92,6 +93,7 @@ import { WrongStudentEmailDialog } from './dialogs/wrong-student-email-dialog/wr
     StudentBoardChangePasswordComponent,
     StartDateErrorDialog,
     WrongStudentEmailDialog,
+    HighlightCreateComponent,
   ],
 
   imports: [

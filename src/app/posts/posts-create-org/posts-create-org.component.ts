@@ -269,7 +269,6 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     this.modalService.dismissAll();
     this.form.reset();
     this.imagePreview = '';
-
   }
 
   closeNotification() {

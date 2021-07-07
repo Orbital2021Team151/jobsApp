@@ -49,6 +49,14 @@
         > Create Job Posting</a>
       </li>
 
+      <li *ngIf="(userIsAuthenticated) && (authStatusObject.role === 'Admin')">
+        <a mat-button routerLink="/createHighlight"
+        routerLinkActive="mat-primary"
+        > Create A Highlight</a>
+      </li>
+
+
+
 
 
 
