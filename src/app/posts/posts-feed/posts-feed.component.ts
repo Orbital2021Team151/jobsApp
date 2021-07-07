@@ -74,6 +74,10 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   beneficiariesSelected: string[] = [];
   keywords: string = "";
 
+  orgs: string[] = [];
+
+  orgsSelected: string[] = [];
+
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
@@ -108,6 +112,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
         } else {
           this.hasApproved = false;
         }
+        this.orgs = this.posts.map(post => post.orgName);
+        // console.log(this.orgsSelected);
+
       });
   }
 
@@ -127,6 +134,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   clearFilter() {
     this.beneficiariesSelected = [];
+    this.orgsSelected = [];
     this.keywords = "";
     this.startDate = null;
     this.endDate = null;
@@ -141,6 +149,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     console.log(weirdText);
     console.log(lowerWeirdText);
     */
+
 
     if (this.beneficiariesSelected.length !== 0) {
       this.filteredPosts = this.posts.filter((post) => {
@@ -175,6 +184,16 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     if (this.keywords !== "") {
       this.filteredPosts = this.filteredPosts.filter(post => {
         return (this.KnuthMorrisPrattSearch(this.keywords, post.content) != -1) || (this.KnuthMorrisPrattSearch(this.keywords, post.title) != -1);
+      });
+    }
+
+    if (this.orgsSelected.length !== 0) {
+      this.filteredPosts = this.filteredPosts.filter(post => {
+        for (let i = 0; i < this.orgsSelected.length; i++) {
+          if (this.orgsSelected[i] === post.orgName) {
+            return true;
+          }
+        }
       });
     }
 

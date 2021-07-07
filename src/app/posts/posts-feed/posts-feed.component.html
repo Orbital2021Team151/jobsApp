@@ -30,6 +30,23 @@
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Organisations</mat-label>
+        <mat-select
+          ngModel
+          multiple
+          #organisationsInput="ngModel"
+          name="orgsSelected"
+          [(ngModel)]="orgsSelected"
+        >
+          <mat-option
+            *ngFor="let org of orgs"
+            [value]="org"
+            >{{ org }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
       <mat-form-field appearance="outline" class="example-form-field">
         <mat-label>Enter a date range</mat-label>
         <mat-date-range-input [rangePicker]="rangePicker">

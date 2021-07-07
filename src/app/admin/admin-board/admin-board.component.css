@@ -1,3 +1,22 @@
+/* navbar styling stuff */
+
+/*for the whole navbar*/
+.container1 {
+  border: 3px solid #fff;
+  padding: 20px;
+}
+
+.container1-child {
+  /* padding-left: 4px;
+  padding-top: 4px;
+  margin-left: 30%; */
+  background-color: white;
+  width: 20%;
+  float: left;
+  padding: 20px;
+  border: 2px solid red;
+}
+
 /* GLOBAL
 -------------------------------------------------- */
 .card-image {
@@ -6,9 +25,8 @@
   object-fit: cover;
 }
 
-
 .post-card-title {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-overflow: ellipsis;
 
   width: 22rem;
@@ -22,7 +40,7 @@
 }
 
 .post-card-subtitle {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 120%;
 
   width: 22rem;
@@ -41,7 +59,7 @@ mat-icon {
 }
 
 .post-card-content {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-overflow: ellipsis;
   width: 22rem;
   max-width: 22rem;
@@ -57,7 +75,7 @@ mat-icon {
 .post-card-footer {
   width: 20rem;
   max-width: 20rem;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   align-items: center;
   flex: auto;
   margin: auto;
@@ -72,22 +90,24 @@ button {
   margin: 5px 5px 5px 0;
 }
 
-
 /* CHANGE PASSWORD
 -------------------------------------------------- */
 .change-password-card {
-  margin: auto;
+  /* margin: auto;
+  width: 50%; */
   width: 50%;
-  padding: 10px;
+  float: left;
+  padding: 20px;
+  border: 2px solid red;
 }
 
 .change-password-title {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-align: center;
 }
 
 .change-password-body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   width: 100%;
   margin: auto;
   padding: 10px;
@@ -100,14 +120,14 @@ button {
 }
 
 .change-password-form-input {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   margin-left: 1rem;
   margin-right: 1rem;
   margin: auto;
 }
 
 .change-password-form-field {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   margin-left: 1rem;
   margin-right: 1rem;
   width: 100%;
@@ -115,27 +135,26 @@ button {
 }
 
 .change-password-button {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   margin: 0 auto;
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
 .change-password-footer {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-align: center;
   width: 100%;
-  flex: auto
+  flex: auto;
 }
 
 .alert {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   padding: 20px;
   background-color: #94f1a2 !important;
   color: white;
   margin-bottom: 15px;
 }
-
 
 /* JOBS PENDING APPROVAL CARDS
 -------------------------------------------------- */
@@ -156,7 +175,6 @@ button {
 
   width: 25rem;
   height: 35rem;
-
 
   text-align: center;
   margin-top: 1rem;
@@ -181,7 +199,6 @@ button {
   color: white;
 }
 
-
 /* JOBS WITH REPORTS CARDS
 -------------------------------------------------- */
 .report-posts-div {
@@ -194,7 +211,6 @@ button {
 }
 
 .report-post-card {
-
   /*
   width: 25rem;
   height: 15rem;
@@ -230,36 +246,45 @@ button {
 /* MODAL WINDOW
 -------------------------------------------------- */
 .modal-header {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   color: black;
 }
 
 .modal-body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   color: black;
 }
 
 .modal-footer {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   color: black;
 }
 
 .modal-body-report {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   border: thin solid black;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   text-align: center;
 }
 
-
 /* MISCELLANEOUS
 -------------------------------------------------- */
+.container {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+}
+
 .info-text {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-align: center;
   color: inherit;
   margin-top: 5rem;
+  width: 50%;
+  float: left;
+  padding: 20px;
+  border: 2px solid red;
 }
 
 /* SMALL SCREEN SIZE //TODO: NOT DONE YET
