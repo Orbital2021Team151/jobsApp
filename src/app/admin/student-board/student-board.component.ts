@@ -67,10 +67,11 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         //console.log(posts);
-        this.posts = posts
+
+        this.posts = posts.filter(post => !post.removed);
+
+        this.posts = this.posts
         .filter(post => post.students.length > 0 || post.reports.length > 0);
-        // console.log("this.posts");
-        // console.log(this.posts);
 
         this.appliedPosts = this.posts.filter(posts => {
           for (let i = 0; i < posts.students.length; i++) {
@@ -90,8 +91,8 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
             }
           }
         });
-        console.log("this.reportedPosts");
-        console.log(this.reportedPosts);
+        //console.log("this.reportedPosts");
+        //console.log(this.reportedPosts);
 
       });
 
@@ -124,6 +125,12 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     this.authService.getChangedPasswordListener().subscribe(res => {
       this.requestedNewPassword = res;
     });
+  }
+
+  onMoreInfo(content) {
+    //console.log("Checking this page's posts! ");
+    console.log(this.posts);
+    this.modalService.open(content, { size: 'lg' });
   }
 
   closeNotification() {

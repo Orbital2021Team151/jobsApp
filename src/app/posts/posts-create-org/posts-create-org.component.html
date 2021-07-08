@@ -32,7 +32,7 @@
           maxlength="8"
           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         />
-        <mat-error *ngIf="phoneNumberControl.errors?.invalid"
+        <mat-error *ngIf="form.get('phoneNumber').hasError('required')"
           >Please provide us your Point-Of-Contact's phone number.</mat-error
         >
       </mat-form-field>

@@ -144,12 +144,12 @@ mat-icon {
   max-width: 20rem;
   font-family: 'Lato', sans-serif;
   align-items: center;
-  flex: auto;
+  display:flex;
   margin: auto;
+  justify-content: space-between;
 }
 
 .post-card-footer-button {
-  margin: 5px 5px 5px 0;
 }
 
 .pCardHeader {

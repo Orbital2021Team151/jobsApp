@@ -205,21 +205,21 @@
 
           <button
             mat-raised-button
-            class="post-card-footer-button-complete"
-            *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
-            (click)="onCompletePrompt(completeContent)"
-          >
-            Complete / Remove
-          </button>
-
-          <button
-            mat-raised-button
             class="post-card-footer-button"
             color="warn"
             *ngIf=" userRole === 'Admin'"
             (click)="onRejectPrompt(rejectContent)"
           >
             Reject
+          </button>
+
+          <button
+            mat-raised-button
+            class="post-card-footer-button-complete"
+            *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
+            (click)="onCompletePrompt(completeContent)"
+          >
+          Mark as Done
           </button>
 
           <button

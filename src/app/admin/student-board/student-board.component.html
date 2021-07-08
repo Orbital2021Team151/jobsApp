@@ -143,18 +143,59 @@
                 <mat-icon>event</mat-icon> {{ post.startDate | date }} to
                 {{ post.endDate | date }} <br />
                 <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
+                <mat-icon> location_on</mat-icon> {{ post.location || "No Location Specified" }} <br />
                 <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
                 <br />
               </mat-card-content>
 
               <mat-footer class="post-card-footer">
-                <button mat-button (click)="onMoreInfo(content)">
+                <button
+                mat-button
+                color="primary"
+                (click)="onMoreInfo(content)">
                   Learn More
                 </button>
               </mat-footer>
             </mat-card>
           </section>
+
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">{{ post.title }}</h4>
+              <button
+                type="button"
+                class="close"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <p>Organization Name: {{ post.orgName }}</p>
+              <p>UEN: {{ post.uen }}</p>
+              <p>Point of Contact (POC): {{ post.POC }}</p>
+              <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
+              <p>POC's email: {{ post.email }}</p>
+              <p>Brief Description for gig: {{ post.content }}</p>
+              <p>Preferred Skills: {{ post.skills }}</p>
+              <p>Start Date: {{ post.startDate | date }}</p>
+              <p>End Date: {{ post.endDate | date }}</p>
+              <p>Commitment Hours: {{ post.hoursRequired }}</p>
+              <p>Beneficiaries: {{ post.beneficiaries }}</p>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-light"
+                (click)="modal.close('Close click')"
+              >
+                Close
+              </button>
+            </div>
+          </ng-template>
         </div>
       </ng-template>
     </li>
@@ -182,7 +223,7 @@
                   <mat-icon>event</mat-icon> {{ post.startDate | date }} to
                   {{ post.endDate | date }} <br />
                   <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                  <mat-icon> location_on</mat-icon> Kent Ridge Drive <br />
+                  <mat-icon> location_on</mat-icon> {{ post.location || "No Location Specified" }} <br/>
                   <mat-icon>people_outline</mat-icon> Skillsets:
                   {{ post.skills }} <br />
                 </mat-card-content>
