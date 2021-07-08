@@ -174,9 +174,15 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  //need to build up along with button. RxJS changes and email accompanying
-  acceptApplicant(userEmail: string) {
+  //need to build
+  acceptApplicant(postId: string, userEmail: string) {
+    this.postsService.acceptStudent(postId, userEmail);
+  }
 
+  //need to build up
+  acceptedBefore(postId: string, userEmail: string) {
+    const post: Post = this.postsService.getPost(postId);
+    return post.studentsAccepted.includes(userEmail);
   }
 
   onChangePassword(form: NgForm) {

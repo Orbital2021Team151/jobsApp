@@ -375,18 +375,45 @@
                 </div>
 
                 <div class="modal-body">
-                  <div *ngFor="let student of post.students">
-                    <div style="border: thin solid black; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-                      <p style="text-align: center">
+                  <div *ngFor="let student of post.students" class="modal-body-content">
+
+                    <div class="modal-body-content-student">
+                      <p>
                         Student's Email: {{ student.email }}
                       </p>
-                      <p style="text-align: center">
+                      <p>
                         Student's Contact: {{ student.contact }}
                       </p>
-                      <p style="text-align: center">
+                      <p>
                         Student's Application: {{ student.content }}
                       </p>
                     </div>
+
+
+                    <div class="modal-body-content-button">
+                      <button
+                      *ngIf="!acceptedBefore(post.id, student.email)"
+                      mat-stroked-button
+                      color="primary"
+                      class="modal-body-content-button-accept"
+                      (click)="acceptApplicant(post.id, student.email)"
+                    >
+                      Accept Applicant
+                    </button>
+
+                    <button
+                      *ngIf="acceptedBefore(post.id, student.email)"
+                      mat-stroked-button
+                      disabled
+                      color="primary"
+                      class="modal-body-content-button-accept"
+                    >
+                      Applicant Accepted
+                    </button>
+
+                    </div>
+
+
                   </div>
                 </div>
                 <div class="modal-footer">

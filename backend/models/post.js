@@ -28,8 +28,9 @@ const postSchema = mongoose.Schema({
   removed: {type: String, },
   reason: {type: String, },
 
-  students: {type: {email: String, contact: Number, content: String, applicationUser: String}, required: true},
-  reports: {type: {email: String, contact: Number, content: String}, required: true},
+  students: {type: [{email: String, contact: Number, content: String, applicationUser: String}], required: true},
+  reports: {type: [{email: String, contact: Number, content: String}], required: true},
+  studentsAccepted: {type: [String], },
 
   //image:
   imagePath:{type: String, },

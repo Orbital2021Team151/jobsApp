@@ -250,6 +250,20 @@ button {
   color: black;
 }
 
+.modal-body-content {
+  border: thin solid black;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-body-content-student {
+  text-align: center;
+}
+
+.modal-body-content-button-accept {
+  color: #00b167;
+}
+
 .modal-footer {
   font-family: 'Lato', sans-serif;
   color: black;

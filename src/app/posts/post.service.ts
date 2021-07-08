@@ -53,6 +53,7 @@ export class PostsService {
 
             students: post.students,
             reports: post.reports,
+            studentsAccepted: post.studentsAccepted,
 
             imagePath: post.imagePath,
           };
@@ -110,6 +111,7 @@ export class PostsService {
 
     postData.append("students", JSON.stringify(post.students));
     postData.append("reports", JSON.stringify(post.reports));
+    postData.append("reports", JSON.stringify(post.studentsAccepted));
     postData.append("image", post.image, post.title);
 
     //console.log("At front end, postService is tring to send this over via addPost: ");
@@ -239,6 +241,22 @@ export class PostsService {
       .subscribe((response) => {
 
         console.log("post reported successfully!");
+        this.postsUpdated.next([...this.posts]);
+    });
+  }
+
+  acceptStudent(postId: string, studentEmail: string) {
+
+    const postToAcceptStudent = this.getPost(postId);
+
+    postToAcceptStudent.studentsAccepted.push(studentEmail);
+
+    this.http
+      .put(BACKEND_URL + 'api/posts/accept' + "/" + postToAcceptStudent.id, postToAcceptStudent)
+      .subscribe((response) => {
+
+        console.log("apply post successful!");
+        //this.posts = this.posts.filter(post => post.id !== postId);
         this.postsUpdated.next([...this.posts]);
     });
   }

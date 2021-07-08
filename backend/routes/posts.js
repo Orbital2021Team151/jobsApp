@@ -53,6 +53,9 @@ router.put("/publish/:id", PostsController.publishPost);
 //student apply function
 router.put("/apply/:id", PostsController.applyPost);
 
+//accept student application function
+router.put("/accept/:id", PostsController.applyPost);
+
 router.put("/report/:id", PostsController.reportPost);
 
 router.get("/download", PostsController.downloadPosts);

@@ -248,6 +248,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
       students: [],
       reports: [],
+      studentsAccepted: [],
 
       image: this.form.value.image,
       imagePath: null,

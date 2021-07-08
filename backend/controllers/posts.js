@@ -51,6 +51,8 @@ exports.requestPost = (req, res, next) => {
 
     students: JSON.parse(req.body.students),
     reports: JSON.parse(req.body.reports),
+    studentsAccepted: JSON.parse(req.body.studentsAccepted),
+
     image: req.body.image,
     imagePath: url + "/images/" + req.file.filename,
   });
@@ -144,6 +146,7 @@ exports.requestPostNoImage = (req, res, next) => {
 
     students: [],
     reports: [],
+    studentsAccepted: [],
 
     //image: null,
     imagePath: null,
@@ -279,6 +282,7 @@ exports.publishPost = (req, res, next) => {
 
     students: [],
     reports: [],
+    studentsAccepted: [],
   });
 
   Post.updateOne({ _id: req.params.id }, newPost)
@@ -362,6 +366,7 @@ exports.applyPost = (req, res, next) => {
 
     students: req.body.students,
     reports: req.body.reports,
+    studentsAccepted: req.body.studentsAccepted,
   });
 
   Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
@@ -407,6 +412,7 @@ exports.reportPost = (req, res, next) => {
 
     students: req.body.post.students,
     reports: req.body.post.reports,
+    studentsAccepted: req.body.studentsAccepted,
   });
 
   let reportInfo = {
@@ -487,6 +493,7 @@ exports.rejectPost = (req, res, next) => {
 
     students: req.body.students,
     reports: req.body.reports,
+    studentsAccepted: req.body.studentsAccepted,
   });
 
   Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
@@ -531,6 +538,7 @@ exports.completePost = (req, res, next) => {
 
     students: req.body.students,
     reports: req.body.reports,
+    studentsAccepted: req.body.studentsAccepted,
   });
 
   Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
@@ -538,6 +546,52 @@ exports.completePost = (req, res, next) => {
     //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
     //sendCompleteAcknowledgementEmail(req.body.email, req.body);
     res.status(200).json("Post has been completed!");
+  });
+};
+
+//adds the student / NUS alumni applicant to the post's studentsAccepted list
+exports.acceptStudent = (req, res, next) => {
+
+  const newPost = new Post({
+    _id: req.body.id,
+    orgName: req.body.orgName,
+    uen: req.body.uen,
+    POC: req.body.POC,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    title: req.body.title,
+    content: req.body.content,
+    opportunity: req.body.opportunity,
+    skills: req.body.skills,
+
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    hoursRequired: req.body.hoursRequired,
+
+    location: req.body.location,
+    beneficiaries: req.body.beneficiaries,
+
+    approved: true,
+    creator: req.body.id,
+    creationDate: req.body.creationDate,
+    publishDate: req.body.publishDate,
+
+    removed: null,
+    reason: null,
+
+    students: req.body.students,
+    reports: req.body.reports,
+    studentsAccepted: req.body.studentsAccepted,
+  });
+
+  Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
+    //sends email to organisation to inform that that someone applied for their post?
+
+    //to just to inform the person who applied for the post that their application got through.
+    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
+    //sendApplyAcknowledgementEmail(req.body.email, req.body);
+
+    res.status(200).json("Applied for posting!");
   });
 };
 

@@ -22,6 +22,7 @@ export interface Post {
 
   students: {email: string, contact: number, content: string, applicationUser: string}[],
   reports: {email: string, contact: number, content: string}[],
+  studentsAccepted: string[],
 
   approved: boolean,
   creationDate: Date, //Date post was published
