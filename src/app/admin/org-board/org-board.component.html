@@ -126,14 +126,14 @@
                 *ngIf="!post.approved">
 
                 <img
-                  *ngIf="!post.imagePath"
+                  *ngIf="post.imagePath === null"
                   mat-card-image
                   class="card-image"
                   src="../../../assets/dark-background-placeholder.png"
                   alt="Placeholder image">
 
                   <img
-                  *ngIf="post.imagePath"
+                  *ngIf="post.imagePath !== null"
                   mat-card-image
                   class="card-image"
                   [src]="post.imagePath"
@@ -290,8 +290,8 @@
           </p>
 
           <div class="application-posts-div">
-            <div class="centered" *ngFor="let approvedPost of approvedPosts">
-              <section class="cards" *ngIf="approvedPost.students.length > 0">
+            <div class="centered" *ngFor="let post of approvedPosts">
+              <section class="cards" *ngIf="post.students.length > 0">
                 <mat-card class="application-post-card">
                   <img
                   *ngIf="!post.imagePath"

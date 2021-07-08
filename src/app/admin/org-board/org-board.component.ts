@@ -61,18 +61,21 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     });
     */
 
-    this.postsService.getPosts(); //NEED THIS. To push the posts to the subscription for the getPostsUpdatedListener to work
+    this.postsService.getPosts(); //NEED THIS? To push the posts to the subscription for the getPostsUpdatedListener to work
 
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
 
-        console.log("organisation dashboard's postService observable!");
-        console.log(posts);
+        //console.log("organisation dashboard's postService observable!");
+        //console.log(posts);
 
         this.posts = [];
         this.approvedPosts = [];
 
         this.posts = posts.filter(post => !post.removed);
+
+        console.log("organisation dashboard's postService observable! After filtering posts removed,");
+        console.log(this.posts);
 
         this.posts = this.posts
             .filter(post => post.email === this.authStatusObject.email);
