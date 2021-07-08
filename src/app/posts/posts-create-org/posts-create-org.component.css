@@ -64,3 +64,175 @@ input[type="file"] {
 .image-preview img {
   height: 100%;
 }
+
+/* post preview stuff */
+.filter-card-title {
+  text-align: center;
+}
+
+.filter-card {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+
+.filter-card-body {
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+
+  /* background-color: #5FB49C; */
+  border-style: solid;
+  border-width: thin;
+  border-color: #4da8da;
+  box-shadow: none;
+}
+
+.filter-button {
+  margin: 0 auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.filter-footer {
+  text-align: center;
+  width: 100%;
+  flex: auto
+}
+
+
+/* POSTS TIMELINE
+-------------------------------------------------- */
+.published-posts {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+}
+
+.published-post-card {
+  width: 25rem;
+  height: 35rem;
+
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.published-post-card:hover {
+  box-shadow: 0 0 11px #394dffda;
+}
+
+.card-image {
+  height: 50%;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+
+.post-card-title {
+  font-family: 'Lato', sans-serif;
+  text-overflow: ellipsis;
+
+  width: 22rem;
+  max-width: 22rem;
+  height: 1.7rem;
+
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.5rem;
+}
+
+.post-card-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 120%;
+
+  width: 22rem;
+  max-width: 22rem;
+  height: 2rem;
+
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: rgb(88, 88, 88);
+}
+
+mat-icon {
+  position: relative;
+  top: 6px;
+}
+
+.post-card-content {
+  font-family: 'Lato', sans-serif;
+  text-overflow: ellipsis;
+  width: 22rem;
+  max-width: 22rem;
+  height: 8rem;
+
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #777777;
+  text-align: center;
+}
+
+.post-card-footer {
+  width: 22rem;
+  max-width: 22rem;
+  font-family: 'Lato', sans-serif;
+  align-items: center;
+  flex: auto;
+  margin: auto;
+}
+
+.post-card-footer-button {
+  margin: 5px 5px 5px 0;
+}
+
+.pCardHeader {
+  text-overflow: ellipsis;
+  width: 45rem;
+  max-width: 45rem;
+  text-align: center;
+  height: 1.7rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.5rem;
+}
+
+.pCardSubheader {
+  height: 3.5rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #D9D9D9;
+}
+
+.pCardContent p {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 10rem;
+}
+
+.post-footer {
+  display: flex;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  justify-content: center;
+}
+
+.post-button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}

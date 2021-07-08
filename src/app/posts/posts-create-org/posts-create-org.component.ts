@@ -27,6 +27,8 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   private postId: string;
   post: Post;
   imagePreview: string;
+  showPreview = false;
+  postPreview: Post[] = [];
 
   beneficiaries: string[] = [
     "Animal Welfare",
@@ -201,6 +203,57 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       //console.log("At create page");
       //console.log(authObject);
     });
+  }
+
+  generatePreview() {
+    if (this.form.invalid) return;
+
+    if (this.postPreview.length > 1) {
+      this.postPreview = [];
+    }
+
+    const post: Post = {
+      id: null,
+      orgName: this.form.value.orgName,
+      uen: this.form.value.uen,
+      POC: this.form.value.POC,
+      phoneNumber: this.form.value.phoneNumber,
+      email: this.form.value.email,
+      title: this.form.value.title,
+      opportunity: this.form.value.opportunity,
+
+      content: this.form.value.content,
+      skills: this.form.value.skills,
+
+      startDate: this.form.value.startDate,
+      endDate: this.form.value.endDate,
+      hoursRequired: this.form.value.hoursRequired,
+
+      location: this.form.value.location,
+      beneficiaries: this.form.value.beneficiaries,
+
+      approved: false,
+      creationDate: new Date(),
+      publishDate: null,
+      creator: null,
+
+      removed: null,
+      reason: null,
+
+      students: [],
+      reports: [],
+      studentsAccepted: [],
+
+      image: this.form.value.image,
+      imagePath: null,
+    };
+    this.postPreview.push(post);
+    this.showPreview = true;
+  }
+
+  onMoreInfo(content) {
+    //console.log(this.posts);
+    this.modalService.open(content, { size: 'lg' });
   }
 
 
