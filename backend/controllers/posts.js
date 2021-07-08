@@ -1137,7 +1137,7 @@ const sendApplyAcknowledgementEmail = (email, post) => {
   });
 };
 
-//need to do up
+//might not need
 const sendCompleteAcknowledgementEmail = (email, post) => {
   var mailOptions;
   let sender = "CCSGP Post Completion Acknowledgement";
