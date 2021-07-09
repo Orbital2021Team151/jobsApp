@@ -75,10 +75,21 @@ button {
 
 /* CHANGE PASSWORD
 -------------------------------------------------- */
-.change-password-card {
-  margin: auto;
-  width: 50%;
+.change-password-container {
+
+  width: 100%;
   padding: 10px;
+
+  /*
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  */
 }
 
 .change-password-title {
@@ -89,14 +100,25 @@ button {
 .change-password-body {
   font-family: 'Lato', sans-serif;
   width: 100%;
-  margin: auto;
   padding: 10px;
   text-align: center;
+
+  /*
 
   border-style: solid;
   border-width: thin;
   border-color: #4da8da;
   box-shadow: none;
+
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  */
 }
 
 .change-password-form-input {
@@ -105,6 +127,12 @@ button {
   margin-right: 1rem;
   margin: auto;
 }
+
+/*
+.change-password-form-input::placeholder {
+  color: #00b167;
+}
+*/
 
 .change-password-form-field {
   font-family: 'Lato', sans-serif;
@@ -218,7 +246,7 @@ button {
 }
 
 .application-post-card:hover {
-  box-shadow: 0 0 11px #34df25e0;
+  box-shadow: 0 0 11px #db2bc4e0;
 }
 
 .application-post-card-button-view-applicants {
@@ -227,6 +255,50 @@ button {
 }
 
 .application-post-card-button-complete {
+  background-color: #00b167;
+  color: white;
+}
+
+/* APPROVED POSTS
+-------------------------------------------------- */
+.approved-posts-div {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+}
+
+.approved-post-card {
+
+  /*
+  width: 25rem;
+  height: 15rem;
+  */
+
+  width: 25rem;
+  height: 35rem;
+
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  /*
+  border-style: solid;
+  border-width: thin;
+  border-color: #ff0000;
+  box-shadow: none;
+  */
+}
+
+.approved-post-card:hover {
+  box-shadow: 0 0 11px #34df25e0;
+}
+
+.approved-post-card-button-complete {
   background-color: #00b167;
   color: white;
 }
@@ -294,6 +366,36 @@ button {
   text-align: center;
   color: inherit;
   margin-top: 5rem;
+}
+
+.nav-item {
+  /*
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  */
+}
+
+.page-container {
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: left;
+  align-content: space-around;
+
+}
+
+.nav-content {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
 }
 
 /* SMALL SCREEN SIZE //TODO: NOT DONE YET

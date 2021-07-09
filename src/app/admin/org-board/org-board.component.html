@@ -4,13 +4,14 @@
   to change nav orientation
 </p>
 
-<div class="d-flex">
+<div class="page-container">
   <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
 
     <li ngbNavItem="changePassword" class="nav-item">
       <a ngbNavLink>Change Password</a>
-      <ng-template ngbNavContent>
-        <div class="change-password-card">
+      <ng-template ngbNavContent class="nav-content">
+
+        <div class="change-password-container">
           <mat-card class="mat-elevation-z0 change-password-body">
             <mat-card-title class="change-password-title"
               >Change Password</mat-card-title
@@ -82,8 +83,10 @@
               </mat-form-field>
 
               <button
-                class="btn btn-outline-primary mb-2 mr-2"
-                (click)="onChangePassword(changePasswordForm)"
+              mat-stroked-button
+              color="primary"
+              class="change-password-form-button"
+              (click)="onChangePassword(changePasswordForm)"
               >
                 Change Password
               </button>
@@ -107,18 +110,22 @@
             </div>
           </mat-card>
         </div>
+
       </ng-template>
     </li>
 
     <li ngbNavItem="pendingPosts">
       <a ngbNavLink>Posts pending approval from admins</a>
       <ng-template ngbNavContent>
+
+        <!--
         <div class="info-text">
           <p>
             <b>Posts that has not been approved by CCSGP Admins yet D:</b>
           </p>
-
-          <div class="request-posts-div">
+        </div>
+        -->
+        <div class="request-posts-div">
             <div class="centered" *ngFor="let post of posts">
               <section class="cards" *ngIf="!post.approved">
                 <mat-card
@@ -263,31 +270,28 @@
                   </button>
                 </div>
               </ng-template>
-
-
-
-
-
             </div>
           </div>
 
           <p
-            class="info-text-2"
+            class="info-text"
             *ngIf="hasRequest === false">
             <i>No post requests or all posts have already been approved.</i>
           </p>
           <mat-spinner *ngIf="hasRequest === null"></mat-spinner>
-
-        </div>
       </ng-template>
     </li>
     <li ngbNavItem="postsWithApplications">
       <a ngbNavLink>Posts with applications</a>
       <ng-template ngbNavContent>
+
+        <!--
         <div class="info-text">
           <p>
             <b>Posts with applications! :D</b>
           </p>
+        </div>
+        -->
 
           <div class="application-posts-div">
             <div class="centered" *ngFor="let post of approvedPosts">
@@ -568,22 +572,25 @@
             <i>No applications yet</i>
           </p>
           <mat-spinner *ngIf="hasApplication === null"></mat-spinner>
-        </div>
 
       </ng-template>
     </li>
     <li ngbNavItem="Approved posts">
       <a ngbNavLink>Approved posts</a>
       <ng-template ngbNavContent>
+
+        <!--
         <div class="info-text">
           <p>
             <b>Posts that have received approval from CCSGP</b>
           </p>
+        </div>
+        -->
 
-          <div class="application-posts-div">
+          <div class="approved-posts-div">
             <div class="centered" *ngFor="let post of approvedPosts">
               <section class="cards">
-                <mat-card class="application-post-card">
+                <mat-card class="approved-post-card">
                   <img
                   *ngIf="!post.imagePath"
                   mat-card-image
@@ -618,7 +625,7 @@
 
                     <button
                     mat-raised-button
-                    class="application-post-card-button-complete"
+                    class="approved-post-card-button-complete"
                       (click)="onCompletePrompt(completeContent)"
                     >
                       Complete / Remove
@@ -821,13 +828,13 @@
           </div>
 
           <p
-            class="info-text-2"
+            class="info-text"
             *ngIf="hasNoApprovedPosts"
           >
             <i>No approved posts yet.</i>
           </p>
           <mat-spinner *ngIf="hasNoApprovedPosts === null"></mat-spinner>
-        </div>
+
 
       </ng-template>
     </li>
