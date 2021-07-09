@@ -93,6 +93,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   onDeletePrompt(content) {
     this.modalService.open(content, { size: 'lg' });
+    console.log(this.posts);
   }
 
   onDelete(postId: string) {

@@ -1,30 +1,6 @@
-/* navbar styling stuff */
-
-/*for the whole navbar*/
-.container1 {
-  /* border: 3px solid #fff; */
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.container1-child {
-  /* padding-left: 4px;
-  padding-top: 4px;
-  margin-left: 30%; */
-  background-color: white;
-  width: 20%;
-  float: left;
-  padding: 20px;
-  border: 2px solid red;
-}
-
 /* GLOBAL
 -------------------------------------------------- */
+
 .card-image {
   height: 50%;
   overflow: hidden;
@@ -100,11 +76,14 @@ button {
 -------------------------------------------------- */
 .change-password-card {
   /* margin: auto;
-  width: 50%; */
+  width: 50%;
   width: 50%;
   float: left;
   padding: 20px;
   border: 2px solid red;
+  */
+  width: 100%;
+  padding: 10px;
 }
 
 .change-password-title {
@@ -115,14 +94,25 @@ button {
 .change-password-body {
   font-family: "Lato", sans-serif;
   width: 100%;
-  margin: auto;
   padding: 10px;
   text-align: center;
+
+  /*
 
   border-style: solid;
   border-width: thin;
   border-color: #4da8da;
   box-shadow: none;
+
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  */
 }
 
 .change-password-form-input {
@@ -274,23 +264,46 @@ button {
   text-align: center;
 }
 
+
 /* MISCELLANEOUS
 -------------------------------------------------- */
-.container {
-  bottom: 0;
-  text-align: center;
-}
-
 .info-text {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   text-align: center;
   color: inherit;
   margin-top: 5rem;
-  width: 50%;
-  float: left;
-  padding: 20px;
-  border: 2px solid red;
 }
+
+.nav-item {
+  /*
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  */
+}
+
+.page-container {
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: left;
+  align-content: space-around;
+
+}
+
+.nav-content {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+}
+
 
 /* SMALL SCREEN SIZE //TODO: NOT DONE YET
 -------------------------------------------------- */

@@ -1,5 +1,5 @@
 <!-- navbar stuff -->
-<div class="d-flex">
+<div class="page-container">
   <ul
     ngbNav
     #nav="ngbNav"
@@ -86,15 +86,12 @@
 
                 <mat-card-footer class="change-password-footer">
                   <button
-                    class="
-                      btn btn-outline-primary
-                      mb-2
-                      mr-2
-                      change-password-button
-                    "
+                  mat-stroked-button
+                  color="primary"
+                  class="change-password-form-button"
                     (click)="onChangePassword(changePasswordForm)"
                   >
-                    Request password change
+                    Change Password
                   </button>
                 </mat-card-footer>
               </form>
@@ -182,10 +179,14 @@
     <li ngbNavItem="postsPendingApproval" class="nav-item">
       <a ngbNavLink>Posts that are pending your approval</a>
       <ng-template ngbNavContent>
+
+        <!--
         <div class="info-text">
           <p>
             <b>Posts that needs to be approved!</b>
           </p>
+        </div>
+        -->
 
           <div class="request-posts-div">
             <div class="centered" *ngFor="let post of posts">
@@ -384,7 +385,7 @@
             <i>No post request!</i>
           </p>
           <mat-spinner *ngIf="hasRequest === null" class="spinner"></mat-spinner>
-        </div>
+
       </ng-template>
     </li>
 
@@ -392,9 +393,14 @@
       <a ngbNavLink>Posts with reports</a>
       <ng-template ngbNavContent>
         <div class="info-text">
+
+          <!--
           <p>
             <b>Posts with reports! :O</b>
           </p>
+          -->
+
+        </div>
 
           <div class="report-posts-div">
             <div class="centered" *ngFor="let post of posts">
@@ -618,7 +624,7 @@
             No post with reports! :D
           </p>
           <mat-spinner *ngIf="hasReport === null"></mat-spinner>
-        </div>
+
       </ng-template>
     </li>
   </ul>
