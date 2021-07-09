@@ -74,8 +74,8 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
 
         this.posts = posts.filter(post => !post.removed);
 
-        console.log("organisation dashboard's postService observable! After filtering posts removed,");
-        console.log(this.posts);
+        //console.log("organisation dashboard's postService observable! After filtering posts removed,");
+        //console.log(this.posts);
 
         this.posts = this.posts
             .filter(post => post.email === this.authStatusObject.email);
@@ -170,7 +170,7 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
-    console.log(this.posts);
+    //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 

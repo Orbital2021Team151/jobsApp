@@ -260,8 +260,17 @@ button {
   text-align: center;
 }
 
+.modal-body-content-button {
+  justify-content:flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: space-around;
+}
+
 .modal-body-content-button-accept {
   color: #00b167;
+  margin-left: 2rem;
 }
 
 .modal-footer {

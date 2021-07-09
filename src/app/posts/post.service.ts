@@ -218,8 +218,10 @@ export class PostsService {
 
     postToBePublished.students.push(student);
 
+    let post_student_pair = {post: postToBePublished, student: student};
+
     this.http
-      .put(BACKEND_URL + 'api/posts/apply' + "/" + postToBePublished.id, postToBePublished)
+      .put(BACKEND_URL + 'api/posts/apply' + "/" + postToBePublished.id, post_student_pair)
       .subscribe((response) => {
 
         console.log("apply post successful!");
@@ -251,8 +253,10 @@ export class PostsService {
 
     postToAcceptStudent.studentsAccepted.push(studentEmail);
 
+    let post_studentEmail_pair = {post: postToAcceptStudent, studentEmail: studentEmail};
+
     this.http
-      .put(BACKEND_URL + 'api/posts/accept' + "/" + postToAcceptStudent.id, postToAcceptStudent)
+      .put(BACKEND_URL + 'api/posts/accept' + "/" + postToAcceptStudent.id, post_studentEmail_pair)
       .subscribe((response) => {
 
         console.log("apply post successful!");

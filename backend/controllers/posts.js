@@ -338,43 +338,43 @@ exports.publishPost = (req, res, next) => {
 //adds the student / NUS alumni applicant to the post
 exports.applyPost = (req, res, next) => {
   const newPost = new Post({
-    _id: req.body.id,
-    orgName: req.body.orgName,
-    uen: req.body.uen,
-    POC: req.body.POC,
-    phoneNumber: req.body.phoneNumber,
-    email: req.body.email,
-    title: req.body.title,
-    content: req.body.content,
-    opportunity: req.body.opportunity,
-    skills: req.body.skills,
+    _id: req.body.post.id,
+    orgName: req.body.post.orgName,
+    uen: req.body.post.uen,
+    POC: req.body.post.POC,
+    phoneNumber: req.body.post.phoneNumber,
+    email: req.body.post.email,
+    title: req.body.post.title,
+    content: req.body.post.content,
+    opportunity: req.body.post.opportunity,
+    skills: req.body.post.skills,
 
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
-    hoursRequired: req.body.hoursRequired,
+    startDate: req.body.post.startDate,
+    endDate: req.body.post.endDate,
+    hoursRequired: req.body.post.hoursRequired,
 
-    location: req.body.location,
-    beneficiaries: req.body.beneficiaries,
+    location: req.body.post.location,
+    beneficiaries: req.body.post.beneficiaries,
 
     approved: true,
-    creator: req.body.id,
-    creationDate: req.body.creationDate,
-    publishDate: req.body.publishDate,
+    creator: req.body.post.id,
+    creationDate: req.body.post.creationDate,
+    publishDate: req.body.post.publishDate,
 
     removed: null,
     reason: null,
 
-    students: req.body.students,
-    reports: req.body.reports,
-    studentsAccepted: req.body.studentsAccepted,
+    students: req.body.post.students,
+    reports: req.body.post.reports,
+    studentsAccepted: req.body.post.studentsAccepted,
   });
 
   Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
     //sends email to organisation to inform that that someone applied for their post?
 
     //to just to inform the person who applied for the post that their application got through.
-    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-    //sendApplyAcknowledgementEmail(req.body.email, req.body);
+    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
+    //sendApplyAcknowledgementEmail(req.body.student, req.body.post);
 
     res.status(200).json("Applied for posting!");
   });
@@ -553,43 +553,43 @@ exports.completePost = (req, res, next) => {
 exports.acceptStudent = (req, res, next) => {
 
   const newPost = new Post({
-    _id: req.body.id,
-    orgName: req.body.orgName,
-    uen: req.body.uen,
-    POC: req.body.POC,
-    phoneNumber: req.body.phoneNumber,
-    email: req.body.email,
-    title: req.body.title,
-    content: req.body.content,
-    opportunity: req.body.opportunity,
-    skills: req.body.skills,
+    _id: req.body.post.id,
+    orgName: req.body.post.orgName,
+    uen: req.body.post.uen,
+    POC: req.body.post.POC,
+    phoneNumber: req.body.post.phoneNumber,
+    email: req.body.post.email,
+    title: req.body.post.title,
+    content: req.body.post.content,
+    opportunity: req.body.post.opportunity,
+    skills: req.body.post.skills,
 
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
-    hoursRequired: req.body.hoursRequired,
+    startDate: req.body.post.startDate,
+    endDate: req.body.post.endDate,
+    hoursRequired: req.body.post.hoursRequired,
 
-    location: req.body.location,
-    beneficiaries: req.body.beneficiaries,
+    location: req.body.post.location,
+    beneficiaries: req.body.post.beneficiaries,
 
     approved: true,
-    creator: req.body.id,
-    creationDate: req.body.creationDate,
-    publishDate: req.body.publishDate,
+    creator: req.body.post.id,
+    creationDate: req.body.post.creationDate,
+    publishDate: req.body.post.publishDate,
 
     removed: null,
     reason: null,
 
-    students: req.body.students,
-    reports: req.body.reports,
-    studentsAccepted: req.body.studentsAccepted,
+    students: req.body.post.students,
+    reports: req.body.post.reports,
+    studentsAccepted: req.body.post.studentsAccepted,
   });
 
   Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
     //sends email to organisation to inform that that someone applied for their post?
 
     //to just to inform the person who applied for the post that their application got through.
-    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-    //sendApplyAcknowledgementEmail(req.body.email, req.body);
+    //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
+    //sendApplyAcceptanceEmail(req.body.studentEmail, req.body.post);
 
     res.status(200).json("Applied for posting!");
   });
@@ -1109,7 +1109,7 @@ const sendReportAcknowledgementEmail = (student, post) => {
   });
 };
 
-const sendApplyAcknowledgementEmail = (email, post) => {
+const sendApplyAcknowledgementEmail = (student, post) => {
   var mailOptions;
   let sender = "CCSGP Report Acknowledgement";
 
@@ -1159,7 +1159,7 @@ const sendApplyAcknowledgementEmail = (email, post) => {
 
   mailOptions = {
     from: sender,
-    to: email,
+    to: student.email,
     subject: "CCSGP Post Application Acknowledgement",
     html: htmlToSend,
     attachments: [
@@ -1277,7 +1277,7 @@ const sendCompleteAcknowledgementEmail = (email, post) => {
 //need to do up
 const sendApplyAcceptanceEmail = (email, post) => {
   var mailOptions;
-  let sender = "CCSGP Post Completion Acknowledgement";
+  let sender = "CCSGP Post Application Acceptance";
 
   let templatePath = path.join(
     __dirname,
@@ -1326,7 +1326,7 @@ const sendApplyAcceptanceEmail = (email, post) => {
   mailOptions = {
     from: sender,
     to: email,
-    subject: "CCSGP Post Completion Acknowledgement",
+    subject: "CCSGP Post Application Successful",
     html: htmlToSend,
     attachments: [
       {
@@ -1347,12 +1347,12 @@ const sendApplyAcceptanceEmail = (email, post) => {
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
       console.log(
-        "Could not send Post Completion Acknowledgement email! (line 539, controllers posts.js) Error is as shown below: "
+        "Could not send Post Application Successful email! (line 539, controllers posts.js) Error is as shown below: "
       );
       console.log(error);
-      throw new Error("Could not send Post Completion Acknowledgement email!");
+      throw new Error("Could not send Post Application Successful email!");
     } else {
-      console.log("Post Completion Acknowledgement email sent!");
+      console.log("Post Application Successful email sent!");
     }
   });
 };
