@@ -1077,7 +1077,7 @@ const sendReportAcknowledgementEmail = (student, post) => {
 
   mailOptions = {
     from: sender,
-    to: email,
+    to: student.email,
     subject: "CCSGP Post Report Acknowledgement",
     html: htmlToSend,
     attachments: [
