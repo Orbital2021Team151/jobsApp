@@ -36,13 +36,12 @@
 
       <ngb-carousel *ngIf="images" class="carousel">
 
-        <ng-template ngbSlide>
+        <ng-template ngbSlide *ngFor="let highlight of highlights">
           <div class="row carousel-card">
             <div class="col-md-7">
-              <h2 class="carousel-heading"><u>Women in Tech</u></h2>
+              <h2 class="carousel-heading"><u>{{ highlight.title }}</u></h2>
               <p class="lead">
-                SOC has been increasing our drive to attract women into the tech workforce. We're glad to announce our success in increasing the participation rate of
-                ladies as exemplified by our increase in female students enrolled year on year.
+                {{ highlight.summary }}
               </p>
 
               <button
@@ -51,18 +50,26 @@
               >
               Read More (In Development)
               </button>
+
+              <button
+              mat-raised-button
+              class="carousel-read-more-button"
+              (click)="deleteHighlight(highlight.id)"
+              *ngIf="isAuth"
+              >
+              Delete
+              </button>
             </div>
 
             <div class="col-md-5">
-              <!--
-                <img src="https://www.pngkey.com/png/full/4-49790_galaxies-galaxy-png.png" alt="Photo of galaxies" class="carousel-image">
-              -->
-              <img [src]="images[0]" alt="Random first slide" class="carousel-image">
+              <!-- <img [src]="images[0]" alt="Random first slide" class="carousel-image"> -->
+
+              <img class="carousel-image" [src]="highlight.imagePath">
             </div>
           </div>
         </ng-template>
 
-        <ng-template ngbSlide>
+        <!-- <ng-template ngbSlide>
           <div class="row carousel-card">
             <div class="col-md-7">
               <h2 class="carousel-heading"><u>Care for Students</u><br></h2>
@@ -102,13 +109,10 @@
             </div>
 
             <div class="col-md-5">
-              <!--
-                <img src="https://www.pngkey.com/png/full/4-49790_galaxies-galaxy-png.png" alt="Photo of galaxies" class="carousel-image">
-              -->
               <img [src]="images[2]" alt="Random third slide" class="carousel-image">
             </div>
           </div>
-        </ng-template>
+        </ng-template> -->
 
 
 

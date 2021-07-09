@@ -14,7 +14,7 @@ const BACKEND_URL = environment.apiUrl; //change this in the environment folder
 })
 export class HighlightService {
 
-  highlights: Highlight[];
+  highlights: Highlight[] = [];
 
   highlightsUpdated = new Subject<Highlight[]>();
 
@@ -25,7 +25,9 @@ export class HighlightService {
     this.http.get<{ title: string, highlights: any }>(BACKEND_URL + 'api/highlights')
     .pipe(map(highlightData => {
       return highlightData.highlights.map(highlight => {
+        console.log(highlight._id);
         return {
+          id: highlight._id,
           title: highlight.title,
           summary: highlight.summary,
           content: highlight.content,
@@ -59,10 +61,26 @@ export class HighlightService {
 
     this.http.post<{title: string}>(BACKEND_URL + 'api/highlights', highlightData)
     .subscribe(res => {
+
+      if (this.highlights.length === 3) {
+        this.highlights.pop();
+      }
       console.log("somehow your highlight went through wilbur! here it is below")
       console.log(highlight);
       this.highlights.push(highlight);
       this.highlightsUpdated.next([...this.highlights]);
     });
+  }
+
+  deleteHighlight(id: string) {
+    this.http
+      .delete(BACKEND_URL + 'api/highlights/' + id)
+      .subscribe((response) => {
+        this.highlights = this.highlights.filter(highlight => {
+          return highlight.id !== id;
+        });
+        console.log("successfully deleted post!");
+        this.highlightsUpdated.next([...this.highlights])
+      })
   }
 }

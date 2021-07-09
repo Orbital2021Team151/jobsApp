@@ -4,6 +4,7 @@ const HighlightsController = require('../controllers/highlights');
 const path = require("path");
 
 const multer = require('multer');
+const checkAuth = require('../middleware/check-auth');
 
 const router = express();
 
@@ -33,6 +34,10 @@ const storage = multer.diskStorage({
 });
 
 router.post("", multer({storage: storage}).single('image'), HighlightsController.publishHighlight);
+
+router.get("", HighlightsController.getAllHighlights);
+
+router.delete("/:id", HighlightsController.deleteHighlight);
 
 module.exports = router;
 

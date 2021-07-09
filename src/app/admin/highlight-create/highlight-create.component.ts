@@ -59,6 +59,7 @@ export class HighlightCreateComponent implements OnInit, OnDestroy {
     }
 
     const highlight: Highlight = {
+      id: null,
       title: this.form.value.title,
       summary: this.form.value.summary,
       content: this.form.value.content,
