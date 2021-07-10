@@ -458,11 +458,12 @@
 </div>
 
 <div class="post-preview" *ngIf="showPreview">
-  <ng-container *ngFor="let post of postPreview">
+
+  <ng-container>
     <section class="cards">
       <mat-card class="published-post-card">
         <img
-          *ngIf="!post.imagePath"
+          *ngIf="!postPreview.imagePath"
           mat-card-image
           class="card-image"
           src="../../../assets/dark-background-placeholder.png"
@@ -470,25 +471,26 @@
         />
 
         <img
-          *ngIf="post.imagePath"
+          *ngIf="postPreview.imagePath"
           mat-card-image
           class="card-image"
-          [src]="post.imagePath"
+          src="{{postPreview.imagePath}}"
           alt="Post's image"
         />
 
+
         <mat-card-title class="post-card-title"
-          ><b>{{ post.title }}</b></mat-card-title
+          ><b>{{ postPreview.title }}</b></mat-card-title
         >
         <mat-card-subtitle class="post-card-subtitle">
-          by <b>{{ post.orgName }}</b>
+          by <b>{{ postPreview.orgName }}</b>
         </mat-card-subtitle>
         <mat-card-content class="post-card-content">
-          <mat-icon>event</mat-icon> {{ post.startDate | date }} to
-          {{ post.endDate | date }} <br />
-          <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-          <mat-icon> location_on</mat-icon> {{ post.location || "Not Specified" }} <br />
-          <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
+          <mat-icon>event</mat-icon> {{ postPreview.startDate | date }} to
+          {{ postPreview.endDate | date }} <br />
+          <mat-icon>schedule</mat-icon> {{ postPreview.hoursRequired }} <br />
+          <mat-icon> location_on</mat-icon> {{ postPreview.location || "Not Specified" }} <br />
+          <mat-icon>people_outline</mat-icon> Skillsets: {{ postPreview.skills }}
           <br />
         </mat-card-content>
         <mat-card-footer class="post-card-footer">
@@ -504,35 +506,9 @@
       </mat-card>
     </section>
 
-    <ng-template #messageForStudent let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Publish Success</h4>
-        <button
-          type="button"
-          class="close"
-          aria-label="Close"
-          (click)="modal.dismiss('Cross click')"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Post Published Successfully!</p>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="modal.close('Close click')"
-        >
-          Back
-        </button>
-      </div>
-    </ng-template>
-
     <ng-template #content let-modal>
       <div class="modal-header">
-        <h4 class="modal-title">{{ post.title }}</h4>
+        <h4 class="modal-title">{{ postPreview.title }}</h4>
         <button
           type="button"
           class="btn-close"
@@ -543,18 +519,18 @@
       </div>
       <div class="modal-body">
         <p>
-          Organization Name: {{ post.orgName }}<br />
-          UEN: {{ post.uen }}<br />
-          Point of Contact (POC): {{ post.POC }}<br />
-          POC's phoneNumber: {{ post.phoneNumber }}<br />
-          POC's email: {{ post.email }}<br />
-          Brief Description for gig: {{ post.content }}<br />
-          Frequency/Type of volunteer opportunity: {{ post.opportunity }}<br />
-          Preferred Skills: {{ post.skills }}<br />
-          Start Date: {{ post.startDate | date }}<br />
-          End Date: {{ post.endDate | date }}<br />
-          Commitment Hours: {{ post.hoursRequired }}<br />
-          Beneficiaries: {{ post.beneficiaries }}
+          Organization Name: {{ postPreview.orgName }}<br />
+          UEN: {{ postPreview.uen }}<br />
+          Point of Contact (POC): {{ postPreview.POC }}<br />
+          POC's phoneNumber: {{ postPreview.phoneNumber }}<br />
+          POC's email: {{ postPreview.email }}<br />
+          Brief Description for gig: {{ postPreview.content }}<br />
+          Frequency/Type of volunteer opportunity: {{ postPreview.opportunity }}<br />
+          Preferred Skills: {{ postPreview.skills }}<br />
+          Start Date: {{ postPreview.startDate | date }}<br />
+          End Date: {{ postPreview.endDate | date }}<br />
+          Commitment Hours: {{ postPreview.hoursRequired }}<br />
+          Beneficiaries: {{ postPreview.beneficiaries }}
         </p>
       </div>
       <div class="modal-footer">
@@ -568,339 +544,6 @@
       </div>
     </ng-template>
 
-    <ng-template #error let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Applied Before</h4>
-        <button
-          type="button"
-          class="close"
-          aria-label="Close"
-          (click)="modal.dismiss('Cross click')"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <p>you applied for this before</p>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="modal.close('Close click')"
-        >
-          Close
-        </button>
-      </div>
-    </ng-template>
-
-    <ng-template #studentContent let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Apply Post: {{ post.title }}</h4>
-        <button
-          type="button"
-          class="btn-close"
-          aria-label="apply"
-          (click)="modal.dismiss('Cross click')"
-        >
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form [formGroup]="applicationForm">
-
-          <mat-form-field appearance="outline">
-            <mat-label>Contact Number</mat-label>
-            <input
-              matInput
-              type="number"
-              required
-              [formControl]="applicationContactControl"
-              placeholder="eg 81234567"
-              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              maxlength="8"
-            />
-            <mat-error *ngIf="!applicationForm.get('contact').valid">Please ensure your contact number is correct.</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Reason for applying</mat-label>
-            <textarea
-              matInput
-              type="text"
-              required
-              [formControl]="applicationContentControl"
-              rows="10"
-              placeholder="Please elaborate on how you can contribute to the project."
-            ></textarea>
-            <mat-error *ngIf="applicationContentControl.errors?.required">Please ensure your contact number is correct.</mat-error>
-          </mat-form-field>
-
-          <div class="role-radio-group">
-            <mat-label> Applicant Type </mat-label>
-            <div class="d-block my-3">
-              <div
-              class="custom-control custom-radio"
-              >
-                <input
-                  id="Student"
-                  type="radio"
-                  class="custom-control-input"
-                  value="Student"
-                  [formControl]="applicationUserTypeControl"
-                />
-                <label class="custom-control-label" for="Student"
-                  >Student</label
-                >
-              </div>
-
-              <div class="custom-control custom-radio">
-                <input
-                  id="NUS Alumni"
-                  type="radio"
-                  class="custom-control-input"
-                  value="NUS Alumni"
-                  [formControl]="applicationUserTypeControl"
-                />
-                <label class="custom-control-label" for="NUS Alumni"
-                  >NUS Alumni</label
-                >
-              </div>
-            </div>
-          </div>
-
-        </form>
-
-
-      </div>
-
-      <div class="modal-footer">
-        <mat-error *ngIf="applicationForm.invalid"
-          >Please fill all required fields before submitting your
-          application.</mat-error
-        >
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="
-            submitApplicationReactive(post.id) && modal.dismiss('Cross click')
-          "
-        >
-          Submit Application
-        </button>
-
-      </div>
-    </ng-template>
-
-    <ng-template #reportContent let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Report Post: {{ post.title }}</h4>
-        <button
-          type="button"
-          class="btn-close"
-          aria-label="apply"
-          (click)="modal.dismiss('Cross click')"
-        >
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form [formGroup]="reportForm">
-
-          <mat-form-field appearance="outline">
-            <mat-label>Contact Number</mat-label>
-            <input
-              matInput
-              type="number"
-              required
-              [formControl]="reportContactControl"
-              placeholder="eg 81234567"
-              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              maxlength="8"
-            />
-            <mat-error *ngIf="!reportForm.get('contact').valid">Please ensure your contact number is correct.</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Reason for reporting</mat-label>
-            <textarea
-              matInput
-              type="text"
-              required
-              [formControl]="reportContentControl"
-              rows="10"
-              placeholder="Please elaborate provide us with the reason for reporting the post."
-            ></textarea>
-            <mat-error *ngIf="reportContentControl.errors?.required">Please ensure your contact number is correct.</mat-error>
-          </mat-form-field>
-        </form>
-      </div>
-
-      <div class="modal-footer">
-
-        <mat-error *ngIf="reportForm.invalid"
-          >Please fill all required fields before submitting your
-          report.</mat-error
-        >
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="
-            submitReportReactive(post.id) && modal.dismiss('Cross click')
-          "
-        >
-          Submit Report
-        </button>
-      </div>
-    </ng-template>
-
-    <ng-template #errorMessage let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">You reported this post before!</h4>
-        <button
-          type="button"
-          class="submit"
-          aria-label="apply"
-          (click)="modal.dismiss('Cross click')"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </ng-template>
-
-    <ng-template #deleteContent let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Delete Confirmation</h4>
-        <button
-          type="button"
-          class="submit"
-          aria-label="apply"
-          (click)="modal.dismiss('Cross click')"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <p>Are you sure you want to delete the post?</p>
-      </div>
-
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="onDelete(post.id) && modal.dismiss('Cross click')"
-        >
-          Confirm Delete
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="modal.dismiss('Cross click')"
-        >
-          Cancel
-        </button>
-      </div>
-    </ng-template>
-
-    <ng-template #completeContent let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Completion Confirmation</h4>
-        <button
-          type="button"
-          class="submit"
-          aria-label="apply"
-          (click)="modal.dismiss('Cross click')"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <p>Confirm that the post request has been completed?</p>
-
-        <form [formGroup]="removeForm">
-
-          <mat-form-field appearance="outline">
-            <mat-label>If you are removing the post not because it is completed, please fill in the reason here.</mat-label>
-            <textarea
-              matInput
-              type="text"
-              [formControl]="removeReasonControl"
-              rows="10"
-              placeholder="Please tell us why you are removing the post. (eg lack of interest in job, job expired, etc)"
-            ></textarea>
-          </mat-form-field>
-        </form>
-      </div>
-
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="onComplete(post.id) && modal.dismiss('Cross click')"
-        >
-          Confirm Completion
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="modal.dismiss('Cross click')"
-        >
-          Cancel
-        </button>
-      </div>
-    </ng-template>
-
-    <ng-template #rejectContent let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Rejection Confirmation</h4>
-        <button
-          type="button"
-          class="submit"
-          aria-label="apply"
-          (click)="modal.dismiss('Cross click')"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <p>Confirm that the post request is rejected?</p>
-
-        <form [formGroup]="rejectForm">
-
-          <mat-form-field appearance="outline">
-            <mat-label>Reason for rejecting post <i>(Optional)</i></mat-label>
-            <textarea
-              matInput
-              type="text"
-              [formControl]="rejectReasonControl"
-              rows="10"
-              placeholder="Please record down the reason for rejecting this approved post."
-            ></textarea>
-          </mat-form-field>
-        </form>
-      </div>
-
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="onReject(post.id) && modal.dismiss('Cross click')"
-        >
-          Confirm Rejection
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="modal.dismiss('Cross click')"
-        >
-          Cancel
-        </button>
-      </div>
-    </ng-template>
   </ng-container>
 </div>
 

@@ -1,7 +1,8 @@
 /* GLOBAL
 -------------------------------------------------- */
-.create-post-card {
+.post-create-card {
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 mat-card-title {
@@ -12,15 +13,17 @@ mat-form-field, textarea {
   width: 100%;
 }
 
-mat-card {
+.post-create-body {
   width: 60%;
   margin: auto;
   padding: 10px;
 
+  /*
   border-style: solid;
   border-width: thin;
   border-color: #4da8da;
   box-shadow: none;
+  */
 }
 
 mat-form-field {
@@ -38,6 +41,7 @@ mat-form-field {
   text-align: center;
 }
 
+
 /* MODAL WINDOW
 -------------------------------------------------- */
 .modal-header {
@@ -52,6 +56,9 @@ mat-form-field {
   color: black;
 }
 
+
+/* FILE PICKER
+-------------------------------------------------- */
 input[type="file"] {
   visibility: hidden;
 }
@@ -65,47 +72,10 @@ input[type="file"] {
   height: 100%;
 }
 
-/* post preview stuff */
-.filter-card-title {
-  text-align: center;
-}
 
-.filter-card {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}
-
-
-.filter-card-body {
-  width: 100%;
-  margin: auto;
-  padding: 10px;
-  text-align: center;
-
-  /* background-color: #5FB49C; */
-  border-style: solid;
-  border-width: thin;
-  border-color: #4da8da;
-  box-shadow: none;
-}
-
-.filter-button {
-  margin: 0 auto;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.filter-footer {
-  text-align: center;
-  width: 100%;
-  flex: auto
-}
-
-
-/* POSTS TIMELINE
+/* POST PREVIEW
 -------------------------------------------------- */
-.published-posts {
+.post-preview {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
@@ -194,35 +164,6 @@ mat-icon {
 
 .post-card-footer-button {
   margin: 5px 5px 5px 0;
-}
-
-.pCardHeader {
-  text-overflow: ellipsis;
-  width: 45rem;
-  max-width: 45rem;
-  text-align: center;
-  height: 1.7rem;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 1.5rem;
-}
-
-.pCardSubheader {
-  height: 3.5rem;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  color: #D9D9D9;
-}
-
-.pCardContent p {
-  display: -webkit-box;
-  -webkit-line-clamp: 8;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 10rem;
 }
 
 .post-footer {

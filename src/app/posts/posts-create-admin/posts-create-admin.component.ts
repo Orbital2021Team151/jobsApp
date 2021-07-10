@@ -124,9 +124,10 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   ];
   termsAndConditions = false;
   pocEmail: string = "";
-  imagePreview: string;
+  imagePreview: string = null;
   showPreview = false;
-  postPreview: Post[] = [];
+  postPreview: Post;
+
 
 
   /* FormGroup version */
@@ -199,9 +200,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   generatePreview() {
     if (this.form.invalid) return;
 
-    if (this.postPreview.length > 1) {
-      this.postPreview = [];
-    }
+    this.postPreview = null;
 
     const post: Post = {
       id: null,
@@ -236,9 +235,10 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       studentsAccepted: [],
 
       image: this.form.value.image,
-      imagePath: null,
+      imagePath: this.imagePreview,
     };
-    this.postPreview.push(post);
+
+    this.postPreview = post;
     this.showPreview = true;
   }
 
@@ -330,14 +330,20 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({image: file});
-    this.form.get('image').updateValueAndValidity();
-    // console.log(file);
-    // console.log(this.form);
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
+
+    if (file) {
+      this.form.patchValue({ image: file });
+      //this.form.get('image').updateValueAndValidity();
+      // console.log(file);
+      // console.log(this.form);
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.form.patchValue({ image: null });
+      this.imagePreview = null;
+    }
   }
 }
