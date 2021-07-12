@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {  MatSidenavModule } from  '@angular/material/sidenav';
 import { MatList, MatListModule } from '@angular/material/list';
+import { MatStepperModule } from '@angular/material/stepper';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   NgbPaginationModule,
@@ -115,6 +116,7 @@ import { HighlightCreateComponent } from './admin/highlight-create/highlight-cre
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatStepperModule,
     FlexLayoutModule,
     CardModule,
     ButtonModule,
@@ -137,16 +139,6 @@ import { HighlightCreateComponent } from './admin/highlight-create/highlight-cre
           lightModeClass: 'light-mode'
     }
   },
-
-    /*
-    {
-      provide: DARK_MODE_OPTIONS,
-      useValue: {
-        darkModeClass: 'my-dark-mode',
-        lightModeClass: 'my-light-mode',
-      },
-    },
-    */
 
   ],
   bootstrap: [AppComponent],
