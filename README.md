@@ -58,8 +58,6 @@ npm install -g @angular/cli@11<br>
 
 * npm install jsonwebtoken
 
-* npm install --save @fortawesome/fontawesome-free
-
 * npm i awesome-notifications
 
 * npm install --save socket.io //do we still need this?
