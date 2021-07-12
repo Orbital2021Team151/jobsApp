@@ -154,11 +154,19 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     */
   });
 
+
+
+  /* TRYING OUT MAT STEPPER */
+  POCInformationGroup: FormGroup;
+  postInformationGroup: FormGroup;
+  postDurationGroup: FormGroup;
+
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
     private authService: AuthService,
     private dialog: MatDialog,
+    private _formBuilder: FormBuilder,
   ) {
 
     this.form = new FormGroup({
@@ -182,6 +190,32 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
       image: this.imageControl,
 
+    });
+
+
+
+    this.POCInformationGroup = this._formBuilder.group({
+      orgName: this.orgNameControl,
+      uen: this.uenControl,
+      email: this.emailControl,
+      POC: this.pocControl,
+      phoneNumber: this.phoneNumberControl,
+    });
+
+    this.postInformationGroup = this._formBuilder.group({
+      title: this.titleControl,
+      content: this.contentControl,
+      skills: this.skillsControl,
+      beneficiaries: this.beneficiariesControl,
+      image: this.imageControl,
+    });
+
+    this.postDurationGroup = this._formBuilder.group({
+      opportunity: this.opportunitySelectedControl,
+      startDate: this.startDateControl,
+      endDate: this.endDateControl,
+      hoursRequired: this.hoursRequiredControl,
+      location: this.locationControl,
     });
 
   }
