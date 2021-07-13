@@ -28,6 +28,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   startDate: Date;
   endDate: Date;
   noFilteredPost: boolean = null;
+  panelOpenState: boolean = false;
 
   private authStatusObject: {
     auth: boolean;

@@ -1,7 +1,114 @@
 <div class="filter-card">
   <mat-card class="filter-card-body">
-    <mat-card-title class="filter-card-title"> Filter Search </mat-card-title>
+  <mat-card-title class="filter-card-title"> Filter Search </mat-card-title>
     <ng-container>
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Beneficiaries
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Beneficiaries</mat-label>
+            <mat-select
+              ngModel
+              multiple
+              #beneficiariesInput="ngModel"
+              name="beneficiariesSelected"
+              [(ngModel)]="beneficiariesSelected"
+            >
+              <mat-option
+                *ngFor="let beneficiary of beneficiaries"
+                [value]="beneficiary"
+                >{{ beneficiary }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+          
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Organisations
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Organisations</mat-label>
+            <mat-select
+              ngModel
+              multiple
+              #organisationsInput="ngModel"
+              name="orgsSelected"
+              [(ngModel)]="orgsSelected"
+            >
+              <mat-option
+                *ngFor="let org of orgs"
+                [value]="org"
+                >{{ org }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Date range
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          
+          <mat-form-field appearance="outline" class="example-form-field">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker">
+              <input
+                matStartDate
+                placeholder="Start date"
+                ngModel
+                [(ngModel)]="startDate"
+                name="startDate"
+              />
+              <input
+                matEndDate
+                placeholder="End date"
+                [(ngModel)]="endDate"
+                name="endDate"
+              />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="rangePicker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker touchUi>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  matDateRangePickerApply
+                  class="apply"
+                >
+                  Apply
+                </button>
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+          </mat-form-field>
+          
+        </mat-expansion-panel>
+      </mat-accordion>
+      
       <mat-form-field appearance="outline">
         <mat-label>Search for keywords</mat-label>
         <input
@@ -11,76 +118,6 @@
           [(ngModel)]="keywords"
           placeholder="eg Potong Pasir"
         />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Beneficiaries</mat-label>
-        <mat-select
-          ngModel
-          multiple
-          #beneficiariesInput="ngModel"
-          name="beneficiariesSelected"
-          [(ngModel)]="beneficiariesSelected"
-        >
-          <mat-option
-            *ngFor="let beneficiary of beneficiaries"
-            [value]="beneficiary"
-            >{{ beneficiary }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Organisations</mat-label>
-        <mat-select
-          ngModel
-          multiple
-          #organisationsInput="ngModel"
-          name="orgsSelected"
-          [(ngModel)]="orgsSelected"
-        >
-          <mat-option
-            *ngFor="let org of orgs"
-            [value]="org"
-            >{{ org }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="example-form-field">
-        <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [rangePicker]="rangePicker">
-          <input
-            matStartDate
-            placeholder="Start date"
-            ngModel
-            [(ngModel)]="startDate"
-            name="startDate"
-          />
-          <input
-            matEndDate
-            placeholder="End date"
-            [(ngModel)]="endDate"
-            name="endDate"
-          />
-        </mat-date-range-input>
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="rangePicker"
-        ></mat-datepicker-toggle>
-        <mat-date-range-picker #rangePicker touchUi>
-          <mat-date-range-picker-actions>
-            <button mat-button matDateRangePickerCancel>Cancel</button>
-            <button
-              mat-raised-button
-              color="primary"
-              matDateRangePickerApply
-              class="apply"
-            >
-              Apply
-            </button>
-          </mat-date-range-picker-actions>
-        </mat-date-range-picker>
       </mat-form-field>
 
       <div class="filter-footer">
