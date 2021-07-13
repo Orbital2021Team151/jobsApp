@@ -10,11 +10,13 @@ mat-card-title {
 }
 
 .post-create-body {
-  width: 60%;
+  width: 80%;
   margin: auto;
   padding: 10px;
 
   /*
+  background-color: inherit;
+  color: inherit;
   border-style: solid;
   border-width: thin;
   border-color: #4da8da;
@@ -48,6 +50,9 @@ mat-error {
 
 .modal-footer {
   color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* FILE PICKER

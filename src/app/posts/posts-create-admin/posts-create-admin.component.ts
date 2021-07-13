@@ -127,6 +127,39 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   imagePreview: string = null;
   showPreview = false;
   postPreview: Post;
+  emptyPostPreview: Post = {
+    id: null,
+      orgName: null,
+      uen: null,
+      POC: null,
+      phoneNumber: null,
+      email: null,
+
+      title: null,
+      content: null,
+      skills: null,
+      beneficiaries: null,
+      image: null,
+      imagePath: null,
+
+      opportunity: null,
+      startDate: null,
+      endDate: null,
+      hoursRequired: null,
+      location: null,
+
+      approved: false,
+      creationDate: new Date(),
+      publishDate: null,
+      creator: null,
+
+      removed: null,
+      reason: null,
+
+      students: [],
+      reports: [],
+      studentsAccepted: [],
+  };
 
 
 
@@ -229,32 +262,34 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       //console.log("At create page");
       //console.log(authObject);
     });
+
+    this.postPreview = this.emptyPostPreview;
   }
 
   generatePreview() {
-    if (this.form.invalid) return;
-
-    this.postPreview = null;
+    //if (this.form.invalid) return;
+    this.postPreview = this.emptyPostPreview;
 
     const post: Post = {
       id: null,
-      orgName: this.form.value.orgName,
-      uen: this.form.value.uen,
-      POC: this.form.value.POC,
-      phoneNumber: this.form.value.phoneNumber,
-      email: this.form.value.email,
-      title: this.form.value.title,
-      opportunity: this.form.value.opportunity,
+      orgName: this.POCInformationGroup.value.orgName,
+      uen: this.POCInformationGroup.value.uen,
+      POC: this.POCInformationGroup.value.POC,
+      phoneNumber: this.POCInformationGroup.value.phoneNumber,
+      email: this.POCInformationGroup.value.email,
 
-      content: this.form.value.content,
-      skills: this.form.value.skills,
+      title: this.postInformationGroup.value.title,
+      content: this.postInformationGroup.value.content,
+      skills: this.postInformationGroup.value.skills,
+      beneficiaries: this.postInformationGroup.value.beneficiaries,
+      image: this.postInformationGroup.value.image,
+      imagePath: this.imagePreview,
 
-      startDate: this.form.value.startDate,
-      endDate: this.form.value.endDate,
-      hoursRequired: this.form.value.hoursRequired,
-
-      location: this.form.value.location,
-      beneficiaries: this.form.value.beneficiaries,
+      opportunity: this.postDurationGroup.value.opportunity,
+      startDate: this.postDurationGroup.value.startDate,
+      endDate: this.postDurationGroup.value.endDate,
+      hoursRequired: this.postDurationGroup.value.hoursRequired,
+      location: this.postDurationGroup.value.location,
 
       approved: false,
       creationDate: new Date(),
@@ -267,9 +302,6 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       students: [],
       reports: [],
       studentsAccepted: [],
-
-      image: this.form.value.image,
-      imagePath: this.imagePreview,
     };
 
     this.postPreview = post;
@@ -283,6 +315,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
 
   onAddPostReactive() {
 
+    /*
     if (this.form.invalid) {
       console.log("Please fill up form first.");
       return;
@@ -293,26 +326,27 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       this.dialog.open(StartDateErrorDialog);
       return;
     }
+    */
 
     const post: Post = {
       id: null,
-      orgName: this.form.value.orgName,
-      uen: this.form.value.uen,
-      POC: this.form.value.POC,
-      phoneNumber: this.form.value.phoneNumber,
-      email: this.form.value.email,
-      title: this.form.value.title,
-      opportunity: this.form.value.opportunity,
+      orgName: this.POCInformationGroup.value.orgName,
+      uen: this.POCInformationGroup.value.uen,
+      POC: this.POCInformationGroup.value.POC,
+      phoneNumber: this.POCInformationGroup.value.phoneNumber,
+      email: this.POCInformationGroup.value.email,
+      title: this.postInformationGroup.value.title,
+      opportunity: this.postDurationGroup.value.opportunity,
 
-      content: this.form.value.content,
-      skills: this.form.value.skills,
+      content: this.postInformationGroup.value.content,
+      skills: this.postInformationGroup.value.skills,
 
-      startDate: this.form.value.startDate,
-      endDate: this.form.value.endDate,
-      hoursRequired: this.form.value.hoursRequired,
+      startDate: this.postDurationGroup.value.startDate,
+      endDate: this.postDurationGroup.value.endDate,
+      hoursRequired: this.postDurationGroup.value.hoursRequired,
 
-      location: this.form.value.location,
-      beneficiaries: this.form.value.beneficiaries,
+      location: this.postDurationGroup.value.location,
+      beneficiaries: this.postInformationGroup.value.beneficiaries,
 
       approved: false,
       creationDate: new Date(),
@@ -326,27 +360,32 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       reports: [],
       studentsAccepted: [],
 
-      image: this.form.value.image,
+      image: this.postInformationGroup.value.image,
       imagePath: null,
     };
 
-    console.log("Form to be submitted is: ");
-    console.log(this.form.value);
+    console.log("Post to be submitted is: ");
+    console.log(post);
+    if (this.postInformationGroup.value.image) {
+      console.log("There is an image!");
+    } else {
+      console.log("There are no images!");
+    }
 
 
+    /*
     this.pendingApproval = true;
-
-    if (this.form.value.image) {
+    if (this.postInformationGroup.value.image) {
       this.postsService.addPost(post);
     } else {
       this.postsService.addPostNoImage(post);
     }
 
-    //this.postsService.addPost(post);
-
-    this.modalService.dismissAll();
-    this.form.reset();
+    this.POCInformationGroup.reset();
+    this.postInformationGroup.reset();
+    this.postDurationGroup.reset();
     this.imagePreview = '';
+    */
   }
 
   closeNotification() {
@@ -366,7 +405,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     const file = (event.target as HTMLInputElement).files[0];
 
     if (file) {
-      this.form.patchValue({ image: file });
+      this.postInformationGroup.patchValue({ image: file });
       //this.form.get('image').updateValueAndValidity();
       // console.log(file);
       // console.log(this.form);
@@ -376,7 +415,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
       };
       reader.readAsDataURL(file);
     } else {
-      this.form.patchValue({ image: null });
+      this.postInformationGroup.patchValue({ image: null });
       this.imagePreview = null;
     }
   }
