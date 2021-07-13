@@ -35,6 +35,39 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
   imagePreview: string = null;
   showPreview = false;
   postPreview: Post;
+  emptyPostPreview: Post = {
+    id: null,
+      orgName: null,
+      uen: null,
+      POC: null,
+      phoneNumber: null,
+      email: null,
+
+      title: null,
+      content: null,
+      skills: null,
+      beneficiaries: null,
+      image: null,
+      imagePath: null,
+
+      opportunity: null,
+      startDate: null,
+      endDate: null,
+      hoursRequired: null,
+      location: null,
+
+      approved: false,
+      creationDate: new Date(),
+      publishDate: null,
+      creator: null,
+
+      removed: null,
+      reason: null,
+
+      students: [],
+      reports: [],
+      studentsAccepted: [],
+  };
 
   beneficiaries: string[] = [
     'Animal Welfare',
@@ -134,6 +167,27 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
   /* FormGroup version */
   public form: FormGroup;
+
+
+  public orgNameControl = new FormControl({
+    value: "Automatically filled using your Organisation's Name",
+    disabled: true,
+});
+  public uenControl = new FormControl({
+    value: "Automatically filled using your Organisation's UEN",
+    disabled: true,
+  });
+  public emailControl = new FormControl({
+    value: "Automatically filled using your Organisation's Email Address",
+    disabled: true,
+  });
+
+  /*
+  public orgNameControl: FormControl;
+  public uenControl: FormControl;
+  public emailControl: FormControl;
+  */
+
   public pocControl = new FormControl(null, [
     Validators.required,
     Validators.minLength(3),
@@ -181,11 +235,17 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     */
   });
 
+  /* Stepper Form */
+  POCInformationGroup: FormGroup;
+  postInformationGroup: FormGroup;
+  postDurationGroup: FormGroup;
+
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
     private authService: AuthService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private _formBuilder: FormBuilder,
   ) {
     this.form = new FormGroup({
       POC: this.pocControl,
@@ -205,6 +265,31 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
       image: this.imageControl,
     });
+
+    /* MULTI-STEP FORM */
+    this.POCInformationGroup = this._formBuilder.group({
+      orgName: this.orgNameControl,
+      uen: this.uenControl,
+      email: this.emailControl,
+      POC: this.pocControl,
+      phoneNumber: this.phoneNumberControl,
+    });
+
+    this.postInformationGroup = this._formBuilder.group({
+      title: this.titleControl,
+      content: this.contentControl,
+      skills: this.skillsControl,
+      beneficiaries: this.beneficiariesControl,
+      image: this.imageControl,
+    });
+
+    this.postDurationGroup = this._formBuilder.group({
+      opportunity: this.opportunitySelectedControl,
+      startDate: this.startDateControl,
+      endDate: this.endDateControl,
+      hoursRequired: this.hoursRequiredControl,
+      location: this.locationControl,
+    });
   }
 
   ngOnInit() {
@@ -223,41 +308,53 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     });
     */
 
+    this.postPreview = this.emptyPostPreview;
+
     this.authStatusObject = this.authService.getAuthStatusObject(); //this is required to avoid the "Cannot read property 'orgName' of undefined" error. but it violates async
 
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe((authObject) => {
         this.authStatusObject = authObject;
-        //console.log("At create page");
-        //console.log(authObject);
+        this.orgNameControl = new FormControl({
+          value: authObject.orgName,
+          disabled: true,
+        });
+        this.uenControl  = new FormControl({
+          value: authObject.uen,
+          disabled: true,
+        });
+        this.emailControl  = new FormControl({
+          value: authObject.email,
+          disabled: true,
+        });
       });
   }
 
   generatePreview() {
-    if (this.form.invalid) return;
 
-    this.postPreview = null;
+    this.postPreview = this.emptyPostPreview;
 
     const post: Post = {
       id: null,
-      orgName: this.form.value.orgName,
-      uen: this.form.value.uen,
-      POC: this.form.value.POC,
-      phoneNumber: this.form.value.phoneNumber,
-      email: this.form.value.email,
-      title: this.form.value.title,
-      opportunity: this.form.value.opportunity,
+      orgName: this.authStatusObject.orgName, //should be the org's details
+      uen: this.authStatusObject.uen, //should be the org's details
+      POC: this.POCInformationGroup.value.POC,
+      phoneNumber: this.POCInformationGroup.value.phoneNumber,
+      email: this.authStatusObject.email, //should be the org's details
 
-      content: this.form.value.content,
-      skills: this.form.value.skills,
+      title: this.postInformationGroup.value.title,
+      content: this.postInformationGroup.value.content,
+      skills: this.postInformationGroup.value.skills,
+      beneficiaries: this.postInformationGroup.value.beneficiaries,
+      image: this.postInformationGroup.value.image,
+      imagePath: this.imagePreview,
 
-      startDate: this.form.value.startDate,
-      endDate: this.form.value.endDate,
-      hoursRequired: this.form.value.hoursRequired,
-
-      location: this.form.value.location,
-      beneficiaries: this.form.value.beneficiaries,
+      opportunity: this.postDurationGroup.value.opportunity,
+      startDate: this.postDurationGroup.value.startDate,
+      endDate: this.postDurationGroup.value.endDate,
+      hoursRequired: this.postDurationGroup.value.hoursRequired,
+      location: this.postDurationGroup.value.location,
 
       approved: false,
       creationDate: new Date(),
@@ -270,13 +367,10 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       students: [],
       reports: [],
       studentsAccepted: [],
-
-      image: this.form.value.image,
-      imagePath: this.imagePreview,
     };
 
     this.postPreview = post;
-    this.showPreview = true;
+    //this.showPreview = true;
   }
 
   onMoreInfo(content) {
@@ -289,34 +383,25 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     //console.log(this.beneficiariesSelected);
     //console.log("add post fired!");
 
-    if (this.form.invalid) {
-      return;
-    }
-
-    let imageAdd = null;
-    if (this.form.value.image) {
-      imageAdd = this.form.value.image;
-    }
-
     const post: Post = {
       id: null,
-      orgName: this.authStatusObject.orgName,
-      uen: this.authStatusObject.uen,
-      POC: this.form.value.POC,
-      phoneNumber: this.form.value.phoneNumber,
-      email: this.authStatusObject.email,
-      title: this.form.value.title,
-      opportunity: this.form.value.opportunity,
+      orgName: this.authStatusObject.orgName, //should be authStatusObject's orgName
+      uen: this.authStatusObject.uen, //should be authStatusObject's uen
+      POC: this.POCInformationGroup.value.POC,
+      phoneNumber: this.POCInformationGroup.value.phoneNumber,
+      email: this.authStatusObject.email, //should be authStatusObject's email
+      title: this.postInformationGroup.value.title,
+      opportunity: this.postDurationGroup.value.opportunity,
 
-      content: this.form.value.content,
-      skills: this.form.value.skills,
+      content: this.postInformationGroup.value.content,
+      skills: this.postInformationGroup.value.skills,
 
-      startDate: this.form.value.startDate,
-      endDate: this.form.value.endDate,
-      hoursRequired: this.form.value.hoursRequired,
+      startDate: this.postDurationGroup.value.startDate,
+      endDate: this.postDurationGroup.value.endDate,
+      hoursRequired: this.postDurationGroup.value.hoursRequired,
 
-      location: this.form.value.location,
-      beneficiaries: this.form.value.beneficiaries,
+      location: this.postDurationGroup.value.location,
+      beneficiaries: this.postInformationGroup.value.beneficiaries,
 
       approved: false,
       creationDate: new Date(),
@@ -330,23 +415,31 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       reports: [],
       studentsAccepted: [],
 
-      image: this.form.value.image,
+      image: this.postInformationGroup.value.image,
       imagePath: null,
     };
 
     this.pendingApproval = true;
 
-    //console.log("Form to be submitted is: ");
-    //console.log(this.form.value);
+    console.log("Post to be submitted is: ");
+    console.log(post);
+    if (this.postInformationGroup.value.image) {
+      console.log("There is an image!");
+    } else {
+      console.log("There are no images!");
+    }
 
-    if (this.form.value.image) {
+
+    this.pendingApproval = true;
+    if (this.postInformationGroup.value.image) {
       this.postsService.addPost(post);
     } else {
       this.postsService.addPostNoImage(post);
     }
 
-    this.modalService.dismissAll();
-    this.form.reset();
+    this.POCInformationGroup.reset();
+    this.postInformationGroup.reset();
+    this.postDurationGroup.reset();
     this.imagePreview = '';
   }
 
@@ -367,7 +460,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     const file = (event.target as HTMLInputElement).files[0];
 
     if (file) {
-      this.form.patchValue({ image: file });
+      this.postInformationGroup.patchValue({ image: file });
       //this.form.get('image').updateValueAndValidity();
       // console.log(file);
       // console.log(this.form);
@@ -377,7 +470,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       };
       reader.readAsDataURL(file);
     } else {
-      this.form.patchValue({ image: null });
+      this.postInformationGroup.patchValue({ image: null });
       this.imagePreview = null;
     }
   }

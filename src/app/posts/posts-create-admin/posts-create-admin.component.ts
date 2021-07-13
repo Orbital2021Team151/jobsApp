@@ -188,8 +188,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   });
 
 
-
-  /* TRYING OUT MAT STEPPER */
+  /* Stepper Form */
   POCInformationGroup: FormGroup;
   postInformationGroup: FormGroup;
   postDurationGroup: FormGroup;
@@ -202,6 +201,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     private _formBuilder: FormBuilder,
   ) {
 
+    /* SINGLE-PAGE FORM */
     this.form = new FormGroup({
       orgName: this.orgNameControl,
       uen: this.uenControl,
@@ -226,7 +226,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     });
 
 
-
+    /* MULTI-STEP FORM */
     this.POCInformationGroup = this._formBuilder.group({
       orgName: this.orgNameControl,
       uen: this.uenControl,
@@ -305,7 +305,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     };
 
     this.postPreview = post;
-    this.showPreview = true;
+    //this.showPreview = true;
   }
 
   onMoreInfo(content) {
@@ -373,7 +373,6 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     }
 
 
-    /*
     this.pendingApproval = true;
     if (this.postInformationGroup.value.image) {
       this.postsService.addPost(post);
@@ -385,7 +384,6 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     this.postInformationGroup.reset();
     this.postDurationGroup.reset();
     this.imagePreview = '';
-    */
   }
 
   closeNotification() {
