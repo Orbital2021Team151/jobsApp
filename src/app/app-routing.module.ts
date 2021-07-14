@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupGeneralComponent, data: { animation: 'isLeft' }},
   { path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
   { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], data: { roles: ["Admin"] }},
+  // { path: 'highlightContnent', component: }
 ];
 
 @NgModule({

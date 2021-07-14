@@ -98,11 +98,11 @@ ngb-carousel {
 }
 
 ::ng-deep .carousel-indicators .active {
-  background-color: #F2545B;
+  background-color: #F2545B !important;
 }
 
 ::ng-deep .carousel-indicators li {
-  background-color: #F2545B;
+  background-color: #F2545B !important;
 }
 
 

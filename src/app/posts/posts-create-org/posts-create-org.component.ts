@@ -14,6 +14,9 @@ import { mimeType } from '../mime-type.validator';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Post } from '../post.model';
 import { PostsService } from '../post.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PostSubmittedDialog } from 'src/app/dialogs/post-submitted-dialog/post-submitted-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-create',
@@ -246,6 +249,8 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     public route: ActivatedRoute,
     private _formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    public router: Router,
   ) {
     this.form = new FormGroup({
       POC: this.pocControl,
@@ -437,10 +442,19 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       this.postsService.addPostNoImage(post);
     }
 
+    // this.dialog.open(PostSubmittedDialog);
     this.POCInformationGroup.reset();
     this.postInformationGroup.reset();
     this.postDurationGroup.reset();
     this.imagePreview = '';
+    return true;
+  }
+
+  openDialog() {
+    this.router.navigate(['/organisation']);
+
+    this.dialog.open(PostSubmittedDialog);
+    return true;
   }
 
   closeNotification() {

@@ -64,6 +64,7 @@ import { StudentBoardChangePasswordComponent } from './admin/student-board-chang
 import { StartDateErrorDialog } from './dialogs/start-date-error-dialog/start-date-error-dialog.component';
 import { WrongStudentEmailDialog } from './dialogs/wrong-student-email-dialog/wrong-student-email-dialog.component';
 import { HighlightCreateComponent } from './admin/highlight-create/highlight-create.component';
+import { PostSubmittedDialog } from './dialogs/post-submitted-dialog/post-submitted-dialog.component';
 
 
 @NgModule({
@@ -95,6 +96,7 @@ import { HighlightCreateComponent } from './admin/highlight-create/highlight-cre
     StartDateErrorDialog,
     WrongStudentEmailDialog,
     HighlightCreateComponent,
+    PostSubmittedDialog,
   ],
 
   imports: [

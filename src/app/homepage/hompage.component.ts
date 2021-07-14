@@ -47,4 +47,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   openPoster() {}
+
+  openContent(id: string) {
+
+  }
 }

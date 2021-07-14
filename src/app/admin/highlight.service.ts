@@ -41,8 +41,8 @@ export class HighlightService {
     })
   }
 
-  getHighlight(title: string) {
-    return {...this.highlights.find(highlight => highlight.title === title)};
+  getHighlight(id: string) {
+    return {...this.highlights.find(highlight => highlight.id === id)};
   }
 
   getHighlightsUpdatedListener() {
@@ -63,8 +63,10 @@ export class HighlightService {
     .subscribe(res => {
 
       if (this.highlights.length === 3) {
-        this.highlights.pop();
+        const deletedHighlight = this.highlights.shift();
+        this.deleteHighlight(deletedHighlight.id);
       }
+
       console.log("somehow your highlight went through wilbur! here it is below")
       console.log(highlight);
       this.highlights.push(highlight);

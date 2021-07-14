@@ -35,119 +35,85 @@
     <main>
 
       <ngb-carousel *ngIf="images" class="carousel">
+          <ng-template ngbSlide *ngFor="let highlight of highlights">
+            <div class="row carousel-card">
+              <div class="col-md-7">
+                <h2 class="carousel-heading"><u>{{ highlight.title }}</u></h2>
+                <p class="lead">
+                  {{ highlight.summary }}
+                </p>
 
-        <ng-template ngbSlide *ngFor="let highlight of highlights">
-          <div class="row carousel-card">
-            <div class="col-md-7">
-              <h2 class="carousel-heading"><u>{{ highlight.title }}</u></h2>
-              <p class="lead">
-                {{ highlight.summary }}
-              </p>
+                <button
+                mat-raised-button
+                class="carousel-read-more-button"
+                (click)="openContent(highlight.id)"
+                >
+                Read More (In Development)
+                </button>
 
-              <button
-              mat-raised-button
-              class="carousel-read-more-button"
-              >
-              Read More (In Development)
-              </button>
+                <button
+                mat-raised-button
+                class="carousel-read-more-button"
+                (click)="deleteHighlight(highlight.id)"
+                *ngIf="isAuth"
+                >
+                Delete
+                </button>
+              </div>
 
-              <button
-              mat-raised-button
-              class="carousel-read-more-button"
-              (click)="deleteHighlight(highlight.id)"
-              *ngIf="isAuth"
-              >
-              Delete
-              </button>
+              <div class="col-md-5">
+                <!-- <img [src]="images[0]" alt="Random first slide" class="carousel-image"> -->
+
+                <img class="carousel-image" [src]="highlight.imagePath">
+              </div>
             </div>
+          </ng-template>
 
-            <div class="col-md-5">
-              <!-- <img [src]="images[0]" alt="Random first slide" class="carousel-image"> -->
 
-              <img class="carousel-image" [src]="highlight.imagePath">
+          <!-- <ng-template ngbSlide>
+            <div class="row carousel-card">
+              <div class="col-md-7">
+                <h2 class="carousel-heading"><u>Care for Students</u><br></h2>
+                <p class="lead">
+                  The organisations are carefully selected by Computing veterans such as the renown <i>Professor Ben Leong</i> and <i>Professor Leong Wing Lup</i>.
+                </p>
+                <button
+                mat-raised-button
+                class="carousel-read-more-button"
+                >
+                Read More (In Development)
+                </button>
+              </div>
+              <div class="col-md-5">
+              <img [src]="images[1]" alt="Random second slide" class="carousel-image">
+              </div>
             </div>
-          </div>
-        </ng-template>
+          </ng-template>
 
-        <!-- <ng-template ngbSlide>
-          <div class="row carousel-card">
-            <div class="col-md-7">
-              <h2 class="carousel-heading"><u>Care for Students</u><br></h2>
-              <p class="lead">
-                The organisations are carefully selected by Computing veterans such as the renown <i>Professor Ben Leong</i> and <i>Professor Leong Wing Lup</i>.
-              </p>
-              <button
-              mat-raised-button
-              class="carousel-read-more-button"
-              >
-              Read More (In Development)
-              </button>
+
+          <ng-template ngbSlide>
+            <div class="row carousel-card">
+              <div class="col-md-7">
+                <h2 class="carousel-heading"><u>Expert Novices</u></h2>
+                <p class="lead">
+                  SOC students are highly sought-after in Singapore. Our platform enables organisations to employ their services for free. <br>
+                  Students have the opportunity to gain exposure and experience while organisations get the chance bring onboard motivated volunteers. <br>
+                  It's a win-win situation.
+                </p>
+
+                <button
+                mat-raised-button
+                class="carousel-read-more-button"
+                >
+                Read More (In Development)
+                </button>
+              </div>
+
+              <div class="col-md-5">
+                <img [src]="images[2]" alt="Random third slide" class="carousel-image">
+              </div>
             </div>
-            <div class="col-md-5">
-            <img [src]="images[1]" alt="Random second slide" class="carousel-image">
-            </div>
-          </div>
-        </ng-template>
-
-
-        <ng-template ngbSlide>
-          <div class="row carousel-card">
-            <div class="col-md-7">
-              <h2 class="carousel-heading"><u>Expert Novices</u></h2>
-              <p class="lead">
-                SOC students are highly sought-after in Singapore. Our platform enables organisations to employ their services for free. <br>
-                Students have the opportunity to gain exposure and experience while organisations get the chance bring onboard motivated volunteers. <br>
-                It's a win-win situation.
-              </p>
-
-              <button
-              mat-raised-button
-              class="carousel-read-more-button"
-              >
-              Read More (In Development)
-              </button>
-            </div>
-
-            <div class="col-md-5">
-              <img [src]="images[2]" alt="Random third slide" class="carousel-image">
-            </div>
-          </div>
-        </ng-template> -->
-
-
-
-        <!--
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img [src]="images[0]" alt="Random first slide">
-          </div>
-          <div class="carousel-caption">
-            <h3>First slide</h3>
-            <p>Should have some featured article here</p>
-          </div>
-        </ng-template>
-
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img [src]="images[1]" alt="Random second slide">
-          </div>
-          <div class="carousel-caption">
-            <h3>Second slide</h3>
-            <p>Should have some featured article here</p>
-          </div>
-        </ng-template>
-
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img [src]="images[2]" alt="Random third slide">
-          </div>
-          <div class="carousel-caption">
-            <h3>Third slide</h3>
-            <p>Should have some featured article here</p>
-          </div>
-        </ng-template>
-        -->
-
+          </ng-template> -->
       </ngb-carousel>
 
 
