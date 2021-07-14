@@ -11,6 +11,8 @@ import { PostsService } from '../post.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AppliedBeforeDialog } from 'src/app/dialogs/applied-before-dialog/applied-before-dialog.component';
 import { StartDateErrorDialog } from 'src/app/dialogs/start-date-error-dialog/start-date-error-dialog.component';
+import { PostSubmittedDialog } from 'src/app/dialogs/post-submitted-dialog/post-submitted-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-create',
@@ -199,6 +201,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private dialog: MatDialog,
     private _formBuilder: FormBuilder,
+    public router: Router,
   ) {
 
     /* SINGLE-PAGE FORM */
@@ -384,8 +387,17 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     this.postInformationGroup.reset();
     this.postDurationGroup.reset();
     this.imagePreview = '';
+    return true;
   }
 
+
+  openDialog() {
+    this.router.navigate(['/admin']);
+
+    this.dialog.open(PostSubmittedDialog);
+    return true;
+  }
+  
   closeNotification() {
     this.pendingApproval = false;
   }
