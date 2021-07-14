@@ -82,7 +82,7 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save  @fortawesome/angular-fontawesome
 
-* ng add @ngnear/tailwind
+* ng add @ngneat/tailwind
 
 
 ## Acknowledgments
