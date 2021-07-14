@@ -1,6 +1,5 @@
 /* GLOBAL
 -------------------------------------------------- */
-
 .card-image {
   height: 50%;
   overflow: hidden;
@@ -59,8 +58,9 @@ mat-icon {
   max-width: 20rem;
   font-family: "Lato", sans-serif;
   align-items: center;
-  flex: auto;
-  margin: auto;
+  display:flex;
+  margin:auto;
+  justify-content: space-between;
 }
 
 mat-spinner {
@@ -199,8 +199,7 @@ button {
 }
 
 .publish-button {
-  background-color: #00b167;
-  color: white;
+  color: #00b167;
 }
 
 /* JOBS WITH REPORTS CARDS

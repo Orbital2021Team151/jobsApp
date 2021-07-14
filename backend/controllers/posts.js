@@ -57,8 +57,6 @@ exports.requestPost = (req, res, next) => {
     imagePath: url + "/images/" + req.file.filename,
   });
 
-  console.log(post);
-
   /*
   console.log("\nTrying out JSON.parse now. hope it works.");
   console.log(post);

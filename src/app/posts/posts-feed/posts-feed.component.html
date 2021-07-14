@@ -177,14 +177,39 @@
           <br />
         </mat-card-content>
         <mat-card-footer class="post-card-footer">
+
           <button
-            mat-raised-button
+            mat-icon-button
+            class="post-card-footer-button"
+            color="warn"
+            aria-label="Report"
+            *ngIf="
+              (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
+              !reportBefore(post)
+            "
+            (click)="onReport(post.id, errorMessage, reportContent)"
+          >
+            <mat-icon color="warn">feedback</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            disabled
+            aria-label="Already Reported"
+            *ngIf="reportBefore(post)"
+            class="post-card-footer-button"
+          >
+            <mat-icon>feedback</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            aria-label="Apply"
             *ngIf="
               (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
               !applyBefore(post)
             "
             class="post-card-footer-button"
-            color="accent"
             (click)="
               onApply(
                 post.id,
@@ -193,38 +218,17 @@
               )
             "
           >
-            Apply
+            <mat-icon class="post-card-footer-button-complete">front_hand</mat-icon>
           </button>
 
           <button
-            mat-raised-button
+            mat-icon-button
             disabled
+            aria-label="Applied Before"
             class="post-card-footer-button"
             *ngIf="applyBefore(post)"
           >
-            Apply
-          </button>
-
-          <button
-            mat-raised-button
-            class="post-card-footer-button"
-            color="warn"
-            *ngIf="
-              (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
-              !reportBefore(post)
-            "
-            (click)="onReport(post.id, errorMessage, reportContent)"
-          >
-            Report
-          </button>
-
-          <button
-            mat-raised-button
-            disabled
-            *ngIf="reportBefore(post)"
-            class="post-card-footer-button"
-          >
-            Report
+          <mat-icon>front_hand</mat-icon>
           </button>
 
           <!--
@@ -240,31 +244,34 @@
           -->
 
           <button
-            mat-raised-button
-            class="post-card-footer-button"
+            mat-icon-button
             color="warn"
+            aria-label="Reject"
+            class="post-card-footer-button"
             *ngIf=" userRole === 'Admin'"
             (click)="onRejectPrompt(rejectContent)"
           >
-            Reject
+            <mat-icon color="warn">block</mat-icon>
           </button>
 
           <button
-            mat-raised-button
+            mat-icon-button
             class="post-card-footer-button-complete"
+            aria-label="Mark as Done"
             *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
             (click)="onCompletePrompt(completeContent)"
           >
-          Mark as Done
+          <mat-icon class="post-card-footer-button-complete">check_circle_outline</mat-icon>
           </button>
 
           <button
-            mat-button
+            mat-icon-button
             color="primary"
+            aria-label="Learn More"
             class="post-card-footer-button"
             (click)="onMoreInfo(content)"
           >
-            Learn More
+            <mat-icon color="primary">help_outline</mat-icon>
           </button>
         </mat-card-footer>
       </mat-card>
@@ -297,33 +304,38 @@
     </ng-template>
 
     <ng-template #content let-modal>
+
+      <!--
       <div class="modal-header">
         <h4 class="modal-title">{{ post.title }}</h4>
         <button
           type="button"
-          class="btn-close"
+          class="close"
           aria-label="Close"
           (click)="modal.dismiss('Cross click')"
         >
-          <!-- <span aria-hidden="true">&times;</span> -->
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
       <div class="modal-body">
+        <p>Organization Name: {{ post.orgName }}</p>
+        <p>UEN: {{ post.uen }}</p>
+        <p>Point of Contact (POC): {{ post.POC }}</p>
+        <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
+        <p>POC's email: {{ post.email }}</p>
+        <p>Brief Description for gig: {{ post.content }}</p>
         <p>
-          Organization Name: {{ post.orgName }}<br />
-          UEN: {{ post.uen }}<br />
-          Point of Contact (POC): {{ post.POC }}<br />
-          POC's phoneNumber: {{ post.phoneNumber }}<br />
-          POC's email: {{ post.email }}<br />
-          Brief Description for gig: {{ post.content }}<br />
-          Frequency/Type of volunteer opportunity: {{ post.opportunity }}<br />
-          Preferred Skills: {{ post.skills }}<br />
-          Start Date: {{ post.startDate | date }}<br />
-          End Date: {{ post.endDate | date }}<br />
-          Commitment Hours: {{ post.hoursRequired }}<br />
-          Beneficiaries: {{ post.beneficiaries }}
+          Frequency/Type of volunteer opportunity:
+          {{ post.opportunity }}
         </p>
+        <p>Preferred Skills: {{ post.skills }}</p>
+        <p>Start Date: {{ post.startDate | date }}</p>
+        <p>End Date: {{ post.endDate | date }}</p>
+        <p>Commitment Hours: {{ post.hoursRequired }}</p>
+        <p>Beneficiaries: {{ post.beneficiaries }}</p>
       </div>
+
       <div class="modal-footer">
         <button
           type="button"
@@ -333,6 +345,101 @@
           Close
         </button>
       </div>
+      -->
+
+      <!-- This example requires Tailwind CSS v2.0+ -->
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+
+  <div class="px-4 py-3 sm:px-6">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+      {{ post.title }}
+    </h3>
+
+    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+      by <i>{{ post.orgName }}</i>
+    </p>
+
+  </div>
+
+  <div class="border-t border-gray-200">
+    <dl>
+
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          About
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <p>{{ post.content }}</p>
+        </dd>
+      </div>
+
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Point-Of-Contact's Name
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          {{ post.POC }}
+        </dd>
+      </div>
+
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Email Address
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          {{ post.email }}
+        </dd>
+      </div>
+
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Preferred Skillset
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          {{ post.skills }}
+        </dd>
+      </div>
+
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Beneficiaries
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          {{ post.beneficiaries }}
+        </dd>
+      </div>
+
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Duration
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          {{ post.startDate | date }} to {{ post.endDate | date }}
+        </dd>
+      </div>
+
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Commitment Information
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          {{ post.hoursRequired }}
+        </dd>
+      </div>
+
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Location
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          {{ post.location || "Not Specified" }}
+        </dd>
+      </div>
+
+    </dl>
+  </div>
+</div>
+
     </ng-template>
 
     <ng-template #error let-modal>
@@ -373,79 +480,6 @@
       </div>
 
       <div class="modal-body">
-
-        <!-- TEMPLATE-DRIVEN FORM -->
-        <!--
-        <form #appForm="ngForm">
-          <mat-form-field appearance="outline">
-            <mat-label>Contact Number</mat-label>
-            <input
-              matInput
-              type="number"
-              ngModel
-              name="contactNumber"
-              required
-              #contactNumber="ngModel"
-              placeholder="81234567"
-              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              minlength="8"
-              maxLength="8"
-            />
-            <mat-error *ngIf="contactNumber.invalid">Please ensure your contact number is correct.</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Reason for applying</mat-label>
-            <textarea
-              matInput
-              type="text"
-              ngModel
-              name="message"
-              required
-              #message="ngModel"
-              rows="10"
-              minlength="5"
-              placeholder="Please elaborate on what you can contribute to the project."
-            ></textarea>
-          </mat-form-field>
-
-          <div class="role-radio-group">
-            <mat-label> Applicant Type </mat-label>
-            <div class="d-block my-3">
-              <div class="custom-control custom-radio">
-                <input
-                  id="Student"
-                  type="radio"
-                  class="custom-control-input"
-                  value="Student"
-                  name="applicationUser"
-                  ngModel
-                  required
-                />
-                <label class="custom-control-label" for="Student"
-                  >Student</label
-                >
-              </div>
-
-              <div class="custom-control custom-radio">
-                <input
-                  id="NUS Alumni"
-                  type="radio"
-                  class="custom-control-input"
-                  value="NUS Alumni"
-                  name="applicationUser"
-                  ngModel
-                  required
-                />
-                <label class="custom-control-label" for="NUS Alumni"
-                  >NUS Alumni</label
-                >
-              </div>
-            </div>
-          </div>
-        </form>
-        -->
-
 
         <!-- REACTIVE FORM -->
         <form [formGroup]="applicationForm">
@@ -541,7 +575,7 @@
         <button
           type="button"
           class="btn-close"
-          aria-label="apply"
+          aria-label="report content modal window"
           (click)="modal.dismiss('Cross click')"
         >
           <!-- <span aria-hidden="true">&times;</span> -->
@@ -625,7 +659,7 @@
         <button
           type="button"
           class="submit"
-          aria-label="apply"
+          aria-label="error message modal window"
           (click)="modal.dismiss('Cross click')"
         >
           <span aria-hidden="true">&times;</span>
@@ -639,7 +673,7 @@
         <button
           type="button"
           class="submit"
-          aria-label="apply"
+          aria-label="delete post modal window"
           (click)="modal.dismiss('Cross click')"
         >
           <span aria-hidden="true">&times;</span>
@@ -675,7 +709,7 @@
         <button
           type="button"
           class="submit"
-          aria-label="apply"
+          aria-label="complete post modal window"
           (click)="modal.dismiss('Cross click')"
         >
           <span aria-hidden="true">&times;</span>
@@ -725,7 +759,7 @@
         <button
           type="button"
           class="submit"
-          aria-label="apply"
+          aria-label="reject content modal window"
           (click)="modal.dismiss('Cross click')"
         >
           <span aria-hidden="true">&times;</span>

@@ -140,16 +140,13 @@ mat-icon {
 }
 
 .post-card-footer {
-  width: 20rem;
-  max-width: 20rem;
+  width: 22rem;
+  max-width: 22rem;
   font-family: 'Lato', sans-serif;
   align-items: center;
   display:flex;
-  margin: auto;
-  justify-content: space-between;
-}
-
-.post-card-footer-button {
+  margin:auto;
+  justify-content: space-evenly;
 }
 
 .pCardHeader {
@@ -204,18 +201,22 @@ mat-icon {
 /* MODAL WINDOW
 -------------------------------------------------- */
 .modal-header {
+  font-family: "Lato", sans-serif;
   color: black;
-  border: none;
 }
 
 .modal-body {
+  font-family: "Lato", sans-serif;
   color: black;
-  border: none;
 }
 
 .modal-footer {
+  font-family: "Lato", sans-serif;
   color: black;
-  border: none;
+}
+
+dd {
+  white-space: pre-wrap;
 }
 
 /* MISCELLANEOUS
@@ -237,8 +238,7 @@ mat-form-field {
 }
 
 .post-card-footer-button-complete {
-  background-color: #00b167;
-  color: rgb(255, 255, 255);
+  color: #00b167;
 }
 
 

@@ -303,7 +303,7 @@ button {
 -------------------------------------------------- */
 .info-text {
   text-align: center;
-  color: black !important;
+  color: inherit;
   margin-top: 5rem;
 }
 
