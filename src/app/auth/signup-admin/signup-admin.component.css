@@ -1,4 +1,4 @@
-div {
+.signup-card-container {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
@@ -16,44 +16,24 @@ mat-spinner {
 }
 
 mat-card {
-  width: 60%;
+  width: 80%;
   margin: auto;
   padding: 10px;
 
+  /*
   border-style: solid;
   border-width: thin;
   border-color: #4da8da;
   box-shadow: none;
+  */
 }
 
 .copyright {
   text-align: center;
 }
 
-
-/*
- * For the role selection for user creation. Still need to combine w styling at html level
-.mat-input-element {
-  color: #EEFBFB;
+.signup-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
-
-.mat-input-element::placeholder {
-  color: #7D7D7D;
-}
-
-::ng-deep .mat-select-arrow {
-  color: #4da8da !important;
-}
-
-::ng-deep .mat-select-value {
-  color: #EEFBFB !important;
-}
-
-.mat-select-value::placeholder {
-  color: #EEFBFB !important;
-}
-
-mat-icon {
-  color: #4da8da;
-}
-*/

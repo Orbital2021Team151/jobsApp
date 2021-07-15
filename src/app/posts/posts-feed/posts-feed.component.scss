@@ -22,8 +22,11 @@ mat-spinner {
 
 /* FILTER CARD
 -------------------------------------------------- */
-.filter-card-title {
-  text-align: center;
+.filter-card-title-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .filter-card {
@@ -36,15 +39,46 @@ mat-spinner {
 .filter-card-body {
   width: 100%;
   margin: auto;
+  background-color: inherit;
+  box-shadow: none;
+  color: inherit;
+  /*
   padding: 10px;
   text-align: center;
 
-  /* background-color: #5FB49C; */
+  background-color: #5FB49C;
   border-style: solid;
   border-width: thin;
   border-color: #4da8da;
   box-shadow: none;
+   */
 }
+
+/*
+.mat-form-field-empty.mat-form-field-label {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.mat-input-element::placeholder{
+  color: inherit;
+  opacity: 0.5;
+}
+*/
+
+/*
+::ng-deep .mat-form-field-placeholder{
+  color:red;
+}
+
+::ng-deep .mat-focused .mat-form-field-placeholder{
+  color:red;
+}
+
+::ng-deep .mat-input-placeholder {
+  color: red;
+}
+*/
 
 .filter-button {
   margin: 0 auto;
@@ -53,7 +87,7 @@ mat-spinner {
 }
 
 .filter-footer {
-  text-align: center;
+  text-align: end;
   width: 100%;
   flex: auto
 }

@@ -26,24 +26,6 @@ mat-card {
   background-color: inherit;
 }
 
-/*
-.mat-input-element {
-  color: #EEFBFB;
-}
-
-.mat-input-element::placeholder {
-  color: #7D7D7D;
-}
-
-::ng-deep .mat-select-arrow {
-  color: #4da8da !important;
-}
-
-::ng-deep .mat-select-value {
-  color: #EEFBFB !important;
-}
-*/
-
 .logo img {
   width: 75%;
   margin-bottom: 5rem;
@@ -57,16 +39,6 @@ mat-card {
   justify-content: center;
 }
 
-/*
-.mat-select-value::placeholder {
-  color: #EEFBFB !important;
-}
-*/
-
-
-mat-icon {
-  color: #4da8da;
-}
 
 mat-form-field {
   width:100%;
