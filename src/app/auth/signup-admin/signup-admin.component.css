@@ -15,10 +15,19 @@ mat-spinner {
   margin: auto;
 }
 
-mat-card {
-  width: 80%;
+.signup-card-container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: inherit;
+}
+
+.signup-card-body {
+  width: 25%;
   margin: auto;
-  padding: 10px;
+  box-shadow: none;
+
+  background-color: inherit;
+  color: inherit;
 
   /*
   border-style: solid;

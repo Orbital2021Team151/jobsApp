@@ -11,7 +11,7 @@ mat-card-title {
 }
 
 .post-create-body {
-  width: 80%;
+  width: 60%;
   margin: auto;
   box-shadow: none;
 
@@ -49,6 +49,26 @@ mat-error {
   float: left;
 }
 
+.step-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.step-footer-button-next {
+  border-color: inherit;
+  color: #5c8aee;
+  margin-left: 1rem;
+}
+
+.step-footer-button-back {
+  margin-left: 1rem;
+}
+
+.step-footer-button-reset {
+  margin-left: 1rem;
+}
+
 /* MODAL WINDOW
 -------------------------------------------------- */
 .modal-header {
@@ -74,12 +94,18 @@ input[type="file"] {
 }
 
 .image-preview {
-  height: 5rem;
-  margin: 1rem 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .image-preview img {
-  height: 100%;
+  max-width: 75%;
+  height: auto;
 }
 
 

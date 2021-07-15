@@ -39,12 +39,98 @@
   <div [ngbNavOutlet]="nav" class="ml-4"></div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
 <div class="change-password-card" *ngIf="active === 'changePassword'">
   <mat-card class="change-password-body">
+
     <mat-card-title class="change-password-title"
       >Change Password</mat-card-title
     >
 
+    <form #changePasswordForm="ngForm">
+      <mat-form-field appearance="outline" class="change-password-form-field">
+        <input
+          matInput
+          class="change-password-form-input"
+          [type]="hideCurrentPassword ? 'password' : 'text'"
+          ngModel
+          name="currentPassword"
+          required
+          #currentPassword="ngModel"
+          placeholder="Current Password"
+        />
+
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideCurrentPassword = !hideCurrentPassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideCurrentPassword"
+        >
+          <mat-icon>{{
+            hideCurrentPassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="currentPassword.invalid"
+          >Please enter your current password.</mat-error
+        >
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field appearance="outline" class="change-password-form-field">
+        <input
+          matInput
+          class="change-password-form-input"
+          [type]="hideNewPassword ? 'password' : 'text'"
+          ngModel
+          name="newPassword"
+          required
+          #newPassword="ngModel"
+          placeholder="New Password"
+        />
+
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideNewPassword = !hideNewPassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideNewPassword"
+        >
+          <mat-icon>{{
+            hideNewPassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="newPassword.invalid"
+          >Please provide us with your new password.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-card-footer class="change-password-footer">
+        <button
+          mat-stroked-button
+          color="primary"
+          class="change-password-form-button"
+          (click)="onChangePassword(changePasswordForm)"
+        >
+          Change Password
+        </button>
+      </mat-card-footer>
+    </form>
+
+    <!--
     <ng-container>
       <form #changePasswordForm="ngForm">
         <mat-form-field appearance="outline" class="change-password-form-field">
@@ -119,8 +205,11 @@
         </mat-card-footer>
       </form>
     </ng-container>
+    -->
+
   </mat-card>
 </div>
+
 <div
   *ngIf="requestedNewPassword"
   class="alert alert-success alert-dismissible fade show"
@@ -143,8 +232,6 @@
     <mat-card-title class="download-csv-title">
       CSV File download
     </mat-card-title>
-
-    <mat-card-subtitle> click on the button below </mat-card-subtitle>
 
     <form #csvDateFilterForm="ngForm">
       <mat-form-field appearance="outline">
@@ -183,7 +270,8 @@
     </form>
     <mat-card-footer>
       <button
-        class="btn btn-outline-primary mb-2 mr-2 change-password-button"
+        mat-stroked-button
+        class="download-csv-button"
         (click)="onDownloadCSV(csvDateFilterForm)"
       >
         Download CSV

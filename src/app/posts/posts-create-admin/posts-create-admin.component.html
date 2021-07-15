@@ -624,8 +624,8 @@
           </mat-form-field>
         </form>
 
-        <div>
-          <button mat-stroked-button color="primary" matStepperNext>Next</button>
+        <div class="step-footer">
+          <button mat-stroked-button class="step-footer-button-next" matStepperNext>Next</button>
         </div>
       </mat-step>
 
@@ -701,19 +701,19 @@
             >
           </mat-form-field>
 
-          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && postInformationGroup.get('image').valid">
-            <img [src]="imagePreview" [alt]="postInformationGroup.value.titleControl">
-          </div>
-
           <div>
             <button mat-stroked-button type="button" (click)="filePicker.click()">Upload an image <i>(Optional)</i></button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
           </div>
+
+          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && postInformationGroup.get('image').valid">
+            <img [src]="imagePreview" [alt]="postInformationGroup.value.titleControl">
+          </div>
         </form>
 
-        <div>
-          <button mat-stroked-button color="accent" matStepperPrevious>Back</button>
-          <button mat-stroked-button color="primary" matStepperNext>Next</button>
+        <div class="step-footer">
+          <button mat-stroked-button color="accent" matStepperPrevious class="step-footer-button-back">Back</button>
+          <button mat-stroked-button color="primary" matStepperNext class="step-footer-button-next">Next</button>
         </div>
 
       </mat-step>
@@ -822,9 +822,9 @@
 
         </form>
 
-        <div>
-          <button mat-stroked-button color="accent" matStepperPrevious>Back</button>
-          <button mat-stroked-button color="primary" matStepperNext (click)="generatePreview()">Next</button>
+        <div class="step-footer">
+          <button mat-stroked-button color="accent" matStepperPrevious class="step-footer-button-back">Back</button>
+          <button mat-stroked-button color="primary" matStepperNext (click)="generatePreview()" class="step-footer-button-next">Next</button>
         </div>
       </mat-step>
 
@@ -921,10 +921,10 @@
 
         </div>
 
-        <div>
-          <button mat-stroked-button color="accent" matStepperPrevious>Back</button>
-          <button mat-stroked-button color="warn" (click)="stepper.reset()">Reset</button>
-          <button mat-stroked-button color="primary" matStepperNext>Next</button>
+        <div class="step-footer">
+          <button mat-stroked-button color="accent" matStepperPrevious class="step-footer-button-back">Back</button>
+          <button mat-stroked-button color="warn" (click)="stepper.reset()" class="step-footer-button-reset">Reset</button>
+          <button mat-stroked-button color="primary" matStepperNext class="step-footer-button-next">Next</button>
         </div>
       </mat-step>
 
