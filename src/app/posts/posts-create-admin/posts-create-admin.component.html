@@ -538,10 +538,12 @@
 
 <div class="post-create-card">
   <mat-card class="post-create-body">
-    <mat-horizontal-stepper linear="Enable linear mode" #stepper>
+    <mat-horizontal-stepper linear="Enable linear mode" #stepper class="post-create-stepper">
       <mat-step [stepControl]="POCInformationGroup">
         <form [formGroup]="POCInformationGroup">
-          <ng-template matStepLabel>Point Of Contact (POC)</ng-template>
+          <ng-template matStepLabel>
+            Point Of Contact (POC)
+          </ng-template>
 
           <mat-form-field appearance="outline">
             <mat-label>Organisation's Name</mat-label>

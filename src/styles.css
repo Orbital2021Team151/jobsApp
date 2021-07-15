@@ -24,6 +24,12 @@ html, body {
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 */
 
+/* MAT FORM FIELD */
+.mat-form-field-empty {
+  color: inherit;
+  opacity: 0.5;
+}
+
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: #5c8aee;
   background-color: inherit;
@@ -43,12 +49,71 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 */
 
-.mat-form-field-empty {
+
+
+
+
+
+/* MAT STEPPER */
+/*
+.mat-step-header .mat-step-label{
+  color: inherit;
+}
+.mat-step-header .mat-step-icon {
+  color: #F2545B;
+  background-color: transparent;
+}
+
+
+
+.basic-container .mat-step-header .mat-step-icon-selected {
+  background-color: #6cb73a;
+  color: #fff;
+}
+
+
+ .mat-step-header .mat-step-icon {
+    background-color: rgba(167, 35, 35, 0.54);
+    color: #fff;
+}
+
+
+.basic-container .mat-step-header .mat-step-icon-selected {
+  background-color: #6cb73a !important;
+  color: inherit;
+}
+*/
+
+.mat-step-header {
+  color: inherit;
+}
+
+.mat-step-header .mat-step-icon  {
+    background-color: #5457f254;
+    color: #f8f8ff;
+}
+
+.mat-step-header .mat-step-icon-selected  {
+  background-color: #5457f2;
+  color: #f8f8ff;
+}
+
+.mat-step-header .mat-step-label  {
   color: inherit;
   opacity: 0.5;
 }
 
+.mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #5457f2;
+  color: #f8f8ff;
+}
 
+
+
+
+
+
+/* MAT SPINNER */
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: #F2545B;
   }

@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-post-create',
   templateUrl: './posts-create-admin.component.html',
-  styleUrls: ['./posts-create-admin.component.css'],
+  styleUrls: ['./posts-create-admin.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class PostCreateAdminComponent implements OnInit, OnDestroy {
@@ -397,7 +397,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     this.dialog.open(PostSubmittedDialog);
     return true;
   }
-  
+
   closeNotification() {
     this.pendingApproval = false;
   }
