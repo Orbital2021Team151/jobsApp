@@ -11,12 +11,27 @@ input[type="file"] {
 }
 
 .image-preview {
-  height: 5rem;
-  margin: 1rem 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .image-preview img {
-  height: 100%;
+  max-width: 75%;
+  height: auto;
+}
+
+.highlight-create-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.highlight-create-button-submit {
+  color: #05b80e;
 }
 
 mat-card {
@@ -28,5 +43,12 @@ mat-card {
   border-width: thin;
   border-color: #4da8da;
   box-shadow: none;
+}
+
+.highlight-create-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: space-around;
 }
 

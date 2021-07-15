@@ -48,12 +48,20 @@
         </mat-error>
       </mat-form-field>
 
-      <div>
-        <button mat-stroked-button type="button" (click)="filePicker.click()">
-          Upload an image
-        </button>
-        <input type="file" #filePicker (change)="onImagePicked($event)" />
-      </div>
+      <footer class="highlight-create-footer">
+
+        <div>
+          <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          (click)="filePicker.click()">
+            Upload an image
+          </button>
+          <input type="file" #filePicker (change)="onImagePicked($event)" />
+        </div>
+
+      </footer>
 
       <div
         class="image-preview"
@@ -61,14 +69,19 @@
       >
         <img [src]="imagePreview" [alt]="form.value.titleControl" />
       </div>
+
     </form>
 
-    <button
-      type="button"
-      class="btn btn-light"
-      (click)="publishHighlight()"
-    >
-      Submit
-    </button>
+    <div class="highlight-create-button">
+      <button
+        mat-stroked-button
+        class="highlight-create-button-submit"
+        type="button"
+        (click)="publishHighlight()"
+      >
+        Submit
+      </button>
+    </div>
+
   </mat-card>
 </div>
