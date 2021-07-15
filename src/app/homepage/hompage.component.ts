@@ -1,4 +1,6 @@
+import { stringify } from "@angular/compiler/src/util";
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Highlight } from "../admin/highlight.model";
 import { HighlightService } from "../admin/highlight.service";
@@ -21,8 +23,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
   highlights: Highlight[];
   authStatusObject: any;
   isAuth: boolean = false;
+  pageNumber: string = "-1";
 
-  constructor(public homepageService: HomepageService, public highlightService: HighlightService, public authService: AuthService) {}
+  constructor(
+    public homepageService: HomepageService, 
+    public highlightService: HighlightService, 
+    public authService: AuthService, 
+    public router: Router) {}
 
   ngOnInit() {
     this.highlightService.getHighlights();
@@ -30,8 +37,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.highlightSub = this.highlightService.getHighlightsUpdatedListener()
                           .subscribe((highlights: Highlight[]) => {
                             this.highlights = highlights;
-                            console.log(highlights);
-                            console.log("here")
+                            //console.log(highlights);
                           });
     this.authStatusObject = this.authService.getAuthStatusObject;
     this.isAuth = this.authService.getIsAuth();
@@ -49,6 +55,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
   openPoster() {}
 
   openContent(id: string) {
-
+    //console.log(this.highlights);
+    for (let i = 0; i < 3; i++) {
+      if (this.highlights[i].id === id) {
+        this.pageNumber = (i + 1).toString();
+      }
+    }
+    this.router.navigate(['/highlightContent' + this.pageNumber]);
   }
 }

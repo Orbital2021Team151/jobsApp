@@ -65,6 +65,9 @@ import { StartDateErrorDialog } from './dialogs/start-date-error-dialog/start-da
 import { WrongStudentEmailDialog } from './dialogs/wrong-student-email-dialog/wrong-student-email-dialog.component';
 import { HighlightCreateComponent } from './admin/highlight-create/highlight-create.component';
 import { PostSubmittedDialog } from './dialogs/post-submitted-dialog/post-submitted-dialog.component';
+import { HighlightContentComponent1 } from './highlight-content/highlight-content-1/highlight-content-1.component';
+import { HighlightContentComponent2 } from './highlight-content/highlight-content-2/highlight-content-2.component';
+import { HighlightContentComponent3 } from './highlight-content/highlight-content-3/highlight-content-3.component';
 
 
 @NgModule({
@@ -97,6 +100,9 @@ import { PostSubmittedDialog } from './dialogs/post-submitted-dialog/post-submit
     WrongStudentEmailDialog,
     HighlightCreateComponent,
     PostSubmittedDialog,
+    HighlightContentComponent1,
+    HighlightContentComponent2,
+    HighlightContentComponent3,
   ],
 
   imports: [

@@ -14,6 +14,9 @@ import { HomepageComponent } from './homepage/hompage.component';
 import { DashBoardLandingComponent } from './admin/dashboard-landing/dashboard-landing.component';
 import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';
 import { HighlightCreateComponent } from './admin/highlight-create/highlight-create.component';
+import { HighlightContentComponent1 } from './highlight-content/highlight-content-1/highlight-content-1.component';
+import { HighlightContentComponent2 } from './highlight-content/highlight-content-2/highlight-content-2.component';
+import { HighlightContentComponent3 } from './highlight-content/highlight-content-3/highlight-content-3.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -44,7 +47,9 @@ const routes: Routes = [
   { path: 'signup', component: SignupGeneralComponent, data: { animation: 'isLeft' }},
   { path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
   { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], data: { roles: ["Admin"] }},
-  // { path: 'highlightContnent', component: }
+  { path: 'highlightContent1', component: HighlightContentComponent1 },
+  { path: 'highlightContent2', component: HighlightContentComponent2 },
+  { path: 'highlightContent3', component: HighlightContentComponent3 },
 ];
 
 @NgModule({

@@ -1,20 +1,21 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Highlight } from "../../admin/highlight.model";
 import { HighlightService } from "../../admin/highlight.service";
 
 @Component({
-  selector: "highlight-content-1",
-  styleUrls: ["./highlight-content-1.component.css"],
-  templateUrl: "./highlight-content-1.component.html",
+  selector: "highlight-content-3",
+  styleUrls: ["./highlight-content-3.component.css"],
+  templateUrl: "./highlight-content-3.component.html",
 })
-export class HighlightContentComponent1 implements OnInit, OnDestroy {
+export class HighlightContentComponent3 implements OnInit, OnDestroy {
 
   highlight: Highlight;
   highlightSub: Subscription;
   highlights: Highlight[];
 
-  constructor(public highlightService: HighlightService) {
+  constructor(public highlightService: HighlightService, public router: Router) {
     
   }
   ngOnDestroy(): void {
@@ -28,16 +29,17 @@ export class HighlightContentComponent1 implements OnInit, OnDestroy {
                             console.log("here");
                             console.log(highlights);
                             this.highlights = highlights;
-                            this.highlight = highlights[0];
+                            this.highlight = highlights[2];
                           });
-    // console.log("this.highlight");
-    // console.log(this.highlight);
   }
-
 
 
   getHighlight() {
 
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 
 
