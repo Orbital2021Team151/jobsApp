@@ -1,66 +1,226 @@
 <mat-toolbar>
-  <mat-toolbar-row>
+  <mat-toolbar-row class="login-logout-signup">
     <span class="logo">
-      <a href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/" title="homepage" class="logo">
-        <img src="assets/Orbital-Logo-Design-Toolbar.png" alt="Logo of CCSGP">
+      <a
+        href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/"
+        title="homepage"
+        class="logo"
+      >
+        <img src="assets/Orbital-Logo-Design-Toolbar.png" alt="Logo of CCSGP" />
       </a>
     </span>
     <span class="spacer-row-1"></span>
     <ul>
       <app-dark-mode-toggle></app-dark-mode-toggle>
       <li *ngIf="!userIsAuthenticated">
-        <button mat-stroked-button class="light-button" routerLink="/login" routerLinkActive="mat-primary">Login</button>
-        <button mat-stroked-button class="light-button" routerLink="/signup" routerLinkActive="mat-primary">Signup</button>
+        <button
+          mat-stroked-button
+          class="light-button"
+          routerLink="/login"
+          routerLinkActive="mat-primary"
+        >
+          Login
+        </button>
+        <button
+          mat-stroked-button
+          class="light-button"
+          routerLink="/signup"
+          routerLinkActive="mat-primary"
+        >
+          Signup
+        </button>
       </li>
 
       <li *ngIf="userIsAuthenticated">
-        <button mat-stroked-button class="light-button" (click)="onLogout()">Logout</button>
+        <button mat-stroked-button class="light-button" (click)="onLogout()">
+          Logout
+        </button>
       </li>
-
     </ul>
+
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
   </mat-toolbar-row>
 
-  <mat-toolbar-row>
-
+  <mat-toolbar-row class="user-tabs" fxShow="true" fxHide.lt-md="true">
     <span class="spacer-row-2"></span>
-    <ul>
+    <ul class="ul-toolbar">
       <li *ngIf="userIsAuthenticated">
-        <a mat-button routerLink="/feed" routerLinkActive="mat-primary"> Feed</a>
+        <a mat-button routerLink="/feed" routerLinkActive="mat-primary">
+          Feed</a
+        >
 
-        <a *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')" mat-button routerLink="/admin" routerLinkActive="mat-primary"> Admin Dashboard</a>
-        <a *ngIf="userIsAuthenticated && ((authStatusObject.role === 'External Organisation') || (authStatusObject.role === 'Student Organisation'))" mat-button routerLink="/organisation" routerLinkActive="mat-primary"> {{authStatusObject.orgName}} Dashboard</a>
-        <a *ngIf="userIsAuthenticated && ((authStatusObject.role === 'Student') || (authStatusObject.role === 'Student / NUS Alumni'))" mat-button routerLink="/student-alumni" routerLinkActive="mat-primary"> Student / Alumni Dashboard</a>
+        <a
+          *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'"
+          mat-button
+          routerLink="/admin"
+          routerLinkActive="mat-primary"
+        >
+          Admin Dashboard</a
+        >
+        <a
+          *ngIf="
+            userIsAuthenticated &&
+            (authStatusObject.role === 'External Organisation' ||
+              authStatusObject.role === 'Student Organisation')
+          "
+          mat-button
+          routerLink="/organisation"
+          routerLinkActive="mat-primary"
+        >
+          {{ authStatusObject.orgName }} Dashboard</a
+        >
+        <a
+          *ngIf="
+            userIsAuthenticated &&
+            (authStatusObject.role === 'Student' ||
+              authStatusObject.role === 'Student / NUS Alumni')
+          "
+          mat-button
+          routerLink="/student-alumni"
+          routerLinkActive="mat-primary"
+        >
+          Student / Alumni Dashboard</a
+        >
       </li>
 
-
-      <li *ngIf="userIsAuthenticated && (authStatusObject.role === 'Admin')">
-        <a mat-button routerLink="/signupAdmin" routerLinkActive="mat-primary"> Signup for others </a>
+      <li *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'">
+        <a mat-button routerLink="/signupAdmin" routerLinkActive="mat-primary">
+          Signup for others
+        </a>
       </li>
 
-      <li *ngIf="(userIsAuthenticated) && (authStatusObject.role === 'Admin')">
-        <a mat-button routerLink="/createAdmin"
-        routerLinkActive="mat-primary"
-        > Create Job Posting</a>
+      <li *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'">
+        <a mat-button routerLink="/createAdmin" routerLinkActive="mat-primary">
+          Create Job Posting</a
+        >
       </li>
 
-      <li *ngIf="(userIsAuthenticated) && ((authStatusObject.role === 'External Organisation') || (authStatusObject.role === 'Student Organisation'))">
-        <a mat-button routerLink="/create"
-        routerLinkActive="mat-primary"
-        > Create Job Posting</a>
+      <li
+        *ngIf="
+          userIsAuthenticated &&
+          (authStatusObject.role === 'External Organisation' ||
+            authStatusObject.role === 'Student Organisation')
+        "
+      >
+        <a mat-button routerLink="/create" routerLinkActive="mat-primary">
+          Create Job Posting</a
+        >
       </li>
 
-      <li *ngIf="(userIsAuthenticated) && (authStatusObject.role === 'Admin')">
-        <a mat-button routerLink="/createHighlight"
-        routerLinkActive="mat-primary"
-        > Create A Highlight</a>
+      <li *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'">
+        <a
+          mat-button
+          routerLink="/createHighlight"
+          routerLinkActive="mat-primary"
+        >
+          Create A Highlight</a
+        >
       </li>
-
-
-
-
-
-
     </ul>
-    <span class="spacer-row-2"></span>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-sidenav
+  color="primary"
+  #sidenav
+  fxLayout="column"
+  mode="over"
+  opened="false"
+  fxHide.gt-sm="true"
+>
+  <div fxLayout="column">
+    <a
+      *ngIf="userIsAuthenticated"
+      mat-button
+      routerLink="/feed"
+      routerLinkActive="mat-primary"
+      (click)="sidenav.close()"
+    >
+      Feed</a
+    >
+
+    <a
+      *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'"
+      mat-button
+      routerLink="/admin"
+      routerLinkActive="mat-primary"
+      (click)="sidenav.close()"
+    >
+      Admin Dashboard</a
+    >
+    <a
+      *ngIf="
+        userIsAuthenticated &&
+        (authStatusObject.role === 'External Organisation' ||
+          authStatusObject.role === 'Student Organisation')
+      "
+      mat-button
+      routerLink="/organisation"
+      routerLinkActive="mat-primary"
+      (click)="sidenav.close()"
+    >
+      {{ authStatusObject.orgName }} Dashboard</a
+    >
+    <a
+      *ngIf="
+        userIsAuthenticated &&
+        (authStatusObject.role === 'Student' ||
+          authStatusObject.role === 'Student / NUS Alumni')
+      "
+      mat-button
+      routerLink="/student-alumni"
+      routerLinkActive="mat-primary"
+      (click)="sidenav.close()"
+    >
+      Student / Alumni Dashboard</a
+    >
+
+    <a
+      *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'"
+      mat-button
+      routerLink="/signupAdmin"
+      routerLinkActive="mat-primary"
+      (click)="sidenav.close()"
+    >
+      Signup for others
+    </a>
+
+    <a
+      *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'"
+      mat-button
+      routerLink="/createAdmin"
+      routerLinkActive="mat-primary"
+      (click)="sidenav.close()"
+    >
+      Create Job Posting
+    </a>
+
+    <a
+      *ngIf="
+        userIsAuthenticated &&
+        (authStatusObject.role === 'External Organisation' ||
+          authStatusObject.role === 'Student Organisation')
+      "
+      mat-button
+      routerLink="/create"
+      routerLinkActive="mat-primary"
+      (click)="sidenav.close()"
+    >
+      Create Job Posting
+    </a>
+
+    <a
+      *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'"
+      mat-button
+      routerLink="/createHighlight"
+      routerLinkActive="mat-primary"
+      (click)="sidenav.close()"
+    >
+      Create A Highlight</a
+    >
+  </div>
+</mat-sidenav>

@@ -74,13 +74,13 @@ button {
 
 /* CHANGE PASSWORD
 -------------------------------------------------- */
-.change-password-container {
+.change-password-card {
+  /* margin: auto;
+  width: 50%;
 
-  width: 100%;
-  padding: 10px;
-
-  /*
-  margin: auto;
+  float: left;
+  padding: 20px;
+  border: 2px solid red;
   text-align: center;
   justify-content: center;
   display: flex;
@@ -88,7 +88,12 @@ button {
   flex-direction: row;
   align-items: center;
   align-content: space-around;
+
   */
+  width: 40%;
+  margin: auto;
+  background-color: inherit;
+  color: inherit;
 }
 
 .change-password-title {
@@ -97,10 +102,14 @@ button {
 }
 
 .change-password-body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   width: 100%;
   padding: 10px;
   text-align: center;
+
+  box-shadow: none;
+  background-color: inherit;
+  color: inherit;
 
   /*
 

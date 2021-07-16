@@ -84,5 +84,7 @@ npm install -g @angular/cli@11<br>
 
 * ng add @ngneat/tailwind
 
+* npm install --save @angular/flex-layout
+
 
 ## Acknowledgments

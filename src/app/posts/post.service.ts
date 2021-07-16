@@ -6,9 +6,7 @@ import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 
 import { environment } from "../../environments/environment";
-
 import { Post } from "./post.model";
-
 
 const BACKEND_URL = environment.apiUrl; //change this in the environment folder
 
@@ -117,15 +115,16 @@ export class PostsService {
     //console.log("At front end, postService is tring to send this over via addPost: ");
     //console.log(postData);
 
-    this.http.post<{message: string, postId: string}>
+    this.http.post<{message: string, postId: string, imagePath: string}>
       (BACKEND_URL + 'api/posts', postData)
       .subscribe(responseData => {
 
         const postId = responseData.postId;
         post.id = postId;
+        post.imagePath = responseData.imagePath;
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
-        console.log(post.opportunity);
+        //console.log(post.opportunity);
     });
   }
 
@@ -203,6 +202,7 @@ export class PostsService {
   }
 
   deletePost(postId: string) {
+
     this.http
       .delete(BACKEND_URL + 'api/posts' + "/" + postId)
       .subscribe((response) => {

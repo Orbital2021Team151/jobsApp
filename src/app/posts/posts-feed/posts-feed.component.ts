@@ -22,7 +22,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   filteredPosts: Post[] = [];
 
-  hasApproved: boolean = false;
+  hasApproved: boolean = null;
   userIsAuthenticated = false;
   userRole: string;
   startDate: Date;

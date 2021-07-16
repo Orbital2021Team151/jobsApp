@@ -25,7 +25,7 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
   public authStatusObject;
   private authStatusSub: Subscription;
   private postServiceSub: Subscription;
-  isLoading = true;
+  public isLoading = true;
   beneficiaries: string[] = [
     "Animal Welfare",
     "Arts & Heritage",
@@ -267,6 +267,8 @@ export class PostCreateAdminComponent implements OnInit, OnDestroy {
     });
 
     this.postPreview = this.emptyPostPreview;
+
+    this.isLoading = false;
   }
 
   generatePreview() {

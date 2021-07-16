@@ -16,13 +16,6 @@
       <a ngbNavLink>Posts pending approval from admins</a>
       <ng-template ngbNavContent>
 
-        <!--
-        <div class="info-text">
-          <p>
-            <b>Posts that has not been approved by CCSGP Admins yet D:</b>
-          </p>
-        </div>
-        -->
 
       </ng-template>
     </li>
@@ -58,8 +51,8 @@
   <div [ngbNavOutlet]="nav" class="ml-4"></div>
 </div>
 
-<div class="change-password-container" *ngIf="active === 'changePassword'">
-  <mat-card class="mat-elevation-z0 change-password-body">
+<div class="change-password-card" *ngIf="active === 'changePassword'">
+  <mat-card class="change-password-body">
     <mat-card-title class="change-password-title"
       >Change Password</mat-card-title
     >
@@ -586,7 +579,7 @@
 </div>
 
 <p
-  class="info-text-2"
+  class="info-text"
   *ngIf="hasApplication === false && active === 'postsWithApplications'"
 >
   <i>No applications yet</i>

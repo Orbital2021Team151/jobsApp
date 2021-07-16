@@ -483,7 +483,7 @@
 
 <div class="post-create-card">
   <mat-card class="post-create-body">
-    <mat-horizontal-stepper linear="Enable linear mode" #stepper>
+    <mat-horizontal-stepper linear="Enable linear mode" #stepper class="post-create-stepper">
       <mat-step [stepControl]="POCInformationGroup">
         <form [formGroup]="POCInformationGroup">
           <ng-template matStepLabel>Point Of Contact (POC)</ng-template>
@@ -644,14 +644,15 @@
             >
           </mat-form-field>
 
-          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && postInformationGroup.get('image').valid">
-            <img [src]="imagePreview" [alt]="postInformationGroup.value.titleControl">
-          </div>
-
           <div>
             <button mat-stroked-button type="button" (click)="filePicker.click()">Upload an image <i>(Optional)</i></button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
           </div>
+
+          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && postInformationGroup.get('image').valid">
+            <img [src]="imagePreview" [alt]="postInformationGroup.value.titleControl">
+          </div>
+
         </form>
 
         <div>

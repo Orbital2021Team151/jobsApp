@@ -586,12 +586,15 @@
       </div>
     </ng-template>
   </div>
+
+  <p class="info-text mat-body-1" *ngIf="hasRequest === false && active === 'postsPendingApproval'">
+    <i>No post request!</i>
+  </p>
+
+  <mat-spinner *ngIf="hasRequest === null" class="spinner"></mat-spinner>
+
 </div>
 
-<p class="info-text mat-body-1" *ngIf="hasRequest === false && active === 'postsPendingApproval'">
-  <i>No post request!</i>
-</p>
-<mat-spinner *ngIf="hasRequest === null" class="spinner"></mat-spinner>
 
 <div class="report-posts-div" *ngIf="active === 'postsWithReports'">
   <div class="centered" *ngFor="let post of posts">
@@ -923,12 +926,13 @@
       </div>
     </ng-template>
   </div>
+
+  <p class="info-text mat-body-1" *ngIf="hasReport === false && active === 'postsWithReports'">
+    No post with reports! :D
+  </p>
+  <mat-spinner *ngIf="hasReport === null"></mat-spinner>
 </div>
 
-<p class="info-text mat-body-1" *ngIf="hasReport === false && active === 'postsWithReports'">
-  No post with reports! :D
-</p>
-<mat-spinner *ngIf="hasReport === null"></mat-spinner>
 
 <footer class="container">
   <!--

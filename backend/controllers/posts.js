@@ -73,6 +73,7 @@ exports.requestPost = (req, res, next) => {
       res.status(201).json({
         message: "post requested successfully! Pending admin approval",
         postId: createdPost._id,
+        imagePath: createdPost.imagePath,
         /*
         post: {
           //might not work tho because of the JSON crap again.
@@ -189,6 +190,7 @@ exports.getAllPosts = (req, res, next) => {
     });
 };
 
+//TODO: Delete image if imagePath is present
 exports.deletePost = (req, res, next) => {
   //console.log("At backend delete PoST! Data are as follows: ");
   //console.log(req.userData);
@@ -463,7 +465,20 @@ exports.reportPost = (req, res, next) => {
 };
 
 //Rejects the post. Either can be done by admin or done by organisation
+//TODO: Delete image if imagePath is present
 exports.rejectPost = (req, res, next) => {
+
+
+  //console.log("At post controller's rejectPost now!");
+  //onsole.log(req.body.imagePath);
+
+  //TODO: Might not be working.
+  /*
+  if (req.body.imagePath) {
+    fs.unlinkSync(req.body.imagePath);
+  }
+  */
+
   const newPost = new Post({
     _id: req.body.id,
     orgName: req.body.orgName,
@@ -502,6 +517,7 @@ exports.rejectPost = (req, res, next) => {
 };
 
 //Post is marked as completed. Either can be done by admin or done by organisation
+//TODO: Delete image if imagePath is present
 exports.completePost = (req, res, next) => {
 
   let removedStatus = "COMPLETED"
