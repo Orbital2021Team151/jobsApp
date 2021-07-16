@@ -68,6 +68,7 @@ import { PostSubmittedDialog } from './dialogs/post-submitted-dialog/post-submit
 import { HighlightContentComponent1 } from './highlight-content/highlight-content-1/highlight-content-1.component';
 import { HighlightContentComponent2 } from './highlight-content/highlight-content-2/highlight-content-2.component';
 import { HighlightContentComponent3 } from './highlight-content/highlight-content-3/highlight-content-3.component';
+import { ExpiredSessionPage } from './errors/expired-session-error-page/expired-session-error-page.component';
 
 
 @NgModule({
@@ -103,6 +104,7 @@ import { HighlightContentComponent3 } from './highlight-content/highlight-conten
     HighlightContentComponent1,
     HighlightContentComponent2,
     HighlightContentComponent3,
+    ExpiredSessionPage
   ],
 
   imports: [

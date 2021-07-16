@@ -17,6 +17,7 @@ import { HighlightCreateComponent } from './admin/highlight-create/highlight-cre
 import { HighlightContentComponent1 } from './highlight-content/highlight-content-1/highlight-content-1.component';
 import { HighlightContentComponent2 } from './highlight-content/highlight-content-2/highlight-content-2.component';
 import { HighlightContentComponent3 } from './highlight-content/highlight-content-3/highlight-content-3.component';
+import { ExpiredSessionPage } from './errors/expired-session-error-page/expired-session-error-page.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'highlightContent1', component: HighlightContentComponent1 },
   { path: 'highlightContent2', component: HighlightContentComponent2 },
   { path: 'highlightContent3', component: HighlightContentComponent3 },
+  { path: 'expiredSession', component: ExpiredSessionPage },
 ];
 
 @NgModule({

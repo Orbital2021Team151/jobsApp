@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Highlight } from "../../admin/highlight.model";
 import { HighlightService } from "../../admin/highlight.service";
@@ -14,7 +15,7 @@ export class HighlightContentComponent1 implements OnInit, OnDestroy {
   highlightSub: Subscription;
   highlights: Highlight[];
 
-  constructor(public highlightService: HighlightService) {
+  constructor(public highlightService: HighlightService, public router: Router) {
     
   }
   ngOnDestroy(): void {
@@ -38,6 +39,10 @@ export class HighlightContentComponent1 implements OnInit, OnDestroy {
 
   getHighlight() {
 
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 
 

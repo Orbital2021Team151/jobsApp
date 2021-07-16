@@ -134,12 +134,12 @@ exports.login = (req, res, next) => {
               },
 
               process.env.JWT_KEY,
-              { expiresIn: "1h" }
+              { expiresIn: "0.005h" }
             );
 
             res.status(200).json({
               token: token,
-              expiresIn: 3600,
+              expiresIn: 18,
               id: fetchedUser._id,
               email: fetchedUser.email,
               password: fetchedUser.password,

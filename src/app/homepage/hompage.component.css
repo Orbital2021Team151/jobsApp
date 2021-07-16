@@ -25,7 +25,7 @@ ngb-carousel {
 
 .carousel-image {
   object-fit: cover;
-  width: 550px;
+  max-width: 50%;
 }
 
 /* Carousel base class */

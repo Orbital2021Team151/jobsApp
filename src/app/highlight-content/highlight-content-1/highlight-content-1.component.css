@@ -1,9 +1,11 @@
 
-
-img {
-    max-width: 50%;
+.w3-container {
+    box-shadow: none; 
+    background-color: inherit; 
+    color: inherit;
 }
 
-div {
-    margin: auto;
-}
+body {
+    background-color: inherit;
+    color: inherit;
+  }
