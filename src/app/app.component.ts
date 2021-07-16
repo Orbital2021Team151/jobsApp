@@ -71,6 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
       if (diff <= 0) {
       localStorage.clear();
+      this.router.navigate(['/expiredSession']);
       }
     }
     if (localStorage.getItem('token')) {

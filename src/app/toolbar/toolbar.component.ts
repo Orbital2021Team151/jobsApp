@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth/auth.service";
 import { Post } from "../posts/post.model";
@@ -19,7 +20,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   orgName: string;
   public authStatusObject;
 
-  constructor(private authService: AuthService, public postsService: PostsService) {};
+  constructor(private authService: AuthService, public postsService: PostsService, public router: Router) {};
 
   onLogout() {
     this.authService.logout();
@@ -38,6 +39,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     } else {
       localStorage.clear();
       this.userIsAuthenticated = false;
+      
     }
 
 

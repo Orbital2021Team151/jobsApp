@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     const isAuth = this.authService.getIsAuth();
     if (isAuth) {
       if (route.data.roles && route.data.roles.indexOf(role) === -1) {
-        this.router.navigate(['/expiredSession']);
+        this.router.navigate(['/']);
         return false;
       } else {
         return true;

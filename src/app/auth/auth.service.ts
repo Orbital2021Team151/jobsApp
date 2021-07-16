@@ -261,7 +261,7 @@ export class AuthService {
 
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate(['/']);
+    this.router.navigate(['/expiredSession']);
   }
 
   private setAuthTimer(duration: number) {
