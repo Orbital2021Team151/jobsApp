@@ -104,7 +104,7 @@ import { ExpiredSessionPage } from './errors/expired-session-error-page/expired-
     HighlightContentComponent1,
     HighlightContentComponent2,
     HighlightContentComponent3,
-    ExpiredSessionPage
+    ExpiredSessionPage,
   ],
 
   imports: [

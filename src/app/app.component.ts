@@ -76,6 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('token')) {
       this.authService.autoAuthUser();
     }
+
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     })
