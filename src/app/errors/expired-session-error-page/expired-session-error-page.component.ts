@@ -13,5 +13,4 @@ export class ExpiredSessionPage {
         this.router.navigate(['/login']);
     }
 
-
 }
