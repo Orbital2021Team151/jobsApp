@@ -1,15 +1,44 @@
 .example-card {
-    max-width: 50%;
-    margin: auto;
-    margin-top: 10%;
-  }
+  max-width: 50%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.title {
+  width: 100%;
+}
+
+.title-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  /*
+  font-family: 'Source Code Pro', monospace;
+  font-size: 2.5rem;
+  */
+}
+
+.footer-text {
+  font-family: 'Lato', sans-serif;
+  /*
+  font-family: 'Source Code Pro', monospace;
+  */
+}
+
+.footer-button {
+  /*
+  color: #fc1776;
+  border-color: #fc1776;
+  */
+}
 
 
 
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
 
 
 
@@ -18,11 +47,9 @@
 
 
 
-
-
-
-
-
+/*
+ * Hour glass animation by Marius Petrescu: https://codepen.io/mashul/pen/rPaqYE
+ */
   div {
     width: 50%;
     margin: 100px auto;

@@ -92,3 +92,6 @@ npm install -g @angular/cli@11<br>
 
 
 ## Acknowledgments
+* Email template reference from [RaKesh Mandal](https://codepen.io/rKalways/pens/popular)
+* Hour glass animation by [Marius Petrescu](https://codepen.io/mashul/pen/rPaqYE)
+
