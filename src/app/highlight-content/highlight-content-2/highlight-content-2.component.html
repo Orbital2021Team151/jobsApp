@@ -7,7 +7,7 @@
 <style>
 body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-<body class="w3-light-grey">
+<!-- <body class="w3-light-grey"> -->
 
 <!-- w3-content defines a container for fixed size centered content, 
 and is wrapped around the whole page content, except for the footer in this example -->
@@ -30,7 +30,7 @@ and is wrapped around the whole page content, except for the footer in this exam
       <p> {{ highlight.content }} </p>
       <div class="w3-row">
         <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>Back to Homepage</b></button></p>
+          <p><button class="w3-button w3-padding-large w3-white w3-border" (click)="goBack()"><b>Back to Homepage</b></button></p>
         </div>
       </div>
     </div>

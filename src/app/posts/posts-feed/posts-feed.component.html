@@ -6,11 +6,14 @@
         <div class="filter-card-title-container">
           <mat-card-title class="filter-card-title"> Filter </mat-card-title>
           <button
-            mat-button
-            color="accent"
-            (click)="clearFilter()"
+          matTooltip="Clear all fields" 
+          [matTooltipShowDelay]="1000" 
+          [matTooltipHideDelay]="2000" 
+          mat-button
+          color="accent" 
+          (click)="clearFilter()"
           >
-          Clear All
+            Clear All
           </button>
         </div>
 
@@ -19,68 +22,30 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Beneficiaries</mat-label>
-            <mat-select
-              ngModel
-              multiple
-              #beneficiariesInput="ngModel"
-              name="beneficiariesSelected"
-              [(ngModel)]="beneficiariesSelected"
-            >
-              <mat-option
-                *ngFor="let beneficiary of beneficiaries"
-                [value]="beneficiary"
-                >{{ beneficiary }}</mat-option
-              >
+            <mat-select ngModel multiple #beneficiariesInput="ngModel" name="beneficiariesSelected"
+              [(ngModel)]="beneficiariesSelected">
+              <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{ beneficiary }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Organisations</mat-label>
-            <mat-select
-              ngModel
-              multiple
-              #organisationsInput="ngModel"
-              name="orgsSelected"
-              [(ngModel)]="orgsSelected"
-            >
-              <mat-option
-                *ngFor="let org of orgs"
-                [value]="org"
-                >{{ org }}</mat-option
-              >
+            <mat-select ngModel multiple #organisationsInput="ngModel" name="orgsSelected" [(ngModel)]="orgsSelected">
+              <mat-option *ngFor="let org of orgs" [value]="org">{{ org }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-form-field">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="rangePicker">
-              <input
-                matStartDate
-                placeholder="Start date"
-                ngModel
-                [(ngModel)]="startDate"
-                name="startDate"
-              />
-              <input
-                matEndDate
-                placeholder="End date"
-                [(ngModel)]="endDate"
-                name="endDate"
-              />
+              <input matStartDate placeholder="Start date" ngModel [(ngModel)]="startDate" name="startDate" />
+              <input matEndDate placeholder="End date" [(ngModel)]="endDate" name="endDate" />
             </mat-date-range-input>
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="rangePicker"
-            ></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
             <mat-date-range-picker #rangePicker touchUi>
               <mat-date-range-picker-actions>
                 <button mat-button matDateRangePickerCancel>Cancel</button>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  matDateRangePickerApply
-                  class="apply"
-                >
+                <button mat-raised-button color="primary" matDateRangePickerApply class="apply">
                   Apply
                 </button>
               </mat-date-range-picker-actions>
@@ -196,13 +161,7 @@
           -->
           <mat-form-field appearance="outline">
             <mat-label>Search for keywords</mat-label>
-            <input
-              matInput
-              type="text"
-              ngModel
-              [(ngModel)]="keywords"
-              placeholder="eg Potong Pasir"
-            />
+            <input matInput type="text" ngModel [(ngModel)]="keywords" placeholder="eg Potong Pasir" />
           </mat-form-field>
 
           <div class="filter-footer">
@@ -223,10 +182,13 @@
             ></p-button>
             -->
 
-            <button
-              mat-button
-              color="accent"
-              (click)="submitFilter()">
+            <button 
+            matTooltip="Filter by the fields you have entered!"
+            [matTooltipShowDelay]="1000"
+            [matTooltipHideDelay]="2000"
+            mat-button 
+            color="accent" 
+            (click)="submitFilter()">
               Filter
             </button>
 
@@ -244,25 +206,12 @@
       <ng-container *ngFor="let post of filteredPosts">
         <section class="cards">
           <mat-card class="published-post-card">
-            <img
-              *ngIf="!post.imagePath"
-              mat-card-image
-              class="card-image"
-              src="../../../assets/dark-background-placeholder.png"
-              alt="Placeholder image for post"
-            />
+            <img *ngIf="!post.imagePath" mat-card-image class="card-image"
+              src="../../../assets/dark-background-placeholder.png" alt="Placeholder image for post" />
 
-            <img
-              *ngIf="post.imagePath"
-              mat-card-image
-              class="card-image"
-              [src]="post.imagePath"
-              alt="Post's image"
-            />
+            <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's image" />
 
-            <mat-card-title class="post-card-title"
-              ><b>{{ post.title }}</b></mat-card-title
-            >
+            <mat-card-title class="post-card-title"><b>{{ post.title }}</b></mat-card-title>
             <mat-card-subtitle class="post-card-subtitle">
               by <b>{{ post.orgName }}</b>
             </mat-card-subtitle>
@@ -276,57 +225,36 @@
             </mat-card-content>
             <mat-card-footer class="post-card-footer">
 
-              <button
-                mat-icon-button
-                class="post-card-footer-button"
-                color="warn"
-                aria-label="Report"
-                *ngIf="
+              <button matTooltip="Report this post!" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="2000"
+                mat-icon-button class="post-card-footer-button" color="warn" aria-label="Report" *ngIf="
                   (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
                   !reportBefore(post)
-                "
-                (click)="onReport(post.id, errorMessage, reportContent)"
-              >
+                " (click)="onReport(post.id, errorMessage, reportContent)">
                 <mat-icon color="warn">feedback</mat-icon>
               </button>
 
-              <button
-                mat-icon-button
-                disabled
-                aria-label="Already Reported"
-                *ngIf="reportBefore(post)"
-                class="post-card-footer-button"
-              >
+              <button mat-icon-button disabled aria-label="Already Reported" *ngIf="reportBefore(post)"
+                class="post-card-footer-button">
                 <mat-icon>feedback</mat-icon>
               </button>
 
-              <button
-                mat-icon-button
-                aria-label="Apply"
-                *ngIf="
+              <button matTooltip="Apply to this post!" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="2000"
+                mat-icon-button aria-label="Apply" *ngIf="
                   (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
                   !applyBefore(post)
-                "
-                class="post-card-footer-button"
-                (click)="
+                " class="post-card-footer-button" (click)="
                   onApply(
                     post.id,
                     'You have applied to this post before!',
                     studentContent
                   )
-                "
-              >
+                ">
                 <mat-icon class="post-card-footer-button-complete">front_hand</mat-icon>
               </button>
 
-              <button
-                mat-icon-button
-                disabled
-                aria-label="Applied Before"
-                class="post-card-footer-button"
-                *ngIf="applyBefore(post)"
-              >
-              <mat-icon>front_hand</mat-icon>
+              <button mat-icon-button disabled aria-label="Applied Before" class="post-card-footer-button"
+                *ngIf="applyBefore(post)">
+                <mat-icon>front_hand</mat-icon>
               </button>
 
               <!--
@@ -341,34 +269,20 @@
               </button>
               -->
 
-              <button
-                mat-icon-button
-                color="warn"
-                aria-label="Reject"
-                class="post-card-footer-button"
-                *ngIf=" userRole === 'Admin'"
-                (click)="onRejectPrompt(rejectContent)"
-              >
+              <button mat-icon-button color="warn" aria-label="Reject" class="post-card-footer-button"
+                *ngIf=" userRole === 'Admin'" (click)="onRejectPrompt(rejectContent)">
                 <mat-icon color="warn">block</mat-icon>
               </button>
 
-              <button
-                mat-icon-button
-                class="post-card-footer-button-complete"
-                aria-label="Mark as Done"
+              <button mat-icon-button class="post-card-footer-button-complete" aria-label="Mark as Done"
                 *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
-                (click)="onCompletePrompt(completeContent)"
-              >
-              <mat-icon class="post-card-footer-button-complete">check_circle_outline</mat-icon>
+                (click)="onCompletePrompt(completeContent)">
+                <mat-icon class="post-card-footer-button-complete">check_circle_outline</mat-icon>
               </button>
 
-              <button
-                mat-icon-button
-                color="primary"
-                aria-label="Learn More"
-                class="post-card-footer-button"
-                (click)="onMoreInfo(content)"
-              >
+              <button matTooltip="Click for more information" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="2000"
+                mat-icon-button color="primary" aria-label="Learn More" class="post-card-footer-button"
+                (click)="onMoreInfo(content)">
                 <mat-icon color="primary">help_outline</mat-icon>
               </button>
             </mat-card-footer>
@@ -378,12 +292,7 @@
         <ng-template #messageForStudent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Publish Success</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -391,11 +300,7 @@
             <p>Post Published Successfully!</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="modal.close('Close click')"
-            >
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
               Back
             </button>
           </div>
@@ -446,119 +351,110 @@
           -->
 
           <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+          <div class="bg-white shadow overflow-hidden sm:rounded-lg">
 
-      <div class="px-4 py-3 sm:px-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900">
-          {{ post.title }}
-        </h3>
+            <div class="px-4 py-3 sm:px-6">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                {{ post.title }}
+              </h3>
 
-        <p class="mt-1 max-w-2xl text-sm text-gray-500">
-          by <i>{{ post.orgName }}</i>
-        </p>
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                by <i>{{ post.orgName }}</i>
+              </p>
 
-      </div>
+            </div>
 
-      <div class="border-t border-gray-200">
-        <dl>
+            <div class="border-t border-gray-200">
+              <dl>
 
-          <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              About
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <p>{{ post.content }}</p>
-            </dd>
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    About
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <p>{{ post.content }}</p>
+                  </dd>
+                </div>
+
+                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Point-Of-Contact's Name
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ post.POC }}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Email Address
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ post.email }}
+                  </dd>
+                </div>
+
+                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Preferred Skillset
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ post.skills }}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Beneficiaries
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ post.beneficiaries }}
+                  </dd>
+                </div>
+
+                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Duration
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ post.startDate | date }} to {{ post.endDate | date }}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Commitment Information
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ post.hoursRequired }}
+                  </dd>
+                </div>
+
+                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Location
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ post.location || "Not Specified" }}
+                  </dd>
+                </div>
+
+              </dl>
+            </div>
           </div>
-
-          <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Point-Of-Contact's Name
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ post.POC }}
-            </dd>
-          </div>
-
-          <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Email Address
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ post.email }}
-            </dd>
-          </div>
-
-          <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Preferred Skillset
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ post.skills }}
-            </dd>
-          </div>
-
-          <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Beneficiaries
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ post.beneficiaries }}
-            </dd>
-          </div>
-
-          <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Duration
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ post.startDate | date }} to {{ post.endDate | date }}
-            </dd>
-          </div>
-
-          <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Commitment Information
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ post.hoursRequired }}
-            </dd>
-          </div>
-
-          <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Location
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ post.location || "Not Specified" }}
-            </dd>
-          </div>
-
-        </dl>
-      </div>
-    </div>
 
         </ng-template>
 
         <ng-template #error let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Applied Before</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            ></button>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
           </div>
           <div class="modal-body">
             <p>you applied for this before</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="modal.close('Close click')"
-            >
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
               Close
             </button>
           </div>
@@ -567,12 +463,7 @@
         <ng-template #studentContent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Apply Post: {{ post.title }}</h4>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="apply"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn-close" aria-label="apply" (click)="modal.dismiss('Cross click')">
               <!-- <span aria-hidden="true">&times;</span> -->
             </button>
           </div>
@@ -584,60 +475,35 @@
 
               <mat-form-field appearance="outline">
                 <mat-label>Contact Number</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  required
-                  [formControl]="applicationContactControl"
+                <input matInput type="number" required [formControl]="applicationContactControl"
                   placeholder="eg 81234567"
                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                  maxlength="8"
-                />
-                <mat-error *ngIf="!applicationForm.get('contact').valid">Please ensure your contact number is correct.</mat-error>
+                  maxlength="8" />
+                <mat-error *ngIf="!applicationForm.get('contact').valid">Please ensure your contact number is correct.
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline">
                 <mat-label>Reason for applying</mat-label>
-                <textarea
-                  matInput
-                  type="text"
-                  required
-                  [formControl]="applicationContentControl"
-                  rows="10"
-                  placeholder="Please elaborate on how you can contribute to the project."
-                ></textarea>
-                <mat-error *ngIf="applicationContentControl.errors?.required">Please ensure your contact number is correct.</mat-error>
+                <textarea matInput type="text" required [formControl]="applicationContentControl" rows="10"
+                  placeholder="Please elaborate on how you can contribute to the project."></textarea>
+                <mat-error *ngIf="applicationContentControl.errors?.required">Please ensure your contact number is
+                  correct.</mat-error>
               </mat-form-field>
 
               <div class="role-radio-group">
                 <mat-label> Applicant Type </mat-label>
                 <div class="d-block my-3">
-                  <div
-                  class="custom-control custom-radio"
-                  >
-                    <input
-                      id="Student"
-                      type="radio"
-                      class="custom-control-input"
-                      value="Student"
-                      [formControl]="applicationUserTypeControl"
-                    />
-                    <label class="custom-control-label" for="Student"
-                      >Student</label
-                    >
+                  <div class="custom-control custom-radio">
+                    <input id="Student" type="radio" class="custom-control-input" value="Student"
+                      [formControl]="applicationUserTypeControl" />
+                    <label class="custom-control-label" for="Student">Student</label>
                   </div>
 
                   <div class="custom-control custom-radio">
-                    <input
-                      id="NUS Alumni"
-                      type="radio"
-                      class="custom-control-input"
-                      value="NUS Alumni"
-                      [formControl]="applicationUserTypeControl"
-                    />
-                    <label class="custom-control-label" for="NUS Alumni"
-                      >NUS Alumni</label
-                    >
+                    <input id="NUS Alumni" type="radio" class="custom-control-input" value="NUS Alumni"
+                      [formControl]="applicationUserTypeControl" />
+                    <label class="custom-control-label" for="NUS Alumni">NUS Alumni</label>
                   </div>
                 </div>
               </div>
@@ -650,17 +516,11 @@
           <div class="modal-footer">
 
             <!-- REACTIVE FORM -->
-            <mat-error *ngIf="applicationForm.invalid"
-              >Please fill all required fields before submitting your
-              application.</mat-error
-            >
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="
+            <mat-error *ngIf="applicationForm.invalid">Please fill all required fields before submitting your
+              application.</mat-error>
+            <button type="button" class="btn btn-light" (click)="
                 submitApplicationReactive(post.id) && modal.dismiss('Cross click')
-              "
-            >
+              ">
               Submit Application
             </button>
 
@@ -670,12 +530,8 @@
         <ng-template #reportContent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Report Post: {{ post.title }}</h4>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="report content modal window"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn-close" aria-label="report content modal window"
+              (click)="modal.dismiss('Cross click')">
               <!-- <span aria-hidden="true">&times;</span> -->
             </button>
           </div>
@@ -687,29 +543,19 @@
 
               <mat-form-field appearance="outline">
                 <mat-label>Contact Number</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  required
-                  [formControl]="reportContactControl"
-                  placeholder="eg 81234567"
+                <input matInput type="number" required [formControl]="reportContactControl" placeholder="eg 81234567"
                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                  maxlength="8"
-                />
-                <mat-error *ngIf="!reportForm.get('contact').valid">Please ensure your contact number is correct.</mat-error>
+                  maxlength="8" />
+                <mat-error *ngIf="!reportForm.get('contact').valid">Please ensure your contact number is correct.
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline">
                 <mat-label>Reason for reporting</mat-label>
-                <textarea
-                  matInput
-                  type="text"
-                  required
-                  [formControl]="reportContentControl"
-                  rows="10"
-                  placeholder="Please elaborate provide us with the reason for reporting the post."
-                ></textarea>
-                <mat-error *ngIf="reportContentControl.errors?.required">Please ensure your contact number is correct.</mat-error>
+                <textarea matInput type="text" required [formControl]="reportContentControl" rows="10"
+                  placeholder="Please elaborate provide us with the reason for reporting the post."></textarea>
+                <mat-error *ngIf="reportContentControl.errors?.required">Please ensure your contact number is correct.
+                </mat-error>
               </mat-form-field>
             </form>
           </div>
@@ -733,19 +579,13 @@
               </button>
             </div> -->
 
-            <mat-error *ngIf="reportForm.invalid"
-              >Please fill all required fields before submitting your
-              report.</mat-error
-            >
+            <mat-error *ngIf="reportForm.invalid">Please fill all required fields before submitting your
+              report.</mat-error>
 
             <!-- REACTIVE FORM -->
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="
+            <button type="button" class="btn btn-light" (click)="
                 submitReportReactive(post.id) && modal.dismiss('Cross click')
-              "
-            >
+              ">
               Submit Report
             </button>
           </div>
@@ -754,12 +594,8 @@
         <ng-template #errorMessage let-modal>
           <div class="modal-header">
             <h4 class="modal-title">You reported this post before!</h4>
-            <button
-              type="button"
-              class="submit"
-              aria-label="error message modal window"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="submit" aria-label="error message modal window"
+              (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -768,12 +604,8 @@
         <ng-template #deleteContent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Delete Confirmation</h4>
-            <button
-              type="button"
-              class="submit"
-              aria-label="delete post modal window"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="submit" aria-label="delete post modal window"
+              (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -783,19 +615,11 @@
           </div>
 
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="onDelete(post.id) && modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn btn-light" (click)="onDelete(post.id) && modal.dismiss('Cross click')">
               Confirm Delete
             </button>
 
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">
               Cancel
             </button>
           </div>
@@ -804,12 +628,8 @@
         <ng-template #completeContent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Completion Confirmation</h4>
-            <button
-              type="button"
-              class="submit"
-              aria-label="complete post modal window"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="submit" aria-label="complete post modal window"
+              (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -820,32 +640,20 @@
             <form [formGroup]="removeForm">
 
               <mat-form-field appearance="outline">
-                <mat-label>If you are removing the post not because it is completed, please fill in the reason here.</mat-label>
-                <textarea
-                  matInput
-                  type="text"
-                  [formControl]="removeReasonControl"
-                  rows="10"
-                  placeholder="Please tell us why you are removing the post. (eg lack of interest in job, job expired, etc)"
-                ></textarea>
+                <mat-label>If you are removing the post not because it is completed, please fill in the reason here.
+                </mat-label>
+                <textarea matInput type="text" [formControl]="removeReasonControl" rows="10"
+                  placeholder="Please tell us why you are removing the post. (eg lack of interest in job, job expired, etc)"></textarea>
               </mat-form-field>
             </form>
           </div>
 
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="onComplete(post.id) && modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn btn-light" (click)="onComplete(post.id) && modal.dismiss('Cross click')">
               Confirm Completion
             </button>
 
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">
               Cancel
             </button>
           </div>
@@ -854,12 +662,8 @@
         <ng-template #rejectContent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Rejection Confirmation</h4>
-            <button
-              type="button"
-              class="submit"
-              aria-label="reject content modal window"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="submit" aria-label="reject content modal window"
+              (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -871,31 +675,18 @@
 
               <mat-form-field appearance="outline">
                 <mat-label>Reason for rejecting post <i>(Optional)</i></mat-label>
-                <textarea
-                  matInput
-                  type="text"
-                  [formControl]="rejectReasonControl"
-                  rows="10"
-                  placeholder="Please record down the reason for rejecting this approved post."
-                ></textarea>
+                <textarea matInput type="text" [formControl]="rejectReasonControl" rows="10"
+                  placeholder="Please record down the reason for rejecting this approved post."></textarea>
               </mat-form-field>
             </form>
           </div>
 
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="onReject(post.id) && modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn btn-light" (click)="onReject(post.id) && modal.dismiss('Cross click')">
               Confirm Rejection
             </button>
 
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">
               Cancel
             </button>
           </div>
@@ -909,12 +700,12 @@
 
       <mat-spinner *ngIf="hasApproved === null"></mat-spinner>
 
-  </div>
+    </div>
 
 
 
 
-  <!--
+    <!--
   <footer class="footer-container">
     <p class="copyright">
       &copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong.
@@ -925,4 +716,4 @@
   </footer>
   -->
 
-</div>
+  </div>

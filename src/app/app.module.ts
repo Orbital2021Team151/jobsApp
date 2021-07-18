@@ -69,7 +69,8 @@ import { HighlightContentComponent1 } from './highlight-content/highlight-conten
 import { HighlightContentComponent2 } from './highlight-content/highlight-content-2/highlight-content-2.component';
 import { HighlightContentComponent3 } from './highlight-content/highlight-content-3/highlight-content-3.component';
 import { ExpiredSessionPage } from './errors/expired-session-error-page/expired-session-error-page.component';
-import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -139,7 +140,8 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
     ReactiveFormsModule,
     MatSidenavModule,
     MatListModule,
-    PasswordStrengthMeterModule,
+    MatPasswordStrengthModule,
+    MatTooltipModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

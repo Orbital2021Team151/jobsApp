@@ -86,9 +86,7 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save @angular/flex-layout
 
-* npm install --save zxcvbn3
-
-* npm install --save angular-password-strength-meter
+* npm install --save @angular-material-extensions/password-strength
 
 
 ## Acknowledgments

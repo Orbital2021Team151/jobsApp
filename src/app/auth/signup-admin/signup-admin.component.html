@@ -66,8 +66,12 @@
         <mat-error *ngIf="passwordInput.invalid"
           >Please enter a valid password.</mat-error
         >
+        
+        <mat-hint> Password Strength </mat-hint>
       </mat-form-field>
-      <password-strength-meter [password]="passwordControl.value"></password-strength-meter>
+      <mat-password-strength [password]="passwordInput.value">
+      </mat-password-strength>
+      
 
       <mat-form-field appearance="outline">
         <mat-label>User Role</mat-label>

@@ -261,13 +261,33 @@ export class AuthService {
 
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
+    this.router.navigate(['/']);
+  }
+
+  expiredSession() {
+    this.token = null;
+    this.isAuthenticated = false;
+
+    this.authStatusListener.next({
+      auth: false,
+      email: null,
+      role: null,
+      orgName: null,
+      uen: null,
+      beneficiaries: null,
+      verified: null,
+    });
+
+    clearTimeout(this.tokenTimer);
+    this.clearAuthData();
     this.router.navigate(['/expiredSession']);
   }
 
   private setAuthTimer(duration: number) {
     console.log("Setting timer" + duration);
     this.tokenTimer = setTimeout(() => {
-      this.logout();
+      //this.logout();
+      this.expiredSession();
     }, duration * 1000);
   }
 
