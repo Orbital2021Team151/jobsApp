@@ -19,6 +19,16 @@ body {
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
+.col-md-5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.col-md-5 img {
+}
+
 ngb-carousel {
   margin-top: 2rem;
 }
@@ -31,6 +41,8 @@ ngb-carousel {
 /* Carousel base class */
 .carousel {
   margin-bottom: 4rem;
+  height: 20rem;
+  width: 100%;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
