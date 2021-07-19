@@ -538,6 +538,7 @@
             <mat-label>POC's name</mat-label>
             <input
               matInput
+              class="form-input"
               type="text"
               name="POC"
               required
@@ -553,6 +554,7 @@
             <mat-label>POC's Contact Number</mat-label>
             <input
               matInput
+              class="form-input"
               type="number"
               name="phoneNumber"
               required
@@ -567,8 +569,8 @@
           </mat-form-field>
         </form>
 
-        <div>
-          <button mat-stroked-button color="primary" matStepperNext>Next</button>
+        <div class="step-footer">
+          <button mat-raised-button color="primary" matStepperNext class="nav-button">Next</button>
         </div>
       </mat-step>
 
@@ -580,6 +582,7 @@
             <mat-label>Volunteer Opportunity Title</mat-label>
             <input
               matInput
+              class="form-input"
               type="text"
               name="title"
               [formControl]="titleControl"
@@ -595,6 +598,7 @@
             <mat-label>Volunteer Opportunity Description (minimum 100 characters)</mat-label>
             <textarea
               matInput
+              class="form-input"
               name="content"
               rows="10"
               required
@@ -645,7 +649,7 @@
           </mat-form-field>
 
           <div>
-            <button mat-stroked-button type="button" (click)="filePicker.click()">Upload an image <i>(Optional)</i></button>
+            <button mat-stroked-button type="button" (click)="filePicker.click()" class="image-upload-button">Upload an image <i>(Optional)</i></button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
           </div>
 
@@ -655,9 +659,9 @@
 
         </form>
 
-        <div>
-          <button mat-stroked-button color="accent" matStepperPrevious>Back</button>
-          <button mat-stroked-button color="primary" matStepperNext>Next</button>
+        <div class="step-footer">
+          <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
+          <button mat-raised-button color="primary" matStepperNext class="nav-button">Next</button>
         </div>
 
       </mat-step>
@@ -701,6 +705,7 @@
             <mat-label>Choose a start date</mat-label>
             <input
             matInput
+            class="form-input"
             [matDatepicker]="startDatePicker"
             placeholder="MM/DD/YYYY"
             [formControl]="startDateControl"
@@ -716,7 +721,9 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Choose an end date</mat-label>
-            <input matInput
+            <input
+            matInput
+            class="form-input"
             [matDatepicker]="endDatePicker"
             placeholder="MM/DD/YYYY"
             [formControl]="endDateControl"
@@ -737,6 +744,7 @@
             <mat-label>Commitment Information</mat-label>
             <input
               matInput
+              class="form-input"
               type="text"
               name="hoursRequired"
               required
@@ -766,9 +774,9 @@
 
         </form>
 
-        <div>
-          <button mat-stroked-button color="accent" matStepperPrevious>Back</button>
-          <button mat-stroked-button color="primary" matStepperNext (click)="generatePreview()">Next</button>
+        <div class="step-footer">
+          <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
+          <button mat-raised-button color="primary" matStepperNext (click)="generatePreview()" class="nav-button">Next</button>
         </div>
       </mat-step>
 
@@ -812,63 +820,122 @@
                 </mat-card-content>
                 <mat-card-footer class="post-card-footer">
                   <button
-                    mat-button
+                    mat-icon-button
                     color="primary"
-                    class="post-card-footer-button"
+                    aria-label="Learn More"
                     (click)="onMoreInfo(content)"
                   >
-                    Learn More
+                  <mat-icon color="primary">help_outline</mat-icon>
                   </button>
                 </mat-card-footer>
               </mat-card>
             </section>
 
             <ng-template #content let-modal>
-              <div class="modal-header">
-                <h4 class="modal-title">{{ postPreview.title }}</h4>
-                <button
-                  type="button"
-                  class="btn-close"
-                  aria-label="Close"
-                  (click)="modal.dismiss('Cross click')"
-                >
-                </button>
+
+              <!-- This example requires Tailwind CSS v2.0+ -->
+              <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+
+                <div class="px-4 py-3 sm:px-6">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    {{ postPreview.title }}
+                  </h3>
+
+                  <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                    by <i>{{ postPreview.orgName }}</i>
+                  </p>
+
+                </div>
+
+                <div class="border-t border-gray-200">
+                  <dl>
+
+                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        About
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <p>{{ postPreview.content }}</p>
+                      </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Point-Of-Contact's Name
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ postPreview.POC }}
+                      </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Email Address
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ postPreview.email }}
+                      </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Preferred Skillset
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ postPreview.skills }}
+                      </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Beneficiaries
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ postPreview.beneficiaries }}
+                      </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Duration
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ postPreview.startDate | date }} to {{ postPreview.endDate | date }}
+                      </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Commitment Information
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ postPreview.hoursRequired }}
+                      </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Location
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ postPreview.location || "Not Specified" }}
+                      </dd>
+                    </div>
+
+                  </dl>
+                </div>
               </div>
-              <div class="modal-body">
-                <p>
-                  Organization Name: {{ postPreview.orgName }}<br />
-                  UEN: {{ postPreview.uen }}<br />
-                  Point of Contact (POC): {{ postPreview.POC }}<br />
-                  POC's phoneNumber: {{ postPreview.phoneNumber }}<br />
-                  POC's email: {{ postPreview.email }}<br />
-                  Brief Description for gig: {{ postPreview.content }}<br />
-                  Frequency/Type of volunteer opportunity: {{ postPreview.opportunity }}<br />
-                  Preferred Skills: {{ postPreview.skills }}<br />
-                  Start Date: {{ postPreview.startDate | date }}<br />
-                  End Date: {{ postPreview.endDate | date }}<br />
-                  Commitment Hours: {{ postPreview.hoursRequired }}<br />
-                  Beneficiaries: {{ postPreview.beneficiaries }}
-                </p>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-light"
-                  (click)="modal.close('Close click')"
-                >
-                  Close
-                </button>
-              </div>
+
             </ng-template>
 
           </ng-container>
 
         </div>
 
-        <div>
-          <button mat-stroked-button color="accent" matStepperPrevious>Back</button>
-          <button mat-stroked-button color="warn" (click)="stepper.reset()">Reset</button>
-          <button mat-stroked-button color="primary" matStepperNext>Next</button>
+        <div class="step-footer">
+          <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
+          <button mat-raised-button color="warn" (click)="stepper.reset()" class="nav-button">Reset</button>
+          <button mat-raised-button color="primary" matStepperNext class="nav-button">Next</button>
         </div>
       </mat-step>
 
@@ -876,17 +943,17 @@
       <mat-step label="Terms and Conditions">
 
         <div
-        class="modal-header">
-          <h4 class="modal-title">Terms and Conditions</h4>
+        class="toc-header">
+          <h4>Terms and Conditions</h4>
         </div>
         <div
-        class="modal-body">
+        class="toc-body">
           <p>Terms and Conditions of Use</p>
 
           <br />
           <p>1. Agreement to Terms</p>
           <p>
-            All access of any area of INSERT URL HERE ONCE DONE ("The Website") is
+            All access of any area of <a href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/" target="_blank">CCSGP Jobs Portal</a> ("The Website") is
             governed by the terms and conditions below ("Terms"). If you do not accept
             any of these Terms, exit immediately. Continue only if you accept these
             Terms. In these Terms, the words "we", "our" and "us" refers to the
@@ -1020,7 +1087,7 @@
         </div>
         -->
 
-        <div class="modal-footer">
+        <div class="toc-footer">
 
           <mat-checkbox ngModel name="checkbox" #checkbox="ngModel" required>
             I have read the above Terms and Conditions.
@@ -1030,9 +1097,9 @@
           </mat-error>
         </div>
 
-        <div>
-          <button mat-stroked-button color="accent" matStepperPrevious>Back</button>
-          <button mat-stroked-button color="primary" (click)="checkbox.valid && onAddPostReactive() && openDialog()">Submit</button>
+        <div class="step-footer">
+          <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
+          <button mat-raised-button color="primary" (click)="checkbox.valid && onAddPostReactive() && openDialog()" class="nav-button">Submit</button>
         </div>
       </mat-step>
 
@@ -1041,18 +1108,13 @@
 </div>
 
 
-
+<!--
 <footer class="container-footer">
-  <!--
-  <p class="float-end"><a href="#">Back to top</a></p>
-  -->
   <p class="copyright">
     &copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong.
     <br />
     In conjuction with the Centre for Computing for Social Good and Philanthropy
     (CCSGP), NUS.
-    <!--
-    <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
-    -->
   </p>
 </footer>
+-->

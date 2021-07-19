@@ -9,13 +9,14 @@
       <mat-form-field appearance="outline">
         <mat-label>Student / Organisation Name</mat-label>
         <input
+          class="form-input"
           matInput
           type="orgName"
           name="orgName"
           ngModel
           required
           #orgNameInput="ngModel"
-          placeholder="Enter Student / Organisation's name Here"
+          placeholder="eg Standard Oil Co."
         />
         <mat-error *ngIf="orgNameInput.invalid"
           >Please enter your name / your organisation's name.</mat-error
@@ -26,12 +27,13 @@
         <mat-label>Email Address</mat-label>
         <input
           matInput
+          class="form-input"
           type="email"
           name="email"
           ngModel
           required
           #emailInput="ngModel"
-          placeholder="Enter your Email Address"
+          placeholder="eg jeff@amazon.com"
           email
         />
         <mat-error *ngIf="emailInput.invalid"
@@ -43,6 +45,7 @@
         <mat-label>Password</mat-label>
         <input
           matInput
+          class="form-input"
           [type]="hidePassword ? 'password' : 'text'"
           name="password"
           ngModel
@@ -58,7 +61,9 @@
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hidePassword"
         >
-          <mat-icon>{{
+          <mat-icon
+            class="password-visibility-icon-button"
+          >{{
             hidePassword ? "visibility_off" : "visibility"
           }}</mat-icon>
         </button>
@@ -66,14 +71,14 @@
         <mat-error *ngIf="passwordInput.invalid"
           >Please enter a valid password.</mat-error
         >
-        
+
         <mat-hint> Password Strength </mat-hint>
       </mat-form-field>
       <mat-password-strength [password]="passwordInput.value">
       </mat-password-strength>
-      
 
-      <mat-form-field appearance="outline">
+
+      <mat-form-field appearance="outline" class="field-user-role">
         <mat-label>User Role</mat-label>
         <mat-select ngModel required #roleInput="ngModel" name="role">
           <mat-option>--</mat-option>
@@ -90,12 +95,13 @@
         <mat-label>Unique Entity Number (UEN)</mat-label>
         <input
           matInput
+          class="form-input"
           type="uen"
           name="uen"
           ngModel
           required
           #uenInput="ngModel"
-          placeholder="eg UEN1234567. If you are a Student Organisation, just put NA"
+          placeholder="eg UEN-1234567"
         />
         <mat-error *ngIf="uenInput.invalid"
           >Please enter a valid Unique Entity Number (UEN).</mat-error
@@ -128,14 +134,10 @@
   </mat-card>
 </div>
 
+<!--
 <footer class="container">
-  <!--
-  <p class="float-end"><a href="#">Back to top</a></p>
-  -->
   <p class="copyright">&copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong. <br>
     In conjuction with the Centre for Computing for Social Good and Philanthropy (CCSGP), NUS.
-    <!--
-    <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
-    -->
   </p>
 </footer>
+-->

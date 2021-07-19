@@ -56,6 +56,24 @@ mat-form-field {
   text-align: center;
 }
 
+/* TERMS AND CONDITIONS
+-------------------------------------------------- */
+.toc-header {
+  color: inherit;
+}
+
+.toc-body {
+  color: inherit;
+  margin: none;
+}
+
+.toc-footer {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 
 /* MODAL WINDOW
 -------------------------------------------------- */
@@ -177,14 +195,11 @@ mat-icon {
 .post-card-footer {
   width: 22rem;
   max-width: 22rem;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   align-items: center;
-  flex: auto;
+  display: flex;
   margin: auto;
-}
-
-.post-card-footer-button {
-  margin: 5px 5px 5px 0;
+  justify-content: space-evenly;
 }
 
 .post-footer {
@@ -197,4 +212,24 @@ mat-icon {
 .post-button {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.mat-input-element:disabled {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.nav-button {
+  margin-left: 1rem;
+}
+
+.step-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.image-upload-button {
+  color: inherit;
+  border-color: #5c8aee;
 }

@@ -140,7 +140,7 @@ button {
   margin: auto;
 }
 
-.change-password-form-input::placeholder {
+.form-input::placeholder {
   color: inherit;
   opacity: 0.5;
 }
@@ -253,6 +253,18 @@ button {
   box-shadow: 0 0 11px #f2545ca6;
 }
 
+
+/* DOWNLOAD CSV
+-------------------------------------------------- */
+.download-csv-footer {
+  font-family: "Lato", sans-serif;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
 /* FOOTER
 -------------------------------------------------- */
 .copyright {
@@ -289,18 +301,18 @@ button {
 
 /* MISCELLANEOUS
 -------------------------------------------------- */
-.download-csv-button {
-  color: #7068e0;
-  border-color: #7068e0;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
 
 .info-text {
   font-family: 'Lato', sans-serif;
   text-align: center;
   color: inherit;
   margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.info-text-header {
+  font-weight: 900;
+  font-size: 1.5rem;
 }
 
 .nav-item {
@@ -330,6 +342,11 @@ button {
   flex-direction: row;
   align-items: center;
   align-content: space-around;
+}
+
+.password-visibility-icon-button {
+  color: #5c8aee;
+  opacity: 0.5;
 }
 
 

@@ -46,3 +46,21 @@ mat-spinner {
   flex-direction: row;
   justify-content: flex-end;
 }
+
+.field-user-role {
+  margin-top: 1.5rem;
+}
+
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+mat-hint {
+  color: inherit;
+}
+
+.password-visibility-icon-button {
+  color: #5c8aee;
+  opacity: 0.5;
+}

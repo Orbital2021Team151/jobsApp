@@ -61,7 +61,7 @@
       <mat-form-field appearance="outline" class="change-password-form-field">
         <input
           matInput
-          class="change-password-form-input"
+          class="form-input"
           [type]="hideCurrentPassword ? 'password' : 'text'"
           ngModel
           name="currentPassword"
@@ -71,13 +71,16 @@
         />
 
         <button
+
           mat-icon-button
           matSuffix
           (click)="hideCurrentPassword = !hideCurrentPassword"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hideCurrentPassword"
         >
-          <mat-icon>{{
+          <mat-icon
+            class="password-visibility-icon-button"
+          >{{
             hideCurrentPassword ? "visibility_off" : "visibility"
           }}</mat-icon>
         </button>
@@ -92,7 +95,7 @@
       <mat-form-field appearance="outline" class="change-password-form-field">
         <input
           matInput
-          class="change-password-form-input"
+          class="form-input"
           [type]="hideNewPassword ? 'password' : 'text'"
           ngModel
           name="newPassword"
@@ -108,7 +111,9 @@
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hideNewPassword"
         >
-          <mat-icon>{{
+          <mat-icon
+            class="password-visibility-icon-button"
+          >{{
             hideNewPassword ? "visibility_off" : "visibility"
           }}</mat-icon>
         </button>
@@ -120,7 +125,7 @@
 
       <mat-card-footer class="change-password-footer">
         <button
-          mat-stroked-button
+          mat-raised-button
           color="primary"
           class="change-password-form-button"
           (click)="onChangePassword(changePasswordForm)"
@@ -238,8 +243,9 @@
         <mat-label>Choose a start date</mat-label>
         <input
           matInput
+          class="form-input"
           [matDatepicker]="startDatePicker"
-          placeholder="Start date"
+          placeholder="MM/DD/YYYY"
           ngModel
           #startDate="ngModel"
           name="startDate"
@@ -255,11 +261,12 @@
         <mat-label>Choose an end date</mat-label>
         <input
           matInput
+          class="form-input"
           [matDatepicker]="endDatePicker"
-          placeholder="End date"
           ngModel
           #endDate="ngModel"
           name="endDate"
+          placeholder="MM/DD/YYYY"
         />
         <mat-datepicker-toggle
           matSuffix
@@ -268,10 +275,11 @@
         <mat-datepicker #endDatePicker></mat-datepicker>
       </mat-form-field>
     </form>
-    <mat-card-footer>
+
+    <mat-card-footer class="download-csv-footer">
       <button
-        mat-stroked-button
-        class="download-csv-button"
+        mat-raised-button
+        color="primary"
         (click)="onDownloadCSV(csvDateFilterForm)"
       >
         Download CSV
@@ -587,9 +595,12 @@
     </ng-template>
   </div>
 
-  <p class="info-text mat-body-1" *ngIf="hasRequest === false && active === 'postsPendingApproval'">
-    <i>No post request!</i>
-  </p>
+  <div class="info-text" *ngIf="hasRequest === false && active === 'postsPendingApproval'">
+    <h1 class="info-text-header">No Post Request</h1>
+    <p>
+      If an organisation sends a request, it will be shown here for your approval!
+    </p>
+  </div>
 
   <mat-spinner *ngIf="hasRequest === null" class="spinner"></mat-spinner>
 
@@ -927,27 +938,26 @@
     </ng-template>
   </div>
 
-  <p class="info-text mat-body-1" *ngIf="hasReport === false && active === 'postsWithReports'">
-    No post with reports! :D
-  </p>
+  <div class="info-text" *ngIf="hasReport === false && active === 'postsWithReports'">
+    <h1 class="info-text-header">No Post With Reports</h1>
+    <p>
+      Don't worry. If a Student / NUS Alumni reports a post, we inform you ASAP via email and you can see it here!
+    </p>
+  </div>
+
   <mat-spinner *ngIf="hasReport === null"></mat-spinner>
 </div>
 
-
+<!--
 <footer class="container">
-  <!--
-  <p class="float-end"><a href="#">Back to top</a></p>
-  -->
   <p class="copyright">
     &copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong.
     <br />
     In conjuction with the Centre for Computing for Social Good and Philanthropy
     (CCSGP), NUS.
-    <!--
-    <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
-    -->
   </p>
 </footer>
+-->
 
 <ng-template #publishContent let-modal>
   <div class="modal-header">

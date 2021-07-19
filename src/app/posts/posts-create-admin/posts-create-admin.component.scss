@@ -69,19 +69,19 @@ mat-error {
   margin-left: 1rem;
 }
 
-/* MODAL WINDOW
+/* TERMS AND CONDITIONS
 -------------------------------------------------- */
-.modal-header {
-  color: black;
+.toc-header {
+  color: inherit;
 }
 
-.modal-body {
-  color: black;
+.toc-body {
+  color: inherit;
   margin: none;
 }
 
-.modal-footer {
-  color: black;
+.toc-footer {
+  color: inherit;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -213,3 +213,39 @@ mat-icon {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
+
+/* MODAL WINDOW
+-------------------------------------------------- */
+.modal-header {
+  color: black;
+}
+
+.modal-body {
+  color: black;
+  margin: none;
+}
+
+.modal-footer {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+/* MISCELLANEOUS
+-------------------------------------------------- */
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.image-upload-button {
+  color: inherit;
+  border-color: #5c8aee;
+}
+
+.nav-button {
+  margin-left: 1rem;
+}
+

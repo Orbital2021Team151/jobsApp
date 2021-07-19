@@ -49,6 +49,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   opacity: 0.5;
 }
 
+.mat-select-value {
+  color: inherit;
+}
+
 /*
 .mat-form-field-appearance-outline .mat-form-field-label {
   color: #5c8aee;
@@ -102,6 +106,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   opacity: 0.5;
 }
 
+/*
+ * NOT WORKING
+.mat-step-header .mat-step-label-selected  {
+  color: inherit;
+}
+ */
+
 .mat-step-header .mat-step-icon  {
   background-color: #eb6c6c54;
   color: #f8f8ff;
@@ -112,6 +123,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #f8f8ff;
 }
 
+
+.mat-select-arrow {
+  color: #5c8aee;
+  opacity: 0.5;
+}
+
+.mat-datepicker-toggle {
+  color: #5c8aee;
+  opacity: 0.5;
+}
+
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
 
 
 

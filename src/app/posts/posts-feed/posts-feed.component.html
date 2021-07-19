@@ -6,11 +6,11 @@
         <div class="filter-card-title-container">
           <mat-card-title class="filter-card-title"> Filter </mat-card-title>
           <button
-          matTooltip="Clear all fields" 
-          [matTooltipShowDelay]="1000" 
-          [matTooltipHideDelay]="2000" 
+          matTooltip="Clear all fields"
+          [matTooltipShowDelay]="1000"
+          [matTooltipHideDelay]="2000"
           mat-button
-          color="accent" 
+          color="accent"
           (click)="clearFilter()"
           >
             Clear All
@@ -161,7 +161,7 @@
           -->
           <mat-form-field appearance="outline">
             <mat-label>Search for keywords</mat-label>
-            <input matInput type="text" ngModel [(ngModel)]="keywords" placeholder="eg Potong Pasir" />
+            <input matInput type="text" ngModel [(ngModel)]="keywords" class="form-input" placeholder="eg Delivery Person"/>
           </mat-form-field>
 
           <div class="filter-footer">
@@ -182,12 +182,12 @@
             ></p-button>
             -->
 
-            <button 
+            <button
             matTooltip="Filter by the fields you have entered!"
             [matTooltipShowDelay]="1000"
             [matTooltipHideDelay]="2000"
-            mat-button 
-            color="accent" 
+            mat-button
+            color="accent"
             (click)="submitFilter()">
               Filter
             </button>
@@ -281,7 +281,7 @@
               </button>
 
               <button matTooltip="Click for more information" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="2000"
-                mat-icon-button color="primary" aria-label="Learn More" class="post-card-footer-button"
+                mat-icon-button color="primary" aria-label="Learn More"
                 (click)="onMoreInfo(content)">
                 <mat-icon color="primary">help_outline</mat-icon>
               </button>
@@ -715,5 +715,4 @@
     </p>
   </footer>
   -->
-
   </div>

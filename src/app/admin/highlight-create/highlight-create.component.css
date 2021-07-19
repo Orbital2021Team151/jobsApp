@@ -51,8 +51,8 @@ input[type="file"] {
 }
 
 .highlight-create-button-image {
-  color: #7068e0;
-  border-color: #7068e0;
+  color: inherit;
+  border-color: #5c8aee;
 }
 
 mat-card {

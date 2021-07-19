@@ -287,6 +287,11 @@ mat-form-field {
   color: #00b167;
 }
 
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
 @media only screen and (max-device-width: 1125px) {
 
   .page-container {

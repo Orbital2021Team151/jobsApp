@@ -7,11 +7,12 @@
         <mat-label> Highlight's Title </mat-label>
         <input
           matInput
+          class="form-input"
           type="text"
           name="title"
           required
           [formControl]="titleControl"
-          placeholder="Title"
+          placeholder="Please provide the title of the featured story."
         />
         <mat-error *ngIf="titleControl.errors?.required">
           Please enter a title for the highlight.
@@ -22,11 +23,12 @@
         <mat-label> Highlight's Summary </mat-label>
         <input
           matInput
+          class="form-input"
           type="text"
           name="summary"
           required
           [formControl]="summaryControl"
-          placeholder="A quick summary of the highlight"
+          placeholder="Please give us a summary of the story."
         />
         <mat-error *ngIf="summaryControl.errors?.required">
           Please enter a summary for the highlight.
@@ -35,14 +37,16 @@
 
       <mat-form-field appearance="outline">
         <mat-label> Content </mat-label>
-        <input
+        <textarea
           matInput
+          class="form-input"
           type="text"
           name="content"
+          rows="10"
           required
           [formControl]="contentControl"
-          placeholder="Content"
-        />
+          placeholder="Please input the highlight story here!"
+        ></textarea>
         <mat-error *ngIf="contentControl.errors?.required">
           Please enter some content for the highlight.
         </mat-error>
@@ -56,7 +60,7 @@
           type="button"
           class="highlight-create-button-image"
           (click)="filePicker.click()">
-            Upload an image
+            Upload Story Image <i>(Required)</i>
           </button>
           <input type="file" #filePicker (change)="onImagePicked($event)" />
         </div>
@@ -74,8 +78,8 @@
 
     <div class="highlight-create-button">
       <button
-        mat-stroked-button
-        class="highlight-create-button-submit"
+        mat-raised-button
+        color="primary"
         type="button"
         (click)="publishHighlight()"
       >
