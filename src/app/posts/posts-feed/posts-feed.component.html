@@ -206,6 +206,7 @@
       <ng-container *ngFor="let post of filteredPosts">
         <section class="cards">
           <mat-card class="published-post-card">
+
             <img *ngIf="!post.imagePath" mat-card-image class="card-image"
               src="../../../assets/dark-background-placeholder.png" alt="Placeholder image for post" />
 
@@ -223,6 +224,7 @@
               <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
               <br />
             </mat-card-content>
+
             <mat-card-footer class="post-card-footer">
 
               <button matTooltip="Report this post!" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="2000"

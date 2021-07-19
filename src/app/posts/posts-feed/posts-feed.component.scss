@@ -152,13 +152,13 @@ mat-spinner {
 .post-card-title {
   font-family: "Lato", sans-serif;
   text-overflow: ellipsis;
+  overflow: hidden;
 
   height: 1.7rem;
   text-align: center;
-  /*
+
   display: block;
   white-space: nowrap;
-  */
   overflow: hidden;
 
   font-size: 1.5rem;
@@ -171,10 +171,8 @@ mat-spinner {
 
   height: 2rem;
 
-  /*
   display: block;
   white-space: nowrap;
-  */
   overflow: hidden;
 
   color: rgb(88, 88, 88);
@@ -190,13 +188,11 @@ mat-icon {
   text-overflow: ellipsis;
   height: 8rem;
 
-  /*
   display: block;
   white-space: nowrap;
-  */
+  text-align: center;
   overflow: hidden;
   color: #777777;
-  text-align: center;
 }
 
 .post-card-footer {
