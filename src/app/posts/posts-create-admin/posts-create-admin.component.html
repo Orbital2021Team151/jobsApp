@@ -175,7 +175,8 @@
           </mat-form-field>
 
           <div>
-            <button mat-stroked-button type="button" (click)="filePicker.click()" class="image-upload-button">Upload an image <i>(Optional)</i></button>
+            <button *ngIf="!imagePreview" mat-stroked-button type="button" (click)="filePicker.click()" class="image-upload-button">Upload an image <i>(Optional)</i></button>
+            <button *ngIf="imagePreview" mat-stroked-button type="button" (click)="removeImage()" class="image-upload-button">Remove Image</button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
           </div>
 

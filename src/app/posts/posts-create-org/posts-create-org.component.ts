@@ -488,4 +488,9 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
       this.imagePreview = null;
     }
   }
+
+  removeImage() {
+    this.imagePreview = null;
+    this.postInformationGroup.patchValue({ image: null });
+  }
 }
