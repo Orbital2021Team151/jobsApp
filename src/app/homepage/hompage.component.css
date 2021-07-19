@@ -19,14 +19,13 @@ body {
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
+
+
 .col-md-5 {
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-}
-
-.col-md-5 img {
 }
 
 ngb-carousel {
@@ -48,11 +47,18 @@ ngb-carousel {
 .carousel-caption {
   bottom: 3rem;
   z-index: 10;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  /* transform: translateY(-50%); */
 }
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
   height: 32rem;
+  top: 50%;
+  /* transform: translateY(-50%); */
 }
 /*
 .carousel-item > img {
@@ -65,9 +71,16 @@ ngb-carousel {
 */
 
 .carousel-card {
-
   margin-left: 15rem;
   margin-right: 15rem;
+}
+
+.wrapper-div {
+  height: 20rem;
+  position: relative;
+  top: 25%;
+  /* -ms-transform: translateY(-50%); */
+  /* transform: translateY(-50%); */
 }
 
 .carousel-heading {

@@ -5,15 +5,8 @@
     <form [formGroup]="form" #highlightForm="ngForm">
       <mat-form-field appearance="outline">
         <mat-label> Highlight's Title </mat-label>
-        <input
-          matInput
-          class="form-input"
-          type="text"
-          name="title"
-          required
-          [formControl]="titleControl"
-          placeholder="Please provide the title of the featured story."
-        />
+        <input matInput class="form-input" type="text" name="title" required [formControl]="titleControl"
+          placeholder="Please provide the title of the featured story." />
         <mat-error *ngIf="titleControl.errors?.required">
           Please enter a title for the highlight.
         </mat-error>
@@ -21,15 +14,8 @@
 
       <mat-form-field appearance="outline">
         <mat-label> Highlight's Summary </mat-label>
-        <input
-          matInput
-          class="form-input"
-          type="text"
-          name="summary"
-          required
-          [formControl]="summaryControl"
-          placeholder="Please give us a summary of the story."
-        />
+        <input matInput class="form-input" type="text" name="summary" required [formControl]="summaryControl"
+          placeholder="Please give us a summary of the story." />
         <mat-error *ngIf="summaryControl.errors?.required">
           Please enter a summary for the highlight.
         </mat-error>
@@ -37,16 +23,8 @@
 
       <mat-form-field appearance="outline">
         <mat-label> Content </mat-label>
-        <textarea
-          matInput
-          class="form-input"
-          type="text"
-          name="content"
-          rows="10"
-          required
-          [formControl]="contentControl"
-          placeholder="Please input the highlight story here!"
-        ></textarea>
+        <textarea matInput class="form-input" type="text" name="content" rows="10" required
+          [formControl]="contentControl" placeholder="Please input the highlight story here!"></textarea>
         <mat-error *ngIf="contentControl.errors?.required">
           Please enter some content for the highlight.
         </mat-error>
@@ -55,11 +33,7 @@
       <footer class="highlight-create-footer">
 
         <div>
-          <button
-          mat-stroked-button
-          type="button"
-          class="highlight-create-button-image"
-          (click)="filePicker.click()">
+          <button mat-stroked-button type="button" class="highlight-create-button-image" (click)="filePicker.click()">
             Upload Story Image <i>(Required)</i>
           </button>
           <input type="file" #filePicker (change)="onImagePicked($event)" />
@@ -67,25 +41,23 @@
 
       </footer>
 
-      <div
-        class="image-preview"
-        *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
-      >
+      <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
         <img [src]="imagePreview" [alt]="form.value.titleControl" />
       </div>
 
     </form>
 
     <div class="highlight-create-button">
-      <button
-        mat-raised-button
-        color="primary"
-        type="button"
-        (click)="publishHighlight()"
-      >
+      <button mat-raised-button color="primary" type="button" (click)="publishHighlight()">
         Submit
       </button>
     </div>
+
+    <!-- <div *ngIf="submitted" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Highlight Created!</strong>
+      <button (click)="closeNotification()" type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+      </button>
+    </div> -->
 
   </mat-card>
 </div>

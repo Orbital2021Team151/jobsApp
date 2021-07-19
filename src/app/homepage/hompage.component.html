@@ -38,30 +38,32 @@
           <ng-template ngbSlide *ngFor="let highlight of highlights">
             <div class="row carousel-card">
               <div class="col-md-7">
-                <h2 class="carousel-heading"><u>{{ highlight.title }}</u></h2>
-                <p class="lead">
-                  {{ highlight.summary }}
-                </p>
-                <!-- <p>
-                  {{ highlight.id }}
-                </p> -->
+                <div class="wrapper-div">
+                  <h2 class="carousel-heading"><u>{{ highlight.title }}</u></h2>
+                  <p class="lead">
+                    {{ highlight.summary }}
+                  </p>
+                  <!-- <p>
+                    {{ highlight.id }}
+                  </p> -->
 
-                <button
-                mat-raised-button
-                class="carousel-read-more-button"
-                (click)="openContent(highlight.id)"
-                >
-                Read More (In Development)
-                </button>
+                  <button
+                  mat-raised-button
+                  class="carousel-read-more-button"
+                  (click)="openContent(highlight.id)"
+                  >
+                  Read More (In Development)
+                  </button>
 
-                <button
-                mat-raised-button
-                class="carousel-read-more-button"
-                (click)="deleteHighlight(highlight.id)"
-                *ngIf="isAuth"
-                >
-                Delete
-                </button>
+                  <button
+                  mat-raised-button
+                  class="carousel-read-more-button"
+                  (click)="deleteHighlight(highlight.id)"
+                  *ngIf="isAuth"
+                  >
+                  Delete
+                  </button>
+                </div>
               </div>
 
               <div class="col-md-5">

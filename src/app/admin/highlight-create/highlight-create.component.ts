@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
 import { AuthService } from "src/app/auth/auth.service";
+import { FieldsNotCompleteDialog } from "src/app/dialogs/fields-not-complete-dialog/fields-not-complete-dialog.component";
+import { HighlightSubmittedDialog } from "src/app/dialogs/highlight-submitted-dialog/highlight-submitted-dialog.component";
 import { Highlight } from "../highlight.model";
 import { HighlightService } from "../highlight.service";
 
@@ -15,6 +19,7 @@ import { HighlightService } from "../highlight.service";
 export class HighlightCreateComponent implements OnInit, OnDestroy {
 
   public imagePreview: string;
+  public submitted: boolean = false;
 
   public form: FormGroup;
   public titleControl = new FormControl(null, [Validators.required]);
@@ -26,6 +31,8 @@ export class HighlightCreateComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private authService: AuthService,
     private highlightService: HighlightService,
+    private dialog: MatDialog,
+    private router: Router,
   ) {
     this.form = new FormGroup({
       title: this.titleControl,
@@ -55,6 +62,7 @@ export class HighlightCreateComponent implements OnInit, OnDestroy {
 
   publishHighlight() {
     if (this.form.invalid) {
+      this.dialog.open(FieldsNotCompleteDialog);
       return;
     }
 
@@ -74,6 +82,16 @@ export class HighlightCreateComponent implements OnInit, OnDestroy {
     this.form.reset();
     this.modalService.dismissAll();
     this.imagePreview = '';
+    this.submitted = true;
+    this.dialog.open(HighlightSubmittedDialog);
+    setTimeout(() => {
+      this.router.navigate(['/'])
+    }
+    , 3000);
+  }
+
+  closeNotification() {
+    this.submitted = false;
   }
 
   onImagePicked(event: Event) {

@@ -71,6 +71,8 @@ import { HighlightContentComponent3 } from './highlight-content/highlight-conten
 import { ExpiredSessionPage } from './errors/expired-session-error-page/expired-session-error-page.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FieldsNotCompleteDialog } from './dialogs/fields-not-complete-dialog/fields-not-complete-dialog.component';
+import { HighlightSubmittedDialog } from './dialogs/highlight-submitted-dialog/highlight-submitted-dialog.component';
 
 
 @NgModule({
@@ -107,6 +109,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     HighlightContentComponent2,
     HighlightContentComponent3,
     ExpiredSessionPage,
+    FieldsNotCompleteDialog,
+    HighlightSubmittedDialog,
   ],
 
   imports: [

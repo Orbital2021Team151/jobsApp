@@ -1,0 +1,32 @@
+img {
+    margin: auto;
+    display: block;
+    margin-top: 10%;
+}
+
+.text {
+    position: relative;
+    width: 50%;
+    left: 20%;
+    text-align: justify;
+}
+
+.title {
+    font-family: 'Raleway';
+    font-size: xx-large;
+    margin-top: 10%;
+}
+
+.content {
+    font-family: 'Raleway';
+    font-size: large;
+}
+
+button {
+    left: 20%;
+}
+
+.everything {
+    display: block;
+    margin: 0 auto;
+}
