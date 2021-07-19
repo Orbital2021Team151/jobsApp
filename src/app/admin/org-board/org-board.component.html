@@ -644,15 +644,20 @@
         <mat-footer class="post-card-footer">
 
           <button
+          matTooltip="Remove Post / Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
           mat-icon-button
-          aria-label="Mark as Done"
+          color="primary"
+          aria-label="Remove Post / Mark as Completed"
             (click)="onCompletePrompt(completeContent)"
           >
             <mat-icon class="mark-as-done-button">check_circle_outline</mat-icon>
           </button>
 
           <button
+          matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
           mat-icon-button
+          color="primary"
+          aria-label="Learn More"
           (click)="onMoreInfo(content)">
           <mat-icon
           color="primary">
