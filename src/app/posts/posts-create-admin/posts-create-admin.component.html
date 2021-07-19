@@ -262,7 +262,7 @@
           </mat-form-field>
 
           <mat-error *ngIf="(startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value)">
-            Your start date cannot be later than the end date! If so, your post will be rejected!
+            You cannot proceed if the start date is be later than the end date!
           </mat-error>
 
           <mat-form-field appearance="outline">
@@ -301,7 +301,25 @@
 
         <div class="step-footer">
           <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
-          <button mat-raised-button color="primary" matStepperNext (click)="generatePreview()" class="nav-button">Next</button>
+
+
+          <button
+          mat-raised-button
+          disabled
+          matStepperNext
+          class="nav-button"
+          *ngIf="(startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value)"
+          >Next</button>
+
+          <button
+          mat-raised-button
+          color="primary"
+          matStepperNext
+          (click)="generatePreview()"
+          class="nav-button"
+          *ngIf="! ((startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value))"
+          >Next</button>
+
         </div>
       </mat-step>
 
