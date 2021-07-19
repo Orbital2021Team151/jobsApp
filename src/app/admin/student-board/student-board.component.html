@@ -23,7 +23,7 @@
               >
                 <input
                   matInput
-                  class="change-password-form-input"
+                  class="form-input"
                   [type]="hideCurrentPassword ? 'password' : 'text'"
                   ngModel
                   name="currentPassword"
@@ -39,7 +39,7 @@
                   [attr.aria-label]="'Hide password'"
                   [attr.aria-pressed]="hideCurrentPassword"
                 >
-                  <mat-icon>{{
+                  <mat-icon class="password-visibility-icon-button">{{
                     hideCurrentPassword ? "visibility_off" : "visibility"
                   }}</mat-icon>
                 </button>
@@ -55,7 +55,7 @@
               >
                 <input
                   matInput
-                  class="change-password-form-input"
+                  class="form-input"
                   [type]="hideNewPassword ? 'password' : 'text'"
                   ngModel
                   name="newPassword"
@@ -71,7 +71,7 @@
                   [attr.aria-label]="'Hide password'"
                   [attr.aria-pressed]="hideNewPassword"
                 >
-                  <mat-icon>{{
+                  <mat-icon class="password-visibility-icon-button">{{
                     hideNewPassword ? "visibility_off" : "visibility"
                   }}</mat-icon>
                 </button>
@@ -82,7 +82,8 @@
               </mat-form-field>
 
               <button
-                class="btn btn-outline-primary mb-2 mr-2"
+                mat-raised-button
+                color="primary"
                 (click)="onChangePassword(changePasswordForm)"
               >
                 Change Password

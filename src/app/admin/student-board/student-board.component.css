@@ -96,53 +96,94 @@ button {
 /* CHANGE PASSWORD
 -------------------------------------------------- */
 .change-password-card {
+  /* margin: auto;
+  width: 50%;
+
+  float: left;
+  padding: 20px;
+  border: 2px solid red;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+
+  */
+  width: 40%;
   margin: auto;
-  width: 100%;
-  padding: 10px;
+  background-color: inherit;
+  color: inherit;
 }
 
 .change-password-title {
+  font-family: "Lato", sans-serif;
   text-align: center;
 }
 
 .change-password-body {
+  font-family: "Lato", sans-serif;
   width: 100%;
-  margin: auto;
   padding: 10px;
   text-align: center;
+
+  box-shadow: none;
+  background-color: inherit;
+  color: inherit;
+
+  /*
 
   border-style: solid;
   border-width: thin;
   border-color: #4da8da;
   box-shadow: none;
+
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  */
 }
 
 .change-password-form-input {
+  font-family: "Lato", sans-serif;
   margin-left: 1rem;
   margin-right: 1rem;
   margin: auto;
+}
+
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
 }
 
 .change-password-form-field {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  font-family: "Lato", sans-serif;
   width: 100%;
   margin: auto;
+
 }
 
 .change-password-button {
-  margin: 0 auto;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  font-family: "Lato", sans-serif;
 }
 
 .change-password-footer {
-  text-align: center;
-  width: 100%;
-  flex: auto
+  font-family: "Lato", sans-serif;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .alert {
+  font-family: "Lato", sans-serif;
   padding: 20px;
   background-color: #94f1a2 !important;
   color: white;
@@ -305,6 +346,11 @@ button {
   text-align: center;
   color: inherit;
   margin-top: 5rem;
+}
+
+.password-visibility-icon-button {
+  color: #5c8aee;
+  opacity: 0.5;
 }
 
 /* SMALL SCREEN SIZE //TODO: NOT DONE YET
