@@ -327,6 +327,7 @@
 
         <mat-card-footer class="post-card-footer">
           <button
+            matTooltip="Click to publish request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             aria-label="Publish"
             (click)="onPublish(post.id, publishContent)"
@@ -336,6 +337,7 @@
 
 
           <button
+            matTooltip="Click to delete request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             color="warn"
             aria-label="Delete Forever"
@@ -345,6 +347,7 @@
           </button>
 
           <button
+            matTooltip="Click to reject request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             color="warn"
             aria-label="Reject"
@@ -354,6 +357,7 @@
           </button>
 
           <button
+            matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             color="primary"
             aria-label="Learn More"
@@ -645,6 +649,7 @@
         <mat-footer class="post-card-footer">
 
           <button
+            matTooltip="Click to read reports" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             color="accent"
             aria-label="Read Report"
@@ -664,6 +669,7 @@
             -->
 
           <button
+            matTooltip="Click to reject request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             color="warn"
             aria-label="Reject"
@@ -673,6 +679,7 @@
           </button>
 
           <button
+            matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             color="primary"
             aria-label="Learn More"
@@ -914,6 +921,15 @@
 
       <div class="modal-body">
         <p>Are you sure you want to reject the post?</p>
+
+        <form [formGroup]="rejectForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Reason for rejecting post <i>(Optional)</i></mat-label>
+            <textarea matInput type="text" [formControl]="rejectReasonControl" rows="10"
+              placeholder="Please record down the reason for rejecting this approved post."></textarea>
+          </mat-form-field>
+        </form>
+
       </div>
 
       <div class="modal-footer">

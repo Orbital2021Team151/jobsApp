@@ -352,11 +352,12 @@
         <mat-footer class="post-card-footer">
 
           <button
-          mat-raised-button
-          class="application-post-card-button-view-applicants"
-            (click)="onMoreInfo(applicantContent)"
+          matTooltip="Click to view applicants" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+          mat-icon-button
+          aria-label="View Applicants"
+          (click)="onMoreInfo(applicantContent)"
           >
-            View Applicants
+            <mat-icon class="application-post-card-button-view-applicants">person_search</mat-icon>
           </button>
 
           <!--
@@ -370,6 +371,7 @@
           -->
 
           <button
+          matTooltip="Click to remove / Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
           mat-icon-button
           aria-label="Mark as Done"
             (click)="onCompletePrompt(completeContentWithApplicants)"
@@ -378,11 +380,16 @@
           </button>
 
           <button
-          mat-button
+          matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+          mat-icon-button
           color="primary"
+          aria-label="Learn More"
           (click)="onMoreInfo(content)"
           >
-            Learn More
+          <mat-icon
+          color="primary">
+            help_outline
+          </mat-icon>
           </button>
         </mat-footer>
       </mat-card>

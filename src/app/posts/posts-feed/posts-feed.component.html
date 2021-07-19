@@ -227,7 +227,7 @@
 
             <mat-card-footer class="post-card-footer">
 
-              <button matTooltip="Report this post!" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="2000"
+              <button matTooltip="Report this post!" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
                 mat-icon-button class="post-card-footer-button" color="warn" aria-label="Report" *ngIf="
                   (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
                   !reportBefore(post)
@@ -240,7 +240,7 @@
                 <mat-icon>feedback</mat-icon>
               </button>
 
-              <button matTooltip="Apply to this post!" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="2000"
+              <button matTooltip="Apply to this post!" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
                 mat-icon-button aria-label="Apply" *ngIf="
                   (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
                   !applyBefore(post)
@@ -271,18 +271,20 @@
               </button>
               -->
 
-              <button mat-icon-button color="warn" aria-label="Reject" class="post-card-footer-button"
+              <button matTooltip="Reject Job Listing" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+              mat-icon-button color="warn" aria-label="Reject" class="post-card-footer-button"
                 *ngIf=" userRole === 'Admin'" (click)="onRejectPrompt(rejectContent)">
                 <mat-icon color="warn">block</mat-icon>
               </button>
 
-              <button mat-icon-button class="post-card-footer-button-complete" aria-label="Mark as Done"
+              <button matTooltip="Remove / Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+              mat-icon-button class="post-card-footer-button-complete" aria-label="Mark as Done"
                 *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
                 (click)="onCompletePrompt(completeContent)">
                 <mat-icon class="post-card-footer-button-complete">check_circle_outline</mat-icon>
               </button>
 
-              <button matTooltip="Click for more information" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="2000"
+              <button matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
                 mat-icon-button color="primary" aria-label="Learn More"
                 (click)="onMoreInfo(content)">
                 <mat-icon color="primary">help_outline</mat-icon>
