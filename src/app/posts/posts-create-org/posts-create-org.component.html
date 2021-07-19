@@ -649,7 +649,8 @@
           </mat-form-field>
 
           <div>
-            <button mat-stroked-button type="button" (click)="filePicker.click()" class="image-upload-button">Upload an image <i>(Optional)</i></button>
+            <button *ngIf="!imagePreview" mat-stroked-button type="button" (click)="filePicker.click()" class="image-upload-button">Upload an image <i>(Optional)</i></button>
+            <button *ngIf="imagePreview" mat-stroked-button type="button" (click)="removeImage()" class="image-upload-button">Remove Image</button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
           </div>
 
@@ -776,7 +777,24 @@
 
         <div class="step-footer">
           <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
-          <button mat-raised-button color="primary" matStepperNext (click)="generatePreview()" class="nav-button">Next</button>
+
+          <button
+          mat-raised-button
+          disabled
+          matStepperNext
+          class="nav-button"
+          *ngIf="(startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value)"
+          >Next</button>
+
+          <button
+          mat-raised-button
+          color="primary"
+          matStepperNext
+          (click)="generatePreview()"
+          class="nav-button"
+          *ngIf="! ((startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value))"
+          >Next</button>
+
         </div>
       </mat-step>
 
