@@ -42,13 +42,15 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 
  -->
-<div class="everything">
-  <div class="text">
+<div class="container">
+
+  <div class="content-body">
     <img [src]="highlight.imagePath">
     <p class="title"> {{ highlight.title }} </p>
     <hr>
     <p class="content"> {{ highlight.content }} </p>
   </div>
+
 
   <button
     mat-raised-button
@@ -57,4 +59,5 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     color="accent"
     >Back to Homepage
   </button>
+
 </div>

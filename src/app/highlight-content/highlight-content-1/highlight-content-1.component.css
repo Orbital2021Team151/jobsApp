@@ -1,26 +1,29 @@
-/* 
+/*
 .w3-container {
-    box-shadow: none; 
-    background-color: inherit; 
+    box-shadow: none;
+    background-color: inherit;
     color: inherit;
 }
 
 body {
     background-color: inherit;
     color: inherit;
-  } */
+}
+*/
 
 img {
-    margin: auto;
-    display: block;
-    margin-top: 10%;
+  margin: 10% auto auto auto;
+  display: block;
 }
 
-.text {
-    position: relative;
-    width: 50%;
-    left: 20%;
-    text-align: justify;
+.content-body {
+
+  /*
+  position: relative;
+  width: 50%;
+  left: 20%;
+  text-align: justify;
+  */
 }
 
 .title {
@@ -35,11 +38,12 @@ img {
 }
 
 button {
-    left: 20%;
+  /*
+  left: 20%;
+  */
 }
 
 .everything {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
-
