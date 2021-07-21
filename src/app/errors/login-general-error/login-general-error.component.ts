@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
 })
 
 export class LoginGeneralErrorComponent {
-  message = "Your Email, Password, or Role may be wrong. Please try again."
+  message = "Your Email, Password, or Role may be wrong, or your account could still be unverified. Please try again."
 }

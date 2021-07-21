@@ -14176,13 +14176,136 @@ html, body {
   height: 100%;
 }
 
+body{
+  margin: 0%;
+}
+
 /*
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 */
 
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  color: #4DA8DA;
+/* MAT FORM FIELD */
+
+.mat-form-field-empty {
+  color: inherit;
+  opacity: 0.5;
 }
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #5c8aee;
+  background-color: inherit;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.mat-form-field-appearance-outline::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.mat-select-value {
+  color: inherit;
+}
+
+/*
+.mat-form-field-appearance-outline .mat-form-field-label {
+  color: #5c8aee;
+  background-color: inherit;
+}
+
+
+.mat-form-field-placeholder{
+  color:red;
+}
+
+.mat-focused .mat-form-field-placeholder{
+  color:red;
+}
+
+.mat-input-placeholder {
+  color: red;
+}
+*/
+
+/* MAT STEPPER */
+
+/*
+.mat-step-header .mat-step-icon  {
+    background-color: #5457f254;
+    color: #f8f8ff;
+}
+
+.mat-step-header .mat-step-icon-selected  {
+  background-color: #5457f2;
+  color: #f8f8ff;
+}
+
+
+.mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #5457f2;
+  color: #f8f8ff;
+}
+*/
+
+.mat-step-header {
+  color: inherit;
+}
+
+.mat-step-header .mat-step-label  {
+  color: inherit;
+  opacity: 0.5;
+}
+
+/*
+ * NOT WORKING
+.mat-step-header .mat-step-label-selected  {
+  color: inherit;
+}
+ */
+
+.mat-step-header .mat-step-icon  {
+  background-color: #eb6c6c54;
+  color: #f8f8ff;
+}
+
+.mat-step-header .mat-step-icon-selected  {
+  background-color: #eb6c6c;
+  color: #f8f8ff;
+}
+
+.mat-select-arrow {
+  color: #5c8aee;
+  opacity: 0.5;
+}
+
+.mat-datepicker-toggle {
+  color: #5c8aee;
+  opacity: 0.5;
+}
+
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* MAT SPINNER */
 
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: #F2545B;

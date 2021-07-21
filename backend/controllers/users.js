@@ -156,7 +156,7 @@ exports.login = (req, res, next) => {
 
           if (err.message === "User not verified!") {
             //console.log("User not verified! err.message printed.");
-            //sendVerificationEmail(fetchedUser.email, fetchedUser._id);    //For my own testing.
+            sendVerificationEmail(fetchedUser.email, fetchedUser._id);    //For my own testing.
             res.status(401).json({
               errorCode: 11,
               message: "User is not verified!",
@@ -400,7 +400,7 @@ const sendVerificationEmail = (email, uniqueString) => {
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      pass: process.env.EMAIL_PASSWORD,
+      pass: "d3f1NiTeLy_NEWp@5sw0Rdee",
     },
     tls: {
       rejectUnauthorized: false,
@@ -502,7 +502,7 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
     service: "Gmail",
     auth: {
       user: "CCSGP.NUS.CONFIRMATION@gmail.com",
-      pass: process.env.EMAIL_PASSWORD
+      pass: "d3f1NiTeLy_NEWp@5sw0Rdee" //process.env.EMAIL_PASSWORD
     },
     tls: {
       rejectUnauthorized: false,
