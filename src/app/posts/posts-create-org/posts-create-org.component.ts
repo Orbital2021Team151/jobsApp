@@ -428,6 +428,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
     console.log("Post to be submitted is: ");
     console.log(post);
+
     if (this.postInformationGroup.value.image) {
       console.log("There is an image!");
     } else {
@@ -436,6 +437,7 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy {
 
 
     this.pendingApproval = true;
+
     if (this.postInformationGroup.value.image) {
       this.postsService.addPost(post);
     } else {

@@ -81,7 +81,7 @@
       </mat-form-field>
 
       <mat-card-footer class="change-password-footer">
-        <button mat-raised-button color="primary" class="change-password-form-button" 
+        <button mat-raised-button color="primary" class="change-password-form-button"
           (click)="onChangePassword(changePasswordForm)">
           Change Password
         </button>
@@ -216,7 +216,7 @@
 
         <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's image" />
 
-        <mat-card-title class="post-card-title"><b>{{ post.title }}</b></mat-card-title>
+        <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
         <mat-card-subtitle class="post-card-subtitle">
           by <b>{{ post.orgName }}</b>
         </mat-card-subtitle>
@@ -473,7 +473,7 @@
 
         <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's Image" />
 
-        <mat-card-title class="post-card-title"><b>{{ post.title }}</b></mat-card-title>
+        <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
         <mat-card-subtitle class="post-card-subtitle">
           by <b>{{ post.orgName }}</b>
         </mat-card-subtitle>

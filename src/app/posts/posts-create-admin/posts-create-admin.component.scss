@@ -143,7 +143,12 @@ input[type="file"] {
 
 
 .post-card-title {
-  font-family: 'Lato', sans-serif;
+
+  /*
+   * CANNOT USE LATO OR ELSE SOME PART OF THE FONT GETS CUT OFF
+  font-family: "Lato", sans-serif;
+  */
+
   text-overflow: ellipsis;
 
   width: 22rem;

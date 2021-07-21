@@ -11,7 +11,10 @@ mat-form-field {
 }
 
 .post-card-title {
+  /*
+   * CANNOT USE LATO OR ELSE SOME PART OF THE FONT GETS CUT OFF
   font-family: "Lato", sans-serif;
+  */
   text-overflow: ellipsis;
 
   width: 22rem;

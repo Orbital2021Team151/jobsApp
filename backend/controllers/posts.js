@@ -70,6 +70,8 @@ exports.requestPost = (req, res, next) => {
 
       //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
       sendPostRequestedNotificationEmail(req.body.email, post);
+
+
       res.status(201).json({
         message: "post requested successfully! Pending admin approval",
         postId: createdPost._id,

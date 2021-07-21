@@ -532,7 +532,9 @@
             <mat-error *ngIf="emailControl.errors?.invalid">Please provide us your email.</mat-error>
           </mat-form-field>
 
+          <!--
           <a href="https://verify-email.org/" target="_blank" style="margin-top: 0rem;">Check if email exists (might not be accurate)</a>
+          -->
 
           <mat-form-field appearance="outline">
             <mat-label>POC's name</mat-label>
@@ -579,7 +581,7 @@
         <form [formGroup]="postInformationGroup">
 
           <mat-form-field appearance="outline">
-            <mat-label>Volunteer Opportunity Title</mat-label>
+            <mat-label>Volunteer Opportunity Title (Max. 100 Characters)</mat-label>
             <input
               matInput
               class="form-input"
@@ -588,6 +590,8 @@
               [formControl]="titleControl"
               required
               placeholder="eg Weekend Underprivileged Teacher"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              maxlength="100"
             />
             <mat-error *ngIf="titleControl.errors?.invalid"
               >Please provide us the job's title.</mat-error
@@ -822,9 +826,9 @@
                 />
 
 
-                <mat-card-title class="post-card-title"
-                  ><b>{{ postPreview.title }}</b></mat-card-title
-                >
+                <mat-card-title class="post-card-title">
+                  {{ postPreview.title }}
+                </mat-card-title>
                 <mat-card-subtitle class="post-card-subtitle">
                   by <b>{{ postPreview.orgName }}</b>
                 </mat-card-subtitle>
@@ -889,7 +893,7 @@
 
                     <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt class="text-sm font-medium text-gray-500">
-                        Email Address
+                        POC's Email Address
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {{ postPreview.email }}
