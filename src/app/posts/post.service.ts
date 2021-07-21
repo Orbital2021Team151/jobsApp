@@ -110,7 +110,7 @@ export class PostsService {
     postData.append("students", JSON.stringify(post.students));
     postData.append("reports", JSON.stringify(post.reports));
     postData.append("studentsAccepted", JSON.stringify(post.studentsAccepted));
-    postData.append("image", post.image, post.title);
+    postData.append("image", post.image);
 
     //console.log("At front end, postService is tring to send this over via addPost: ");
     //console.log(postData);

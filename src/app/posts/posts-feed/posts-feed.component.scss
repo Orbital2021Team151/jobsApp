@@ -155,12 +155,9 @@ mat-spinner {
   height: 2rem;
   vertical-align: middle;
   text-align: center;
-
-  /*
   display: block;
   white-space: nowrap;
   font-size: 1.5rem;
-  */
 
 }
 
@@ -264,9 +261,25 @@ dd {
 }
 
 .info-text {
+  font-family: 'Lato', sans-serif;
   text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  color: inherit;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-text-header {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+.info-text-body {
+  width: 70%;
 }
 
 mat-form-field {

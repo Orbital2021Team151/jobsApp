@@ -259,17 +259,17 @@
                 <mat-icon>front_hand</mat-icon>
               </button>
 
-              <!--
-              <button
-                mat-raised-button
+              <!-- COMMENT OUT FOR PRODUCTION BECAUSE BY RIGHT POSTS THAT HAVE BEEN APPROVED CANNOT JUST BE "DELETED." MUST BE REJECTED-->
+              <button matTooltip="Reject Job Listing" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+                mat-icon-button
                 class="post-card-footer-button"
                 color="warn"
+                aria-label="Delete Forever"
                 *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
                 (click)="onDeletePrompt(deleteContent)"
               >
-                Delete
+                <mat-icon>delete_forever</mat-icon>
               </button>
-              -->
 
               <button matTooltip="Reject Job Listing" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
               mat-icon-button color="warn" aria-label="Reject" class="post-card-footer-button"
@@ -697,9 +697,13 @@
         </ng-template>
       </ng-container>
 
-      <p class="info-text" *ngIf="hasApproved === false">
-        <i>No jobs listing currently available!</i>
-      </p>
+      <div class="info-text" *ngIf="hasApproved === false">
+        <h1 class="info-text-header">No jobs listing currently available</h1>
+        <p class="info-text-body">
+          To make sure that you get the latest job openings, remember to update your interested beneficiaries under your dashboard! This way we will send an email notification
+          to you directly once a job that has your interested beneficiary is posted!
+        </p>
+      </div>
 
 
       <mat-spinner *ngIf="hasApproved === null"></mat-spinner>
