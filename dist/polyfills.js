@@ -7,7 +7,11 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! /Users/wilburfong/Documents/orbital/jobsApp/src/polyfills.ts */"hN/g");
+=======
+module.exports = __webpack_require__(/*! C:\Users\wu081\Downloads\summer work\jobsApp\src\polyfills.ts */"hN/g");
+>>>>>>> 271874632f1938a15084293f67b616b633e71638
 
 
 /***/ }),
