@@ -74,6 +74,9 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FieldsNotCompleteDialog } from './dialogs/fields-not-complete-dialog/fields-not-complete-dialog.component';
 import { HighlightSubmittedDialog } from './dialogs/highlight-submitted-dialog/highlight-submitted-dialog.component';
+import { PostRejectedDialog } from './dialogs/post-rejected-dialog/post-rejected-dialog.component';
+import { PostCompletedDialog } from './dialogs/post-completed-dialog/post-completed-dialog.component';
+import { MatChipList, MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
@@ -112,6 +115,8 @@ import { HighlightSubmittedDialog } from './dialogs/highlight-submitted-dialog/h
     ExpiredSessionPage,
     FieldsNotCompleteDialog,
     HighlightSubmittedDialog,
+    PostRejectedDialog,
+    PostCompletedDialog
   ],
 
   imports: [
@@ -148,6 +153,7 @@ import { HighlightSubmittedDialog } from './dialogs/highlight-submitted-dialog/h
     MatListModule,
     MatPasswordStrengthModule,
     MatTooltipModule,
+    MatChipsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

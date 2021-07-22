@@ -368,6 +368,35 @@ button {
 
 /* MISCELLANEOUS
 -------------------------------------------------- */
+/* this is for the whole page */
+
+::ng-deep .nav-pills .nav-link.active, 
+::ng-deep .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #F2545B;
+    
+}
+
+mat-card-title {
+  font-family: 'Raleway';
+}
+
+a {
+  color: black;
+  height: fit-content;
+  font-size: larger;
+}
+
+
+
+.navbarmatcard {
+  width: 15%;
+  background-color: #FFFFFF;
+  margin-top: 1%;
+  margin-left: 1%;
+  border-radius: 25px;
+}
+
 .info-text {
   font-family: 'Lato', sans-serif;
   text-align: center;
@@ -399,7 +428,6 @@ button {
   flex-direction: row;
   align-items: left;
   align-content: space-around;
-
 }
 
 .nav-content {

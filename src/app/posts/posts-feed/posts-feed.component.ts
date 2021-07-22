@@ -11,6 +11,13 @@ import { AppliedBeforeDialog } from 'src/app/dialogs/applied-before-dialog/appli
 import { ReportedBeforeDialog } from 'src/app/dialogs/reported-before-dialog/reported-before-dialog.component';
 import { ReportedPostNotificationDialog } from 'src/app/dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
 import { AppliedPostNotificationDialog } from 'src/app/dialogs/applied-post-notification-dialog/applied-post-notification-dialog.component';
+import { PostRejectedDialog } from 'src/app/dialogs/post-rejected-dialog/post-rejected-dialog.component';
+import { PostCompletedDialog } from 'src/app/dialogs/post-completed-dialog/post-completed-dialog.component';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-feed',
@@ -91,12 +98,82 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     'Sports',
     'Women & Girls',
   ];
+
+  public beneficiariesBoolean: { beneficiary: string, selected: boolean }[] = [
+    {
+      beneficiary: 'Animal Welfare',
+      selected: false,
+    },
+    {
+      beneficiary: 'Arts & Heritage',
+      selected: false,
+    },
+    {
+      beneficiary: 'Children & Youth',
+      selected: false,
+    },
+    {
+      beneficiary: 'Community',
+      selected: false,
+    },
+    {
+      beneficiary: 'Disability',
+      selected: false,
+    },
+    {
+      beneficiary: 'Education',
+      selected: false,
+    },
+    {
+      beneficiary: 'Elderly',
+      selected: false,
+    },
+    {
+      beneficiary: 'Environment',
+      selected: false,
+    },
+    {
+      beneficiary: 'Families',
+      selected: false,
+    },
+    {
+      beneficiary: 'Health',
+      selected: false,
+    },
+    {
+      beneficiary: 'Humanitarian',
+      selected: false,
+    },
+    {
+      beneficiary: 'Social Service',
+      selected: false,
+    },
+    {
+      beneficiary: 'Sports',
+      selected: false,
+    },
+    {
+      beneficiary: 'Women & Girls',
+      selected: false,
+    }
+  ]
+
+
+
   beneficiariesSelected: string[] = [];
   keywords: string = "";
 
   orgs: string[] = [];
+  public orgsBoolean: { org: string, selected: boolean }[] = [];
 
   orgsSelected: string[] = [];
+
+  //chips stuff
+  /*
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  */
 
   constructor(
     public postsService: PostsService,
@@ -152,6 +229,15 @@ export class PostFeedComponent implements OnInit, OnDestroy {
           this.hasApproved = false;
         }
         this.orgs = this.posts.map(post => post.orgName);
+        console.log(this.orgs);
+        for (let i = 0; i < this.orgs.length; i++) {
+          this.orgsBoolean.push({
+            org: this.orgs[i],
+            selected: false,
+          });
+        }
+        // console.log(this.orgs);
+        console.log(this.orgsBoolean);
         // console.log(this.orgsSelected);
 
       });
@@ -173,6 +259,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   onComplete(postId: string) {
     this.postsService.completePost(postId, this.removeForm.value.reason);
     this.removeForm.reset();
+    this.dialog.open(PostCompletedDialog);
     return true;
   }
 
@@ -182,6 +269,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   onReject(postId: string) {
     this.postsService.rejectPost(postId, this.rejectForm.value.reason);
+    this.dialog.open(PostRejectedDialog);
     return true;
   }
 
@@ -196,6 +284,12 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.keywords = "";
     this.startDate = null;
     this.endDate = null;
+    for (let i = 0; i < this.beneficiariesBoolean.length; i++) {
+      this.beneficiariesBoolean[i].selected = false;
+    }
+    for (let i = 0; i < this.orgsBoolean.length; i++) {
+      this.orgsBoolean[i].selected = false;
+    }
     this.submitFilter();
   }
 
@@ -208,7 +302,32 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     console.log(lowerWeirdText);
     */
 
+    for (let i = 0; i < this.beneficiariesBoolean.length; i++) {
+      if (this.beneficiariesBoolean[i].selected) {
+        if (this.beneficiariesSelected.includes(this.beneficiariesBoolean[i].beneficiary)) {
+          continue;
+        }
+        this.beneficiariesSelected.push(this.beneficiariesBoolean[i].beneficiary);
+      }
+      if (!this.beneficiariesBoolean[i].selected && this.beneficiariesSelected.includes(this.beneficiariesBoolean[i].beneficiary)) {
+        this.beneficiariesSelected = this.beneficiariesSelected.filter(beneficiary => beneficiary != this.beneficiariesBoolean[i].beneficiary);
+      }
+    }
 
+    for (let i = 0; i < this.orgsBoolean.length; i++) {
+      if (this.orgsBoolean[i].selected) {
+        if (this.orgsSelected.includes(this.orgsBoolean[i].org)) {
+          continue;
+        }
+        this.orgsSelected.push(this.orgsBoolean[i].org);
+      }
+      if (!this.orgsBoolean[i].selected && this.orgsSelected.includes(this.orgsBoolean[i].org)) {
+        this.orgsSelected = this.orgsSelected.filter(org => org != this.orgsBoolean[i].org);
+      }
+    }
+
+    console.log(this.orgsSelected);
+    
     if (this.beneficiariesSelected.length !== 0) {
       this.filteredPosts = this.posts.filter((post) => {
         return this.beneficiariesSelected.includes(post.beneficiaries);
@@ -217,6 +336,11 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       this.filteredPosts = [...this.posts];
       //console.log(this.filteredPosts);
     }
+    
+
+
+
+
 
     if (this.startDate) {
       //console.log("There is a startDate!");
@@ -415,6 +539,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
     return false;
   }
+
 
   ngOnDestroy() {
     this.postSub.unsubscribe();

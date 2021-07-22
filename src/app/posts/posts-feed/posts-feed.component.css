@@ -222,6 +222,10 @@ mat-icon {
   border: none;
 }
 
+.closelearnmore {
+  float: right;
+}
+
 /* MISCELLANEOUS
 -------------------------------------------------- */
 .info-text {

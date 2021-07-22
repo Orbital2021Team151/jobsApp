@@ -90,7 +90,8 @@ export class HighlightCreateComponent implements OnInit, OnDestroy, ComponentCan
     this.submitted = true;
     this.dialog.open(HighlightSubmittedDialog);
     setTimeout(() => {
-      this.router.navigate(['/'])
+      this.dialog.closeAll();
+      this.router.navigate(['/']);
     }
     , 3000);
   }

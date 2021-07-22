@@ -20,20 +20,57 @@
 
         <ng-container>
 
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline">
             <mat-label>Beneficiaries</mat-label>
             <mat-select ngModel multiple #beneficiariesInput="ngModel" name="beneficiariesSelected"
               [(ngModel)]="beneficiariesSelected">
               <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{ beneficiary }}</mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> -->
+          
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Beneficiaries
+              </mat-panel-title>
+              <mat-panel-description>
+                Filter by Beneficiaries
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <li *ngFor="let beneficiary of beneficiariesBoolean">
+              <mat-checkbox 
+              [(ngModel)]="beneficiary.selected"
+              >
+              {{ beneficiary.beneficiary }}
+              </mat-checkbox>
+            </li>
+          </mat-expansion-panel>
 
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline">
             <mat-label>Organisations</mat-label>
             <mat-select ngModel multiple #organisationsInput="ngModel" name="orgsSelected" [(ngModel)]="orgsSelected">
               <mat-option *ngFor="let org of orgs" [value]="org">{{ org }}</mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Organisations
+              </mat-panel-title>
+              <mat-panel-description>
+                Filter by Organisations
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <li *ngFor="let org of orgsBoolean">
+              <mat-checkbox 
+              [(ngModel)]="org.selected"
+              >
+              {{ org.org }}
+              </mat-checkbox>
+            </li>
+          </mat-expansion-panel>
+
 
           <mat-form-field appearance="outline" class="example-form-field">
             <mat-label>Enter a date range</mat-label>
@@ -296,8 +333,7 @@
         <ng-template #messageForStudent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Publish Success</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             </button>
           </div>
           <div class="modal-body">
@@ -356,7 +392,10 @@
 
           <!-- This example requires Tailwind CSS v2.0+ -->
           <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-
+            <div class="closelearnmore">
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+              ></button>
+            </div>
             <div class="px-4 py-3 sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
                 {{ post.title }}
@@ -632,9 +671,8 @@
         <ng-template #completeContent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Completion Confirmation</h4>
-            <button type="button" class="submit" aria-label="complete post modal window"
+            <button type="button" class="btn-close" aria-label="complete post modal window"
               (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
             </button>
           </div>
 
@@ -666,9 +704,8 @@
         <ng-template #rejectContent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Rejection Confirmation</h4>
-            <button type="button" class="submit" aria-label="reject content modal window"
+            <button type="button" class="btn-close" aria-label="reject content modal window"
               (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
             </button>
           </div>
 
