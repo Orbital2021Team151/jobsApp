@@ -163,9 +163,15 @@ button {
   font-family: "Lato", sans-serif;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   margin-bottom: 2rem;
+}
+
+.change-password-form-button {
+  width: auto;
+  margin: auto;
+  align-self: center;
 }
 
 .alert {

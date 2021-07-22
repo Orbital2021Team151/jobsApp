@@ -57,96 +57,102 @@
       >Change Password</mat-card-title
     >
 
-    <form #changePasswordForm="ngForm" class="changePasswordForm">
-      <mat-form-field
-        appearance="outline"
-        class="change-password-form-field"
-      >
+    <form [formGroup]="changePasswordForm">
+      <mat-form-field appearance="outline" class="change-password-form-field">
         <input
-          matInput
-          class="form-input"
-          [type]="hideCurrentPassword ? 'password' : 'text'"
-          ngModel
-          name="currentPassword"
-          required
-          #currentPassword="ngModel"
-          placeholder="Current Password"
-        />
+        matInput
+        class="form-input"
+        [type]="hideCurrentPassword ? 'password' : 'text'"
+        [formControl]="currentPasswordControl"
+        name="currentPassword"
+        required
+        placeholder="Current Password"/>
 
         <button
-          mat-icon-button
-          matSuffix
-          (click)="hideCurrentPassword = !hideCurrentPassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hideCurrentPassword"
-        >
+        mat-icon-button
+        matSuffix
+        (click)="hideCurrentPassword = !hideCurrentPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideCurrentPassword">
           <mat-icon class="password-visibility-icon-button">{{
             hideCurrentPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
+            }}</mat-icon>
         </button>
-
-        <mat-error *ngIf="currentPassword.invalid"
-          >Please enter your current password.</mat-error
-        >
+        <mat-error *ngIf="currentPasswordControl.errors?.invalid">Please enter your current password.</mat-error>
       </mat-form-field>
 
-      <mat-form-field
-        appearance="outline"
-        class="change-password-form-field"
-      >
+      <mat-form-field appearance="outline" class="change-password-form-field">
         <input
-          matInput
-          class="form-input"
-          [type]="hideNewPassword ? 'password' : 'text'"
-          ngModel
-          name="newPassword"
-          required
-          #newPassword="ngModel"
-          placeholder="New Password"
-        />
+        matInput
+        class="form-input"
+        [type]="hideCurrentPassword ? 'password' : 'text'"
+        [formControl]="newPasswordControl"
+        name="newPassword"
+        required
+        placeholder="New Password"/>
 
         <button
-          mat-icon-button
-          matSuffix
-          (click)="hideNewPassword = !hideNewPassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hideNewPassword"
-        >
+        mat-icon-button
+        matSuffix
+        (click)="hideCurrentPassword = !hideCurrentPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideCurrentPassword">
           <mat-icon class="password-visibility-icon-button">{{
-            hideNewPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
+            hideCurrentPassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
         </button>
-
-        <mat-error *ngIf="newPassword.invalid"
-          >Please provide us with your new password.</mat-error
-        >
+        <mat-error *ngIf="newPasswordControl.errors?.invalid">Please enter your new password.</mat-error>
       </mat-form-field>
 
-      <button
-      mat-raised-button
-      color="primary"
-      class="change-password-form-button"
-      (click)="onChangePassword(changePasswordForm)"
-      >
-        Change Password
-      </button>
+      <mat-form-field appearance="outline" class="change-password-form-field">
+        <input
+        matInput
+        class="form-input"
+        [type]="hideCurrentPassword ? 'password' : 'text'"
+        [formControl]="newPasswordConfirmControl"
+        name="newPasswordConfirm"
+        required
+        placeholder="Confirm New Password"/>
+
+        <button
+        mat-icon-button
+        matSuffix
+        (click)="hideCurrentPassword = !hideCurrentPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideCurrentPassword">
+          <mat-icon class="password-visibility-icon-button">{{
+            hideCurrentPassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+        </button>
+        <mat-error *ngIf="newPasswordConfirmControl.errors?.invalid">Please enter confirm your new password.</mat-error>
+      </mat-form-field>
     </form>
 
-    <div
-      *ngIf="requestedNewPassword"
-      class="alert alert-success alert-dismissible fade show"
-      role="alert"
-    >
-      <strong>Password changed!</strong>
+    <mat-card-footer class="change-password-footer">
+
+      <mat-error *ngIf="!(newPasswordControl.value === newPasswordConfirmControl.value)">
+        Please ensure that your new password and the confirm new password matches
+      </mat-error>
+
       <button
-        (click)="closeNotification()"
-        type="button"
-        class="btn-close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
+      *ngIf="!(newPasswordControl.value === newPasswordConfirmControl.value) || !newPasswordControl.value || !newPasswordConfirmControl.value"
+      mat-raised-button
+      disabled
+      class="change-password-form-button">
+        Change Password
       </button>
-    </div>
+
+      <button
+      *ngIf="(newPasswordControl.value === newPasswordConfirmControl.value) && newPasswordControl.value && newPasswordConfirmControl.value"
+      mat-raised-button color="primary"
+      class="change-password-form-button"
+        (click)="onChangePassword()">
+        Change Password
+      </button>
+
+    </mat-card-footer>
+
+
   </mat-card>
 </div>
 

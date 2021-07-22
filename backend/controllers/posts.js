@@ -630,7 +630,7 @@ exports.downloadPosts = (req, res, next) => {
     (err, client) => {
       if (err) {
         console.log(
-          "Error at connecting to mongodb. line 261 controllers posts.js"
+          "Error at connecting to mongodb. line 633 controllers posts.js"
         );
         console.log(err);
         res.status(404).json({
@@ -646,7 +646,7 @@ exports.downloadPosts = (req, res, next) => {
         .toArray((err, data) => {
           if (err) {
             console.log(
-              "Error at toArray function of downloadPosts. line 274 controllers posts.js"
+              "Error at toArray function of downloadPosts. line 649 controllers posts.js"
             );
             console.log(err);
             res.stats(404).json({
@@ -656,6 +656,13 @@ exports.downloadPosts = (req, res, next) => {
           }
 
           mappedData = data.map((obj) => {
+            let approvalStatus = '';
+            if (obj.approved) {
+              approvalStatus = "YES";
+            } else {
+              approvalStatus = "NO";
+            }
+
             return {
               location: obj.location,
               beneficiaries: obj.beneficiaries,
@@ -673,7 +680,7 @@ exports.downloadPosts = (req, res, next) => {
               commitment: obj.hoursRequired,
               studentsInterested: obj.students,
               reports: obj.reports,
-              approved: obj.approved,
+              approved: approvalStatus,
               creationDate: obj.creationDate,
               publishDate: obj.publishDate,
               removed: obj.removed,

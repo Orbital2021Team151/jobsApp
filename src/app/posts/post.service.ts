@@ -281,10 +281,12 @@ export class PostsService {
 
       let pipe = new DatePipe('en-US'); // Use your own locale
       let dataArray = response.data;
+      let extensionName = "all posts";
 
 
       if (startDate && endDate) {
         console.log("Both Start and End dates are present!");
+        extensionName = startDate.toDateString() + " to " + endDate.toDateString();
 
         dataArray = dataArray.filter(obj => {
           return (new Date(obj.startDate).getTime() >= new Date(startDate).getTime() && new Date(obj.endDate).getTime() <= new Date(endDate).getTime()) //within search range
@@ -294,12 +296,16 @@ export class PostsService {
 
       } else if (startDate) {
         console.log("Start Date's clause activated!");
+        extensionName = "posts starting from " + startDate.toDateString();
+
         dataArray = dataArray.filter(obj => {
           return (new Date(obj.startDate).getTime() >= new Date(startDate).getTime()) //start date of job is after start date of range
           || (new Date(obj.endDate).getTime() > new Date(startDate).getTime()); //end date of job is after start date of range
         });
       } else if (endDate) {
         console.log("end Date's clause activated!");
+        extensionName = "posts until " + endDate.toDateString();
+
         dataArray = dataArray.filter(obj => {
           return (new Date(obj.endDate).getTime() <= new Date(endDate).getTime()) //end date of job is before end date of range
           || (new Date(obj.startDate).getTime() < new Date(endDate).getTime()); //start date of job is before end date of range
@@ -321,8 +327,8 @@ export class PostsService {
           skills: obj.skills,
           startDate: pipe.transform(obj.startDate, 'longDate'),
           endDate: pipe.transform(obj.endDate, 'longDate'),
-          commitment: obj.hoursRequired,
-          studentsInterested: obj.students,
+          commitment: obj.commitment,
+          studentsInterested: obj.studentsInterested,
           reports: obj.reports,
           approved: obj.approved,
           removed: obj.removed,
@@ -342,7 +348,7 @@ export class PostsService {
             dwldLink.setAttribute("target", "_blank");
         }
         dwldLink.setAttribute("href", url);
-        dwldLink.setAttribute("download", "all posts" + ".csv");
+        dwldLink.setAttribute("download", "history - " + extensionName + ".csv");
         dwldLink.style.visibility = "hidden";
         document.body.appendChild(dwldLink);
         dwldLink.click();

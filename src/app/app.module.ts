@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {  MatSidenavModule } from  '@angular/material/sidenav';
 import { MatList, MatListModule } from '@angular/material/list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
@@ -141,6 +142,7 @@ import { HighlightSubmittedDialog } from './dialogs/highlight-submitted-dialog/h
     NgbPaginationModule,
     NgbAlertModule,
     MatRadioModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     MatSidenavModule,
     MatListModule,

@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
 import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { ChangePasswordAlertComponent } from "../change-password-alert/change-password-alert.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-org-board",
@@ -32,18 +34,29 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
   public hasRequest: Boolean = null;
   public hasApplication: Boolean = null;
   postToBeDeleted: string;
-  requestedNewPassword = false;
 
   /* Remove / Complete FormGroup */
   public removeForm: FormGroup;
   public removeReasonControl = new FormControl(null);
 
+  /* Change Password FormGroup */
+  public changePasswordForm: FormGroup;
+  public currentPasswordControl = new FormControl(null);
+  public newPasswordControl = new FormControl(null);
+  public newPasswordConfirmControl = new FormControl(null);
+
   //for the navbar
   active: string = "changePassword";
 
-  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {
+  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService, private _snackBar: MatSnackBar) {
     this.removeForm = new FormGroup({
       reason: this.removeReasonControl,
+    });
+
+    this.changePasswordForm = new FormGroup({
+      currentPassword: this.currentPasswordControl,
+      newPassword: this.newPasswordControl,
+      newPasswordConfirm: this.newPasswordConfirmControl,
     });
   }
 
@@ -185,18 +198,21 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     return post.studentsAccepted.includes(userEmail);
   }
 
-  onChangePassword(form: NgForm) {
-    if (form.invalid) {
+  onChangePassword() {
+    if (this.changePasswordForm.invalid) {
       return;
     }
-    this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
+    this.authService.changePassword(this.changePasswordForm.value.currentPassword, this.changePasswordForm.value.newPassword);
     this.authService.getChangedPasswordListener().subscribe(res => {
-      this.requestedNewPassword = res;
+      this.openChangePasswordAlertSnackBar();
+      this.changePasswordForm.reset();
     });
   }
 
-  closeNotification() {
-    this.requestedNewPassword = false;
+  openChangePasswordAlertSnackBar() {
+    this._snackBar.openFromComponent(ChangePasswordAlertComponent, {
+      duration: 3 * 1000,
+    });
   }
 
   ngOnDestroy() {

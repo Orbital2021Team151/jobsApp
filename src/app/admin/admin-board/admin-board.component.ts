@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
 import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ChangePasswordAlertComponent } from "../change-password-alert/change-password-alert.component";
 
 @Component({
   selector: "app-admin-board",
@@ -30,19 +32,30 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   public hasRequest: Boolean = null;
   public hasReport: Boolean = null;
   postToBeDeleted: string;
-  requestedNewPassword = false;
 
 
   /* Reject FormGroup */
   public rejectForm: FormGroup;
   public rejectReasonControl = new FormControl(null);
 
+  /* Change Password FormGroup */
+  public changePasswordForm: FormGroup;
+  public currentPasswordControl = new FormControl(null);
+  public newPasswordControl = new FormControl(null);
+  public newPasswordConfirmControl = new FormControl(null);
+
   //navbar stuff
   active: string = "changePassword";
 
-  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {
+  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService, private _snackBar: MatSnackBar) {
     this.rejectForm = new FormGroup({
       reason: this.rejectReasonControl,
+    });
+
+    this.changePasswordForm = new FormGroup({
+      currentPassword: this.currentPasswordControl,
+      newPassword: this.newPasswordControl,
+      newPasswordConfirm: this.newPasswordConfirmControl,
     });
   }
 
@@ -171,26 +184,35 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     this.modalService.open(reportedContent, { size: 'lg' });
   }
 
-  onChangePassword(form: NgForm) {
-    if (form.invalid) {
+  onChangePassword() {
+    if (this.changePasswordForm.invalid) {
       return;
     }
 
-    this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
+    console.log(this.changePasswordForm.value);
+
+    this.authService.changePassword(this.changePasswordForm.value.currentPassword, this.changePasswordForm.value.newPassword);
+
     this.authService.getChangedPasswordListener().subscribe(res => {
-      this.requestedNewPassword = res;
+      this.openChangePasswordAlertSnackBar();
+      this.changePasswordForm.reset();
     });
   }
 
   onDownloadCSV(form: NgForm) {
     if (form.invalid) {
+      console.log("IT IS INVALID!?");
       return;
     }
     this.postsService.downloadPosts(form.value.startDate, form.value.endDate);
+
+    //TODO: needs some service here
   }
 
-  closeNotification() {
-    this.requestedNewPassword = false;
+  openChangePasswordAlertSnackBar() {
+    this._snackBar.openFromComponent(ChangePasswordAlertComponent, {
+      duration: 3 * 1000,
+    });
   }
 
   ngOnDestroy() {
