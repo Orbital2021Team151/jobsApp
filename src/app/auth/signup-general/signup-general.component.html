@@ -130,14 +130,17 @@
         <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
       </span>
 
-      <form [formGroup]="form" #signupForm="ngForm">
+      <form [formGroup]="form">
 
         <div>
           <mat-radio-group [formControl]="roleControl">
+
             <mat-radio-button value="External / Student Organisation">
               External / Student Organisation
             </mat-radio-button>
+
             <span class="radio-spacer"></span>
+
             <mat-radio-button value="Student / NUS Alumni"
               >Student / NUS Alumni</mat-radio-button
             >
@@ -236,7 +239,6 @@
             <input
               matInput
               name="uen"
-              required
               [formControl]="uenControl"
               placeholder="UEN1234567"
             />
@@ -282,14 +284,18 @@
       </form>
 
       <div class="signup-button-container">
-        <button mat-raised-button color="accent" (click)="onSignupReactive()">Signup</button>
+        <button *ngIf="form.invalid" mat-raised-button disabled>Signup</button>
+        <button *ngIf="!form.invalid" mat-raised-button color="accent" (click)="onSignupReactive()">Signup</button>
       </div>
 
+      <!--
       <div *ngIf="signedUp" class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>You have signed up!</strong> Please check your email to verify your account.
         <button (click)="closeNotification()" type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
         </button>
       </div>
+      -->
+
     </mat-card>
   </div>
 </div>
