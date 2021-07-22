@@ -483,7 +483,7 @@
 
 <div class="post-create-card">
   <mat-card class="post-create-body">
-    <mat-horizontal-stepper linear="Enable linear mode" #stepper class="post-create-stepper">
+    <mat-horizontal-stepper linear="Enable linear mode" #stepper class="post-create-stepper" (selectionChange)="generatePreview()">
       <mat-step [stepControl]="POCInformationGroup">
         <form [formGroup]="POCInformationGroup">
           <ng-template matStepLabel>Point Of Contact (POC)</ng-template>
@@ -794,7 +794,6 @@
           mat-raised-button
           color="primary"
           matStepperNext
-          (click)="generatePreview()"
           class="nav-button"
           *ngIf="! ((startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value))"
           >Next</button>

@@ -34,7 +34,9 @@ mat-stroked-button {
 }
 
 .logo img {
-  width: 25%;
+  width: 75px;
+  width: 75px;
+  object-fit: cover;
 }
 
 

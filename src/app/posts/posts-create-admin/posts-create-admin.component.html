@@ -4,7 +4,7 @@
 
 
   <mat-card class="post-create-body">
-    <mat-horizontal-stepper linear="Enable linear mode" #stepper class="post-create-stepper">
+    <mat-horizontal-stepper linear="Enable linear mode" #stepper class="post-create-stepper" (selectionChange)="generatePreview()">
       <mat-step [stepControl]="POCInformationGroup">
         <form [formGroup]="POCInformationGroup">
           <ng-template matStepLabel>
