@@ -4,54 +4,58 @@
       Signup Account
     </mat-card-title>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form *ngIf="!isLoading" #signupForm="ngForm">
+
+    <form *ngIf="!isLoading" [formGroup]="form">
 
       <mat-form-field appearance="outline">
-        <mat-label>Student / Organisation Name</mat-label>
+        <!--
+          <mat-label>Student / Organisation Name</mat-label>
+        -->
         <input
           class="form-input"
           matInput
+          [formControl]="orgNameControl"
           type="orgName"
           name="orgName"
-          ngModel
           required
-          #orgNameInput="ngModel"
-          placeholder="eg Standard Oil Co."
+          placeholder="Student / Organisation Name"
         />
-        <mat-error *ngIf="orgNameInput.invalid"
+        <mat-error *ngIf="orgNameControl.errors?.invalid"
           >Please enter your name / your organisation's name.</mat-error
         >
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Email Address</mat-label>
+        <!--
+          <mat-label>Email Address</mat-label>
+        -->
         <input
           matInput
           class="form-input"
+          [formControl]="emailControl"
           type="email"
           name="email"
-          ngModel
           required
-          #emailInput="ngModel"
-          placeholder="eg jeff@amazon.com"
+          placeholder="Email Address"
           email
         />
-        <mat-error *ngIf="emailInput.invalid"
+        <mat-error *ngIf="emailControl.errors?.invalid"
           >Please enter a valid email address.</mat-error
         >
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
+        <!--
+          <mat-label>Password</mat-label>
+        -->
         <input
           matInput
           class="form-input"
+          [formControl]="passwordControl"
           [type]="hidePassword ? 'password' : 'text'"
           name="password"
-          ngModel
           required
-          #passwordInput="ngModel"
-          placeholder="Enter Password Here"
+          placeholder="Password"
         />
 
         <button
@@ -68,65 +72,70 @@
           }}</mat-icon>
         </button>
 
-        <mat-error *ngIf="passwordInput.invalid"
+        <mat-error *ngIf="passwordControl.errors?.invalid"
           >Please enter a valid password.</mat-error
         >
 
         <mat-hint> Password Strength </mat-hint>
       </mat-form-field>
-      <mat-password-strength [password]="passwordInput.value">
+      <mat-password-strength [password]="passwordControl.value">
       </mat-password-strength>
 
 
       <mat-form-field appearance="outline" class="field-user-role">
-        <mat-label>User Role</mat-label>
-        <mat-select ngModel required #roleInput="ngModel" name="role">
+        <!--
+          <mat-label>User Role</mat-label>
+        -->
+        <mat-select
+        required
+        [formControl]="roleControl"
+        name="role"
+        placeholder="User Role"
+        >
           <mat-option>--</mat-option>
           <mat-option *ngFor="let role of roles" [value]="role">
             {{ role }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="roleInput.invalid"
+        <mat-error *ngIf="roleControl.errors?.invalid"
           >Please select the user's role.</mat-error
         >
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Unique Entity Number (UEN)</mat-label>
+        <!--
+          <mat-label>Unique Entity Number (UEN)</mat-label>
+        -->
         <input
           matInput
           class="form-input"
+          [formControl]="uenControl"
           type="uen"
           name="uen"
-          ngModel
           required
-          #uenInput="ngModel"
-          placeholder="eg UEN-1234567"
+          placeholder="Unique Entity Number (UEN) / N.A."
         />
-        <mat-error *ngIf="uenInput.invalid"
+        <mat-error *ngIf="uenControl.errors?.invalid"
           >Please enter a valid Unique Entity Number (UEN).</mat-error
         >
       </mat-form-field>
 
       <div
-      *ngIf="signedUp"
-      class="alert alert-success alert-dismissible fade show"
-      role="alert">
-        <strong>You have signed up!</strong> Please check your email for the verification link.
-        <button (click)="closeNotification()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-
-      <div
         class="signup-button-container"
         >
         <button
+          *ngIf="form.invalid"
+          mat-raised-button
+          disabled
+          class="signup-button"
+        >Signup</button>
+
+        <button
+        *ngIf="!form.invalid"
           mat-raised-button
           color="accent"
           class="signup-button"
-          (click)="onSignup(signupForm)"
+          (click)="onSignupReactive()"
         >Signup</button>
 
       </div>
