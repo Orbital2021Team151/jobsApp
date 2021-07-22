@@ -7,6 +7,7 @@ import { Subscription } from "rxjs";
 import { AuthService } from "src/app/auth/auth.service";
 import { FieldsNotCompleteDialog } from "src/app/dialogs/fields-not-complete-dialog/fields-not-complete-dialog.component";
 import { HighlightSubmittedDialog } from "src/app/dialogs/highlight-submitted-dialog/highlight-submitted-dialog.component";
+import { ComponentCanDeactivate } from "src/app/posts/posts-create-admin/can-deactivate.component";
 import { Highlight } from "../highlight.model";
 import { HighlightService } from "../highlight.service";
 
@@ -16,7 +17,11 @@ import { HighlightService } from "../highlight.service";
   styleUrls: ['./highlight-create.component.css'],
 })
 
-export class HighlightCreateComponent implements OnInit, OnDestroy {
+export class HighlightCreateComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
+  canDeactivate() {
+    console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
+    return this.form.dirty;
+  }
 
   public imagePreview: string;
   public submitted: boolean = false;

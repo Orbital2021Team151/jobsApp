@@ -17,6 +17,7 @@ import { PostsService } from '../post.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PostSubmittedDialog } from 'src/app/dialogs/post-submitted-dialog/post-submitted-dialog.component';
 import { Router } from '@angular/router';
+import { ComponentCanDeactivate } from '../posts-create-admin/can-deactivate.component';
 
 @Component({
   selector: 'app-post-create',
@@ -24,7 +25,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./posts-create-org.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class PostCreateOrgComponent implements OnInit, OnDestroy {
+export class PostCreateOrgComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
+  canDeactivate() {
+    console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
+    return this.form.dirty;
+  }
+
   pendingApproval: boolean = false;
   public authStatusObject;
 

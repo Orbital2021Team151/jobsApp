@@ -18,6 +18,7 @@ import { HighlightContentComponent1 } from './highlight-content/highlight-conten
 import { HighlightContentComponent2 } from './highlight-content/highlight-content-2/highlight-content-2.component';
 import { HighlightContentComponent3 } from './highlight-content/highlight-content-3/highlight-content-3.component';
 import { ExpiredSessionPage } from './errors/expired-session-error-page/expired-session-error-page.component';
+import { DirtycheckGuard } from './route-guards/dirtycheck.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -35,19 +36,21 @@ const routes: Routes = [
     path: 'create',
    component: PostCreateOrgComponent,
    canActivate: [AuthGuard],
+   canDeactivate: [DirtycheckGuard],
    data: { roles: ["External Organisation", "Student Organisation"]}
   },
   {
     path: 'createAdmin',
    component: PostCreateAdminComponent,
    canActivate: [AuthGuard],
+   canDeactivate: [DirtycheckGuard],
    data: { roles: ["Admin"]}
   },
 
   { path: 'login', component: LoginComponent, data: { animation: 'isRight' }},
   { path: 'signup', component: SignupGeneralComponent, data: { animation: 'isLeft' }},
   { path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
-  { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], data: { roles: ["Admin"] }},
+  { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { roles: ["Admin"] }},
   { path: 'highlightContent1', component: HighlightContentComponent1 },
   { path: 'highlightContent2', component: HighlightContentComponent2 },
   { path: 'highlightContent3', component: HighlightContentComponent3 },

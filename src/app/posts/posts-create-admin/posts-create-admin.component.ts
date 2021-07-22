@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { mimeType } from '../mime-type.validator';
 
 
@@ -13,6 +13,7 @@ import { AppliedBeforeDialog } from 'src/app/dialogs/applied-before-dialog/appli
 import { StartDateErrorDialog } from 'src/app/dialogs/start-date-error-dialog/start-date-error-dialog.component';
 import { PostSubmittedDialog } from 'src/app/dialogs/post-submitted-dialog/post-submitted-dialog.component';
 import { Router } from '@angular/router';
+import { ComponentCanDeactivate } from './can-deactivate.component';
 
 @Component({
   selector: 'app-post-create',
@@ -20,7 +21,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./posts-create-admin.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class PostCreateAdminComponent implements OnInit, OnDestroy {
+export class PostCreateAdminComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
+  canDeactivate() {
+    console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
+    return this.form.dirty;
+  }
+
   pendingApproval: boolean = false;
   public authStatusObject;
   private authStatusSub: Subscription;
