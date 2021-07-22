@@ -5,7 +5,10 @@ import { PostsService } from "../../posts/post.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ChangePasswordAlertComponent } from "../snackbars/change-password-snackbar/change-password-snackbar.component";
+import { UpdateBeneficiariesComponent } from "../snackbars/update-beneficiaries-snackbar/update-beneficiaries-snackbar.component";
 
 @Component({
   selector: "app-admin-board",
@@ -50,7 +53,19 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   reportedPosts: Post[] = [];
   hasReport: boolean = false;
 
-  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
+  /* Change Password FormGroup */
+  public changePasswordForm: FormGroup;
+  public currentPasswordControl = new FormControl(null);
+  public newPasswordControl = new FormControl(null);
+  public newPasswordConfirmControl = new FormControl(null);
+
+  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService, private _snackBar: MatSnackBar) {
+    this.changePasswordForm = new FormGroup({
+      currentPassword: this.currentPasswordControl,
+      newPassword: this.newPasswordControl,
+      newPasswordConfirm: this.newPasswordConfirmControl,
+    });
+  }
 
   ngOnInit() {
 
@@ -115,15 +130,33 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     //console.log("At student-board updateUser method now");
     //console.log(this.beneficiariesSelected);
     this.authService.update(this.beneficiariesSelected);
+    this.openUpdateBeneficiariesSnackBar();
   }
 
-  onChangePassword(form: NgForm) {
-    if (form.invalid) {
+  onChangePassword() {
+    if (this.changePasswordForm.invalid) {
       return;
     }
-    this.authService.changePassword(form.value.currentPassword, form.value.newPassword);
+
+    console.log(this.changePasswordForm.value);
+
+    this.authService.changePassword(this.changePasswordForm.value.currentPassword, this.changePasswordForm.value.newPassword);
+
     this.authService.getChangedPasswordListener().subscribe(res => {
-      this.requestedNewPassword = res;
+      this.openChangePasswordAlertSnackBar();
+      this.changePasswordForm.reset();
+    });
+  }
+
+  openChangePasswordAlertSnackBar() {
+    this._snackBar.openFromComponent(ChangePasswordAlertComponent, {
+      duration: 3 * 1000,
+    });
+  }
+
+  openUpdateBeneficiariesSnackBar() {
+    this._snackBar.openFromComponent(UpdateBeneficiariesComponent, {
+      duration: 3 * 1000,
     });
   }
 

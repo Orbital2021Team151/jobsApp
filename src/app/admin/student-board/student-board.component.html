@@ -11,12 +11,12 @@
       <a ngbNavLink>Change Password</a>
       <ng-template ngbNavContent>
         <div class="change-password-card">
-          <mat-card class="mat-elevation-z0 change-password-body">
+          <mat-card class="change-password-body">
             <mat-card-title class="change-password-title"
               >Change Password</mat-card-title
             >
 
-            <form #changePasswordForm="ngForm" class="changePasswordForm">
+            <form [formGroup]="changePasswordForm">
               <mat-form-field
                 appearance="outline"
                 class="change-password-form-field"
@@ -25,10 +25,9 @@
                   matInput
                   class="form-input"
                   [type]="hideCurrentPassword ? 'password' : 'text'"
-                  ngModel
+                  [formControl]="currentPasswordControl"
                   name="currentPassword"
                   required
-                  #currentPassword="ngModel"
                   placeholder="Current Password"
                 />
 
@@ -43,8 +42,7 @@
                     hideCurrentPassword ? "visibility_off" : "visibility"
                   }}</mat-icon>
                 </button>
-
-                <mat-error *ngIf="currentPassword.invalid"
+                <mat-error *ngIf="currentPasswordControl.errors?.invalid"
                   >Please enter your current password.</mat-error
                 >
               </mat-form-field>
@@ -56,59 +54,107 @@
                 <input
                   matInput
                   class="form-input"
-                  [type]="hideNewPassword ? 'password' : 'text'"
-                  ngModel
+                  [type]="hideCurrentPassword ? 'password' : 'text'"
+                  [formControl]="newPasswordControl"
                   name="newPassword"
                   required
-                  #newPassword="ngModel"
                   placeholder="New Password"
                 />
 
                 <button
                   mat-icon-button
                   matSuffix
-                  (click)="hideNewPassword = !hideNewPassword"
+                  (click)="hideCurrentPassword = !hideCurrentPassword"
                   [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hideNewPassword"
+                  [attr.aria-pressed]="hideCurrentPassword"
                 >
                   <mat-icon class="password-visibility-icon-button">{{
-                    hideNewPassword ? "visibility_off" : "visibility"
+                    hideCurrentPassword ? "visibility_off" : "visibility"
                   }}</mat-icon>
                 </button>
-
-                <mat-error *ngIf="newPassword.invalid"
-                  >Please provide us with your new password.</mat-error
+                <mat-error *ngIf="newPasswordControl.errors?.invalid"
+                  >Please enter your new password.</mat-error
                 >
               </mat-form-field>
 
+              <mat-form-field
+                appearance="outline"
+                class="change-password-form-field"
+              >
+                <input
+                  matInput
+                  class="form-input"
+                  [type]="hideCurrentPassword ? 'password' : 'text'"
+                  [formControl]="newPasswordConfirmControl"
+                  name="newPasswordConfirm"
+                  required
+                  placeholder="Confirm New Password"
+                />
+
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hideCurrentPassword = !hideCurrentPassword"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hideCurrentPassword"
+                >
+                  <mat-icon class="password-visibility-icon-button">{{
+                    hideCurrentPassword ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                <mat-error *ngIf="newPasswordConfirmControl.errors?.invalid"
+                  >Please enter confirm your new password.</mat-error
+                >
+              </mat-form-field>
+            </form>
+
+            <mat-card-footer class="change-password-footer">
+              <mat-error
+                *ngIf="
+                  !(
+                    newPasswordControl.value === newPasswordConfirmControl.value
+                  )
+                "
+              >
+                Please ensure that your new password and the confirm new
+                password matches
+              </mat-error>
+
               <button
+                *ngIf="
+                  !(
+                    newPasswordControl.value === newPasswordConfirmControl.value
+                  ) ||
+                  !newPasswordControl.value ||
+                  !newPasswordConfirmControl.value
+                "
                 mat-raised-button
-                color="primary"
-                (click)="onChangePassword(changePasswordForm)"
+                disabled
+                class="change-password-form-button"
               >
                 Change Password
               </button>
-            </form>
 
-            <div
-              *ngIf="requestedNewPassword"
-              class="alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>Password changed!</strong>
               <button
-                (click)="closeNotification()"
-                type="button"
-                class="btn-close"
-                data-dismiss="alert"
-                aria-label="Close"
+                *ngIf="
+                  newPasswordControl.value ===
+                    newPasswordConfirmControl.value &&
+                  newPasswordControl.value &&
+                  newPasswordConfirmControl.value
+                "
+                mat-raised-button
+                color="primary"
+                class="change-password-form-button"
+                (click)="onChangePassword()"
               >
+                Change Password
               </button>
-            </div>
+            </mat-card-footer>
           </mat-card>
         </div>
       </ng-template>
     </li>
+
     <li ngbNavItem="appliedPosts" class="nav-item">
       <a ngbNavLink>Posts that you have applied to</a>
       <ng-template ngbNavContent>
@@ -143,22 +189,23 @@
                 <mat-icon>event</mat-icon> {{ post.startDate | date }} to
                 {{ post.endDate | date }} <br />
                 <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                <mat-icon> location_on</mat-icon> {{ post.location || "No Location Specified" }} <br />
+                <mat-icon> location_on</mat-icon>
+                {{ post.location || "No Location Specified" }} <br />
                 <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
                 <br />
               </mat-card-content>
 
               <mat-footer class="post-card-footer">
                 <button
-                matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-                mat-icon-button
-                color="primary"
-                aria-label="Learn More"
-                (click)="onMoreInfo(content)">
-                <mat-icon
-                color="primary">
-                  help_outline
-                </mat-icon>
+                  matTooltip="Click for more information"
+                  [matTooltipShowDelay]="100"
+                  [matTooltipHideDelay]="100"
+                  mat-icon-button
+                  color="primary"
+                  aria-label="Learn More"
+                  (click)="onMoreInfo(content)"
+                >
+                  <mat-icon color="primary"> help_outline </mat-icon>
                 </button>
               </mat-footer>
             </mat-card>
@@ -166,7 +213,6 @@
 
           <ng-template #content let-modal>
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-
               <div class="px-4 py-3 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                   {{ post.title }}
@@ -175,93 +221,163 @@
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
                   by <i>{{ post.orgName }}</i>
                 </p>
-
               </div>
 
               <div class="border-t border-gray-200">
                 <dl>
-
-                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                      About
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <div
+                    class="
+                      bg-gray-50
+                      px-4
+                      py-3
+                      sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                    "
+                  >
+                    <dt class="text-sm font-medium text-gray-500">About</dt>
+                    <dd
+                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                    >
                       {{ post.content }}
                     </dd>
                   </div>
 
-                  <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div
+                    class="
+                      bg-white
+                      px-4
+                      py-3
+                      sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                    "
+                  >
                     <dt class="text-sm font-medium text-gray-500">
                       Point-Of-Contact's Name
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd
+                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                    >
                       {{ post.POC }}
                     </dd>
                   </div>
 
-                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div
+                    class="
+                      bg-gray-50
+                      px-4
+                      py-3
+                      sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                    "
+                  >
                     <dt class="text-sm font-medium text-gray-500">
                       Email Address
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd
+                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                    >
                       {{ post.email }}
                     </dd>
                   </div>
 
-                  <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div
+                    class="
+                      bg-white
+                      px-4
+                      py-3
+                      sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                    "
+                  >
                     <dt class="text-sm font-medium text-gray-500">
                       Preferred Skillset
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd
+                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                    >
                       {{ post.skills }}
                     </dd>
                   </div>
 
-                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div
+                    class="
+                      bg-gray-50
+                      px-4
+                      py-3
+                      sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                    "
+                  >
                     <dt class="text-sm font-medium text-gray-500">
                       Beneficiaries
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd
+                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                    >
                       {{ post.beneficiaries }}
                     </dd>
                   </div>
 
-                  <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                      Duration
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <div
+                    class="
+                      bg-white
+                      px-4
+                      py-3
+                      sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                    "
+                  >
+                    <dt class="text-sm font-medium text-gray-500">Duration</dt>
+                    <dd
+                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                    >
                       {{ post.startDate | date }} to {{ post.endDate | date }}
                     </dd>
                   </div>
 
-                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div
+                    class="
+                      bg-gray-50
+                      px-4
+                      py-3
+                      sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                    "
+                  >
                     <dt class="text-sm font-medium text-gray-500">
                       Commitment Information
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd
+                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                    >
                       {{ post.hoursRequired }}
                     </dd>
                   </div>
 
-                  <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                      Location
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <div
+                    class="
+                      bg-white
+                      px-4
+                      py-3
+                      sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                    "
+                  >
+                    <dt class="text-sm font-medium text-gray-500">Location</dt>
+                    <dd
+                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                    >
                       {{ post.location || "Not Specified" }}
                     </dd>
                   </div>
-
                 </dl>
               </div>
             </div>
           </ng-template>
-
-
         </div>
+
+        <div class="info-text" *ngIf="appliedPosts.length === 0">
+          <h1 class="info-text-header">No Applications</h1>
+          <p>
+            If you have applied for a post, it will show up here.
+          </p>
+        </div>
+
       </ng-template>
     </li>
+
     <li ngbNavItem="reportedPosts" class="nav-item">
       <a ngbNavLink>Posts that you have reported</a>
       <ng-template ngbNavContent>
@@ -286,22 +402,22 @@
                   <mat-icon>event</mat-icon> {{ post.startDate | date }} to
                   {{ post.endDate | date }} <br />
                   <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-                  <mat-icon> location_on</mat-icon> {{ post.location || "No Location Specified" }} <br/>
+                  <mat-icon> location_on</mat-icon>
+                  {{ post.location || "No Location Specified" }} <br />
                   <mat-icon>people_outline</mat-icon> Skillsets:
                   {{ post.skills }} <br />
                 </mat-card-content>
                 <mat-footer class="post-card-footer">
                   <button
-                  matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-                  mat-icon-button
-                  color="primary"
-                  aria-label="Learn More"
+                    matTooltip="Click for more information"
+                    [matTooltipShowDelay]="100"
+                    [matTooltipHideDelay]="100"
+                    mat-icon-button
+                    color="primary"
+                    aria-label="Learn More"
                     (click)="onMoreInfo(content)"
                   >
-                  <mat-icon
-                  color="primary">
-                    help_outline
-                  </mat-icon>
+                    <mat-icon color="primary"> help_outline </mat-icon>
                   </button>
                 </mat-footer>
               </mat-card>
@@ -309,7 +425,6 @@
 
             <ng-template #content let-modal>
               <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-
                 <div class="px-4 py-3 sm:px-6">
                   <h3 class="text-lg leading-6 font-medium text-gray-900">
                     {{ post.title }}
@@ -318,104 +433,175 @@
                   <p class="mt-1 max-w-2xl text-sm text-gray-500">
                     by <i>{{ post.orgName }}</i>
                   </p>
-
                 </div>
 
                 <div class="border-t border-gray-200">
                   <dl>
-
-                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt class="text-sm font-medium text-gray-500">
-                        About
-                      </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <div
+                      class="
+                        bg-gray-50
+                        px-4
+                        py-3
+                        sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                      "
+                    >
+                      <dt class="text-sm font-medium text-gray-500">About</dt>
+                      <dd
+                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                      >
                         {{ post.content }}
                       </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div
+                      class="
+                        bg-white
+                        px-4
+                        py-3
+                        sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                      "
+                    >
                       <dt class="text-sm font-medium text-gray-500">
                         Point-Of-Contact's Name
                       </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <dd
+                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                      >
                         {{ post.POC }}
                       </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div
+                      class="
+                        bg-gray-50
+                        px-4
+                        py-3
+                        sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                      "
+                    >
                       <dt class="text-sm font-medium text-gray-500">
                         Email Address
                       </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <dd
+                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                      >
                         {{ post.email }}
                       </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div
+                      class="
+                        bg-white
+                        px-4
+                        py-3
+                        sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                      "
+                    >
                       <dt class="text-sm font-medium text-gray-500">
                         Preferred Skillset
                       </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <dd
+                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                      >
                         {{ post.skills }}
                       </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div
+                      class="
+                        bg-gray-50
+                        px-4
+                        py-3
+                        sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                      "
+                    >
                       <dt class="text-sm font-medium text-gray-500">
                         Beneficiaries
                       </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <dd
+                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                      >
                         {{ post.beneficiaries }}
                       </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div
+                      class="
+                        bg-white
+                        px-4
+                        py-3
+                        sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                      "
+                    >
                       <dt class="text-sm font-medium text-gray-500">
                         Duration
                       </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <dd
+                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                      >
                         {{ post.startDate | date }} to {{ post.endDate | date }}
                       </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div
+                      class="
+                        bg-gray-50
+                        px-4
+                        py-3
+                        sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                      "
+                    >
                       <dt class="text-sm font-medium text-gray-500">
                         Commitment Information
                       </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <dd
+                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                      >
                         {{ post.hoursRequired }}
                       </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div
+                      class="
+                        bg-white
+                        px-4
+                        py-3
+                        sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
+                      "
+                    >
                       <dt class="text-sm font-medium text-gray-500">
                         Location
                       </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <dd
+                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                      >
                         {{ post.location || "Not Specified" }}
                       </dd>
                     </div>
-
                   </dl>
                 </div>
               </div>
             </ng-template>
-
           </div>
         </div>
 
-        <p class="info-text" *ngIf="hasReport === false">
-          No post with reports! :D
-        </p>
+        <div class="info-text" *ngIf="hasReport === false">
+          <h1 class="info-text-header">No Post Reported</h1>
+          <p>
+            If you have reported a post, it will show up here.
+          </p>
+        </div>
+
       </ng-template>
     </li>
+
     <li ngbNavItem="updateBeneficiaries" class="nav-item">
       <a ngbNavLink>Update Beneficiaries</a>
       <ng-template ngbNavContent>
         <div class="update-beneficiaries-card">
           <mat-card class="mat-elevation-z0 change-password-body">
             <mat-card-title class="change-password-title">
-              Update interested beneficiaries
+              Update Interested Beneficiaries
             </mat-card-title>
             <mat-form-field
               appearance="outline"
@@ -438,7 +624,11 @@
               </mat-select>
             </mat-form-field>
 
-            <button class="btn btn-outline-primary mb-2 mr-2" (click)="updateUser()">
+            <button
+            mat-raised-button
+            color="primary"
+              (click)="updateUser()"
+            >
               Update Interested Beneficiaries
             </button>
           </mat-card>

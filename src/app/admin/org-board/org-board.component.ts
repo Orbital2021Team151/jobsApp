@@ -6,8 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "src/app/auth/auth.service";
 import { formatDate } from "@angular/common";
 import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { ChangePasswordAlertComponent } from "../change-password-alert/change-password-alert.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ChangePasswordAlertComponent } from "../snackbars/change-password-snackbar/change-password-snackbar.component";
 
 @Component({
   selector: "app-org-board",
