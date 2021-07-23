@@ -196,18 +196,18 @@
 
         <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's image" />
 
-        <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
+        <mat-card-title class="post-card-title">{{post.title}}</mat-card-title>
         <mat-card-subtitle class="post-card-subtitle">
-          by <b>{{ post.orgName }}</b>
+          by <b>{{post.orgName}}</b>
         </mat-card-subtitle>
         <mat-card-content class="post-card-content">
-          <mat-icon>event</mat-icon> {{ post.startDate | date }} to
-          {{ post.endDate | date }} <br />
-          <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
+          <mat-icon>event</mat-icon> {{post.startDate | date}} to
+          {{post.endDate | date}} <br />
+          <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br />
           <mat-icon> location_on</mat-icon>
-          {{ post.location || "No Specific Location" }} <br />
+          {{post.location || "No Specific Location"}} <br />
           <mat-icon>people_outline</mat-icon> Skillsets:
-          {{ post.skills }}
+          {{post.skills}}
           <br />
         </mat-card-content>
 
@@ -287,11 +287,11 @@
 
         <div class="px-4 py-3 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
-            {{ post.title }}
+            {{post.title}}
           </h3>
 
           <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            by <i>{{ post.orgName }}</i>
+            by <i>{{post.orgName}}</i>
           </p>
 
         </div>
@@ -304,7 +304,7 @@
                 About
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.content }}
+                {{post.content}}
               </dd>
             </div>
 
@@ -313,7 +313,7 @@
                 Point-Of-Contact's Name
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.POC }}
+                {{post.POC}}
               </dd>
             </div>
 
@@ -322,7 +322,7 @@
                 Email Address
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.email }}
+                {{post.email}}
               </dd>
             </div>
 
@@ -331,7 +331,7 @@
                 Preferred Skillset
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.skills }}
+                {{post.skills}}
               </dd>
             </div>
 
@@ -340,7 +340,7 @@
                 Beneficiaries
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.beneficiaries }}
+                {{post.beneficiaries}}
               </dd>
             </div>
 
@@ -349,7 +349,7 @@
                 Duration
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.startDate | date }} to {{ post.endDate | date }}
+                {{post.startDate | date}} to {{post.endDate | date}}
               </dd>
             </div>
 
@@ -358,7 +358,7 @@
                 Commitment Information
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.hoursRequired }}
+                {{post.hoursRequired}}
               </dd>
             </div>
 
@@ -367,7 +367,7 @@
                 Location
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.location || "Not Specified" }}
+                {{post.location || "Not Specified"}}
               </dd>
             </div>
 
@@ -453,17 +453,17 @@
 
         <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's Image" />
 
-        <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
+        <mat-card-title class="post-card-title">{{post.title}}</mat-card-title>
         <mat-card-subtitle class="post-card-subtitle">
-          by <b>{{ post.orgName }}</b>
+          by <b>{{post.orgName}}</b>
         </mat-card-subtitle>
         <mat-card-content class="post-card-content">
-          <mat-icon>event</mat-icon> {{ post.startDate | date }} to
-          {{ post.endDate | date }} <br />
-          <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
+          <mat-icon>event</mat-icon> {{post.startDate | date}} to
+          {{post.endDate | date }} <br />
+          <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br />
           <mat-icon> location_on</mat-icon>
-          {{ post.location || "No Specific Location" }} <br />
-          <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
+          {{post.location || "No Specific Location"}} <br />
+          <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}}
           <br />
         </mat-card-content>
         <mat-footer class="post-card-footer">
@@ -499,7 +499,7 @@
 
     <ng-template #reportContent let-modal>
       <div class="modal-header">
-        <h4 class="modal-title">{{ post.title }}</h4>
+        <h4 class="modal-title">{{post.title}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -508,9 +508,9 @@
       <div class="modal-body">
         <div *ngFor="let report of post.reports" class="modal-body-report">
           <div>
-            <p>Student's Email: {{ report.email }}</p>
-            <p>Student's Contact: {{ report.contact }}</p>
-            <p>Student's Report: {{ report.content }}</p>
+            <p>Student's Email: {{report.email }}</p>
+            <p>Student's Contact: {{report.contact }}</p>
+            <p>Student's Report: {{report.content }}</p>
           </div>
         </div>
       </div>
@@ -568,11 +568,11 @@
 
         <div class="px-4 py-3 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
-            {{ post.title }}
+            {{post.title }}
           </h3>
 
           <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            by <i>{{ post.orgName }}</i>
+            by <i>{{post.orgName }}</i>
           </p>
 
         </div>
@@ -585,7 +585,7 @@
                 About
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.content }}
+                {{post.content}}
               </dd>
             </div>
 
@@ -594,7 +594,7 @@
                 Point-Of-Contact's Name
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.POC }}
+                {{post.POC}}
               </dd>
             </div>
 
@@ -603,7 +603,7 @@
                 Email Address
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.email }}
+                {{post.email}}
               </dd>
             </div>
 
@@ -612,7 +612,7 @@
                 Preferred Skillset
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.skills }}
+                {{post.skills}}
               </dd>
             </div>
 
@@ -621,7 +621,7 @@
                 Beneficiaries
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.beneficiaries }}
+                {{post.beneficiaries}}
               </dd>
             </div>
 
@@ -630,7 +630,7 @@
                 Duration
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.startDate | date }} to {{ post.endDate | date }}
+                {{post.startDate | date}} to {{post.endDate | date}}
               </dd>
             </div>
 
@@ -639,7 +639,7 @@
                 Commitment Information
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.hoursRequired }}
+                {{post.hoursRequired}}
               </dd>
             </div>
 
@@ -648,7 +648,7 @@
                 Location
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ post.location }}
+                {{post.location}}
               </dd>
             </div>
 
@@ -776,16 +776,16 @@
 
 <ng-template #studentsReport let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">{{ post.title }}</h4>
+    <h4 class="modal-title">{{post.title}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div *ngFor="let report of post.reports">
-      <p>Email: {{ report.email }}</p>
-      <p>Contact Number: {{ report.contact }}</p>
-      <p>Reason for Reporting: {{ report.content }}</p>
+      <p>Email: {{report.email}}</p>
+      <p>Contact Number: {{report.contact}}</p>
+      <p>Reason for Reporting: {{report.content}}</p>
     </div>
   </div>
   <div class="modal-footer">

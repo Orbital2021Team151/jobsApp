@@ -192,18 +192,18 @@
           alt="Placeholder image">
 
           <mat-card-title class="post-card-title"
-          >{{ post.title }}
+          >{{post.title}}
           </mat-card-title>
 
           <mat-card-subtitle class="post-card-subtitle">
-            by <b>{{ post.orgName }}</b>
+            by <b>{{post.orgName}}</b>
             </mat-card-subtitle>
 
           <mat-card-content class="post-card-content">
-            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
-            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
-            <mat-icon> location_on</mat-icon> {{ post.location || "Not Specified" }} <br>
-            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+            <mat-icon>event</mat-icon>  {{post.startDate | date}} to {{post.endDate | date}} <br>
+            <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br>
+            <mat-icon> location_on</mat-icon> {{post.location || "Not Specified"}} <br>
+            <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}} <br>
 
           </mat-card-content>
 
@@ -282,11 +282,11 @@
 
           <div class="px-4 py-3 sm:px-6">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{ post.title }}
+              {{post.title}}
             </h3>
 
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
-              by <i>{{ post.orgName }}</i>
+              by <i>{{post.orgName}}</i>
             </p>
 
           </div>
@@ -299,7 +299,7 @@
                   About
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.content }}
+                  {{post.content}}
                 </dd>
               </div>
 
@@ -308,7 +308,7 @@
                   Point-Of-Contact's Name
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.POC }}
+                  {{post.POC}}
                 </dd>
               </div>
 
@@ -317,7 +317,7 @@
                   Email Address
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.email }}
+                  {{post.email}}
                 </dd>
               </div>
 
@@ -326,7 +326,7 @@
                   Preferred Skillset
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.skills }}
+                  {{post.skills}}
                 </dd>
               </div>
 
@@ -335,7 +335,7 @@
                   Beneficiaries
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.beneficiaries }}
+                  {{post.beneficiaries}}
                 </dd>
               </div>
 
@@ -344,7 +344,7 @@
                   Duration
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.startDate | date }} to {{ post.endDate | date }}
+                  {{post.startDate | date}} to {{post.endDate | date}}
                 </dd>
               </div>
 
@@ -353,7 +353,7 @@
                   Commitment Information
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.hoursRequired }}
+                  {{post.hoursRequired}}
                 </dd>
               </div>
 
@@ -362,7 +362,7 @@
                   Location
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.location }}
+                  {{post.location}}
                 </dd>
               </div>
 
@@ -455,18 +455,18 @@
 
 
           <mat-card-title class="post-card-title">
-            {{ post.title }}
+            {{post.title}}
           </mat-card-title>
 
           <mat-card-subtitle class="post-card-subtitle">
-            by <b>{{ post.orgName }}</b>
+            by <b>{{post.orgName}}</b>
           </mat-card-subtitle>
 
           <mat-card-content class="post-card-content">
-            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
-            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
-            <mat-icon> location_on</mat-icon> {{ post.location || "Not Specified" }} <br>
-            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+            <mat-icon>event</mat-icon>  {{post.startDate | date}} to {{post.endDate | date}} <br>
+            <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br>
+            <mat-icon> location_on</mat-icon> {{post.location || "Not Specified"}} <br>
+            <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}} <br>
           </mat-card-content>
 
           <mat-footer class="post-card-footer">
@@ -491,7 +491,7 @@
             -->
 
             <button
-            matTooltip="Click to remove / Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+            matTooltip="Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             aria-label="Mark as Done"
               (click)="onCompletePrompt(completeContentWithApplicants)"
@@ -517,7 +517,7 @@
 
       <ng-template #applicantContent let-modal>
         <div class="modal-header">
-          <h4 class="modal-title">{{ post.title }}</h4>
+          <h4 class="modal-title">{{post.title}}</h4>
           <button
             type="button"
             class="close"
@@ -533,13 +533,13 @@
 
             <div class="modal-body-content-student">
               <p>
-                Student's Email: {{ student.email }}
+                Student's Email: {{student.email}}
               </p>
               <p>
-                Student's Contact: {{ student.contact }}
+                Student's Contact: {{student.contact}}
               </p>
               <p>
-                Student's Application: {{ student.content }}
+                Student's Application: {{student.content}}
               </p>
             </div>
 
@@ -628,11 +628,11 @@
 
           <div class="px-4 py-3 sm:px-6">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{ post.title }}
+              {{post.title}}
             </h3>
 
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
-              by <i>{{ post.orgName }}</i>
+              by <i>{{post.orgName}}</i>
             </p>
 
           </div>
@@ -645,7 +645,7 @@
                   About
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.content }}
+                  {{post.content}}
                 </dd>
               </div>
 
@@ -654,7 +654,7 @@
                   Point-Of-Contact's Name
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.POC }}
+                  {{post.POC}}
                 </dd>
               </div>
 
@@ -663,7 +663,7 @@
                   Email Address
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.email }}
+                  {{post.email}}
                 </dd>
               </div>
 
@@ -672,7 +672,7 @@
                   Preferred Skillset
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.skills }}
+                  {{post.skills}}
                 </dd>
               </div>
 
@@ -681,7 +681,7 @@
                   Beneficiaries
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.beneficiaries }}
+                  {{post.beneficiaries}}
                 </dd>
               </div>
 
@@ -690,7 +690,7 @@
                   Duration
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.startDate | date }} to {{ post.endDate | date }}
+                  {{post.startDate | date}} to {{post.endDate | date}}
                 </dd>
               </div>
 
@@ -699,7 +699,7 @@
                   Commitment Information
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.hoursRequired }}
+                  {{post.hoursRequired}}
                 </dd>
               </div>
 
@@ -708,7 +708,7 @@
                   Location
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.location }}
+                  {{post.location}}
                 </dd>
               </div>
 
@@ -849,24 +849,24 @@
 
 
           <mat-card-title class="post-card-title">
-            {{ post.title }}
+            {{post.title}}
           </mat-card-title>
 
           <mat-card-subtitle class="post-card-subtitle">
-            by <b>{{ post.orgName }}</b>
+            by <b>{{post.orgName}}</b>
           </mat-card-subtitle>
 
           <mat-card-content class="post-card-content">
-            <mat-icon>event</mat-icon>  {{ post.startDate | date }} to {{ post.endDate | date }} <br>
-            <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br>
-            <mat-icon> location_on</mat-icon> {{ post.location || "Not Specified" }} <br>
-            <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }} <br>
+            <mat-icon>event</mat-icon>  {{post.startDate | date}} to {{post.endDate | date}} <br>
+            <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br>
+            <mat-icon> location_on</mat-icon> {{post.location || "Not Specified"}} <br>
+            <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}} <br>
           </mat-card-content>
 
           <mat-footer class="post-card-footer">
 
             <button
-            matTooltip="Remove Post / Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+            matTooltip="Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             color="primary"
             aria-label="Remove Post / Mark as Completed"
@@ -893,7 +893,7 @@
 
       <ng-template #applicantContent let-modal>
         <div class="modal-header">
-          <h4 class="modal-title">{{ post.title }}</h4>
+          <h4 class="modal-title">{{post.title }}</h4>
           <button
             type="button"
             class="close"
@@ -908,13 +908,13 @@
           <div *ngFor="let student of post.students">
             <div style="border: thin solid black; margin-top: 0.5rem; margin-bottom: 0.5rem;">
               <p style="text-align: center">
-                Student's Email: {{ student.email }}
+                Student's Email: {{student.email}}
               </p>
               <p style="text-align: center">
-                Student's Contact: {{ student.contact }}
+                Student's Contact: {{student.contact}}
               </p>
               <p style="text-align: center">
-                Student's Application: {{ student.content }}
+                Student's Application: {{student.content}}
               </p>
             </div>
           </div>
@@ -977,11 +977,11 @@
 
           <div class="px-4 py-3 sm:px-6">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{ post.title }}
+              {{post.title}}
             </h3>
 
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
-              by <i>{{ post.orgName }}</i>
+              by <i>{{post.orgName}}</i>
             </p>
 
           </div>
@@ -994,7 +994,7 @@
                   About
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.content }}
+                  {{post.content}}
                 </dd>
               </div>
 
@@ -1003,7 +1003,7 @@
                   Point-Of-Contact's Name
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.POC }}
+                  {{post.POC}}
                 </dd>
               </div>
 
@@ -1012,7 +1012,7 @@
                   Email Address
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.email }}
+                  {{post.email}}
                 </dd>
               </div>
 
@@ -1021,7 +1021,7 @@
                   Preferred Skillset
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.skills }}
+                  {{post.skills}}
                 </dd>
               </div>
 
@@ -1030,7 +1030,7 @@
                   Beneficiaries
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.beneficiaries }}
+                  {{post.beneficiaries}}
                 </dd>
               </div>
 
@@ -1039,7 +1039,7 @@
                   Duration
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.startDate | date }} to {{ post.endDate | date }}
+                  {{post.startDate | date}} to {{post.endDate | date}}
                 </dd>
               </div>
 
@@ -1048,7 +1048,7 @@
                   Commitment Information
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.hoursRequired }}
+                  {{post.hoursRequired}}
                 </dd>
               </div>
 
@@ -1057,7 +1057,7 @@
                   Location
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{ post.location }}
+                  {{post.location}}
                 </dd>
               </div>
 

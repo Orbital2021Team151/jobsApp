@@ -47,3 +47,8 @@ button {
   display: block;
   margin: 0 auto;
 }
+
+.highlight-image {
+  object-fit: cover;
+  max-width: 50%;
+}

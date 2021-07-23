@@ -1,14 +1,29 @@
-img {
-    margin: auto;
-    display: block;
-    margin-top: 10%;
+/*
+.w3-container {
+    box-shadow: none;
+    background-color: inherit;
+    color: inherit;
 }
 
-.text {
-    position: relative;
-    width: 50%;
-    left: 20%;
-    text-align: justify;
+body {
+    background-color: inherit;
+    color: inherit;
+}
+*/
+
+img {
+  margin: 10% auto auto auto;
+  display: block;
+}
+
+.content-body {
+
+  /*
+  position: relative;
+  width: 50%;
+  left: 20%;
+  text-align: justify;
+  */
 }
 
 .title {
@@ -23,10 +38,17 @@ img {
 }
 
 button {
-    left: 20%;
+  /*
+  left: 20%;
+  */
 }
 
 .everything {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.highlight-image {
+  object-fit: cover;
+  max-width: 50%;
 }
