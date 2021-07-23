@@ -340,6 +340,7 @@ export class PostsService {
       const json2csvParser = new Json2csvParser({ header: true});
       const csvData = json2csvParser.parse(dataArray);
 
+      //retrieve posts from db
       let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
         let dwldLink = document.createElement("a");
         let url = URL.createObjectURL(blob);
@@ -347,6 +348,8 @@ export class PostsService {
         if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
             dwldLink.setAttribute("target", "_blank");
         }
+
+        //downloading starts here
         dwldLink.setAttribute("href", url);
         dwldLink.setAttribute("download", "history - " + extensionName + ".csv");
         dwldLink.style.visibility = "hidden";
