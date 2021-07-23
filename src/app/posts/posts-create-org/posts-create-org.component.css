@@ -238,3 +238,23 @@ mat-icon {
   color: inherit;
   border-color: #5c8aee;
 }
+
+/* MISCELLANEOUS
+-------------------------------------------------- */
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.image-upload-button {
+  color: inherit;
+  border-color: #5c8aee;
+}
+
+.nav-button {
+  margin-left: 1rem;
+}
+
+dd {
+  white-space: pre-wrap;
+}

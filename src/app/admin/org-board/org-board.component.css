@@ -401,7 +401,7 @@ a {
 }
 
 .navbarmatcard {
-  width: 14%;
+  width: 14.5%;
   background-color: #FFFFFF;
   margin-top: 1%;
   margin-left: 1%;
@@ -467,6 +467,12 @@ a {
   color: inherit;
   opacity: 0.5;
 }
+
+dd {
+  white-space: pre-wrap;
+}
+
+
 
 /* SMALL SCREEN SIZE //TODO: NOT DONE YET
 -------------------------------------------------- */

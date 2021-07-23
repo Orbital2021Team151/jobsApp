@@ -17,7 +17,7 @@ import { PostsService } from '../post.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PostSubmittedDialog } from 'src/app/dialogs/post-submitted-dialog/post-submitted-dialog.component';
 import { Router } from '@angular/router';
-import { ComponentCanDeactivate } from '../posts-create-admin/can-deactivate.component';
+import { ComponentCanDeactivate } from '../../route-guards/can-deactivate.component';
 
 @Component({
   selector: 'app-post-create',
@@ -28,7 +28,7 @@ import { ComponentCanDeactivate } from '../posts-create-admin/can-deactivate.com
 export class PostCreateOrgComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   canDeactivate() {
     console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
-    return this.form.dirty;
+    return this.POCInformationGroup.pristine && this.postInformationGroup.pristine && this.postDurationGroup.pristine;
   }
 
   pendingApproval: boolean = false;
@@ -441,19 +441,19 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy, ComponentCanDe
       console.log("There are no images!");
     }
 
+    this.POCInformationGroup.reset();
+    this.postInformationGroup.reset();
+    this.postDurationGroup.reset();
 
     this.pendingApproval = true;
 
-    if (this.postInformationGroup.value.image) {
+    if (post.image) {
       this.postsService.addPost(post);
     } else {
       this.postsService.addPostNoImage(post);
     }
 
-    // this.dialog.open(PostSubmittedDialog);
-    this.POCInformationGroup.reset();
-    this.postInformationGroup.reset();
-    this.postDurationGroup.reset();
+
     this.imagePreview = '';
     return true;
   }
