@@ -75,6 +75,7 @@ import { HighlightSubmittedDialog } from './dialogs/highlight-submitted-dialog/h
 import { PostRejectedDialog } from './dialogs/post-rejected-dialog/post-rejected-dialog.component';
 import { PostCompletedDialog } from './dialogs/post-completed-dialog/post-completed-dialog.component';
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -151,6 +152,7 @@ import { MatChipList, MatChipsModule } from '@angular/material/chips';
     MatPasswordStrengthModule,
     MatTooltipModule,
     MatChipsModule,
+    ScrollingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -4,7 +4,8 @@
 
 
   <mat-card class="post-create-body">
-    <mat-horizontal-stepper linear="Enable linear mode" #stepper class="post-create-stepper" (selectionChange)="generatePreview()">
+    <mat-horizontal-stepper linear="Enable linear mode" #stepper class="post-create-stepper"
+      (selectionChange)="generatePreview()">
       <mat-step [stepControl]="POCInformationGroup">
         <form [formGroup]="POCInformationGroup">
           <ng-template matStepLabel>
@@ -13,85 +14,46 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Organisation's Name</mat-label>
-            <input
-              matInput
-              class="form-input"
-              type="text"
-              name="orgName"
-              required
-              [formControl]="orgNameControl"
-              placeholder="eg Standard Oil Co."
-            />
-            <mat-error *ngIf="orgNameControl.errors?.required"
-              >Please enter provide us the name of the Organisation you are helping to create the post for.</mat-error
-            >
+            <input matInput class="form-input" type="text" name="orgName" required [formControl]="orgNameControl"
+              placeholder="eg Standard Oil Co." />
+            <mat-error *ngIf="orgNameControl.errors?.required">Please enter provide us the name of the Organisation you
+              are helping to create the post for.</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>POC's UEN</mat-label>
-            <input
-              matInput
-              class="form-input"
-              type="text"
-              name="uen"
-              required
-              [formControl]="uenControl"
-              placeholder="eg UEN7654321"
-            />
-            <mat-error *ngIf="uenControl.errors?.invalid"
-              >Please enter provide us the name of your Point-Of-Contact.</mat-error
-            >
+            <input matInput class="form-input" type="text" name="uen" required [formControl]="uenControl"
+              placeholder="eg UEN7654321" />
+            <mat-error *ngIf="uenControl.errors?.invalid">Please enter provide us the name of your Point-Of-Contact.
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>POC's Email Address</mat-label>
-            <input
-              matInput
-              class="form-input"
-              type="email"
-              name="email"
-              required
-              [formControl]="emailControl"
-              placeholder="eg jeff@amazon.com"
-              email
-            />
+            <input matInput class="form-input" type="email" name="email" required [formControl]="emailControl"
+              placeholder="eg jeff@amazon.com" email />
             <mat-error *ngIf="emailControl.errors?.invalid">Please provide us your email.</mat-error>
           </mat-form-field>
 
-          <a href="https://verify-email.org/" target="_blank" style="margin-top: 0rem;">Check if email exists (might not be accurate)</a>
+          <a href="https://verify-email.org/" target="_blank" style="margin-top: 0rem;">Check if email exists (might not
+            be accurate)</a>
 
           <mat-form-field appearance="outline">
             <mat-label>POC's Name</mat-label>
-            <input
-              matInput
-              class="form-input"
-              type="text"
-              name="POC"
-              required
-              [formControl]="pocControl"
-              placeholder="eg Jeff Bezos"
-            />
-            <mat-error *ngIf="pocControl.errors?.invalid"
-              >Please enter provide us the name of your Point-Of-Contact.</mat-error
-            >
+            <input matInput class="form-input" type="text" name="POC" required [formControl]="pocControl"
+              placeholder="eg Jeff Bezos" />
+            <mat-error *ngIf="pocControl.errors?.invalid">Please enter provide us the name of your Point-Of-Contact.
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>POC's Contact Number</mat-label>
-            <input
-              matInput
-              class="form-input"
-              type="number"
-              name="phoneNumber"
-              required
-              [formControl]="phoneNumberControl"
-              placeholder="eg 98761234"
+            <input matInput class="form-input" type="number" name="phoneNumber" required
+              [formControl]="phoneNumberControl" placeholder="eg 98761234"
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              maxlength="8"
-            />
-            <mat-error *ngIf="phoneNumberControl.errors?.invalid"
-              >Please provide us your Point-Of-Contact's phone number.</mat-error
-            >
+              maxlength="8" />
+            <mat-error *ngIf="phoneNumberControl.errors?.invalid">Please provide us your Point-Of-Contact's phone
+              number.</mat-error>
           </mat-form-field>
         </form>
 
@@ -106,40 +68,25 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Volunteer Opportunity Title (Max. 100 Characters)</mat-label>
-            <input
-              matInput
-              class="form-input"
-              type="text"
-              name="title"
-              [formControl]="titleControl"
-              required
+            <input matInput class="form-input" type="text" name="title" [formControl]="titleControl" required
               placeholder="eg Weekend Underprivileged Teacher"
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              maxlength="100"
-            />
-            <mat-error *ngIf="titleControl.errors?.invalid"
-              >Please provide us the job's title.</mat-error
-            >
+              maxlength="100" />
+            <mat-error *ngIf="titleControl.errors?.invalid">Please provide us the job's title.</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Volunteer Opportunity Description (minimum 100 characters)</mat-label>
-            <textarea
-              matInput
-              class="form-input"
-              name="content"
-              rows="10"
-              required
-              [formControl]="contentControl"
+            <textarea matInput class="form-input" name="content" rows="10" required [formControl]="contentControl"
               minlength="100"
-              placeholder="Please give a short description of the volunteer opportunity (minimum 100 characters)."
-            ></textarea>
-            <mat-error *ngIf="contentControl.errors?.invalid"
-              >Please give us a description of the job (minimum 100 words).</mat-error
-            >
+              placeholder="Please give a short description of the volunteer opportunity (minimum 100 characters)."></textarea>
+            <mat-error *ngIf="contentControl.errors?.invalid">Please give us a description of the job (minimum 100
+              words).</mat-error>
+
+            <mat-hint> Preferred Skills </mat-hint>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline">
             <mat-label>Preferred Skills</mat-label>
             <mat-select
               required
@@ -156,33 +103,37 @@
             <mat-error *ngIf="skillsControl.errors?.invalid"
               >Please select the skill(s) an applicant require for the job.</mat-error
             >
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <mat-selection-list required [formControl]="skillsControl">
+            <mat-list-option *ngFor="let skill of skills" [value]="skill">
+              {{skill}}
+            </mat-list-option>
+          </mat-selection-list>
+          <mat-error *ngIf="skillsControl.errors?.invalid"
+              >Please select the skill(s) that an applicant require for the job.</mat-error
+          >
+
 
           <mat-form-field appearance="outline">
             <mat-label>Beneficiaries</mat-label>
-            <mat-select
-              required
-              [formControl]="beneficiariesControl"
-              name="beneficiariesSelected"
-            >
-              <mat-option
-                *ngFor="let beneficiary of beneficiaries"
-                [value]="beneficiary"
-                >{{ beneficiary }}</mat-option
-              >
+            <mat-select required [formControl]="beneficiariesControl" name="beneficiariesSelected">
+              <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{ beneficiary }}</mat-option>
             </mat-select>
-            <mat-error *ngIf="beneficiariesControl.errors?.invalid"
-              >Please provide us the main beneficiaries of this opportunity.</mat-error
-            >
+            <mat-error *ngIf="beneficiariesControl.errors?.invalid">Please provide us the main beneficiaries of this
+              opportunity.</mat-error>
           </mat-form-field>
 
           <div>
-            <button *ngIf="!imagePreview" mat-stroked-button type="button" (click)="filePicker.click()" class="image-upload-button">Upload an image <i>(Optional)</i></button>
-            <button *ngIf="imagePreview" mat-stroked-button type="button" (click)="removeImage()" class="image-upload-button">Remove Image</button>
+            <button *ngIf="!imagePreview" mat-stroked-button type="button" (click)="filePicker.click()"
+              class="image-upload-button">Upload an image <i>(Optional)</i></button>
+            <button *ngIf="imagePreview" mat-stroked-button type="button" (click)="removeImage()"
+              class="image-upload-button">Remove Image</button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
           </div>
 
-          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && postInformationGroup.get('image').valid">
+          <div class="image-preview"
+            *ngIf="imagePreview !== '' && imagePreview && postInformationGroup.get('image').valid">
             <img [src]="imagePreview" [alt]="postInformationGroup.value.titleControl">
           </div>
         </form>
@@ -213,50 +164,28 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Volunteer Type</mat-label>
-            <mat-select
-              required
-              [formControl]="opportunitySelectedControl"
-              name="opportunitySelected"
-            >
-              <mat-option
-                *ngFor="let opportunity of opportunities"
-                [value]="opportunity"
-                >{{ opportunity }}</mat-option
-              >
+            <mat-select required [formControl]="opportunitySelectedControl" name="opportunitySelected">
+              <mat-option *ngFor="let opportunity of opportunities" [value]="opportunity">{{ opportunity }}</mat-option>
             </mat-select>
-            <mat-error *ngIf="opportunitySelectedControl.errors?.invalid"
-              >Please indicate the frequency of this job.</mat-error
-            >
+            <mat-error *ngIf="opportunitySelectedControl.errors?.invalid">Please indicate the frequency of this job.
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Choose a start date</mat-label>
-            <input
-            matInput
-            class="form-input"
-            [matDatepicker]="startDatePicker"
-            placeholder="MM/DD/YYYY"
-            [formControl]="startDateControl"
-            name="startDate"
-            required
-            >
+            <input matInput class="form-input" [matDatepicker]="startDatePicker" placeholder="MM/DD/YYYY"
+              [formControl]="startDateControl" name="startDate" required>
             <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #startDatePicker></mat-datepicker>
             <mat-error *ngIf="startDateControl.errors?.invalid">
               Please pick a start date.
-              </mat-error>
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Choose an end date</mat-label>
-            <input
-            matInput
-            class="form-input"
-            [matDatepicker]="endDatePicker"
-            placeholder="MM/DD/YYYY"
-            [formControl]="endDateControl"
-                name="endDate"
-                required>
+            <input matInput class="form-input" [matDatepicker]="endDatePicker" placeholder="MM/DD/YYYY"
+              [formControl]="endDateControl" name="endDate" required>
             <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #endDatePicker></mat-datepicker>
             <mat-error *ngIf="endDateControl.errors?.invalid">
@@ -264,37 +193,24 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-error *ngIf="(startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value)">
+          <mat-error
+            *ngIf="(startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value)">
             You cannot proceed if the start date is be later than the end date!
           </mat-error>
 
           <mat-form-field appearance="outline">
             <mat-label>Commitment Information</mat-label>
-            <input
-              matInput
-              class="form-input"
-              type="text"
-              name="hoursRequired"
-              required
+            <input matInput class="form-input" type="text" name="hoursRequired" required
               [formControl]="hoursRequiredControl"
-              placeholder="eg 1hr per week, Monday to Friday, anytime between 8am - 3pm"
-            />
-            <mat-error *ngIf="hoursRequiredControl.errors?.invalid"
-              >Please provide the details on the commitment required of the student.</mat-error
-            >
+              placeholder="eg 1hr per week, Monday to Friday, anytime between 8am - 3pm" />
+            <mat-error *ngIf="hoursRequiredControl.errors?.invalid">Please provide the details on the commitment
+              required of the student.</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Location <i>(Optional)</i></mat-label>
-            <mat-select
-              [formControl]="locationControl"
-              name="locationSelected"
-            >
-              <mat-option
-                *ngFor="let location of locations"
-                [value]="location"
-                >{{ location }}</mat-option
-              >
+            <mat-select [formControl]="locationControl" name="locationSelected">
+              <mat-option *ngFor="let location of locations" [value]="location">{{ location }}</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -306,22 +222,11 @@
           <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
 
 
-          <button
-          mat-raised-button
-          disabled
-          matStepperNext
-          class="nav-button"
-          *ngIf="(startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value)"
-          >Next</button>
+          <button mat-raised-button disabled matStepperNext class="nav-button"
+            *ngIf="(startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value)">Next</button>
 
-          <button
-          mat-raised-button
-          color="primary"
-          matStepperNext
-          (click)="generatePreview()"
-          class="nav-button"
-          *ngIf="! ((startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value))"
-          >Next</button>
+          <button mat-raised-button color="primary" matStepperNext (click)="generatePreview()" class="nav-button"
+            *ngIf="! ((startDateControl.value && endDateControl.value) && (startDateControl.value > endDateControl.value))">Next</button>
 
         </div>
       </mat-step>
@@ -333,21 +238,11 @@
           <ng-container>
             <section class="cards">
               <mat-card class="published-post-card">
-                <img
-                  *ngIf="!postPreview.imagePath"
-                  mat-card-image
-                  class="card-image"
-                  src="../../../assets/dark-background-placeholder.png"
-                  alt="Placeholder image for post"
-                />
+                <img *ngIf="!postPreview.imagePath" mat-card-image class="card-image"
+                  src="../../../assets/dark-background-placeholder.png" alt="Placeholder image for post" />
 
-                <img
-                  *ngIf="postPreview.imagePath"
-                  mat-card-image
-                  class="card-image"
-                  src="{{postPreview.imagePath}}"
-                  alt="Post's image"
-                />
+                <img *ngIf="postPreview.imagePath" mat-card-image class="card-image" src="{{postPreview.imagePath}}"
+                  alt="Post's image" />
 
 
                 <mat-card-title class="post-card-title">
@@ -365,14 +260,9 @@
                   <br />
                 </mat-card-content>
                 <mat-card-footer class="post-card-footer">
-                  <button
-                    matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-                    mat-icon-button
-                    aria-label="Learn More"
-                    color="primary"
-                    class="post-card-footer-button"
-                    (click)="onMoreInfo(content)"
-                  >
+                  <button matTooltip="Click for more information" [matTooltipShowDelay]="100"
+                    [matTooltipHideDelay]="100" mat-icon-button aria-label="Learn More" color="primary"
+                    class="post-card-footer-button" (click)="onMoreInfo(content)">
                     <mat-icon color="primary">help_outline</mat-icon>
                   </button>
                 </mat-card-footer>
@@ -490,18 +380,17 @@
 
       <mat-step label="Terms and Conditions">
 
-        <div
-        class="toc-header">
+        <div class="toc-header">
           <h4>Terms and Conditions</h4>
         </div>
-        <div
-        class="toc-body">
+        <div class="toc-body">
           <p>Terms and Conditions of Use</p>
 
           <br />
           <p>1. Agreement to Terms</p>
           <p>
-            All access of any area of <a href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/" target="_blank">CCSGP Jobs Portal</a> ("The Website") is
+            All access of any area of <a href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/"
+              target="_blank">CCSGP Jobs Portal</a> ("The Website") is
             governed by the terms and conditions below ("Terms"). If you do not accept
             any of these Terms, exit immediately. Continue only if you accept these
             Terms. In these Terms, the words "we", "our" and "us" refers to the
@@ -631,7 +520,8 @@
 
         <div class="step-footer">
           <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
-          <button mat-raised-button color="primary" (click)="checkbox.valid && onAddPostReactive() && openDialog()" class="nav-button">Submit</button>
+          <button mat-raised-button color="primary" (click)="checkbox.valid && onAddPostReactive() && openDialog()"
+            class="nav-button">Submit</button>
         </div>
       </mat-step>
 

@@ -258,3 +258,8 @@ mat-icon {
 dd {
   white-space: pre-wrap;
 }
+
+mat-selection-list {
+  max-height: 200px;
+  overflow: auto;
+}

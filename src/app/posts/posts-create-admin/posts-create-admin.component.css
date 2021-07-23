@@ -183,3 +183,17 @@ mat-icon {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
+
+/* skills mat card
+-------------------------------------------------- */
+
+.skills-mat-card {
+  height: 20%;
+  overflow: hidden;
+}
+
+.skills-mat-card-content {
+  max-height: 100%;
+  position: absolute;
+  overflow: auto;
+}

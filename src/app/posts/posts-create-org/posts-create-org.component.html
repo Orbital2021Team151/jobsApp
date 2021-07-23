@@ -613,9 +613,10 @@
             <mat-error *ngIf="contentControl.errors?.invalid"
               >Please give us a description of the job (minimum 100 words).</mat-error
             >
+            <mat-hint> Preferred Skills </mat-hint>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline">
             <mat-label>Preferred Skills</mat-label>
             <mat-select
               required
@@ -632,7 +633,16 @@
             <mat-error *ngIf="skillsControl.errors?.invalid"
               >Please select the skill(s) an applicant require for the job.</mat-error
             >
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <mat-selection-list required [formControl]="skillsControl">
+            <mat-list-option *ngFor="let skill of skills" [value]="skill">
+              {{skill}}
+            </mat-list-option>
+          </mat-selection-list>
+          <mat-error *ngIf="skillsControl.errors?.invalid"
+              >Please select the skill(s) that an applicant require for the job.</mat-error
+          >
 
           <mat-form-field appearance="outline">
             <mat-label>Beneficiaries</mat-label>

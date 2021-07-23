@@ -5,17 +5,26 @@
     <div class="page-container">
       <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
         <li ngbNavItem="changePassword" class="nav-item">
-          <a ngbNavLink>Change Password</a>
+          <a ngbNavLink>
+            <mat-icon>lock</mat-icon>
+            Change Password
+          </a>
           <ng-template ngbNavContent> </ng-template>
         </li>
 
         <li ngbNavItem="downloadCSV" class="nav-item">
-          <a ngbNavLink>Download CSV</a>
+          <a ngbNavLink>
+            <mat-icon>cloud_download</mat-icon>
+            Download CSV
+          </a>
           <ng-template ngbNavContent> </ng-template>
         </li>
 
         <li ngbNavItem="postsPendingApproval" class="nav-item">
-          <a ngbNavLink>Posts Pending Your Approval</a>
+          <a ngbNavLink>
+            <mat-icon>hourglass_empty</mat-icon>
+            Posts Pending Your Approval
+          </a>
           <ng-template ngbNavContent>
             <!--
             <div class="info-text">
@@ -28,7 +37,10 @@
         </li>
 
         <li ngbNavItem="postsWithReports" class="nav-item">
-          <a ngbNavLink>Posts with reports</a>
+          <a ngbNavLink>
+            <mat-icon>report_problem</mat-icon>
+            Posts with reports
+          </a>
           <ng-template ngbNavContent> </ng-template>
         </li>
       </ul>
@@ -496,7 +508,7 @@
     </section>
 
     <ng-template #reportContent let-modal>
-      <div class="modal-header">
+      <!-- <div class="modal-header">
         <h4 class="modal-title">{{post.title}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
@@ -516,6 +528,55 @@
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
           Close
         </button>
+      </div> -->
+
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="closelearnmore">
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+          ></button>
+        </div>
+        <div class="px-4 py-3 sm:px-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            {{post.title }}
+          </h3>
+    
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            by <i>{{post.orgName }}</i>
+          </p>
+    
+        </div>
+    
+        <div class="border-t border-gray-200" *ngFor="let report of post.reports">
+          <dl>
+    
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Email
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{report.email}}
+              </dd>
+            </div>
+    
+            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Point-Of-Contact
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{report.contact}}
+              </dd>
+            </div>
+    
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Reason For Reporting
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{report.content}}
+              </dd>
+            </div>
+          </dl>
+        </div>
       </div>
     </ng-template>
 
@@ -795,3 +856,5 @@
     </button>
   </div>
 </ng-template>
+
+

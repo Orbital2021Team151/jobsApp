@@ -316,6 +316,12 @@ button {
 /* MISCELLANEOUS
 -------------------------------------------------- */
 
+a {
+  color: black;
+  height: fit-content;
+  font-size: larger;
+}
+
 .navbarmatcard {
   width: 14.5%;
   background-color: #FFFFFF;
