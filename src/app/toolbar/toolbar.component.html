@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <mat-toolbar-row class="login-logout-signup">
+  <mat-toolbar-row class="login-logout-signup" >
     <span class="logo">
       <a
         href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/"
@@ -12,7 +12,6 @@
     </span>
     <span class="spacer-row-1"></span>
     <ul>
-      <app-dark-mode-toggle></app-dark-mode-toggle>
       <li *ngIf="!userIsAuthenticated">
         <button
           mat-stroked-button

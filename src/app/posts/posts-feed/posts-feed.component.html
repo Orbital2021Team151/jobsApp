@@ -1,14 +1,11 @@
 <div class="page-container">
   <div class="feed-container">
 
-    <div class="filter-card">
+    <div class="filter-card sm:hidden md:inline">
       <mat-card class="filter-card-body">
         <div class="filter-card-title-container">
           <mat-card-title class="filter-card-title"> Filter </mat-card-title>
           <button
-          matTooltip="Clear all fields"
-          [matTooltipShowDelay]="1000"
-          [matTooltipHideDelay]="2000"
           mat-button
           color="accent"
           (click)="clearFilter()"
@@ -16,8 +13,6 @@
             Clear All
           </button>
         </div>
-
-
         <ng-container>
 
           <!-- <mat-form-field appearance="outline">
@@ -27,49 +22,55 @@
               <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">{{ beneficiary }}</mat-option>
             </mat-select>
           </mat-form-field> -->
-          
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Beneficiaries
-              </mat-panel-title>
-              <mat-panel-description>
-                Filter by Beneficiaries
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <li *ngFor="let beneficiary of beneficiariesBoolean">
-              <mat-checkbox 
-              [(ngModel)]="beneficiary.selected"
-              >
-              {{ beneficiary.beneficiary }}
-              </mat-checkbox>
-            </li>
-          </mat-expansion-panel>
 
-          <!-- <mat-form-field appearance="outline">
-            <mat-label>Organisations</mat-label>
-            <mat-select ngModel multiple #organisationsInput="ngModel" name="orgsSelected" [(ngModel)]="orgsSelected">
-              <mat-option *ngFor="let org of orgs" [value]="org">{{ org }}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
+          <mat-accordion>
+            <mat-expansion-panel class="filter-expansion-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="filter-expansion-panel-title">
+                  Beneficiaries
+                </mat-panel-title>
+                <!--
+                <mat-panel-description>
+                  Filter by Beneficiaries
+                </mat-panel-description>
+                -->
+              </mat-expansion-panel-header>
+              <li *ngFor="let beneficiary of beneficiariesBoolean">
+                <mat-checkbox
+                [(ngModel)]="beneficiary.selected"
+                >
+                {{ beneficiary.beneficiary }}
+                </mat-checkbox>
+              </li>
+            </mat-expansion-panel>
 
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Organisations
-              </mat-panel-title>
-              <mat-panel-description>
-                Filter by Organisations
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <li *ngFor="let org of orgsBoolean">
-              <mat-checkbox 
-              [(ngModel)]="org.selected"
-              >
-              {{ org.org }}
-              </mat-checkbox>
-            </li>
-          </mat-expansion-panel>
+            <!-- <mat-form-field appearance="outline">
+              <mat-label>Organisations</mat-label>
+              <mat-select ngModel multiple #organisationsInput="ngModel" name="orgsSelected" [(ngModel)]="orgsSelected">
+                <mat-option *ngFor="let org of orgs" [value]="org">{{ org }}</mat-option>
+              </mat-select>
+            </mat-form-field> -->
+
+            <mat-expansion-panel class="filter-expansion-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="filter-expansion-panel-title">
+                  Organisations
+                </mat-panel-title>
+                <!--
+                <mat-panel-description>
+                  Filter by Organisations
+                </mat-panel-description>
+                -->
+              </mat-expansion-panel-header>
+              <li *ngFor="let org of orgsBoolean">
+                <mat-checkbox
+                [(ngModel)]="org.selected"
+                >
+                {{ org.org }}
+                </mat-checkbox>
+              </li>
+            </mat-expansion-panel>
+          </mat-accordion>
 
 
           <mat-form-field appearance="outline" class="example-form-field">
@@ -747,17 +748,5 @@
 
     </div>
 
-
-
-
-    <!--
-  <footer class="footer-container">
-    <p class="copyright">
-      &copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong.
-      <br />
-      In conjuction with the Centre for Computing for Social Good and Philanthropy
-      (CCSGP), NUS.
-    </p>
-  </footer>
-  -->
   </div>
+</div>

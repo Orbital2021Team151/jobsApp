@@ -370,11 +370,15 @@ button {
 -------------------------------------------------- */
 /* this is for the whole page */
 
-::ng-deep .nav-pills .nav-link.active, 
+.page-container {
+
+}
+
+::ng-deep .nav-pills .nav-link.active,
 ::ng-deep .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #F2545B;
-    
+
 }
 
 mat-card-title {
@@ -387,14 +391,22 @@ a {
   font-size: larger;
 }
 
-
+.nav-bar-title {
+  font-family: 'Lato', sans-serif;
+  color: inherit;
+  opacity: 0.7;
+  margin-left: 5%;
+  font-size: 100%;
+  font-weight: 700;
+}
 
 .navbarmatcard {
-  width: 15%;
+  width: 14%;
   background-color: #FFFFFF;
   margin-top: 1%;
   margin-left: 1%;
   border-radius: 25px;
+  box-shadow: 0 0 4px 0 #ff396bc0;
 }
 
 .info-text {
@@ -421,13 +433,16 @@ a {
   */
 }
 
-.page-container {
+.nav-container {
+  /*
   justify-content: flex-start;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-items: left;
   align-content: space-around;
+  */
+  font-family: 'Lato', sans-serif;
 }
 
 .nav-content {

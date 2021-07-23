@@ -54,11 +54,9 @@ import { UpdatePasswordErrorComponent } from './errors/update-password-error/upd
 import { LoginGeneralErrorComponent } from './errors/login-general-error/login-general-error.component';
 import { SignupBeforeErrorComponent } from './errors/signup-before-error/signup-before-error.component';
 import { HomepageComponent } from './homepage/hompage.component';
-import { DarkModeToggleComponent } from './dark-mode-toggle/dark-mode-toggle.component';
 import { AppliedBeforeDialog } from './dialogs/applied-before-dialog/applied-before-dialog.component';
 import { ReportedBeforeDialog } from './dialogs/reported-before-dialog/reported-before-dialog.component';
 import { ReportedPostNotificationDialog } from './dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
-import { DARK_MODE_OPTIONS } from 'angular-dark-mode';
 import { AppliedPostNotificationDialog } from './dialogs/applied-post-notification-dialog/applied-post-notification-dialog.component';
 import { DashBoardLandingComponent } from './admin/dashboard-landing/dashboard-landing.component';
 import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';
@@ -98,7 +96,6 @@ import { MatChipList, MatChipsModule } from '@angular/material/chips';
     LoginGeneralErrorComponent,
     SignupBeforeErrorComponent,
     HomepageComponent,
-    DarkModeToggleComponent,
     AppliedBeforeDialog,
     ReportedBeforeDialog,
     ReportedPostNotificationDialog,
@@ -158,14 +155,6 @@ import { MatChipList, MatChipsModule } from '@angular/material/chips';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    {
-      provide: DARK_MODE_OPTIONS,
-      useValue: {
-          darkModeClass: 'dark-mode',
-          lightModeClass: 'light-mode'
-    }
-  },
-
   ],
   bootstrap: [AppComponent],
   entryComponents: [

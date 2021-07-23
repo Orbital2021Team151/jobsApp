@@ -66,7 +66,7 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save json2csv
 
-* npm install --save angular-dark-mode
+* npm install --save angular-dark-mode //REMOVE
 
 * npm install --save multer
 

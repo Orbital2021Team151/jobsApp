@@ -1,6 +1,8 @@
 /* TOOLBAR GLOBAL
 -------------------------------------------------- */
+
 mat-toolbar {
+  /* */
   background-color:#F2545B;
   color: white;
   padding-top: 2rem;
@@ -66,6 +68,7 @@ mat-stroked-button {
 
 /* TOOLBAR USER OPTIONS
 -------------------------------------------------- */
+
 button {
   text-decoration: none;
 

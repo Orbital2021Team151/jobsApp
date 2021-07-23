@@ -6,14 +6,6 @@
   margin-top: 1rem;
 }
 */
-.cdk-overlay-container {
-  position: fixed;
-  z-index: 99999;
-}
-
-::ng-deep .cdk-overlay-container {
-  z-index: 99999;
-}
 
 mat-spinner {
   margin: auto;
@@ -23,24 +15,24 @@ mat-spinner {
 /* FILTER CARD
 -------------------------------------------------- */
 .filter-card {
-  width: 15%;
-
-  margin-top: 0;
   /*
+  width: 15%;
+  margin-top: 0;
   margin: left;
   background-color: #aca140 !important;
   */
+
+
+  /*
 
   justify-content: flex-start;
   flex-direction: row;
   align-items: flex-start;
   align-content: flex-start;
 
-  /*
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   */
 }
 
@@ -55,8 +47,10 @@ mat-spinner {
 }
 
 .filter-card-body {
-  width: 100%;
+  list-style: none;
+  width: 60%;
   margin: auto;
+  height: 200%;
   background-color: inherit;
   box-shadow: none;
   color: inherit;
@@ -72,6 +66,27 @@ mat-spinner {
   border-color: #4da8da;
   box-shadow: none;
    */
+}
+
+::ng-deep .mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+  color: #5c8aee;
+  opacity: 0.5;
+}
+
+.filter-expansion-panel {
+  box-shadow: none;
+  /*
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #2d3436;
+  */
+}
+
+.filter-expansion-panel-title {
+  font-family: 'Lato', sans-serif;
+  color: inherit;
+  font-size: 100%;
+  font-weight: 500;
 }
 
 /*
@@ -116,6 +131,17 @@ mat-spinner {
 -------------------------------------------------- */
 .published-posts {
   width: 100%;
+  height: 200%;
+
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: space-around;
+
+  /*
+  width: 100%;
 
   justify-content: center;
   display: flex;
@@ -123,7 +149,7 @@ mat-spinner {
   flex-direction: row;
   align-items: center;
   align-content: space-around;
-  /*
+
   background-color: #8360c3 !important;
   */
 }
@@ -248,9 +274,9 @@ dd {
 /* MISCELLANEOUS
 -------------------------------------------------- */
 .page-container {
-  display: flex;
 
   /*
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
@@ -261,9 +287,15 @@ dd {
 
 .feed-container {
   display: flex;
-  flex-direction: row;
+  /*
+
   justify-content: center;
+  flex-direction: row;
+  background-color: #00b167;
+  */
+  margin-top: 0.5rem;
   width: 100%;
+  height: 100%;
 }
 
 .info-text {
@@ -307,7 +339,28 @@ mat-form-field {
   opacity: 0.5;
 }
 
-@media only screen and (max-device-width: 1125px) {
+/* To keep the accordion closed otherwise it opens then closes for some reason https://github.com/angular/components/issues/11765 */
+::ng-deep .ng-animating div mat-accordion mat-expansion-panel mat-expansion-panel-header {
+  height: 48px;
+}
+::ng-deep .ng-animating div mat-accordion mat-expansion-panel div.mat-expansion-panel-content {
+  height: 0px;
+  visibility: hidden;
+}
+
+/* To allow us to use dropdown boxes in modal for application / rejection / confirmation */
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 99999;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 99999;
+}
+
+
+
+@media only screen and (max-device-width: 1000px) {
 
   .page-container {
     display: block;
@@ -323,7 +376,6 @@ mat-form-field {
   .filter-card {
     margin: auto;
     width: 100%;
-
     display: block;
     justify-content: center;
     flex-direction: column;
@@ -331,7 +383,6 @@ mat-form-field {
   }
 
   .published-posts {
-    width: 100%;
 
     justify-content: center;
     display: flex;
@@ -339,9 +390,7 @@ mat-form-field {
     flex-direction: column;
     align-items: center;
     align-content: space-around;
-    /*
-    background-color: #8360c3 !important;
-    */
+
   }
 
   .published-post-card {
@@ -354,5 +403,4 @@ mat-form-field {
     margin-left: 1rem;
     margin-right: 1rem
   }
-
 }

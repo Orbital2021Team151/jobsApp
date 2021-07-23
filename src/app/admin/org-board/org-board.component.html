@@ -1,12 +1,12 @@
 <!-- <p>navbar stuff</p> -->
-<div class="page">
+<div class="page-container">
   <mat-card class="navbarmatcard">
-    <mat-card-title> Options </mat-card-title>
-    <div class="page-container">
+    <mat-card-title class="nav-bar-title"> OPTIONS </mat-card-title>
+    <div class="nav-container">
       <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
 
         <li ngbNavItem="changePassword" class="nav-item">
-          
+
           <a ngbNavLink>
             <mat-icon>settings</mat-icon>
             Change Password
@@ -26,7 +26,7 @@
           </ng-template>
         </li>
         <li ngbNavItem="postsWithApplications">
-          
+
           <a ngbNavLink>
             <mat-icon> message</mat-icon>
             Posts With Applications
@@ -623,7 +623,6 @@
   </p>
   </div>
 
-
   <mat-spinner *ngIf="hasApplication === null && active === 'postsWithApplications'"></mat-spinner>
 
   <div class="approved-posts-div" *ngIf="active ==='Approved posts'">
@@ -873,7 +872,6 @@
     </div>
   </div>
 
-
   <div class="info-text" *ngIf="hasNoApprovedPosts && active === 'Approved posts'">
 
     <h1 class="info-text-header">No Approved Posts Yet</h1>
@@ -885,11 +883,3 @@
 
   <mat-spinner *ngIf="hasNoApprovedPosts === null && active ==='Approved posts'"></mat-spinner>
 </div>
-
-<!--
-<footer class="container-footer">
-  <p class="copyright">&copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur Fong. <br>
-    In conjuction with the Centre for Computing for Social Good and Philanthropy (CCSGP), NUS.
-  </p>
-</footer>
--->
