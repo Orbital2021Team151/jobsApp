@@ -1,48 +1,42 @@
 <!-- navbar stuff -->
 <div class="page-container">
-  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-    <li ngbNavItem="changePassword" class="nav-item">
-      <a ngbNavLink>Change Password</a>
-      <ng-template ngbNavContent> </ng-template>
-    </li>
+  <mat-card class="navbarmatcard">
+    <mat-card-title class="nav-bar-title"> OPTIONS </mat-card-title>
+    <div class="page-container">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+        <li ngbNavItem="changePassword" class="nav-item">
+          <a ngbNavLink>Change Password</a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
 
-    <li ngbNavItem="downloadCSV" class="nav-item">
-      <a ngbNavLink>Download CSV</a>
-      <ng-template ngbNavContent> </ng-template>
-    </li>
+        <li ngbNavItem="downloadCSV" class="nav-item">
+          <a ngbNavLink>Download CSV</a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
 
-    <li ngbNavItem="postsPendingApproval" class="nav-item">
-      <a ngbNavLink>Posts Pending Your Approval</a>
-      <ng-template ngbNavContent>
-        <!--
-        <div class="info-text">
-          <p>
-            <b>Posts that needs to be approved!</b>
-          </p>
-        </div>
-        -->
-      </ng-template>
-    </li>
+        <li ngbNavItem="postsPendingApproval" class="nav-item">
+          <a ngbNavLink>Posts Pending Your Approval</a>
+          <ng-template ngbNavContent>
+            <!--
+            <div class="info-text">
+              <p>
+                <b>Posts that needs to be approved!</b>
+              </p>
+            </div>
+            -->
+          </ng-template>
+        </li>
 
-    <li ngbNavItem="postsWithReports" class="nav-item">
-      <a ngbNavLink>Posts with reports</a>
-      <ng-template ngbNavContent> </ng-template>
-    </li>
-  </ul>
+        <li ngbNavItem="postsWithReports" class="nav-item">
+          <a ngbNavLink>Posts with reports</a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+      </ul>
 
-  <div [ngbNavOutlet]="nav" class="ml-4"></div>
+      <div [ngbNavOutlet]="nav" class="ml-4"></div>
+    </div>
+  </mat-card>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="change-password-card" *ngIf="active === 'changePassword'">
   <mat-card class="change-password-body">

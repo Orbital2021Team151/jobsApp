@@ -316,6 +316,31 @@ button {
 /* MISCELLANEOUS
 -------------------------------------------------- */
 
+.navbarmatcard {
+  width: 14.5%;
+  background-color: #FFFFFF;
+  margin-top: 1%;
+  margin-left: 1%;
+  border-radius: 25px;
+  box-shadow: 0 0 4px 0 #ff396bc0;
+}
+
+::ng-deep .nav-pills .nav-link.active,
+::ng-deep .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #F2545B;
+
+}
+
+.nav-bar-title {
+  font-family: 'Lato', sans-serif;
+  color: inherit;
+  opacity: 0.7;
+  margin-left: 5%;
+  font-size: 100%;
+  font-weight: 700;
+}
+
 .info-text {
   font-family: 'Lato', sans-serif;
   text-align: center;
