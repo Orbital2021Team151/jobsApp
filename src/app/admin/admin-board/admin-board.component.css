@@ -1,5 +1,10 @@
 /* GLOBAL
 -------------------------------------------------- */
+
+.closelearnmore {
+  float: right;
+}
+
 mat-form-field {
   width: 100%;
 }

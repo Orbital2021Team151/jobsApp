@@ -12,7 +12,7 @@
     </li>
 
     <li ngbNavItem="postsPendingApproval" class="nav-item">
-      <a ngbNavLink>Posts that are pending your approval</a>
+      <a ngbNavLink>Posts Pending Your Approval</a>
       <ng-template ngbNavContent>
         <!--
         <div class="info-text">
@@ -284,6 +284,10 @@
       -->
 
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="closelearnmore">
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+          ></button>
+        </div>
 
         <div class="px-4 py-3 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -565,7 +569,10 @@
 
 
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-
+        <div class="closelearnmore">
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+          ></button>
+        </div>
         <div class="px-4 py-3 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
             {{post.title }}

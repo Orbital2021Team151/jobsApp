@@ -1,5 +1,6 @@
 /* GLOBAL
 -------------------------------------------------- */
+
 .card-image {
   height: 50%;
   overflow: hidden;
@@ -369,6 +370,11 @@ button {
 /* MISCELLANEOUS
 -------------------------------------------------- */
 /* this is for the whole page */
+
+
+.closelearnmore {
+  float: right;
+}
 
 .page-container {
 

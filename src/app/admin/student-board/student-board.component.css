@@ -1,5 +1,30 @@
 /* For the navbar */
 
+.navbarmatcard {
+  width: 14.5%;
+  background-color: #FFFFFF;
+  margin-top: 1%;
+  margin-left: 1%;
+  border-radius: 25px;
+  box-shadow: 0 0 4px 0 #ff396bc0;
+}
+
+::ng-deep .nav-pills .nav-link.active,
+::ng-deep .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #F2545B;
+
+}
+
+.nav-bar-title {
+  font-family: 'Lato', sans-serif;
+  color: inherit;
+  opacity: 0.7;
+  margin-left: 5%;
+  font-size: 100%;
+  font-weight: 700;
+}
+
 .d-flex {
   margin: auto;
   /* padding-left: 14rem; */
@@ -9,10 +34,10 @@ a {
   margin: auto;
 }
 
-.nav-pills {
+/* .nav-pills {
   padding-left: 14rem;
   padding-top: 10px;
-}
+} */
 
 ng-template {
   height: 100%;
@@ -227,9 +252,11 @@ button {
 }
 
 
+
+
 /* JOBS WITH APPLICATIONS CARDS
 -------------------------------------------------- */
-.application-posts-div {
+.applied-posts-div {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
@@ -315,6 +342,13 @@ button {
   box-shadow: 0 0 11px #f2545ca6;
 }
 
+/* UPDATE BENEFICIARIES CARD
+-------------------------------------------------- */
+
+.update-beneficiaries-card {
+  width: 50%;
+}
+
 /* FOOTER
 -------------------------------------------------- */
 .copyright {
@@ -353,6 +387,9 @@ button {
 
 /* MISCELLANEOUS
 -------------------------------------------------- */
+
+
+
 .info-text {
   font-family: 'Lato', sans-serif;
   text-align: center;
