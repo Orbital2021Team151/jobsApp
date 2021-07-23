@@ -174,9 +174,15 @@
     </form>
 
     <mat-card-footer class="download-csv-footer">
-      <button mat-raised-button color="primary" (click)="onDownloadCSV(csvDateFilterForm)">
+
+      <button *ngIf="!csvIsDownloading" mat-raised-button color="primary" (click)="onDownloadCSV(csvDateFilterForm)">
         Download CSV
       </button>
+
+      <button *ngIf="csvIsDownloading" mat-raised-button disabled>
+        Download CSV
+      </button>
+
     </mat-card-footer>
   </mat-card>
 </div>

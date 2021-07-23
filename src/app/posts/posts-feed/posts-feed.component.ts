@@ -63,7 +63,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   /* Application FormGroup */
   public applicationForm: FormGroup;
   public applicationContactControl = new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999)]);
-  public applicationContentControl = new FormControl(null, [Validators.required, ]);
+  public applicationContentControl = new FormControl(null, [Validators.required]);
   public applicationUserTypeControl = new FormControl(null, [Validators.required]);
 
   /* Report FormGroup */
@@ -276,6 +276,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   onMoreInfo(content) {
     //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
+    console.log(this.posts);
   }
 
   clearFilter() {
@@ -327,7 +328,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
 
     console.log(this.orgsSelected);
-    
+
     if (this.beneficiariesSelected.length !== 0) {
       this.filteredPosts = this.posts.filter((post) => {
         return this.beneficiariesSelected.includes(post.beneficiaries);
@@ -336,7 +337,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       this.filteredPosts = [...this.posts];
       //console.log(this.filteredPosts);
     }
-    
+
 
 
 
@@ -453,6 +454,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   submitApplicationReactive(postId: string) {
 
+    console.log("Application form sending now! The contents are: ");
     console.log(this.applicationForm);
 
     if (this.applicationForm.invalid) {
@@ -467,11 +469,14 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       applicationUser: this.applicationForm.value.applicationUser,
     };
 
+    //console.log("the sutdentApplyObject is: ");
+    //console.log(this.studentApplyObject);
+
+
     this.postsService.applyPost(postId, this.studentApplyObject);
     this.dialog.open(AppliedPostNotificationDialog);
     this.applicationForm.reset();
     return true;
-
   }
 
   applyBefore(currentPost: Post) {

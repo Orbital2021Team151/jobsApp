@@ -14,6 +14,7 @@ const BACKEND_URL = environment.apiUrl; //change this in the environment folder
 export class PostsService {
   private posts: Post[] = [];
   private postsUpdated = new Subject<Post[]>();
+  private csvDownloading = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -71,6 +72,10 @@ export class PostsService {
 
   getPostsUpdatedListener() {
     return this.postsUpdated.asObservable();
+  }
+
+  getCSVDownloadingListener() {
+    return this.csvDownloading.asObservable();
   }
 
   addPost(post: Post) {
@@ -214,10 +219,21 @@ export class PostsService {
 
   applyPost(postId: string, student: {email: string, contact: number, content: string, applicationUser: string}) {
 
+    console.log("Received id is: ");
+    console.log(postId);
+
+    console.log("Received student Object is: ");
+    console.log(student);
+
     const postToBePublished = this.getPost(postId);
+
+    console.log("This current post has: ");
+    console.log(postToBePublished);
 
     postToBePublished.students.push(student);
 
+    //console.log("After pushing, it is: ");
+    //console.log(postToBePublished);
     let post_student_pair = {post: postToBePublished, student: student};
 
     this.http
@@ -266,6 +282,8 @@ export class PostsService {
   }
 
   downloadPosts(startDate: Date, endDate: Date) {
+
+    this.csvDownloading.next(true);
 
     this.http.get<{message: string, data: any[]}>(BACKEND_URL + 'api/posts/download')
     .subscribe(response => {
@@ -356,6 +374,9 @@ export class PostsService {
         document.body.appendChild(dwldLink);
         dwldLink.click();
         document.body.removeChild(dwldLink);
+
+
+        this.csvDownloading.next(false);
 
     });
   }

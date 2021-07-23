@@ -341,6 +341,7 @@ exports.publishPost = (req, res, next) => {
 
 //adds the student / NUS alumni applicant to the post
 exports.applyPost = (req, res, next) => {
+
   const newPost = new Post({
     _id: req.body.post.id,
     orgName: req.body.post.orgName,
@@ -373,7 +374,7 @@ exports.applyPost = (req, res, next) => {
     studentsAccepted: req.body.post.studentsAccepted,
   });
 
-  Post.updateOne({ _id: req.body.id }, newPost).then((result) => {
+  Post.updateOne({ _id: req.body.post.id }, newPost).then((result) => {
     //sends email to organisation to inform that that someone applied for their post?
 
     //to just to inform the person who applied for the post that their application got through.

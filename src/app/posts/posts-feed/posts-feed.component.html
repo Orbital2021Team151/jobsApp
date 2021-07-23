@@ -298,7 +298,7 @@
               </button>
 
               <!-- COMMENT OUT FOR PRODUCTION BECAUSE BY RIGHT POSTS THAT HAVE BEEN APPROVED CANNOT JUST BE "DELETED." MUST BE REJECTED-->
-              <button matTooltip="Reject Job Listing" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+              <button matTooltip="Delete Post from Database" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
                 mat-icon-button
                 class="post-card-footer-button"
                 color="warn"
@@ -315,7 +315,7 @@
                 <mat-icon color="warn">block</mat-icon>
               </button>
 
-              <button matTooltip="Remove / Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+              <button matTooltip="Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
               mat-icon-button class="post-card-footer-button-complete" aria-label="Mark as Done"
                 *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
                 (click)="onCompletePrompt(completeContent)">

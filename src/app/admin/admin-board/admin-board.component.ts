@@ -21,6 +21,9 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   //need to remove subscription later to prevent memory leak
 
   private postSub: Subscription;
+  private csvDownloadedSub: Subscription;
+  public csvIsDownloading: boolean;
+
   private authStatusSub: Subscription;
   private authStatusObject;
   hideCurrentPassword = true;
@@ -80,6 +83,11 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
     });
     */
+
+    this.csvDownloadedSub = this.postsService.getCSVDownloadingListener()
+    .subscribe(downloadingStatus => {
+      this.csvIsDownloading = downloadingStatus;
+    });
 
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
@@ -218,6 +226,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.postSub.unsubscribe();
     //this.authStatusSub.unsubscribe();
+    this.csvDownloadedSub.unsubscribe();
   }
 
 }
