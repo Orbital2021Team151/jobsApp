@@ -548,33 +548,44 @@
     
         <div class="border-t border-gray-200" *ngFor="let report of post.reports">
           <dl>
-    
-            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium text-gray-500">
-                Email
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{report.email}}
-              </dd>
-            </div>
-    
-            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium text-gray-500">
-                Point-Of-Contact
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{report.contact}}
-              </dd>
-            </div>
-    
-            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium text-gray-500">
-                Reason For Reporting
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{report.content}}
-              </dd>
-            </div>
+            <mat-expansion-panel class="report-mat-expansion-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="filter-expansion-panel-title">
+                  Expand to read more about report
+                </mat-panel-title>
+                <!--
+                <mat-panel-description>
+                  Filter by Organisations
+                </mat-panel-description>
+                -->
+              </mat-expansion-panel-header>
+              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Email
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{report.email}}
+                </dd>
+              </div>
+      
+              <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Point-Of-Contact
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{report.contact}}
+                </dd>
+              </div>
+      
+              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Reason For Reporting
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{report.content}}
+                </dd>
+              </div>
+            </mat-expansion-panel>
           </dl>
         </div>
       </div>
