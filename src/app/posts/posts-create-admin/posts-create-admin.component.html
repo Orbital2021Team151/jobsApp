@@ -238,8 +238,8 @@
           <ng-container>
             <section class="cards">
               <mat-card class="published-post-card">
-                <img *ngIf="!postPreview.imagePath" mat-card-image class="card-image"
-                  src="../../../assets/placeholder-{{post.beneficiaries}}.png" alt="Placeholder image for post" />
+                <img *ngIf="!postPreview.imagePath && postPreview.beneficiaries" mat-card-image class="card-image"
+                  src="../../../assets/placeholder-{{postPreview.beneficiaries}}.png" alt="Placeholder image for post" />
 
                 <img *ngIf="postPreview.imagePath" mat-card-image class="card-image" src="{{postPreview.imagePath}}"
                   alt="Post's image" />
