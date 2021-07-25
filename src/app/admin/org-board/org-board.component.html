@@ -181,7 +181,7 @@
           *ngIf="post.imagePath === null"
           mat-card-image
           class="card-image"
-          src="../../../assets/dark-background-placeholder.png"
+          src="../../../assets/placeholder-{{post.beneficiaries}}.png"
           alt="Placeholder image">
 
           <img
@@ -443,7 +443,7 @@
           *ngIf="!post.imagePath"
           mat-card-image
           class="card-image"
-          src="../../../assets/light-background-placeholder.png"
+          src="../../../assets/placeholder-{{post.beneficiaries}}.png"
           alt="Placeholder image for post request">
 
           <img
@@ -844,7 +844,7 @@
           *ngIf="!post.imagePath"
           mat-card-image
           class="card-image"
-          src="../../../assets/light-background-placeholder.png"
+          src="../../../assets/placeholder-{{post.beneficiaries}}.png"
           alt="Placeholder image for post with applications">
 
           <img

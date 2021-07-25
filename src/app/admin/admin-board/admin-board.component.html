@@ -198,7 +198,7 @@
     <section class="cards" *ngIf="!post.approved">
       <mat-card class="request-post-card">
         <img *ngIf="!post.imagePath" mat-card-image class="card-image"
-          src="../../../assets/light-background-placeholder.png" alt="Placeholder image for post" />
+          src="../../../assets/placeholder-{{post.beneficiaries}}.png" alt="Placeholder image for post" />
 
         <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's image" />
 
@@ -459,7 +459,7 @@
     <section class="cards" *ngIf="post.reports.length > 0">
       <mat-card class="report-post-card">
         <img *ngIf="!post.imagePath" mat-card-image class="card-image"
-          src="../../../assets/dark-background-placeholder.png" alt="Placeholder image for post" />
+          src="../../../assets/placeholder-{{post.beneficiaries}}.png" alt="Placeholder image for post" />
 
         <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's Image" />
 
