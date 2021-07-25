@@ -398,6 +398,19 @@ a {
   color:rgb(88, 88, 88);
 } */
 
+.report-mat-expansion-panel {
+  margin: auto;
+  
+}
+
+.report-card {
+  width: 100%;
+}
+
+.flex {
+  width: 100%;
+  box-shadow: none;
+}
 
 /* SMALL SCREEN SIZE //TODO: NOT DONE YET
 -------------------------------------------------- */

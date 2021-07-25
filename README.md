@@ -78,6 +78,8 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save @angular-material-extensions/password-strength
 
+* npm install --save tailwindcss
+
 
 ## Acknowledgments
 * Email template reference from [RaKesh Mandal](https://codepen.io/rKalways/pens/popular)

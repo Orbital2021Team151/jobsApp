@@ -507,7 +507,7 @@
       </mat-card>
     </section>
 
-    <ng-template #reportContent let-modal>
+    <ng-template #reportContent let-modal class="report-content">
       <!-- <div class="modal-header">
         <h4 class="modal-title">{{post.title}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -529,52 +529,59 @@
           Close
         </button>
       </div> -->
+      <div class="report-card">
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+          <div class="closelearnmore">
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+            ></button>
+          </div>
+          <div class="px-4 py-3 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+              {{post.title }}
+            </h3>
 
-      <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-        <div class="closelearnmore">
-          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
-          ></button>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+              by <i>{{post.orgName }}</i>
+            </p>
+
+          </div>
         </div>
-        <div class="px-4 py-3 sm:px-6">
-          <h3 class="text-lg leading-6 font-medium text-gray-900">
-            {{post.title }}
-          </h3>
-
-          <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            by <i>{{post.orgName }}</i>
-          </p>
-
-        </div>
-
         <div class="border-t border-gray-200" *ngFor="let report of post.reports">
           <dl>
+            <mat-expansion-panel class="report-mat-expansion-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="filter-expansion-panel-title">
+                  Report {{ post.reports.indexOf(report) + 1 }}
+                </mat-panel-title>
+              
+              </mat-expansion-panel-header>
+              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Email
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{report.email}}
+                </dd>
+              </div>
 
-            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium text-gray-500">
-                Email
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{report.email}}
-              </dd>
-            </div>
+              <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Point-Of-Contact
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{report.contact}}
+                </dd>
+              </div>
 
-            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium text-gray-500">
-                Point-Of-Contact
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{report.contact}}
-              </dd>
-            </div>
-
-            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium text-gray-500">
-                Reason For Reporting
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{report.content}}
-              </dd>
-            </div>
+              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Reason For Reporting
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{report.content}}
+                </dd>
+              </div>
+            </mat-expansion-panel>
           </dl>
         </div>
       </div>
