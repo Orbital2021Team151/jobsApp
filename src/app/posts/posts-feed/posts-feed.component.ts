@@ -48,6 +48,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   };
 
   private studentApplyObject: {
+    name: string;
     email: string;
     contact: number;
     content: string;
@@ -55,6 +56,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   private studentReportObject: {
+    name: string;
     email: string;
     contact: number;
     content: string;
@@ -276,7 +278,12 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   onMoreInfo(content) {
     //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
+
+    console.log("The posts are: ");
     console.log(this.posts);
+
+    console.log("This authStatusObject is: ");
+    console.log(this.authStatusObject);
   }
 
   clearFilter() {
@@ -426,7 +433,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     if (currentPost.students.filter(student => student.email === this.authStatusObject.email).length > 0) {
       //this.modalService.open(errorMessage, { size: 'lg' });
       this.dialog.open(AppliedBeforeDialog);
-      //console.log("YOU, NRIC RANK AND NAME, HEREBY DECLARE THAT. TODAY IS YOUR BOOKOUT DAY, BOOKOUT, BOOKOUT. TODAY IS UR BOOKOUT DAY, YOU APPLIED BEFORE. ");
       return;
     } else {
       //this.postsService.applyPost(postId, this.studentObject);
@@ -441,6 +447,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
 
     this.studentApplyObject = {
+      name: this.authStatusObject.orgName,
       email: this.authStatusObject.email,
       contact: appForm.value.contactNumber,
       content: appForm.value.message,
@@ -454,8 +461,8 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   submitApplicationReactive(postId: string) {
 
-    console.log("Application form sending now! The contents are: ");
-    console.log(this.applicationForm);
+    //console.log("Application form sending now! The contents are: ");
+    //console.log(this.applicationForm);
 
     if (this.applicationForm.invalid) {
       console.log("Application Form is not filled up yet or has invalid parts!");
@@ -463,6 +470,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
 
     this.studentApplyObject = {
+      name: this.authStatusObject.orgName,
       email: this.authStatusObject.email,
       contact: this.applicationForm.value.contact,
       content: this.applicationForm.value.content,
@@ -508,6 +516,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       return;
     }
     this.studentReportObject = {
+      name: this.authStatusObject.orgName,
       email: this.authStatusObject.email,
       contact: reportForm.value.contactNumber,
       content: reportForm.value.message,
@@ -527,6 +536,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
 
     this.studentReportObject = {
+      name: this.authStatusObject.orgName,
       email: this.authStatusObject.email,
       contact: this.reportForm.value.contact,
       content: this.reportForm.value.content,

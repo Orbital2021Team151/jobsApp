@@ -217,23 +217,20 @@ export class PostsService {
     });
   }
 
-  applyPost(postId: string, student: {email: string, contact: number, content: string, applicationUser: string}) {
+  applyPost(postId: string, student: {name: string, email: string, contact: number, content: string, applicationUser: string}) {
 
-    console.log("Received id is: ");
-    console.log(postId);
+    //console.log("Received id is: ");
+    //console.log(postId);
 
-    console.log("Received student Object is: ");
-    console.log(student);
+    //console.log("Received student Object is: ");
+    //console.log(student);
 
     const postToBePublished = this.getPost(postId);
-
-    console.log("This current post has: ");
-    console.log(postToBePublished);
-
     postToBePublished.students.push(student);
 
     //console.log("After pushing, it is: ");
     //console.log(postToBePublished);
+
     let post_student_pair = {post: postToBePublished, student: student};
 
     this.http
@@ -246,7 +243,7 @@ export class PostsService {
     });
   }
 
-  reportPost(postId: string, student: {email: string, contact: number, content: string}) {
+  reportPost(postId: string, student: {name: string, email: string, contact: number, content: string}) {
 
     const postToBePublished = this.getPost(postId);
 

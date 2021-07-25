@@ -39,7 +39,7 @@
                 <mat-checkbox
                 [(ngModel)]="beneficiary.selected"
                 >
-                {{ beneficiary.beneficiary }}
+                {{beneficiary.beneficiary}}
                 </mat-checkbox>
               </li>
             </mat-expansion-panel>
@@ -66,7 +66,7 @@
                 <mat-checkbox
                 [(ngModel)]="org.selected"
                 >
-                {{ org.org }}
+                {{org.org}}
                 </mat-checkbox>
               </li>
             </mat-expansion-panel>
@@ -246,20 +246,20 @@
           <mat-card class="published-post-card">
 
             <img *ngIf="!post.imagePath" mat-card-image class="card-image"
-              src="../../../assets/dark-background-placeholder.png" alt="Placeholder image for post" />
+              src="../../../assets/placeholder-{{post.beneficiaries}}.png" alt="Placeholder image for post" />
 
             <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's image" />
 
-            <mat-card-title class="post-card-title">{{ post.title }}</mat-card-title>
+            <mat-card-title class="post-card-title">{{post.title}}</mat-card-title>
             <mat-card-subtitle class="post-card-subtitle">
-              by <b>{{ post.orgName }}</b>
+              by <b>{{post.orgName}}</b>
             </mat-card-subtitle>
             <mat-card-content class="post-card-content">
-              <mat-icon>event</mat-icon> {{ post.startDate | date }} to
-              {{ post.endDate | date }} <br />
-              <mat-icon>schedule</mat-icon> {{ post.hoursRequired }} <br />
-              <mat-icon> location_on</mat-icon> {{ post.location || "Not Specified" }} <br />
-              <mat-icon>people_outline</mat-icon> Skillsets: {{ post.skills }}
+              <mat-icon>event</mat-icon> {{post.startDate | date}} to
+              {{post.endDate | date}} <br />
+              <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br />
+              <mat-icon> location_on</mat-icon> {{post.location || "Not Specified"}} <br />
+              <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}}
               <br />
             </mat-card-content>
 
@@ -399,11 +399,11 @@
             </div>
             <div class="px-4 py-3 sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
-                {{ post.title }}
+                {{post.title}}
               </h3>
 
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                by <i>{{ post.orgName }}</i>
+                by <i>{{post.orgName}}</i>
               </p>
 
             </div>
@@ -425,7 +425,7 @@
                     Point-Of-Contact's Name
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ post.POC }}
+                    {{post.POC}}
                   </dd>
                 </div>
 
@@ -434,7 +434,7 @@
                     Email Address
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ post.email }}
+                    {{post.email}}
                   </dd>
                 </div>
 
@@ -443,7 +443,7 @@
                     Preferred Skillset
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ post.skills }}
+                    {{post.skills}}
                   </dd>
                 </div>
 
@@ -452,7 +452,7 @@
                     Beneficiaries
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ post.beneficiaries }}
+                    {{post.beneficiaries}}
                   </dd>
                 </div>
 
@@ -461,7 +461,7 @@
                     Duration
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ post.startDate | date }} to {{ post.endDate | date }}
+                    {{post.startDate | date}} to {{post.endDate | date}}
                   </dd>
                 </div>
 
@@ -470,7 +470,7 @@
                     Commitment Information
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ post.hoursRequired }}
+                    {{post.hoursRequired}}
                   </dd>
                 </div>
 
@@ -479,7 +479,7 @@
                     Location
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ post.location || "Not Specified" }}
+                    {{post.location || "Not Specified"}}
                   </dd>
                 </div>
 
@@ -506,7 +506,7 @@
 
         <ng-template #studentContent let-modal>
           <div class="modal-header">
-            <h4 class="modal-title">Apply Post: {{ post.title }}</h4>
+            <h4 class="modal-title">Apply Post: {{post.title}}</h4>
             <button type="button" class="btn-close" aria-label="apply" (click)="modal.dismiss('Cross click')">
               <!-- <span aria-hidden="true">&times;</span> -->
             </button>
@@ -573,7 +573,7 @@
 
         <ng-template #reportContent let-modal>
           <div class="modal-header">
-            <h4 class="modal-title">Report Post: {{ post.title }}</h4>
+            <h4 class="modal-title">Report Post: {{post.title}}</h4>
             <button type="button" class="btn-close" aria-label="report content modal window"
               (click)="modal.dismiss('Cross click')">
               <!-- <span aria-hidden="true">&times;</span> -->

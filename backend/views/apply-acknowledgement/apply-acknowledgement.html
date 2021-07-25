@@ -101,9 +101,11 @@
                           margin: 0;
                         "
                       >
+                      Dear {{studentName}}, <br>
                       We have received your application for the following job posting: <br><br>
 
-                      <span><b>Organisation:</b> {{orgName}}<br></span>
+                      <div style="text-align: start;">
+                        <span><b>Organisation:</b> {{orgName}}<br></span>
                       <span><b>Point-Of-Contact:</b> {{POC}}<br></span>
                       <span><b>Contact Number:</b> {{phoneNumber}}<br></span>
                       <span><b>Email Address:</b> {{email}}<br></span>
@@ -113,7 +115,22 @@
                       <span><b>Start Date:</b> {{startDate}}<br></span>
                       <span><b>End Date:</b> {{endDate}}<br></span>
                       <span><b>Commitment Hours Required:</b> {{hoursRequired}}<br></span>
-                      <span><b>Beneficiaries involved:</b> {{beneficiaries}}<br><br></span>
+                      <span><b>Beneficiaries involved:</b> {{beneficiaries}}</span>
+                      </div>
+
+                      <br>
+                      <span
+                        style="
+                          display: inline-block;
+                          vertical-align: middle;
+                          margin: 29px 0 26px;
+                          border-bottom: 1px solid #cecece;
+                          width: 100px;
+                        "
+                      ></span>
+                      <br><br>
+
+
                       <span>Thank you for applying for the job and we wish you all the best! <br><br>
                         <span style="font-family: 'Special Elite', cursive;">
                           <b>“If I am not for myself, who will be for me?

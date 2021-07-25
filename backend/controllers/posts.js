@@ -420,11 +420,13 @@ exports.reportPost = (req, res, next) => {
     studentsAccepted: req.body.studentsAccepted,
   });
 
+  /*
   let reportInfo = {
     email: req.body.student.email,
     contact: req.body.student.contact,
     content: req.body.student.content,
   }
+  */
 
   Post.findByIdAndUpdate(req.body.post.id, newPost)
     .then((result) => {
@@ -995,6 +997,7 @@ const sendReportToAdminEmail = (adminEmail, student, post) => {
 
     //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
 
+    studentName: student.name,
     studentEmail: student.email,
     studentContact: student.contact,
     studentContent: student.content,
@@ -1081,6 +1084,7 @@ const sendReportAcknowledgementEmail = (student, post) => {
 
     //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
 
+    studentName: student.name,
     studentEmail: student.email,
     studentContact: student.contact,
     studentContent: student.content,
@@ -1166,6 +1170,9 @@ const sendApplyAcknowledgementEmail = (student, post) => {
     beneficiaries: post.beneficiaries,
 
     //imagePath: post.imagePath, if we want to attach images, it is below and MIGHT require us to have the exact file name (so post model has to change to store the name);
+
+    studentName: student.name,
+
   };
   const htmlToSend = template(replacements);
 
