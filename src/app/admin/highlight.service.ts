@@ -25,7 +25,7 @@ export class HighlightService {
     this.http.get<{ title: string, highlights: any }>(BACKEND_URL + 'api/highlights')
     .pipe(map(highlightData => {
       return highlightData.highlights.map(highlight => {
-        console.log(highlight._id);
+        //console.log(highlight._id);
         return {
           id: highlight._id,
           title: highlight.title,
