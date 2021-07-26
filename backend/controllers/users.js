@@ -98,7 +98,6 @@ exports.signupAdmin = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  let fetchedUser;
 
   User.findOne({
     email: req.body.email
@@ -108,7 +107,6 @@ exports.login = (req, res, next) => {
         throw new Error("No such user");
       }
 
-      fetchedUser = userFound;
       //console.log("Inside MongoDB now. Fetched user is: ");
       //console.log(userFound);
 
@@ -118,7 +116,7 @@ exports.login = (req, res, next) => {
           if (!result) {
             throw new Error("Wrong Password!");
           }
-          return fetchedUser.verified;
+          return userFound.verified;
         })
 
         .then((verified) => {
@@ -128,9 +126,9 @@ exports.login = (req, res, next) => {
 
             const token = jwt.sign(
               {
-                email: fetchedUser.email,
-                userId: fetchedUser._id,
-                role: fetchedUser.role,
+                email: userFound.email,
+                userId: userFound._id,
+                role: userFound.role,
               },
 
               process.env.JWT_KEY,
@@ -140,13 +138,13 @@ exports.login = (req, res, next) => {
             res.status(200).json({
               token: token,
               expiresIn: 86400,
-              id: fetchedUser._id,
-              email: fetchedUser.email,
-              password: fetchedUser.password,
-              role: fetchedUser.role,
-              orgName: fetchedUser.orgName,
-              uen: fetchedUser.uen,
-              beneficiaries: fetchedUser.beneficiaries,
+              id: userFound._id,
+              email: userFound.email,
+              password: userFound.password,
+              role: userFound.role,
+              orgName: userFound.orgName,
+              uen: userFound.uen,
+              beneficiaries: userFound.beneficiaries,
             });
             return true;
           }

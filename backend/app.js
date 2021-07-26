@@ -22,10 +22,9 @@ mongoose.connect("mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepme
   });
 
 app.use(bodyParser.json());
-app.use(cors());
-app.use(cors({origin: true}));
+
 //can i comment out this and nothing breaks?
-app.use(urlencoded({extended: false}));
+//app.use(urlencoded({extended: false}));
 
 
 //app.use("/images", express.static("images")); //for aws
@@ -34,6 +33,10 @@ app.use("/images", express.static(path.join(__dirname, "images"))); //for localh
 app.use("/highlightsImages", express.static(path.join(__dirname, "highlightsImages"))); //for localhost:3000 only? or do it on aws for safety
 
 app.use(mongoSanitize());
+
+app.use(cors());
+/*
+app.use(cors({origin: true}));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', "*");
   res.setHeader(
@@ -43,6 +46,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', "GET, POST, PATCH, PUT, DELETE, OPTIONS");
   next();
 });
+*/
 
 
 //for deployment in heroku.

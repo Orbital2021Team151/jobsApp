@@ -36,6 +36,10 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save express
 
+* npm install --save https
+
+* npm install --save http
+
 * npm install --save-dev nodemon
 
 * npm install --save body-parser

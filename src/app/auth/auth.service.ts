@@ -216,6 +216,8 @@ export class AuthService {
         },
 
         (error) => {
+          console.log("Error at logging in! The error is: ");
+          console.log(error);
           this.authStatusListener.next({
             auth: false,
             email: null,
