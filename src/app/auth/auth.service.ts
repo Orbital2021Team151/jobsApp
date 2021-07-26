@@ -50,11 +50,11 @@ export class AuthService {
   }
 
   getAuthStatusObject() {
-    return this.authStatus;
+    return {...this.authStatus};
   }
 
   getAuthStatusListener() {
-    console.log(this.authStatusListener.asObservable());
+    //console.log(this.authStatusListener.asObservable());
     return this.authStatusListener.asObservable();
   }
 
@@ -142,11 +142,13 @@ export class AuthService {
       beneficiaries: updatedBeneficiaries,
       verified: true,
     };
+
     this.http
       .put(BACKEND_URL + 'api/user/updateBeneficiaries', userObject)
       .subscribe((response) => {
         console.log("User's beneficiaries updated! At authService.ts");
         console.log(response);
+
         let updatedObject = {
           auth: true,
           email: this.authStatus.email,
@@ -156,8 +158,14 @@ export class AuthService {
           beneficiaries: updatedBeneficiaries,
           verified: true,
         };
+
         this.authStatus = updatedObject;
-      });
+        this.authStatusListener.next({...updatedObject});
+      },
+      (error) => {
+        this.authStatusListener.next(this.authStatus);
+      }
+      );
   }
 
   login(email: string, password: string) {

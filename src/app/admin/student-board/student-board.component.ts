@@ -195,18 +195,19 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     /*
      * Probably do not need this because there are no changes to authStatusObject once user is logged in.
      * Might have to be revised in the future for chat function.
+     */
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       console.log("student dashboard's authStatus observable!");
       this.authStatusObject = authObject;
     });
-    */
   }
 
   updateUser() {
-    //console.log("At student-board updateUser method now");
-    //console.log(this.beneficiariesSelected);
+    console.log("At student-board updateUser method now");
+    console.log(this.beneficiariesSelected);
 
+    /*
     for (let i = 0; i < this.beneficiariesBoolean.length; i++) {
       if (this.beneficiariesBoolean[i].selected) {
         if (this.beneficiariesSelected.includes(this.beneficiariesBoolean[i].beneficiary)) {
@@ -218,6 +219,8 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
         this.beneficiariesSelected = this.beneficiariesSelected.filter(beneficiary => beneficiary != this.beneficiariesBoolean[i].beneficiary);
       }
     }
+    */
+
     this.authService.update(this.beneficiariesSelected);
     this.openUpdateBeneficiariesSnackBar();
   }
