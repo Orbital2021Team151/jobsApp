@@ -48,6 +48,65 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     "Women & Girls",
   ];
 
+  public beneficiariesBoolean: { beneficiary: string, selected: boolean }[] = [
+    {
+      beneficiary: 'Animal Welfare',
+      selected: false,
+    },
+    {
+      beneficiary: 'Arts & Heritage',
+      selected: false,
+    },
+    {
+      beneficiary: 'Children & Youth',
+      selected: false,
+    },
+    {
+      beneficiary: 'Community',
+      selected: false,
+    },
+    {
+      beneficiary: 'Disability',
+      selected: false,
+    },
+    {
+      beneficiary: 'Education',
+      selected: false,
+    },
+    {
+      beneficiary: 'Elderly',
+      selected: false,
+    },
+    {
+      beneficiary: 'Environment',
+      selected: false,
+    },
+    {
+      beneficiary: 'Families',
+      selected: false,
+    },
+    {
+      beneficiary: 'Health',
+      selected: false,
+    },
+    {
+      beneficiary: 'Humanitarian',
+      selected: false,
+    },
+    {
+      beneficiary: 'Social Service',
+      selected: false,
+    },
+    {
+      beneficiary: 'Sports',
+      selected: false,
+    },
+    {
+      beneficiary: 'Women & Girls',
+      selected: false,
+    }
+  ]
+
   posts: Post[] = [];
   appliedPosts: Post[] = [];
   reportedPosts: Post[] = [];
@@ -78,6 +137,20 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
 
     this.hasRequest = false;
     this.postsService.getPosts();
+
+    for (let i = 0; i < this.beneficiariesBoolean.length; i++) {
+
+      if (this.beneficiariesSelected.length === 0) {
+        this.beneficiariesBoolean[i].selected = false;
+      }
+
+
+      if (this.beneficiariesSelected.includes(this.beneficiariesBoolean[i].beneficiary)) {
+        this.beneficiariesBoolean[i].selected = true;
+      } else {
+        this.beneficiariesBoolean[i].selected = false;
+      }
+    }
 
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
@@ -129,6 +202,18 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   updateUser() {
     //console.log("At student-board updateUser method now");
     //console.log(this.beneficiariesSelected);
+
+    for (let i = 0; i < this.beneficiariesBoolean.length; i++) {
+      if (this.beneficiariesBoolean[i].selected) {
+        if (this.beneficiariesSelected.includes(this.beneficiariesBoolean[i].beneficiary)) {
+          continue;
+        }
+        this.beneficiariesSelected.push(this.beneficiariesBoolean[i].beneficiary);
+      }
+      if (!this.beneficiariesBoolean[i].selected && this.beneficiariesSelected.includes(this.beneficiariesBoolean[i].beneficiary)) {
+        this.beneficiariesSelected = this.beneficiariesSelected.filter(beneficiary => beneficiary != this.beneficiariesBoolean[i].beneficiary);
+      }
+    }
     this.authService.update(this.beneficiariesSelected);
     this.openUpdateBeneficiariesSnackBar();
   }

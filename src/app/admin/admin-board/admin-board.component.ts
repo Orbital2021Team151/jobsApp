@@ -12,7 +12,7 @@ import { ChangePasswordAlertComponent } from "../snackbars/change-password-snack
 @Component({
   selector: "app-admin-board",
   templateUrl: './admin-board.component.html',
-  styleUrls: ['./admin-board.component.css'],
+  styleUrls: ['./admin-board.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AdminBoardComponent implements OnInit, OnDestroy {

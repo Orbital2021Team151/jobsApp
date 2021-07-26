@@ -632,7 +632,7 @@
     <mat-card-title class="change-password-title">
       Update Interested Beneficiaries
     </mat-card-title>
-    <mat-form-field
+    <!-- <mat-form-field
       appearance="outline"
       class="change-password-form-field"
       text-center
@@ -651,7 +651,27 @@
           >{{ beneficiary }}</mat-option
         >
       </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
+
+    <mat-expansion-panel class="filter-expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="filter-expansion-panel-title">
+          Beneficiaries
+        </mat-panel-title>
+        <!--
+        <mat-panel-description>
+          Filter by Organisations
+        </mat-panel-description>
+        -->
+      </mat-expansion-panel-header>
+      <li *ngFor="let beneficiary of beneficiariesBoolean">
+        <mat-checkbox
+        [(ngModel)]="beneficiary.selected"
+        >
+        {{ beneficiary.beneficiary }}
+        </mat-checkbox>
+      </li>
+    </mat-expansion-panel>
 
     <button
     mat-raised-button

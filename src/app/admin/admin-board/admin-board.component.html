@@ -529,7 +529,7 @@
           Close
         </button>
       </div> -->
-      <div class="report-card">
+      <!-- <div class="report-card">
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
           <div class="closelearnmore">
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
@@ -584,7 +584,30 @@
             </mat-expansion-panel>
           </dl>
         </div>
-      </div>
+      </div> -->
+
+
+      <mat-accordion displayMode="flat" multi class="mat-table">
+        <section matSort class="mat-elevation-z2 mat-header-row">
+          <span class="mat-header-cell" mat-sort-header="Name">Name</span>
+          <span class="mat-header-cell" mat-sort-header="email">Email Address</span>
+          <span class="mat-header-cell" mat-sort-header="contact">Contact Number</span>
+        </section>
+      
+        <mat-expansion-panel *ngFor="let report of post.reports" #panel>
+      
+          <mat-expansion-panel-header class="mat-row">
+            <span class="mat-cell">{{report.name}}</span>
+            <span class="mat-cell">{{report.email}}</span>
+            <span class="mat-cell">{{report.contact}}</span>
+          </mat-expansion-panel-header>
+          <div class="mat-cell-content">
+            <b>Student / NUS Alumni's Report:</b><br>
+            {{report.content}}
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      
     </ng-template>
 
     <ng-template #content let-modal>
