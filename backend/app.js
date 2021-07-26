@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const path = require("path");
 const mongoose = require("mongoose");
-
+const cors = require('cors');
 const postRoutes = require('./routes/posts');
 const userRoutes = require('./routes/users');
 const highlightRoutes = require('./routes/highlights');
@@ -22,7 +22,8 @@ mongoose.connect("mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@eprepme
   });
 
 app.use(bodyParser.json());
-
+app.use(cors());
+app.use(cors({origin: true}));
 //can i comment out this and nothing breaks?
 app.use(urlencoded({extended: false}));
 

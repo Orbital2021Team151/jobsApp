@@ -40,8 +40,6 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save body-parser
 
-* Install [MongoDB Shell](https://downloads.mongodb.org/windows/mongodb-shell-windows-x86_64-4.4.6.zip) (Optional, since this is just to check for requests if it does not show up on the webpage yet)
-
 * npm install --save mongoose
 
 * npm install --save mongoose-unique-validator
@@ -50,15 +48,9 @@ npm install -g @angular/cli@11<br>
 
 * Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)
 
-* ng add @ng-bootstrap/ng-bootstrap
-
-* npm install --save bootstrap@5
-
 * npm install --save nodemailer
 
 * npm install --save jsonwebtoken
-
-* npm install --save awesome-notifications
 
 * npm install --save express-mongo-sanitize
 
@@ -68,15 +60,22 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save multer
 
-* npm install --save  @fortawesome/angular-fontawesome
+* npm install --save @angular-material-extensions/password-strength
 
 * ng add @ngneat/tailwind
 
 * npm install --save tailwindcss
 
-* npm install --save @angular/flex-layout
+* ng add @ng-bootstrap/ng-bootstrap
 
-* npm install --save @angular-material-extensions/password-strength
+* npm install --save bootstrap@5
+
+* npm install --save awesome-notifications //no need?
+
+* npm install --save  @fortawesome/angular-fontawesome //no need?
+
+* npm install --save @angular/flex-layout //no need?
+
 
 
 ## Acknowledgments
