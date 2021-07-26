@@ -22,6 +22,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   authStatusObject: any;
   isAuth: boolean = false;
   pageNumber: string = "-1";
+  role: string = '';
 
   constructor(
     public homepageService: HomepageService,
@@ -35,11 +36,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.highlightSub = this.highlightService.getHighlightsUpdatedListener()
                           .subscribe((highlights: Highlight[]) => {
                             this.highlights = highlights;
-                            //console.log(highlights);
+                            // console.log(highlights);
+                            // console.log(this.highlights[0].id);
                           });
     this.authStatusObject = this.authService.getAuthStatusObject;
     this.isAuth = this.authService.getIsAuth();
-
+    this.role = this.authService.getAuthStatusObject().role;
+    console.log(this.role);
   }
   ngOnDestroy() {
     this.highlightSub.unsubscribe();
@@ -53,10 +56,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
   openPoster() {}
 
   openContent(id: string) {
-    //console.log(this.highlights);
+    console.log(this.highlights[0].id);
     for (let i = 0; i < 3; i++) {
       if (this.highlights[i].id === id) {
         this.pageNumber = (i + 1).toString();
+        break;
       }
     }
     this.router.navigate(['/highlightContent' + this.pageNumber]);

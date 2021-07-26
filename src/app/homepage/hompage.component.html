@@ -67,14 +67,14 @@
                     class="carousel-read-more-button"
                     (click)="openContent(highlight.id)"
                   >
-                    Read More (In Development)
+                    Read More
                   </button>
 
                   <button
                     mat-raised-button
                     class="carousel-read-more-button"
                     (click)="deleteHighlight(highlight.id)"
-                    *ngIf="isAuth"
+                    *ngIf="isAuth && role === 'Admin'"
                   >
                     Delete
                   </button>
