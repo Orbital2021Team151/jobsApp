@@ -40,18 +40,16 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Disposition",
     );
     res.setHeader('Access-Control-Allow-Methods', "GET, POST, PATCH, PUT, DELETE, OPTIONS");
-
   next();
 });
 
-/*
-//for deployment in heroku. might have to comment out for AWS though. see how.
+
+//for deployment in heroku.
 app.use("/", express.static(path.join(__dirname, "../dist/jobsApp")));
 
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "../dist/jobsApp/index.html"));
 });
-*/
 
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
