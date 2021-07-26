@@ -653,16 +653,11 @@
       </mat-select>
     </mat-form-field> -->
 
-    <mat-expansion-panel class="filter-expansion-panel">
+    <!-- <mat-expansion-panel class="filter-expansion-panel">
       <mat-expansion-panel-header>
         <mat-panel-title class="filter-expansion-panel-title">
           Beneficiaries
         </mat-panel-title>
-        <!--
-        <mat-panel-description>
-          Filter by Organisations
-        </mat-panel-description>
-        -->
       </mat-expansion-panel-header>
       <li *ngFor="let beneficiary of beneficiariesBoolean">
         <mat-checkbox
@@ -671,7 +666,13 @@
         {{ beneficiary.beneficiary }}
         </mat-checkbox>
       </li>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
+
+    <mat-selection-list required [(ngModel)]="beneficiariesSelected">
+      <mat-list-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">
+        {{beneficiary}}
+      </mat-list-option>
+    </mat-selection-list>
 
     <button
     mat-raised-button

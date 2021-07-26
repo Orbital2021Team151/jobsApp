@@ -414,9 +414,14 @@ button {
   opacity: 0.5;
 }
 
-.filter-expansion-panel {
+/* .filter-expansion-panel {
   width: 50%;
   margin: auto;
+} */
+
+mat-selection-list {
+  max-height: 200px;
+  overflow: auto;
 }
 
 /* SMALL SCREEN SIZE //TODO: NOT DONE YET

@@ -118,6 +118,10 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
   public newPasswordControl = new FormControl(null);
   public newPasswordConfirmControl = new FormControl(null);
 
+  /* beneficiaries formgroup */
+  public beneficiariesForm: FormGroup;
+  public beneficiariesControl = new FormControl(null);
+
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService, private _snackBar: MatSnackBar) {
     this.changePasswordForm = new FormGroup({
       currentPassword: this.currentPasswordControl,
