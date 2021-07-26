@@ -54,11 +54,11 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save bootstrap@5
 
-* npm install nodemailer
+* npm install --save nodemailer
 
-* npm install jsonwebtoken
+* npm install --save jsonwebtoken
 
-* npm i awesome-notifications
+* npm install --save awesome-notifications
 
 * npm install --save express-mongo-sanitize
 
@@ -66,19 +66,17 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save json2csv
 
-* npm install --save angular-dark-mode //REMOVE
-
 * npm install --save multer
 
 * npm install --save  @fortawesome/angular-fontawesome
 
 * ng add @ngneat/tailwind
 
+* npm install --save tailwindcss
+
 * npm install --save @angular/flex-layout
 
 * npm install --save @angular-material-extensions/password-strength
-
-* npm install --save tailwindcss
 
 
 ## Acknowledgments

@@ -16,19 +16,17 @@ import { HomepageService } from "./homepage.service";
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class HomepageComponent implements OnInit, OnDestroy {
-  //images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
-  images = [1, 2, 3].map((n) => `../../assets/sample-carousel-image-${n}.jpg`);
 
   highlightSub: Subscription;
-  highlights: Highlight[];
+  highlights: Highlight[] = [];
   authStatusObject: any;
   isAuth: boolean = false;
   pageNumber: string = "-1";
 
   constructor(
-    public homepageService: HomepageService, 
-    public highlightService: HighlightService, 
-    public authService: AuthService, 
+    public homepageService: HomepageService,
+    public highlightService: HighlightService,
+    public authService: AuthService,
     public router: Router) {}
 
   ngOnInit() {
