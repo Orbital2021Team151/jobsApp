@@ -149,6 +149,7 @@ exports.login = (req, res, next) => {
             return true;
           }
         })
+
         .catch((err) => {
           //console.log(err);
 
@@ -158,6 +159,7 @@ exports.login = (req, res, next) => {
             res.status(401).json({
               errorCode: 11,
               message: "User is not verified!",
+              error: err,
             });
           }
 
@@ -166,6 +168,7 @@ exports.login = (req, res, next) => {
             res.status(401).json({
               errorCode: 2,
               message: "Wrong Password",
+              error: err,
             });
           }
         });

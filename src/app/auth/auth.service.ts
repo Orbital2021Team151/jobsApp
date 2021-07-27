@@ -169,6 +169,11 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
+
+    //console.log("Login credentials are:");
+    //console.log(email);
+    //console.log(password); //TODO: REMOVE ON DEPLOYMENT
+
     const authData: AuthData = {
       email: email,
       password: password,
