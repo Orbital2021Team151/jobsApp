@@ -24,6 +24,7 @@ img {
   left: 20%;
   text-align: justify;
   */
+  white-space: pre-line;
 }
 
 .title {
