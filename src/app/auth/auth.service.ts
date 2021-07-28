@@ -14,20 +14,18 @@ export class AuthService {
   private token: string;
   private authStatus: {
     auth: boolean;
+    name: string;
     email: string;
-    role: string;
-    orgName: string;
-    uen: string;
+    admin: boolean;
     beneficiaries: string[];
     verified: boolean;
   };
 
   private authStatusListener = new Subject<{
     auth: boolean;
+    name: string;
     email: string;
-    role: string;
-    orgName: string;
-    uen: string;
+    admin: boolean;
     beneficiaries: string[];
     verified: boolean;
   }>();
@@ -71,20 +69,14 @@ export class AuthService {
   }
 
   createUser(
+    name: string,
     email: string,
     password: string,
-    role: string,
-    orgName: string,
-    uen: string
   ) {
     let userObject = {
+      name: name,
       email: email,
       password: password,
-      role: role,
-      orgName: orgName,
-      uen: uen,
-      beneficiaries: [],
-      verified: false,
     };
 
     return this.http
@@ -102,17 +94,19 @@ export class AuthService {
   }
 
 
+  /*
+   *  SHOULD NOT BE HERE ANYMORE BECAUSE EVERYONE MUST USE THE MAIN SIGNUP FORM.
   createUserAdmin(
     email: string,
     password: string,
-    role: string,
+    admin: string,
     orgName: string,
     uen: string
   ) {
     let userObject = {
       email: email,
       password: password,
-      role: role,
+      admin: admin,
       orgName: orgName,
       uen: uen,
       beneficiaries: [],
@@ -130,15 +124,13 @@ export class AuthService {
         }
       );
   }
-
-
+  */
 
   update(updatedBeneficiaries: string[]) {
     let userObject = {
+      name: this.authStatus.name,
       email: this.authStatus.email,
-      role: this.authStatus.role,
-      orgName: this.authStatus.orgName,
-      uen: this.authStatus.uen,
+      admin: this.authStatus.admin,
       beneficiaries: updatedBeneficiaries,
       verified: true,
     };
@@ -151,10 +143,9 @@ export class AuthService {
 
         let updatedObject = {
           auth: true,
+          name: this.authStatus.name,
           email: this.authStatus.email,
-          role: this.authStatus.role,
-          orgName: this.authStatus.orgName,
-          uen: this.authStatus.uen,
+          admin: this.authStatus.admin,
           beneficiaries: updatedBeneficiaries,
           verified: true,
         };
@@ -183,10 +174,9 @@ export class AuthService {
       .post<{
         token: string;
         expiresIn: number;
+        name: string;
         email: string;
-        orgName: string;
-        role: string;
-        uen: string;
+        admin: boolean;
         beneficiaries: string[];
         verified: boolean;
       }>
@@ -207,10 +197,9 @@ export class AuthService {
 
             this.authStatus = {
               auth: true,
+              name: response.name,
               email: email,
-              role: response.role,
-              orgName: response.orgName,
-              uen: response.uen,
+              admin: response.admin,
               beneficiaries: response.beneficiaries,
               verified: true,
             };
@@ -225,10 +214,9 @@ export class AuthService {
           console.log(error);
           this.authStatusListener.next({
             auth: false,
+            name: null,
             email: null,
-            role: null,
-            orgName: null,
-            uen: null,
+            admin: null,
             beneficiaries: null,
             verified: null,
           });
@@ -266,10 +254,9 @@ export class AuthService {
 
     this.authStatusListener.next({
       auth: false,
+      name: null,
       email: null,
-      role: null,
-      orgName: null,
-      uen: null,
+      admin: null,
       beneficiaries: null,
       verified: null,
     });
@@ -285,10 +272,9 @@ export class AuthService {
 
     this.authStatusListener.next({
       auth: false,
+      name: null,
       email: null,
-      role: null,
-      orgName: null,
-      uen: null,
+      admin: null,
       beneficiaries: null,
       verified: null,
     });
@@ -312,10 +298,9 @@ export class AuthService {
     response: {
       token: string;
       expiresIn: number;
+      name: string;
       email: string;
-      orgName: string;
-      role: string;
-      uen: string;
+      admin: boolean;
       beneficiaries: string[];
       verified: boolean;
     })
@@ -350,10 +335,9 @@ export class AuthService {
 
   changePassword(currentPassword: string, newPassword: string) {
     let userObject = {
+      name: this.authStatus.name,
       email: this.authStatus.email,
-      role: this.authStatus.role,
-      orgName: this.authStatus.orgName,
-      uen: this.authStatus.uen,
+      admin: this.authStatus.admin,
       beneficiaries: this.authStatus.beneficiaries,
       verified: true,
       currentPassword: currentPassword,

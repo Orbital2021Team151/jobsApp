@@ -69,7 +69,7 @@ exports.requestPost = (req, res, next) => {
       //console.log(createdPost);
 
       //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-      sendPostRequestedNotificationEmail(req.body.email, post);
+      //sendPostRequestedNotificationEmail(req.body.email, post);
 
 
       res.status(201).json({
@@ -167,7 +167,7 @@ exports.requestPostNoImage = (req, res, next) => {
       //console.log(createdPost);
 
       //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-      sendPostRequestedNotificationEmail(req.body.email, post);
+      //sendPostRequestedNotificationEmail(req.body.email, post);
       res.status(201).json({
         message: "post requested successfully! Pending admin approval",
         postId: createdPost._id,
@@ -218,40 +218,6 @@ exports.deletePost = (req, res, next) => {
         .status(401)
         .json({ message: "Error at deleting. it does not exist?", error: err });
     });
-
-  /*
-  if (req.userData.role === 'Admin') {
-    Post.deleteOne({_id: req.params.id})
-    .then((result) => {
-      if (result.n > 0) {
-        //console.log("Deletion by admin successful");
-        res.status(200).json({message: "Post delete request sent and completed!"});
-      } else {
-        //console.log("Deletion by admin unsuccessful");
-        res.status(401).json({ message: "Not authorised to delete? Even tho I am an admin!?"});
-      }
-    })
-     .catch(err => {
-       //console.log(err);
-       res.status(401).json({ message: "Error at deleting. it does not exist?", error: err});
-     });
-
-  } else {
-    Post.deleteOne({ _id: req.params.id, }) //  creator: req.userData.userId,  }) //can't tag creator too apparently
-    .then((result) => {
-      if (result.n > 0) {
-        res.status(200).json({message: "Post delete request sent!"});
-      } else {
-        res.status(401).json({ message: "Not authorised to delete!"});
-      }
-    })
-
-    .catch(err => {
-      //console.log(err);
-      res.status(401).json({ message: "Error at deleting. it does not exist?", error: err});
-    });
-  }
-  */
 };
 
 //publish function to change approved from false to true
@@ -313,14 +279,14 @@ exports.publishPost = (req, res, next) => {
             //console.log(postBeneficiary);
             if (interestedBeneficiaries.includes(postBeneficiary)) {
               //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-              sendNotificationEmail(currentUser.email, req.body);
+              //sendNotificationEmail(currentUser.email, req.body);
               break;
             }
           }
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-        sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
+        //sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
 
         res.status(200).json({
           documents: allUsersDocument, //probably do not need this
@@ -379,7 +345,7 @@ exports.applyPost = (req, res, next) => {
 
     //to just to inform the person who applied for the post that their application got through.
     //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-    sendApplyAcknowledgementEmail(req.body.student, req.body.post);
+    //sendApplyAcknowledgementEmail(req.body.student, req.body.post);
 
     res.status(200).json("Applied for posting!");
   });
@@ -440,18 +406,18 @@ exports.reportPost = (req, res, next) => {
         );
 
         let adminUsers = allUsersDocument.filter(
-          (user) => user.role === "Admin"
+          (user) => user.admin
         );
 
         for (var userI = 0; userI < adminUsers.length; userI++) {
           let currentAdmin = adminUsers[userI];
           //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-          sendReportToAdminEmail(currentAdmin.email, req.body.student, req.body.post);
+          //sendReportToAdminEmail(currentAdmin.email, req.body.student, req.body.post);
           //console.log("Report email sent to admin: " + currentAdmin.email);
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-        sendReportAcknowledgementEmail(req.body.student, req.body.post);
+        //sendReportAcknowledgementEmail(req.body.student, req.body.post);
         //console.log("Report acknowledgement sent to: " + req.body.student.email);
 
         res.status(200).json({

@@ -5,9 +5,7 @@ const router = express.Router();
 
 router.get("/verify/:uniqueId", UserController.verifyAccount); //Need to return some HTML here to inform user their acc has been set up
 
-router.post("/signupAdmin", UserController.signupAdmin);
-
-router.post("/signup", UserController.signupGeneral);
+router.post("/signup", UserController.signup);
 
 router.post("/login", UserController.login);
 

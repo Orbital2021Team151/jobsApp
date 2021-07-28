@@ -22,7 +22,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   authStatusObject: any;
   isAuth: boolean = false;
   pageNumber: string = "-1";
-  role: string = '';
+  isAdmin: boolean;
 
   constructor(
     public homepageService: HomepageService,
@@ -41,8 +41,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
                           });
     this.authStatusObject = this.authService.getAuthStatusObject;
     this.isAuth = this.authService.getIsAuth();
-    this.role = this.authService.getAuthStatusObject().role;
-    console.log(this.role);
+    this.isAdmin = this.authService.getAuthStatusObject().admin;
   }
   ngOnDestroy() {
     this.highlightSub.unsubscribe();

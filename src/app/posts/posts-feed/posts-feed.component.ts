@@ -31,7 +31,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   hasApproved: boolean = null;
   userIsAuthenticated = false;
-  userRole: string;
+  isAdmin: boolean;
   startDate: Date;
   endDate: Date;
   noFilteredPost: boolean = null;
@@ -39,10 +39,9 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   private authStatusObject: {
     auth: boolean;
+    name: string;
     email: string;
-    role: string;
-    orgName: string;
-    uen: string;
+    admin: boolean;
     beneficiaries: string[];
     verified: boolean;
   };
@@ -209,7 +208,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
     this.authStatusObject = this.authService.getAuthStatusObject();
     this.userIsAuthenticated = this.authStatusObject.auth;
-    this.userRole = this.authStatusObject.role;
+    this.isAdmin = this.authStatusObject.admin;
 
     this.postSub = this.postsService
       .getPostsUpdatedListener()
@@ -447,7 +446,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
 
     this.studentApplyObject = {
-      name: this.authStatusObject.orgName,
+      name: this.authStatusObject.name,
       email: this.authStatusObject.email,
       contact: appForm.value.contactNumber,
       content: appForm.value.message,
@@ -470,7 +469,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
 
     this.studentApplyObject = {
-      name: this.authStatusObject.orgName,
+      name: this.authStatusObject.name,
       email: this.authStatusObject.email,
       contact: this.applicationForm.value.contact,
       content: this.applicationForm.value.content,
@@ -516,7 +515,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       return;
     }
     this.studentReportObject = {
-      name: this.authStatusObject.orgName,
+      name: this.authStatusObject.name,
       email: this.authStatusObject.email,
       contact: reportForm.value.contactNumber,
       content: reportForm.value.message,
@@ -536,7 +535,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     }
 
     this.studentReportObject = {
-      name: this.authStatusObject.orgName,
+      name: this.authStatusObject.name,
       email: this.authStatusObject.email,
       contact: this.reportForm.value.contact,
       content: this.reportForm.value.content,

@@ -328,11 +328,11 @@ export class PostCreateOrgComponent implements OnInit, OnDestroy, ComponentCanDe
       .subscribe((authObject) => {
         this.authStatusObject = authObject;
         this.orgNameControl = new FormControl({
-          value: authObject.orgName,
+          value: authObject.name,
           disabled: true,
         });
         this.uenControl  = new FormControl({
-          value: authObject.uen,
+          value: authObject.name,
           disabled: true,
         });
         this.emailControl  = new FormControl({

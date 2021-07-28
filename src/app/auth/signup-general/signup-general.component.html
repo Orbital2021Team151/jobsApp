@@ -1,128 +1,3 @@
-
-
-<!--
-<div class="grid-container">
-  <div class="card">
-    <mat-card>
-
-      <span class="logo">
-        <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
-      </span>
-
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
-
-      <form *ngIf="!isLoading" #signupForm="ngForm">
-
-        <mat-form-field appearance="outline">
-          <mat-label>User Role</mat-label>
-          <mat-select ngModel required #roleInput="ngModel" name="role" (click)="roleSelected = role">
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let role of roles" [value]="role">
-              {{ role }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="roleInput.invalid">
-            Please select the user's role.
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Student Name</mat-label>
-          <input
-            matInput
-            type="orgName"
-            name="orgName"
-            ngModel
-            required
-            #orgNameInput="ngModel"
-            placeholder="eg Alexandra Martinez Delaso"
-          />
-          <mat-error *ngIf="orgNameInput.invalid"
-            >Please enter your name.</mat-error
-          >
-        </mat-form-field>
-
-
-        <mat-form-field appearance="outline">
-          <mat-label>Email Address</mat-label>
-          <input
-            matInput
-            type="email"
-            name="email"
-            ngModel
-            required
-            #emailInput="ngModel"
-            placeholder="Enter Email Here"
-          />
-          <mat-error *ngIf="emailInput.invalid"
-            >Please enter a valid email address.</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            [type]="hidePassword ? 'password' : 'text'"
-            name="password"
-            ngModel
-            required
-            #passwordInput="ngModel"
-            placeholder="Enter Password Here"
-          />
-
-          <button
-            mat-icon-button
-            matSuffix
-            (click)="hidePassword = !hidePassword"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hidePassword"
-          >
-            <mat-icon>{{
-              hidePassword ? "visibility_off" : "visibility"
-            }}</mat-icon>
-          </button>
-
-          <mat-error *ngIf="passwordInput.invalid"
-            >Please enter a valid password.</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field matNativeControl appearance="outline" [disabled]="true">
-          <mat-label>Unique Entity Number (UEN)</mat-label>
-          <input
-            matInput
-            type="uen"
-            name="uen"
-            ngModel
-            required
-            #uenInput="ngModel"
-            placeholder="eg UEN1234567. If you are a Student Organisation / Student, just put NA"
-          />
-          <mat-error *ngIf="uenInput.invalid"
-            >Please enter a valid Unique Entity Number (UEN).</mat-error
-          >
-        </mat-form-field>
-
-        <button mat-raised-button color="accent" (click)="onSignupTemplate(signupForm)">Signup</button>
-
-      </form>
-    </mat-card>
-
-        <div
-        *ngIf="signedUp"
-        class="alert alert-success alert-dismissible fade show"
-        role="alert">
-          <strong>You have signed up!</strong> Please check your email for the verification link.
-          <button (click)="closeNotification()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-  </div>
-</div>
--->
-
-
 <div class="grid-container">
   <div class="card">
     <mat-card>
@@ -133,44 +8,21 @@
       <form [formGroup]="form">
 
         <div>
-          <mat-radio-group [formControl]="roleControl">
-
-            <mat-radio-button value="External / Student Organisation">
-              External / Student Organisation
-            </mat-radio-button>
-
-            <span class="radio-spacer"></span>
-
-            <mat-radio-button value="Student / NUS Alumni"
-              >Student / NUS Alumni</mat-radio-button
-            >
-          </mat-radio-group>
-        </div>
-
-
-
-        <div *ngIf="roleControl.value === 'Student / NUS Alumni'">
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          >
-            <mat-label>Student Name</mat-label>
+          <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+            <mat-label>Name</mat-label>
             <input
               matInput
-              name="orgName"
+              name="name"
               required
-              [formControl]="orgNameControl"
+              [formControl]="nameControl"
               placeholder="Mary Antoinette"
             />
-            <mat-error *ngIf="orgNameControl.errors?.required"
+            <mat-error *ngIf="nameControl.errors?.required"
               >Please enter your name.</mat-error
             >
           </mat-form-field>
 
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          >
+          <mat-form-field appearance="outline" [hideRequiredMarker]="true">
             <mat-label>Email Address</mat-label>
             <input
               matInput
@@ -178,75 +30,14 @@
               name="email"
               required
               [formControl]="emailControl"
-              placeholder="e1234567@u.nus.edu"
+              placeholder="mary@antoinette.com"
             />
             <mat-error *ngIf="emailControl.errors?.required"
               >Please enter your NUS student / Alumni email address.</mat-error
             >
           </mat-form-field>
-
-
         </div>
 
-        <div
-          *ngIf="roleControl.value === 'External / Student Organisation'"
-        >
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          >
-            <mat-label>Organisation Name</mat-label>
-            <input
-              matInput
-              name="orgName"
-              required
-              [formControl]="orgNameControl"
-              placeholder="Standard Oil Co."
-            />
-            <mat-error *ngIf="orgNameControl.errors?.required"
-              >Please enter your organisation's name.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          >
-            <mat-label>Email Address</mat-label>
-            <input
-              matInput
-              type="email"
-              name="email"
-              required
-              [formControl]="emailControl"
-              placeholder="jeff@amazon.com"
-            />
-            <mat-error *ngIf="emailControl.errors?.required"
-              >Please enter your work email address.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-checkbox
-          formControlName="hideUen"
-          >We are a Student Organisation</mat-checkbox>
-
-          <mat-form-field
-          appearance="outline"
-          [hideRequiredMarker]="true"
-          *ngIf="!hideUenControl.value"
-          >
-            <mat-label>Organisation UEN</mat-label>
-            <input
-              matInput
-              name="uen"
-              [formControl]="uenControl"
-              placeholder="UEN1234567"
-            />
-            <mat-error *ngIf="uenControl.errors?.required"
-              >Please enter your organisation's UEN Number.</mat-error
-            >
-          </mat-form-field>
-        </div>
 
         <div>
           <mat-form-field appearance="outline">
@@ -286,14 +77,6 @@
         <button *ngIf="form.invalid" mat-raised-button disabled>Signup</button>
         <button *ngIf="!form.invalid" mat-raised-button color="accent" (click)="onSignupReactive()">Signup</button>
       </div>
-
-      <!--
-      <div *ngIf="signedUp" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>You have signed up!</strong> Please check your email to verify your account.
-        <button (click)="closeNotification()" type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-        </button>
-      </div>
-      -->
 
     </mat-card>
   </div>

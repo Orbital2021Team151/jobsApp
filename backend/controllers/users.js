@@ -7,23 +7,15 @@ const path = require("path");
 
 const User = require("../models/user");
 
-exports.signupGeneral = (req, res, next) => {
-  //TODO: Need to change this wholesale when ready for production.
-  let backendRole = "";
-  if (req.body.role === "Student / NUS Alumni") {
-    backendRole = "Student";
-  } else {
-    backendRole = req.body.role;
-  }
+exports.signup = (req, res, next) => {
 
   bcrypt.hash(req.body.password, 10).then((passwordHash) => {
     const user = new User({
+      name: req.body.name,
       email: req.body.email,
       password: passwordHash,
-      role: backendRole, //TODO: KIV to change at production w/o all these confusing names
-      orgName: req.body.orgName,
-      uen: req.body.uen,
-      beneficiaries: req.body.beneficiaries,
+      admin: false,
+      beneficiaries: [],
       verified: false,
     });
 
@@ -31,7 +23,6 @@ exports.signupGeneral = (req, res, next) => {
       .save()
       .then((result) => {
         const email = user.email;
-
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
         sendVerificationEmail(email, result._id);
 
@@ -52,53 +43,7 @@ exports.signupGeneral = (req, res, next) => {
   });
 };
 
-exports.signupAdmin = (req, res, next) => {
-  //TODO: Need to change this wholesale when ready for production.
-  let backendRole = "";
-  if (req.body.role === "Student / NUS Alumni") {
-    backendRole = "Student";
-  } else {
-    backendRole = req.body.role;
-  }
-
-  bcrypt.hash(req.body.password, 10).then((passwordHash) => {
-    const user = new User({
-      email: req.body.email,
-      password: passwordHash,
-      role: backendRole, //todo: kiv to change
-      orgName: req.body.orgName,
-      uen: req.body.uen,
-      beneficiaries: req.body.beneficiaries,
-      verified: false,
-    });
-
-    user
-      .save()
-      .then((result) => {
-        const email = user.email;
-
-        //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO HEROKU. CAN LEAVE IT HERE IF EXTENSIVELY TESTING TO AVOID SPAM
-        sendVerificationEmail(email, result._id);
-
-        res.status(201).json({
-          message:
-            "Account Registered! Please check your email for activation link.",
-          result: result,
-        });
-      })
-
-      .catch((err) => {
-        res.status(500).json({
-          errorCode: 5,
-          message: "You probably signed up before using this email before...",
-          result: err,
-        });
-      });
-  });
-};
-
 exports.login = (req, res, next) => {
-
   User.findOne({
     email: req.body.email
   })
@@ -128,9 +73,7 @@ exports.login = (req, res, next) => {
               {
                 email: userFound.email,
                 userId: userFound._id,
-                role: userFound.role,
               },
-
               process.env.JWT_KEY,
               { expiresIn: "24h" }
             );
@@ -139,12 +82,12 @@ exports.login = (req, res, next) => {
               token: token,
               expiresIn: 86400,
               id: userFound._id,
+              name: userFound.name,
               email: userFound.email,
               password: userFound.password,
-              role: userFound.role,
-              orgName: userFound.orgName,
-              uen: userFound.uen,
+              admin: userFound.admin,
               beneficiaries: userFound.beneficiaries,
+              verified: userFound.verified,
             });
             return true;
           }
@@ -188,8 +131,8 @@ exports.updateBeneficiaries = (req, res, next) => {
   let fetchedUser;
 
   User.findOne({
+    //_id: req.body.id,
     email: req.body.email,
-    role: req.body.role,
   }).then((user) => {
     if (!user) {
       throw new Error("Update Failed. But this should not happen tbf");
@@ -198,17 +141,16 @@ exports.updateBeneficiaries = (req, res, next) => {
 
     const newUser = new User({
       _id: fetchedUser.id,
+      name: fetchedUser.name,
       email: fetchedUser.email,
       password: fetchedUser.password,
-      role: fetchedUser.role,
-      orgName: fetchedUser.orgName,
-      uen: fetchedUser.uen,
+      admin: fetchedUser.admin,
       beneficiaries: req.body.beneficiaries, //only difference
       verified: true,
     });
 
     User.updateOne(
-      { email: req.body.email, role: req.body.role },
+      {email: req.body.email},
       newUser
     ).then((result) => {
       res.status(200).json("User beneficiaries updated!");
@@ -222,8 +164,8 @@ exports.updatePassword = (req, res, next) => {
   //console.log(req.body);
 
   User.findOne({
+    //_id: req.body.id,
     email: req.body.email,
-    role: req.body.role,
   })
 
     .then((user) => {
@@ -248,17 +190,16 @@ exports.updatePassword = (req, res, next) => {
       bcrypt.hash(req.body.newPassword, 10).then((passwordHash) => {
         const newUser = new User({
           _id: fetchedUser.id,
+          name: fetchedUser.name,
           email: fetchedUser.email,
           password: passwordHash,
-          role: fetchedUser.role,
-          orgName: fetchedUser.orgName,
-          uen: fetchedUser.uen,
-          beneficiaries: req.body.beneficiaries,
+          admin: fetchedUser.admin,
+          beneficiaries: fetchedUser.beneficiaries,
           verified: true,
         });
 
-        User.updateMany(
-          { _id: fetchedUser.id, email: req.body.email, role: req.body.role },
+        User.updateOne(
+          { _id: fetchedUser.id, email: req.body.email},
           newUser
         ).then((result) => {
           if (!result) {
@@ -278,7 +219,6 @@ exports.updatePassword = (req, res, next) => {
       });
     });
 };
-
 
 exports.forgetPassword = (req, res) => {
   let fetchedUser;
@@ -300,16 +240,15 @@ exports.forgetPassword = (req, res) => {
       bcrypt.hash(tempPassword, 10).then((passwordHash) => {
         const newUser = new User({
           _id: fetchedUser.id,
+          name: fetchedUser.name,
           email: fetchedUser.email,
           password: passwordHash,
-          role: fetchedUser.role,
-          orgName: fetchedUser.orgName,
-          uen: fetchedUser.uen,
+          admin: fetchedUser.admin,
           beneficiaries: req.body.beneficiaries,
           verified: true,
         });
 
-        User.updateOne({ email: req.body.email, role: fetchedUser.role}, newUser)
+        User.updateOne({_id: fetchedUser.id, email: req.body.email}, newUser)
           .then((result) => {
             if (result) {
 

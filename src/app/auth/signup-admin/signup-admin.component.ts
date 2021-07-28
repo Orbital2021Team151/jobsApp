@@ -71,11 +71,9 @@ export class SignupAdminComponent implements OnInit, OnDestroy {
     }
 
     this.authService.createUser(
+      this.form.value.name,
       this.form.value.email,
       this.form.value.password,
-      this.form.value.role,
-      this.form.value.orgName,
-      this.form.value.uen
     );
 
     this.authService.getSignupListener().subscribe(result => {
