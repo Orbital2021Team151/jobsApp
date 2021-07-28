@@ -14,6 +14,8 @@ const userSchema = mongoose.Schema({
 
   verified: {type: Boolean, required: true, default: false},
 
+  ban: {type: Boolean, required: true, default: false},
+
 
   //seenPosts: {type: [String], required: false} //if we want to continue with notifications
 

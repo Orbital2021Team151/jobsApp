@@ -17,6 +17,7 @@ exports.signup = (req, res, next) => {
       admin: false,
       beneficiaries: [],
       verified: false,
+      ban: false,
     });
 
     user
@@ -67,6 +68,8 @@ exports.login = (req, res, next) => {
         .then((verified) => {
           if (!verified) {
             throw new Error("User not verified!");
+          } else if (userFound.ban) {
+            throw new Error("User has been banned!");
           } else {
 
             const token = jwt.sign(
@@ -88,6 +91,7 @@ exports.login = (req, res, next) => {
               admin: userFound.admin,
               beneficiaries: userFound.beneficiaries,
               verified: userFound.verified,
+              ban: userFound.ban,
             });
             return true;
           }
@@ -111,6 +115,15 @@ exports.login = (req, res, next) => {
             res.status(401).json({
               errorCode: 2,
               message: "Wrong Password",
+              error: err,
+            });
+          }
+
+          if (err.message === "User has been banned!") {
+            //console.log("Wrong Password! err.message printed.");
+            res.status(401).json({
+              errorCode: 2, //TODO: NEED A NEW ERROR FOR THIS
+              message: "User has been banned",
               error: err,
             });
           }
@@ -147,6 +160,7 @@ exports.updateBeneficiaries = (req, res, next) => {
       admin: fetchedUser.admin,
       beneficiaries: req.body.beneficiaries, //only difference
       verified: true,
+      ban: false,
     });
 
     User.updateOne(
@@ -196,6 +210,7 @@ exports.updatePassword = (req, res, next) => {
           admin: fetchedUser.admin,
           beneficiaries: fetchedUser.beneficiaries,
           verified: true,
+          ban: false,
         });
 
         User.updateOne(
@@ -245,7 +260,8 @@ exports.forgetPassword = (req, res) => {
           password: passwordHash,
           admin: fetchedUser.admin,
           beneficiaries: req.body.beneficiaries,
-          verified: true,
+          verified: fetchedUser.verified,
+          ban: false,
         });
 
         User.updateOne({_id: fetchedUser.id, email: req.body.email}, newUser)

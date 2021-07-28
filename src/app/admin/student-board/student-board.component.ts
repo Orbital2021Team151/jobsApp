@@ -221,7 +221,7 @@ export class StudentBoardComponent implements OnInit, OnDestroy {
     }
     */
 
-    this.authService.update(this.beneficiariesSelected);
+    this.authService.updateBeneficiaries(this.beneficiariesSelected);
     this.openUpdateBeneficiariesSnackBar();
   }
 

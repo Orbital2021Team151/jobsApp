@@ -17,8 +17,9 @@ import { ChangePasswordAlertComponent } from "../snackbars/change-password-snack
 })
 export class AdminBoardComponent implements OnInit, OnDestroy {
 
+  list = '1'.repeat(100).split('').map((_, i) => i);
+
   posts: Post[] = [];
-  //need to remove subscription later to prevent memory leak
 
   private postSub: Subscription;
   private csvDownloadedSub: Subscription;

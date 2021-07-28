@@ -93,46 +93,14 @@ export class AuthService {
       );
   }
 
-
-  /*
-   *  SHOULD NOT BE HERE ANYMORE BECAUSE EVERYONE MUST USE THE MAIN SIGNUP FORM.
-  createUserAdmin(
-    email: string,
-    password: string,
-    admin: string,
-    orgName: string,
-    uen: string
-  ) {
-    let userObject = {
-      email: email,
-      password: password,
-      admin: admin,
-      orgName: orgName,
-      uen: uen,
-      beneficiaries: [],
-      verified: false,
-    };
-
-    return this.http
-      .post(BACKEND_URL + 'api/user/signupAdmin', userObject)
-      .subscribe(
-        (result) => {
-          this.signupListener.next(true);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  }
-  */
-
-  update(updatedBeneficiaries: string[]) {
+  updateBeneficiaries(updatedBeneficiaries: string[]) {
     let userObject = {
       name: this.authStatus.name,
       email: this.authStatus.email,
       admin: this.authStatus.admin,
       beneficiaries: updatedBeneficiaries,
       verified: true,
+      ban: false,
     };
 
     this.http
@@ -148,6 +116,7 @@ export class AuthService {
           admin: this.authStatus.admin,
           beneficiaries: updatedBeneficiaries,
           verified: true,
+          ban: false,
         };
 
         this.authStatus = updatedObject;
@@ -160,10 +129,6 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-
-    //console.log("Login credentials are:");
-    //console.log(email);
-    //console.log(password); //TODO: REMOVE ON DEPLOYMENT
 
     const authData: AuthData = {
       email: email,
@@ -179,6 +144,7 @@ export class AuthService {
         admin: boolean;
         beneficiaries: string[];
         verified: boolean;
+        ban: boolean;
       }>
       (BACKEND_URL + 'api/user/login', authData)
       .subscribe(
