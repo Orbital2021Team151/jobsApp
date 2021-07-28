@@ -34,7 +34,6 @@ import { ButtonModule } from 'primeng/button';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { PostCreateAdminComponent } from './posts/posts-create-admin/posts-create-admin.component';
 import { PostFeedComponent } from './posts/posts-feed/posts-feed.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -76,13 +75,14 @@ import { PostRejectedDialog } from './dialogs/post-rejected-dialog/post-rejected
 import { PostCompletedDialog } from './dialogs/post-completed-dialog/post-completed-dialog.component';
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PostCreateComponent } from './posts/posts-create/posts-create.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    PostCreateAdminComponent,
+    PostCreateComponent,
     PostCreateOrgComponent,
     PostFeedComponent,
     AdminBoardComponent,

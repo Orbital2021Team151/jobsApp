@@ -4,7 +4,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { mimeType } from '../mime-type.validator';
 
-
 import { AuthService } from 'src/app/auth/auth.service';
 import { Post } from '../post.model';
 import { PostsService } from '../post.service';
@@ -17,11 +16,11 @@ import { ComponentCanDeactivate } from '../../route-guards/can-deactivate.compon
 
 @Component({
   selector: 'app-post-create',
-  templateUrl: './posts-create-admin.component.html',
-  styleUrls: ['./posts-create-admin.component.scss'],
+  templateUrl: './posts-create.component.html',
+  styleUrls: ['./posts-create.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class PostCreateAdminComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
+export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   canDeactivate() {
     console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
     return this.POCInformationGroup.pristine && this.postInformationGroup.pristine && this.postDurationGroup.pristine;

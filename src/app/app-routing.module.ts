@@ -6,7 +6,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupAdminComponent } from './auth/signup-admin/signup-admin.component';
 import { SignupGeneralComponent } from './auth/signup-general/signup-general.component';
 import { PostFeedComponent } from './posts/posts-feed/posts-feed.component';
-import { PostCreateAdminComponent } from './posts/posts-create-admin/posts-create-admin.component';
 import { StudentBoardComponent } from './admin/student-board/student-board.component';
 import { OrgBoardComponent } from './admin/org-board/org-board.component';
 import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-org.component';
@@ -19,6 +18,7 @@ import { HighlightContentComponent2 } from './highlight-content/highlight-conten
 import { HighlightContentComponent3 } from './highlight-content/highlight-content-3/highlight-content-3.component';
 import { ExpiredSessionPage } from './errors/expired-session-error-page/expired-session-error-page.component';
 import { DirtycheckGuard } from './route-guards/dirtycheck.guard';
+import { PostCreateComponent } from './posts/posts-create/posts-create.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -32,6 +32,7 @@ const routes: Routes = [
   },
   { path: 'organisation', component: OrgBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student Organisation", "External Organisation"] }},
 
+  /*
   {
     path: 'create',
    component: PostCreateOrgComponent,
@@ -39,9 +40,11 @@ const routes: Routes = [
    canDeactivate: [DirtycheckGuard],
    data: { roles: ["External Organisation", "Student Organisation"]}
   },
+  */
+
   {
-    path: 'createAdmin',
-   component: PostCreateAdminComponent,
+    path: 'create',
+   component: PostCreateComponent,
    canActivate: [AuthGuard],
    canDeactivate: [DirtycheckGuard],
    data: { roles: ["Admin"]}
