@@ -400,7 +400,7 @@ a {
 
 .report-mat-expansion-panel {
   margin: auto;
-  
+
 }
 
 .report-card {
@@ -411,6 +411,30 @@ a {
   width: 100%;
   box-shadow: none;
 }
+
+
+/* USER PERMISSIONS TABLE
+-------------------------------------------------- */
+.change-user-permissions {
+  width: 40%;
+  margin: auto;
+  background-color: inherit;
+  color: inherit;
+}
+
+table {
+  width: 100%;
+}
+
+.user-filter {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
 
 /* SMALL SCREEN SIZE //TODO: NOT DONE YET
 -------------------------------------------------- */
@@ -438,7 +462,7 @@ $mat-header-row-height: 56px;
 $mat-row-height: 48px;
 $mat-row-horizontal-padding: 24px;
 
-.mat-table {
+.report-table {
   display: block;
 }
 
@@ -450,7 +474,7 @@ $mat-row-horizontal-padding: 24px;
   min-height: $mat-row-height;
 }
 
-.mat-row, .mat-header-row {
+.report-table, .report-table-header {
   display: flex;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -468,7 +492,7 @@ $mat-row-horizontal-padding: 24px;
   }
 }
 
-.mat-cell, .mat-header-cell {
+.report-table-cell, .report-table-cell-header {
   flex: 1;
   overflow: hidden;
   word-wrap: break-word;
