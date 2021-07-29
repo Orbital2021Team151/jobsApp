@@ -1,14 +1,14 @@
 /* TOOLBAR GLOBAL
 -------------------------------------------------- */
 
-mat-toolbar {
+.top-bar {
   /* */
   background-color:#F2545B;
   color: white;
   padding-top: 2rem;
   margin-top: 0rem;
   border: none;
-
+  
 }
 
 .login-logout-signup {
@@ -111,4 +111,30 @@ a {
 .mat-sidenav-content{
     font-size: 200%;
     text-align: center;
+}
+
+
+
+/* a {
+  color: black;
+  height: fit-content;
+  font-size: larger;
+} */
+
+.nav-button {
+  color: transparent;
+  outline: 0;
+  background: transparent;
+}
+
+.real-toolbar {
+  background-color: #F2545B;
+  width: 14.5%;
+  margin-top: 1%;
+  margin-left: 1%;
+  border-radius: 25px;
+}
+
+.toolbar-buttons {
+  color: white;
 }

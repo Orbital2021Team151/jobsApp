@@ -19,6 +19,9 @@ import { HighlightContentComponent3 } from './highlight-content/highlight-conten
 import { ExpiredSessionPage } from './errors/expired-session-error-page/expired-session-error-page.component';
 import { DirtycheckGuard } from './route-guards/dirtycheck.guard';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
+import { ApprovePostsPageComponent } from './admin/approve-posts-page/approve-posts-page.component';
+import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported-posts-page.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -58,6 +61,9 @@ const routes: Routes = [
   { path: 'highlightContent2', component: HighlightContentComponent2 },
   { path: 'highlightContent3', component: HighlightContentComponent3 },
   { path: 'expiredSession', component: ExpiredSessionPage },
+  { path: 'changePassword', component: ChangePasswordComponent },
+  { path: 'approvePosts', component: ApprovePostsPageComponent },
+  { path: 'reportedPosts', component: ReportedPostsPageComponent },
 ];
 
 @NgModule({

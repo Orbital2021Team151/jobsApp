@@ -19,6 +19,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   role: string;
   orgName: string;
   public authStatusObject;
+  active = "changePassword"
 
   constructor(private authService: AuthService, public postsService: PostsService, public router: Router) {};
 
@@ -36,6 +37,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       this.userIsAuthenticated = true;
       this.authService.autoAuthUser();
       this.authStatusObject = this.authService.getAuthStatusObject();
+      console.log(this.authStatusObject);
     } else {
       localStorage.clear();
       this.userIsAuthenticated = false;

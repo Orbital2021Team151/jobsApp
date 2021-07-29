@@ -58,6 +58,7 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'jobsApp';
+  active = 'changePassword';
 
   public showOverlay: boolean = true;
 

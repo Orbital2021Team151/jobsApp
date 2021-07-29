@@ -76,6 +76,9 @@ import { PostCompletedDialog } from './dialogs/post-completed-dialog/post-comple
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
+import { ApprovePostsPageComponent } from './admin/approve-posts-page/approve-posts-page.component';
+import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported-posts-page.component';
 
 
 @NgModule({
@@ -114,7 +117,10 @@ import { PostCreateComponent } from './posts/posts-create/posts-create.component
     FieldsNotCompleteDialog,
     HighlightSubmittedDialog,
     PostRejectedDialog,
-    PostCompletedDialog
+    PostCompletedDialog,
+    ChangePasswordComponent,
+    ApprovePostsPageComponent,
+    ReportedPostsPageComponent
   ],
 
   imports: [

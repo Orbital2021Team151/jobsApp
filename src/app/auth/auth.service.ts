@@ -171,7 +171,11 @@ export class AuthService {
             };
 
             this.authStatusListener.next(this.authStatus);
-            this.router.navigate(['/feed']);
+            if (this.authStatus.admin) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/feed']);
+            }
           }
         },
 

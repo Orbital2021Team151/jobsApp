@@ -4,21 +4,6 @@
     <mat-card-title class="nav-bar-title"> OPTIONS </mat-card-title>
     <div class="page-container">
       <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-        <li ngbNavItem="changePassword" class="nav-item">
-          <a ngbNavLink>
-            <mat-icon>lock</mat-icon>
-            Change Password
-          </a>
-          <ng-template ngbNavContent> </ng-template>
-        </li>
-
-        <li ngbNavItem="downloadCSV" class="nav-item">
-          <a ngbNavLink>
-            <mat-icon>cloud_download</mat-icon>
-            Download CSV
-          </a>
-          <ng-template ngbNavContent> </ng-template>
-        </li>
 
         <li ngbNavItem="postsPendingApproval" class="nav-item">
           <a ngbNavLink>
@@ -43,6 +28,24 @@
           </a>
           <ng-template ngbNavContent> </ng-template>
         </li>
+
+        <li ngbNavItem="changePassword" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>lock</mat-icon>
+            Change Password
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+
+        <li ngbNavItem="downloadCSV" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>cloud_download</mat-icon>
+            Download CSV
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+
+        
 
         <li ngbNavItem="changeUserPermissions" class="nav-item">
           <a ngbNavLink>
@@ -491,16 +494,6 @@
             mat-icon-button color="accent" aria-label="Read Report" (click)="onMoreInfo(reportContent)">
             <mat-icon color="accent">error_outline</mat-icon>
           </button>
-
-          <!--
-            <button
-              mat-raised-button
-              color="warn"
-              (click)="onDeletePrompt(deleteReportedContent)"
-            >
-              Delete
-            </button>
-            -->
 
           <button matTooltip="Click to reject request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button color="warn" aria-label="Reject" (click)="onRejectPrompt(rejectReportedContent)">

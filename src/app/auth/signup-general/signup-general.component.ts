@@ -90,11 +90,11 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.authService.createUser(
-      this.form.value.name,
-      this.form.value.email,
-      this.form.value.password,
-    );
+    // this.authService.createUser(
+    //   this.form.value.name,
+    //   this.form.value.email,
+    //   this.form.value.password,
+    // );
 
     this.authService.getSignupListener().subscribe((result) => {
       this.nameControl.reset();

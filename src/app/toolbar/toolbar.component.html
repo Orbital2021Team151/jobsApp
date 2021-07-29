@@ -1,4 +1,4 @@
-<mat-toolbar>
+<!-- <mat-toolbar>
   <mat-toolbar-row class="login-logout-signup" >
     <span class="logo">
       <a
@@ -54,7 +54,7 @@
         >
 
         <a
-          *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'"
+          *ngIf="userIsAuthenticated && authStatusObject.admin"
           mat-button
           routerLink="/admin"
           routerLinkActive="mat-primary"
@@ -87,13 +87,13 @@
         >
       </li>
 
-      <li *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'">
+      <li *ngIf="userIsAuthenticated && authStatusObject.admin">
         <a mat-button routerLink="/signupAdmin" routerLinkActive="mat-primary">
           Signup for others
         </a>
       </li>
 
-      <li *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'">
+      <li *ngIf="userIsAuthenticated && authStatusObject.admin">
         <a mat-button routerLink="/createAdmin" routerLinkActive="mat-primary">
           Create Job Posting</a
         >
@@ -144,7 +144,7 @@
     >
 
     <a
-      *ngIf="userIsAuthenticated && authStatusObject.role === 'Admin'"
+      *ngIf="userIsAuthenticated && authStatusObject.admin"
       mat-button
       routerLink="/admin"
       routerLinkActive="mat-primary"
@@ -223,4 +223,115 @@
       Create A Highlight</a
     >
   </div>
-</mat-sidenav>
+</mat-sidenav> -->
+
+<!-- <div class="page-container">
+  <mat-card class="navbarmatcard">
+    <mat-card-title class="nav-bar-title"> OPTIONS </mat-card-title>
+    <div class="page-container">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+        <li ngbNavItem="changePassword" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>lock</mat-icon>
+            Change Password
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+
+        <li ngbNavItem="downloadCSV" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>cloud_download</mat-icon>
+            Download CSV
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+
+        <li ngbNavItem="postsPendingApproval" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>hourglass_empty</mat-icon>
+            Posts Pending Approval
+          </a>
+          <ng-template ngbNavContent>
+          </ng-template>
+        </li>
+
+        <li ngbNavItem="postsWithReports" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>report_problem</mat-icon>
+            Posts with reports
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+
+        <li ngbNavItem="changeUserPermissions" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>manage_accounts</mat-icon>
+            Change User Permissions
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+
+      </ul>
+
+      <div [ngbNavOutlet]="nav" class="ml-4"></div>
+    </div>
+  </mat-card>
+</div> -->
+
+<mat-toolbar class="top-bar">
+  <span class="logo">
+    <a href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/" target="_blank" title="homepage"
+      class="logo">
+      <img src="assets/Orbital-Logo-Design-White.png" alt="Logo of CCSGP" />
+    </a>
+  </span>
+  <mat-toolbar-row>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-toolbar class="real-toolbar">
+  <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
+    <a mat-button routerLink="/approvePosts" routerLinkActive="mat-primary" class="toolbar-buttons">
+      Posts Pending Approval
+    </a>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
+    <a mat-button routerLink="/reportedPosts" routerLinkActive="mat-primary" class="toolbar-buttons">
+      Posts With Reports
+    </a>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="userIsAuthenticated">
+    <a mat-button routerLink="/feed" routerLinkActive="mat-primary" class="toolbar-buttons">
+      Feed
+    </a>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
+    <a  mat-button routerLink="/admin" class="toolbar-buttons"
+      routerLinkActive="mat-primary">
+      Admin Dashboard
+    </a>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="!userIsAuthenticated">
+    <a  mat-button class="toolbar-buttons" routerLink="/login"
+    routerLinkActive="mat-primary">
+      Login
+    </a>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <a *ngIf="userIsAuthenticated" mat-button class="toolbar-buttons" (click)="onLogout()">
+      Logout
+    </a>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="userIsAuthenticated">
+    <a mat-button routerLink="/create" routerLinkActive="mat-primary">
+      Create Job Posting</a
+    >
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="userIsAuthenticated">
+    <a mat-button routerLink="/changePassword" routerLinkActive="mat-primary">
+      Change Password
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>

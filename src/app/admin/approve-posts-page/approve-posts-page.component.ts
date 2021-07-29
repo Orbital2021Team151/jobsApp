@@ -1,23 +1,21 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation  } from "@angular/core";
-import { Subscription } from "rxjs";
-import { Post } from "../../posts/post.model";
-import { PostsService } from "../../posts/post.service";
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from "src/app/auth/auth.service";
-import { formatDate } from "@angular/common";
-import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { ChangePasswordAlertComponent } from "../snackbars/change-password-snackbar/change-password-snackbar.component";
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Post } from 'src/app/posts/post.model';
+import { PostsService } from 'src/app/posts/post.service';
+import { ChangePasswordAlertComponent } from '../snackbars/change-password-snackbar/change-password-snackbar.component';
 
 @Component({
-  selector: "app-admin-board",
-  templateUrl: './admin-board.component.html',
-  styleUrls: ['./admin-board.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated,
+    selector: 'approve-posts',
+    templateUrl: './approve-posts-page.component.html',
+    styleUrls: ['approve-posts-page.component.css']
 })
-export class AdminBoardComponent implements OnInit, OnDestroy {
-
-  list = '1'.repeat(100).split('').map((_, i) => i);
+export class ApprovePostsPageComponent implements OnInit, OnDestroy {
+   
+    list = '1'.repeat(100).split('').map((_, i) => i);
 
   posts: Post[] = [];
 
@@ -229,5 +227,4 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     //this.authStatusSub.unsubscribe();
     this.csvDownloadedSub.unsubscribe();
   }
-
 }
