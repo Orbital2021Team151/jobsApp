@@ -62,7 +62,7 @@ app.use("/api/posts", postRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/highlights", highlightRoutes);
 
-//for deployment in heroku. If using on localhost3000, need to comment it out
+//for deployment in heroku. If using on localhost3000, make sure to run ng build --prod to get this dist/ created
 app.use("/", express.static(path.join(__dirname, "../dist/jobsApp")));
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "../dist/jobsApp/index.html"));

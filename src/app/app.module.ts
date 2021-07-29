@@ -82,6 +82,7 @@ import { PostCreateComponent } from './posts/posts-create/posts-create.component
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { ApprovePostsPageComponent } from './admin/approve-posts-page/approve-posts-page.component';
 import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported-posts-page.component';
+import { UserBannedErrorComponent } from './errors/user-banned-error/user-banned-error.component';
 
 
 @NgModule({
@@ -102,6 +103,7 @@ import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported
     UpdatePasswordErrorComponent,
     LoginGeneralErrorComponent,
     SignupBeforeErrorComponent,
+    UserBannedErrorComponent,
     HomepageComponent,
     AppliedBeforeDialog,
     ReportedBeforeDialog,

@@ -73,15 +73,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
   //navbar stuff
   active: string = 'changePassword';
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
   constructor(
     public postsService: PostsService,
     private modalService: NgbModal,
@@ -247,14 +238,21 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
     this.postsService.downloadPosts(form.value.startDate, form.value.endDate);
-
-    //TODO: needs some service here
   }
 
   openChangePasswordAlertSnackBar() {
     this._snackBar.openFromComponent(ChangePasswordAlertComponent, {
       duration: 3 * 1000,
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   ngOnDestroy() {

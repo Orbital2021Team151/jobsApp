@@ -1,7 +1,7 @@
 <!-- navbar stuff -->
 <div class="page-container">
   <mat-card class="navbarmatcard">
-    <mat-card-title class="nav-bar-title"> OPTIONS </mat-card-title>
+    <mat-card-title class="nav-bar-title">OPTIONS</mat-card-title>
     <div class="page-container">
       <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
 
@@ -28,6 +28,23 @@
           </a>
           <ng-template ngbNavContent> </ng-template>
         </li>
+
+        <li ngbNavItem="changePassword" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>security</mat-icon>
+            Change Password
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+
+        <li ngbNavItem="downloadCSV" class="nav-item">
+          <a ngbNavLink>
+            <mat-icon>file_download</mat-icon>
+            Download CSV
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+
       </ul>
 
       <div [ngbNavOutlet]="nav" class="ml-4"></div>
@@ -139,7 +156,6 @@
 </div>
 
 
-
 <div class="change-password-card" *ngIf="active === 'downloadCSV'">
   <mat-card class="mat-elevation-z0 change-password-body">
     <mat-card-title class="download-csv-title">
@@ -177,6 +193,7 @@
     </mat-card-footer>
   </mat-card>
 </div>
+
 
 <div class="request-posts-div" *ngIf="active === 'postsPendingApproval'">
   <div class="centered" *ngFor="let post of posts">
@@ -635,11 +652,11 @@
         </div>
         <div class="px-4 py-3 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
-            {{post.title }}
+            {{post.title}}
           </h3>
 
           <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            by <i>{{post.orgName }}</i>
+            by <i>{{post.orgName}}</i>
           </p>
 
         </div>
@@ -814,10 +831,11 @@
   <mat-spinner *ngIf="hasReport === null"></mat-spinner>
 </div>
 
+
 <div class="change-user-permissions">
-  <mat-form-field class="user-filter">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  <mat-form-field class="user-filter" appearance="fill">
+    <mat-label>Find User</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="eg Woodrow Wilson" #input>
   </mat-form-field>
 
 

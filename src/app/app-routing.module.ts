@@ -55,7 +55,7 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent, data: { animation: 'isRight' }},
   { path: 'signup', component: SignupGeneralComponent, data: { animation: 'isLeft' }},
-  { path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
+  //{ path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
   { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { roles: ["Admin"] }},
   { path: 'highlightContent1', component: HighlightContentComponent1 },
   { path: 'highlightContent2', component: HighlightContentComponent2 },

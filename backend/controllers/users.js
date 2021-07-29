@@ -120,7 +120,7 @@ exports.login = (req, res, next) => {
           }
 
           if (err.message === "User has been banned!") {
-            //console.log("Wrong Password! err.message printed.");
+            //console.log("Account got banned!");
             res.status(401).json({
               errorCode: 2, //TODO: NEED A NEW ERROR FOR THIS
               message: "User has been banned",
@@ -296,6 +296,57 @@ exports.forgetPassword = (req, res) => {
     });
 };
 
+exports.verifyAccount = (req, res) => {
+  const uniqueId = req.params.uniqueId;
+
+  User.findById(uniqueId)
+    .then((result) => {
+      if (result) {
+        result.verified = true;
+
+        User
+        .updateOne({ email: result.email, role: result.role }, result)
+        .then(
+          (result) => {
+
+            /*
+            res.status(500).json({
+              message: "User is now verified!",
+            });
+            */
+            res.sendFile(path.join(__dirname, "..", "views", "verification-confirmation", "verification-confirmation.html"));
+          }
+        );
+      } else {
+        throw new Error("User cannot be verified!?");
+      }
+    })
+
+    .catch((err) => {
+      res.status(401).json({
+        errorCode: 6,
+        message: "User not found",
+      });
+    });
+};
+
+exports.getUsers = (req, res) => {
+  User.find()
+    .then((documents) => {
+      res.status(200).json({
+        message: "all users fetched successfully",
+        users: documents,
+      });
+    })
+
+    .catch((e) => {
+      console.log("Error at get users in controllers users.js");
+      res.status(404).json({
+        error: e,
+        message: "Error at get users in controllers users.js",
+      });
+    });
+};
 
 
 
@@ -396,40 +447,6 @@ const sendVerificationEmail = (email, uniqueString) => {
       console.log("Confirmation message sent!");
     }
   });
-};
-
-exports.verifyAccount = (req, res) => {
-  const uniqueId = req.params.uniqueId;
-
-  User.findById(uniqueId)
-    .then((result) => {
-      if (result) {
-        result.verified = true;
-
-        User
-        .updateOne({ email: result.email, role: result.role }, result)
-        .then(
-          (result) => {
-
-            /*
-            res.status(500).json({
-              message: "User is now verified!",
-            });
-            */
-            res.sendFile(path.join(__dirname, "..", "views", "verification-confirmation", "verification-confirmation.html"));
-          }
-        );
-      } else {
-        throw new Error("User cannot be verified!?");
-      }
-    })
-
-    .catch((err) => {
-      res.status(401).json({
-        errorCode: 6,
-        message: "User not found",
-      });
-    });
 };
 
 const sendForgetPasswordEmail = (email, tempPassword) => {

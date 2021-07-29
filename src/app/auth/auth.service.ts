@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Subject, timer } from 'rxjs';
 import { AuthData } from './auth-data.model';
+import { map } from "rxjs/operators";
 
 import { environment } from "../../environments/environment";
 const BACKEND_URL = environment.apiUrl; //change this in the environment folder
@@ -30,6 +31,24 @@ export class AuthService {
     verified: boolean;
   }>();
 
+  private users: {
+    name: string;
+    email: string;
+    admin: boolean;
+    beneficiaries: string[];
+    verified: boolean;
+    ban: boolean;
+  }[];
+
+  private usersListener = new Subject<{
+    name: string;
+    email: string;
+    admin: boolean;
+    beneficiaries: string[];
+    verified: boolean;
+    ban: boolean;
+  }[]>();
+
   private signupListener = new Subject<boolean>();
   private loginListener = new Subject<boolean>();
   private changedPasswordListener = new Subject<boolean>();
@@ -54,6 +73,30 @@ export class AuthService {
   getAuthStatusListener() {
     //console.log(this.authStatusListener.asObservable());
     return this.authStatusListener.asObservable();
+  }
+
+  getUsers() {
+    this.http.get<{message: string, users: any}>(BACKEND_URL + 'api/user/getUsers')
+    .pipe(map(userData => {
+      return userData.users.map(user => {
+        return {
+          name: user.name,
+          email: user.email,
+          admin: user.admin,
+          beneficiaries: user.beneficiaries,
+          verified: user.verified,
+          ban: user.ban
+        };
+      });
+    })) //to change from _id from database to id
+    .subscribe((mappedUsers) => {
+      this.users = mappedUsers;
+      this.usersListener.next([...this.users]);
+    });
+  }
+
+  getUsersListener() {
+    return this.usersListener.asObservable();
   }
 
   getSignupListener() {
