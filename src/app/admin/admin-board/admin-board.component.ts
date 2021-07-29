@@ -1,23 +1,46 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation  } from "@angular/core";
-import { Subscription } from "rxjs";
-import { Post } from "../../posts/post.model";
-import { PostsService } from "../../posts/post.service";
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Post } from '../../posts/post.model';
+import { PostsService } from '../../posts/post.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from "src/app/auth/auth.service";
-import { formatDate } from "@angular/common";
-import { NgForm, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { ChangePasswordAlertComponent } from "../snackbars/change-password-snackbar/change-password-snackbar.component";
+import { AuthService } from 'src/app/auth/auth.service';
+import { formatDate } from '@angular/common';
+import {
+  NgForm,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ChangePasswordAlertComponent } from '../snackbars/change-password-snackbar/change-password-snackbar.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
 
 @Component({
-  selector: "app-admin-board",
+  selector: 'app-admin-board',
   templateUrl: './admin-board.component.html',
   styleUrls: ['./admin-board.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class AdminBoardComponent implements OnInit, OnDestroy {
+export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  list = '1'.repeat(100).split('').map((_, i) => i);
+  //list = '1'.repeat(100).split('').map((_, i) => i);
+  /** Constants used to fill up our data base. */
+  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+  dataSource: MatTableDataSource<UserData>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   posts: Post[] = [];
 
@@ -37,7 +60,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   public hasReport: Boolean = null;
   postToBeDeleted: string;
 
-
   /* Reject FormGroup */
   public rejectForm: FormGroup;
   public rejectReasonControl = new FormControl(null);
@@ -49,9 +71,23 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   public newPasswordConfirmControl = new FormControl(null);
 
   //navbar stuff
-  active: string = "postsPendingApproval";
+  active: string = 'changePassword';
 
-  constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService, private _snackBar: MatSnackBar) {
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  constructor(
+    public postsService: PostsService,
+    private modalService: NgbModal,
+    public authService: AuthService,
+    private _snackBar: MatSnackBar,
+  ) {
     this.rejectForm = new FormGroup({
       reason: this.rejectReasonControl,
     });
@@ -61,56 +97,51 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
       newPassword: this.newPasswordControl,
       newPasswordConfirm: this.newPasswordConfirmControl,
     });
+
+
+    // Create 100 users
+    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(users);
   }
 
   ngOnInit() {
-    /*
-    if (!null) {
-      console.log("This prints for some reason...");
-      //so !null is treated as true in typescript. cool.
-    }
-    */
 
     this.postsService.getPosts();
     this.authStatusObject = this.authService.getAuthStatusObject();
-
-    /*
-     * Probably do not need this because there are no changes to authStatusObject once user is logged in.
-     * Might have to be revised in the future for chat function.
-    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
-      console.log("Admin dashboard's authStatus observable!");
-      this.authStatusObject = authObject;
-      this.hasRequest = false;
-
-    });
-    */
-
-    this.csvDownloadedSub = this.postsService.getCSVDownloadingListener()
-    .subscribe(downloadingStatus => {
-      this.csvIsDownloading = downloadingStatus;
-    });
-
-    this.postSub = this.postsService.getPostsUpdatedListener()
+    this.csvDownloadedSub = this.postsService
+      .getCSVDownloadingListener()
+      .subscribe((downloadingStatus) => {
+        this.csvIsDownloading = downloadingStatus;
+      });
+    this.postSub = this.postsService
+      .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         //console.log(posts);
         //console.log("Admin dashboard's postService observable!");
-        this.posts = posts.filter(post => !post.removed);
+        this.posts = posts.filter((post) => !post.removed);
 
-        if (this.posts.filter(post => !post.approved).length > 0) {
+        if (this.posts.filter((post) => !post.approved).length > 0) {
           this.hasRequest = true;
-          this.postsNumber = this.posts.filter(post => !post.approved).length;
+          this.postsNumber = this.posts.filter((post) => !post.approved).length;
         } else {
           this.hasRequest = false;
         }
 
-        if (this.posts.filter(post => post.reports.length > 0).length > 0) {
+        if (this.posts.filter((post) => post.reports.length > 0).length > 0) {
           this.hasReport = true;
-          this.reportedPostsNumber = this.posts.filter(post => post.reports.length > 0).length;
+          this.reportedPostsNumber = this.posts.filter(
+            (post) => post.reports.length > 0
+          ).length;
         } else {
           this.hasReport = false;
         }
-
       });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   onDeletePrompt(content) {
@@ -173,7 +204,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
   }
 
   onPublish(postId: string, publishContent) {
-
     this.postsService.publishPost(postId);
 
     this.modalService.open(publishContent, { scrollable: true });
@@ -200,9 +230,12 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
     console.log(this.changePasswordForm.value);
 
-    this.authService.changePassword(this.changePasswordForm.value.currentPassword, this.changePasswordForm.value.newPassword);
+    this.authService.changePassword(
+      this.changePasswordForm.value.currentPassword,
+      this.changePasswordForm.value.newPassword
+    );
 
-    this.authService.getChangedPasswordListener().subscribe(res => {
+    this.authService.getChangedPasswordListener().subscribe((res) => {
       this.openChangePasswordAlertSnackBar();
       this.changePasswordForm.reset();
     });
@@ -210,7 +243,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
 
   onDownloadCSV(form: NgForm) {
     if (form.invalid) {
-      console.log("IT IS INVALID!?");
+      console.log('IT IS INVALID!?');
       return;
     }
     this.postsService.downloadPosts(form.value.startDate, form.value.endDate);
@@ -229,5 +262,64 @@ export class AdminBoardComponent implements OnInit, OnDestroy {
     //this.authStatusSub.unsubscribe();
     this.csvDownloadedSub.unsubscribe();
   }
+}
 
+
+const COLORS: string[] = [
+  'maroon',
+  'red',
+  'orange',
+  'yellow',
+  'olive',
+  'green',
+  'purple',
+  'fuchsia',
+  'lime',
+  'teal',
+  'aqua',
+  'blue',
+  'navy',
+  'black',
+  'gray',
+];
+const NAMES: string[] = [
+  'Maia',
+  'Asher',
+  'Olivia',
+  'Atticus',
+  'Amelia',
+  'Jack',
+  'Charlotte',
+  'Theodore',
+  'Isla',
+  'Oliver',
+  'Isabella',
+  'Jasper',
+  'Cora',
+  'Levi',
+  'Violet',
+  'Arthur',
+  'Mia',
+  'Thomas',
+  'Elizabeth',
+];
+
+export interface UserData {
+  id: string;
+  name: string;
+  progress: string;
+  color: string;
+}
+
+/** Builds and returns a new User. */
+function createNewUser(id: number): UserData {
+  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+
+  return {
+    id: id.toString(),
+    name: name,
+    progress: Math.round(Math.random() * 100).toString(),
+    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
+  };
 }

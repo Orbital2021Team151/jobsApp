@@ -22,6 +22,7 @@ import { MatList, MatListModule } from '@angular/material/list';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {
   NgbPaginationModule,
   NgbAlertModule,
@@ -74,6 +75,8 @@ import { HighlightSubmittedDialog } from './dialogs/highlight-submitted-dialog/h
 import { PostRejectedDialog } from './dialogs/post-rejected-dialog/post-rejected-dialog.component';
 import { PostCompletedDialog } from './dialogs/post-completed-dialog/post-completed-dialog.component';
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PostCreateComponent } from './posts/posts-create/posts-create.component';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
@@ -158,7 +161,10 @@ import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported
     MatPasswordStrengthModule,
     MatTooltipModule,
     MatChipsModule,
-    ScrollingModule
+    ScrollingModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
