@@ -25,6 +25,7 @@ import { ChangePasswordAlertComponent } from '../snackbars/change-password-snack
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { UserData } from './user-model';
 
 
 @Component({
@@ -35,14 +36,17 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  //list = '1'.repeat(100).split('').map((_, i) => i);
-  /** Constants used to fill up our data base. */
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+
+  /* Filter Table */
+  displayedColumns: string[] = ['name', 'email', 'admin', 'verified', 'menu'];
+  dataSource: MatTableDataSource<UserData> = new MatTableDataSource<UserData>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   posts: Post[] = [];
+
+  private usersSub: Subscription;
+  public users: UserData[] = [];
 
   private postSub: Subscription;
   private csvDownloadedSub: Subscription;
@@ -88,12 +92,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
       newPassword: this.newPasswordControl,
       newPasswordConfirm: this.newPasswordConfirmControl,
     });
-
-
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
   }
 
   ngOnInit() {
@@ -131,8 +129,14 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.authService.getUsers();
+    this.usersSub = this.authService.getUsersListener().subscribe(usersList => {
+      this.users = usersList;
+      this.dataSource = new MatTableDataSource(this.users);
+
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   onDeletePrompt(content) {
@@ -249,6 +253,9 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    //console.log("Apply Filter function called!");
+    //console.log(filterValue);
+    //console.log(this.dataSource.filter);
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -260,64 +267,4 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
     //this.authStatusSub.unsubscribe();
     this.csvDownloadedSub.unsubscribe();
   }
-}
-
-
-const COLORS: string[] = [
-  'maroon',
-  'red',
-  'orange',
-  'yellow',
-  'olive',
-  'green',
-  'purple',
-  'fuchsia',
-  'lime',
-  'teal',
-  'aqua',
-  'blue',
-  'navy',
-  'black',
-  'gray',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
 }

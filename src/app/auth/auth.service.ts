@@ -88,11 +88,18 @@ export class AuthService {
           ban: user.ban
         };
       });
-    })) //to change from _id from database to id
+    }))
     .subscribe((mappedUsers) => {
+      console.log("get users mapped successful. mapped users are: ");
+      console.log(mappedUsers);
       this.users = mappedUsers;
       this.usersListener.next([...this.users]);
     });
+  }
+
+  getUsersObject() {
+    this.getUsers();
+    return {...this.users};
   }
 
   getUsersListener() {

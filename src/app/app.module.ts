@@ -23,6 +23,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu';
 import {
   NgbPaginationModule,
   NgbAlertModule,
@@ -166,7 +167,8 @@ import { UserBannedErrorComponent } from './errors/user-banned-error/user-banned
     ScrollingModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
