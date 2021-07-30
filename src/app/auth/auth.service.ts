@@ -387,6 +387,49 @@ export class AuthService {
       });
   }
 
+  banUser(email: string) {
+    this.http.put(BACKEND_URL + 'api/user/banUser', email)
+    .subscribe(result => {
+      this.getUsers();
+    },
+    error => {
+      console.log("Error occured at banUser");
+      console.log(error);
+    });
+  }
+
+  unbanUser(email: string) {
+    this.http.put(BACKEND_URL + 'api/user/unbanUser', email)
+    .subscribe(result => {
+      this.getUsers();
+    },
+    error => {
+      console.log("Error occured at unbanUser");
+      console.log(error);
+    });
+  }
+
+  makeAdmin(email: string) {
+    this.http.put(BACKEND_URL + 'api/user/makeAdmin', email)
+    .subscribe(result => {
+      this.getUsers();
+    },
+    error => {
+      console.log("Error occured at makeAdmin");
+      console.log(error);
+    });
+  }
+
+  removeAdmin(email: string) {
+    this.http.put(BACKEND_URL + 'api/user/removeAdmin', email)
+    .subscribe(result => {
+      this.getUsers();
+    },
+    error => {
+      console.log("Error occured at removeAdmin");
+      console.log(error);
+    });
+  }
 
 
 

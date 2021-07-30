@@ -279,6 +279,25 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+
+  blockUser(email: string) {
+    this.authService.banUser(email);
+  }
+
+  unblockUser(email: string) {
+    this.authService.unbanUser(email);
+  }
+
+  makeAdmin(email: string) {
+    this.authService.makeAdmin(email);
+  }
+
+  removeAdmin(email: string) {
+    this.authService.removeAdmin(email);
+  }
+
+
+
   ngOnDestroy() {
     this.postSub.unsubscribe();
     //this.authStatusSub.unsubscribe();

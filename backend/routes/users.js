@@ -17,4 +17,12 @@ router.put("/updatePassword", UserController.updatePassword);
 
 router.put("/forgetPassword", UserController.forgetPassword);
 
+router.put("/banUser", UserController.banUser);
+
+router.put("/unbanUser", UserController.unbanUser);
+
+router.put("/makeAdmin", UserController.makeAdmin);
+
+router.put("/removeAdmin", UserController.removeAdmin);
+
 module.exports = router;

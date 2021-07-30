@@ -349,6 +349,133 @@ exports.getUsers = (req, res) => {
 };
 
 
+exports.banUser = (req, res, next) => {
+  let fetchedUser;
+
+  User.findOne({
+    //_id: req.body.id,
+    email: req.body,
+  }).then((user) => {
+    if (!user) {
+      throw new Error("No user found to ban");
+    }
+    fetchedUser = user;
+
+    const newUser = new User({
+      _id: fetchedUser.id,
+      name: fetchedUser.name,
+      email: fetchedUser.email,
+      password: fetchedUser.password,
+      admin: fetchedUser.admin,
+      beneficiaries: fetchedUser.beneficiaries,
+      verified: fetchedUser.verified,
+      ban: true,
+    });
+
+    User.updateOne(
+      {email: req.body},
+      newUser
+    ).then((result) => {
+      res.status(200).json("User Banned!");
+    });
+  });
+};
+
+exports.unbanUser = (req, res, next) => {
+  let fetchedUser;
+
+  User.findOne({
+    //_id: req.body.id,
+    email: req.body,
+  }).then((user) => {
+    if (!user) {
+      throw new Error("No user found to unban. @ controllers js line 391");
+    }
+    fetchedUser = user;
+
+    const newUser = new User({
+      _id: fetchedUser.id,
+      name: fetchedUser.name,
+      email: fetchedUser.email,
+      password: fetchedUser.password,
+      admin: fetchedUser.admin,
+      beneficiaries: fetchedUser.beneficiaries,
+      verified: fetchedUser.verified,
+      ban: false,
+    });
+
+    User.updateOne(
+      {email: req.body},
+      newUser
+    ).then((result) => {
+      res.status(200).json("User unbanned!");
+    });
+  });
+};
+
+exports.makeAdmin = (req, res, next) => {
+  let fetchedUser;
+
+  User.findOne({
+    //_id: req.body.id,
+    email: req.body,
+  }).then((user) => {
+    if (!user) {
+      throw new Error("No user found to make admin. @ controllers users.js line 423");
+    }
+    fetchedUser = user;
+
+    const newUser = new User({
+      _id: fetchedUser.id,
+      name: fetchedUser.name,
+      email: fetchedUser.email,
+      password: fetchedUser.password,
+      admin: true,
+      beneficiaries: fetchedUser.beneficiaries,
+      verified: fetchedUser.verified,
+      ban: fetchedUser.ban,
+    });
+
+    User.updateOne(
+      {email: req.body},
+      newUser
+    ).then((result) => {
+      res.status(200).json("User made Admin!");
+    });
+  });
+};
+
+exports.removeAdmin = (req, res, next) => {
+  let fetchedUser;
+
+  User.findOne({
+    //_id: req.body.id,
+    email: req.body,
+  }).then((user) => {
+    if (!user) {
+      throw new Error("No user found remove admin persmissions from. @ controllers users js line 455");
+    }
+    fetchedUser = user;
+
+    const newUser = new User({
+      _id: fetchedUser.id,
+      name: fetchedUser.name,
+      email: fetchedUser.email,
+      password: fetchedUser.password,
+      admin: false,
+      beneficiaries: fetchedUser.beneficiaries,
+      verified: fetchedUser.verified,
+      ban: fetchedUser.ban,
+    });
+
+    User.updateOne(
+      {email: req.body},
+      newUser
+    ).then((result) => {
+      res.status(200).json("User Removed of admin privileges!");
+    });
+  });
+};
 
 
 
