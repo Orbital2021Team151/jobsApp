@@ -46,11 +46,6 @@ mat-form-field {
   color: rgb(88, 88, 88);
 }
 
-mat-icon {
-  position: relative;
-  top: 6px;
-}
-
 .post-card-content {
   font-family: "Lato", sans-serif;
   text-overflow: ellipsis;
@@ -361,14 +356,9 @@ a {
 }
 
 .nav-item {
-  /*
-  justify-content: center;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
   align-items: center;
-  align-content: space-around;
-  */
+  justify-content: space-between;
 }
 
 .page-container {
@@ -433,6 +423,11 @@ table {
 
 td, th {
   width: 25%;
+}
+
+.menu-button-option {
+  display: flex;
+  align-items: center;
 }
 
 

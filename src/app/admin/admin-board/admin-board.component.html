@@ -882,21 +882,24 @@
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon button with menu for each user">
           <mat-icon>more_vert</mat-icon>
         </button>
+
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item *ngIf="row.accountStatus !== 'Banned'" class="menu-button-option">
             <mat-icon>block</mat-icon>
-            <span>Block</span>
+            <span class="menu-button-text">Block</span>
           </button>
-          <button mat-menu-item disabled>
+
+          <button mat-menu-item *ngIf="row.accountStatus === 'Banned'" class="menu-button-option">
             <mat-icon>check_circle_outline</mat-icon>
             <span>Unblock</span>
           </button>
-          <button mat-menu-item>
+
+          <button mat-menu-item *ngIf="row.accountStatus === 'Normal User'" class="menu-button-option">
             <mat-icon>person_add</mat-icon>
-            <span>Make Admin</span>
+            <span class="menu-button-text">Make Admin</span>
           </button>
 
-          <button mat-menu-item disabled>
+          <button mat-menu-item *ngIf="row.accountStatus === 'Admin'" class="menu-button-option">
             <mat-icon>person_remove</mat-icon>
             <span>Remove Admin Rights</span>
           </button>
