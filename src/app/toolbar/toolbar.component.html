@@ -300,14 +300,14 @@
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/feed" routerLinkActive="mat-primary" class="toolbar-buttons">
+    <a mat-button routerLink="/feed" routerLinkActive="mat-primary" class="toolbar-buttons-common">
       <mat-icon>feed</mat-icon>
       Feed
     </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/create" routerLinkActive="mat-primary" class="toolbar-buttons">
+    <a mat-button routerLink="/create" routerLinkActive="mat-primary" class="toolbar-buttons-common">
       <mat-icon>add</mat-icon>
       Create Job Posting</a
     >
@@ -337,11 +337,29 @@
   </mat-toolbar-row>
 
   <mat-toolbar-row class="row-selection-item" *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/signup" routerLinkActive="mat-primary" class="toolbar-buttons">
+    <a mat-button routerLink="/changePassword" routerLinkActive="mat-primary" class="toolbar-buttons">
       <mat-icon>security</mat-icon>
-      Change Password (TODO)
+      Change Password
     </a>
   </mat-toolbar-row>
+
+  <mat-toolbar-row class="row-selection-item" *ngIf="userIsAuthenticated">
+    <a mat-button routerLink="/changePassword" routerLinkActive="mat-primary" class="toolbar-buttons">
+      <mat-icon>interests</mat-icon>
+      Update Interests (TODO)
+    </a>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin" class="row-selection-item">
+    <a mat-button routerLink="/signup" routerLinkActive="mat-primary" class="toolbar-buttons">
+      <mat-icon>supervisor_account</mat-icon>
+      Permissions (TODO)
+    </a>
+  </mat-toolbar-row>
+
+
+
+
 
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
     <a  mat-button routerLink="/admin" class="toolbar-buttons"
@@ -349,6 +367,7 @@
       Admin Dashboard
     </a>
   </mat-toolbar-row>
+
   <mat-toolbar-row *ngIf="!userIsAuthenticated">
     <a  mat-button class="toolbar-buttons" routerLink="/login"
     routerLinkActive="mat-primary">
