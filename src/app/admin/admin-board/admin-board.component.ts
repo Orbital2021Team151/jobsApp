@@ -281,8 +281,8 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   blockUser(email: string) {
-    console.log("Block user function fired!");
-    console.log(email);
+    //console.log("Block user function fired!");
+    //console.log(email);
     this.authService.banUser(email);
   }
 
