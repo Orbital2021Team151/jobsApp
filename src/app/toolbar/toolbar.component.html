@@ -319,6 +319,12 @@
       Login
     </a>
   </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="!userIsAuthenticated">
+    <a  mat-button class="toolbar-buttons" routerLink="/signup"
+    routerLinkActive="mat-primary">
+      Signup
+    </a>
+  </mat-toolbar-row>
   <mat-toolbar-row>
     <a *ngIf="userIsAuthenticated" mat-button class="toolbar-buttons" (click)="onLogout()">
       Logout

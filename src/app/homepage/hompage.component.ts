@@ -2,6 +2,7 @@ import { stringify } from "@angular/compiler/src/util";
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { UserData } from "../admin/admin-board/user-model";
 import { Highlight } from "../admin/highlight.model";
 import { HighlightService } from "../admin/highlight.service";
 import { AuthService } from "../auth/auth.service";
@@ -22,7 +23,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
   authStatusObject: any;
   isAuth: boolean = false;
   pageNumber: string = "-1";
-  isAdmin: boolean;
+
+  userSub: Subscription;
+  user: any;
 
   constructor(
     public homepageService: HomepageService,
@@ -39,9 +42,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
                             // console.log(highlights);
                             // console.log(this.highlights[0].id);
                           });
-    this.authStatusObject = this.authService.getAuthStatusObject;
+    this.user = this.authService.getAuthStatusObject();
     this.isAuth = this.authService.getIsAuth();
-    this.isAdmin = this.authService.getAuthStatusObject().admin;
+
+    this.userSub = this.authService.getAuthStatusListener().subscribe(userData => {
+      this.user = userData;
+    })
   }
   ngOnDestroy() {
     this.highlightSub.unsubscribe();

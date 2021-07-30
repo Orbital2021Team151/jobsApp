@@ -38,7 +38,7 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   /* Filter Table */
-  displayedColumns: string[] = ['name', 'email', 'admin', 'verified', 'menu'];
+  displayedColumns: string[] = ['name', 'email', 'accountStatus', 'menu'];
   dataSource: MatTableDataSource<UserData> = new MatTableDataSource<UserData>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -106,8 +106,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.postSub = this.postsService
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
-        //console.log(posts);
-        //console.log("Admin dashboard's postService observable!");
         this.posts = posts.filter((post) => !post.removed);
 
         if (this.posts.filter((post) => !post.approved).length > 0) {
@@ -131,7 +129,26 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.authService.getUsers();
     this.usersSub = this.authService.getUsersListener().subscribe(usersList => {
-      this.users = usersList;
+      this.users = usersList.map(user => {
+
+        let userAccountStatus = '';
+        if (user.ban) {
+          userAccountStatus = 'Banned'
+        } else if (!user.verified) {
+          userAccountStatus = 'Unverified'
+        } else if (user.admin) {
+          userAccountStatus = 'Admin'
+        } else {
+          userAccountStatus = 'Normal User'
+        }
+
+        return {
+          name: user.name,
+          email: user.email,
+          accountStatus: userAccountStatus,
+          beneficiaries: user.beneficiaries
+        };
+      });
       this.dataSource = new MatTableDataSource(this.users);
 
       this.dataSource.paginator = this.paginator;

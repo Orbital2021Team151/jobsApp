@@ -74,7 +74,7 @@
                     mat-raised-button
                     class="carousel-read-more-button"
                     (click)="deleteHighlight(highlight.id)"
-                    *ngIf="isAuth && role === 'Admin'"
+                    *ngIf="isAuth && user.admin"
                   >
                     Delete
                   </button>
