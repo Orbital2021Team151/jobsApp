@@ -388,7 +388,14 @@ export class AuthService {
   }
 
   banUser(email: string) {
-    this.http.put(BACKEND_URL + 'api/user/banUser', email)
+    //console.log("Email received at authService is: ")
+    //console.log(email)
+
+    let emailObject = {
+      email: email,
+    }
+
+    this.http.put(BACKEND_URL + 'api/user/banUser', emailObject)
     .subscribe(result => {
       this.getUsers();
     },
@@ -399,7 +406,11 @@ export class AuthService {
   }
 
   unbanUser(email: string) {
-    this.http.put(BACKEND_URL + 'api/user/unbanUser', email)
+    let emailObject = {
+      email: email,
+    }
+
+    this.http.put(BACKEND_URL + 'api/user/unbanUser', emailObject)
     .subscribe(result => {
       this.getUsers();
     },
@@ -410,7 +421,11 @@ export class AuthService {
   }
 
   makeAdmin(email: string) {
-    this.http.put(BACKEND_URL + 'api/user/makeAdmin', email)
+    let emailObject = {
+      email: email,
+    }
+
+    this.http.put(BACKEND_URL + 'api/user/makeAdmin', emailObject)
     .subscribe(result => {
       this.getUsers();
     },
@@ -421,7 +436,11 @@ export class AuthService {
   }
 
   removeAdmin(email: string) {
-    this.http.put(BACKEND_URL + 'api/user/removeAdmin', email)
+    let emailObject = {
+      email: email,
+    }
+
+    this.http.put(BACKEND_URL + 'api/user/removeAdmin', emailObject)
     .subscribe(result => {
       this.getUsers();
     },

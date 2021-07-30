@@ -281,6 +281,8 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   blockUser(email: string) {
+    console.log("Block user function fired!");
+    console.log(email);
     this.authService.banUser(email);
   }
 
@@ -302,5 +304,6 @@ export class AdminBoardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.postSub.unsubscribe();
     //this.authStatusSub.unsubscribe();
     this.csvDownloadedSub.unsubscribe();
+    this.usersSub.unsubscribe();
   }
 }

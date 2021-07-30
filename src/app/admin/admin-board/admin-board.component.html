@@ -876,22 +876,22 @@
         </button>
 
         <mat-menu #menu="matMenu">
-          <button mat-menu-item *ngIf="row.accountStatus !== 'Banned'" class="menu-button-option">
+          <button mat-menu-item *ngIf="row.accountStatus !== 'Banned'" class="menu-button-option" (click)="blockUser(row.email)">
             <mat-icon>block</mat-icon>
             <span class="menu-button-text">Block</span>
           </button>
 
-          <button mat-menu-item *ngIf="row.accountStatus === 'Banned'" class="menu-button-option">
+          <button mat-menu-item *ngIf="row.accountStatus === 'Banned'" class="menu-button-option" (click)="unblockUser(row.email)">
             <mat-icon>check_circle_outline</mat-icon>
             <span>Unblock</span>
           </button>
 
-          <button mat-menu-item *ngIf="row.accountStatus === 'Normal User'" class="menu-button-option">
+          <button mat-menu-item *ngIf="row.accountStatus === 'Normal User'" class="menu-button-option" (click)="makeAdmin(row.email)">
             <mat-icon>person_add</mat-icon>
             <span class="menu-button-text">Make Admin</span>
           </button>
 
-          <button mat-menu-item *ngIf="row.accountStatus === 'Admin'" class="menu-button-option">
+          <button mat-menu-item *ngIf="row.accountStatus === 'Admin'" class="menu-button-option" (click)="removeAdmin(row.email)">
             <mat-icon>person_remove</mat-icon>
             <span>Remove Admin Rights</span>
           </button>

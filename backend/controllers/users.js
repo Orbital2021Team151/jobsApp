@@ -350,11 +350,15 @@ exports.getUsers = (req, res) => {
 
 
 exports.banUser = (req, res, next) => {
+
+  //console.log("At ban user in users.js controllers. received req body is: ")
+  //console.log(req.body)
+
   let fetchedUser;
 
   User.findOne({
     //_id: req.body.id,
-    email: req.body,
+    email: req.body.email,
   }).then((user) => {
     if (!user) {
       throw new Error("No user found to ban");
@@ -373,7 +377,7 @@ exports.banUser = (req, res, next) => {
     });
 
     User.updateOne(
-      {email: req.body},
+      {email: req.body.email},
       newUser
     ).then((result) => {
       res.status(200).json("User Banned!");
@@ -386,7 +390,7 @@ exports.unbanUser = (req, res, next) => {
 
   User.findOne({
     //_id: req.body.id,
-    email: req.body,
+    email: req.body.email,
   }).then((user) => {
     if (!user) {
       throw new Error("No user found to unban. @ controllers js line 391");
@@ -405,7 +409,7 @@ exports.unbanUser = (req, res, next) => {
     });
 
     User.updateOne(
-      {email: req.body},
+      {email: req.body.email},
       newUser
     ).then((result) => {
       res.status(200).json("User unbanned!");
@@ -418,7 +422,7 @@ exports.makeAdmin = (req, res, next) => {
 
   User.findOne({
     //_id: req.body.id,
-    email: req.body,
+    email: req.body.email,
   }).then((user) => {
     if (!user) {
       throw new Error("No user found to make admin. @ controllers users.js line 423");
@@ -437,7 +441,7 @@ exports.makeAdmin = (req, res, next) => {
     });
 
     User.updateOne(
-      {email: req.body},
+      {email: req.body.email},
       newUser
     ).then((result) => {
       res.status(200).json("User made Admin!");
@@ -450,7 +454,7 @@ exports.removeAdmin = (req, res, next) => {
 
   User.findOne({
     //_id: req.body.id,
-    email: req.body,
+    email: req.body.email,
   }).then((user) => {
     if (!user) {
       throw new Error("No user found remove admin persmissions from. @ controllers users js line 455");
@@ -469,7 +473,7 @@ exports.removeAdmin = (req, res, next) => {
     });
 
     User.updateOne(
-      {email: req.body},
+      {email: req.body.email},
       newUser
     ).then((result) => {
       res.status(200).json("User Removed of admin privileges!");
