@@ -330,9 +330,9 @@
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin" class="row-selection-item">
-    <a mat-button routerLink="/signup" routerLinkActive="mat-primary" class="toolbar-buttons">
+    <a mat-button routerLink="/downloadCSV" routerLinkActive="mat-primary" class="toolbar-buttons">
       <mat-icon>file_download</mat-icon>
-      Download CSV (TODO)
+      Download CSV
     </a>
   </mat-toolbar-row>
 
@@ -344,9 +344,9 @@
   </mat-toolbar-row>
 
   <mat-toolbar-row class="row-selection-item" *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/changePassword" routerLinkActive="mat-primary" class="toolbar-buttons">
+    <a mat-button routerLink="/updateInterests" routerLinkActive="mat-primary" class="toolbar-buttons">
       <mat-icon>interests</mat-icon>
-      Update Interests (TODO)
+      Update Interests
     </a>
   </mat-toolbar-row>
 
@@ -354,6 +354,13 @@
     <a mat-button routerLink="/signup" routerLinkActive="mat-primary" class="toolbar-buttons">
       <mat-icon>supervisor_account</mat-icon>
       Permissions (TODO)
+    </a>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin" class="row-selection-item">
+    <a mat-button routerLink="/createHighlight" routerLinkActive="mat-primary" class="toolbar-buttons">
+      <mat-icon> highlight</mat-icon>
+      Create A Highlight
     </a>
   </mat-toolbar-row>
 

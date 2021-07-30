@@ -22,11 +22,13 @@ import { PostCreateComponent } from './posts/posts-create/posts-create.component
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { ApprovePostsPageComponent } from './admin/approve-posts-page/approve-posts-page.component';
 import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported-posts-page.component';
+import { DownloadCSVPageComponent } from './admin/download-csv-page/download-csv-page.component';
+import { UpdateInterestsComponent } from './admin/update-interests-page/update-interests-page.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
-  { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard]},
-  { path: 'admin', component: AdminBoardComponent, canActivate: [AuthGuard], data: { roles: ["Admin"]}},
+  { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard], data: { admin: false }},
+  { path: 'admin', component: AdminBoardComponent, canActivate: [AuthGuard], data: { admin: false }},
   { path: 'student-alumni', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student", "Student / NUS Alumni"] },
     children: [
       //{ path: '', component: DashBoardLandingComponent, canActivate: [AuthGuard] },
@@ -50,20 +52,22 @@ const routes: Routes = [
    component: PostCreateComponent,
    canActivate: [AuthGuard],
    canDeactivate: [DirtycheckGuard],
-   data: { roles: ["Admin"]}
+   data: { admin: false, }
   },
 
   { path: 'login', component: LoginComponent, data: { animation: 'isRight' }},
   { path: 'signup', component: SignupGeneralComponent, data: { animation: 'isLeft' }},
   //{ path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
-  { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { roles: ["Admin"] }},
+  { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: true, }},
   { path: 'highlightContent1', component: HighlightContentComponent1 },
   { path: 'highlightContent2', component: HighlightContentComponent2 },
   { path: 'highlightContent3', component: HighlightContentComponent3 },
   { path: 'expiredSession', component: ExpiredSessionPage },
-  { path: 'changePassword', component: ChangePasswordComponent },
-  { path: 'approvePosts', component: ApprovePostsPageComponent },
-  { path: 'reportedPosts', component: ReportedPostsPageComponent },
+  { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: false, }},
+  { path: 'approvePosts', component: ApprovePostsPageComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: true, } },
+  { path: 'reportedPosts', component: ReportedPostsPageComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: true, } },
+  { path: 'downloadCSV', component: DownloadCSVPageComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: true, } },
+  { path: 'updateInterests', component: UpdateInterestsComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: false, } }
 ];
 
 @NgModule({

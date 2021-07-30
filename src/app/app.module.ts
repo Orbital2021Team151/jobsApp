@@ -84,6 +84,8 @@ import { ChangePasswordComponent } from './auth/change-password/change-password.
 import { ApprovePostsPageComponent } from './admin/approve-posts-page/approve-posts-page.component';
 import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported-posts-page.component';
 import { UserBannedErrorComponent } from './errors/user-banned-error/user-banned-error.component';
+import { DownloadCSVPageComponent } from './admin/download-csv-page/download-csv-page.component';
+import { UpdateInterestsComponent } from './admin/update-interests-page/update-interests-page.component';
 
 
 @NgModule({
@@ -126,7 +128,9 @@ import { UserBannedErrorComponent } from './errors/user-banned-error/user-banned
     PostCompletedDialog,
     ChangePasswordComponent,
     ApprovePostsPageComponent,
-    ReportedPostsPageComponent
+    ReportedPostsPageComponent,
+    DownloadCSVPageComponent,
+    UpdateInterestsComponent,
   ],
 
   imports: [

@@ -24,6 +24,23 @@ export class AuthGuard implements CanActivate {
       return false;
     }
     */
+   const admin: boolean = this.authService.getAuthStatusObject().admin;
+   const isAuth = this.authService.getIsAuth();
+
+   if (isAuth) {
+     if (admin) {
+       return true;
+     } else if (!admin && route.data.admin) {
+       return false;
+     } else if (!route.data.admin && !admin) {
+       return true;
+     } else {
+       return false;
+     }
+   } else {
+     this.router.navigate(['/login']);
+     return false;
+   }
    return true;
   }
 

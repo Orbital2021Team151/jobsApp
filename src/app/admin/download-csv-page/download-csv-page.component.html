@@ -1,0 +1,37 @@
+<div class="change-password-card">
+  <mat-card class="mat-elevation-z0 change-password-body">
+    <mat-card-title class="download-csv-title">
+      CSV File download
+    </mat-card-title>
+
+    <form #csvDateFilterForm="ngForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Choose a start date</mat-label>
+        <input matInput class="form-input" [matDatepicker]="startDatePicker" placeholder="MM/DD/YYYY" ngModel
+          #startDate="ngModel" name="startDate" />
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Choose an end date</mat-label>
+        <input matInput class="form-input" [matDatepicker]="endDatePicker" ngModel #endDate="ngModel" name="endDate"
+          placeholder="MM/DD/YYYY" />
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+    </form>
+
+    <mat-card-footer class="download-csv-footer">
+
+      <button *ngIf="!csvIsDownloading" mat-raised-button color="primary" (click)="onDownloadCSV(csvDateFilterForm)">
+        Download CSV
+      </button>
+
+      <button *ngIf="csvIsDownloading" mat-raised-button disabled>
+        Download CSV
+      </button>
+
+    </mat-card-footer>
+  </mat-card>
+</div>
