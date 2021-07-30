@@ -69,7 +69,7 @@ exports.requestPost = (req, res, next) => {
       //console.log(createdPost);
 
       //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-      //sendPostRequestedNotificationEmail(req.body.email, post);
+      sendPostRequestedNotificationEmail(req.body.email, post);
 
 
       res.status(201).json({
@@ -167,7 +167,7 @@ exports.requestPostNoImage = (req, res, next) => {
       //console.log(createdPost);
 
       //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-      //sendPostRequestedNotificationEmail(req.body.email, post);
+      sendPostRequestedNotificationEmail(req.body.email, post);
       res.status(201).json({
         message: "post requested successfully! Pending admin approval",
         postId: createdPost._id,
@@ -192,7 +192,7 @@ exports.getAllPosts = (req, res, next) => {
     });
 };
 
-//TODO: Delete image if imagePath is present
+//TODO MAYBE: Delete image if imagePath is present
 exports.deletePost = (req, res, next) => {
   //console.log("At backend delete PoST! Data are as follows: ");
   //console.log(req.userData);
@@ -279,14 +279,14 @@ exports.publishPost = (req, res, next) => {
             //console.log(postBeneficiary);
             if (interestedBeneficiaries.includes(postBeneficiary)) {
               //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-              //sendNotificationEmail(currentUser.email, req.body);
+              sendNotificationEmail(currentUser.email, req.body);
               break;
             }
           }
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-        //sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
+        sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
 
         res.status(200).json({
           documents: allUsersDocument, //probably do not need this
@@ -345,7 +345,7 @@ exports.applyPost = (req, res, next) => {
 
     //to just to inform the person who applied for the post that their application got through.
     //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-    //sendApplyAcknowledgementEmail(req.body.student, req.body.post);
+    sendApplyAcknowledgementEmail(req.body.student, req.body.post);
 
     res.status(200).json("Applied for posting!");
   });
@@ -412,12 +412,12 @@ exports.reportPost = (req, res, next) => {
         for (var userI = 0; userI < adminUsers.length; userI++) {
           let currentAdmin = adminUsers[userI];
           //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-          //sendReportToAdminEmail(currentAdmin.email, req.body.student, req.body.post);
+          sendReportToAdminEmail(currentAdmin.email, req.body.student, req.body.post);
           //console.log("Report email sent to admin: " + currentAdmin.email);
         }
 
         //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-        //sendReportAcknowledgementEmail(req.body.student, req.body.post);
+        sendReportAcknowledgementEmail(req.body.student, req.body.post);
         //console.log("Report acknowledgement sent to: " + req.body.student.email);
 
         res.status(200).json({
