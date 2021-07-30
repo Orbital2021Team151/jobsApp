@@ -1,14 +1,33 @@
+/* FONT IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+
+
 /* TOOLBAR GLOBAL
 -------------------------------------------------- */
 
 .top-bar {
-  /* */
   background-color:#F2545B;
   color: white;
   padding-top: 2rem;
   margin-top: 0rem;
   border: none;
-  
+}
+
+.nav-bar-title {
+  font-family: 'Lato', sans-serif;
+  color: white;
+  opacity: 0.7;
+  margin-left: 5%;
+  font-size: 100%;
+  font-weight: 500;
+  /*
+  margin-bottom: -1.25rem;
+  */
+}
+
+.row-selection-item {
+  margin-top: -1.25rem;
+  width: 100%;
 }
 
 .login-logout-signup {
@@ -68,6 +87,10 @@ mat-stroked-button {
 
 /* TOOLBAR USER OPTIONS
 -------------------------------------------------- */
+.logo-row {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 
 button {
   text-decoration: none;
@@ -129,12 +152,20 @@ a {
 
 .real-toolbar {
   background-color: #F2545B;
-  width: 14.5%;
+  width: 350px;
+  /*
   margin-top: 1%;
   margin-left: 1%;
   border-radius: 25px;
+  */
+  height: 100%;
 }
 
 .toolbar-buttons {
   color: white;
+  width: 100%;
+  text-align: start;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 100%;
+  font-weight: 600;
 }
