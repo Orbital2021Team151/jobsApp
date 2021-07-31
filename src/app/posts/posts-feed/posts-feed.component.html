@@ -266,10 +266,8 @@
             <mat-card-footer class="post-card-footer">
 
               <button matTooltip="Report this post!" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-                mat-icon-button class="post-card-footer-button" color="warn" aria-label="Report" *ngIf="
-                  (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
-                  !reportBefore(post)
-                " (click)="onReport(post.id, errorMessage, reportContent)">
+                mat-icon-button class="post-card-footer-button" color="warn" aria-label="Report"
+                *ngIf="!reportBefore(post)" (click)="onReport(post.id, errorMessage, reportContent)">
                 <mat-icon color="warn">feedback</mat-icon>
               </button>
 
@@ -279,10 +277,8 @@
               </button>
 
               <button matTooltip="Apply to this post!" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-                mat-icon-button aria-label="Apply" *ngIf="
-                  (userRole === 'Student' || userRole === 'Student / NUS Alumni') &&
-                  !applyBefore(post)
-                " class="post-card-footer-button" (click)="
+                mat-icon-button aria-label="Apply"
+                *ngIf="!applyBefore(post)" class="post-card-footer-button" (click)="
                   onApply(
                     post.id,
                     'You have applied to this post before!',
@@ -303,7 +299,7 @@
                 class="post-card-footer-button"
                 color="warn"
                 aria-label="Delete Forever"
-                *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
+                *ngIf="authStatusObject.admin"
                 (click)="onDeletePrompt(deleteContent)"
               >
                 <mat-icon>delete_forever</mat-icon>
@@ -311,13 +307,13 @@
 
               <button matTooltip="Reject Job Listing" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
               mat-icon-button color="warn" aria-label="Reject" class="post-card-footer-button"
-                *ngIf=" userRole === 'Admin'" (click)="onRejectPrompt(rejectContent)">
+                *ngIf="authStatusObject.admin" (click)="onRejectPrompt(rejectContent)">
                 <mat-icon color="warn">block</mat-icon>
               </button>
 
               <button matTooltip="Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
               mat-icon-button class="post-card-footer-button-complete" aria-label="Mark as Done"
-                *ngIf="userRole === 'Admin' || post.email === authStatusObject.email"
+                *ngIf="authStatusObject.admin || post.email === authStatusObject.email"
                 (click)="onCompletePrompt(completeContent)">
                 <mat-icon class="post-card-footer-button-complete">check_circle_outline</mat-icon>
               </button>
@@ -348,48 +344,6 @@
         </ng-template>
 
         <ng-template #content let-modal>
-
-          <!--
-          <div class="modal-header">
-            <h4 class="modal-title">{{ post.title }}</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <p>Organization Name: {{ post.orgName }}</p>
-            <p>UEN: {{ post.uen }}</p>
-            <p>Point of Contact (POC): {{ post.POC }}</p>
-            <p>POC's phoneNumber: {{ post.phoneNumber }}</p>
-            <p>POC's email: {{ post.email }}</p>
-            <p>Brief Description for gig: {{ post.content }}</p>
-            <p>
-              Frequency/Type of volunteer opportunity:
-              {{ post.opportunity }}
-            </p>
-            <p>Preferred Skills: {{ post.skills }}</p>
-            <p>Start Date: {{ post.startDate | date }}</p>
-            <p>End Date: {{ post.endDate | date }}</p>
-            <p>Commitment Hours: {{ post.hoursRequired }}</p>
-            <p>Beneficiaries: {{ post.beneficiaries }}</p>
-          </div>
-
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="modal.close('Close click')"
-            >
-              Close
-            </button>
-          </div>
-          -->
 
           <!-- This example requires Tailwind CSS v2.0+ -->
           <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -431,6 +385,15 @@
 
                 <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
+                    Contact Number
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{post.phoneNumber}}
+                  </dd>
+                </div>
+
+                <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
                     Email Address
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -438,7 +401,7 @@
                   </dd>
                 </div>
 
-                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Preferred Skillset
                   </dt>
@@ -447,7 +410,7 @@
                   </dd>
                 </div>
 
-                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Beneficiaries
                   </dt>
@@ -456,7 +419,7 @@
                   </dd>
                 </div>
 
-                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Duration
                   </dt>
@@ -465,7 +428,7 @@
                   </dd>
                 </div>
 
-                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Commitment Information
                   </dt>
@@ -474,7 +437,7 @@
                   </dd>
                 </div>
 
-                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Location
                   </dt>
@@ -506,15 +469,15 @@
 
         <ng-template #studentContent let-modal>
           <div class="modal-header">
-            <h4 class="modal-title">Apply Post: {{post.title}}</h4>
+            <h4 class="modal-title">Volunteer Listing Application</h4>
             <button type="button" class="btn-close" aria-label="apply" (click)="modal.dismiss('Cross click')">
-              <!-- <span aria-hidden="true">&times;</span> -->
             </button>
           </div>
 
           <div class="modal-body">
 
-            <!-- REACTIVE FORM -->
+            <p>Please fill in the following fields to allow organisations to better learn about you!</p>
+
             <form [formGroup]="applicationForm">
 
               <mat-form-field appearance="outline">
@@ -549,6 +512,12 @@
                       [formControl]="applicationUserTypeControl" />
                     <label class="custom-control-label" for="NUS Alumni">NUS Alumni</label>
                   </div>
+
+                  <div class="custom-control custom-radio">
+                    <input id="Others" type="radio" class="custom-control-input" value="Others"
+                      [formControl]="applicationUserTypeControl" />
+                    <label class="custom-control-label" for="Others">Others</label>
+                  </div>
                 </div>
               </div>
 
@@ -573,17 +542,17 @@
 
         <ng-template #reportContent let-modal>
           <div class="modal-header">
-            <h4 class="modal-title">Report Post: {{post.title}}</h4>
+            <h4 class="modal-title">Report Post</h4>
             <button type="button" class="btn-close" aria-label="report content modal window"
               (click)="modal.dismiss('Cross click')">
-              <!-- <span aria-hidden="true">&times;</span> -->
             </button>
           </div>
 
           <div class="modal-body">
 
-            <!-- REACTIVE FORM -->
             <form [formGroup]="reportForm">
+
+              <p>Please fill in the following information to help us better understand the reason for reporting this job listing.</p>
 
               <mat-form-field appearance="outline">
                 <mat-label>Contact Number</mat-label>
@@ -626,7 +595,6 @@
             <mat-error *ngIf="reportForm.invalid">Please fill all required fields before submitting your
               report.</mat-error>
 
-            <!-- REACTIVE FORM -->
             <button type="button" class="btn btn-light" (click)="
                 submitReportReactive(post.id) && modal.dismiss('Cross click')
               ">

@@ -30,8 +30,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   filteredPosts: Post[] = [];
 
   hasApproved: boolean = null;
-  userIsAuthenticated = false;
-  isAdmin: boolean;
   startDate: Date;
   endDate: Date;
   noFilteredPost: boolean = null;
@@ -207,8 +205,6 @@ export class PostFeedComponent implements OnInit, OnDestroy {
     this.postsService.getPosts();
 
     this.authStatusObject = this.authService.getAuthStatusObject();
-    this.userIsAuthenticated = this.authStatusObject.auth;
-    this.isAdmin = this.authStatusObject.admin;
 
     this.postSub = this.postsService
       .getPostsUpdatedListener()
@@ -238,7 +234,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
           });
         }
         // console.log(this.orgs);
-        console.log(this.orgsBoolean);
+        //console.log(this.orgsBoolean);
         // console.log(this.orgsSelected);
 
       });
