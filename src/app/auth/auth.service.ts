@@ -223,7 +223,7 @@ export class AuthService {
 
             this.authStatusListener.next(this.authStatus);
             if (this.authStatus.admin) {
-              this.router.navigate(['/admin']);
+              this.router.navigate(['/approvePosts']);
             } else {
               this.router.navigate(['/feed']);
             }
