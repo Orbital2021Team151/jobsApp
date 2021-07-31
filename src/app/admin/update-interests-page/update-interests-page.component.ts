@@ -127,7 +127,10 @@ export class UpdateInterestsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.authService.getAuthStatusObject();
+    this.authStatusObject = this.authService.getAuthStatusObject();
+    for (var beneficiary of this.authStatusObject.beneficiaries) {
+      this.beneficiariesSelected.push(beneficiary);
+    }
     /*
     //this.authStatusObject = this.authService.getAuthStatusObject();
     //console.log(this.authStatusObject);
@@ -150,9 +153,6 @@ export class UpdateInterestsComponent implements OnInit, OnDestroy {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       console.log("student dashboard's authStatus observable!");
       this.authStatusObject = authObject;
-      for (var beneficiary of this.authStatusObject.beneficiaries) {
-        this.beneficiariesSelected.push(beneficiary);
-      }
     });
   }
 
