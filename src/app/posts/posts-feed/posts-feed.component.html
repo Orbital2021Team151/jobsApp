@@ -266,19 +266,18 @@
             <mat-card-footer class="post-card-footer">
 
               <button matTooltip="Report this post!" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-                mat-icon-button class="post-card-footer-button" color="warn" aria-label="Report"
+                mat-icon-button color="warn" aria-label="Report"
                 *ngIf="!reportBefore(post)" (click)="onReport(post.id, errorMessage, reportContent)">
                 <mat-icon color="warn">feedback</mat-icon>
               </button>
 
-              <button mat-icon-button disabled aria-label="Already Reported" *ngIf="reportBefore(post)"
-                class="post-card-footer-button">
+              <button mat-icon-button disabled aria-label="Already Reported" *ngIf="reportBefore(post)">
                 <mat-icon>feedback</mat-icon>
               </button>
 
               <button matTooltip="Apply to this post!" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
                 mat-icon-button aria-label="Apply"
-                *ngIf="!applyBefore(post)" class="post-card-footer-button" (click)="
+                *ngIf="!applyBefore(post)" (click)="
                   onApply(
                     post.id,
                     'You have applied to this post before!',
@@ -288,7 +287,7 @@
                 <mat-icon class="post-card-footer-button-complete">front_hand</mat-icon>
               </button>
 
-              <button mat-icon-button disabled aria-label="Applied Before" class="post-card-footer-button"
+              <button mat-icon-button disabled aria-label="Applied Before"
                 *ngIf="applyBefore(post)">
                 <mat-icon>front_hand</mat-icon>
               </button>
@@ -296,7 +295,6 @@
               <!-- COMMENT OUT FOR PRODUCTION BECAUSE BY RIGHT POSTS THAT HAVE BEEN APPROVED CANNOT JUST BE "DELETED." MUST BE REJECTED-->
               <button matTooltip="Delete Post from Database" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
                 mat-icon-button
-                class="post-card-footer-button"
                 color="warn"
                 aria-label="Delete Forever"
                 *ngIf="authStatusObject.admin"
@@ -306,13 +304,13 @@
               </button>
 
               <button matTooltip="Reject Job Listing" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button color="warn" aria-label="Reject" class="post-card-footer-button"
+              mat-icon-button color="warn" aria-label="Reject"
                 *ngIf="authStatusObject.admin" (click)="onRejectPrompt(rejectContent)">
                 <mat-icon color="warn">block</mat-icon>
               </button>
 
               <button matTooltip="Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button class="post-card-footer-button-complete" aria-label="Mark as Done"
+              mat-icon-button aria-label="Mark as Done"
                 *ngIf="authStatusObject.admin || post.email === authStatusObject.email"
                 (click)="onCompletePrompt(completeContent)">
                 <mat-icon class="post-card-footer-button-complete">check_circle_outline</mat-icon>

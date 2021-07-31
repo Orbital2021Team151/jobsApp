@@ -184,3 +184,7 @@ a {
   align-items: center;
   justify-content: space-between;
 }
+
+.active {
+  color: #4A5899;
+}
