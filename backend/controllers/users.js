@@ -142,6 +142,7 @@ exports.login = (req, res, next) => {
 
 exports.updateBeneficiaries = (req, res, next) => {
   let fetchedUser;
+  console.log("updating beneficiaries now!")
 
   User.findOne({
     //_id: req.body.id,
@@ -163,11 +164,20 @@ exports.updateBeneficiaries = (req, res, next) => {
       ban: false,
     });
 
+    //console.log("Found the user to update!")
+    //console.log(newUser)
+
     User.updateOne(
       {email: req.body.email},
       newUser
     ).then((result) => {
-      res.status(200).json("User beneficiaries updated!");
+      //console.log("User's beneficiaries got updated?")
+      //console.log(result);
+
+      res.status(200).json({
+        message: "User beneficiaries updated!",
+        result: result,
+      });
     });
   });
 };

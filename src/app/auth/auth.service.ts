@@ -144,6 +144,7 @@ export class AuthService {
   }
 
   updateBeneficiaries(updatedBeneficiaries: string[]) {
+
     let userObject = {
       name: this.authStatus.name,
       email: this.authStatus.email,

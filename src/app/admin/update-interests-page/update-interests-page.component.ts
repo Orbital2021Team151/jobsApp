@@ -107,11 +107,6 @@ export class UpdateInterestsComponent implements OnInit, OnDestroy {
     }
   ]
 
-  posts: Post[] = [];
-  appliedPosts: Post[] = [];
-  reportedPosts: Post[] = [];
-  hasReport: boolean = false;
-
   /* Change Password FormGroup */
   public changePasswordForm: FormGroup;
   public currentPasswordControl = new FormControl(null);
@@ -132,15 +127,10 @@ export class UpdateInterestsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.authStatusObject = this.authService.getAuthStatusObject();
+    this.authService.getAuthStatusObject();
+    /*
+    //this.authStatusObject = this.authService.getAuthStatusObject();
     //console.log(this.authStatusObject);
-
-    for (var beneficiary of this.authStatusObject.beneficiaries) {
-      this.beneficiariesSelected.push(beneficiary);
-    }
-
-    this.hasRequest = false;
-    this.postsService.getPosts();
 
     for (let i = 0; i < this.beneficiariesBoolean.length; i++) {
 
@@ -155,57 +145,21 @@ export class UpdateInterestsComponent implements OnInit, OnDestroy {
         this.beneficiariesBoolean[i].selected = false;
       }
     }
-
-    this.postSub = this.postsService.getPostsUpdatedListener()
-      .subscribe((posts: Post[]) => {
-        //console.log(posts);
-
-        this.posts = posts.filter(post => !post.removed);
-
-        this.posts = this.posts
-        .filter(post => post.students.length > 0 || post.reports.length > 0);
-
-        this.appliedPosts = this.posts.filter(posts => {
-          for (let i = 0; i < posts.students.length; i++) {
-            if (posts.students[i].email === this.authStatusObject.email) {
-              return true;
-            }
-          }
-        });
-        // console.log("this.appliedPosts");
-        // console.log(this.appliedPosts);
-
-        this.reportedPosts = this.posts.filter(posts => {
-          for (let i = 0; i < posts.reports.length; i++) {
-            if (posts.reports[i].email === this.authStatusObject.email) {
-              this.hasReport = true;
-              return true;
-            }
-          }
-        });
-        //console.log("this.reportedPosts");
-        //console.log(this.reportedPosts);
-
-      });
-
-    // console.log("this.appliedPosts");
-    // console.log(this.appliedPosts);
-    // console.log(this.posts);
-
-    /*
-     * Probably do not need this because there are no changes to authStatusObject once user is logged in.
-     * Might have to be revised in the future for chat function.
-     */
+    */
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       console.log("student dashboard's authStatus observable!");
       this.authStatusObject = authObject;
+      for (var beneficiary of this.authStatusObject.beneficiaries) {
+        this.beneficiariesSelected.push(beneficiary);
+      }
     });
   }
 
   updateUser() {
     console.log("At student-board updateUser method now");
     console.log(this.beneficiariesSelected);
+
 
     /*
     for (let i = 0; i < this.beneficiariesBoolean.length; i++) {
@@ -221,29 +175,9 @@ export class UpdateInterestsComponent implements OnInit, OnDestroy {
     }
     */
 
-    // this.authService.updateBeneficiaries(this.beneficiariesSelected);
+
+    this.authService.updateBeneficiaries(this.beneficiariesSelected);
     this.openUpdateBeneficiariesSnackBar();
-  }
-
-  onChangePassword() {
-    if (this.changePasswordForm.invalid) {
-      return;
-    }
-
-    console.log(this.changePasswordForm.value);
-
-    this.authService.changePassword(this.changePasswordForm.value.currentPassword, this.changePasswordForm.value.newPassword);
-
-    this.authService.getChangedPasswordListener().subscribe(res => {
-      this.openChangePasswordAlertSnackBar();
-      this.changePasswordForm.reset();
-    });
-  }
-
-  openChangePasswordAlertSnackBar() {
-    this._snackBar.openFromComponent(ChangePasswordAlertComponent, {
-      duration: 3 * 1000,
-    });
   }
 
   openUpdateBeneficiariesSnackBar() {
@@ -252,18 +186,8 @@ export class UpdateInterestsComponent implements OnInit, OnDestroy {
     });
   }
 
-  onMoreInfo(content) {
-    //console.log("Checking this page's posts! ");
-    console.log(this.posts);
-    this.modalService.open(content, { size: 'lg' });
-  }
-
-  closeNotification() {
-    this.requestedNewPassword = false;
-  }
-
   ngOnDestroy() {
-    //this.authStatusSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
 
 }
