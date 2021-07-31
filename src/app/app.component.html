@@ -1,9 +1,14 @@
-<div class="white-block"></div>
-<app-toolbar class="toolbar"></app-toolbar>
-<main [@routeAnimations]="prepareRoute(outlet)" class="content">
-  <div class="loading-icon" *ngIf="showOverlay">
-    <mat-spinner></mat-spinner>
-  </div>
-  <router-outlet #outlet="outlet"></router-outlet>
-</main>
 
+
+<div class="split left">
+  <app-toolbar class="sidenav-bar"></app-toolbar>
+</div>
+
+<div class="split right">
+  <main [@routeAnimations]="prepareRoute(outlet)" class="content">
+    <div class="loading-icon" *ngIf="showOverlay">
+      <mat-spinner></mat-spinner>
+    </div>
+    <router-outlet #outlet="outlet"></router-outlet>
+  </main>
+</div>

@@ -291,23 +291,38 @@
 </mat-toolbar>
 -->
 
+
 <mat-toolbar class="real-toolbar">
   <mat-toolbar-row class="logo-row">
-    <a href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/" target="_blank" title="homepage"
-        class="logo">
-        <img src="assets/Orbital-Logo-Design-White.png" alt="Logo of CCSGP" />
-      </a>
+    <a
+      href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/"
+      target="_blank"
+      title="homepage"
+      class="logo"
+    >
+      <img src="assets/Orbital-Logo-Design-White.png" alt="Logo of CCSGP" />
+    </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/feed" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/feed"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>feed</mat-icon>
       Feed
     </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/create" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/create"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>add</mat-icon>
       Create Job Posting</a
     >
@@ -315,79 +330,111 @@
 
   <mat-toolbar-row></mat-toolbar-row>
 
-  <mat-toolbar-row class="nav-bar-title" *ngIf="userIsAuthenticated">ADMIN</mat-toolbar-row>
+  <mat-toolbar-row class="nav-bar-title" *ngIf="userIsAuthenticated"
+    >ADMIN</mat-toolbar-row
+  >
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
-    <a mat-button routerLink="/approvePosts" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/approvePosts"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>hourglass_empty</mat-icon>
       Posts Pending Approval
     </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
-    <a mat-button routerLink="/reportedPosts" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/reportedPosts"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>report_problem</mat-icon>
       Posts With Reports
     </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
-    <a mat-button routerLink="/downloadCSV" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/downloadCSV"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>file_download</mat-icon>
       Download CSV
     </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/changePassword" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/changePassword"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>security</mat-icon>
       Change Password
     </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/updateInterests" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/updateInterests"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>interests</mat-icon>
       Update Interests
     </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
-    <a mat-button routerLink="/signup" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/signup"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>supervisor_account</mat-icon>
       Permissions (TODO)
     </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
-    <a mat-button routerLink="/createHighlight" routerLinkActive="mat-primary" class="toolbar-buttons-common">
+    <a
+      mat-button
+      routerLink="/createHighlight"
+      routerLinkActive="mat-primary"
+      class="toolbar-buttons-common"
+    >
       <mat-icon> highlight</mat-icon>
       Create A Highlight
     </a>
   </mat-toolbar-row>
 
-
-
-
-
-  <!--
-  <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
-    <a  mat-button routerLink="/admin" class="toolbar-buttons"
-      routerLinkActive="mat-primary">
-      Admin Dashboard
-    </a>
-  </mat-toolbar-row>
-  -->
-
   <mat-toolbar-row *ngIf="!userIsAuthenticated">
-    <a  mat-button routerLink="/login" class="toolbar-buttons-common"
-    routerLinkActive="mat-primary">
+    <a
+      mat-button
+      routerLink="/login"
+      class="toolbar-buttons-common"
+      routerLinkActive="mat-primary"
+    >
       <mat-icon>login</mat-icon>
       Login
     </a>
   </mat-toolbar-row>
   <mat-toolbar-row *ngIf="!userIsAuthenticated">
-    <a  mat-button routerLink="/signup" class="toolbar-buttons-common"
-    routerLinkActive="mat-primary">
+    <a
+      mat-button
+      routerLink="/signup"
+      class="toolbar-buttons-common"
+      routerLinkActive="mat-primary"
+    >
       <mat-icon>create</mat-icon>
       Signup
     </a>
@@ -396,7 +443,12 @@
   <mat-toolbar-row></mat-toolbar-row>
 
   <mat-toolbar-row>
-    <a *ngIf="userIsAuthenticated" mat-button (click)="onLogout()" class="toolbar-buttons-common">
+    <a
+      *ngIf="userIsAuthenticated"
+      mat-button
+      (click)="onLogout()"
+      class="toolbar-buttons-common"
+    >
       <mat-icon>logout</mat-icon>
       Logout
     </a>

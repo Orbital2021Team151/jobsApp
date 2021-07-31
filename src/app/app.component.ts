@@ -88,6 +88,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     //this.authService.autoAuthUser();
+    //this.authStatusObject = this.authService.getAuthStatusObject();
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       //console.log("inside app-component's ngOnInit here!");
