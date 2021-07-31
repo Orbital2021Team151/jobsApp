@@ -145,14 +145,18 @@ export class AuthService {
 
   updateBeneficiaries(updatedBeneficiaries: string[]) {
 
+    //TODO: Either make a new method for getUser to use on updateBeneficiaries or update localStorage's response (and toolbar does not reset?);
+    const retrievedDataObject = JSON.parse(localStorage.getItem("response"));
     let userObject = {
+      token: retrievedDataObject.token,
+      expiresIn: retrievedDataObject.expiresIn,
       name: this.authStatus.name,
       email: this.authStatus.email,
       admin: this.authStatus.admin,
       beneficiaries: updatedBeneficiaries,
-      verified: true,
-      ban: false,
+      verified: true
     };
+    localStorage.setItem('response', JSON.stringify(userObject));
 
     this.http
       .put(BACKEND_URL + 'api/user/updateBeneficiaries', userObject)
@@ -167,11 +171,10 @@ export class AuthService {
           admin: this.authStatus.admin,
           beneficiaries: updatedBeneficiaries,
           verified: true,
-          ban: false,
         };
 
         this.authStatus = updatedObject;
-        this.authStatusListener.next({...updatedObject});
+        this.authStatusListener.next({...this.authStatus});
       },
       (error) => {
         this.authStatusListener.next(this.authStatus);
