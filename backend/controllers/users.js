@@ -576,6 +576,42 @@ const sendVerificationEmail = (email, uniqueString) => {
         ),
         cid: "orbitalLogo",
       },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
+      },
     ],
   };
 
@@ -640,6 +676,42 @@ const sendForgetPasswordEmail = (email, tempPassword) => {
           "Orbital-Logo-Design.png"
         ),
         cid: "orbitalLogo",
+      },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
       },
     ],
   };

@@ -750,6 +750,42 @@ const sendNotificationEmail = (email, post) => {
         ),
         cid: "orbitalLogo",
       },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
+      },
     ],
   };
 
@@ -832,6 +868,42 @@ const sendPostApprovedNotificationEmail = (email, post) => {
         ),
         cid: "orbitalLogo",
       },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
+      },
     ],
   };
 
@@ -913,6 +985,42 @@ const sendPostRequestedNotificationEmail = (email, post) => {
           "Orbital-Logo-Design.png"
         ),
         cid: "orbitalLogo",
+      },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
       },
     ],
   };
@@ -1002,6 +1110,42 @@ const sendReportToAdminEmail = (adminEmail, student, post) => {
         ),
         cid: "orbitalLogo",
       },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
+      },
     ],
   };
 
@@ -1089,6 +1233,42 @@ const sendReportAcknowledgementEmail = (student, post) => {
         ),
         cid: "orbitalLogo",
       },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
+      },
     ],
   };
 
@@ -1174,6 +1354,42 @@ const sendApplyAcknowledgementEmail = (student, post) => {
         ),
         cid: "orbitalLogo",
       },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
+      },
     ],
   };
 
@@ -1257,6 +1473,42 @@ const sendCompleteAcknowledgementEmail = (email, post) => {
         ),
         cid: "orbitalLogo",
       },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
+      },
     ],
   };
 
@@ -1339,6 +1591,42 @@ const sendApplyAcceptanceEmail = (email, post) => {
           "Orbital-Logo-Design.png"
         ),
         cid: "orbitalLogo",
+      },
+      {
+        filename: "Facebook.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Facebook.png"
+        ),
+        cid: "FacebookLogo",
+      },
+      {
+        filename: "Instagram.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "Instagram.png"
+        ),
+        cid: "InstagramLogo",
+      },
+      {
+        filename: "NUS.png",
+        path: path.join(
+          __dirname,
+          "..",
+          "..",
+          "src",
+          "assets",
+          "NUS.png"
+        ),
+        cid: "NUSLogo",
       },
     ],
   };
