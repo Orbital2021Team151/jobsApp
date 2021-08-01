@@ -195,7 +195,9 @@
           </mat-expansion-panel>
         </mat-accordion>
         -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" matTooltip="Our search engine will search for these words in each job's Title and 'About' section!"
+        [matTooltipShowDelay]="100"
+        [matTooltipHideDelay]="100">
           <mat-label>Search for keywords</mat-label>
           <input matInput type="text" ngModel [(ngModel)]="keywords" class="form-input" placeholder="eg Delivery Person"/>
         </mat-form-field>
@@ -219,9 +221,6 @@
           -->
 
           <button
-          matTooltip="Filter by the fields you have entered!"
-          [matTooltipShowDelay]="1000"
-          [matTooltipHideDelay]="2000"
           mat-button
           color="accent"
           (click)="submitFilter()">
@@ -263,7 +262,7 @@
           <mat-card-footer class="post-card-footer">
 
             <button matTooltip="Report this post!" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button color="warn" aria-label="Report"
+              mat-button color="warn" aria-label="Report"
               *ngIf="!reportBefore(post)" (click)="onReport(post.id, errorMessage, reportContent)">
               <mat-icon color="warn">feedback</mat-icon>
             </button>
@@ -273,7 +272,7 @@
             </button>
 
             <button matTooltip="Apply to this post!" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button aria-label="Apply"
+              mat-button aria-label="Apply"
               *ngIf="!applyBefore(post)" (click)="
                 onApply(
                   post.id,
@@ -291,7 +290,7 @@
 
             <!-- COMMENT OUT FOR PRODUCTION BECAUSE BY RIGHT POSTS THAT HAVE BEEN APPROVED CANNOT JUST BE "DELETED." MUST BE REJECTED-->
             <button matTooltip="Delete Post from Database" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button
+              mat-button
               color="warn"
               aria-label="Delete Forever"
               *ngIf="authStatusObject.admin"
@@ -301,20 +300,20 @@
             </button>
 
             <button matTooltip="Reject Job Listing" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-            mat-icon-button color="warn" aria-label="Reject"
+            mat-button color="warn" aria-label="Reject"
               *ngIf="authStatusObject.admin" (click)="onRejectPrompt(rejectContent)">
               <mat-icon color="warn">block</mat-icon>
             </button>
 
             <button matTooltip="Mark as Completed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-            mat-icon-button aria-label="Mark as Done"
+            mat-button aria-label="Mark as Done"
               *ngIf="authStatusObject.admin || post.email === authStatusObject.email"
               (click)="onCompletePrompt(completeContent)">
               <mat-icon class="post-card-footer-button-complete">check_circle_outline</mat-icon>
             </button>
 
             <button matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button color="primary" aria-label="Learn More"
+              mat-button color="primary" aria-label="Learn More" class="post-card-button"
               (click)="onMoreInfo(content)">
               <mat-icon color="primary">help_outline</mat-icon>
             </button>

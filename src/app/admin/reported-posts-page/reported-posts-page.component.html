@@ -24,17 +24,17 @@
           <mat-footer class="post-card-footer">
 
             <button matTooltip="Click to read reports" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button color="accent" aria-label="Read Report" (click)="onMoreInfo(reportContent)">
+              mat-button color="accent" aria-label="Read Report" (click)="onMoreInfo(reportContent)">
               <mat-icon color="accent">error_outline</mat-icon>
             </button>
 
             <button matTooltip="Click to reject request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button color="warn" aria-label="Reject" (click)="onRejectPrompt(rejectReportedContent)">
+              mat-button color="warn" aria-label="Reject" (click)="onRejectPrompt(rejectReportedContent)">
               <mat-icon color="warn">block</mat-icon>
             </button>
 
             <button matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-icon-button color="primary" aria-label="Learn More" (click)="onMoreInfo(content)">
+              mat-button color="primary" aria-label="Learn More" (click)="onMoreInfo(content)">
               <mat-icon color="primary">help_outline</mat-icon>
             </button>
 

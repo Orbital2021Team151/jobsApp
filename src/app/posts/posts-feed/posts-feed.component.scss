@@ -226,11 +226,6 @@ mat-spinner {
   color: rgb(88, 88, 88);
 }
 
-mat-icon {
-  position: relative;
-  top: 6px;
-}
-
 .post-card-content {
   font-family: "Lato", sans-serif;
   text-overflow: ellipsis;
@@ -253,21 +248,14 @@ mat-icon {
   justify-content: space-evenly;
 }
 
-/* FOOTER
--------------------------------------------------- */
-.footer-container {
-  justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  align-content: space-around;
-  align-self: flex-end;
+/*
+mat-icon {
+  position: relative;
+  top: 6px;
 }
+*/
 
-.copyright {
-  text-align: center;
-}
+
 
 /* MODAL WINDOW
 -------------------------------------------------- */

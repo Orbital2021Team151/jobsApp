@@ -40,10 +40,12 @@
   color: rgb(88, 88, 88);
 }
 
+/*
 mat-icon {
   position: relative;
   top: 6px;
 }
+*/
 
 .post-card-content {
   font-family: 'Lato', sans-serif;
