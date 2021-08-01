@@ -300,7 +300,7 @@
       title="homepage"
       class="logo"
     >
-      <img src="assets/Orbital-Logo-Design-White.png" alt="Logo of CCSGP" />
+      <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
     </a>
   </mat-toolbar-row>
 
@@ -311,7 +311,7 @@
       routerLinkActive="active"
       class="toolbar-buttons-common"
     >
-      <mat-icon>feed</mat-icon>
+      <mat-icon routerLinkActive="active">feed</mat-icon>
       Feed
     </a>
   </mat-toolbar-row>
@@ -323,16 +323,55 @@
       routerLinkActive="active"
       class="toolbar-buttons-common"
     >
-      <mat-icon>add</mat-icon>
+      <mat-icon routerLinkActive="active">add</mat-icon>
       Create Job Posting</a
     >
   </mat-toolbar-row>
 
+  <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
+    <a
+      mat-button
+      routerLink="/createHighlight"
+      routerLinkActive="active"
+      class="toolbar-buttons-common"
+    >
+      <mat-icon routerLinkActive="active"> highlight</mat-icon>
+      Create A Highlight
+    </a>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="userIsAuthenticated && !authStatusObject.admin">
+    <a
+      mat-button
+      routerLink="/signup"
+      routerLinkActive="active"
+      class="toolbar-buttons-common"
+    >
+      <mat-icon routerLinkActive="active">send</mat-icon>
+      Jobs Applied (TODO)
+    </a>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="userIsAuthenticated && !authStatusObject.admin">
+    <a
+      mat-button
+      routerLink="/signup"
+      routerLinkActive="active"
+      class="toolbar-buttons-common"
+    >
+      <mat-icon routerLinkActive="active">flag</mat-icon>
+      Jobs Reported (TODO)
+    </a>
+  </mat-toolbar-row>
+
+  <!--
   <mat-toolbar-row></mat-toolbar-row>
 
   <mat-toolbar-row class="nav-bar-title" *ngIf="userIsAuthenticated"
     >ADMIN</mat-toolbar-row
   >
+  -->
+
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
     <a
       mat-button
@@ -340,7 +379,7 @@
       routerLinkActive="active"
       class="toolbar-buttons-common"
     >
-      <mat-icon>hourglass_empty</mat-icon>
+      <mat-icon routerLinkActive="active">hourglass_empty</mat-icon>
       Posts Pending Approval
     </a>
   </mat-toolbar-row>
@@ -352,7 +391,7 @@
       routerLinkActive="active"
       class="toolbar-buttons-common"
     >
-      <mat-icon>report_problem</mat-icon>
+      <mat-icon routerLinkActive="active">report_problem</mat-icon>
       Posts With Reports
     </a>
   </mat-toolbar-row>
@@ -364,7 +403,7 @@
       routerLinkActive="active"
       class="toolbar-buttons-common"
     >
-      <mat-icon>file_download</mat-icon>
+      <mat-icon routerLinkActive="active">file_download</mat-icon>
       Download CSV
     </a>
   </mat-toolbar-row>
@@ -376,19 +415,19 @@
       routerLinkActive="active"
       class="toolbar-buttons-common"
     >
-      <mat-icon>security</mat-icon>
+      <mat-icon routerLinkActive="active">security</mat-icon>
       Change Password
     </a>
   </mat-toolbar-row>
 
-  <mat-toolbar-row *ngIf="userIsAuthenticated">
+  <mat-toolbar-row *ngIf="userIsAuthenticated && !authStatusObject.admin">
     <a
       mat-button
       routerLink="/updateInterests"
       routerLinkActive="active"
       class="toolbar-buttons-common"
     >
-      <mat-icon>interests</mat-icon>
+      <mat-icon routerLinkActive="active">interests</mat-icon>
       Update Interests
     </a>
   </mat-toolbar-row>
@@ -400,20 +439,8 @@
       routerLinkActive="active"
       class="toolbar-buttons-common"
     >
-      <mat-icon>supervisor_account</mat-icon>
+      <mat-icon routerLinkActive="active">supervisor_account</mat-icon>
       Permissions (TODO)
-    </a>
-  </mat-toolbar-row>
-
-  <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
-    <a
-      mat-button
-      routerLink="/createHighlight"
-      routerLinkActive="active"
-      class="toolbar-buttons-common"
-    >
-      <mat-icon> highlight</mat-icon>
-      Create A Highlight
     </a>
   </mat-toolbar-row>
 
@@ -424,7 +451,7 @@
       class="toolbar-buttons-common"
       routerLinkActive="active"
     >
-      <mat-icon>login</mat-icon>
+      <mat-icon routerLinkActive="active">login</mat-icon>
       Login
     </a>
   </mat-toolbar-row>
@@ -435,12 +462,14 @@
       class="toolbar-buttons-common"
       routerLinkActive="active"
     >
-      <mat-icon>create</mat-icon>
+      <mat-icon routerLinkActive="active">create</mat-icon>
       Signup
     </a>
   </mat-toolbar-row>
 
+  <!--
   <mat-toolbar-row></mat-toolbar-row>
+  -->
 
   <mat-toolbar-row>
     <a
@@ -449,7 +478,7 @@
       (click)="onLogout()"
       class="toolbar-buttons-common"
     >
-      <mat-icon>logout</mat-icon>
+      <mat-icon routerLinkActive="active">logout</mat-icon>
       Logout
     </a>
   </mat-toolbar-row>

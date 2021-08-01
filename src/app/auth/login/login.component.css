@@ -1,6 +1,7 @@
 /* LOGIN PAGE GLOBAL
 -------------------------------------------------- */
 
+/*
 .cdk-overlay-container {
   position: fixed;
   z-index: 99999;
@@ -9,21 +10,28 @@
 ::ng-deep .cdk-overlay-container {
   z-index: 99999;
 }
+*/
 
 
 /* LOGIN CARD
 -------------------------------------------------- */
-mat-card {
+.login-card {
   width: 400px;
   margin-top: 5rem;
+  box-shadow: 10cm;
 }
 
-.card {
+.card-container {
+  overflow: auto;
+  background-color: inherit;
+  height: 100vh;
+
   justify-content: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
   border: none;
-  background-color: inherit;
+
 }
 
 .logo img {

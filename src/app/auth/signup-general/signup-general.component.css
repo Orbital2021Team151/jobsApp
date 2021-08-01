@@ -1,7 +1,15 @@
 /* SIGNUP GENERAL GLOBAL
 -------------------------------------------------- */
-div {
+.signup-container {
+  overflow: auto;
   background-color: inherit;
+  height: 100vh;
+
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
 }
 
 mat-form-field {

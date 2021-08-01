@@ -37,6 +37,8 @@ mat-spinner {
 .right {
   right: 0;
   width: 83%;
+  height: 100%;
+  overflow: auto;
 }
 
 /* If you want the content centered horizontally and vertically */
