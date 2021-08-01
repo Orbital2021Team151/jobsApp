@@ -6,6 +6,11 @@
   object-fit: cover;
 }
 
+.closelearnmore {
+  float: right;
+}
+
+
 
 .post-card-title {
 

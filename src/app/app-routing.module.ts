@@ -61,14 +61,14 @@ const routes: Routes = [
    data: { admin: false, }
   },
 
-  { path: 'login', component: LoginComponent, data: { animation: 'isRight' }},
-  { path: 'signup', component: SignupGeneralComponent, data: { animation: 'isLeft' }},
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { animation: 'isRight', login: true}},
+  { path: 'signup', component: SignupGeneralComponent, canActivate: [AuthGuard], data: { animation: 'isLeft', signup: true}},
   //{ path: 'signupAdmin', component: SignupAdminComponent , canActivate: [AuthGuard], data: { roles: ["Admin"] }},
   { path: 'createHighlight', component: HighlightCreateComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: true, }},
   { path: 'highlightContent1', component: HighlightContentComponent1 },
   { path: 'highlightContent2', component: HighlightContentComponent2 },
   { path: 'highlightContent3', component: HighlightContentComponent3 },
-  { path: 'expiredSession', component: ExpiredSessionPage },
+  { path: 'expiredSession', component: ExpiredSessionPage, canActivate: [AuthGuard], data: { expiredSession: true }},
   { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuard], data: { admin: false, }},
   { path: 'approvePosts', component: ApprovePostsPageComponent, canActivate: [AuthGuard], data: { admin: true, } },
   { path: 'reportedPosts', component: ReportedPostsPageComponent, canActivate: [AuthGuard], data: { admin: true, } },

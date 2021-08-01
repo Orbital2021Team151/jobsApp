@@ -600,9 +600,8 @@
       <ng-template #errorMessage let-modal>
         <div class="modal-header">
           <h4 class="modal-title">You reported this post before!</h4>
-          <button type="button" class="submit" aria-label="error message modal window"
+          <button type="button" class="btn-close" aria-label="error message modal window"
             (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
           </button>
         </div>
       </ng-template>
@@ -610,9 +609,8 @@
       <ng-template #deleteContent let-modal>
         <div class="modal-header">
           <h4 class="modal-title">Delete Confirmation</h4>
-          <button type="button" class="submit" aria-label="delete post modal window"
+          <button type="button" class="btn-close" aria-label="delete post modal window"
             (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
           </button>
         </div>
 

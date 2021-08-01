@@ -286,6 +286,44 @@
   </p>
 </div>
 
+<!-- SECTION CONTAIMING THE MODALS -->
+<ng-template #publishContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Publish Success</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Post Published Successfully!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+      Back
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #studentsReport let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{post.title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let report of post.reports">
+      <p>Email: {{report.email}}</p>
+      <p>Contact Number: {{report.contact}}</p>
+      <p>Reason for Reporting: {{report.content}}</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+      Close
+    </button>
+  </div>
+</ng-template>
+
 
 
 <!-- <div class="centered" *ngFor="let post of posts">
