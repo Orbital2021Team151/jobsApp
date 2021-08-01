@@ -32,8 +32,9 @@ const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard], data: { admin: false }},
 
-  /*
+
   { path: 'admin', component: AdminBoardComponent, canActivate: [AuthGuard], data: { admin: false }},
+  /*
   { path: 'student-alumni', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student", "Student / NUS Alumni"] },
     children: [
       //{ path: '', component: DashBoardLandingComponent, canActivate: [AuthGuard] },

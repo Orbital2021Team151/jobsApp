@@ -80,11 +80,10 @@ button {
 /* JOBS WITH REPORTS CARDS
 -------------------------------------------------- */
 .report-posts-div {
-  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   align-content: space-around;
 }
 

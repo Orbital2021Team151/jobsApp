@@ -48,7 +48,7 @@ export class ApprovePostsPageComponent implements OnInit, OnDestroy {
       .subscribe((posts: Post[]) => {
 
         this.posts = posts.filter(post => !post.removed);
-        this.posts = posts.filter(post => !post.approved);
+        this.posts = this.posts.filter(post => !post.approved);
 
         if (this.posts.length > 0) {
           this.hasRequest = true;
