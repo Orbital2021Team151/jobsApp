@@ -36,7 +36,7 @@ import { AuthService } from './auth/auth.service';
             display: 'block'
           }),
 
-          animate(500, style({
+          animate(250, style({
             opacity: 0,
           }))
         ], { optional: true }),
@@ -48,7 +48,7 @@ import { AuthService } from './auth/auth.service';
             display: 'block',
             height: '100%'
           }),
-          animate(500, style({
+          animate(250, style({
             opacity: 1,
           }))
         ], { optional: true })
