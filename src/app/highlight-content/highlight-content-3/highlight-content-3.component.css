@@ -38,10 +38,16 @@ img {
     font-size: large;
 }
 
-button {
+.button-footer {
   /*
   left: 20%;
   */
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+
 }
 
 .everything {

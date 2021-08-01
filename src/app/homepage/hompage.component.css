@@ -54,14 +54,19 @@ ngb-carousel {
 
 .carousel-image {
   object-fit: cover;
-  max-width: 50%;
+  max-width: 100%;
+  max-height: 20rem;
 }
 
 /* Carousel base class */
 .carousel {
+  /*
   margin-bottom: 4rem;
+  background-color: purple;
+  */
   height: 20rem;
   width: 100%;
+
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -93,14 +98,23 @@ ngb-carousel {
 .carousel-card {
   margin-left: 15rem;
   margin-right: 15rem;
+  flex-direction: row;
+  display: flex;
+
+  /*
+  background-color: aqua;
+  */
 }
 
 .wrapper-div {
   height: 20rem;
-  position: relative;
-  top: 25%;
-  /* -ms-transform: translateY(-50%); */
-  /* transform: translateY(-50%); */
+  width: 75%;
+  /*
+    top: 25%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background-color: red;
+  */
 }
 
 .carousel-heading {
@@ -118,11 +132,36 @@ ngb-carousel {
   font-family: 'Lato', sans-serif;
   font-weight: 400 !important;
   text-align: left;
+  white-space: pre-line;
+  height: 40%;
+
+  /*
+  background-color:cornflowerblue;
+  */
 }
 
+.carousel-button-container {
+  /*
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: yellow;
+  */
+  position: absolute;
+  bottom: 0;
+  height: 20%;
+  width: 40.5%;
+
+}
 .carousel-read-more-button {
   background-color: #F2545B;
   color: #F8F8FF;
+  margin-left: 1rem;
+}
+
+.carousel-divider {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 

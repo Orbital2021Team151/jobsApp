@@ -46,22 +46,26 @@
 
   <body>
     <main>
-      <div *ngIf="highlights.length !==0" >
+      <div *ngIf="highlights.length !== 0">
+
         <ngb-carousel class="carousel">
           <ng-template ngbSlide *ngFor="let highlight of highlights">
-            <div class="row carousel-card">
-              <div class="col-md-7">
-                <div class="wrapper-div">
-                  <h2 class="carousel-heading">
-                    <u>{{ highlight.title }}</u>
-                  </h2>
-                  <p class="lead">
-                    {{ highlight.summary }}
-                  </p>
-                  <!-- <p>
-                      {{ highlight.id }}
-                    </p> -->
 
+            <div class="carousel-card">
+              <div class="wrapper-div">
+
+                <h2 class="carousel-heading">
+                  <u>{{ highlight.title }}</u>
+                </h2>
+
+                <p class="carousel-lead">
+                  {{ highlight.summary }}
+                </p>
+                <!-- <p>
+                    {{ highlight.id }}
+                  </p> -->
+
+                <div class="carousel-button-container">
                   <button
                     mat-raised-button
                     class="carousel-read-more-button"
@@ -85,22 +89,24 @@
                 <img class="carousel-image" [src]="highlight.imagePath" />
               </div>
             </div>
+
+
           </ng-template>
         </ngb-carousel>
       </div>
 
-      <div class="info-text" *ngIf="highlights.length ===0">
+      <div class="info-text" *ngIf="highlights.length === 0">
         <h1 class="info-text-header">No Highlights Shown</h1>
         <p class="info-text-body">
-          Our Administrators will post a highlight here as and when it is available!
+          Our Administrators will post a highlight here as and when it is
+          available!
         </p>
       </div>
 
       <!---->
-      <hr class="featurette-divider" />
+      <hr class="carousel-divider" />
 
       <div class="container marketing">
-
         <!-- START THE FEATURETTES -->
         <div class="row featurette">
           <div class="col-md-7">
@@ -241,17 +247,12 @@
         <p class="copyright">
           &copy; Orbital 2021 Team StudyGoWhere, ID 2601, Darren Hoon and Wilbur
           Fong. <br />
-          In conjuction with the <a href="https://www.ccsgp.comp.nus.edu.sg/" target="_blank">Centre for Computing for Social Good and
-            Philanthropy (CCSGP)</a>, NUS.
+          In conjuction with the
+          <a href="https://www.ccsgp.comp.nus.edu.sg/" target="_blank"
+            >Centre for Computing for Social Good and Philanthropy (CCSGP)</a
+          >, NUS.
         </p>
       </footer>
-
-
-
-
-
-
-
     </main>
   </body>
 </html>
