@@ -52,6 +52,11 @@ mat-form-field {
   width:100%;
 }
 
+.show-password-checkbox-container {
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  margin-left: 0.2rem;
+}
 
 .form-footer {
   display: -webkit-flex;

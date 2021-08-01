@@ -12,7 +12,7 @@ import { AuthService } from "../auth.service";
 export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
   roles: string[] = ["Admin", "External Organisation", "Student Organisation", "Student / NUS Alumni"];
-  hidePassword = true;
+  showPassword = false;
   authStatusSub: Subscription;
   loggedIn: boolean;
   newPasswordSent = false;

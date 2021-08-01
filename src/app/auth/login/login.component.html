@@ -4,7 +4,6 @@
       <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
     </span>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <div class="form"></div>
     <form *ngIf="!isLoading" #loginForm="ngForm">
       <mat-form-field appearance="outline">
         <mat-label>Email Address</mat-label>
@@ -27,30 +26,22 @@
         <mat-label>Password</mat-label>
         <input
           matInput
-          [type]="hidePassword ? 'password' : 'text'"
+          [type]="showPassword ? 'text' :  'password'"
           name="password"
           ngModel
           required
           #passwordInput="ngModel"
           placeholder="Enter Password Here"
         />
-
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hidePassword = !hidePassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hidePassword"
-        >
-          <mat-icon>{{
-            hidePassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
-
         <mat-error *ngIf="passwordInput.invalid"
           >Please enter a valid password.</mat-error
         >
       </mat-form-field>
+
+      <div class="show-password-checkbox-container">
+        <mat-checkbox class="show-password-checkbox" [(ngModel)]="showPassword" name="showPassword">Show Password</mat-checkbox>
+      </div>
+
 
       <div class="form-footer">
         <a href="javascript:;" (click)="onOpenForgetPassword(forgetPasswordContent)" class="forget-password-link">Forget Password</a>
