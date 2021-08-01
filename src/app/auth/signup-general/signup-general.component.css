@@ -60,3 +60,10 @@ mat-card {
   justify-content: flex-end;
   margin-top: 1rem;
 }
+
+.show-password-checkbox-container {
+  text-align: start;
+  margin-left: 0.2rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+}

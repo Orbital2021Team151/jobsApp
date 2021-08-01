@@ -22,7 +22,6 @@ import { SignupAlertComponent } from '../signup-alert/signup-alert.component';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class SignupGeneralComponent implements OnInit, OnDestroy {
-  hidePassword = true;
   signedUp: boolean;
   private authStatusSub: Subscription;
 
@@ -40,6 +39,7 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.minLength(1),
   ]);
+  public showPasswordControl = new FormControl(false);
 
   constructor(
     public authService: AuthService,
@@ -49,22 +49,12 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private router: Router
   ) {
-    /*
-    this.form = fb.group({
-      floatLabel: this.floatLabelControl,
-      userType: this.userTypeControl,
-      orgName: this.orgNameControl,
-      email: this.emailControl,
-      uen: this.uenControl,
-      hideUen: this.hideUenControl,
-      password: this.passwordControl,
-    });
-    */
 
     this.form = new FormGroup({
       name: this.nameControl,
       email: this.emailControl,
       password: this.passwordControl,
+      showPassword: this.showPasswordControl,
     });
   }
 
@@ -102,11 +92,13 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
       this.nameControl.reset();
       this.emailControl.reset();
       this.passwordControl.reset();
+      this.showPasswordControl.reset();
 
       this.form = new FormGroup({
         name: this.nameControl,
         email: this.emailControl,
         password: this.passwordControl,
+        showPassword: this.showPasswordControl,
       });
 
       this.openSignupSuccessSnackBar();

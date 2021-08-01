@@ -44,32 +44,28 @@
             <mat-label>Password</mat-label>
             <input
               matInput
-              [type]="hidePassword ? 'password' : 'text'"
+              [type]="form.value.showPassword ? 'text' : 'password' "
               name="password"
               [formControl]="passwordControl"
               required
               placeholder="Enter Password Here"
             />
-
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="hidePassword = !hidePassword"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hidePassword"
-            >
-              <mat-icon>{{
-                hidePassword ? "visibility_off" : "visibility"
-              }}</mat-icon>
-            </button>
-
             <mat-error *ngIf="passwordControl.errors?.required"
               >Please enter a valid password.</mat-error
             >
           </mat-form-field>
-          <mat-label>Password Strength</mat-label>
-          <mat-password-strength  [password]="passwordControl.value">
-          </mat-password-strength>
+
+          <div class="show-password-checkbox-container">
+            <mat-checkbox class="show-password-checkbox"[formControl]="showPasswordControl">Show Password</mat-checkbox>
+          </div>
+
+          <div class="password-strength-checker-container">
+            <mat-label>Password Strength</mat-label>
+            <mat-password-strength  [password]="passwordControl.value">
+            </mat-password-strength>
+          </div>
+
+
         </div>
       </form>
 
