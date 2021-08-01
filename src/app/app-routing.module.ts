@@ -25,6 +25,7 @@ import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported
 import { DownloadCSVPageComponent } from './admin/download-csv-page/download-csv-page.component';
 import { UpdateInterestsComponent } from './admin/update-interests-page/update-interests-page.component';
 import { PermissionsComponent } from './admin/permissions/permissions.component';
+import { JobsAppliedComponent } from './admin/jobs-applied/jobs-applied.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -71,7 +72,7 @@ const routes: Routes = [
   { path: 'updateInterests', component: UpdateInterestsComponent, canActivate: [AuthGuard], data: { admin: false, } },
   { path: 'permissions', component: PermissionsComponent, canActivate: [AuthGuard], data: { admin: false, } },
 
-  //{ path: 'jobsApplied', component: UpdateInterestsComponent, canActivate: [AuthGuard], data: { admin: false, } },
+  { path: 'jobsApplied', component: JobsAppliedComponent, canActivate: [AuthGuard], data: { admin: false, } },
   //{ path: 'jobsReported', component: UpdateInterestsComponent, canActivate: [AuthGuard], data: { admin: false, } },
 ];
 

@@ -1,0 +1,295 @@
+/* GLOBAL
+-------------------------------------------------- */
+.card-image {
+  height: 50%;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+
+.post-card-title {
+
+  /*
+   * CANNOT USE LATO OR ELSE SOME PART OF THE FONT GETS CUT OFF
+  font-family: "Lato", sans-serif;
+  */
+
+  text-overflow: ellipsis;
+
+  width: 22rem;
+  max-width: 22rem;
+  height: 1.7rem;
+
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.5rem;
+}
+
+.post-card-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 120%;
+
+  width: 22rem;
+  max-width: 22rem;
+  height: 2rem;
+
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: rgb(88, 88, 88);
+}
+
+mat-icon {
+  position: relative;
+  top: 6px;
+}
+
+.post-card-content {
+  font-family: 'Lato', sans-serif;
+  text-overflow: ellipsis;
+  width: 22rem;
+  max-width: 22rem;
+  height: 8rem;
+
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #777777;
+  text-align: center;
+}
+
+.post-card-footer {
+  width: 20rem;
+  max-width: 20rem;
+  font-family: 'Lato', sans-serif;
+  align-items: center;
+  flex: auto;
+  margin: auto;
+}
+
+mat-spinner {
+  margin: auto;
+  display: flex;
+}
+
+/* CHANGE PASSWORD
+-------------------------------------------------- */
+.change-password-card {
+  /* margin: auto;
+  width: 50%;
+
+  float: left;
+  padding: 20px;
+  border: 2px solid red;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+
+  */
+  width: 40%;
+  margin: auto;
+  background-color: inherit;
+  color: inherit;
+}
+
+.change-password-title {
+  font-family: "Lato", sans-serif;
+  text-align: center;
+}
+
+.change-password-body {
+  font-family: "Lato", sans-serif;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+
+  box-shadow: none;
+  background-color: inherit;
+  color: inherit;
+
+  /*
+
+  border-style: solid;
+  border-width: thin;
+  border-color: #4da8da;
+  box-shadow: none;
+
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  */
+}
+
+.change-password-form-input {
+  font-family: "Lato", sans-serif;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin: auto;
+}
+
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.change-password-form-field {
+  font-family: "Lato", sans-serif;
+  width: 100%;
+  margin: auto;
+
+}
+
+.change-password-button {
+  font-family: "Lato", sans-serif;
+}
+
+.change-password-footer {
+  font-family: "Lato", sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.change-password-form-button {
+  width: auto;
+  margin: auto;
+  align-self: center;
+}
+
+.alert {
+  font-family: "Lato", sans-serif;
+  padding: 20px;
+  background-color: #94f1a2 !important;
+  color: white;
+  margin-bottom: 15px;
+}
+
+
+/* CHANGE PASSWORD
+-------------------------------------------------- */
+.update-beneficiaries-card {
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+
+/* JOBS PENDING APPROVAL CARDS
+-------------------------------------------------- */
+.request-post-card {
+  width: 25rem;
+  height: 15rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  border-style: solid;
+  border-width: thin;
+  border-color: #ffd000;
+  box-shadow: none;
+}
+
+
+
+
+/* JOBS WITH APPLICATIONS CARDS
+-------------------------------------------------- */
+.applied-posts-div {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+}
+
+.application-post-card {
+
+  /*
+  width: 25rem;
+  height: 15rem;
+  */
+
+  width: 25rem;
+  height: 35rem;
+
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  /*
+  border-style: solid;
+  border-width: thin;
+  border-color: #ff0000;
+  box-shadow: none;
+  */
+}
+
+.application-post-card:hover {
+  box-shadow: 0 0 11px #34df25e0;
+}
+
+.application-post-card-button-view-applicants {
+  background-color: #b810da;
+  color: white;
+}
+
+.application-post-card-button-complete {
+  background-color: #00b167;
+  color: white;
+}
+
+
+/* MISCELLANEOUS
+-------------------------------------------------- */
+.info-text {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  color: inherit;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.info-text-header {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+.password-visibility-icon-button {
+  color: #5c8aee;
+  opacity: 0.5;
+}
+
+/* .filter-expansion-panel {
+  width: 50%;
+  margin: auto;
+} */
+
+mat-selection-list {
+  max-height: 200px;
+  overflow: auto;
+}
+
+/* SMALL SCREEN SIZE //TODO: NOT DONE YET
+-------------------------------------------------- */
+@media screen {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
