@@ -399,7 +399,7 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
 
 
   openDialog() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/feed']);
 
     this.dialog.open(PostSubmittedDialog);
     return true;

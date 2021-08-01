@@ -1,5 +1,3 @@
-
-
 <div class="list-of-posts">
   <div class="container"  *ngFor="let post of posts">
     <mat-expansion-panel>
@@ -18,16 +16,16 @@
               <h3 class="text-lg leading-6 font-medium text-gray-900">
                 {{post.title }}
               </h3>
-    
+
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
                 by <i>{{post.orgName }}</i>
               </p>
-    
+
             </div>
-    
+
             <div class="border-t border-gray-200">
               <dl>
-    
+
                 <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     About
@@ -36,7 +34,7 @@
                     {{post.content}}
                   </dd>
                 </div>
-    
+
                 <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Point-Of-Contact's Name
@@ -45,7 +43,7 @@
                     {{post.POC}}
                   </dd>
                 </div>
-    
+
                 <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Email Address
@@ -54,7 +52,7 @@
                     {{post.email}}
                   </dd>
                 </div>
-    
+
                 <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Preferred Skillset
@@ -63,7 +61,7 @@
                     {{post.skills}}
                   </dd>
                 </div>
-    
+
                 <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Beneficiaries
@@ -72,7 +70,7 @@
                     {{post.beneficiaries}}
                   </dd>
                 </div>
-    
+
                 <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Duration
@@ -81,7 +79,7 @@
                     {{post.startDate | date}} to {{post.endDate | date}}
                   </dd>
                 </div>
-    
+
                 <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Commitment Information
@@ -90,7 +88,7 @@
                     {{post.hoursRequired}}
                   </dd>
                 </div>
-    
+
                 <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">
                     Location
@@ -109,20 +107,20 @@
                         mat-icon-button aria-label="Publish" (click)="onPublish(post.id, publishContent)">
                         <mat-icon class="publish-button">publish</mat-icon>
                       </button>
-            
-            
+
+
                       <button matTooltip="Click to delete request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
                         mat-icon-button color="warn" aria-label="Delete Forever" (click)="onDeletePrompt(deleteUnapprovedContent)">
                         <mat-icon>delete_forever</mat-icon>
                       </button>
-            
+
                       <button matTooltip="Click to reject request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
                         mat-icon-button color="warn" aria-label="Reject" (click)="onRejectPrompt(rejectUnapprovedContent)">
                         <mat-icon color="warn">block</mat-icon>
                       </button>
                     </dd>
                   </div>
-    
+
               </dl>
             </div>
           </div>
@@ -134,21 +132,21 @@
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
           ></button>
         </div>
-  
+
         <div class="px-4 py-3 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
             {{post.title}}
           </h3>
-  
+
           <p class="mt-1 max-w-2xl text-sm text-gray-500">
             by <i>{{post.orgName}}</i>
           </p>
-  
+
         </div>
-  
+
         <div class="border-t border-gray-200">
           <dl>
-  
+
             <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 About
@@ -157,7 +155,7 @@
                 {{post.content}}
               </dd>
             </div>
-  
+
             <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Point-Of-Contact's Name
@@ -166,7 +164,7 @@
                 {{post.POC}}
               </dd>
             </div>
-  
+
             <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Email Address
@@ -175,7 +173,7 @@
                 {{post.email}}
               </dd>
             </div>
-  
+
             <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Preferred Skillset
@@ -184,7 +182,7 @@
                 {{post.skills}}
               </dd>
             </div>
-  
+
             <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Beneficiaries
@@ -193,7 +191,7 @@
                 {{post.beneficiaries}}
               </dd>
             </div>
-  
+
             <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Duration
@@ -202,7 +200,7 @@
                 {{post.startDate | date}} to {{post.endDate | date}}
               </dd>
             </div>
-  
+
             <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Commitment Information
@@ -211,7 +209,7 @@
                 {{post.hoursRequired}}
               </dd>
             </div>
-  
+
             <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Location
@@ -220,45 +218,45 @@
                 {{post.location || "Not Specified"}}
               </dd>
             </div>
-  
+
           </dl>
         </div>
       </div>
-  
+
     </ng-template>
-  
+
     <ng-template #deleteUnapprovedContent let-modal>
       <div class="modal-header">
         <h4 class="modal-title">Delete Confirmation</h4>
         <button type="button" class="btn-close" aria-label="apply" (click)="modal.dismiss('Cross click')">
         </button>
       </div>
-  
+
       <div class="modal-body">
         <p>Are you sure you want to delete the post?</p>
       </div>
-  
+
       <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="onDelete(post.id) && modal.dismiss('Cross click')">
           Confirm Delete
         </button>
-  
+
         <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">
           Cancel
         </button>
       </div>
     </ng-template>
-  
+
     <ng-template #rejectUnapprovedContent let-modal>
       <div class="modal-header">
         <h4 class="modal-title">Reject Confirmation</h4>
         <button type="button" class="btn-close" aria-label="apply" (click)="modal.dismiss('Cross click')">
         </button>
       </div>
-  
+
       <div class="modal-body">
         <p>Are you sure you want to reject the post?</p>
-  
+
         <form [formGroup]="rejectForm">
           <mat-form-field appearance="outline">
             <mat-label>Reason for rejecting post <i>(Optional)</i></mat-label>
@@ -267,25 +265,25 @@
           </mat-form-field>
         </form>
       </div>
-  
+
       <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="onReject(post.id) && modal.dismiss('Cross click')">
           Confirm Reject
         </button>
-  
+
         <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">
           Cancel
         </button>
       </div>
     </ng-template>
-  
-    <div class="info-text" *ngIf="hasRequest === false">
-      <h1 class="info-text-header">No Post Request</h1>
-      <p>
-        If an organisation sends a request, it will be shown here for your approval!
-      </p>
-    </div>
   </div>
+</div>
+
+<div class="info-text" *ngIf="hasRequest === false">
+  <h1 class="info-text-header">No Post Request</h1>
+  <p>
+    If an organisation sends a request, it will be shown here for your approval!
+  </p>
 </div>
 
 
@@ -341,9 +339,8 @@
       </mat-card>
     </section>
 
-    
+
   </div>
 
    -->
 
-  

@@ -31,6 +31,8 @@ import { JobsReportedComponent } from './admin/jobs-reported/jobs-reported.compo
 const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'feed', component: PostFeedComponent, canActivate: [AuthGuard], data: { admin: false }},
+
+  /*
   { path: 'admin', component: AdminBoardComponent, canActivate: [AuthGuard], data: { admin: false }},
   { path: 'student-alumni', component: StudentBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student", "Student / NUS Alumni"] },
     children: [
@@ -40,7 +42,7 @@ const routes: Routes = [
   },
   { path: 'organisation', component: OrgBoardComponent, canActivate: [AuthGuard], data: { roles: ["Student Organisation", "External Organisation"] }},
 
-  /*
+
   {
     path: 'create',
    component: PostCreateOrgComponent,
