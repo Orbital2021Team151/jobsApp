@@ -86,6 +86,7 @@ import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported
 import { UserBannedErrorComponent } from './errors/user-banned-error/user-banned-error.component';
 import { DownloadCSVPageComponent } from './admin/download-csv-page/download-csv-page.component';
 import { UpdateInterestsComponent } from './admin/update-interests-page/update-interests-page.component';
+import { PermissionsComponent } from './admin/permissions/permissions.component';
 
 
 @NgModule({
@@ -131,6 +132,7 @@ import { UpdateInterestsComponent } from './admin/update-interests-page/update-i
     ReportedPostsPageComponent,
     DownloadCSVPageComponent,
     UpdateInterestsComponent,
+    PermissionsComponent,
   ],
 
   imports: [

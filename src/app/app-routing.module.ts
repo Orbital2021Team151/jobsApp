@@ -24,6 +24,7 @@ import { ApprovePostsPageComponent } from './admin/approve-posts-page/approve-po
 import { ReportedPostsPageComponent } from './admin/reported-posts-page/reported-posts-page.component';
 import { DownloadCSVPageComponent } from './admin/download-csv-page/download-csv-page.component';
 import { UpdateInterestsComponent } from './admin/update-interests-page/update-interests-page.component';
+import { PermissionsComponent } from './admin/permissions/permissions.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -63,11 +64,15 @@ const routes: Routes = [
   { path: 'highlightContent2', component: HighlightContentComponent2 },
   { path: 'highlightContent3', component: HighlightContentComponent3 },
   { path: 'expiredSession', component: ExpiredSessionPage },
-  { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: false, }},
-  { path: 'approvePosts', component: ApprovePostsPageComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: true, } },
-  { path: 'reportedPosts', component: ReportedPostsPageComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: true, } },
-  { path: 'downloadCSV', component: DownloadCSVPageComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: true, } },
-  { path: 'updateInterests', component: UpdateInterestsComponent, canActivate: [AuthGuard], canDeactivate: [DirtycheckGuard], data: { admin: false, } }
+  { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuard], data: { admin: false, }},
+  { path: 'approvePosts', component: ApprovePostsPageComponent, canActivate: [AuthGuard], data: { admin: true, } },
+  { path: 'reportedPosts', component: ReportedPostsPageComponent, canActivate: [AuthGuard], data: { admin: true, } },
+  { path: 'downloadCSV', component: DownloadCSVPageComponent, canActivate: [AuthGuard], data: { admin: true, } },
+  { path: 'updateInterests', component: UpdateInterestsComponent, canActivate: [AuthGuard], data: { admin: false, } },
+  { path: 'permissions', component: PermissionsComponent, canActivate: [AuthGuard], data: { admin: false, } },
+
+  //{ path: 'jobsApplied', component: UpdateInterestsComponent, canActivate: [AuthGuard], data: { admin: false, } },
+  //{ path: 'jobsReported', component: UpdateInterestsComponent, canActivate: [AuthGuard], data: { admin: false, } },
 ];
 
 @NgModule({

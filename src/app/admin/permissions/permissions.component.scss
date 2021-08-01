@@ -1,0 +1,101 @@
+/* USER PERMISSIONS TABLE
+-------------------------------------------------- */
+.change-user-permissions {
+  width: 70%;
+  margin: auto;
+  background-color: inherit;
+  color: inherit;
+
+  overflow: auto;
+  background-color: inherit;
+  height: 100vh;
+
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+table {
+  width: 100%;
+}
+
+.user-filter {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.menu-button-option {
+  display: flex;
+  align-items: center;
+}
+
+
+/* SMALL SCREEN SIZE //TODO: NOT DONE YET?
+--------------------------------------------------
+@media screen {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+
+.mat-accordion .mat-header-row {
+  padding-left: 1.5rem;
+  padding-right: 2rem;
+  border-bottom: none;
+}
+
+.mat-expansion-panel-header.mat-row {
+  border-bottom: none;
+}
+
+//copied from https://github.com/angular/material2/blob/master/src/lib/table/table.scss
+$mat-header-row-height: 56px;
+$mat-row-height: 48px;
+$mat-row-horizontal-padding: 24px;
+
+.report-table {
+  display: block;
+}
+
+.mat-header-row {
+  min-height: $mat-header-row-height;
+}
+
+.mat-row {
+  min-height: $mat-row-height;
+}
+
+.report-table, .report-table-header {
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  align-items: center;
+  padding: 0 $mat-row-horizontal-padding;
+  box-sizing: border-box;
+
+  // Workaround for https://goo.gl/pFmjJD in IE 11. Adds a pseudo
+  // element that will stretch the row the correct height. See:
+  // https://connect.microsoft.com/IE/feedback/details/802625
+  &::after {
+    display: inline-block;
+    min-height: inherit;
+    content: '';
+  }
+}
+
+.report-table-cell, .report-table-cell-header {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+*/
