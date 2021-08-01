@@ -20,10 +20,13 @@
               are helping to create the post for.</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <div class="show-uen-checkbox-container">
+            <mat-checkbox class="show-uen-checkbox"[formControl]="showUenControl">We are an organisation with a UEN</mat-checkbox>
+          </div>
+
+          <mat-form-field appearance="outline" *ngIf="POCInformationGroup.value.showUen">
             <mat-label>POC's UEN</mat-label>
-            <input matInput class="form-input" type="text" name="uen" required [formControl]="uenControl"
-              placeholder="eg UEN7654321" />
+            <input matInput class="form-input" type="text" name="uen" [formControl]="uenControl"/>
             <mat-error *ngIf="uenControl.errors?.invalid">Please enter provide us the name of your Point-Of-Contact.
             </mat-error>
           </mat-form-field>

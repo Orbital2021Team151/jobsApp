@@ -173,7 +173,8 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
   /* FormGroup version */
   public form: FormGroup;
   public orgNameControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
-  public uenControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
+  public showUenControl = new FormControl(false);
+  public uenControl = new FormControl(null);
   public pocControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
   public phoneNumberControl = new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999)]);
   public emailControl = new FormControl(null, [Validators.required, Validators.minLength(10)]);
@@ -209,9 +210,10 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     public router: Router,
   ) {
 
-    /* SINGLE-PAGE FORM */
+    /* SINGLE-PAGE FORM
     this.form = new FormGroup({
       orgName: this.orgNameControl,
+      showUen: this.showUenControl,
       uen: this.uenControl,
       POC: this.pocControl,
       phoneNumber: this.phoneNumberControl,
@@ -230,8 +232,8 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
       beneficiaries: this.beneficiariesControl,
 
       image: this.imageControl,
-
     });
+     */
 
 
     /* MULTI-STEP FORM */
@@ -241,6 +243,8 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
       email: this.emailControl,
       POC: this.pocControl,
       phoneNumber: this.phoneNumberControl,
+
+      showUen: this.showUenControl,
     });
 
     this.postInformationGroup = this._formBuilder.group({
@@ -280,10 +284,15 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     //if (this.form.invalid) return;
     this.postPreview = this.emptyPostPreview;
 
+    let uenField = "Not Applicable";
+    if (this.POCInformationGroup.value.uenControl) {
+      uenField = this.POCInformationGroup.value.uen;
+    }
+
     const post: Post = {
       id: null,
       orgName: this.POCInformationGroup.value.orgName,
-      uen: this.POCInformationGroup.value.uen,
+      uen: uenField,
       POC: this.POCInformationGroup.value.POC,
       phoneNumber: this.POCInformationGroup.value.phoneNumber,
       email: this.POCInformationGroup.value.email,
@@ -338,10 +347,15 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     }
     */
 
+    let uenField = "Not Applicable";
+    if (this.POCInformationGroup.value.uenControl) {
+      uenField = this.POCInformationGroup.value.uen;
+    }
+
     const post: Post = {
       id: null,
       orgName: this.POCInformationGroup.value.orgName,
-      uen: this.POCInformationGroup.value.uen,
+      uen: uenField,
       POC: this.POCInformationGroup.value.POC,
       phoneNumber: this.POCInformationGroup.value.phoneNumber,
       email: this.POCInformationGroup.value.email,

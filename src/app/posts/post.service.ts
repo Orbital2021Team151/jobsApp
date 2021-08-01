@@ -328,6 +328,39 @@ export class PostsService {
       }
 
       dataArray = dataArray.map(obj => {
+
+        let skillsString = "";
+        for (let i = 0; i < obj.skills.length; i++) {
+          skillsString += obj.skills[i]
+          if (obj.skills.length - 1 > i) {
+            skillsString += ","
+          }
+        }
+
+        let studentsString = "";
+        for (let j = 0; j < obj.studentsInterested.length; j++) {
+          let currentStudent = obj.studentsInterested[j];
+          let studentName = "Name: " + currentStudent["name"];
+          let studentEmail = "Email: " + currentStudent["email"];
+          let studentContact = "Contact Number: " + currentStudent["contact"];
+          let studentContent = "Report: " + currentStudent["content"];
+          let studentType = "Applicant: " + currentStudent["applicationUser"];
+
+          let studentStringObject = studentName + "\n" + studentEmail + "\n" + studentContact + "\n" + studentContent + "\n" + studentType + "\n\n";
+          studentsString += studentStringObject;
+        }
+
+        let reportsString = "";
+        for (let k = 0; k < obj.reports.length; k++) {
+          let currentReport = obj.reports[k];
+          let reportName = "Name: " + currentReport["name"];
+          let reportEmail = "Email: " + currentReport["email"];
+          let reportContact = "Contact Number: " + currentReport["contact"];
+          let reportContent = "Report: " + currentReport["content"];
+          let reportStringObject = reportName + "\n" + reportEmail + "\n" + reportContact + "\n" + reportContent + "\n\n";
+          reportsString += reportStringObject;
+        }
+
         return {
           location: obj.location,
           beneficiaries: obj.beneficiaries,
@@ -339,12 +372,12 @@ export class PostsService {
           title: obj.title,
           content: obj.content,
           opportunity: obj.opportunity,
-          skills: obj.skills,
+          skills: skillsString,
           startDate: pipe.transform(obj.startDate, 'longDate'),
           endDate: pipe.transform(obj.endDate, 'longDate'),
           commitment: obj.commitment,
-          studentsInterested: obj.studentsInterested,
-          reports: obj.reports,
+          studentsInterested: studentsString, //was originally obj.studentsInterested
+          reports: reportsString, //was originally obj.reports
           approved: obj.approved,
           removed: obj.removed,
           reason: obj.reason,
