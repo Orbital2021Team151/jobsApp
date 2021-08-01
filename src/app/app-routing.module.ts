@@ -26,6 +26,7 @@ import { DownloadCSVPageComponent } from './admin/download-csv-page/download-csv
 import { UpdateInterestsComponent } from './admin/update-interests-page/update-interests-page.component';
 import { PermissionsComponent } from './admin/permissions/permissions.component';
 import { JobsAppliedComponent } from './admin/jobs-applied/jobs-applied.component';
+import { JobsReportedComponent } from './admin/jobs-reported/jobs-reported.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -71,9 +72,8 @@ const routes: Routes = [
   { path: 'downloadCSV', component: DownloadCSVPageComponent, canActivate: [AuthGuard], data: { admin: true, } },
   { path: 'updateInterests', component: UpdateInterestsComponent, canActivate: [AuthGuard], data: { admin: false, } },
   { path: 'permissions', component: PermissionsComponent, canActivate: [AuthGuard], data: { admin: false, } },
-
   { path: 'jobsApplied', component: JobsAppliedComponent, canActivate: [AuthGuard], data: { admin: false, } },
-  //{ path: 'jobsReported', component: UpdateInterestsComponent, canActivate: [AuthGuard], data: { admin: false, } },
+  { path: 'jobsReported', component: JobsReportedComponent, canActivate: [AuthGuard], data: { admin: false, } },
 ];
 
 @NgModule({

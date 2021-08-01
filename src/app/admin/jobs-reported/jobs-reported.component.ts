@@ -11,28 +11,31 @@ import { ChangePasswordAlertComponent } from "../snackbars/change-password-snack
 import { UpdateBeneficiariesComponent } from "../snackbars/update-beneficiaries-snackbar/update-beneficiaries-snackbar.component";
 
 @Component({
-  selector: "app-jobs-applied",
-  templateUrl: './jobs-applied.component.html',
-  styleUrls: ['./jobs-applied.component.css'],
+  selector: "app-jobs-reported",
+  templateUrl: './jobs-reported.component.html',
+  styleUrls: ['./jobs-reported.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class JobsAppliedComponent implements OnInit, OnDestroy {
-
-  beneficiariesSelected: string[] = [];
+export class JobsReportedComponent implements OnInit, OnDestroy {
 
   private postSub: Subscription;
   private authStatusSub: Subscription;
 
+
   private authStatusObject;
+
   posts: Post[] = [];
-  appliedPosts: Post[] = [];
-  hasApplied: boolean;
+  reportedPosts: Post[] = [];
+  hasReport: boolean;
+
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {}
 
   ngOnInit() {
 
     this.authStatusObject = this.authService.getAuthStatusObject();
+    //console.log(this.authStatusObject);
+
     this.postsService.getPosts();
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
@@ -43,32 +46,23 @@ export class JobsAppliedComponent implements OnInit, OnDestroy {
         this.posts = this.posts
         .filter(post => post.students.length > 0 || post.reports.length > 0);
 
-        this.appliedPosts = this.posts.filter(posts => {
-          for (let i = 0; i < posts.students.length; i++) {
-            if (posts.students[i].email === this.authStatusObject.email) {
+        this.reportedPosts = this.posts.filter(posts => {
+          for (let i = 0; i < posts.reports.length; i++) {
+            if (posts.reports[i].email === this.authStatusObject.email) {
               return true;
             }
           }
         });
-        // console.log("this.appliedPosts");
-        // console.log(this.appliedPosts);
 
-        if (this.appliedPosts.length > 0) {
-          this.hasApplied = true;
+        if (this.reportedPosts.length > 0) {
+          this.hasReport = true;
         } else {
-          this.hasApplied = false;
+          this.hasReport = false;
         }
-
+        //console.log("this.reportedPosts");
+        //console.log(this.reportedPosts);
       });
 
-    // console.log("this.appliedPosts");
-    // console.log(this.appliedPosts);
-    // console.log(this.posts);
-
-    /*
-     * Probably do not need this because there are no changes to authStatusObject once user is logged in.
-     * Might have to be revised in the future for chat function.
-     */
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       console.log("student dashboard's authStatus observable!");

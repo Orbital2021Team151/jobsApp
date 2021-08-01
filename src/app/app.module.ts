@@ -88,6 +88,7 @@ import { DownloadCSVPageComponent } from './admin/download-csv-page/download-csv
 import { UpdateInterestsComponent } from './admin/update-interests-page/update-interests-page.component';
 import { PermissionsComponent } from './admin/permissions/permissions.component';
 import { JobsAppliedComponent } from './admin/jobs-applied/jobs-applied.component';
+import { JobsReportedComponent } from './admin/jobs-reported/jobs-reported.component';
 
 
 @NgModule({
@@ -135,7 +136,7 @@ import { JobsAppliedComponent } from './admin/jobs-applied/jobs-applied.componen
     UpdateInterestsComponent,
     PermissionsComponent,
     JobsAppliedComponent,
-
+    JobsReportedComponent,
   ],
 
   imports: [
