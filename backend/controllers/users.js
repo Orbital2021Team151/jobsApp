@@ -122,7 +122,7 @@ exports.login = (req, res, next) => {
           if (err.message === "User has been banned!") {
             //console.log("Account got banned!");
             res.status(401).json({
-              errorCode: 2, //TODO: NEED A NEW ERROR FOR THIS
+              errorCode: 17, //TODO: NEED A NEW ERROR FOR THIS
               message: "User has been banned",
               error: err,
             });

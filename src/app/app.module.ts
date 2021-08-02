@@ -89,6 +89,7 @@ import { UpdateInterestsComponent } from './admin/update-interests-page/update-i
 import { PermissionsComponent } from './admin/permissions/permissions.component';
 import { JobsAppliedComponent } from './admin/jobs-applied/jobs-applied.component';
 import { JobsReportedComponent } from './admin/jobs-reported/jobs-reported.component';
+import { BannedErrorComponent } from './errors/banned-error/banned-error.component';
 
 
 @NgModule({
@@ -137,6 +138,7 @@ import { JobsReportedComponent } from './admin/jobs-reported/jobs-reported.compo
     PermissionsComponent,
     JobsAppliedComponent,
     JobsReportedComponent,
+    BannedErrorComponent
   ],
 
   imports: [
