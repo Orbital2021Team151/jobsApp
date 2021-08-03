@@ -297,10 +297,9 @@
     <a
       href="https://ccsgp-app.herokuapp.com/"
       target="_blank"
-      title="homepage"
-      class="logo"
-    >
-      <img src="assets/Orbital-Logo-Design.png" alt="Logo of CCSGP" />
+      class="logo toolbar-buttons-common"
+      matTooltip="Homepage" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <img src="assets/Orbital-Logo-Design.png" alt="CCSGP's Job Portal Homepage" />
     </a>
   </mat-toolbar-row>
 
@@ -310,9 +309,8 @@
       routerLink="/feed"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">feed</mat-icon>
-      Feed
+      matTooltip="Feed" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Feed">feed</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -322,10 +320,11 @@
       routerLink="/create"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">add</mat-icon>
-      Create Job Post</a
-    >
+      matTooltip="Create Job Post" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+
+      <mat-icon routerLinkActive="active" alt="Create Job Post">add</mat-icon>
+
+    </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row *ngIf="userIsAuthenticated && authStatusObject.admin">
@@ -334,9 +333,8 @@
       routerLink="/createHighlight"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active"> highlight</mat-icon>
-      Create Highlight
+      matTooltip="Create Highlight" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Create Highlight"> highlight</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -346,9 +344,8 @@
       routerLink="/jobsApplied"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">send</mat-icon>
-      Jobs Applied
+      matTooltip="Jobs Applied" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Jobs Applied">send</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -358,9 +355,8 @@
       routerLink="/jobsReported"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">flag</mat-icon>
-      Jobs Reported
+      matTooltip="Jobs Reported" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Jobs Reported">flag</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -378,9 +374,8 @@
       routerLink="/approvePosts"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">hourglass_empty</mat-icon>
-      Pending Approval
+      matTooltip="Pending Approval" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Pending Approval">hourglass_empty</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -390,9 +385,8 @@
       routerLink="/reportedPosts"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">report_problem</mat-icon>
-      Reports
+      matTooltip="Reports" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Reports">report_problem</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -402,9 +396,8 @@
       routerLink="/downloadCSV"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">file_download</mat-icon>
-      Download CSV
+      matTooltip="Download CSV" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Download CSV">file_download</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -414,9 +407,8 @@
       routerLink="/changePassword"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">security</mat-icon>
-      Change Password
+      matTooltip="Change Password" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Change Password">security</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -426,9 +418,8 @@
       routerLink="/updateInterests"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">interests</mat-icon>
-      Update Interests
+      matTooltip="Update Interests" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Update Interests">interests</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -438,9 +429,8 @@
       routerLink="/permissions"
       routerLinkActive="active"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">supervisor_account</mat-icon>
-      Permissions
+      matTooltip="Permissions" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Permissions">supervisor_account</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -450,9 +440,8 @@
       routerLink="/login"
       class="toolbar-buttons-common"
       routerLinkActive="active"
-    >
-      <mat-icon routerLinkActive="active">login</mat-icon>
-      Login
+      matTooltip="Login" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Login">login</mat-icon>
     </a>
   </mat-toolbar-row>
   <mat-toolbar-row *ngIf="!userIsAuthenticated">
@@ -461,9 +450,8 @@
       routerLink="/signup"
       class="toolbar-buttons-common"
       routerLinkActive="active"
-    >
-      <mat-icon routerLinkActive="active">create</mat-icon>
-      Signup
+      matTooltip="Signup" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Signup">create</mat-icon>
     </a>
   </mat-toolbar-row>
 
@@ -477,9 +465,8 @@
       mat-button
       (click)="onLogout()"
       class="toolbar-buttons-common"
-    >
-      <mat-icon routerLinkActive="active">logout</mat-icon>
-      Logout
+      matTooltip="Logout" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="Logout">logout</mat-icon>
     </a>
   </mat-toolbar-row>
 </mat-toolbar>

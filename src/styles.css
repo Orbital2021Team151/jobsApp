@@ -184,3 +184,16 @@ mat-label {
 }
 */
 
+.toolbar-tooltip {
+
+  background-color: #3e4158d7;
+  font-size: medium;
+  font-weight: 600;
+  /*
+
+  background-color: #f06f76;
+  Segoe, Trebuchet, Arial,
+
+  */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
