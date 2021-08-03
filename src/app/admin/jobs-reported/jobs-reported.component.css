@@ -130,13 +130,22 @@ button {
   font-family: 'Lato', sans-serif;
   text-align: center;
   color: inherit;
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .info-text-header {
   font-weight: 900;
-  font-size: 1.5rem;
+  font-size: 3rem;
+}
+
+.info-text-subheader {
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
 .password-visibility-icon-button {
