@@ -24,7 +24,6 @@ export class JobsReportedComponent implements OnInit, OnDestroy {
 
   private authStatusObject;
 
-  posts: Post[] = [];
   reportedPosts: Post[] = [];
   hasReport: boolean;
 
@@ -41,17 +40,17 @@ export class JobsReportedComponent implements OnInit, OnDestroy {
       .subscribe((posts: Post[]) => {
         //console.log(posts);
 
-        this.posts = posts.filter(post => !post.removed);
+        this.reportedPosts = posts.filter(post => !post.removed);
 
-        this.posts = this.posts
-        .filter(post => post.students.length > 0 || post.reports.length > 0);
+        this.reportedPosts = this.reportedPosts
+        .filter(post => {
 
-        this.reportedPosts = this.posts.filter(posts => {
-          for (let i = 0; i < posts.reports.length; i++) {
-            if (posts.reports[i].email === this.authStatusObject.email) {
+          for (let i = 0; i < post.reports.length; i++) {
+            if (post.reports[i].email === this.authStatusObject.email) {
               return true;
             }
           }
+          return false;
         });
 
         if (this.reportedPosts.length > 0) {
@@ -72,7 +71,7 @@ export class JobsReportedComponent implements OnInit, OnDestroy {
 
   onMoreInfo(content) {
     //console.log("Checking this page's posts! ");
-    console.log(this.posts);
+    //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 

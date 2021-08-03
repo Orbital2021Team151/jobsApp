@@ -276,14 +276,17 @@
 
               <!-- This example requires Tailwind CSS v2.0+ -->
               <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-
+                <div class="closelearnmore">
+                  <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+                  ></button>
+                </div>
                 <div class="px-4 py-3 sm:px-6">
                   <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    {{ postPreview.title }}
+                    {{postPreview.title}}
                   </h3>
 
                   <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    by <i>{{ postPreview.orgName }}</i>
+                    by <i>{{postPreview.orgName}}</i>
                   </p>
 
                 </div>
@@ -305,61 +308,70 @@
                         Point-Of-Contact's Name
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ postPreview.POC }}
+                        {{postPreview.POC}}
                       </dd>
                     </div>
 
                     <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt class="text-sm font-medium text-gray-500">
-                        POC's Email Address
+                        Contact Number
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ postPreview.email }}
+                        {{postPreview.phoneNumber}}
                       </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Email Address
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{postPreview.email}}
+                      </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt class="text-sm font-medium text-gray-500">
                         Preferred Skillset
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ postPreview.skills }}
+                        {{postPreview.skills}}
                       </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt class="text-sm font-medium text-gray-500">
                         Beneficiaries
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ postPreview.beneficiaries }}
-                      </dd>
-                    </div>
-
-                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt class="text-sm font-medium text-gray-500">
-                        Duration
-                      </dt>
-                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ postPreview.startDate | date }} to {{ postPreview.endDate | date }}
+                        {{postPreview.beneficiaries}}
                       </dd>
                     </div>
 
                     <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt class="text-sm font-medium text-gray-500">
-                        Commitment Information
+                        Duration
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ postPreview.hoursRequired }}
+                        {{postPreview.startDate | date}} to {{postPreview.endDate | date}}
                       </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt class="text-sm font-medium text-gray-500">
+                        Commitment Information
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{postPreview.hoursRequired}}
+                      </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt class="text-sm font-medium text-gray-500">
                         Location
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ postPreview.location || "Not Specified" }}
+                        {{postPreview.location || "Not Specified"}}
                       </dd>
                     </div>
 

@@ -37,8 +37,23 @@
         </mat-card-content>
 
         <mat-footer class="post-card-footer">
+
+          <!--
           <button
-            matTooltip="Click for more information"
+            matTooltip="View Submitted Application"
+            [matTooltipShowDelay]="100"
+            [matTooltipHideDelay]="100"
+            mat-button
+            color="accent"
+            aria-label="Learn More"
+            (click)="viewApplication(post.id)"
+          >
+            <mat-icon color="accent"> attach_file </mat-icon>
+          </button>
+          -->
+
+          <button
+            matTooltip="More Information"
             [matTooltipShowDelay]="100"
             [matTooltipHideDelay]="100"
             mat-button
@@ -53,6 +68,8 @@
     </section>
 
     <ng-template #content let-modal>
+
+      <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="closelearnmore">
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
@@ -60,157 +77,105 @@
         </div>
         <div class="px-4 py-3 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
-            {{ post.title }}
+            {{post.title}}
           </h3>
 
           <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            by <i>{{ post.orgName }}</i>
+            by <i>{{post.orgName}}</i>
           </p>
+
         </div>
 
         <div class="border-t border-gray-200">
           <dl>
-            <div
-              class="
-                bg-gray-50
-                px-4
-                py-3
-                sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
-              "
-            >
-              <dt class="text-sm font-medium text-gray-500">About</dt>
-              <dd
-                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ post.content }}
+
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                About
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <p>{{post.content}}</p>
               </dd>
             </div>
 
-            <div
-              class="
-                bg-white
-                px-4
-                py-3
-                sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
-              "
-            >
+            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Point-Of-Contact's Name
               </dt>
-              <dd
-                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ post.POC }}
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.POC}}
               </dd>
             </div>
 
-            <div
-              class="
-                bg-gray-50
-                px-4
-                py-3
-                sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
-              "
-            >
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Contact Number
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.phoneNumber}}
+              </dd>
+            </div>
+
+            <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Email Address
               </dt>
-              <dd
-                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ post.email }}
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.email}}
               </dd>
             </div>
 
-            <div
-              class="
-                bg-white
-                px-4
-                py-3
-                sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
-              "
-            >
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Preferred Skillset
               </dt>
-              <dd
-                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ post.skills }}
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.skills}}
               </dd>
             </div>
 
-            <div
-              class="
-                bg-gray-50
-                px-4
-                py-3
-                sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
-              "
-            >
+            <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Beneficiaries
               </dt>
-              <dd
-                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ post.beneficiaries }}
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.beneficiaries}}
               </dd>
             </div>
 
-            <div
-              class="
-                bg-white
-                px-4
-                py-3
-                sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
-              "
-            >
-              <dt class="text-sm font-medium text-gray-500">Duration</dt>
-              <dd
-                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ post.startDate | date }} to {{ post.endDate | date }}
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Duration
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.startDate | date}} to {{post.endDate | date}}
               </dd>
             </div>
 
-            <div
-              class="
-                bg-gray-50
-                px-4
-                py-3
-                sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
-              "
-            >
+            <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
                 Commitment Information
               </dt>
-              <dd
-                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ post.hoursRequired }}
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.hoursRequired}}
               </dd>
             </div>
 
-            <div
-              class="
-                bg-white
-                px-4
-                py-3
-                sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6
-              "
-            >
-              <dt class="text-sm font-medium text-gray-500">Location</dt>
-              <dd
-                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ post.location || "Not Specified" }}
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Location
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.location || "Not Specified"}}
               </dd>
             </div>
+
           </dl>
         </div>
       </div>
+
     </ng-template>
+
   </div>
 </div>
 

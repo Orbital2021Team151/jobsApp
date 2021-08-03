@@ -71,8 +71,9 @@ mat-icon {
   max-width: 20rem;
   font-family: 'Lato', sans-serif;
   align-items: center;
-  flex: auto;
+  display: flex;
   margin: auto;
+  justify-content: space-evenly;
 }
 
 mat-spinner {
