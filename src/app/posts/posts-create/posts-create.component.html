@@ -70,11 +70,11 @@
         <form [formGroup]="postInformationGroup">
 
           <mat-form-field appearance="outline">
-            <mat-label>Volunteer Opportunity Title (Max. 100 Characters)</mat-label>
+            <mat-label>Volunteer Opportunity Title (Max. 50 Characters)</mat-label>
             <input matInput class="form-input" type="text" name="title" [formControl]="titleControl" required
               placeholder="eg Weekend Underprivileged Teacher"
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              maxlength="100" />
+              maxlength="50" />
             <mat-error *ngIf="titleControl.errors?.invalid">Please provide us the job's title.</mat-error>
           </mat-form-field>
 

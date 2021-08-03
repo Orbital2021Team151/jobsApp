@@ -338,7 +338,18 @@
     </a>
   </mat-toolbar-row>
 
-  <mat-toolbar-row *ngIf="userIsAuthenticated && !authStatusObject.admin">
+  <mat-toolbar-row *ngIf="userIsAuthenticated">
+    <a
+      mat-button
+      routerLink="/myPosts"
+      routerLinkActive="active"
+      class="toolbar-buttons-common"
+      matTooltip="My Posts" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" [matTooltipPosition]="'right'" matTooltipClass="toolbar-tooltip">
+      <mat-icon routerLinkActive="active" alt="My Posts"> face</mat-icon>
+    </a>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="userIsAuthenticated">
     <a
       mat-button
       routerLink="/jobsApplied"
@@ -349,7 +360,7 @@
     </a>
   </mat-toolbar-row>
 
-  <mat-toolbar-row *ngIf="userIsAuthenticated && !authStatusObject.admin">
+  <mat-toolbar-row *ngIf="userIsAuthenticated">
     <a
       mat-button
       routerLink="/jobsReported"

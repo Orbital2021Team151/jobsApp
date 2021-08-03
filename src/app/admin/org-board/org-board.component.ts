@@ -187,12 +187,10 @@ export class OrgBoardComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  //need to build
-  acceptApplicant(postId: string, userEmail: string) {
-    this.postsService.acceptStudent(postId, userEmail);
+  acceptApplicant(postId: string, student: {name: string, email: string, contact: number, content: string}) {
+    this.postsService.acceptStudent(postId, student);
   }
 
-  //need to build up
   acceptedBefore(postId: string, userEmail: string) {
     const post: Post = this.postsService.getPost(postId);
     return post.studentsAccepted.includes(userEmail);

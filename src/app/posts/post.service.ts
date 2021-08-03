@@ -187,6 +187,32 @@ export class PostsService {
       });
   }
 
+  completePostMyPosts(postId: string, reason: string) {
+    const postToBeCompleted = this.getPost(postId);
+
+    if (reason) {
+      postToBeCompleted.reason = reason;
+    }
+    //console.log("At postsService now. Post to be rejected is: ");
+    //console.log(postToBeRejected);
+
+    this.http
+      .put<{message: string, removedStatus: string}>(BACKEND_URL + 'api/posts/complete' + "/" + postToBeCompleted.id, postToBeCompleted)
+      .subscribe((response) => {
+        //this.router.navigate(['/']);
+        console.log("post successfully completed! (As in the request has been fulfilled)");
+        //this.posts = this.posts.filter(post => post.id !== postId);
+        this.posts = this.posts.map(post => {
+
+          if (post.id === postId) {
+            post.removed = response.removedStatus;
+          }
+          return post;
+        })
+        this.postsUpdated.next([...this.posts]);
+      });
+  }
+
   completePost(postId: string, reason: string) {
     const postToBeCompleted = this.getPost(postId);
 
@@ -222,8 +248,10 @@ export class PostsService {
     //console.log("Received id is: ");
     //console.log(postId);
 
-    //console.log("Received student Object is: ");
-    //console.log(student);
+    console.log("Received student Object is: ");
+    console.log(student);
+
+
 
     const postToBePublished = this.getPost(postId);
     postToBePublished.students.push(student);
@@ -260,13 +288,13 @@ export class PostsService {
     });
   }
 
-  acceptStudent(postId: string, studentEmail: string) {
+  acceptStudent(postId: string, student: {name: string, email: string, contact: number, content: string}) {
 
     const postToAcceptStudent = this.getPost(postId);
 
-    postToAcceptStudent.studentsAccepted.push(studentEmail);
+    postToAcceptStudent.studentsAccepted.push(student.email);
 
-    let post_studentEmail_pair = {post: postToAcceptStudent, studentEmail: studentEmail};
+    let post_studentEmail_pair = {post: postToAcceptStudent, student: student};
 
     this.http
       .put(BACKEND_URL + 'api/posts/accept' + "/" + postToAcceptStudent.id, post_studentEmail_pair)

@@ -27,6 +27,7 @@ import { UpdateInterestsComponent } from './admin/update-interests-page/update-i
 import { PermissionsComponent } from './admin/permissions/permissions.component';
 import { JobsAppliedComponent } from './admin/jobs-applied/jobs-applied.component';
 import { JobsReportedComponent } from './admin/jobs-reported/jobs-reported.component';
+import { MyPostsComponent } from './admin/my-posts/my-posts.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -77,6 +78,7 @@ const routes: Routes = [
   { path: 'permissions', component: PermissionsComponent, canActivate: [AuthGuard], data: { admin: false, } },
   { path: 'jobsApplied', component: JobsAppliedComponent, canActivate: [AuthGuard], data: { admin: false, } },
   { path: 'jobsReported', component: JobsReportedComponent, canActivate: [AuthGuard], data: { admin: false, } },
+  { path: 'myPosts', component: MyPostsComponent, canActivate: [AuthGuard], data: { admin: false, } },
 ];
 
 @NgModule({

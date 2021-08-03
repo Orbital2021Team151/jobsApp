@@ -532,7 +532,11 @@ exports.completePost = (req, res, next) => {
     //to inform the organisation that their job has been completed and thank them for using our service
     //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
     sendCompleteAcknowledgementEmail(req.body.email, req.body);
-    res.status(200).json("Post has been completed!");
+
+    res.status(200).json({
+      message: "Post has been completed!",
+      removedStatus: removedStatus,
+    });
   });
 };
 

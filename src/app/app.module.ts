@@ -90,6 +90,7 @@ import { PermissionsComponent } from './admin/permissions/permissions.component'
 import { JobsAppliedComponent } from './admin/jobs-applied/jobs-applied.component';
 import { JobsReportedComponent } from './admin/jobs-reported/jobs-reported.component';
 import { BannedErrorComponent } from './errors/banned-error/banned-error.component';
+import { MyPostsComponent } from './admin/my-posts/my-posts.component';
 
 
 @NgModule({
@@ -138,7 +139,8 @@ import { BannedErrorComponent } from './errors/banned-error/banned-error.compone
     PermissionsComponent,
     JobsAppliedComponent,
     JobsReportedComponent,
-    BannedErrorComponent
+    MyPostsComponent,
+    BannedErrorComponent,
   ],
 
   imports: [
