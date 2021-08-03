@@ -30,7 +30,7 @@ mat-spinner {
 /* Control the left side */
 .left {
   left: 0;
-  width: 6%;
+  width: 100px;
   /*
   background-color: #0f1522;
   */
@@ -40,7 +40,7 @@ mat-spinner {
 /* Control the right side */
 .right {
   right: 0;
-  width: 92%;
+  width: calc(100% - 145px);
   height: 100%;
   overflow: auto;
 }
