@@ -154,8 +154,8 @@ export class PostsService {
     const postToBePublished = this.getPost(postId);
     postToBePublished.publishDate = new Date(Date.now());
 
-    console.log("At postsService now. Post to be published is: ");
-    console.log(postToBePublished);
+    //console.log("At postsService now. Post to be published is: ");
+    //console.log(postToBePublished);
 
     this.http
       .put(BACKEND_URL + 'api/posts/publish' + "/" + postToBePublished.id, postToBePublished)
@@ -247,9 +247,8 @@ export class PostsService {
 
     //console.log("Received id is: ");
     //console.log(postId);
-
-    console.log("Received student Object is: ");
-    console.log(student);
+    //console.log("Received student Object is: ");
+    //console.log(student);
 
 
 
@@ -312,15 +311,10 @@ export class PostsService {
 
     this.http.get<{message: string, data: any[]}>(BACKEND_URL + 'api/posts/download')
     .subscribe(response => {
-      /*
-      console.log("Post service's download CSV function called. The response is: ");
-      console.log(response);
-      console.log(response.data);
-      console.log("The start date is: ");
-      console.log(startDate);
-      console.log("The end date is: ");
-      console.log(endDate);
-      */
+
+      //console.log("Post service's download CSV function called. The response is: ");
+      //console.log(response.data);
+
 
       let pipe = new DatePipe('en-US'); // Use your own locale
       let dataArray = response.data;

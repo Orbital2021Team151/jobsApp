@@ -226,17 +226,13 @@ export class PostFeedComponent implements OnInit, OnDestroy {
           this.hasApproved = false;
         }
         this.orgs = this.posts.map(post => post.orgName);
-        console.log(this.orgs);
+        //console.log(this.orgs);
         for (let i = 0; i < this.orgs.length; i++) {
           this.orgsBoolean.push({
             org: this.orgs[i],
             selected: false,
           });
         }
-        // console.log(this.orgs);
-        //console.log(this.orgsBoolean);
-        // console.log(this.orgsSelected);
-
       });
   }
 
@@ -271,14 +267,11 @@ export class PostFeedComponent implements OnInit, OnDestroy {
   }
 
   onMoreInfo(content) {
-    //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
-
-    console.log("The posts are: ");
-    console.log(this.posts);
-
-    console.log("This authStatusObject is: ");
-    console.log(this.authStatusObject);
+    //console.log("The posts are: ");
+    //console.log(this.posts);
+    //console.log("This authStatusObject is: ");
+    //console.log(this.authStatusObject);
   }
 
   clearFilter() {
@@ -329,7 +322,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
       }
     }
 
-    console.log(this.orgsSelected);
+    //console.log(this.orgsSelected);
 
     if (this.beneficiariesSelected.length !== 0) {
       this.filteredPosts = this.posts.filter((post) => {
@@ -523,7 +516,7 @@ export class PostFeedComponent implements OnInit, OnDestroy {
 
   submitReportReactive(postId: string) {
 
-    console.log(this.reportForm);
+    //console.log(this.reportForm);
 
     if (this.reportForm.invalid) {
       console.log("Report Form is not filled up yet or has invalid parts!");

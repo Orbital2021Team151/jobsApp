@@ -37,19 +37,14 @@ import { ButtonModule } from 'primeng/button';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PostFeedComponent } from './posts/posts-feed/posts-feed.component';
-import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
-import { SignupAdminComponent } from './auth/signup-admin/signup-admin.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupGeneralComponent } from './auth/signup-general/signup-general.component';
-import { StudentBoardComponent } from './admin/student-board/student-board.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ForgetPasswordErrorComponent } from './errors/forget-password-error/forget-password-error.component';
-import { OrgBoardComponent } from './admin/org-board/org-board.component';
-import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-org.component';
 import { LoginWrongPasswordErrorComponent } from './errors/login-wrong-password-error/login-wrong-password-error.component';
 import { UpdatePasswordErrorComponent } from './errors/update-password-error/update-password-error.component';
 import { LoginGeneralErrorComponent } from './errors/login-general-error/login-general-error.component';
@@ -60,7 +55,6 @@ import { ReportedBeforeDialog } from './dialogs/reported-before-dialog/reported-
 import { ReportedPostNotificationDialog } from './dialogs/reported-post-notification-dialog/reported-post-notification-dialog.component';
 import { AppliedPostNotificationDialog } from './dialogs/applied-post-notification-dialog/applied-post-notification-dialog.component';
 import { DashBoardLandingComponent } from './admin/dashboard-landing/dashboard-landing.component';
-import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';
 import { StartDateErrorDialog } from './dialogs/start-date-error-dialog/start-date-error-dialog.component';
 import { WrongStudentEmailDialog } from './dialogs/wrong-student-email-dialog/wrong-student-email-dialog.component';
 import { HighlightCreateComponent } from './admin/highlight-create/highlight-create.component';
@@ -75,6 +69,14 @@ import { FieldsNotCompleteDialog } from './dialogs/fields-not-complete-dialog/fi
 import { HighlightSubmittedDialog } from './dialogs/highlight-submitted-dialog/highlight-submitted-dialog.component';
 import { PostRejectedDialog } from './dialogs/post-rejected-dialog/post-rejected-dialog.component';
 import { PostCompletedDialog } from './dialogs/post-completed-dialog/post-completed-dialog.component';
+
+import { PostCreateOrgComponent } from './posts/posts-create-org/posts-create-org.component'; //NOT USED ANYMORE
+import { AdminBoardComponent } from './admin/admin-board/admin-board.component';              //NOT USED ANYMORE
+import { SignupAdminComponent } from './auth/signup-admin/signup-admin.component';            //NOT USED ANYMORE
+import { OrgBoardComponent } from './admin/org-board/org-board.component';                    //NOT USED ANYMORE
+import { StudentBoardChangePasswordComponent } from './admin/student-board-change-password/student-board-change-password.component';  //NOT USED ANYMORE
+import { StudentBoardComponent } from './admin/student-board/student-board.component';        //NOT USED ANYMORE
+
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
@@ -98,7 +100,6 @@ import { MyPostsComponent } from './admin/my-posts/my-posts.component';
     AppComponent,
     ToolbarComponent,
     PostCreateComponent,
-    PostCreateOrgComponent,
     PostFeedComponent,
     AdminBoardComponent,
     LoginComponent,
@@ -141,6 +142,7 @@ import { MyPostsComponent } from './admin/my-posts/my-posts.component';
     JobsReportedComponent,
     MyPostsComponent,
     BannedErrorComponent,
+    PostCreateOrgComponent,
   ],
 
   imports: [

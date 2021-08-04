@@ -90,8 +90,8 @@ export class AuthService {
       });
     }))
     .subscribe((mappedUsers) => {
-      console.log("get users mapped successful. mapped users are: ");
-      console.log(mappedUsers);
+      //console.log("get users mapped successful. mapped users are: ");
+      //console.log(mappedUsers);
       this.users = mappedUsers;
       this.usersListener.next([...this.users]);
     });
@@ -137,8 +137,8 @@ export class AuthService {
           //this.router.navigate['/signup'];
         },
         (error) => {
-          console.log("Failed to sign up user.");
-          console.log(error);
+          //console.log("Failed to sign up user.");
+          //console.log(error);
         }
       );
   }
@@ -161,8 +161,7 @@ export class AuthService {
     this.http
       .put(BACKEND_URL + 'api/user/updateBeneficiaries', userObject)
       .subscribe((response) => {
-        console.log("User's beneficiaries updated! At authService.ts");
-        console.log(response);
+        console.log("User's beneficiaries updated!");
 
         let updatedObject = {
           auth: true,
@@ -370,9 +369,8 @@ export class AuthService {
     this.http
       .put(BACKEND_URL + 'api/user/updatePassword', userObject)
       .subscribe((response) => {
-        console.log("User's password updated! At authService.ts");
+        console.log("User's password updated!");
         this.changedPasswordListener.next(true);
-        console.log(response);
       });
   }
 
@@ -382,11 +380,11 @@ export class AuthService {
     this.http
       .put(BACKEND_URL + 'api/user/forgetPassword', userObject)
       .subscribe((response) => {
-        console.log("User's password reset! At authService.ts");
-        console.log(response);
+        console.log("User's password reset!");
         this.loginListener.next(true);
       },
       (error) => {
+        console.log("User's password reset failed!");
         console.log(error);
       });
   }

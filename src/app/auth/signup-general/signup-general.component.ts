@@ -59,8 +59,6 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log("At signup page!");
-
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe((authStatusObject) => {
@@ -73,12 +71,8 @@ export class SignupGeneralComponent implements OnInit, OnDestroy {
   //could throw an error if email is used before
   onSignupReactive() {
 
-    console.log('Request to sign up! Form submitted info is:');
-    console.log(this.form);
-
     if (this.form.invalid) {
       console.log("Reactive Form is invalid! It is:");
-      console.log(this.form);
       return;
     }
 

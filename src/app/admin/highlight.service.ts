@@ -67,8 +67,8 @@ export class HighlightService {
         this.deleteHighlight(deletedHighlight.id);
       }
 
-      console.log("somehow your highlight went through wilbur! here it is below")
-      console.log(highlight);
+      //console.log("somehow your highlight went through wilbur! here it is below")
+      //console.log(highlight);
       this.highlights.push(highlight);
       this.highlightsUpdated.next([...this.highlights]);
     });
@@ -81,7 +81,7 @@ export class HighlightService {
         this.highlights = this.highlights.filter(highlight => {
           return highlight.id !== id;
         });
-        console.log("successfully deleted post!");
+        console.log("successfully deleted highlight!");
         this.highlightsUpdated.next([...this.highlights])
       })
   }

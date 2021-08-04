@@ -95,7 +95,7 @@ export class JobsReportedComponent implements OnInit, OnDestroy {
 
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
-      console.log("student dashboard's authStatus observable!");
+      //console.log("student dashboard's authStatus observable!");
       this.authStatusObject = authObject;
     });
   }

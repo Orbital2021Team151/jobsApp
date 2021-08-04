@@ -151,14 +151,14 @@ export class UpdateInterestsComponent implements OnInit, OnDestroy {
     */
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
-      console.log("student dashboard's authStatus observable!");
+      //console.log("student dashboard's authStatus observable!");
       this.authStatusObject = authObject;
     });
   }
 
   updateUser() {
-    console.log("At student-board updateUser method now");
-    console.log(this.beneficiariesSelected);
+    //console.log("At student-board updateUser method now");
+    //console.log(this.beneficiariesSelected);
 
 
     /*

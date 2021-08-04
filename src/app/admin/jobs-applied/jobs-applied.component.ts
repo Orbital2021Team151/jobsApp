@@ -94,8 +94,8 @@ export class JobsAppliedComponent implements OnInit, OnDestroy {
               student: post.students[studentIndex],
             };
           });
-        // console.log("this.appliedPosts");
-        // console.log(this.appliedPosts);
+        //console.log("this.appliedPosts");
+        //console.log(this.appliedPosts);
 
         if (this.appliedPosts.length > 0) {
           this.hasApplied = true;
@@ -104,9 +104,9 @@ export class JobsAppliedComponent implements OnInit, OnDestroy {
         }
       });
 
-    // console.log("this.appliedPosts");
-    // console.log(this.appliedPosts);
-    // console.log(this.posts);
+    //console.log("this.appliedPosts");
+    //console.log(this.appliedPosts);
+    //console.log(this.posts);
 
     /*
      * Probably do not need this because there are no changes to authStatusObject once user is logged in.

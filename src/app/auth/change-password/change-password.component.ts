@@ -50,7 +50,7 @@ export class ChangePasswordComponent {
           return;
         }
 
-        console.log(this.changePasswordForm.value);
+        //console.log(this.changePasswordForm.value);
 
         this.authService.changePassword(this.changePasswordForm.value.currentPassword, this.changePasswordForm.value.newPassword);
 

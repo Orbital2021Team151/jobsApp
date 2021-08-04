@@ -19,7 +19,7 @@ import { HighlightService } from "../highlight.service";
 
 export class HighlightCreateComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   canDeactivate() {
-    console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
+    //console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
     return this.form.pristine;
   }
 
@@ -79,8 +79,8 @@ export class HighlightCreateComponent implements OnInit, OnDestroy, ComponentCan
       image: this.form.value.image,
       imagePath: null,
     }
-    console.log("this is the highlight object in highlight-create");
-    console.log(highlight);
+    //console.log("this is the highlight object in highlight-create");
+    //console.log(highlight);
 
     this.highlightService.addHighlight(highlight);
 
@@ -106,7 +106,7 @@ export class HighlightCreateComponent implements OnInit, OnDestroy, ComponentCan
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({image: file});
     this.form.get('image').updateValueAndValidity();
-    console.log(file);
+    //console.log(file);
     // console.log(this.form);
     const reader = new FileReader();
     reader.onload = () => {

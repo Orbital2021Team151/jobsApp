@@ -22,7 +22,7 @@ import { ComponentCanDeactivate } from '../../route-guards/can-deactivate.compon
 })
 export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   canDeactivate() {
-    console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
+    //console.log("DIRTY GUARD FIRED! You should not be able to switch pages so easily kiddo");
     return this.POCInformationGroup.pristine && this.postInformationGroup.pristine && this.postDurationGroup.pristine;
   }
 
@@ -235,6 +235,17 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     });
      */
 
+    this.authStatusObject = this.authService.getAuthStatusObject();
+    //console.log(this.authStatusObject);
+
+    let email, name = null;
+    if (!this.authStatusObject.admin) {
+      email = this.authStatusObject.email
+      name = this.authStatusObject.name
+    }
+
+    this.emailControl = new FormControl({value: email, disabled: !this.authStatusObject.admin}, [Validators.required, Validators.minLength(10)]);
+    this.pocControl = new FormControl({value: name, disabled: !this.authStatusObject.admin}, [Validators.required, Validators.minLength(10)]);
 
     /* MULTI-STEP FORM */
     this.POCInformationGroup = this._formBuilder.group({
@@ -266,8 +277,6 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
   }
 
   ngOnInit() {
-
-    this.authStatusObject = this.authService.getAuthStatusObject(); //this is required to avoid the "Cannot read property 'orgName' of undefined" error. but it violates async
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(authObject => {
       this.authStatusObject = authObject;

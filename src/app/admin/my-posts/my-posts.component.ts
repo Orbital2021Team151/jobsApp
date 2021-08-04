@@ -134,7 +134,7 @@ export class MyPostsComponent
 
   onDeletePrompt(content) {
     this.modalService.open(content, { size: 'lg' });
-    console.log(this.posts);
+    //console.log(this.posts);
   }
 
   onDelete(postId: string) {
@@ -159,7 +159,7 @@ export class MyPostsComponent
 
   onMoreInfo(content) {
     //console.log("Checking this page's posts! ");
-    console.log(this.posts);
+    //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 

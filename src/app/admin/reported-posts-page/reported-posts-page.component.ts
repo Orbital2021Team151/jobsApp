@@ -56,7 +56,7 @@ export class ReportedPostsPageComponent implements OnInit, OnDestroy {
 
   onDeletePrompt(content) {
     this.modalService.open(content, { size: 'lg' });
-    console.log(this.posts);
+    //console.log(this.posts);
   }
 
   onDeleteReportedPost(postId: string) {
@@ -87,7 +87,7 @@ export class ReportedPostsPageComponent implements OnInit, OnDestroy {
 
   onMoreInfo(content) {
     //console.log("Checking this page's posts! ");
-    console.log(this.posts);
+    //console.log(this.posts);
     this.modalService.open(content, { size: 'lg' });
   }
 
