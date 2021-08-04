@@ -1,7 +1,7 @@
 <div class="report-posts-div">
   <div class="report-posts-sub-div">
     <div class="centered" *ngFor="let post of reportedPosts">
-      <section class="cards" *ngIf="post.reports.length > 0">
+      <section class="cards">
         <mat-card class="report-post-card">
           <img
             mat-card-image
@@ -26,6 +26,19 @@
             {{ post.skills }} <br />
           </mat-card-content>
           <mat-footer class="post-card-footer">
+
+            <button
+            matTooltip="View Submitted Report"
+            [matTooltipShowDelay]="100"
+            [matTooltipHideDelay]="100"
+            mat-button
+            color="accent"
+            aria-label="Learn More"
+            (click)="onMoreInfo(reportContent)"
+          >
+            <mat-icon color="accent"> receipt_long </mat-icon>
+          </button>
+
             <button
               matTooltip="Click for more information"
               [matTooltipShowDelay]="100"
@@ -144,6 +157,69 @@
                 </dd>
               </div>
 
+            </dl>
+          </div>
+        </div>
+
+      </ng-template>
+
+      <ng-template #reportContent let-modal>
+
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+          <div class="closelearnmore">
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+            ></button>
+          </div>
+          <div class="px-4 py-3 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+              {{post.title}}
+            </h3>
+
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+              by <i>{{post.orgName}}</i>
+            </p>
+
+          </div>
+
+          <div class="border-t border-gray-200">
+            <dl>
+
+              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Your Name
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <p>{{post.report.name}}</p>
+                </dd>
+              </div>
+
+              <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Your Email Address
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{post.report.email}}
+                </dd>
+              </div>
+
+              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Your Contact Number
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{post.report.contact}}
+                </dd>
+              </div>
+
+              <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Your Report
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{post.report.content}}
+                </dd>
+              </div>
             </dl>
           </div>
         </div>

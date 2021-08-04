@@ -12,6 +12,10 @@
   float: right;
 }
 
+dd {
+  white-space: pre-wrap;
+}
+
 mat-form-field {
   width: 100%;
 }
@@ -82,38 +86,6 @@ mat-icon {
   display: flex;
   margin: auto;
   justify-content: space-evenly;
-}
-
-.request-post-card {
-  /*
-    width: 25rem;
-    height: 15rem;
-    */
-
-  width: 25rem;
-  height: 35rem;
-
-  text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-
-  margin: auto;
-  /*
-    border-style: solid;
-    border-width: thin;
-    border-color: #57ff57;
-    box-shadow: none;
-    */
-}
-
-.request-post-card:hover {
-  box-shadow: 0 0 11px #54f2e5a6;
-}
-
-.publish-button {
-  color: #00b167;
 }
 
 .report-post-card {

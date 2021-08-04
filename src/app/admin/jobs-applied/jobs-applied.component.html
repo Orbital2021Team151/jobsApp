@@ -1,6 +1,6 @@
 <div class="applied-posts-div">
   <div class="centered" *ngFor="let post of appliedPosts" >
-    <section class="cards" *ngIf="post.students.length > 0">
+    <section class="cards">
       <mat-card class="application-post-card">
         <img
           *ngIf="!post.imagePath"
@@ -38,7 +38,7 @@
 
         <mat-footer class="post-card-footer">
 
-          <!--
+
           <button
             matTooltip="View Submitted Application"
             [matTooltipShowDelay]="100"
@@ -46,11 +46,10 @@
             mat-button
             color="accent"
             aria-label="Learn More"
-            (click)="viewApplication(post.id)"
+            (click)="onMoreInfo(applicantContent)"
           >
             <mat-icon color="accent"> attach_file </mat-icon>
           </button>
-          -->
 
           <button
             matTooltip="More Information"
@@ -167,6 +166,79 @@
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {{post.location || "Not Specified"}}
+              </dd>
+            </div>
+
+          </dl>
+        </div>
+      </div>
+
+    </ng-template>
+
+    <ng-template #applicantContent let-modal>
+
+      <!-- This example requires Tailwind CSS v2.0+ -->
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="closelearnmore">
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+          ></button>
+        </div>
+        <div class="px-4 py-3 sm:px-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            {{post.title}}
+          </h3>
+
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            by <i>{{post.orgName}}</i>
+          </p>
+
+        </div>
+
+        <div class="border-t border-gray-200">
+          <dl>
+
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Your Name
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <p>{{post.student.name}}</p>
+              </dd>
+            </div>
+
+            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Your Email Address
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.student.email}}
+              </dd>
+            </div>
+
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Your Contact Number
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.student.contact}}
+              </dd>
+            </div>
+
+            <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Your Application
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.student.content}}
+              </dd>
+            </div>
+
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Your Applicant Type
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.student.applicationUser}}
               </dd>
             </div>
 
