@@ -1,9 +1,15 @@
 <div class="approve-posts-container">
   <div class="posts-list">
-    <div class="posts-counter-container" *ngIf="hasRequest === true">
+    <!-- <div class="posts-counter-container" *ngIf="hasRequest === true">
       <span class="posts-counter-text">Posts remaining: {{postsNumber}}</span>
-    </div>
+    </div> -->
 
+    <div class="posts-counter-container">
+      <div class="card">
+        <h3> {{postsNumber}} </h3>
+        <p>Post(s) Left</p>
+      </div>
+    </div>
 
 
     <mat-form-field class="user-filter" appearance="outline">

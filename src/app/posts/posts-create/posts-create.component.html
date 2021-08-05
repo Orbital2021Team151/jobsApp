@@ -255,12 +255,26 @@
                   by <b>{{ postPreview.orgName }}</b>
                 </mat-card-subtitle>
                 <mat-card-content class="post-card-content">
-                  <mat-icon>event</mat-icon> {{ postPreview.startDate | date }} to
+                  <!-- <mat-icon>event</mat-icon> {{ postPreview.startDate | date }} to
                   {{ postPreview.endDate | date }} <br />
                   <mat-icon>schedule</mat-icon> {{ postPreview.hoursRequired }} <br />
                   <mat-icon> location_on</mat-icon> {{ postPreview.location || "Not Specified" }} <br />
                   <mat-icon>people_outline</mat-icon> Skillsets: {{ postPreview.skills }}
-                  <br />
+                  <br /> -->
+                  <ul>
+                    <li>
+                      <mat-icon>event</mat-icon> {{postPreview.startDate | date}} to {{postPreview.endDate | date}}
+                    </li>
+                    <li>
+                      <mat-icon>schedule</mat-icon> {{postPreview.hoursRequired}}
+                    </li>
+                    <li>
+                      <mat-icon> location_on</mat-icon> {{postPreview.location || "Not Specified"}}
+                    </li>
+                    <li>
+                      <mat-icon>people_outline</mat-icon> Skillsets: {{postPreview.skills}}
+                    </li>
+                  </ul>
                 </mat-card-content>
                 <mat-card-footer class="post-card-footer">
                   <button matTooltip="Click for more information" [matTooltipShowDelay]="100"

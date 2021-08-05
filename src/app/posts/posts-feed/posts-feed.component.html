@@ -251,12 +251,26 @@
             by <b>{{post.orgName}}</b>
           </mat-card-subtitle>
           <mat-card-content class="post-card-content">
-            <mat-icon>event</mat-icon> {{post.startDate | date}} to
+            <!-- <mat-icon>event</mat-icon> {{post.startDate | date}} to
             {{post.endDate | date}} <br />
             <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br />
             <mat-icon> location_on</mat-icon> {{post.location || "Not Specified"}} <br />
             <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}}
-            <br />
+            <br /> -->
+            <ul>
+              <li>
+                <mat-icon>event</mat-icon> {{post.startDate | date}} to {{post.endDate | date}}
+              </li>
+              <li>
+                <mat-icon>schedule</mat-icon> {{post.hoursRequired}}
+              </li>
+              <li>
+                <mat-icon> location_on</mat-icon> {{post.location || "Not Specified"}}
+              </li>
+              <li>
+                <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}}
+              </li>
+            </ul>
           </mat-card-content>
 
           <mat-card-footer class="post-card-footer">
