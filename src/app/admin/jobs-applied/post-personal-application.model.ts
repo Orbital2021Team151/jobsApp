@@ -22,4 +22,5 @@ export interface PostPersonalApplication {
   //creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
 
   student: {name: string, email: string, contact: number, content: string, applicationUser: string},
+  postStatus: string,
 }

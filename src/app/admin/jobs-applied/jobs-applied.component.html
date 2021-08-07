@@ -1,3 +1,265 @@
+<div class="approve-posts-container">
+  <div class="posts-list">
+    <!-- <div class="posts-counter-container" *ngIf="hasRequest === true">
+      <span class="posts-counter-text">Number of posts by me: {{postsNumber}}</span>
+    </div> -->
+
+    <div class="posts-counter-container">
+      <div class="card">
+        <h3> {{postsNumber}} </h3>
+        <p>Post(s) By Me</p>
+      </div>
+    </div>
+
+
+
+    <mat-form-field class="user-filter" appearance="outline">
+      <mat-label>Find Post</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="eg Mr Durham" #input>
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort>
+
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let row" class="text-sm font-medium text-gray-900"> {{row.title}} </td>
+      </ng-container>
+
+      <!-- Post's POC Column -->
+      <ng-container matColumnDef="POC">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> POC </th>
+
+        <td mat-cell *matCellDef="let row">
+          {{row.POC}}
+        </td>
+      </ng-container>
+
+      <!-- Post's Status Column -->
+      <ng-container matColumnDef="postStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+
+        <td mat-cell *matCellDef="let row">
+          <span *ngIf="row.postStatus === 'Ongoing'" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{row.postStatus}}</span>
+          <span *ngIf="row.postStatus === 'Ended'" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">{{row.postStatus}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="menu">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true"></th>
+
+        <td mat-cell *matCellDef="let row">
+
+          <button matTooltip="View My Application" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+            mat-button color="accent" aria-label="View My Application" class="post-card-button" (click)="onMoreInfo(applicantContent)">
+            <mat-icon color="accent">search</mat-icon>
+          </button>
+
+          <button matTooltip="More Information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+            mat-button color="primary" aria-label="Learn More" class="post-card-button" (click)="onMoreInfo(content)">
+            <mat-icon color="primary">help_outline</mat-icon>
+          </button>
+
+
+        <ng-template #content let-modal>
+          <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="closelearnmore">
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+              ></button>
+            </div>
+            <div class="px-4 py-3 sm:px-6">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                {{row.title}}
+              </h3>
+
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                by <i>{{row.orgName}}</i>
+              </p>
+
+            </div>
+
+            <div class="border-t border-gray-200">
+              <dl>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    About
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <p>{{row.content}}</p>
+                  </dd>
+                </div>
+
+                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Point-Of-Contact's Name
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.POC}}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Contact Number
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.phoneNumber}}
+                  </dd>
+                </div>
+
+                <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Email Address
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.email}}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Preferred Skillset
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.skills}}
+                  </dd>
+                </div>
+
+                <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Beneficiaries
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.beneficiaries}}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Duration
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.startDate | date}} to {{row.endDate | date}}
+                  </dd>
+                </div>
+
+                <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Commitment Information
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.hoursRequired}}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Location
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.location || "Not Specified"}}
+                  </dd>
+                </div>
+
+              </dl>
+            </div>
+          </div>
+
+        </ng-template>
+
+        <ng-template #applicantContent let-modal>
+
+          <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="closelearnmore">
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+              ></button>
+            </div>
+            <div class="px-4 py-3 sm:px-6">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                {{row.title}}
+              </h3>
+
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                by <i>{{row.orgName}}</i>
+              </p>
+
+            </div>
+
+            <div class="border-t border-gray-200">
+              <dl>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Your Name
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <p>{{row.student.name}}</p>
+                  </dd>
+                </div>
+
+                <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Your Email Address
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.student.email}}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Your Contact Number
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.student.contact}}
+                  </dd>
+                </div>
+
+                <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Your Application
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.student.content}}
+                  </dd>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Applicant Type
+                  </dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{row.student.applicationUser}}
+                  </dd>
+                </div>
+
+              </dl>
+            </div>
+          </div>
+
+        </ng-template>
+
+
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter <b>{{input.value}}</b> or no data at all</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>
+
+
+<!--
 <div class="applied-posts-div">
   <div class="centered" *ngFor="let post of appliedPosts" >
     <section class="cards">
@@ -68,7 +330,6 @@
 
     <ng-template #content let-modal>
 
-      <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="closelearnmore">
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
@@ -177,7 +438,6 @@
 
     <ng-template #applicantContent let-modal>
 
-      <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="closelearnmore">
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
@@ -257,3 +517,4 @@
     If you have applied for a post, it will show up here.
   </p>
 </div>
+-->
