@@ -10,6 +10,18 @@ dd {
   white-space: pre-wrap;
 }
 
+.closelearnmore {
+  float: right;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: rgb(255, 55, 55);
+  color: white;
+}
+
 /*
 .posts-counter-container {
   background-color: white;

@@ -2,169 +2,190 @@
   <div *ngFor="let post of posts">
 
     <section class="cards" *ngIf="post.reports.length > 0">
-        <mat-card class="report-post-card">
-          <img *ngIf="!post.imagePath" mat-card-image class="card-image"
-            src="../../../assets/placeholder-{{post.beneficiaries}}.png" alt="Placeholder image for post" />
+      <mat-card class="report-post-card">
+        <img *ngIf="!post.imagePath" mat-card-image class="card-image"
+          src="../../../assets/placeholder-{{post.beneficiaries}}.png" alt="Placeholder image for post" />
 
-          <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's Image" />
+        <img *ngIf="post.imagePath" mat-card-image class="card-image" [src]="post.imagePath" alt="Post's Image" />
 
-          <mat-card-title class="post-card-title">{{post.title}}</mat-card-title>
-          <mat-card-subtitle class="post-card-subtitle">
-            by <b>{{post.orgName}}</b>
-          </mat-card-subtitle>
-          <mat-card-content class="post-card-content">
-            <mat-icon>event</mat-icon> {{post.startDate | date}} to
+        <mat-card-title class="post-card-title">{{post.title}}</mat-card-title>
+        <mat-card-subtitle class="post-card-subtitle">
+          by <b>{{post.orgName}}</b>
+        </mat-card-subtitle>
+        <mat-card-content class="post-card-content">
+          <!-- <mat-icon>event</mat-icon> {{post.startDate | date}} to
             {{post.endDate | date }} <br />
             <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br />
             <mat-icon> location_on</mat-icon>
             {{post.location || "No Specific Location"}} <br />
             <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}}
-            <br />
-          </mat-card-content>
-          <mat-footer class="post-card-footer">
+            <br /> -->
 
-            <button matTooltip="Click to read reports" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-button color="accent" aria-label="Read Report" (click)="onMoreInfo(reportContent)">
-              <mat-icon color="accent">error_outline</mat-icon>
-            </button>
+          <ul>
+            <li>
+              <mat-icon>event</mat-icon> {{post.startDate | date}} to {{post.endDate | date}}
+            </li>
+            <li>
+              <mat-icon>schedule</mat-icon> {{post.hoursRequired}}
+            </li>
+            <li>
+              <mat-icon> location_on</mat-icon> {{post.location || "Not Specified"}}
+            </li>
+            <li>
+              <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}}
+            </li>
+          </ul>
+        </mat-card-content>
+        <mat-footer class="post-card-footer">
 
-            <button matTooltip="Click to reject request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-button color="warn" aria-label="Reject" (click)="onRejectPrompt(rejectReportedContent)">
-              <mat-icon color="warn">block</mat-icon>
-            </button>
+          <button matTooltip="Click to read reports" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" mat-button
+            color="accent" aria-label="Read Report" (click)="onMoreInfo(reportContent)">
+            <mat-icon color="accent">error_outline</mat-icon>
+          </button>
 
-            <button matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
-              mat-button color="primary" aria-label="Learn More" (click)="onMoreInfo(content)">
-              <mat-icon color="primary">help_outline</mat-icon>
-            </button>
+          <button matTooltip="Click to reject request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+            mat-button color="warn" aria-label="Reject" (click)="onRejectPrompt(rejectReportedContent)">
+            <mat-icon color="warn">block</mat-icon>
+          </button>
 
-          </mat-footer>
-        </mat-card>
-      </section>
+          <button matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+            mat-button color="primary" aria-label="Learn More" (click)="onMoreInfo(content)">
+            <mat-icon color="primary">help_outline</mat-icon>
+          </button>
 
-      <ng-template #reportContent let-modal class="report-content">
-        <mat-accordion displayMode="flat" multi class="mat-table">
-          <section matSort class="mat-elevation-z2 mat-header-row">
-            <span class="mat-header-cell" mat-sort-header="Name" [disabled]="true">Name</span>
-            <span class="mat-header-cell" mat-sort-header="email" [disabled]="true">Email Address</span>
-            <span class="mat-header-cell" mat-sort-header="contact" [disabled]="true">Contact Number</span>
-          </section>
+        </mat-footer>
+      </mat-card>
+    </section>
 
-          <mat-expansion-panel *ngFor="let report of post.reports" #panel>
+    <ng-template #reportContent let-modal class="report-content">
+      <!-- <div class="closelearnmore">
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+          ></button>
+        </div> -->
+      <mat-accordion displayMode="flat" multi class="mat-table">
+        <section matSort class="mat-elevation-z2 mat-header-row">
+          <span class="mat-header-cell" mat-sort-header="Name" [disabled]="true">Name</span>
+          <span class="mat-header-cell" mat-sort-header="email" [disabled]="true">Email Address</span>
+          <span class="mat-header-cell" mat-sort-header="contact" [disabled]="true">Contact Number</span>
 
-            <mat-expansion-panel-header class="mat-row">
-              <span class="mat-cell">{{report.name}}</span>
-              <span class="mat-cell">{{report.email}}</span>
-              <span class="mat-cell">{{report.contact}}</span>
-            </mat-expansion-panel-header>
-            <div class="mat-cell-content">
-              <b>Report:</b><br>
-              {{report.content}}
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"></button>
 
-      </ng-template>
+        </section>
 
-      <ng-template #content let-modal>
+        <mat-expansion-panel *ngFor="let report of post.reports" #panel>
 
-        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-          <div class="closelearnmore">
-            <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
-            ></button>
+          <mat-expansion-panel-header class="mat-row">
+            <span class="mat-cell">{{report.name}}</span>
+            <span class="mat-cell">{{report.email}}</span>
+            <span class="mat-cell">{{report.contact}}</span>
+          </mat-expansion-panel-header>
+          <div class="mat-cell-content">
+            <b>Report:</b><br>
+            {{report.content}}
           </div>
-          <div class="px-4 py-3 sm:px-6">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{post.title }}
-            </h3>
+        </mat-expansion-panel>
+      </mat-accordion>
 
-            <p class="mt-1 max-w-2xl text-sm text-gray-500">
-              by <i>{{post.orgName }}</i>
-            </p>
+    </ng-template>
 
-          </div>
+    <ng-template #content let-modal>
 
-          <div class="border-t border-gray-200">
-            <dl>
-
-              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                  About
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{post.content}}
-                </dd>
-              </div>
-
-              <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                  Point-Of-Contact's Name
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{post.POC}}
-                </dd>
-              </div>
-
-              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                  Email Address
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{post.email}}
-                </dd>
-              </div>
-
-              <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                  Preferred Skillset
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{post.skills}}
-                </dd>
-              </div>
-
-              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                  Beneficiaries
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{post.beneficiaries}}
-                </dd>
-              </div>
-
-              <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                  Duration
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{post.startDate | date}} to {{post.endDate | date}}
-                </dd>
-              </div>
-
-              <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                  Commitment Information
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{post.hoursRequired}}
-                </dd>
-              </div>
-
-              <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                  Location
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{post.location}}
-                </dd>
-              </div>
-
-            </dl>
-          </div>
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="closelearnmore">
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"></button>
         </div>
-      </ng-template>
+        <div class="px-4 py-3 sm:px-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            {{post.title }}
+          </h3>
 
-      <!-- Should not be able to delete apporved content
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            by <i>{{post.orgName }}</i>
+          </p>
+
+        </div>
+
+        <div class="border-t border-gray-200">
+          <dl>
+
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                About
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.content}}
+              </dd>
+            </div>
+
+            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Point-Of-Contact's Name
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.POC}}
+              </dd>
+            </div>
+
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Email Address
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.email}}
+              </dd>
+            </div>
+
+            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Preferred Skillset
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.skills}}
+              </dd>
+            </div>
+
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Beneficiaries
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.beneficiaries}}
+              </dd>
+            </div>
+
+            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Duration
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.startDate | date}} to {{post.endDate | date}}
+              </dd>
+            </div>
+
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Commitment Information
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.hoursRequired}}
+              </dd>
+            </div>
+
+            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Location
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{post.location}}
+              </dd>
+            </div>
+
+          </dl>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- Should not be able to delete apporved content
         <ng-template #deleteReportedContent let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Delete Confirmation</h4>
@@ -204,46 +225,45 @@
         </ng-template>
         -->
 
-      <ng-template #rejectReportedContent let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">Reject Confirmation</h4>
-          <button type="button" class="submit" aria-label="apply" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+    <ng-template #rejectReportedContent let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Reject Confirmation</h4>
+        <button type="button" class="btn-close" aria-label="apply" (click)="modal.dismiss('Cross click')">
+        </button>
+      </div>
 
-        <div class="modal-body">
-          <p>Are you sure you want to reject the post?</p>
+      <div class="modal-body">
+        <p>Are you sure you want to reject the post?</p>
 
-          <form [formGroup]="rejectForm">
-            <mat-form-field appearance="outline">
-              <mat-label>Reason for rejecting post <i>(Optional)</i></mat-label>
-              <textarea matInput type="text" [formControl]="rejectReasonControl" rows="10"
-                placeholder="Please record down the reason for rejecting this approved post."></textarea>
-            </mat-form-field>
-          </form>
+        <form [formGroup]="rejectForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Reason for rejecting post <i>(Optional)</i></mat-label>
+            <textarea matInput type="text" [formControl]="rejectReasonControl" rows="10"
+              placeholder="Please record down the reason for rejecting this approved post."></textarea>
+          </mat-form-field>
+        </form>
 
-        </div>
+      </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" (click)="
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="
               onRejectReportedPost(post.id) && modal.dismiss('Cross click')
             ">
-            Confirm Reject
-          </button>
+          Confirm Reject
+        </button>
 
-          <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">
-            Cancel
-          </button>
-        </div>
-      </ng-template>
+        <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">
+          Cancel
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>
 
 
 <div class="info-text" *ngIf="hasReport === false">
-    <h1 class="info-text-header">No Post With Reports</h1>
-    <p class="info-text-subheader">
-      Don't worry. If a Student / NUS Alumni reports a post, we inform you ASAP via email and you can see it here!
-    </p>
+  <h1 class="info-text-header">No Post With Reports</h1>
+  <p class="info-text-subheader">
+    Don't worry. If a Student / NUS Alumni reports a post, we inform you ASAP via email and you can see it here!
+  </p>
 </div>

@@ -231,11 +231,26 @@ mat-spinner {
   text-overflow: ellipsis;
   height: 8rem;
 
-  display: block;
+  // display: block;
+  align-items: center;
   white-space: nowrap;
   text-align: center;
   overflow: hidden;
   color: #777777;
+}
+
+ul li {
+  text-align: left;
+  margin-left: -1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 20rem;
+}
+
+mat-icon {
+  margin-right: 4px;
+  vertical-align: middle;
 }
 
 .post-card-footer {

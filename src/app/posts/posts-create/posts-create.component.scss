@@ -217,6 +217,20 @@ mat-icon {
   text-align: center;
 }
 
+ul li {
+  text-align: left;
+  margin-left: -1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 20rem;
+}
+
+mat-icon {
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
 .post-card-footer {
   width: 22rem;
   max-width: 22rem;

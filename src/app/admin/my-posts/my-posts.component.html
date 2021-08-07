@@ -1,7 +1,14 @@
 <div class="approve-posts-container">
   <div class="posts-list">
-    <div class="posts-counter-container" *ngIf="hasRequest === true">
+    <!-- <div class="posts-counter-container" *ngIf="hasRequest === true">
       <span class="posts-counter-text">Number of posts by me: {{postsNumber}}</span>
+    </div> -->
+
+    <div class="posts-counter-container">
+      <div class="card">
+        <h3> {{postsNumber}} </h3>
+        <p>Post(s) By Me</p>
+      </div>
     </div>
 
 
@@ -224,11 +231,10 @@
             <h4 class="modal-title">{{row.title}}</h4>
             <button
               type="button"
-              class="close"
+              class="btn-close"
               aria-label="Close"
               (click)="modal.dismiss('Cross click')"
             >
-              <span aria-hidden="true">&times;</span>
             </button>
           </div>
 
