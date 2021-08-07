@@ -281,8 +281,13 @@ dd {
   white-space: pre-wrap;
 }
 
+.skills-label-container {
+  margin-top: 1rem;
+  font-size: medium;
+  color: #5c8aee;
+}
+
 mat-selection-list {
   max-height: 200px;
   overflow: auto;
 }
-
