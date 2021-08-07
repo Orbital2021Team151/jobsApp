@@ -1,3 +1,274 @@
+<div class="approve-posts-container">
+  <div class="posts-list">
+    <!-- <div class="posts-counter-container" *ngIf="hasRequest === true">
+      <span class="posts-counter-text">Posts remaining: {{postsNumber}}</span>
+    </div> -->
+
+    <div class="posts-counter-container">
+      <div class="card">
+        <h3> {{reportedPostsNumber}} </h3>
+        <p>Post(s) Left</p>
+      </div>
+    </div>
+
+
+    <mat-form-field class="user-filter" appearance="outline">
+      <mat-label>Find Post</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="eg Mr Durham" #input>
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- phoneNumber Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+
+        <td mat-cell *matCellDef="let row" class="text-sm text-gray-500">
+          {{row.title}}
+        </td>
+      </ng-container>
+
+      <!-- POC Column -->
+      <ng-container matColumnDef="POC">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> POC </th>
+        <td mat-cell *matCellDef="let row" class="text-sm font-medium text-gray-900"> {{row.POC}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+
+        <td mat-cell *matCellDef="let row" class="text-sm text-gray-500">
+          {{row.email}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="menu">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true"></th>
+
+        <td mat-cell *matCellDef="let row">
+
+          <button matTooltip="Click to read reports" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100" mat-button
+            color="accent" aria-label="Read Report" (click)="onMoreInfo(reportContent)">
+            <mat-icon color="accent">error_outline</mat-icon>
+          </button>
+
+          <button matTooltip="Reject Request" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+            mat-button color="warn" aria-label="Reject" (click)="onRejectPrompt(rejectReportedContent)">
+            <mat-icon color="warn">block</mat-icon>
+          </button>
+
+          <button matTooltip="Click for more information" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
+            mat-button color="primary" aria-label="Learn More" (click)="onMoreInfo(content)">
+            <mat-icon color="primary">help_outline</mat-icon>
+          </button>
+
+
+          <ng-template #content let-modal>
+
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="closelearnmore">
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
+                ></button>
+              </div>
+              <div class="px-4 py-3 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  {{row.title}}
+                </h3>
+
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                  by <i>{{row.orgName}}</i>
+                </p>
+
+              </div>
+
+              <div class="border-t border-gray-200">
+                <dl>
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      About
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p>{{row.content}}</p>
+                    </dd>
+                  </div>
+
+                  <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Point-Of-Contact's Name
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{row.POC}}
+                    </dd>
+                  </div>
+
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Contact Number
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{row.phoneNumber}}
+                    </dd>
+                  </div>
+
+                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Email Address
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{row.email}}
+                    </dd>
+                  </div>
+
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Preferred Skillset
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{row.skills}}
+                    </dd>
+                  </div>
+
+                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Beneficiaries
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{row.beneficiaries}}
+                    </dd>
+                  </div>
+
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Duration
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{row.startDate | date}} to {{row.endDate | date}}
+                    </dd>
+                  </div>
+
+                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Commitment Information
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{row.hoursRequired}}
+                    </dd>
+                  </div>
+
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Location
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{row.location || "Not Specified"}}
+                    </dd>
+                  </div>
+
+                </dl>
+              </div>
+            </div>
+          </ng-template>
+
+
+          <ng-template #rejectReportedContent let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Reject Confirmation</h4>
+              <button type="button" class="btn-close" aria-label="apply" (click)="modal.dismiss('Cross click')">
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <p>Are you sure you want to reject the post?</p>
+
+              <form [formGroup]="rejectForm">
+                <mat-form-field appearance="outline">
+                  <mat-label>Reason for rejecting post <i>(Optional)</i></mat-label>
+                  <textarea matInput type="text" [formControl]="rejectReasonControl" rows="10"
+                    placeholder="Please record down the reason for rejecting this approved post."></textarea>
+                </mat-form-field>
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="onReject(row.id) && modal.dismiss('Cross click')">
+                Confirm Reject
+              </button>
+
+              <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">
+                Cancel
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #studentsReport let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">{{post.title}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div *ngFor="let report of row.reports">
+                <p>Email: {{report.email}}</p>
+                <p>Contact Number: {{report.contact}}</p>
+                <p>Reason for Reporting: {{report.content}}</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+                Close
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #reportContent let-modal class="report-content">
+
+            <mat-accordion displayMode="flat" multi class="mat-table-report">
+              <section matSort class="mat-elevation-z2 mat-header-row-report">
+                <span class="mat-header-cell-report" mat-sort-header="Name" [disabled]="true">Name</span>
+                <span class="mat-header-cell-report" mat-sort-header="email" [disabled]="true">Email Address</span>
+                <span class="mat-header-cell-report" mat-sort-header="contact" [disabled]="true">Contact Number</span>
+
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"></button>
+
+              </section>
+
+              <mat-expansion-panel *ngFor="let report of row.reports" #panel>
+
+                <mat-expansion-panel-header class="mat-row-report">
+                  <span class="mat-cell-report">{{report.name}}</span>
+                  <span class="mat-cell-report">{{report.email}}</span>
+                  <span class="mat-cell-report">{{report.contact}}</span>
+                </mat-expansion-panel-header>
+                <div class="mat-cell-content-report">
+                  <b>Report:</b><br>
+                  {{report.content}}
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+
+          </ng-template>
+
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter <b>{{input.value}}</b> or no data at all</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+</div>
+
+<!--
 <div class="posts-with-reports-container">
   <div *ngFor="let post of posts">
 
@@ -13,14 +284,6 @@
           by <b>{{post.orgName}}</b>
         </mat-card-subtitle>
         <mat-card-content class="post-card-content">
-          <!-- <mat-icon>event</mat-icon> {{post.startDate | date}} to
-            {{post.endDate | date }} <br />
-            <mat-icon>schedule</mat-icon> {{post.hoursRequired}} <br />
-            <mat-icon> location_on</mat-icon>
-            {{post.location || "No Specific Location"}} <br />
-            <mat-icon>people_outline</mat-icon> Skillsets: {{post.skills}}
-            <br /> -->
-
           <ul>
             <li>
               <mat-icon>event</mat-icon> {{post.startDate | date}} to {{post.endDate | date}}
@@ -58,10 +321,7 @@
     </section>
 
     <ng-template #reportContent let-modal class="report-content">
-      <!-- <div class="closelearnmore">
-          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
-          ></button>
-        </div> -->
+
       <mat-accordion displayMode="flat" multi class="mat-table">
         <section matSort class="mat-elevation-z2 mat-header-row">
           <span class="mat-header-cell" mat-sort-header="Name" [disabled]="true">Name</span>
@@ -185,46 +445,6 @@
       </div>
     </ng-template>
 
-    <!-- Should not be able to delete apporved content
-        <ng-template #deleteReportedContent let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title">Delete Confirmation</h4>
-            <button
-              type="button"
-              class="submit"
-              aria-label="apply"
-              (click)="modal.dismiss('Cross click')"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <p>Are you sure you want to delete the post?</p>
-          </div>
-
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="
-                onDeleteReportedPost(post.id) && modal.dismiss('Cross click')
-              "
-            >
-              Confirm Delete
-            </button>
-
-            <button
-              type="button"
-              class="btn btn-light"
-              (click)="modal.dismiss('Cross click')"
-            >
-              Cancel
-            </button>
-          </div>
-        </ng-template>
-        -->
-
     <ng-template #rejectReportedContent let-modal>
       <div class="modal-header">
         <h4 class="modal-title">Reject Confirmation</h4>
@@ -267,3 +487,4 @@
     Don't worry. If a Student / NUS Alumni reports a post, we inform you ASAP via email and you can see it here!
   </p>
 </div>
+-->

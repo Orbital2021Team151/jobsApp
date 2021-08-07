@@ -1,6 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -14,19 +17,25 @@ import { ChangePasswordAlertComponent } from '../snackbars/change-password-snack
     styleUrls: ['./reported-posts-page.component.scss'],
 })
 
-export class ReportedPostsPageComponent implements OnInit, OnDestroy {
+export class ReportedPostsPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   posts: Post[] = [];
 
   private postSub: Subscription;
   private authStatusObject;
 
-  private reportedPostsNumber: number;
+  public reportedPostsNumber: number;
   public hasReport: Boolean = null;
 
   /* Reject FormGroup */
   public rejectForm: FormGroup;
   public rejectReasonControl = new FormControl(null);
+
+  /* Filter Table */
+  displayedColumns: string[] = ['title', 'POC', 'email', 'menu'];
+  dataSource: MatTableDataSource<Post> = new MatTableDataSource<Post>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(public postsService: PostsService, private modalService: NgbModal, public authService: AuthService) {
     this.rejectForm = new FormGroup({
@@ -37,7 +46,9 @@ export class ReportedPostsPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.postsService.getPosts();
     this.authStatusObject = this.authService.getAuthStatusObject();
+  }
 
+  ngAfterViewInit() {
     this.postSub = this.postsService.getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
         //console.log(posts);
@@ -51,6 +62,12 @@ export class ReportedPostsPageComponent implements OnInit, OnDestroy {
         } else {
           this.hasReport = false;
         }
+
+        this.dataSource = new MatTableDataSource(this.posts);
+
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
       });
   }
 
@@ -93,6 +110,18 @@ export class ReportedPostsPageComponent implements OnInit, OnDestroy {
 
   onMoreInfoReport(reportedContent) {
     this.modalService.open(reportedContent, { size: 'lg' });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    //console.log("Apply Filter function called!");
+    //console.log(filterValue);
+    //console.log(this.dataSource.filter);
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 

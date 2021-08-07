@@ -169,20 +169,20 @@ $mat-header-row-height: 56px;
 $mat-row-height: 48px;
 $mat-row-horizontal-padding: 24px;
 
-.mat-table {
+.mat-table-report {
   display: block;
 }
 
-.mat-header-row {
+.mat-header-row-report {
   min-height: $mat-header-row-height;
 }
 
-.mat-row {
+.mat-row-report {
   min-height: $mat-row-height;
 }
 
-.mat-row,
-.mat-header-row {
+.mat-row-report,
+.mat-header-row-report {
   display: flex;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -200,15 +200,114 @@ $mat-row-horizontal-padding: 24px;
   }
 }
 
-.mat-cell {
+.mat-cell-report {
   flex: 1;
   overflow: hidden;
   word-wrap: break-word;
 }
 
-.mat-header-cell {
+.mat-header-cell-report {
   flex: 1;
   overflow: hidden;
   word-wrap: break-word;
   font-size: medium;
+}
+
+
+/* GLOBAL
+-------------------------------------------------- */
+
+.approve-posts-container {
+  width: 100%;
+  margin: auto;
+}
+
+.closelearnmore {
+  float: right;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: rgb(255, 55, 55);
+  color: white;
+}
+
+.posts-list {
+  width: 1200px;
+  margin: auto;
+  background-color: inherit;
+  color: inherit;
+
+  overflow: auto;
+  background-color: inherit;
+  height: 100vh;
+
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+table {
+  width: 100%;
+}
+
+.user-filter {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.publish-button {
+  color: #00b167;
+}
+
+
+
+/* MODAL WINDOW
+-------------------------------------------------- */
+.modal-header {
+  font-family: "Lato", sans-serif;
+  color: black;
+}
+
+.modal-body {
+  font-family: "Lato", sans-serif;
+  color: black;
+}
+
+.modal-footer {
+  font-family: "Lato", sans-serif;
+  color: black;
+}
+
+.modal-body-report {
+  font-family: "Lato", sans-serif;
+  border: thin solid black;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.info-text {
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  color: inherit;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.info-text-header {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+dd {
+  white-space: pre-wrap;
 }
