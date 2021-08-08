@@ -175,11 +175,11 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
   public orgNameControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
   public showUenControl = new FormControl(false);
   public uenControl = new FormControl(null);
-  public pocControl = new FormControl(null, [Validators.required, Validators.minLength(3)]);
+  public pocControl = new FormControl(null, [Validators.required]);
   public phoneNumberControl = new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999)]);
   public emailControl = new FormControl(null, [Validators.required, Validators.minLength(10)]);
-  public titleControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
-  public contentControl = new FormControl(null, [Validators.required, Validators.minLength(100)]);
+  public titleControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]);
+  public contentControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]);
   public opportunitySelectedControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public skillsControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
   public startDateControl = new FormControl(null, [Validators.required, Validators.minLength(1)]);
@@ -244,8 +244,8 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
       name = this.authStatusObject.name
     }
 
-    this.emailControl = new FormControl({value: email, disabled: !this.authStatusObject.admin}, [Validators.required, Validators.minLength(10)]);
-    this.pocControl = new FormControl({value: name, disabled: !this.authStatusObject.admin}, [Validators.required, Validators.minLength(10)]);
+    this.emailControl = new FormControl({value: email, disabled: !this.authStatusObject.admin}, [Validators.required]);
+    this.pocControl = new FormControl({value: name, disabled: !this.authStatusObject.admin}, [Validators.required]);
 
     /* MULTI-STEP FORM */
     this.POCInformationGroup = this._formBuilder.group({

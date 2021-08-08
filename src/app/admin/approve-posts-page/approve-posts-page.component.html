@@ -75,8 +75,6 @@
 
 
           <ng-template #content let-modal>
-
-            <!-- This example requires Tailwind CSS v2.0+ -->
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
               <div class="closelearnmore">
                 <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
@@ -98,6 +96,19 @@
 
                   <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
+                      Image
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <img *ngIf="!row.imagePath" mat-card-image class="card-image"
+                        src="../../../assets/placeholder-{{row.beneficiaries}}.png" alt="Placeholder image for post"/>
+
+                      <img *ngIf="row.imagePath" mat-card-image class="card-image" [src]="row.imagePath" alt="Post's image"/>
+                    </dd>
+                  </div>
+
+
+                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
                       About
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -105,7 +116,7 @@
                     </dd>
                   </div>
 
-                  <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                       Point-Of-Contact's Name
                     </dt>
@@ -114,7 +125,7 @@
                     </dd>
                   </div>
 
-                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                       Contact Number
                     </dt>
@@ -123,7 +134,7 @@
                     </dd>
                   </div>
 
-                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                       Email Address
                     </dt>
@@ -132,7 +143,7 @@
                     </dd>
                   </div>
 
-                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                       Preferred Skillset
                     </dt>
@@ -141,7 +152,7 @@
                     </dd>
                   </div>
 
-                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                       Beneficiaries
                     </dt>
@@ -150,7 +161,7 @@
                     </dd>
                   </div>
 
-                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                       Duration
                     </dt>
@@ -159,7 +170,7 @@
                     </dd>
                   </div>
 
-                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                       Commitment Information
                     </dt>
@@ -168,7 +179,7 @@
                     </dd>
                   </div>
 
-                  <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div class="bg-white-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                       Location
                     </dt>
@@ -461,12 +472,14 @@
 
 </div>
 
+<!--
 <div class="info-text" *ngIf="hasRequest === false">
   <h1 class="info-text-header">No Post Request</h1>
   <p>
     If an organisation sends a request, it will be shown here for your approval!
   </p>
 </div>
+-->
 
 <!-- SECTION CONTAIMING THE MODALS -->
 <ng-template #publishContent let-modal>

@@ -1,9 +1,11 @@
 import {
+  AfterViewInit,
   Component,
   Input,
   OnDestroy,
   OnInit,
   TemplateRef,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -23,6 +25,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangePasswordAlertComponent } from '../snackbars/change-password-snackbar/change-password-snackbar.component';
 import { UpdateBeneficiariesComponent } from '../snackbars/update-beneficiaries-snackbar/update-beneficiaries-snackbar.component';
 import { PostPersonalApplication } from './post-personal-application.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-jobs-applied',
@@ -30,7 +35,7 @@ import { PostPersonalApplication } from './post-personal-application.model';
   styleUrls: ['./jobs-applied.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class JobsAppliedComponent implements OnInit, OnDestroy {
+export class JobsAppliedComponent implements OnInit, OnDestroy, AfterViewInit {
   beneficiariesSelected: string[] = [];
 
   private postSub: Subscription;
@@ -39,6 +44,13 @@ export class JobsAppliedComponent implements OnInit, OnDestroy {
   private authStatusObject;
   appliedPosts: PostPersonalApplication[] = [];
   hasApplied: boolean;
+  postsNumber: number;
+
+  /* Filter Table */
+  displayedColumns: string[] = ['title', 'POC', 'postStatus', 'menu'];
+  dataSource: MatTableDataSource<PostPersonalApplication> = new MatTableDataSource<PostPersonalApplication>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     public postsService: PostsService,
@@ -49,13 +61,24 @@ export class JobsAppliedComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authStatusObject = this.authService.getAuthStatusObject();
     this.postsService.getPosts();
+
+
+    /*
+    this.authStatusSub = this.authService
+      .getAuthStatusListener()
+      .subscribe((authObject) => {
+        //console.log("student dashboard's authStatus observable!");
+        this.authStatusObject = authObject;
+      });
+    */
+  }
+
+  ngAfterViewInit() {
     this.postSub = this.postsService
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
-        //console.log(posts);
 
         this.appliedPosts = posts
-          .filter((post) => !post.removed)
           .filter((post) => {
             for (let i = 0; i < post.students.length; i++) {
               if (post.students[i].email === this.authStatusObject.email) {
@@ -72,6 +95,11 @@ export class JobsAppliedComponent implements OnInit, OnDestroy {
                 studentIndex = j;
                 break;
               }
+            }
+
+            let postStatus = 'Ongoing';
+            if (post.removed) {
+              postStatus = 'Ended';
             }
 
             return {
@@ -92,31 +120,23 @@ export class JobsAppliedComponent implements OnInit, OnDestroy {
               beneficiaries: post.beneficiaries,
               imagePath: post.imagePath,
               student: post.students[studentIndex],
+              postStatus: postStatus,
             };
           });
         //console.log("this.appliedPosts");
         //console.log(this.appliedPosts);
+
+        this.postsNumber = this.appliedPosts.length;
 
         if (this.appliedPosts.length > 0) {
           this.hasApplied = true;
         } else {
           this.hasApplied = false;
         }
-      });
 
-    //console.log("this.appliedPosts");
-    //console.log(this.appliedPosts);
-    //console.log(this.posts);
-
-    /*
-     * Probably do not need this because there are no changes to authStatusObject once user is logged in.
-     * Might have to be revised in the future for chat function.
-     */
-    this.authStatusSub = this.authService
-      .getAuthStatusListener()
-      .subscribe((authObject) => {
-        //console.log("student dashboard's authStatus observable!");
-        this.authStatusObject = authObject;
+        this.dataSource = new MatTableDataSource(this.appliedPosts);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
 
@@ -126,8 +146,20 @@ export class JobsAppliedComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    //console.log("Apply Filter function called!");
+    //console.log(filterValue);
+    //console.log(this.dataSource.filter);
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   ngOnDestroy() {
     this.postSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
+    //this.authStatusSub.unsubscribe();
   }
 }

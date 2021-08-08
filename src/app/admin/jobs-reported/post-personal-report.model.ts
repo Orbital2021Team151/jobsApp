@@ -22,4 +22,5 @@ export interface PostPersonalReport {
   //creator: string; //need to check if person is authorized to edit the post. ie CCSGP admin
 
   report: {name: string, email: string, contact: number, content: string},
+  postStatus: string,
 }

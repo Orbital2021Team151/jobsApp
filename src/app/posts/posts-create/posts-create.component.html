@@ -76,17 +76,17 @@
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               maxlength="50" />
             <mat-error *ngIf="titleControl.errors?.invalid">Please provide us the job's title.</mat-error>
+            <mat-hint>Characters Remaining: {{50 - titleControl.value.length}}</mat-hint>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Volunteer Opportunity Description (minimum 100 characters)</mat-label>
+            <mat-label>Volunteer Opportunity Description (maximum 500 characters)</mat-label>
             <textarea matInput class="form-input" name="content" rows="10" required [formControl]="contentControl"
               minlength="100"
-              placeholder="Please give a short description of the volunteer opportunity (minimum 100 characters)."></textarea>
-            <mat-error *ngIf="contentControl.errors?.invalid">Please give us a description of the job (minimum 100
-              words).</mat-error>
-
-            <mat-hint> Preferred Skills </mat-hint>
+              placeholder="Please give a short description of the volunteer opportunity (maximum 500 characters)."></textarea>
+            <mat-error *ngIf="contentControl.errors?.invalid">Please give us a description of the job (maximum 500
+              characters).</mat-error>
+            <mat-hint> Characters Remaining: {{500 - contentControl.value.length}} </mat-hint>
           </mat-form-field>
 
           <!-- <mat-form-field appearance="outline">
@@ -107,6 +107,10 @@
               >Please select the skill(s) an applicant require for the job.</mat-error
             >
           </mat-form-field> -->
+
+          <div class="skills-label-container">
+            <mat-label>Preferred Skills</mat-label>
+          </div>
 
           <mat-selection-list required [formControl]="skillsControl">
             <mat-list-option *ngFor="let skill of skills" [value]="skill">
