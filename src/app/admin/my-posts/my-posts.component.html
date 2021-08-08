@@ -6,8 +6,9 @@
 
     <div class="posts-counter-container">
       <div class="card">
-        <h3> {{postsNumber}} </h3>
-        <p>Post(s) By Me</p>
+        <h3 *ngIf="postsNumber"> {{postsNumber}} Post(s) </h3>
+        <h3 *ngIf="!postsNumber"> 0 Post(s) Left</h3>
+        <!-- <p>Post(s) Left</p> -->
       </div>
     </div>
 
