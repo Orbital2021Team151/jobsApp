@@ -23,6 +23,40 @@ dd {
   color: white;
 }
 
+.posts-counter-container {
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: 20px;
+
+  height: 100px;
+
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  
+  float: left;
+}
+
+.posts-counter-text-header {
+  
+  font-size: 20px;
+  
+}
+
+.posts-counter-text-number {
+  margin-top: 4px;
+  font-size: 30px;
+  color:rgb(255, 89, 89);
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+}
+
 /*
 .posts-counter-container {
   background-color: white;

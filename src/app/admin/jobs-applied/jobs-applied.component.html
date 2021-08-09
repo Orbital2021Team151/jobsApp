@@ -4,10 +4,19 @@
       <span class="posts-counter-text">Number of posts by me: {{postsNumber}}</span>
     </div> -->
 
-    <div class="posts-counter-container">
+    <!-- <div class="posts-counter-container">
       <div class="card">
         <h3> {{postsNumber}} </h3>
         <p>Post(s) By Me</p>
+      </div>
+    </div> -->
+    <div class="posts-counter-container">
+      <div *ngIf="postsNumber">
+        <span class="posts-counter-text-header">Post(s) Remaining: </span> <br>
+        <span class="posts-counter-text-number"> {{postsNumber}} </span>
+      </div>
+      <div *ngIf="!postsNumber">
+        <span class="posts-counter-text-header">No posts remaining</span>
       </div>
     </div>
 
