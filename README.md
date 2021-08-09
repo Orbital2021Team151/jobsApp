@@ -74,12 +74,6 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save bootstrap@5
 
-* npm install --save awesome-notifications //no need?
-
-* npm install --save  @fortawesome/angular-fontawesome //no need?
-
-* npm install --save @angular/flex-layout //no need?
-
 
 
 ## Acknowledgments
