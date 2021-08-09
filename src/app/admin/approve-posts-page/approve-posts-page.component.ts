@@ -32,7 +32,7 @@ export class ApprovePostsPageComponent
   private authStatusObject;
 
   public postsNumber: number;
-  public hasRequest: Boolean;
+  public hasRequest: Boolean = null;
 
   /* Filter Table */
   displayedColumns: string[] = ['POC', 'email', 'phoneNumber', 'menu'];

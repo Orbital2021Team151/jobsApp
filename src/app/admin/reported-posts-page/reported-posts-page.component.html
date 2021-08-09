@@ -1,17 +1,24 @@
 <div class="approve-posts-container">
-  <div class="posts-list">
-    <!-- <div class="posts-counter-container" *ngIf="hasRequest === true">
-      <span class="posts-counter-text">Posts remaining: {{postsNumber}}</span>
-    </div> -->
 
-    <div class="posts-counter-container">
-      <div class="card">
-        <h3> {{reportedPostsNumber}} </h3>
-        <p>Post(s) Left</p>
-      </div>
+  <div class="counter-container">
+
+    <div  *ngIf="hasReport === null">
+      <mat-spinner></mat-spinner>
     </div>
 
+    <div *ngIf="hasReport">
+      <span class="posts-counter-text-header">Number of reported posts: </span>
+      <span class="posts-counter-text-number">{{reportedPostsNumber}}</span>
+    </div>
 
+    <div *ngIf="hasReport == false">
+      <span class="posts-counter-text-none">No posts reported</span>
+    </div>
+
+  </div>
+
+
+  <div class="filter-list-container">
     <mat-form-field class="user-filter" appearance="outline">
       <mat-label>Find Post</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="eg Mr Durham" #input>
