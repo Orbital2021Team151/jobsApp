@@ -55,7 +55,7 @@ ngb-carousel {
 .carousel-image {
   object-fit: cover;
   max-width: 100%;
-  max-height: 20rem;
+  max-height: 300px;
 }
 
 /* Carousel base class */
@@ -66,6 +66,7 @@ ngb-carousel {
   */
   height: 20rem;
   width: 100%;
+  margin-bottom: 2rem;
 
 }
 /* Since positioning the image, we need to help out the caption */
