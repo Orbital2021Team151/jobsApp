@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.13.
 
+## Documentation
+
+The documentation for this project, along with its accompanying materials such as promotional materials and Project Logs, can be found [here](https://drive.google.com/drive/folders/1R-dW1R1nc8ZsLZN88xT_VTJRHMQ4WB-z?usp=sharing). If the information cannot be accessed and you wish to view it, please feel free to contact any of our team members.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
