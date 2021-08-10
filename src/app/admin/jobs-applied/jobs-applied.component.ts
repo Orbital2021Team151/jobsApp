@@ -43,7 +43,7 @@ export class JobsAppliedComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private authStatusObject;
   appliedPosts: PostPersonalApplication[] = [];
-  hasApplied: boolean;
+  hasApplied: boolean = null;
   postsNumber: number;
 
   /* Filter Table */

@@ -35,7 +35,7 @@ export class MyPostsComponent
   private authStatusObject;
 
   public postsNumber: number;
-  public hasRequest: Boolean;
+  public hasRequest: Boolean = null;
 
   /* Filter Table */
   displayedColumns: string[] = ['title', 'postStatus', 'applicantStatus' , 'menu'];

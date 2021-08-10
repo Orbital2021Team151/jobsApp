@@ -29,7 +29,7 @@ export class JobsReportedComponent implements OnInit, OnDestroy, AfterViewInit {
   private authStatusObject;
 
   reportedPosts: PostPersonalReport[] = [];
-  hasReport: boolean;
+  hasReport: boolean = null;
   postsNumber: number;
 
   /* Filter Table */
