@@ -6,6 +6,9 @@ html {
   background-color: inherit;
 }
 
+.carousel-inner .sr-only {
+  display: none;
+}
 
 body {
   padding-bottom: 1rem;
