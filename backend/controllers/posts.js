@@ -11,6 +11,7 @@ const mongodb = require("mongodb").MongoClient;
 
 const Post = require("../models/post");
 const User = require("../models/user");
+const { request } = require("http");
 
 exports.requestPost = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host"); //url to our server
@@ -263,25 +264,27 @@ exports.publishPost = (req, res, next) => {
       }
 
       User.find().then((allUsersDocument) => {
-        //console.log("Post it published! This message should only be seen from the mongoDB shell");
+
+        //console.log(allUsersDocument)
+
+
+        //console.log("The current beneficiary is: ")
+        //console.log(req.body.beneficiaries)
 
         for (var userI = 0; userI < allUsersDocument.length; userI++) {
           var currentUser = allUsersDocument[userI];
           var interestedBeneficiaries = currentUser.beneficiaries;
-          //console.log(currentUser);
 
-          for (
-            var postBeneficiaryI = 0;
-            postBeneficiaryI < req.body.beneficiaries.length;
-            postBeneficiaryI++
-          ) {
-            let postBeneficiary = req.body.beneficiaries[postBeneficiaryI];
-            //console.log(postBeneficiary);
-            if (interestedBeneficiaries.includes(postBeneficiary)) {
-              //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
-              sendNotificationEmail(currentUser.email, req.body);
-              break;
-            }
+          if (currentUser.ban || !currentUser.verified || interestedBeneficiaries.length === 0) {
+            continue;
+          }
+
+          //console.log("This user's beneficiaries are:" )
+          //console.log(interestedBeneficiaries);
+
+          if (interestedBeneficiaries.includes(req.body.beneficiaries)) {
+            //TODO: REMOVE BACKSLAHES WHEN UPLOADING TO AVOID SPAM
+            sendNotificationEmail(currentUser.email, req.body);
           }
         }
 
@@ -289,7 +292,7 @@ exports.publishPost = (req, res, next) => {
         sendPostApprovedNotificationEmail(req.body.email, req.body); //sends email to post creator to inform organisation that their post has been published?
 
         res.status(200).json({
-          documents: allUsersDocument, //probably do not need this
+          //documents: allUsersDocument, //probably do not need this
           message: "All Users Found?",
         });
       });
