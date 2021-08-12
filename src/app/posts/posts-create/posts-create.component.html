@@ -547,11 +547,15 @@
             <mat-checkbox ngModel name="checkbox" #checkbox="ngModel" required>
               I have read the above Terms and Conditions.
             </mat-checkbox>
-            <mat-error *ngIf="checkbox.invalid">
+            <!-- <mat-error *ngIf="checkbox.invalid">
               Please click on the checkbox at the end of the page.
-            </mat-error>
+            </mat-error> -->
           </div>
         </mat-selection-list>
+        
+        <mat-error *ngIf="checkbox.invalid">
+          Please click on the checkbox at the end of the page.
+        </mat-error>
 
         <div class="step-footer">
           <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
