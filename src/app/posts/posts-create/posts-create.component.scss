@@ -92,13 +92,22 @@ mat-error {
 
 /* TERMS AND CONDITIONS
 -------------------------------------------------- */
+.toc-selection-list {
+  max-height: 700px;
+  overflow: auto;
+  margin-top: 10px;
+}
+
 .toc-header {
   color: inherit;
+
 }
 
 .toc-body {
   color: inherit;
   margin: none;
+  // max-width: 70%;
+  // max-height: 50%;
 }
 
 .toc-footer {
@@ -125,8 +134,9 @@ input[type="file"] {
 }
 
 .image-preview img {
-  max-width: 75%;
-  height: auto;
+  max-width: 10%;
+  max-height: 10%;
+  /* height: auto; */
 }
 
 
@@ -301,7 +311,7 @@ dd {
   color: #5c8aee;
 }
 
-mat-selection-list {
+.skills-selection-list {
   max-height: 200px;
   overflow: auto;
 }

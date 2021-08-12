@@ -21,12 +21,13 @@
           </mat-form-field>
 
           <div class="show-uen-checkbox-container">
-            <mat-checkbox class="show-uen-checkbox"[formControl]="showUenControl">We are an organisation with a UEN</mat-checkbox>
+            <mat-checkbox class="show-uen-checkbox" [formControl]="showUenControl">We are an organisation with a UEN
+            </mat-checkbox>
           </div>
 
           <mat-form-field appearance="outline" *ngIf="POCInformationGroup.value.showUen">
             <mat-label>POC's UEN</mat-label>
-            <input matInput class="form-input" type="text" name="uen" [formControl]="uenControl"/>
+            <input matInput class="form-input" type="text" name="uen" [formControl]="uenControl" />
             <mat-error *ngIf="uenControl.errors?.invalid">Please enter provide us the name of your Point-Of-Contact.
             </mat-error>
           </mat-form-field>
@@ -38,7 +39,8 @@
             <mat-error *ngIf="emailControl.errors?.invalid">Please provide us your email.</mat-error>
           </mat-form-field>
 
-          <a *ngIf="authStatusObject.admin" href="https://verify-email.org/" target="_blank" style="margin-top: 0rem;">Check if email exists (might not
+          <a *ngIf="authStatusObject.admin" href="https://verify-email.org/" target="_blank"
+            style="margin-top: 0rem;">Check if email exists (might not
             be accurate)</a>
 
           <mat-form-field appearance="outline">
@@ -111,14 +113,13 @@
             <mat-label>Preferred Skills</mat-label>
           </div>
 
-          <mat-selection-list required [formControl]="skillsControl">
+          <mat-selection-list required [formControl]="skillsControl" class="skills-selection-list">
             <mat-list-option *ngFor="let skill of skills" [value]="skill">
               {{skill}}
             </mat-list-option>
           </mat-selection-list>
-          <mat-error *ngIf="skillsControl.errors?.invalid"
-              >Please select the skill(s) that an applicant require for the job.</mat-error
-          >
+          <mat-error *ngIf="skillsControl.errors?.invalid">Please select the skill(s) that an applicant require for the
+            job.</mat-error>
 
 
           <mat-form-field appearance="outline">
@@ -245,7 +246,8 @@
             <section class="cards">
               <mat-card class="published-post-card">
                 <img *ngIf="!postPreview.imagePath && postPreview.beneficiaries" mat-card-image class="card-image"
-                  src="../../../assets/placeholder-{{postPreview.beneficiaries}}.png" alt="Placeholder image for post" />
+                  src="../../../assets/placeholder-{{postPreview.beneficiaries}}.png"
+                  alt="Placeholder image for post" />
 
                 <img *ngIf="postPreview.imagePath" mat-card-image class="card-image" src="{{postPreview.imagePath}}"
                   alt="Post's image" />
@@ -294,8 +296,8 @@
               <!-- This example requires Tailwind CSS v2.0+ -->
               <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                 <div class="closelearnmore">
-                  <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"
-                  ></button>
+                  <button type="button" class="btn-close" aria-label="Close"
+                    (click)="modal.close('Close click')"></button>
                 </div>
                 <div class="px-4 py-3 sm:px-6">
                   <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -411,150 +413,151 @@
 
 
       <mat-step label="Terms and Conditions">
+        <mat-selection-list class="toc-selection-list">
+          <div class="toc-header">
+            <h4>Terms and Conditions</h4>
+          </div>
+          <div class="toc-body">
+            <p>Terms and Conditions of Use</p>
 
-        <div class="toc-header">
-          <h4>Terms and Conditions</h4>
-        </div>
-        <div class="toc-body">
-          <p>Terms and Conditions of Use</p>
+            <br />
+            <p>1. Agreement to Terms</p>
+            <p>
+              All access of any area of <a href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/"
+                target="_blank">CCSGP Jobs Portal</a> ("The Website") is
+              governed by the terms and conditions below ("Terms"). If you do not accept
+              any of these Terms, exit immediately. Continue only if you accept these
+              Terms. In these Terms, the words "we", "our" and "us" refers to the
+              Government of Singapore.
+            </p>
 
-          <br />
-          <p>1. Agreement to Terms</p>
-          <p>
-            All access of any area of <a href="http://ccsgp-portal.s3-website-ap-southeast-1.amazonaws.com/"
-              target="_blank">CCSGP Jobs Portal</a> ("The Website") is
-            governed by the terms and conditions below ("Terms"). If you do not accept
-            any of these Terms, exit immediately. Continue only if you accept these
-            Terms. In these Terms, the words "we", "our" and "us" refers to the
-            Government of Singapore.
-          </p>
+            <br />
+            <p>2. Access To The Website</p>
+            <p>
+              The accessibility and operation of The Website relies on technologies
+              outside our control. We do not guarantee continuous accessibility or
+              uninterrupted operation of The Website.
+            </p>
 
-          <br />
-          <p>2. Access To The Website</p>
-          <p>
-            The accessibility and operation of The Website relies on technologies
-            outside our control. We do not guarantee continuous accessibility or
-            uninterrupted operation of The Website.
-          </p>
+            <br />
+            <p>3. Relying On Information</p>
+            <p>
+              We provide The Website as a general information source only and we are not
+              involved in giving professional advice here. The Website may not cover all
+              information available on a particular issue. Before relying on the
+              Website, you should do your own checks or obtain professional advice
+              relevant to your particular circumstances.
+            </p>
 
-          <br />
-          <p>3. Relying On Information</p>
-          <p>
-            We provide The Website as a general information source only and we are not
-            involved in giving professional advice here. The Website may not cover all
-            information available on a particular issue. Before relying on the
-            Website, you should do your own checks or obtain professional advice
-            relevant to your particular circumstances.
-          </p>
+            <br />
+            <p>4. Security</p>
+            <p>
+              Where appropriate, we use available technology to protect the security of
+              communications made through The Website. However, we do not accept
+              liability for the security, authenticity, integrity or confidentiality of
+              any transactions and other communications made through The Website.
+            </p>
+            <br />
+            <p>
+              Internet communications may be susceptible to interference or interception
+              by third parties. Despite our best efforts, we make no warranties that The
+              Website is free of infection by computer viruses or other unauthorised
+              software.
+            </p>
 
-          <br />
-          <p>4. Security</p>
-          <p>
-            Where appropriate, we use available technology to protect the security of
-            communications made through The Website. However, we do not accept
-            liability for the security, authenticity, integrity or confidentiality of
-            any transactions and other communications made through The Website.
-          </p>
-          <br />
-          <p>
-            Internet communications may be susceptible to interference or interception
-            by third parties. Despite our best efforts, we make no warranties that The
-            Website is free of infection by computer viruses or other unauthorised
-            software.
-          </p>
+            <br />
+            <p>5. Hyperlinks</p>
+            <p>
+              We are not responsible or liable for the availability or content of any
+              other Internet site (not provided by us) linked to or from The Website.
+              Access to any other Internet site is at your own risk. If you create a
+              link or frame to The Website, you do so at your own risk.
+            </p>
+            <br />
+            <p>
+              We reserve the right to object or disable any link or frame to or from The
+              Website.
+            </p>
+            <br />
+            <p>We reserve the right to change the URL of The Website.</p>
 
-          <br />
-          <p>5. Hyperlinks</p>
-          <p>
-            We are not responsible or liable for the availability or content of any
-            other Internet site (not provided by us) linked to or from The Website.
-            Access to any other Internet site is at your own risk. If you create a
-            link or frame to The Website, you do so at your own risk.
-          </p>
-          <br />
-          <p>
-            We reserve the right to object or disable any link or frame to or from The
-            Website.
-          </p>
-          <br />
-          <p>We reserve the right to change the URL of The Website.</p>
+            <br />
+            <p>6. Intellectual Property</p>
+            <p>
+              Materials, including source code, pages, documents and online graphics,
+              audio and video in The Website are protected by law. The intellectual
+              property rights in the materials is owned by or licensed to us. All rights
+              reserved. (Government of Singapore © 2018).
+            </p>
+            <br />
+            <p>
+              Apart from any fair dealings for the purposes of private study, research,
+              criticism or review, as permitted in law, no part of The Website may be
+              reproduced or reused for any commercial purposes whatsoever without our
+              prior written permission.
+            </p>
 
-          <br />
-          <p>6. Intellectual Property</p>
-          <p>
-            Materials, including source code, pages, documents and online graphics,
-            audio and video in The Website are protected by law. The intellectual
-            property rights in the materials is owned by or licensed to us. All rights
-            reserved. (Government of Singapore © 2018).
-          </p>
-          <br />
-          <p>
-            Apart from any fair dealings for the purposes of private study, research,
-            criticism or review, as permitted in law, no part of The Website may be
-            reproduced or reused for any commercial purposes whatsoever without our
-            prior written permission.
-          </p>
+            <br />
+            <p>7. General Disclaimer And Limitation Of Liability</p>
+            <p>We will not be liable for any loss or damage</p>
+            <br />
+            <p>
+              1. That you may incur on account of using, visiting or relying on any
+              statements, opinion, representation or information in The Website;
+            </p>
+            <p>
+              2. Resulting from any delay in operation or transmission, communications
+              failure, Internet access difficulties or malfunctions in equipment or
+              software; or
+            </p>
+            <p>
+              3. Resulting from the conduct or the views of any person who accesses or
+              uses The Website.
+            </p>
 
-          <br />
-          <p>7. General Disclaimer And Limitation Of Liability</p>
-          <p>We will not be liable for any loss or damage</p>
-          <br />
-          <p>
-            1. That you may incur on account of using, visiting or relying on any
-            statements, opinion, representation or information in The Website;
-          </p>
-          <p>
-            2. Resulting from any delay in operation or transmission, communications
-            failure, Internet access difficulties or malfunctions in equipment or
-            software; or
-          </p>
-          <p>
-            3. Resulting from the conduct or the views of any person who accesses or
-            uses The Website.
-          </p>
+            <br />
+            <p>8. Fees</p>
+            <p>
+              There are currently no fees for using any part of The Website. We reserve
+              the right to introduce new fees from time to time. We are not responsible
+              for any fees charged by any other Internet site (not provided by us).
+            </p>
 
-          <br />
-          <p>8. Fees</p>
-          <p>
-            There are currently no fees for using any part of The Website. We reserve
-            the right to introduce new fees from time to time. We are not responsible
-            for any fees charged by any other Internet site (not provided by us).
-          </p>
+            <br />
+            <p>9. Applicable Laws</p>
+            <p>
+              Use of The Website and these Terms are governed by the laws of Singapore.
+              Any claim relating to use of The Website shall be heard by Singapore
+              Courts.
+            </p>
 
-          <br />
-          <p>9. Applicable Laws</p>
-          <p>
-            Use of The Website and these Terms are governed by the laws of Singapore.
-            Any claim relating to use of The Website shall be heard by Singapore
-            Courts.
-          </p>
+            <br />
+            <p>10. Variation</p>
+            <p>
+              We may revise these Terms at any time by updating this page. You should
+              visit this page from time to time and review the then current Terms
+              because they are binding on you. We may modify or discontinue any
+              information or features that form part of The Website at any time, with or
+              without notice to you, and without liability.
+            </p>
+          </div>
 
-          <br />
-          <p>10. Variation</p>
-          <p>
-            We may revise these Terms at any time by updating this page. You should
-            visit this page from time to time and review the then current Terms
-            because they are binding on you. We may modify or discontinue any
-            information or features that form part of The Website at any time, with or
-            without notice to you, and without liability.
-          </p>
-        </div>
+          <div class="toc-footer">
 
-        <div class="toc-footer">
+            <mat-checkbox ngModel name="checkbox" #checkbox="ngModel" required>
+              I have read the above Terms and Conditions.
+            </mat-checkbox>
+            <mat-error *ngIf="checkbox.invalid">
+              Please click on the checkbox at the end of the page.
+            </mat-error>
+          </div>
 
-          <mat-checkbox ngModel name="checkbox" #checkbox="ngModel" required>
-            I have read the above Terms and Conditions.
-          </mat-checkbox>
-          <mat-error *ngIf="checkbox.invalid">
-            Please click on the checkbox at the end of the page.
-          </mat-error>
-        </div>
-
-        <div class="step-footer">
-          <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
-          <button mat-raised-button color="primary" (click)="checkbox.valid && onAddPostReactive() && openDialog()"
-            class="nav-button">Submit</button>
-        </div>
+          <div class="step-footer">
+            <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
+            <button mat-raised-button color="primary" (click)="checkbox.valid && onAddPostReactive() && openDialog()"
+              class="nav-button">Submit</button>
+          </div>
+        </mat-selection-list>
       </mat-step>
 
     </mat-horizontal-stepper>
