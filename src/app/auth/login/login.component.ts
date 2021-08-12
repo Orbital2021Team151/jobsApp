@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
+import { ForgetPasswordDialog } from "src/app/dialogs/forget-password-dialog/forget-password-dialog.component";
 import { AuthService } from "../auth.service";
 
 @Component({
@@ -18,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   newPasswordSent = false;
 
 
-  constructor(public authService: AuthService, private modalService: NgbModal) {}
+  constructor(public authService: AuthService, private modalService: NgbModal, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
@@ -57,6 +59,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.getLoginListener().subscribe((res) => {
       this.newPasswordSent = res;
     });
+
+    this.modalService.dismissAll();
+    this.dialog.open(ForgetPasswordDialog);
   }
 
   closeNotification() {
