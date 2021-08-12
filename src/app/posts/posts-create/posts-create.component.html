@@ -551,13 +551,13 @@
               Please click on the checkbox at the end of the page.
             </mat-error>
           </div>
-
-          <div class="step-footer">
-            <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
-            <button mat-raised-button color="primary" (click)="checkbox.valid && onAddPostReactive() && openDialog()"
-              class="nav-button">Submit</button>
-          </div>
         </mat-selection-list>
+
+        <div class="step-footer">
+          <button mat-raised-button color="accent" matStepperPrevious class="nav-button">Back</button>
+          <button mat-raised-button color="primary" (click)="checkbox.valid && onAddPostReactive() && openDialog()"
+            class="nav-button">Submit</button>
+        </div>
       </mat-step>
 
     </mat-horizontal-stepper>
