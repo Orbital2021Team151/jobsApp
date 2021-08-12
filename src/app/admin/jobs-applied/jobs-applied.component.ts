@@ -97,9 +97,11 @@ export class JobsAppliedComponent implements OnInit, OnDestroy, AfterViewInit {
               }
             }
 
-            let postStatus = 'Ongoing';
+            let postStatus = 'Pending';
             if (post.removed) {
               postStatus = 'Ended';
+            } else if (post.studentsAccepted.includes(this.authStatusObject.email)) {
+              postStatus = 'Accepted'
             }
 
             return {
