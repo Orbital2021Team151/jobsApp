@@ -27,14 +27,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * Install [NodeJS](https://nodejs.org/en/)
 
 * npm install -g @angular/cli@11 <br>
-
-* npm install --save-dev @angular-devkit/build-angular
-
 if you need to reset your angular version, please do: <br>
 npm uninstall -g @angular/cli<br>
 npm cache clean --force<br>
 npm install -g @angular/cli@11<br>
 
+* npm install --save-dev @angular-devkit/build-angular
 
 * ng add @angular/material => choose theme, yes to both typography styles and animations <br>
 

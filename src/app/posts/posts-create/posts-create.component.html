@@ -82,7 +82,6 @@
           <mat-form-field appearance="outline">
             <mat-label>Volunteer Opportunity Description (maximum 500 characters)</mat-label>
             <textarea matInput class="form-input" name="content" rows="10" required [formControl]="contentControl"
-              minlength="100"
               placeholder="Please give a short description of the volunteer opportunity (maximum 500 characters)."></textarea>
             <mat-error *ngIf="contentControl.errors?.invalid">Please give us a description of the job (maximum 500
               characters).</mat-error>
