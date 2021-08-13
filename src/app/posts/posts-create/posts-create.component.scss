@@ -129,19 +129,17 @@ input[type="file"] {
 }
 
 .image-preview {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.image-preview img {
-  max-width: 10%;
-  max-height: 10%;
-  /* height: auto; */
+  // justify-content: center;
+  // align-items: center;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  // margin-top: 1rem;
+  // margin-bottom: 1rem;
+  font-style: italic;
+  display: inline-flex;
+  align-items: left;
+  margin-bottom: 1%;
 }
 
 

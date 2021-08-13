@@ -169,6 +169,8 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
   };
 
 
+  public fileName: string;
+
 
   /* FormGroup version */
   public form: FormGroup;
@@ -443,6 +445,8 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
+    this.fileName = (event.target as HTMLInputElement).files[0].name;
+    console.log(this.fileName);
 
     if (file) {
       this.postInformationGroup.patchValue({ image: file });
