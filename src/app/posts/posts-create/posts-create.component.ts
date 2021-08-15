@@ -407,9 +407,7 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
       console.log("There are no images!");
     }
 
-    this.POCInformationGroup.reset();
-    this.postInformationGroup.reset();
-    this.postDurationGroup.reset();
+    
 
     this.pendingApproval = true;
     if (post.image) {
@@ -417,6 +415,10 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     } else {
       this.postsService.addPostNoImage(post);
     }
+
+    this.POCInformationGroup.reset();
+    this.postInformationGroup.reset();
+    this.postDurationGroup.reset();
 
     this.imagePreview = '';
     return true;
