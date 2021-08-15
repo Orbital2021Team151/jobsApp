@@ -416,10 +416,8 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
       imagePath: null,
     };
 
-    console.log("Post to be submitted is: ");
-    console.log(post);
-
-
+    //console.log("Post to be submitted is: ");
+    //console.log(post);
 
     if (post.image) {
       this.postsService.addPost(post);
