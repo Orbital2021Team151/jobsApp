@@ -26,7 +26,6 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     return this.POCInformationGroup.pristine && this.postInformationGroup.pristine && this.postDurationGroup.pristine;
   }
 
-  pendingApproval: boolean = false;
   public authStatusObject;
   private authStatusSub: Subscription;
   private postServiceSub: Subscription;
@@ -295,8 +294,17 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     //if (this.form.invalid) return;
     this.postPreview = this.emptyPostPreview;
 
+    let emailField, POCField = null;
+    if (!this.authStatusObject.admin) {
+      emailField = this.authStatusObject.email
+      POCField = this.authStatusObject.name
+    } else {
+      emailField = this.POCInformationGroup.value.email
+      POCField = this.POCInformationGroup.value.POC
+    }
+
     let uenField = "Not Applicable";
-    if (this.POCInformationGroup.value.uenControl) {
+    if ((this.POCInformationGroup.value.uen !== null || this.POCInformationGroup.value.uen !== "") && this.POCInformationGroup.value.showUen) {
       uenField = this.POCInformationGroup.value.uen;
     }
 
@@ -304,9 +312,9 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
       id: null,
       orgName: this.POCInformationGroup.value.orgName,
       uen: uenField,
-      POC: this.POCInformationGroup.value.POC,
+      POC: POCField,
       phoneNumber: this.POCInformationGroup.value.phoneNumber,
-      email: this.POCInformationGroup.value.email,
+      email: emailField,
 
       title: this.postInformationGroup.value.title,
       content: this.postInformationGroup.value.content,
@@ -358,8 +366,17 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     }
     */
 
+    let emailField, POCField = null;
+    if (!this.authStatusObject.admin) {
+      emailField = this.authStatusObject.email
+      POCField = this.authStatusObject.name
+    } else {
+      emailField = this.POCInformationGroup.value.email
+      POCField = this.POCInformationGroup.value.POC
+    }
+
     let uenField = "Not Applicable";
-    if (this.POCInformationGroup.value.uenControl) {
+    if ((this.POCInformationGroup.value.uen !== null || this.POCInformationGroup.value.uen !== "") && this.POCInformationGroup.value.showUen) {
       uenField = this.POCInformationGroup.value.uen;
     }
 
@@ -367,9 +384,9 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
       id: null,
       orgName: this.POCInformationGroup.value.orgName,
       uen: uenField,
-      POC: this.POCInformationGroup.value.POC,
+      POC: POCField,
       phoneNumber: this.POCInformationGroup.value.phoneNumber,
-      email: this.POCInformationGroup.value.email,
+      email: emailField,
       title: this.postInformationGroup.value.title,
       opportunity: this.postDurationGroup.value.opportunity,
 
@@ -401,15 +418,9 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
 
     console.log("Post to be submitted is: ");
     console.log(post);
-    if (this.postInformationGroup.value.image) {
-      console.log("There is an image!");
-    } else {
-      console.log("There are no images!");
-    }
 
-    
 
-    this.pendingApproval = true;
+
     if (post.image) {
       this.postsService.addPost(post);
     } else {
@@ -430,10 +441,6 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
 
     this.dialog.open(PostSubmittedDialog);
     return true;
-  }
-
-  closeNotification() {
-    this.pendingApproval = false;
   }
 
   openTermsAndConditions(longContent) {
