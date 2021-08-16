@@ -52,8 +52,6 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save bcryptjs
 
-* Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)
-
 * npm install --save nodemailer
 
 * npm install --save jsonwebtoken
@@ -76,10 +74,13 @@ npm install -g @angular/cli@11<br>
 
 * npm install --save bootstrap@5
 
+* Follow the Get Started guide on [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup) //might be optional. try 
+
 
 
 ## Acknowledgments
-* Email template reference from [RaKesh Mandal](https://codepen.io/rKalways/pens/popular)
+* Old email template's reference from [RaKesh Mandal](https://codepen.io/rKalways/pens/popular)
 * Verification template reference from [Gretten](https://codepen.io/Grett/pen/byvRZq)
 * Hour glass animation by [Marius Petrescu](https://codepen.io/mashul/pen/rPaqYE)
-
+* Report's table-like mat-accordion from [james-schwartzkopf](https://stackblitz.com/@james-schwartzkopf)
+* All other persons who have assisted us with their publically-available code. If your name is not mentioned here, please reach out to us to allow us to properly acknowledge your work!
