@@ -428,7 +428,7 @@ export class PostCreateComponent implements OnInit, OnDestroy, ComponentCanDeact
     this.POCInformationGroup.reset();
     this.postInformationGroup.reset();
     this.postDurationGroup.reset();
-
+    //line 431
     this.imagePreview = '';
     return true;
   }
