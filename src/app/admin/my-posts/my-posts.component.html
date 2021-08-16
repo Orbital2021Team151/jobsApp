@@ -63,15 +63,14 @@
         <td mat-cell *matCellDef="let row">
 
           <button
-           *ngIf="row.applicantStatus === 'No Applicants' ||
-           row.postStatus === 'Pending Approval' || row.postStatus === 'Removed / Completed' || row.postStatus === 'Completed' || row.postStatus === 'Rejected'"
+           *ngIf="row.applicantStatus === 'No Applicants'"
             mat-icon-button
             aria-label="No Applicants"
             [disabled]="true">
             <mat-icon>person_search</mat-icon>
           </button>
           <button
-           *ngIf="row.applicantStatus === 'Has Applicants' && row.postStatus === 'Approved'"
+           *ngIf="row.applicantStatus === 'Has Applicants'"
             matTooltip="View Applicants" [matTooltipShowDelay]="100" [matTooltipHideDelay]="100"
             mat-icon-button
             aria-label="View Applicants"
@@ -268,7 +267,7 @@
 
               <div class="modal-body-content-button">
                 <button
-                *ngIf="!acceptedBefore(row.id, student.email)"
+                *ngIf="(!acceptedBefore(row.id, student.email)) && (row.postStatus === 'Approved')"
                 mat-stroked-button
                 color="primary"
                 class="modal-body-content-button-accept"
@@ -278,10 +277,21 @@
               </button>
 
               <button
-                *ngIf="acceptedBefore(row.id, student.email)"
+                *ngIf="(!acceptedBefore(row.id, student.email)) && (row.postStatus !== 'Approved')"
                 mat-stroked-button
                 disabled
                 color="primary"
+                class="modal-body-content-button-not-accepted"
+              >
+                Not Accepted
+              </button>
+
+
+
+              <button
+                *ngIf="acceptedBefore(row.id, student.email)"
+                mat-stroked-button
+                disabled
                 class="modal-body-content-button-accept"
               >
                 Accepted
