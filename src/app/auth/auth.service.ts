@@ -50,7 +50,7 @@ export class AuthService {
   }[]>();
 
   private signupListener = new Subject<boolean>();
-  private loginListener = new Subject<boolean>();
+  private isLoggingInListener = new Subject<boolean>();
   private changedPasswordListener = new Subject<boolean>();
 
   private isAuthenticated = false;
@@ -110,8 +110,8 @@ export class AuthService {
     return this.signupListener.asObservable();
   }
 
-  getLoginListener() {
-    return this.loginListener.asObservable();
+  getIsLoggingInListener() {
+    return this.isLoggingInListener.asObservable();
   }
 
   getChangedPasswordListener() {
@@ -183,6 +183,8 @@ export class AuthService {
 
   login(email: string, password: string) {
 
+    this.isLoggingInListener.next(true);
+
     const authData: AuthData = {
       email: email,
       password: password,
@@ -202,6 +204,8 @@ export class AuthService {
       (BACKEND_URL + 'api/user/login', authData)
       .subscribe(
         (response) => {
+          this.isLoggingInListener.next(false);
+
           const token = response.token;
           this.token = token;
 
@@ -224,6 +228,7 @@ export class AuthService {
             };
 
             this.authStatusListener.next(this.authStatus);
+
             if (this.authStatus.admin) {
               this.router.navigate(['/approvePosts']);
             } else {
@@ -233,6 +238,7 @@ export class AuthService {
         },
 
         (error) => {
+          this.isLoggingInListener.next(false);
           console.log("Error at logging in! The error is: ");
           console.log(error);
           this.authStatusListener.next({
@@ -376,12 +382,10 @@ export class AuthService {
 
   forgetPassword(email: string) {
     let userObject = { email: email};
-
     this.http
       .put(BACKEND_URL + 'api/user/forgetPassword', userObject)
       .subscribe((response) => {
         console.log("User's password reset!");
-        this.loginListener.next(true);
       },
       (error) => {
         console.log("User's password reset failed!");

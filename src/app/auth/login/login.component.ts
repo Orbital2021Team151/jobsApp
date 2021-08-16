@@ -16,8 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   roles: string[] = ["Admin", "External Organisation", "Student Organisation", "Student / NUS Alumni"];
   showPassword = false;
   authStatusSub: Subscription;
-  loggedIn: boolean;
-  newPasswordSent = false;
+  isLoggingIn: boolean = false;
 
 
   constructor(public authService: AuthService, private modalService: NgbModal, private dialog: MatDialog) {}
@@ -27,17 +26,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       authStatusObject => {
         if (!authStatusObject.auth) {
           this.isLoading = false;
-          this.loggedIn = false;
         }
       }
     );
+
+    this.authService.getIsLoggingInListener().subscribe((res) => {
+      this.isLoggingIn = res;
+    });
   }
 
   onLogin(form: NgForm) {
     if (form.invalid) {
       return;
     }
-
     this.authService.login(form.value.email, form.value.password);
     this.authService.autoAuthUser();
   }
@@ -56,16 +57,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     //console.log(form.value.forgetPasswordRole);
 
     this.authService.forgetPassword(form.value.forgetPasswordEmail);
-    this.authService.getLoginListener().subscribe((res) => {
-      this.newPasswordSent = res;
-    });
-
     this.modalService.dismissAll();
     this.dialog.open(ForgetPasswordDialog);
-  }
-
-  closeNotification() {
-    this.newPasswordSent = false;
   }
 
   ngOnDestroy() {

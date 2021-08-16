@@ -45,9 +45,15 @@
 
       <div class="form-footer">
         <a href="javascript:;" (click)="onOpenForgetPassword(forgetPasswordContent)" class="forget-password-link">Forget Password</a>
-        <button mat-raised-button color="accent" (click)="onLogin(loginForm)">
+
+        <button mat-raised-button color="accent" *ngIf="!isLoggingIn" (click)="onLogin(loginForm)">
           Login
         </button>
+
+        <button mat-raised-button disabled *ngIf="isLoggingIn">
+          Logging In...
+        </button>
+
       </div>
     </form>
   </mat-card>
